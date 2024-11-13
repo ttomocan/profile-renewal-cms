@@ -30,22 +30,6 @@
 	gap: 16px;
 }
 
-.tag {
-	background-color: var(--color-bg-sub);
-	border-radius: var(--border-radius);
-	font-size: 1rem;
-	padding: 4px 12px;
-	white-space: nowrap;
-}
-
-.date {
-	align-items: center;
-	display: flex;
-	font-size: 1rem;
-	gap: 8px;
-	margin: 0.8rem 0;
-}
-
 @media (max-width: 640px) {
 	.link {
 		display: block;

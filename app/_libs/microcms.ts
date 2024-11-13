@@ -7,3 +7,7 @@ export type News = {
 	publishedAt: string;
 	createdAt: string;
 };
+
+export type Category = {
+	name: string;
+};
