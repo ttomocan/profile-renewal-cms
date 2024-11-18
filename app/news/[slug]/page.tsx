@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation';
 import { getNewsDetail } from '@/app/_libs/microcms';
 import Article from '@/app/_components/Article';
 import ButtonLink from '@/app/_components/ButtonLink';
@@ -9,8 +10,8 @@ type Props = {
 	};
 };
 
-export async function generateMetadata({ params }: Props) {
-	const data = await getNewsDetail(params.slug);
+export default async function page({ params }: Props) {
+	const data = await getNewsDetail(params.slug).catch(notFound);
 
 	return (
 		<>
