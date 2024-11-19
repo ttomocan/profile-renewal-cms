@@ -8,18 +8,16 @@ export type Member = {
 	image: MicroCMSImage;
 } & MicroCMSListContent;
 
-export type News = {
-	id: string;
-	title: string;
-	category: {
-		name: string;
-	};
-	publishedAt: string;
-	createdAt: string;
-} & MicroCMSListContent;
-
 export type Category = {
 	name: string;
+} & MicroCMSListContent;
+
+export type News = {
+	title: string;
+	description: string;
+	content: string;
+	thumbnail?: MicroCMSImage;
+	category: Category;
 } & MicroCMSListContent;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
@@ -56,6 +54,11 @@ export const getNewsDetail = async (contentId: string, queries?: MicroCMSQueries
 		endpoint: 'news',
 		contentId,
 		queries,
+		customRequestInit: {
+			next: {
+				revalidate: queries?.draftKey === undefined ? 60 : 0,
+			},
+		},
 	});
 
 	return detailData;
@@ -69,4 +72,20 @@ export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQue
 	});
 
 	return detailData;
+};
+
+export const getAllNewsList = async () => {
+	const listData = await client.getAllContents<News>({
+		endpoint: 'news',
+	});
+
+	return listData;
+};
+
+export const getAllCategoryList = async () => {
+	const listData = await client.getAllContents<Category>({
+		endpoint: 'categories',
+	});
+
+	return listData;
 };
