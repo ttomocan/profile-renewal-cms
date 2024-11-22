@@ -1,8 +1,6 @@
 import './globals.css';
 
 import { GoogleAnalytics } from '@next/third-parties/google';
-import Script from 'next/script';
-import Head from 'next/head';
 import type { Metadata } from 'next';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
@@ -47,10 +45,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <Head>
-        <link rel="stylesheet" href="http://localhost:3000/styles/animation.css" />
-        <script src="/scripts/index.js" async></script>
-      </Head>
       <body>
         <Header />
         {children}
