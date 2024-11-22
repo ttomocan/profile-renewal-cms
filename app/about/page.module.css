@@ -5,7 +5,7 @@
 ================================== */
 .about .pagetitle {
   background-color: #000000;
-  background-image: url('../img/pages/about/img_hero.jpg');
+  background-image: url('/pages/about/img_hero.jpg');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
