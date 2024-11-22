@@ -1,17 +1,13 @@
 import styles from './index.module.css';
+import Link from 'next/link';
 
-type Props = {
-  href: string;
-  children: React.ReactNode;
-};
-
-export default function ButtonLink({ href, children }: Props) {
+export default function PageTop() {
   return (
     <div className={styles.pagetop}>
       <div className={styles.pagetop_icon}></div>
-      <a href={href} className={styles.pagetop_link}>
-        {children}
-      </a>
+      <Link href="#" className={styles.pagetop_link}>
+        PAGE TOP
+      </Link>
     </div>
   );
 }

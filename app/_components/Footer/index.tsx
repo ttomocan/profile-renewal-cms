@@ -4,20 +4,25 @@ import styles from './index.module.css';
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <nav className={styles.nav}>
-        <ul className={styles.items}>
-          <li className={styles.item}>
-            <Link href="/news">ニュース</Link>
+      <div className={styles.footer_navigation} role="navigation" aria-label="グローバルナビゲーション">
+        <ul className={styles.navigation}>
+          <li className={styles.navigation_item}>
+            <Link href="/">Top</Link>
           </li>
-          <li className={styles.item}>
-            <Link href="/members">メンバー</Link>
+          <li className={styles.navigation_item}>
+            <Link href="/about/">About</Link>
           </li>
-          <li className={styles.item}>
-            <Link href="/contact">お問い合わせ</Link>
+          <li className={styles.navigation_item}>
+            <Link href="/skill/">Skill</Link>
+          </li>
+          <li className={styles.navigation_item}>
+            <Link href="/contact/">Contact</Link>
           </li>
         </ul>
-      </nav>
-      <p className={styles.cr}>© SIMPLE. All Rights Reserved 2024</p>
+      </div>
+      <div className={styles.footer_copyright}>
+        <small>&copy; 2024 ともきゃんスタイル inc.</small>
+      </div>
     </footer>
   );
 }

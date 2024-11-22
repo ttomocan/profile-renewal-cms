@@ -4,7 +4,7 @@
 /* トップページ
 ================================== */
 .top .hero {
-  background: url(../img/pages/top/img_hero.jpg) no-repeat center/cover;
+  background: url(/pages/top/img_hero.jpg) no-repeat center/cover;
   align-items: center;
   display: flex;
   min-height: 500px;
@@ -152,7 +152,7 @@
 
 @media (max-width: 767px) {
   .top .hero {
-    background: url(../img/pages/top/img_hero.jpg) center/cover no-repeat;
+    background: url(/pages/top/img_hero.jpg) center/cover no-repeat;
     align-items: center;
     display: flex;
     min-height: 400px;

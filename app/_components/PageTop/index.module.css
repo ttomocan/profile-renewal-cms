@@ -10,7 +10,7 @@
   right: 20px;
   z-index: 20;
 }
-.pagetop__icon {
+.pagetop_icon {
   width: 1px;
   height: 0;
   background: #383838;
@@ -20,8 +20,8 @@
   transition: height 0.3s cubic-bezier(0.77, 0, 0.175, 1);
   transform-origin: left top;
 }
-.pagetop__icon::before,
-.pagetop__icon::after {
+.pagetop_icon::before,
+.pagetop_icon::after {
   left: 50%;
   position: absolute;
   top: -10px;
@@ -33,10 +33,10 @@
   border-right: 1px solid #383838;
   transform: translateX(-50%) rotate(-45deg);
 }
-.pagetop__icon::after {
+.pagetop_icon::after {
   top: 4px;
 }
-.pagetop__link {
+.pagetop_link {
   color: #383838;
   font-family: Roboto, sans-serif;
   font-weight: 14px;
@@ -47,17 +47,17 @@
   text-align: center;
   writing-mode: vertical-rl;
 }
-.pagetop:hover .pagetop__icon {
+.pagetop:hover .pagetop_icon {
   height: 60px;
 }
-.pagetop.on-white .pagetop__icon {
+.pagetop.on_white .pagetop_icon {
   background: #ffffff;
 }
-.pagetop.on-white .pagetop__icon::before,
-.pagetop.on-white .pagetop__icon::after {
+.pagetop.on_white .pagetop_icon::before,
+.pagetop.on_white .pagetop_icon::after {
   border-top: 1px solid #ffffff;
   border-right: 1px solid #ffffff;
 }
-.pagetop.on-white .pagetop__link {
+.pagetop.on_white .pagetop_link {
   color: #ffffff;
 }

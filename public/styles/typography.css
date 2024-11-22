@@ -2,7 +2,7 @@
 
 /* ボタン
 /* ======================================= */
-.button__link {
+.button_link {
   background-color: #f36b0a;
   border: 1px solid #ffffff;
   border-radius: calc(infinity * 1px);
@@ -17,7 +17,7 @@
   transition: 0.2s;
   min-width: 300px;
 }
-.button__link::before {
+.button_link::before {
   border: 1px solid;
   border-color: #ffffff #ffffff transparent transparent;
   content: '';
@@ -29,53 +29,53 @@
   transform: translateY(-50%) rotate(45deg);
   width: 10px;
 }
-.button__link:hover,
-.button__link:focus {
+.button_link:hover,
+.button_link:focus {
   background-color: #ffffff;
   border-color: #f36b0a;
   color: #f36b0a;
   opacity: 1;
 }
-.button__link:hover::before,
-.button__link:focus::before {
+.button_link:hover::before,
+.button_link:focus::before {
   border: 1px solid;
   border-color: currentColor currentColor transparent transparent;
 }
-.button__link.--gray {
+.button_link._gray {
   background-color: #666666;
   color: #ffffff;
 }
-.button__link.--gray::before {
+.button_link._gray::before {
   border: 1px solid;
   border-color: currentColor currentColor transparent transparent;
 }
-.button__link.--gray:hover {
+.button_link._gray:hover {
   background-color: #ffffff;
   border-color: #666666;
   color: #666666;
 }
-.button__link.--gray:hover::before {
+.button_link._gray:hover::before {
   border: 1px solid;
   border-color: currentColor currentColor transparent transparent;
 }
-.button__link.--navy {
+.button_link._navy {
   background-color: #001473;
   color: #ffffff;
 }
-.button__link.--navy::before {
+.button_link._navy::before {
   border: 1px solid;
   border-color: currentColor currentColor transparent transparent;
 }
-.button__link.--navy:hover {
+.button_link._navy:hover {
   background-color: #ffffff;
   border-color: #001473;
   color: #001473;
 }
-.button__link.--navy:hover::before {
+.button_link._navy:hover::before {
   border: 1px solid;
   border-color: currentColor currentColor transparent transparent;
 }
-.button__link-external {
+.button_link_external {
   background-color: transparent;
   border: 1px solid #ffffff;
   border-radius: calc(infinity * 1px);
@@ -90,7 +90,7 @@
   transition: 0.2s;
   min-width: 300px;
 }
-.button__link-external::before {
+.button_link_external::before {
   border: 1px solid;
   border-color: #ffffff #ffffff transparent transparent;
   content: '';
@@ -102,24 +102,24 @@
   transform: translateY(-50%) rotate(45deg);
   width: 10px;
 }
-.button__link-external:hover,
-.button__link-external:focus {
+.button_link-external:hover,
+.button_link-external:focus {
   background-color: #ffffff;
   border-color: transparent;
   color: transparent;
   opacity: 1;
 }
-.button__link-external:hover::before,
-.button__link-external:focus::before {
+.button_link-external:hover::before,
+.button_link-external:focus::before {
   border: 1px solid;
   border-color: currentColor currentColor transparent transparent;
 }
-.button__link-external:hover,
-.button__link-external:focus {
+.button_link-external:hover,
+.button_link-external:focus {
   background-color: #ffffff;
   color: #383838;
 }
-.button__link.--return::before {
+.button_link._return::before {
   left: 30px;
   right: auto;
   transform: translateY(-50%) rotate(225deg);
@@ -127,7 +127,7 @@
 
 /* 見出し
 /* ======================================= */
-.heading-lv2 {
+.heading_lv2 {
   color: #383838;
   display: flex;
   flex-flow: column;
@@ -135,45 +135,45 @@
   margin-bottom: 40px;
   text-align: center;
 }
-.heading-lv2-en {
+.heading_lv2_en {
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   font-size: clamp(34px, 4vw, 44px);
   line-height: 1;
   letter-spacing: 0.1em;
 }
-.heading-lv2-en::after {
+.heading_lv2_en::after {
   border-bottom: 1px solid #f36b0a;
   content: '';
   display: block;
   margin: 15px auto;
   width: 60px;
 }
-.heading-lv2-ja {
+.heading_lv2_ja {
   display: block;
   font-weight: 500;
   font-size: clamp(18px, 1.8vw, 20px);
   letter-spacing: 0.05em;
   line-height: 1;
 }
-.heading-lv2.--color-w .heading-lv2-en {
+.heading_lv2._color-w .heading_lv2_en {
   color: #ffffff;
 }
-.heading-lv2.--color-w .heading-lv2-en::after {
+.heading_lv2._color-w .heading_lv2_en::after {
   border-color: currentColor;
 }
-.heading-lv2.--color-w .heading-lv2-ja {
+.heading_lv2._color_w .heading_lv2_ja {
   color: #ffffff;
 }
-.heading-lv3 {
+.heading_lv3 {
   font-size: 20px;
   line-height: 1.5;
 }
 
 /* リンク
 /* ======================================= */
-.link-external::after {
-  background: url(../img/common/icon_link-external.svg) no-repeat center/contain;
+.link_external::after {
+  background: url(/common/icon_link-external.svg) no-repeat center/contain;
   content: '';
   display: inline-block;
   height: 0.8em;
@@ -181,8 +181,8 @@
   vertical-align: text-top;
   width: 0.8em;
 }
-.link-external.--w::after {
-  background: url(../img/common/icon_link-external-w.svg) no-repeat center/contain;
+.link_external._w::after {
+  background: url(/common/icon_link-external-w.svg) no-repeat center/contain;
 }
 
 /* リスト
@@ -202,40 +202,26 @@
   top: 0.7em;
   width: 6px;
 }
-.list-ol {
-  counter-reset: my-counter;
-}
-.list-ol li {
-  padding-left: 25px;
-  position: relative;
-}
-.list-ol li::before {
-  content: counter(my-counter) '.';
-  counter-increment: my-counter;
-  left: 4px;
-  position: absolute;
-  top: 0;
-}
 
 /* テキスト
 /* ======================================= */
-.text-lead {
+.text_lead {
   font-size: 28px;
   font-weight: 400;
   letter-spacing: 0.1em;
 }
-.text-color {
+.text_color {
   color: #f36b0a;
 }
-.text-color-w {
+.text_color-w {
   color: #ffffff;
 }
-.text-note {
+.text_note {
   font-size: 0.875em;
   margin-top: 0;
   padding-left: 1em;
 }
-.text-note::before {
+.text_note::before {
   content: '※';
   display: inline-block;
   text-indent: -1em;
@@ -243,37 +229,37 @@
 
 /* テーブル
 /* ======================================= */
-.table-01 {
+.table {
   border-collapse: separate;
   border-spacing: 0 1px;
   width: 100%;
 }
-.table-01 th {
+.table th {
   background: #f36b0a;
   color: #ffffff;
   padding: 10px 15px;
   text-align: center;
   width: 150px;
 }
-.table-01 td {
+.table td {
   background-color: #ffffff;
   padding: 10px 15px;
 }
 @media (max-width: 767px) {
-  .table-01 {
+  .table {
     width: 100%;
     overflow-x: auto;
     display: block;
   }
-  .table-01 :is(thead, tbody, th, td, tr) {
+  .table :is(thead, tbody, th, td, tr) {
     display: block;
   }
-  .table-01 th {
+  .table th {
     padding: 10px;
     text-align: left;
     width: 100%;
   }
-  .table-01 td {
+  .table td {
     background: none;
     padding: 10px;
     padding-bottom: 20px;
@@ -290,18 +276,18 @@
 .row .col {
   flex: 1;
 }
-.row .col-img {
+.row .col_img {
   flex-shrink: 0;
   max-width: 55vw;
 }
-.row .col-text {
+.row .col_text {
   align-self: center;
   width: 100%;
 }
-.row.--center {
+.row._center {
   justify-content: center;
 }
-.row.--end {
+.row._end {
   justify-content: flex-end;
 }
 @media (max-width: 767px) {
@@ -309,15 +295,15 @@
     flex-direction: column;
     gap: 40px;
   }
-  .row .col-text {
+  .row .col_text {
     order: 2;
   }
-  .row .col-img {
+  .row .col_ > img {
     max-width: 100%;
     order: 1;
     text-align: center;
   }
-  .row.--spReverse {
+  .row._spReverse {
     flex-direction: column-reverse;
   }
 }
