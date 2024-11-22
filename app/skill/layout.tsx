@@ -1,4 +1,4 @@
-import TitleArea from '@/app/_components/TitleArea';
+import PageTitle from '@/app/_components/PageTitle';
 import Sheet from '@/app/_components/Sheet';
 
 export const metadata = {
@@ -12,7 +12,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <>
-      <TitleArea title="Contact" sub="お問い合わせ" />
+      <PageTitle title="Contact" sub="お問い合わせ" />
       <Sheet>{children}</Sheet>
     </>
   );

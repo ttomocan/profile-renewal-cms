@@ -1,4 +1,4 @@
-import TitleArea from '@/app/_components/TitleArea';
+import PageTitle from '@/app/_components/PageTitle';
 import Sheet from '@/app/_components/Sheet';
 
 export const metadata = {
@@ -14,7 +14,7 @@ export const revalidate = 60;
 export default function NewsLayout({ children }: Props) {
   return (
     <>
-      <TitleArea title="News" sub="ニュース" />
+      <PageTitle title="News" sub="ニュース" />
       <Sheet>{children}</Sheet>
     </>
   );
