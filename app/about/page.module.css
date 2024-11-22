@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+/* =============================== */
+/* ともきゃんはこんな人
+================================== */
+.about .pagetitle {
+  background-color: #000000;
+  background-image: url('../img/pages/about/img_hero.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+}
+.about .greeting {
+  padding-bottom: 80px;
+}
+.about .greeting img {
+  border: 1px solid #6a6a6a;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.about .greeting__cont {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.about .greeting__image {
+  flex: 0 0 150px;
+  text-align: center;
+}
+.about .greeting__occupation {
+  font-size: 13px;
+  white-space: nowrap;
+}
+.about .license__cont {
+  display: grid;
+  place-content: center;
+}
+.about .result__cont {
+  display: grid;
+  place-content: center;
+}
+@media (max-width: 767px) {
+  .about .greeting__cont {
+    flex-direction: column;
+  }
+  .about .license__cont {
+    display: grid;
+    place-content: start;
+  }
+  .about .result__cont {
+    display: grid;
+    place-content: start;
+  }
+}

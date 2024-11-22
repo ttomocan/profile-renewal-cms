@@ -1,0 +1,78 @@
+@keyframes menu_top {
+  0% {
+    transform: translateY(10px) rotate(-45deg);
+  }
+  100% {
+    background: #f36b0a;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+@keyframes menu_bottom {
+  0% {
+    transform: translateY(-10px) rotate(45deg);
+  }
+  100% {
+    background: #f36b0a;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+@keyframes menu_top_close {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    background: #ffffff;
+    transform: translateY(10px) rotate(-45deg);
+  }
+}
+@keyframes menu_bottom_close {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    background: #ffffff;
+    transform: translateY(-10px) rotate(45deg);
+  }
+}
+.inner,
+.inner-s {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 100%;
+}
+
+main {
+  padding-bottom: 100px;
+  padding-top: 100px;
+}
+
+section:not(:is(.pagetitle, :last-of-type)) {
+  padding-bottom: 100px;
+}
+section * ~ section:not(:last-of-type) {
+  padding-bottom: 50px;
+  padding-top: 0;
+}
+
+.inner {
+  max-width: calc(800px + 40px);
+}
+.inner-s {
+  max-width: calc(600px + 40px);
+}
+
+.content {
+  flex: 1;
+}
+
+@media (max-width: 767px) {
+  main {
+    padding-bottom: 100px;
+    padding-top: 50px;
+  }
+  section:not(:is(.pagetitle, :last-of-type)) {
+    padding-bottom: 80px;
+  }
+} /*# sourceMappingURL=style.css.map */

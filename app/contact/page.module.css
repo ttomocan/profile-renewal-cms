@@ -1,10 +1,13 @@
-.text {
-  text-align: center;
-  margin-bottom: 40px;
-}
+@charset "UTF-8";
 
-@media (max-width: 640px) {
-  .text {
-    text-align: left;
-  }
+/* =============================== */
+/* お問い合わせ
+================================== */
+.contact .pagetitle {
+  background-color: #000000;
+  background-image: url('../img/pages/contact/img_hero.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
 }

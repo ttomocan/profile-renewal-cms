@@ -1,0 +1,323 @@
+@charset "UTF-8";
+
+/* ボタン
+/* ======================================= */
+.button__link {
+  background-color: #f36b0a;
+  border: 1px solid #ffffff;
+  border-radius: calc(infinity * 1px);
+  box-sizing: border-box;
+  color: #ffffff;
+  display: inline-block;
+  line-height: 1.5;
+  padding: 15px 40px;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.2s;
+  min-width: 300px;
+}
+.button__link::before {
+  border: 1px solid;
+  border-color: #ffffff #ffffff transparent transparent;
+  content: '';
+  display: block;
+  height: 10px;
+  right: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 10px;
+}
+.button__link:hover,
+.button__link:focus {
+  background-color: #ffffff;
+  border-color: #f36b0a;
+  color: #f36b0a;
+  opacity: 1;
+}
+.button__link:hover::before,
+.button__link:focus::before {
+  border: 1px solid;
+  border-color: currentColor currentColor transparent transparent;
+}
+.button__link.--gray {
+  background-color: #666666;
+  color: #ffffff;
+}
+.button__link.--gray::before {
+  border: 1px solid;
+  border-color: currentColor currentColor transparent transparent;
+}
+.button__link.--gray:hover {
+  background-color: #ffffff;
+  border-color: #666666;
+  color: #666666;
+}
+.button__link.--gray:hover::before {
+  border: 1px solid;
+  border-color: currentColor currentColor transparent transparent;
+}
+.button__link.--navy {
+  background-color: #001473;
+  color: #ffffff;
+}
+.button__link.--navy::before {
+  border: 1px solid;
+  border-color: currentColor currentColor transparent transparent;
+}
+.button__link.--navy:hover {
+  background-color: #ffffff;
+  border-color: #001473;
+  color: #001473;
+}
+.button__link.--navy:hover::before {
+  border: 1px solid;
+  border-color: currentColor currentColor transparent transparent;
+}
+.button__link-external {
+  background-color: transparent;
+  border: 1px solid #ffffff;
+  border-radius: calc(infinity * 1px);
+  box-sizing: border-box;
+  color: #ffffff;
+  display: inline-block;
+  line-height: 1.5;
+  padding: 15px 40px;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.2s;
+  min-width: 300px;
+}
+.button__link-external::before {
+  border: 1px solid;
+  border-color: #ffffff #ffffff transparent transparent;
+  content: '';
+  display: block;
+  height: 10px;
+  right: 20px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 10px;
+}
+.button__link-external:hover,
+.button__link-external:focus {
+  background-color: #ffffff;
+  border-color: transparent;
+  color: transparent;
+  opacity: 1;
+}
+.button__link-external:hover::before,
+.button__link-external:focus::before {
+  border: 1px solid;
+  border-color: currentColor currentColor transparent transparent;
+}
+.button__link-external:hover,
+.button__link-external:focus {
+  background-color: #ffffff;
+  color: #383838;
+}
+.button__link.--return::before {
+  left: 30px;
+  right: auto;
+  transform: translateY(-50%) rotate(225deg);
+}
+
+/* 見出し
+/* ======================================= */
+.heading-lv2 {
+  color: #383838;
+  display: flex;
+  flex-flow: column;
+  font-size: 32px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.heading-lv2-en {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: clamp(34px, 4vw, 44px);
+  line-height: 1;
+  letter-spacing: 0.1em;
+}
+.heading-lv2-en::after {
+  border-bottom: 1px solid #f36b0a;
+  content: '';
+  display: block;
+  margin: 15px auto;
+  width: 60px;
+}
+.heading-lv2-ja {
+  display: block;
+  font-weight: 500;
+  font-size: clamp(18px, 1.8vw, 20px);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+.heading-lv2.--color-w .heading-lv2-en {
+  color: #ffffff;
+}
+.heading-lv2.--color-w .heading-lv2-en::after {
+  border-color: currentColor;
+}
+.heading-lv2.--color-w .heading-lv2-ja {
+  color: #ffffff;
+}
+.heading-lv3 {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+/* リンク
+/* ======================================= */
+.link-external::after {
+  background: url(../img/common/icon_link-external.svg) no-repeat center/contain;
+  content: '';
+  display: inline-block;
+  height: 0.8em;
+  margin-left: 0.5em;
+  vertical-align: text-top;
+  width: 0.8em;
+}
+.link-external.--w::after {
+  background: url(../img/common/icon_link-external-w.svg) no-repeat center/contain;
+}
+
+/* リスト
+/* ======================================= */
+.list li {
+  padding-left: 15px;
+  position: relative;
+}
+.list li::before {
+  background: #f36b0a;
+  border-radius: 50%;
+  content: '';
+  display: inline-block;
+  height: 6px;
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 6px;
+}
+.list-ol {
+  counter-reset: my-counter;
+}
+.list-ol li {
+  padding-left: 25px;
+  position: relative;
+}
+.list-ol li::before {
+  content: counter(my-counter) '.';
+  counter-increment: my-counter;
+  left: 4px;
+  position: absolute;
+  top: 0;
+}
+
+/* テキスト
+/* ======================================= */
+.text-lead {
+  font-size: 28px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+}
+.text-color {
+  color: #f36b0a;
+}
+.text-color-w {
+  color: #ffffff;
+}
+.text-note {
+  font-size: 0.875em;
+  margin-top: 0;
+  padding-left: 1em;
+}
+.text-note::before {
+  content: '※';
+  display: inline-block;
+  text-indent: -1em;
+}
+
+/* テーブル
+/* ======================================= */
+.table-01 {
+  border-collapse: separate;
+  border-spacing: 0 1px;
+  width: 100%;
+}
+.table-01 th {
+  background: #f36b0a;
+  color: #ffffff;
+  padding: 10px 15px;
+  text-align: center;
+  width: 150px;
+}
+.table-01 td {
+  background-color: #ffffff;
+  padding: 10px 15px;
+}
+@media (max-width: 767px) {
+  .table-01 {
+    width: 100%;
+    overflow-x: auto;
+    display: block;
+  }
+  .table-01 :is(thead, tbody, th, td, tr) {
+    display: block;
+  }
+  .table-01 th {
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+  }
+  .table-01 td {
+    background: none;
+    padding: 10px;
+    padding-bottom: 20px;
+  }
+}
+
+/* カラム
+/* ======================================= */
+.row {
+  display: flex;
+  gap: clamp(20px, 3vw + (100vw - 800px) * 0.1, 30px);
+  justify-content: space-between;
+}
+.row .col {
+  flex: 1;
+}
+.row .col-img {
+  flex-shrink: 0;
+  max-width: 55vw;
+}
+.row .col-text {
+  align-self: center;
+  width: 100%;
+}
+.row.--center {
+  justify-content: center;
+}
+.row.--end {
+  justify-content: flex-end;
+}
+@media (max-width: 767px) {
+  .row {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .row .col-text {
+    order: 2;
+  }
+  .row .col-img {
+    max-width: 100%;
+    order: 1;
+    text-align: center;
+  }
+  .row.--spReverse {
+    flex-direction: column-reverse;
+  }
+}
