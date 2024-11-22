@@ -1,4 +1,4 @@
-import Hero from '@/app/_components/Hero';
+import TitleArea from '@/app/_components/TitleArea';
 import Sheet from '@/app/_components/Sheet';
 
 export const metadata = {
@@ -12,7 +12,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <>
-      <Hero title="Contact" sub="お問い合わせ" />
+      <TitleArea title="Contact" sub="お問い合わせ" />
       <Sheet>{children}</Sheet>
     </>
   );
