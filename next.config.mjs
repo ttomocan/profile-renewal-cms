@@ -8,9 +8,7 @@ const nextConfig = {
       },
     ],
   },
-  exports: {
-    trailingSlash: true,
-  },
+  trailingSlash: true,
 };
 
 export default nextConfig;

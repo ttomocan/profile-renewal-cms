@@ -1,4 +1,3 @@
-import './globals.css';
 import '../styles/common/style.scss';
 import '../styles/common/animation.scss';
 
@@ -56,7 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <DynamicBodyClass />
-        <Loading />
+        {/* <Loading /> */}
         <Header />
         <div className="l-content">{children}</div>
         <Blog />
