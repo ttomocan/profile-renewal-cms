@@ -1,8 +1,7 @@
 import PageTitle from '@/app/_components/PageTitle';
-import Sheet from '@/app/_components/Sheet';
 
 export const metadata = {
-  title: 'お問い合わせ',
+  title: 'ともきゃんができること',
 };
 
 type Props = {
@@ -12,8 +11,8 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <>
-      <PageTitle title="Contact" sub="お問い合わせ" />
-      <Sheet>{children}</Sheet>
+      <PageTitle title="Skill" sub="ともきゃんができること" />
+      <main>{children}</main>
     </>
   );
 }

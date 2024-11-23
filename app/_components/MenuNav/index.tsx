@@ -1,13 +1,10 @@
-'use client';
+'use client'; // クライアントコンポーネントとして宣言
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Menu() {
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const open = () => setOpen(true);
-  const close = () => setOpen(false);
+  const pathname = usePathname(); // 現在のパスを取得
 
   return (
     <div className="l-header__link">
@@ -26,27 +23,33 @@ export default function Menu() {
       <nav className="l-header__navigation" role="navigation" aria-label="グローバルナビゲーション">
         <ul className="l-navigation">
           <li className="l-navigation__item">
-            <a href="/" className="current">
+            <Link href="/" className={`l-navigation__item ${pathname === '/' ? 'current' : ''}`}>
               Top
-            </a>
+            </Link>
           </li>
           <li className="l-navigation__item">
-            <a href="/about/">About</a>
+            <Link href="/about/" className={`l-navigation__item ${pathname === '/about/' ? 'current' : ''}`}>
+              About
+            </Link>
           </li>
           <li className="l-navigation__item">
-            <a href="/skill/">Skill</a>
+            <Link href="/skill/" className={`l-navigation__item ${pathname === '/skill/' ? 'current' : ''}`}>
+              Skill
+            </Link>
           </li>
           <li className="l-navigation__item">
-            <a href="/contact/">Contact</a>
+            <Link href="/contact/" className={`l-navigation__item ${pathname === '/contact/' ? 'current' : ''}`}>
+              Contact
+            </Link>
           </li>
         </ul>
       </nav>
       <div className="l-header__sns">
         <a href="https://x.com/t_tomocan" className="l-header__sns__item --x" target="_blank">
-          <Image src="/img/common/icon_x.svg" alt="X" width={40} height={41} priority />
+          <img src="/img/common/icon_x.svg" alt="X" width="40" height="41" />
         </a>
         <a href="https://coconala.com/users/1531202" className="l-header__sns__item --coconala" target="_blank">
-          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={41} priority />
+          <img src="/img/common/icon_coconala.svg" alt="coconala" width="40" height="41" />
         </a>
       </div>
     </div>

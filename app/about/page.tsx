@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function Page() {
+export default async function Page() {
   return (
     <>
       <section className="greeting l-inner l-inner-s">
@@ -34,46 +34,48 @@ export default function Page() {
         </h2>
         <div className="profile__cont flipDownTrigger">
           <table className="c-table-01">
-            <tr>
-              <th>名前</th>
-              <td>ともきゃん</td>
-            </tr>
-            <tr>
-              <th>生年月</th>
-              <td>1994年1月生まれ</td>
-            </tr>
-            <tr>
-              <th>出身地</th>
-              <td>愛知県</td>
-            </tr>
-            <tr>
-              <th>性別</th>
-              <td>男性</td>
-            </tr>
-            <tr>
-              <th>職業</th>
-              <td>Webエンジニア、ブロガー</td>
-            </tr>
-            <tr>
-              <th>趣味</th>
-              <td>ブログ、読書、カラオケ</td>
-            </tr>
-            <tr>
-              <th>座右の銘</th>
-              <td>Webエンジニア、ブロガー</td>
-            </tr>
-            <tr>
-              <th>職業</th>
-              <td>遊ぶように生きる</td>
-            </tr>
-            <tr>
-              <th>ロールモデル</th>
-              <td>前田裕二氏</td>
-            </tr>
-            <tr>
-              <th>人生のバイブル</th>
-              <td>NARUTO</td>
-            </tr>
+            <tbody>
+              <tr>
+                <th>名前</th>
+                <td>ともきゃん</td>
+              </tr>
+              <tr>
+                <th>生年月</th>
+                <td>1994年1月生まれ</td>
+              </tr>
+              <tr>
+                <th>出身地</th>
+                <td>愛知県</td>
+              </tr>
+              <tr>
+                <th>性別</th>
+                <td>男性</td>
+              </tr>
+              <tr>
+                <th>職業</th>
+                <td>Webエンジニア、ブロガー</td>
+              </tr>
+              <tr>
+                <th>趣味</th>
+                <td>ブログ、読書、カラオケ</td>
+              </tr>
+              <tr>
+                <th>座右の銘</th>
+                <td>Webエンジニア、ブロガー</td>
+              </tr>
+              <tr>
+                <th>職業</th>
+                <td>遊ぶように生きる</td>
+              </tr>
+              <tr>
+                <th>ロールモデル</th>
+                <td>前田裕二氏</td>
+              </tr>
+              <tr>
+                <th>人生のバイブル</th>
+                <td>NARUTO</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </section>

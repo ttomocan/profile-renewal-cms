@@ -59,9 +59,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <div className="l-content">{children}</div>
         <Blog />
-        <div className="c-wave">
-          <canvas id="waveCanvas"></canvas>
-        </div>
         <Footer />
         <PageTop />
       </body>

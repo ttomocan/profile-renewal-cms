@@ -1,5 +1,4 @@
 import PageTitle from '@/app/_components/PageTitle';
-import Sheet from '@/app/_components/Sheet';
 
 export const metadata = {
   title: 'ニュース',
@@ -15,7 +14,7 @@ export default function NewsLayout({ children }: Props) {
   return (
     <>
       <PageTitle title="News" sub="ニュース" />
-      <Sheet>{children}</Sheet>
+      <main>{children}</main>
     </>
   );
 }
