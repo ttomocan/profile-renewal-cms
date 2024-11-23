@@ -3,7 +3,7 @@
 .c-link {
   &-external {
     &::after {
-      background: url(../img/common/icon_link-external.svg) no-repeat center/contain;
+      background: url(/img/common/icon_link-external.svg) no-repeat center/contain;
       content: '';
       display: inline-block;
       height: 0.8em;
@@ -13,7 +13,7 @@
     }
     &.--w {
       &::after {
-        background: url(../img/common/icon_link-external-w.svg) no-repeat center/contain;
+        background: url(/img/common/icon_link-external-w.svg) no-repeat center/contain;
       }
     }
   }

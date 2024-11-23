@@ -4,9 +4,9 @@ window.addEventListener('load', function () {
   $('.loading').addClass('loaded');
 
   // 固定要素の設定
-  const header = $('.header');
-  const pagetop = $('.pagetop');
-  const headerDiv = $('<div class="scroll header">').append(header.clone().contents());
+  const header = $('.l-header');
+  const pagetop = $('.c-pagetop');
+  const headerDiv = $('<div class="scroll l-header">').append(header.clone().contents());
   let headerHeight = header.innerHeight();
   headerDiv.appendTo('body');
 
@@ -24,9 +24,9 @@ window.addEventListener('load', function () {
 
     // スクロール位置がフッターに達したかどうかを確認
     if (scrollPosition >= blogPosition) {
-      pagetop.addClass('on_white');
+      pagetop.addClass('on-white');
     } else {
-      pagetop.removeClass('on_white');
+      pagetop.removeClass('on-white');
     }
   };
   updateHeaderPosition();
@@ -51,11 +51,18 @@ window.addEventListener('load', function () {
     $('html, body').animate({ scrollTop: target }, 0, 'swing');
   }
 
+  // アコーディオン
+  $('.accordion__detail').hide();
+  $('.accordion__title').on('click', function () {
+    $(this).next().slideToggle();
+    $(this).children('.accordion__title-icon').toggleClass('open');
+  });
+
   // ナビゲーションのカレント
   const currentUrl = window.location.href;
   const currentPath = window.location.pathname;
 
-  $('.header_navigation a, .footer_navigation a').each(function () {
+  $('.l-header__navigation a, .l-footer__navigation a').each(function () {
     const linkUrl = $(this).attr('href');
     const linkPath = new URL(linkUrl, window.location.origin).pathname;
 
@@ -72,9 +79,9 @@ window.addEventListener('load', function () {
   });
 
   // 添付ファイル
-  $('.attachment_fileinput').on('change', function () {
+  $('.attachment-fileinput').on('change', function () {
     const file = $(this).prop('files')[0];
-    $(this).closest('.attachment').find('.attachment_filename').text(file.name);
+    $(this).closest('.attachment').find('.attachment-filename').text(file.name);
   });
 
   // 波打つ
@@ -170,11 +177,11 @@ window.addEventListener('load', function () {
   function initPCMenu() {}
 
   function initSPMenu() {
-    const menuBtn = $('.header_menuBtn,.header_link a');
+    const menuBtn = $('.l-header__menuBtn,.l-header__link a');
 
     menuBtn.off('click').on('click', function () {
       $('body').toggleClass('no-scroll');
-      $(this).closest('.header').find('.header_link').toggleClass('menu_open');
+      $(this).closest('.l-header').find('.l-header__link').toggleClass('menu-open');
 
       if (menuBtn.hasClass('open')) {
         menuBtn.removeClass('open').addClass('close');

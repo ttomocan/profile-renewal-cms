@@ -153,7 +153,7 @@
 /* 　ブログエリア
 /* ======================================= */
 .blog {
-  background: url(../img/common/bg_blog.jpg) no-repeat center/cover;
+  background: url(/img/common/bg_blog.jpg) no-repeat center/cover;
   background-attachment: fixed;
   color: #ffffff;
   padding: 60px 0 140px;
@@ -186,7 +186,7 @@
     margin-top: 30px;
     :hover {
       &::after {
-        background: url(../img/common/icon_link-external.svg) no-repeat center / contain;
+        background: url(/img/common/icon_link-external.svg) no-repeat center / contain;
       }
     }
   }
@@ -200,7 +200,7 @@
       margin-top: 30px;
       :hover {
         &::after {
-          background: url(../img/common/icon_link-external.svg) no-repeat center / contain;
+          background: url(/img/common/icon_link-external.svg) no-repeat center / contain;
         }
       }
     }
@@ -216,7 +216,7 @@ $icon-images: (
 .icon {
   @each $class, $icon-image in $icon-images {
     &-#{$class} {
-      background: url('../img/common/' + $icon-image) no-repeat center right/auto 1.5em;
+      background: url('/img/common/' + $icon-image) no-repeat center right/auto 1.5em;
       display: inline-block;
       padding-right: 2em;
     }
