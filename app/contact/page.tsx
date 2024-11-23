@@ -1,5 +1,5 @@
 import ContactForm from '@/app/_components/ContactForm';
 
-export default async function Page() {
+export default function Page() {
   return <div className=""></div>;
 }
