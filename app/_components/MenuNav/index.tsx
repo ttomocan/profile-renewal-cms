@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import cx from 'classnames';
 
 export default function Menu() {
   const [isOpen, setOpen] = useState<boolean>(false);
@@ -44,10 +43,10 @@ export default function Menu() {
       </nav>
       <div className="l-header__sns">
         <a href="https://x.com/t_tomocan" className="l-header__sns__item --x" target="_blank">
-          <Image src="/img/common/icon_x.svg" alt="X" width={40} height={41} priority sizes="100vw" />
+          <Image src="/img/common/icon_x.svg" alt="X" width={40} height={41} priority />
         </a>
         <a href="https://coconala.com/users/1531202" className="l-header__sns__item --coconala" target="_blank">
-          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={41} priority sizes="100vw" />
+          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={41} priority />
         </a>
       </div>
     </div>

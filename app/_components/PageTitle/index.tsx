@@ -1,5 +1,3 @@
-import styles from './index.module.css';
-
 type Props = {
   title: string;
   sub: string;
@@ -7,11 +5,11 @@ type Props = {
 
 export default function PageTitle({ title, sub }: Props) {
   return (
-    <section className={styles.container}>
-      <div>
-        <h1 className={styles.title}>{title}</h1>
-        <p className={styles.sub}>{sub}</p>
+    <div className="pagetitle">
+      <div className="l-inner">
+        <p className="pagetitle__en">{title}</p>
+        <h1 className="pagetitle__ja">{sub}</h1>
       </div>
-    </section>
+    </div>
   );
 }
