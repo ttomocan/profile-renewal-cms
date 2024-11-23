@@ -1,0 +1,20 @@
+@use '../../global' as *;
+
+.c-link {
+  &-external {
+    &::after {
+      background: url(../img/common/icon_link-external.svg) no-repeat center/contain;
+      content: '';
+      display: inline-block;
+      height: 0.8em;
+      margin-left: 0.5em;
+      vertical-align: text-top;
+      width: 0.8em;
+    }
+    &.--w {
+      &::after {
+        background: url(../img/common/icon_link-external-w.svg) no-repeat center/contain;
+      }
+    }
+  }
+}

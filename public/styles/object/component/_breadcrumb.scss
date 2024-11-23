@@ -1,0 +1,86 @@
+@use '../../global' as *;
+
+.c-breadcrumbs {
+  padding: 20px 0;
+  color: #b3b3b3;
+  ul {
+    display: flex;
+  }
+  li {
+    letter-spacing: 0.1em;
+    margin: 0;
+    padding: 0;
+    &:not(:last-of-type) {
+      flex-shrink: 0;
+      &::after {
+        border: {
+          top: 1px solid #b3b3b3;
+          right: 1px solid #b3b3b3;
+        }
+        content: '';
+        display: inline-block;
+        height: 12px;
+        margin: 0 15px 3px 0;
+        text-align: center;
+        transform: rotate(45deg) skew(-15deg, -15deg);
+        vertical-align: middle;
+        width: 12px;
+      }
+    }
+    &:last-of-type {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+    }
+  }
+  a {
+    color: #b3b3b3;
+  }
+
+  /* ======================================= */
+  /* 　PC
+/* ======================================= */
+  @include mq(pc) {
+  }
+
+  /* ======================================= */
+  /* 　TABLET
+/* ======================================= */
+  @include mq(tab) {
+  }
+
+  /* ======================================= */
+  /* 　SP
+/* ======================================= */
+  @include mq(sp) {
+    overflow: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    /*スクロールバー全体の高さ*/
+    &::-webkit-scrollbar {
+      height: 5px;
+    }
+    /*スクロールバー全体の背景*/
+    &::-webkit-scrollbar-track {
+      background: #eceff4;
+    }
+    /*スクロールバーの動く部分*/
+    &::-webkit-scrollbar-thumb {
+      background: #bcc8dd;
+      border-radius: calc(infinity * 1px);
+    }
+    /*スクロールバーの動く部分のホバー（マウスオーバー）*/
+    &::-webkit-scrollbar-thumb:hover {
+      background: darken(#889cbe, 10%);
+    }
+    li {
+      &:nth-child(n + 2):before {
+        margin: 0 10px;
+      }
+      &:last-of-type {
+        padding-right: 10px;
+      }
+    }
+  }
+}

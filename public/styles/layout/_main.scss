@@ -1,0 +1,47 @@
+@use '../global' as *;
+
+main {
+  padding: {
+    bottom: 100px;
+    top: 100px;
+  }
+}
+
+section {
+  &:not(:is(.pagetitle, :last-of-type)) {
+    padding-bottom: 100px;
+  }
+  * ~ section:not(:last-of-type) {
+    padding: {
+      bottom: 50px;
+      top: 0;
+    }
+  }
+}
+
+.l-inner {
+  $block: &;
+  @extend %inner;
+  max-width: calc(#{$inner} + 40px);
+  &#{$block}-s {
+    max-width: calc(#{$innerSmall} + 40px);
+  }
+}
+
+.l-content {
+  flex: 1;
+}
+
+@include mq(sp) {
+  main {
+    padding: {
+      bottom: 100px;
+      top: 50px;
+    }
+  }
+  section {
+    &:not(:is(.pagetitle, :last-of-type)) {
+      padding-bottom: 80px;
+    }
+  }
+}

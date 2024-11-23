@@ -1,0 +1,24 @@
+@use '../../global' as *;
+
+/* リスト
+/* ======================================= */
+.c-list {
+  li {
+    padding-left: 15px;
+    position: relative;
+    &::before {
+      @include listStyle();
+    }
+  }
+
+  &-ol {
+    counter-reset: my-counter;
+    li {
+      padding-left: 25px;
+      position: relative;
+      &::before {
+        @include olListStyle();
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+@use '../../global' as *;
+
+.c-text {
+  &-lead {
+    font: {
+      size: 28px;
+      weight: 400;
+    }
+    letter-spacing: 0.1em;
+  }
+  &-color {
+    color: $mainC;
+    &-w {
+      color: #ffffff;
+    }
+  }
+  &-note {
+    font-size: 0.875em;
+    margin-top: 0;
+    padding-left: 1em;
+    &::before {
+      content: '※';
+      display: inline-block;
+      text-indent: -1em;
+    }
+  }
+}

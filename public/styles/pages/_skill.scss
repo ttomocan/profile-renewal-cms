@@ -1,0 +1,60 @@
+@use '../global/variables' as *;
+@use '../global/mixin' as *;
+@use '../global/extend' as *;
+
+/* =============================== */
+/* ともきゃんができること
+================================== */
+.skill {
+  .pagetitle {
+    @include background(#000000, url('../img/pages/skill/img_hero.jpg'), center, cover, no-repeat);
+  }
+
+  .first {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .programming,
+  .tool {
+    padding-bottom: 80px;
+    &__item {
+      align-items: center;
+      display: flex;
+      gap: 20px;
+      &:has(+ div) {
+        margin-bottom: 20px;
+      }
+    }
+    &__heading {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    &__image {
+      flex: 0 0 100px;
+      text-align: center;
+    }
+    &__occupation {
+      font-size: 13px;
+      white-space: nowrap;
+    }
+  }
+
+  .license {
+    &__cont {
+      display: grid;
+      place-content: center;
+    }
+  }
+
+  .other {
+    &__cont {
+      display: grid;
+      place-content: center;
+    }
+  }
+
+  @include mq(sp) {
+  }
+}

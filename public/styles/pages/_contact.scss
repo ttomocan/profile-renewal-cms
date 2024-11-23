@@ -1,0 +1,12 @@
+@use '../global/variables' as *;
+@use '../global/mixin' as *;
+@use '../global/extend' as *;
+
+/* =============================== */
+/* お問い合わせ
+================================== */
+.contact {
+  .pagetitle {
+    @include background(#000000, url('../img/pages/contact/img_hero.jpg'), center, cover, no-repeat);
+  }
+}

@@ -1,0 +1,42 @@
+@use '../global/variables' as *;
+
+//ハンバーガーメニュー
+@keyframes menu_top {
+  0% {
+    transform: translateY(10px) rotate(-45deg);
+  }
+  100% {
+    background: $mainC;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes menu_bottom {
+  0% {
+    transform: translateY(-10px) rotate(45deg);
+  }
+  100% {
+    background: $mainC;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes menu_top_close {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    background: #ffffff;
+    transform: translateY(10px) rotate(-45deg);
+  }
+}
+
+@keyframes menu_bottom_close {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    background: #ffffff;
+    transform: translateY(-10px) rotate(45deg);
+  }
+}

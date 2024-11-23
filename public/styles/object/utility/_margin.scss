@@ -1,0 +1,16 @@
+.u {
+  @for $value from 0 to 6 {
+    &-mb#{$value * 10} {
+      margin-bottom: 10px * $value;
+    }
+    &-mt#{$value * 10} {
+      margin-top: 10px * $value;
+    }
+    &-ml#{$value * 10} {
+      margin-left: 10px * $value;
+    }
+    &-mr#{$value * 10} {
+      margin-right: 10px * $value;
+    }
+  }
+}

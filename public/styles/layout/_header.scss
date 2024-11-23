@@ -1,0 +1,373 @@
+@use '../global' as *;
+
+.l-header {
+  align-items: center;
+  animation: {
+    duration: 0.4s;
+    timing-function: ease-out;
+  }
+  background-color: $baseC;
+  display: flex;
+  gap: 30px;
+  height: 100px;
+  width: 100%;
+  @include z-index(header);
+
+  &.scroll {
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    height: 80px;
+    left: 0;
+    position: fixed;
+    top: -100%;
+    transition: {
+      duration: 0.4s;
+      delay: 0s;
+      timing-function: ease-out;
+    }
+  }
+
+  &__menuBtn {
+    display: none;
+  }
+}
+
+/* ======================================= */
+/* 　PC
+/* ======================================= */
+@include mq(pcHeader) {
+  .l-header {
+    padding: 20px;
+    transition: 0.3s;
+
+    &__logo {
+      max-width: 30vw;
+      a {
+        transition: 0.2s;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    &__link {
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-columns: 1fr auto;
+      gap: 0 20px;
+      margin-left: auto;
+    }
+
+    &__blog {
+      display: flex;
+      gap: 30px;
+      &__item {
+        font: {
+          weight: 500;
+        }
+      }
+      a {
+        transition: 0.2s;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    &__sns {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      grid-row: 1 / 3;
+      &__item {
+        align-content: center;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        width: 50px;
+        &.--x {
+          background-color: rgba(29, 161, 242, 0.15);
+        }
+        &.--coconala {
+          background-color: rgba(243, 107, 10, 0.15);
+        }
+        &:hover {
+          &.--x {
+            background-color: rgba(29, 161, 242, 0.4);
+          }
+          &.--coconala {
+            background-color: rgba(243, 107, 10, 0.4);
+          }
+        }
+      }
+    }
+
+    .l-navigation {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      &__item {
+        a {
+          color: $textC;
+          display: inline-block;
+          font: {
+            family: 'Roboto', sans-serif;
+            size: 20px;
+            weight: 500;
+          }
+          letter-spacing: 0.1em;
+          position: relative;
+          text-decoration: none;
+
+          /*ホバーエフェクト*/
+          &::after {
+            background: $mainC;
+            content: '';
+            bottom: 0;
+            left: 50%;
+            height: 1px;
+            position: absolute;
+            transition: width 0.4s ease, left 0.4s ease;
+            width: 0;
+          }
+          &:is(:hover, .current) {
+            &::after {
+              width: 100%;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ======================================= */
+/* 　TABLET
+/* ======================================= */
+@include mq(spHeader) {
+  .l-header {
+    height: 60px;
+    gap: 20px;
+    &.scroll {
+      height: 60px;
+    }
+
+    &__logo {
+      margin-left: 20px;
+      max-width: clamp(150px, 70vw, 280px);
+    }
+
+    &__blog {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      order: 2;
+      &__item {
+        font: {
+          weight: 400;
+        }
+      }
+      .c-link-external::after {
+        background: url(../img/common/icon_link-external-w.svg) no-repeat center / contain;
+      }
+      a {
+        border-radius: 10px;
+        border: 1px solid #fff;
+        background: rgba(255, 255, 255, 0.1);
+        color: #ffffff;
+        display: block;
+        padding: 10px 15px;
+        text-align: center;
+      }
+    }
+
+    &__sns {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      grid-row: 1 / 3;
+      order: 3;
+      &__item {
+        align-content: center;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        display: flex;
+        height: 50px;
+        justify-content: center;
+        width: 50px;
+        &.--x {
+          background-color: #fef6f0;
+        }
+        &.--coconala {
+          background-color: #fef6f0;
+        }
+        &:hover {
+          &.--x {
+            background-color: #fef6f0;
+          }
+          &.--coconala {
+            background-color: #fef6f0;
+          }
+        }
+      }
+    }
+
+    .l-navigation {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 10px;
+      width: 100%;
+      &__item {
+        text-align: center;
+        a {
+          color: #ffffff;
+          display: inline-block;
+          font: {
+            family: 'Roboto', sans-serif;
+            size: 20px;
+            weight: 500;
+          }
+          letter-spacing: 0.2em;
+          position: relative;
+          text-decoration: none;
+
+          /*ホバーエフェクト*/
+          &::after {
+            background: #ffffff;
+            content: '';
+            bottom: 0;
+            left: 50%;
+            height: 1px;
+            position: absolute;
+            transition: width 0.4s ease, left 0.4s ease;
+            width: 0;
+          }
+          &:is(:hover, .current) {
+            &::after {
+              width: 100%;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+
+    &__link {
+      align-items: center;
+      background: hsl(25deg 92% 20% / 90%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      height: 100dvh;
+      justify-content: center;
+      opacity: 0;
+      overflow: hidden;
+      right: 0;
+      top: 0;
+      transition: all 0.3s 0s ease-in;
+      position: fixed;
+      visibility: hidden;
+      width: 100%;
+      z-index: 98;
+    }
+
+    /* メニューボタン */
+    &__menuBtn {
+      aspect-ratio: 1 / 1;
+      display: block;
+      height: 100%;
+      margin-left: auto;
+      width: auto;
+      z-index: 99;
+      &::before {
+        left: 0;
+        transform-origin: 0 0;
+      }
+      &-button {
+        display: block;
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        span {
+          background: $mainC;
+          display: block;
+          height: 2px;
+          margin: 0 auto;
+          position: relative;
+          width: 50%;
+          &.top {
+            animation-fill-mode: forwards;
+            top: -8px;
+            transform: translateY(0) rotate(0deg);
+          }
+          &.middle {
+            opacity: 1;
+            top: 0;
+          }
+          &.bottom {
+            animation-fill-mode: forwards;
+            top: 8px;
+            transform: translateY(0) rotate(0deg);
+          }
+        }
+      }
+
+      /* メニューが閉じる時のアニメーション */
+      &.close {
+        .top {
+          animation: menu_top 0.5s {
+            fill-mode: forwards;
+          }
+        }
+        .middle {
+          transition: 0.5s opacity;
+          opacity: 1;
+        }
+        .bottom {
+          animation: menu_bottom 0.5s {
+            fill-mode: forwards;
+          }
+        }
+      }
+
+      /* メニューが開く時のアニメーション */
+      &.open {
+        .top {
+          animation: menu_top_close 0.5s {
+            fill-mode: forwards;
+          }
+        }
+        .middle {
+          opacity: 0;
+          transition: 0.5s opacity;
+        }
+        .bottom {
+          animation: menu_bottom_close 0.5s {
+            fill-mode: forwards;
+          }
+        }
+      }
+    }
+  }
+
+  .no-scroll {
+    overflow: hidden;
+    .l-header {
+      &__link {
+        &.menu-open {
+          opacity: 1;
+          overflow: auto;
+          visibility: initial;
+        }
+      }
+    }
+  }
+}
+
+/* ======================================= */
+/* 　SP
+/* ======================================= */
+@include mq(sp) {
+}

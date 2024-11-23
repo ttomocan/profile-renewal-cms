@@ -1,0 +1,62 @@
+@use '../../global' as *;
+
+$btn-colors: (
+  'gray': (
+    'bg-color': #666666,
+    'text-color': #ffffff,
+  ),
+  'navy': (
+    'bg-color': #001473,
+    'text-color': #ffffff,
+  ),
+);
+
+/* ボタン
+==================================
+@include btn(backgorund-color, color);
+*/
+
+.c-button {
+  &__link {
+    @include btn($mainC, #ffffff, 300px);
+    @each $site_name, $color in $btn-colors {
+      &.--#{$site_name} {
+        background-color: map-get($color, bg-color);
+        color: map-get($color, text-color);
+        &::before {
+          border: 1px solid {
+            color: currentColor currentColor transparent transparent;
+          }
+        }
+        &:hover {
+          background-color: map-get($color, text-color);
+          border-color: map-get($color, bg-color);
+          color: map-get($color, bg-color);
+          &::before {
+            border: 1px solid {
+              color: currentColor currentColor transparent transparent;
+            }
+          }
+        }
+      }
+    }
+
+    &-external {
+      @include btn(transparent, #ffffff, 300px);
+      &:hover,
+      &:focus {
+        background-color: #ffffff;
+        color: $textC;
+      }
+    }
+
+    //モディファイア
+    &.--return {
+      &::before {
+        left: 30px;
+        right: auto;
+        transform: translateY(-50%) rotate(225deg);
+      }
+    }
+  }
+}

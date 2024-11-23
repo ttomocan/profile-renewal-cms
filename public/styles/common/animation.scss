@@ -1,7 +1,7 @@
-@charset "UTF-8";
 /*==================================================
 ふわっ
 ===================================*/
+
 /* その場で */
 .fadeIn {
   animation-name: fadeInAnime;
@@ -14,10 +14,12 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 /* 下から */
 .fadeUp {
   animation-name: fadeUpAnime;
@@ -31,12 +33,15 @@
     opacity: 0;
     transform: translateY(50px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 /* 上から */
+
 .fadeDown {
   animation-name: fadeDownAnime;
   animation-duration: 0.5s;
@@ -49,12 +54,15 @@
     opacity: 0;
     transform: translateY(-80px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
 /* 左から */
+
 .fadeLeft {
   animation-name: fadeLeftAnime;
   animation-duration: 0.5s;
@@ -67,12 +75,15 @@
     opacity: 0;
     transform: translateX(-80px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
   }
 }
+
 /* 右から */
+
 .fadeRight {
   animation-name: fadeRightAnime;
   animation-duration: 0.5s;
@@ -85,12 +96,15 @@
     opacity: 0;
     transform: translateX(80px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
   }
 }
+
 /* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+
 .fadeInTrigger,
 .fadeUpTrigger,
 .fadeDownTrigger,
@@ -102,6 +116,7 @@
 /*==================================================
 パタッ
 ===================================*/
+
 /* 下へ */
 .flipDown {
   animation-name: flipDownAnime;
@@ -115,11 +130,13 @@
     transform: perspective(2500px) rotateX(100deg);
     opacity: 0;
   }
+
   to {
     transform: perspective(2500px) rotateX(0);
     opacity: 1;
   }
 }
+
 /* 左へ */
 .flipLeft {
   animation-name: flipLeftAnime;
@@ -134,11 +151,13 @@
     transform: perspective(600px) translate3d(0, 0, 0) rotateY(30deg);
     opacity: 0;
   }
+
   to {
     transform: perspective(600px) translate3d(0, 0, 0) rotateY(0deg);
     opacity: 1;
   }
 }
+
 /* 左上へ */
 .flipLeftTop {
   animation-name: flipLeftTopAnime;
@@ -152,11 +171,13 @@
     transform: translate(-20px, 80px) rotate(-15deg);
     opacity: 0;
   }
+
   to {
     transform: translate(0, 0) rotate(0deg);
     opacity: 1;
   }
 }
+
 /* 右へ */
 .flipRight {
   animation-name: flipRightAnime;
@@ -171,11 +192,13 @@
     transform: perspective(600px) translate3d(0, 0, 0) rotateY(-30deg);
     opacity: 0;
   }
+
   to {
     transform: perspective(600px) translate3d(0, 0, 0) rotateY(0deg);
     opacity: 1;
   }
 }
+
 /* 右上へ */
 .flipRightTop {
   animation-name: flipRightTopAnime;
@@ -189,12 +212,15 @@
     transform: translate(-20px, 80px) rotate(25deg);
     opacity: 0;
   }
+
   to {
     transform: translate(0, 1) rotate(0deg);
     opacity: 1;
   }
 }
+
 /* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+
 .flipDownTrigger,
 .flipLeftTrigger,
 .flipLeftTopTrigger,
@@ -206,6 +232,7 @@
 /*==================================================
 くるっ
 ===================================*/
+
 /* X 軸（縦へ） */
 .rotateX {
   animation-name: rotateXAnime;
@@ -223,6 +250,7 @@
     opacity: 1;
   }
 }
+
 /*　Y軸（横へ） */
 .rotateY {
   animation-name: rotateYAnime;
@@ -240,6 +268,7 @@
     opacity: 1;
   }
 }
+
 /* Z 軸（左へ） */
 .rotateLeftZ {
   animation-name: rotateLeftZAnime;
@@ -257,6 +286,7 @@
     opacity: 1;
   }
 }
+
 /*　Z 軸（右へ） */
 .rotateRightZ {
   animation-name: rotateRightZAnime;
@@ -274,7 +304,9 @@
     opacity: 1;
   }
 }
+
 /* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+
 .rotateXTrigger,
 .rotateYTrigger,
 .rotateLeftZTrigger,
@@ -285,6 +317,7 @@
 /*==================================================
 ボンッ、ヒュッ
 ===================================*/
+
 /* 拡大 */
 .zoomIn {
   animation-name: zoomInAnime;
@@ -297,11 +330,13 @@
     transform: scale(0.6);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
   }
 }
+
 /* 縮小 */
 .zoomOut {
   animation-name: zoomOutAnime;
@@ -314,12 +349,15 @@
     transform: scale(1.2);
     opacity: 0;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
   }
 }
+
 /* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+
 .zoomInTrigger,
 .zoomOutTrigger {
   opacity: 0;
@@ -328,6 +366,7 @@
 /*==================================================
 じわっ
 ===================================*/
+
 /* ぼかしから出現 */
 .blur {
   animation-name: blurAnime;
@@ -341,13 +380,16 @@
     transform: scale(1.02);
     opacity: 0;
   }
+
   to {
     filter: blur(0);
     transform: scale(1);
     opacity: 1;
   }
 }
+
 /* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+
 .blurTrigger {
   opacity: 0;
 }
@@ -355,6 +397,7 @@
 /*==================================================
 にゅーん
 ===================================*/
+
 /* 滑らかに変形して出現 */
 .smooth {
   animation-name: smoothAnime;
@@ -369,12 +412,15 @@
     transform: translate3d(0, 100%, 0) skewY(12deg);
     opacity: 0;
   }
+
   to {
     transform: translate3d(0, 0, 0) skewY(0);
     opacity: 1;
   }
 }
+
 /* スクロールをしたら出現する要素にはじめに透過0を指定　*/
+
 .smoothTrigger {
   opacity: 0;
 }
@@ -382,7 +428,9 @@
 /*==================================================
 スーッ（枠線が伸びて出現）
 ===================================*/
+
 /*枠線が伸びて出現*/
+
 .lineTrigger {
   position: relative; /* 枠線が書かれる基点*/
   opacity: 0;
@@ -398,15 +446,17 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 /*上下線*/
 .lineTrigger::before,
 .lineTrigger::after {
   position: absolute;
-  content: "";
+  content: '';
   width: 0;
   height: 1px;
   background: #333; /* 枠線の色*/
@@ -416,7 +466,7 @@
 .line2::before,
 .line2::after {
   position: absolute;
-  content: "";
+  content: '';
   width: 1px;
   height: 0;
   background: #333; /* 枠線の色*/
@@ -470,6 +520,7 @@
     width: 100%;
   }
 }
+
 @keyframes lineAnime2 {
   0% {
     height: 0%;
@@ -478,7 +529,9 @@
     height: 100%;
   }
 }
+
 /*枠線内側の要素*/
+
 .lineTrigger.lineanime .lineinappear {
   animation: lineInnerAnime 0.5s linear 1.5s forwards; /*1.5秒後に中央のエリアが0.5秒かけて表示*/
   opacity: 0; /*初期値を透過0にする*/
@@ -492,9 +545,11 @@
     opacity: 1;
   }
 }
+
 /*==================================================
 シャッ（背景色が伸びて出現）
 ===================================*/
+
 /*背景色が伸びて出現（共通）*/
 .bgextend {
   animation-name: bgextendAnimeBase;
@@ -509,10 +564,12 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
 }
+
 /*中の要素*/
 .bgappear {
   animation-name: bgextendAnimeSecond;
@@ -530,18 +587,18 @@
     opacity: 1;
   }
 }
+
 /*左から*/
 .bgLRextend::before {
   animation-name: bgLRextendAnime;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: #666; /*伸びる背景色の設定*/
 }
-
 @keyframes bgLRextendAnime {
   0% {
     transform-origin: left;
@@ -559,18 +616,18 @@
     transform: scaleX(0);
   }
 }
+
 /*右から*/
 .bgRLextend::before {
   animation-name: bgRLextendAnime;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: #666; /*伸びる背景色の設定*/
 }
-
 @keyframes bgRLextendAnime {
   0% {
     transform-origin: right;
@@ -588,18 +645,18 @@
     transform: scaleX(0);
   }
 }
+
 /*下から*/
 .bgDUextend::before {
   animation-name: bgDUextendAnime;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: #666; /*伸びる背景色の設定*/
 }
-
 @keyframes bgDUextendAnime {
   0% {
     transform-origin: bottom;
@@ -617,18 +674,18 @@
     transform: scaleY(0);
   }
 }
+
 /*上から*/
 .bgUDextend::before {
   animation-name: bgUDextendAnime;
   animation-duration: 1s;
   animation-fill-mode: forwards;
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   height: 100%;
   background-color: #666; /*伸びる背景色の設定*/
 }
-
 @keyframes bgUDextendAnime {
   0% {
     transform-origin: top;
@@ -646,6 +703,7 @@
     transform: scaleY(0);
   }
 }
+
 /* スクロールをしたら出現する要素にはじめに透過0を指定　*/
 .bgappearTrigger,
 .bgUDextendTrigger,
@@ -656,6 +714,7 @@
 }
 
 /*========= レイアウトのためのCSS ===============*/
+
 .wrapper {
   overflow: hidden;
 }
@@ -685,7 +744,9 @@
 /*==================================================
 アニメーション設定
 ===================================*/
+
 /* アニメーションの回数を決めるCSS*/
+
 .count2 {
   animation-iteration-count: 2; /*この数字を必要回数分に変更*/
 }
@@ -695,6 +756,7 @@
 }
 
 /* アニメーションスタートの遅延時間を決めるCSS*/
+
 .delay-time03 {
   animation-delay: 0.3s;
 }
@@ -740,6 +802,7 @@
 }
 
 /* アニメーション自体が変化する時間を決めるCSS*/
+
 .change-time05 {
   animation-duration: 0.5s;
 }
@@ -758,4 +821,4 @@
 
 .change-time25 {
   animation-duration: 2.5s;
-}/*# sourceMappingURL=animation.css.map */
+}

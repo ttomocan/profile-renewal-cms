@@ -1,0 +1,43 @@
+@use '../../global' as *;
+
+.c-row {
+  display: flex;
+  gap: clamp(20px, 3vw + (100vw - $inner) * 0.1, 30px);
+  justify-content: space-between;
+  .col {
+    flex: 1;
+    &-img {
+      flex-shrink: 0;
+      max-width: 55vw;
+    }
+    &-text {
+      align-self: center;
+      width: 100%;
+    }
+  }
+
+  &.--center {
+    justify-content: center;
+  }
+  &.--end {
+    justify-content: flex-end;
+  }
+
+  @include mq(sp) {
+    flex-direction: column;
+    gap: 40px;
+    .col {
+      &-text {
+        order: 2;
+      }
+      &-img {
+        max-width: 100%;
+        order: 1;
+        text-align: center;
+      }
+    }
+    &.--spReverse {
+      flex-direction: column-reverse;
+    }
+  }
+}

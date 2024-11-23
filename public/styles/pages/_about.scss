@@ -1,0 +1,70 @@
+@use '../global/variables' as *;
+@use '../global/mixin' as *;
+@use '../global/extend' as *;
+
+/* =============================== */
+/* ともきゃんはこんな人
+================================== */
+.about {
+  .pagetitle {
+    @include background(#000000, url('../img/pages/about/img_hero.jpg'), center, cover, no-repeat);
+  }
+
+  .greeting {
+    padding-bottom: 80px;
+    img {
+      border: 1px solid #6a6a6a;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    &__cont {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+    &__image {
+      flex: 0 0 150px;
+      text-align: center;
+    }
+    &__occupation {
+      font-size: 13px;
+      white-space: nowrap;
+    }
+  }
+
+  .license {
+    &__cont {
+      display: grid;
+      place-content: center;
+    }
+  }
+
+  .result {
+    &__cont {
+      display: grid;
+      place-content: center;
+    }
+  }
+
+  @include mq(sp) {
+    .greeting {
+      &__cont {
+        flex-direction: column;
+      }
+    }
+
+    .license {
+      &__cont {
+        display: grid;
+        place-content: start;
+      }
+    }
+
+    .result {
+      &__cont {
+        display: grid;
+        place-content: start;
+      }
+    }
+  }
+}

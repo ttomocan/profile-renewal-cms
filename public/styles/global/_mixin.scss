@@ -1,0 +1,139 @@
+@use 'variables' as *;
+
+// ==========================================================================
+// mixin定義
+// ==========================================================================
+
+// メディアクエリー
+$breakpoint: (
+  'pcHeader': '(min-width: 1141px)',
+  'spHeader': '(max-width: 1140px)',
+  'pc': '(min-width: 1041px)',
+  'tab': '(max-width: 1040px)',
+  'pcTab': '(min-width: 768px)',
+  'sp': '(max-width: 767px)',
+) !default;
+
+@mixin mq($bp) {
+  @media #{map-get($breakpoint, $bp)} {
+    @content;
+  }
+}
+
+// ホバー
+@mixin hover {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+// リスト
+@mixin listStyle() {
+  background: $mainC;
+  border-radius: 50%;
+  content: '';
+  display: inline-block;
+  height: 6px;
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 6px;
+}
+
+// 番号付きリスト
+@mixin olListStyle() {
+  content: counter(my-counter) '.';
+  counter-increment: my-counter;
+  left: 4px;
+  position: absolute;
+  top: 0;
+}
+
+// ボタン
+@mixin btn($bg, $color, $width) {
+  background-color: $bg;
+  border: 1px solid $color;
+  border-radius: calc(infinity * 1px);
+  box-sizing: border-box;
+  color: $color;
+  display: inline-block;
+  line-height: 1.5;
+  padding: 15px 40px;
+  position: relative;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.2s;
+  min-width: $width;
+  &::before {
+    border: 1px solid {
+      color: $color $color transparent transparent;
+    }
+    content: '';
+    display: block;
+    height: 10px;
+    right: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 10px;
+  }
+  &:hover,
+  &:focus {
+    background-color: $color;
+    border-color: $bg;
+    color: $bg;
+    opacity: 1;
+    &::before {
+      border: 1px solid {
+        color: currentColor currentColor transparent transparent;
+      }
+    }
+  }
+}
+
+// Backgroundプロパティ
+@mixin background($color: transparent, $image: none, $position: 50% 50%, $size: auto, $repeat: no-repeat, $attachment: scroll) {
+  background-color: $color;
+  background-image: $image;
+  background-position: $position;
+  background-size: $size;
+  background-repeat: $repeat;
+  background-attachment: $attachment;
+}
+
+// 重なり順
+$layer: (
+  modal: 100,
+  header: 30,
+  pagetop: 20,
+  tooltip: 10,
+  default: 1,
+);
+@mixin z-index($key) {
+  z-index: map-get($layer, $key);
+}
+
+// animationプロパティ
+@mixin animation($name, $duration: 1s, $timing-function: ease, $delay: 0s, $iteration-count: 1, $direction: normal, $fill-mode: forwards) {
+  animation: {
+    name: $name;
+    duration: $duration;
+    timing-function: $timing-function;
+    delay: $delay;
+    iteration-count: $iteration-count;
+    direction: $direction;
+    fill-mode: $fill-mode;
+  }
+}
+
+//その他
+@mixin colorScheme($bg-color, $text-color) {
+  background: $bg-color;
+  color: $text-color;
+}
+
+@mixin font-properties($family: sans-serif, $weight: 400, $size: 15px) {
+  font-family: $family, sans-serif;
+  font-weight: $weight;
+  font-size: $size;
+}

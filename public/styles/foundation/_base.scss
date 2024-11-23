@@ -1,0 +1,98 @@
+@use '../global' as *;
+
+body {
+  background-color: $baseC;
+  color: $textC;
+  display: flex;
+  flex-flow: column;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-optical-sizing: auto;
+  font-size: 15px;
+  min-height: 100vh;
+  letter-spacing: 0.025em;
+  line-break: strict;
+  line-height: 2;
+  overflow-wrap: anywhere;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  color: $linkC;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  transition: 0.1s;
+  word-wrap: break-word;
+
+  &:focus {
+    outline: none;
+  }
+
+  @include mq(pc) {
+    &[href^='tel:'] {
+      color: inherit;
+      pointer-events: none;
+    }
+  }
+
+  /* ホバー可能なデバイスでのみ適用される */
+  @include hover {
+    &:is(:hover, :focus) {
+      text-decoration: none;
+    }
+  }
+}
+
+img {
+  $height: true;
+  max-width: 100%;
+  vertical-align: bottom;
+  @if $height {
+    height: auto;
+  }
+}
+
+figcaption {
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+address {
+  font-style: normal;
+  text-decoration: none;
+}
+
+:is(button, input, textarea, select) {
+  all: unset;
+}
+
+select {
+  cursor: pointer;
+  &::-ms-expand {
+    display: none;
+  }
+}
+
+button,
+input:is([type='reset'], [type='button'], [type='submit']) {
+  cursor: pointer;
+  transition: 0.2s;
+  &:focus {
+    outline-offset: -2px;
+  }
+  &::-webkit-search-decoration {
+    display: none;
+  }
+}
+
+sub,
+sup {
+  font-size: 0.75em;
+  vertical-align: baseline;
+}
+
+sup {
+  vertical-align: text-top;
+}

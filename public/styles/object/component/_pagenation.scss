@@ -1,0 +1,60 @@
+@use '../../global' as *;
+
+/* ページネーション
+================================== */
+.c-pagenation {
+  display: flex;
+  justify-content: center;
+  .prev,
+  .next {
+    a {
+      background: #edf1f5;
+      display: inline-block;
+      line-height: 1;
+      text-align: center;
+      padding: 10px;
+      transition: 0.2s all;
+      &:hover {
+        @include colorScheme($mainC, #ffffff);
+      }
+    }
+  }
+  .page-numbers {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    li {
+      border-bottom: 1px solid #808080;
+      height: 62px;
+      overflow: hidden;
+      :is(a, span) {
+        color: #ffffff;
+        background: #808080;
+        border-radius: 50%;
+        display: grid;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        line-height: 1;
+        height: 72px;
+        width: 72px;
+        place-content: center;
+        transition: 0.2s all;
+      }
+      .--current,
+      a:hover {
+        @include colorScheme($mainC, #ffffff);
+        border-bottom: 1px solid $mainC;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+@include mq(sp) {
+  .c-pagenation {
+    .page-numbers {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  }
+}

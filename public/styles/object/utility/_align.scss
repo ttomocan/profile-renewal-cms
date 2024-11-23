@@ -1,0 +1,10 @@
+@use '../../global' as *;
+
+.u-align {
+  $text-aligns: center, left, right;
+  @each $text-align in $text-aligns {
+    &-#{$text-align} {
+      text-align: $text-align;
+    }
+  }
+}

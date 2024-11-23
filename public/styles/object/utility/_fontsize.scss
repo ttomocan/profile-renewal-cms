@@ -1,0 +1,15 @@
+@use '../../global' as *;
+
+$font-sizes: (
+  's': 0.75em,
+  'm': 1em,
+  'l': 1.25em,
+);
+
+.u-fs {
+  @each $font-name, $font-size in $font-sizes {
+    &-#{$font-name} {
+      font-size: $font-size;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+%positionCenter {
+  inset: 0;
+  margin: auto;
+  position: absolute;
+}
+
+%inner {
+  margin: {
+    left: auto;
+    right: auto;
+  }
+  padding: {
+    left: 20px;
+    right: 20px;
+  }
+  width: 100%;
+}

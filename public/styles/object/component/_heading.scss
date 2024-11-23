@@ -1,0 +1,55 @@
+@use '../../global' as *;
+
+.c-heading {
+  &-lv2 {
+    $heading-lv2: &;
+    color: $textC;
+    display: flex;
+    flex-flow: column;
+    font-size: 32px;
+    margin-bottom: 40px;
+    text-align: center;
+    &-en {
+      font: {
+        family: 'Roboto', sans-serif;
+        weight: 500;
+        size: clamp(34px, 4vw, 44px);
+      }
+      line-height: 1;
+      letter-spacing: 0.1em;
+      &::after {
+        border-bottom: 1px solid $mainC;
+        content: '';
+        display: block;
+        margin: 15px auto;
+        width: 60px;
+      }
+    }
+    &-ja {
+      display: block;
+      font: {
+        weight: 500;
+        size: clamp(18px, 1.8vw, 20px);
+      }
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+    &.--color-w {
+      #{$heading-lv2} {
+        &-en {
+          color: #ffffff;
+          &::after {
+            border-color: currentColor;
+          }
+        }
+        &-ja {
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  &-lv3 {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+}
