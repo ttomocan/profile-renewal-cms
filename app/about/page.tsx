@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default async function Page() {
+export default async function Home() {
   return (
     <>
       <section className="greeting l-inner l-inner-s">
