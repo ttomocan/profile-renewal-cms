@@ -1,7 +1,7 @@
 'use client';
 
 import { createContactData } from '@/app/_actions/contact';
-import { useFormState } from 'react-dom';
+import { useActionState } from 'react'; // Updated import
 import { sendGAEvent } from '@next/third-parties/google';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export default function ContactForm() {
-  const [state, formAction] = useFormState(createContactData, initialState);
+  const [state, formAction] = useActionState(createContactData, initialState);
   const [fileName, setFileName] = useState('選択されていません');
 
   const handleFileChange = (event) => {
