@@ -28,7 +28,7 @@ export default function Page() {
         </div>
         <div className="programming__item flipDownTrigger">
           <div className="programming__image">
-            <Image src="/img/pages/skill/img_chatgpt.svg" alt="CSS3" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
+            <Image src="/img/pages/skill/img_css3.svg" alt="CSS3" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">CSS3</h3>
