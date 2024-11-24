@@ -19,7 +19,7 @@ export default function Page() {
         </h2>
         <div className="programming__item flipDownTrigger">
           <div className="programming__image">
-            <Image src="/img/pages/skill/img_html5.svg" alt="HTML5" width="100" height="100" priority sizes="100vw" />
+            <Image src="/img/pages/skill/img_html5.svg" alt="HTML5" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">HTML5</h3>
@@ -28,7 +28,7 @@ export default function Page() {
         </div>
         <div className="programming__item flipDownTrigger">
           <div className="programming__image">
-            <Image src="/img/pages/skill/img_css3.svg" alt="CSS3" width="100" height="100" priority sizes="100vw" />
+            <Image src="/img/pages/skill/img_chatgpt.svg" alt="CSS3" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">CSS3</h3>
@@ -37,7 +37,7 @@ export default function Page() {
         </div>
         <div className="programming__item flipDownTrigger">
           <div className="programming__image">
-            <Image src="/img/pages/skill/img_javascript.svg" alt="JS" width="100" height="100" priority sizes="100vw" />
+            <Image src="/img/pages/skill/img_javascript.svg" alt="JS" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">JavaScript</h3>
@@ -91,7 +91,7 @@ export default function Page() {
         </div>
         <div className="tool__item flipDownTrigger">
           <div className="tool__image">
-            <Image src="/img/pages/skill/img_adobe.svg" alt="Photoshop・Illustrator" width="100" height="100" priority sizes="100vw" />
+            <Image src="/img/pages/skill/img_adobe.svg" alt="Photoshop・Illustrator" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Photoshop・Illustrator</h3>
@@ -100,7 +100,7 @@ export default function Page() {
         </div>
         <div className="tool__item flipDownTrigger">
           <div className="tool__image">
-            <Image src="/img/pages/skill/img_canva.svg" alt="Canva" width="100" height="100" priority sizes="100vw" />
+            <Image src="/img/pages/skill/img_canva.svg" alt="Canva" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Canva・Adobe Express</h3>
@@ -109,13 +109,7 @@ export default function Page() {
         </div>
         <div className="tool__item flipDownTrigger">
           <div className="tool__image">
-            <Image
-              src="/img/pages/skill/img_chatgpt.svg"
-              alt="ChatGPT"
-              width={100}
-              height={100}
-              style={{ width: 'auto', height: '100px' }} // アスペクト比を維持
-            />
+            <Image src="/img/pages/skill/img_chatgpt.svg" alt="ChatGPT" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">ChatGPT・Adobe Firefly</h3>
