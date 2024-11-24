@@ -1,5 +1,6 @@
 'use client'; // クライアントコンポーネントとして宣言
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -46,10 +47,10 @@ export default function Menu() {
       </nav>
       <div className="l-header__sns">
         <a href="https://x.com/t_tomocan" className="l-header__sns__item --x" target="_blank">
-          <img src="/img/common/icon_x.svg" alt="X" width="40" height="41" />
+          <Image src="/img/common/icon_x.svg" alt="X" width={40} height={40} style={{ width: 'auto', height: '40px' }} />
         </a>
         <a href="https://coconala.com/users/1531202" className="l-header__sns__item --coconala" target="_blank">
-          <img src="/img/common/icon_coconala.svg" alt="coconala" width="40" height="41" />
+          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} style={{ width: 'auto', height: '40px' }} />
         </a>
       </div>
     </div>
