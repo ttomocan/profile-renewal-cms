@@ -11,6 +11,9 @@ export default async function Home() {
   return (
     <>
       <div className="hero">
+        <div className="hero__image">
+          <Image src="/img/pages/top/img_hero.jpg" alt="" width={1366} height={400} priority sizes="100vw" />
+        </div>
         <div className="hero__wrap l-inner">
           <p className="hero__en">
             <span className="char">T</span>

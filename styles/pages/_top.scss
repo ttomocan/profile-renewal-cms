@@ -7,17 +7,28 @@
 ================================== */
 .top {
   .hero {
-    background: url(/img/pages/top/img_hero.jpg) no-repeat center / cover;
     align-items: center;
     display: flex;
     min-height: 500px;
+    overflow: hidden;
     padding: 20px;
+    position: relative;
+    &__image {
+      inset: 0;
+      position: absolute;
+      img {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+      }
+    }
     &__wrap {
       background: rgba(243, 107, 10, 0.7);
       display: grid;
       gap: 10px;
       line-height: 1;
       place-content: center;
+      position: relative;
       text-align: center;
       max-width: 1000px;
       min-height: 340px;
@@ -107,7 +118,6 @@
 
   @include mq(sp) {
     .hero {
-      background: url(/img/pages/top/img_hero.jpg) center / cover no-repeat;
       align-items: center;
       display: flex;
       min-height: 400px;
