@@ -48,8 +48,8 @@ $white-color: #ffffff;
   &__link {
     color: $black-color;
     @include font-properties(Roboto, 500, 14px);
-    letter-spacing: 0.2em;
-    line-height: 1.2;
+    letter-spacing: 0.1em;
+    line-height: 1;
     margin-top: 30px;
     text-align: center;
     text-orientation: upright;
