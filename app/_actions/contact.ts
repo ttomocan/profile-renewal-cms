@@ -41,7 +41,7 @@ export async function createContactData(_prevState: any, formData: FormData) {
         {
           objectTypeId: '0-1',
           name: 'namae',
-          value: rawFormData.name,
+          value: rawFormData.namae,
         },
         {
           objectTypeId: '0-1',
