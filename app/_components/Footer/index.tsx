@@ -1,6 +1,10 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Footer() {
+  const pathname = usePathname();
   return (
     <>
       <div className="c-wave">
@@ -10,16 +14,24 @@ export default function Footer() {
         <div className="l-footer__navigation" role="navigation" aria-label="グローバルナビゲーション">
           <ul className="l-navigation">
             <li className="l-navigation__item">
-              <Link href="/">Top</Link>
+              <Link href="/" className={`l-navigation__item ${pathname === '/' ? 'current' : ''}`}>
+                Top
+              </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/about/">About</Link>
+              <Link href="/about/" className={`l-navigation__item ${pathname === '/about/' ? 'current' : ''}`}>
+                About
+              </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/skill/">Skill</Link>
+              <Link href="/skill/" className={`l-navigation__item ${pathname === '/skill/' ? 'current' : ''}`}>
+                Skill
+              </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/contact/">Contact</Link>
+              <Link href="/contact/" className={`l-navigation__item ${pathname === '/contact/' ? 'current' : ''}`}>
+                Contact
+              </Link>
             </li>
           </ul>
         </div>

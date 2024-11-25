@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 export default function Menu() {
-  const pathname = usePathname(); // 現在のパスを取得
+  const pathname = usePathname();
 
   return (
     <div className="l-header__link">
