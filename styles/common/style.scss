@@ -71,7 +71,7 @@
     z-index: 0;
   }
   &::before {
-    @include animation($name: hero-before, $duration: 0.5s, $timing-function: ease, $delay: 0.1s, $fill-mode: both);
+    @include animation($name: hero-before, $duration: 0.5s, $timing-function: ease, $delay: 0.5s, $fill-mode: both);
     rotate: 45deg;
     transform-origin: center;
     @keyframes hero-before {
@@ -85,7 +85,7 @@
     }
   }
   &::after {
-    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 0.6s, $fill-mode: both);
+    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 1s, $fill-mode: both);
     rotate: -45deg;
     transform-origin: center;
     @keyframes hero-after {
