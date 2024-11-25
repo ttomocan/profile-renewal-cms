@@ -8,11 +8,11 @@ function validateEmail(email: string) {
 export async function createContactData(_prevState: any, formData: FormData) {
   // formのname属性ごとにformData.get()で値を取り出すことができる
   const rawFormData = {
-    name: formData.get('name') as string,
+    namae: formData.get('namae') as string,
     email: formData.get('email') as string,
   };
 
-  if (!rawFormData.name) {
+  if (!rawFormData.namae) {
     return {
       status: 'error',
       message: '名前を入力してください',
@@ -40,7 +40,7 @@ export async function createContactData(_prevState: any, formData: FormData) {
       fields: [
         {
           objectTypeId: '0-1',
-          name: 'name',
+          name: 'namae',
           value: rawFormData.name,
         },
         {
