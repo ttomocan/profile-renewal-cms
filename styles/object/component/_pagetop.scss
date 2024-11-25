@@ -57,6 +57,9 @@ $white-color: #ffffff;
     unicode-bidi: plaintext;
     direction: ltr;
     -webkit-writing-mode: vertical-rl;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
 
   &:hover {
