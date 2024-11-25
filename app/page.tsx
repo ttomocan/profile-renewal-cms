@@ -53,7 +53,7 @@ export default async function Home() {
       </div>
       <main>
         <section className="about l-inner l-inner-s">
-          <h2 className="c-heading-lv2 flipDownTrigger">
+          <h2 className="c-heading-lv2">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
           </h2>
