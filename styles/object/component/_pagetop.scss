@@ -4,12 +4,12 @@
 /* ページトップ
 ================================== */
 
-$black-color: $textC;
-$white-color: #ffffff;
+$color: #fff9f4;
 
 .c-pagetop {
   $pagetop: &;
   bottom: 20px;
+  mix-blend-mode: difference;
   opacity: 0;
   position: fixed;
   right: 30px;
@@ -19,7 +19,7 @@ $white-color: #ffffff;
   &__icon {
     width: 1px;
     height: 0;
-    background: $black-color;
+    background: $color;
     display: block;
     margin: auto;
     position: relative;
@@ -35,8 +35,8 @@ $white-color: #ffffff;
       display: block;
       width: 30px;
       height: 30px;
-      border-top: 1px solid $black-color;
-      border-right: 1px solid $black-color;
+      border-top: 1px solid $color;
+      border-right: 1px solid $color;
       transform: translateX(-50%) rotate(-45deg);
     }
 
@@ -46,7 +46,7 @@ $white-color: #ffffff;
   }
 
   &__link {
-    color: $black-color;
+    color: $color;
     display: inline-block;
     @include font-properties(Roboto, 500, 14px);
     letter-spacing: 0.15em;
@@ -70,17 +70,17 @@ $white-color: #ffffff;
 
   &.on-white {
     #{$pagetop}__icon {
-      background: $white-color;
+      background: $color;
 
       &::before,
       &::after {
-        border-top: 1px solid $white-color;
-        border-right: 1px solid $white-color;
+        border-top: 1px solid $color;
+        border-right: 1px solid $color;
       }
     }
 
     #{$pagetop}__link {
-      color: $white-color;
+      color: $color;
     }
   }
 }
