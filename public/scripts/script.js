@@ -11,7 +11,7 @@ script.onload = function () {
     const headerDiv = document.createElement('div');
     headerDiv.className = 'scroll l-header';
     headerDiv.appendChild(headerClone?.firstChild);
-    document.body.appendChild(headerDiv);
+    //document.body.appendChild(headerDiv);
     const headerHeight = header?.offsetHeight || 0;
 
     // スクロール時
