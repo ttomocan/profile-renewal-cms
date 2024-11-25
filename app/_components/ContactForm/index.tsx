@@ -139,9 +139,9 @@ export default function ContactForm() {
 
       {/* ボタン */}
       <div className="l-form__button">
-        <button type="submit" className="c-button__link --return --gray">
+        {/* <button type="submit" className="c-button__link --return --gray">
           戻る
-        </button>
+        </button> */}
         <button type="submit" className="c-button__link --main">
           送信する
         </button>
