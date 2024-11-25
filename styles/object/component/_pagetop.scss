@@ -48,7 +48,7 @@ $color: #fff9f4;
   &__link {
     color: $color;
     display: inline-block;
-    @include font-properties(Roboto, 300, 15px);
+    @include font-properties(Roboto, 400, 15px);
     letter-spacing: 0.15em;
     line-height: 1;
     padding-top: 20px;
