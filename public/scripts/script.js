@@ -167,8 +167,13 @@ script.onload = function () {
         btn.addEventListener('click', () => {
           document.body.classList.toggle('no-scroll');
           document.querySelector('.l-header__link')?.classList.toggle('menu-open');
-          btn.classList.toggle('open');
-          btn.classList.toggle('close');
+          if ($('.l-header__menuBtn').hasClass('open')) {
+            // openクラスがある場合
+            $('.l-header__menuBtn').removeClass('open').addClass('close');
+          } else {
+            // openクラスがない場合
+            $('.l-header__menuBtn').removeClass('close').addClass('open');
+          }
         });
       });
     }
