@@ -52,7 +52,9 @@ $white-color: #ffffff;
     line-height: 30px;
     margin-top: 30px;
     text-align: center;
+    text-orientation: upright;
     writing-mode: vertical-rl;
+    -webkit-writing-mode: vertical-rl;
   }
 
   &:hover {
