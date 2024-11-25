@@ -9,6 +9,7 @@ $color: #fff9f4;
 .c-pagetop {
   $pagetop: &;
   bottom: 20px;
+  display: flex;
   mix-blend-mode: difference;
   opacity: 0;
   position: fixed;
