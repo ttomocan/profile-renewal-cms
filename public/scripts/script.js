@@ -19,7 +19,7 @@ script.onload = function () {
       const scrollTop = window.scrollY;
 
       // ヘッダーの表示切り替え
-      headerDiv.style.top = scrollTop > 300 ? '0' : `-${headerHeight}px`;
+      //headerDiv.style.top = scrollTop > 300 ? '0' : `-${headerHeight}px`;
 
       // ページトップボタンの表示切り替え
       pagetop?.classList.toggle('show', scrollTop > 300);
