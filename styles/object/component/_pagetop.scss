@@ -49,7 +49,7 @@ $white-color: #ffffff;
     color: $black-color;
     display: inline-block;
     @include font-properties(Roboto, 500, 14px);
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     line-height: 1;
     margin-top: 20px;
     writing-mode: vertical-rl;
