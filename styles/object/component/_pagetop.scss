@@ -68,9 +68,10 @@ $color: #fff9f4;
     visibility: visible;
   }
 
-  &.on-white {
+  &.on-footer {
     #{$pagetop}__icon {
       background: $color;
+      mix-blend-mode: lighten;
 
       &::before,
       &::after {

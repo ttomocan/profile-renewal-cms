@@ -29,7 +29,7 @@ script.onload = function () {
       const blogPosition = blog?.getBoundingClientRect().top + window.scrollY || 0;
       const scrollPosition = window.scrollY + window.innerHeight;
 
-      pagetop?.classList.toggle('on-white', scrollPosition >= blogPosition);
+      pagetop?.classList.toggle('on-footer', scrollPosition >= blogPosition);
     };
 
     updateHeaderPosition();
