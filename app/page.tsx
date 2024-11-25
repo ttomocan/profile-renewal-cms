@@ -59,7 +59,7 @@ export default async function Home() {
           </h2>
           <div className="about__cont">
             <div className="about__image flipDownTrigger">
-              <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={300} height={200} priority sizes="100vw" />
+              <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} priority sizes="100vw" />
             </div>
             <div className="about__detail flipDownTrigger">
               <p>
