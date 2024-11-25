@@ -49,11 +49,13 @@ $white-color: #ffffff;
     color: $black-color;
     @include font-properties(Roboto, 500, 14px);
     letter-spacing: 0.2em;
-    line-height: 30px;
+    line-height: 1.2;
     margin-top: 30px;
     text-align: center;
     text-orientation: upright;
     writing-mode: vertical-rl;
+    unicode-bidi: plaintext;
+    direction: ltr;
     -webkit-writing-mode: vertical-rl;
   }
 
