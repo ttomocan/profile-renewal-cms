@@ -8,8 +8,6 @@ function fadeAnime() {
     const windowHeight = window.innerHeight;
     if (scroll >= elemPos - windowHeight) {
       element.classList.add('fadeIn');
-    } else {
-      element.classList.remove('fadeIn');
     }
   });
 
@@ -37,8 +35,6 @@ function fadeAnime() {
       const windowHeight = window.innerHeight;
       if (scroll >= elemPos - windowHeight) {
         element.classList.add(type.classToAdd);
-      } else {
-        element.classList.remove(type.classToAdd);
       }
     });
   });
