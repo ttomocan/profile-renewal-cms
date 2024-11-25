@@ -90,7 +90,7 @@ export default async function Page() {
           <li>Webクリエイター能力認定 エキスパート</li>
           <li>マルチメディア検定 エキスパート</li>
           <li>Webデザイナー検定 エキスパート</li>
-          <li>ITパスワード</li>
+          <li>ITパスポード</li>
         </ul>
       </section>
       <section className="result l-inner l-inner-s">
@@ -103,7 +103,7 @@ export default async function Page() {
           <li>2社のWeb制作会社でWebエンジニアとして活動</li>
           <li>これまでに手掛けたWebサイトの構築数は150件以上</li>
           <li>ブログ運営での広告収益は累計100万円以上</li>
-          <li>coconalaでの総売上は累計120万円以上</li>
+          <li>coconalaでの売上は累計120万円以上</li>
         </ul>
       </section>
     </>
