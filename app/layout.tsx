@@ -1,26 +1,7 @@
 import '../styles/common/style.scss';
 import '../styles/common/animation.scss';
-import { Roboto, Noto_Sans_JP, Caveat_Brush } from 'next/font/google';
 
-const roboto = Roboto({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  fallback: ['Arial', 'sans-serif'],
-});
-
-const notoSansJP = Noto_Sans_JP({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  fallback: ['Arial', 'sans-serif'],
-});
-
-const caveatBrush = Caveat_Brush({
-  weight: '400',
-  subsets: ['latin'],
-  fallback: ['cursive'],
-});
-
-import { GoogleAnalytics } from '@next/third-parties/google';
+//import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import Loading from './_components/Loading';
 import Header from './_components/Header';
@@ -63,7 +44,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={`${roboto.className} ${notoSansJP.className}`}>
+    <html lang="ja">
       <head>
         <script src="/scripts/animation.js" async></script>
         <script src="/scripts/script.js" async></script>
