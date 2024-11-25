@@ -19,7 +19,7 @@ export default function ContactForm() {
   };
   if (state.status === 'success') {
     return (
-      <p className="success">
+      <p className={styles.success}>
         お問い合わせいただき、ありがとうございます。
         <br />
         お返事まで今しばらくお待ちください。
@@ -123,22 +123,19 @@ export default function ContactForm() {
           </label>
         </div>
         <div className="l-form__input">
-          <input type="file" name="file" id="file" className="attachment-fileinput" />
+          <div className="attachment">
+            <label>
+              <input type="file" name="file" id="file" className="attachment-fileinput" />
+              ファイルを添付する
+              <Image src="/img/pages/contact/icon_file.svg" alt="" width={20} height={20} style={{ width: 'auto', height: '20px' }} />
+            </label>
+            <span className="attachment-filename">選択されていません</span>
+          </div>
         </div>
       </div>
-      {/* <FormItem label="添付ファイル">
-        <div className="attachment">
-          <label>
-            <input type="file" name="file" className="attachment-fileinput" />
-            ファイルを添付する
-            <Image src="/img/pages/contact/icon_file.svg" alt="" width={20} height={20} style={{ width: 'auto', height: '20px' }} />
-          </label>
-          <span className="attachment-filename">選択されていません</span>
-        </div>
-      </FormItem> */}
 
       {/* エラー */}
-      {state.status === 'error' && <p className="error">{state.message}</p>}
+      {state.status === 'error' && <p className={styles.error}>{state.message}</p>}
 
       {/* ボタン */}
       <div className="l-form__button">
@@ -152,16 +149,3 @@ export default function ContactForm() {
     </form>
   );
 }
-
-/* 共通のフォーム項目コンポーネント */
-/* function FormItem({ label, required, children }) {
-  return (
-    <div className="l-form__item">
-      <div className="l-form__heading">
-        {label}
-        {required && <span className="l-form__required">必須</span>}
-      </div>
-      <div className="l-form__input">{children}</div>
-    </div>
-  );
-} */

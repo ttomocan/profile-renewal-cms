@@ -1,6 +1,6 @@
 import ContactForm from '@/app/_components/ContactForm';
 
-export default function Page() {
+export default async function Page() {
   return (
     <section className="l-inner">
       <p className="flipDownTrigger">

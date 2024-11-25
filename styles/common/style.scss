@@ -37,10 +37,6 @@
     background-color: $baseC;
     border-radius: 50%;
   }
-  &.loaded {
-    opacity: 0;
-    visibility: hidden;
-  }
 }
 
 @keyframes loading {

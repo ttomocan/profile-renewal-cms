@@ -10,7 +10,7 @@ export default async function Page() {
         </h2>
         <div className="greeting__cont">
           <div className="greeting__image flipDownTrigger">
-            <Image src="/img/pages/about/img_tomocan.jpg" alt="ともきゃんの似顔絵" width="200" height="200" priority sizes="100vw" />
+            <Image src="/img/pages/about/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} priority sizes="100vw" />
             <p className="greeting__name">ともきゃん</p>
             <p className="greeting__occupation">Webエンジニア / ブロガー</p>
           </div>

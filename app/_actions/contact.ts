@@ -32,7 +32,7 @@ export async function createContactData(_prevState: any, formData: FormData) {
   if (!rawFormData.item) {
     return {
       status: 'error',
-      message: 'ふりがなを入力してください',
+      message: 'お問い合わせ項目を選択してください',
     };
   }
 
@@ -63,8 +63,23 @@ export async function createContactData(_prevState: any, formData: FormData) {
         },
         {
           objectTypeId: '0-1',
+          name: 'furigana',
+          value: rawFormData.furigana,
+        },
+        {
+          objectTypeId: '0-1',
           name: 'email',
           value: rawFormData.email,
+        },
+        {
+          objectTypeId: '0-1',
+          name: 'item',
+          value: rawFormData.item,
+        },
+        {
+          objectTypeId: '0-1',
+          name: 'message',
+          value: rawFormData.message,
         },
       ],
     }),

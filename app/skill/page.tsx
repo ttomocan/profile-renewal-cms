@@ -1,10 +1,10 @@
 import Image from 'next/image';
 
-export default function Page() {
+export default async function Page() {
   return (
     <>
-      <section className="first l-inner flipDownTrigger">
-        <p>
+      <section className="first l-inner">
+        <p className="flipDownTrigger">
           私が実務でよく使っているスキルとサイト制作ツールを紹介します。
           <br />
           SEO対策を考慮したコーディングはもちろん、WordPressサイトの構築・カスタマイズや、ユーザビリティを考慮したデザイン調整など、Webサイトに関する幅広いサポートを行っています。
@@ -46,13 +46,7 @@ export default function Page() {
         </div>
         <div className="programming__item flipDownTrigger">
           <div className="programming__image">
-            <Image
-              src="/img/pages/skill/img_php.svg"
-              alt="PHP"
-              width={100}
-              height={100}
-              style={{ width: 'auto', height: '100px' }} // アスペクト比を維持
-            />
+            <Image src="/img/pages/skill/img_php.svg" alt="PHP" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">PHP</h3>
@@ -76,13 +70,7 @@ export default function Page() {
         </div>
         <div className="tool__item flipDownTrigger">
           <div className="tool__image">
-            <Image
-              src="/img/pages/skill/img_figma.svg"
-              alt="Figma"
-              width={100}
-              height={100}
-              style={{ width: 'auto', height: '100px' }} // アスペクト比を維持
-            />
+            <Image src="/img/pages/skill/img_figma.svg" alt="Figma" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Figma</h3>

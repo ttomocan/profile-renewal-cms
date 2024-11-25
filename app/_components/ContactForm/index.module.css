@@ -54,16 +54,17 @@
 }
 
 .success {
-  background-color: var(--color-bg-sub);
+  background-color: rgba(0, 0, 255, 0.05);
+  margin-top: 30px;
   text-align: center;
-  padding: 40px;
-  border-radius: var(--border-radius);
+  padding: 20px;
 }
 
 .error {
-  color: var(--color-text-error);
-  font-size: 14px;
-  margin-bottom: 8px;
+  background-color: rgba(255, 0, 0, 0.05);
+  color: #f00;
+  margin-top: 30px;
+  padding: 20px;
 }
 
 @media (max-width: 640px) {

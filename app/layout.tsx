@@ -65,9 +65,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja" className={`${roboto.className} ${notoSansJP.className}`}>
       <head>
-        <script src="/scripts/jquery-3.7.1.js" defer></script>
-        <script src="/scripts/script.js" defer></script>
-        <script src="/scripts/animation.js" defer></script>
+        <script src="/scripts/animation.js" async></script>
+        <script src="/scripts/script.js" async></script>
       </head>
       <body>
         <DynamicBodyClass />
