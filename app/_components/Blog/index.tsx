@@ -18,12 +18,12 @@ export default function Blog() {
           あなたのブログをさらに魅力的にアップデートして、一段上の見せ方を目指しましょう！
         </p>
         <div className="blog__button flipDownTrigger">
-          <a href="https://www.newagevoice.com/" target="_blank" className="c-button__link-external c-link-external --w">
+          <Link href="https://www.newagevoice.com/" target="_blank" className="c-button__link-external c-link-external --w">
             ともきゃんのボイトレ生活
-          </a>
-          <a href="https://www.blogdesign-mania.com/" target="_blank" className="c-button__link-external c-link-external --w">
+          </Link>
+          <Link href="https://www.blogdesign-mania.com/" target="_blank" className="c-button__link-external c-link-external --w">
             ブログデザインマニア
-          </a>
+          </Link>
         </div>
       </div>
     </div>

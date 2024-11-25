@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { getNewsList } from '@/app/_libs/microcms';
 import { TOP_NEWS_LIMIT } from '@/app/_constants';
 
@@ -73,9 +74,9 @@ export default async function Home() {
               <p>Webサイト制作の現場で経験した豊富なノウハウを活かし、あなただけのサイトやブログを丁寧に作り上げます。まずはお気軽にご相談ください。</p>
             </div>
             <div className="about__button flipDownTrigger">
-              <a href="./about/" className="c-button__link">
+              <Link href="./about/" className="c-button__link">
                 ともきゃんについて知る
-              </a>
+              </Link>
             </div>
           </div>
         </section>
@@ -102,9 +103,9 @@ export default async function Home() {
             </div>
           </div>
           <div className="skill__button flipDownTrigger">
-            <a href="./skill/" className="c-button__link">
+            <Link href="./skill/" className="c-button__link">
               ともきゃんのできることを見る
-            </a>
+            </Link>
           </div>
         </section>
         <section className="contact l-inner">
@@ -123,9 +124,9 @@ export default async function Home() {
                 あなたの課題に寄り添い、最適な解決策をご提案いたします。
               </p>
               <div className="contact__button">
-                <a href="./contact/" className="c-button__link">
+                <Link href="./contact/" className="c-button__link">
                   ともきゃんに相談する
-                </a>
+                </Link>
               </div>
             </div>
           </div>
