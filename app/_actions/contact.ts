@@ -18,7 +18,7 @@ export async function createContactData(_prevState: any, formData: FormData) {
   if (!rawFormData.namae) {
     return {
       status: 'error',
-      message: '名前を入力してください',
+      message: 'お名前を入力してください',
     };
   }
 
