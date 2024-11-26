@@ -1,7 +1,7 @@
 var script = document.createElement('script');
 script.src = '/scripts/jquery-3.7.1.js';
 script.onload = function () {
-  $('.loading').fadeOut(500);
+  $('.loading').fadeOut(400);
 
   // 固定要素の設定
   const header = document.querySelector('.l-header');
