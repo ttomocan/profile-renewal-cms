@@ -77,19 +77,19 @@ export default function ContactForm() {
         </div>
         <div className="c-form__input">
           <label className="checkbox">
-            <input type="radio" name="item" value="website_request" />
+            <input type="radio" name="item" value="Webサイト制作の依頼" />
             <span className="checkbox-text">Webサイト制作の依頼</span>
           </label>
           <label className="checkbox">
-            <input type="radio" name="item" value="web_design" />
+            <input type="radio" name="item" value="Webデザインに関する相談" />
             <span className="checkbox-text">Webデザインに関する相談</span>
           </label>
           <label className="checkbox">
-            <input type="radio" name="item" value="blog_consulting" />
+            <input type="radio" name="item" value="ブログに関する相談" />
             <span className="checkbox-text">ブログに関する相談</span>
           </label>
           <label className="checkbox">
-            <input type="radio" name="item" value="other" />
+            <input type="radio" name="item" value="その他" />
             <span className="checkbox-text">その他</span>
           </label>
         </div>
