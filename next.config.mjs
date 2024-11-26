@@ -9,27 +9,21 @@ const nextConfig = {
     ],
   },
   trailingSlash: true,
+  async redirects() {
+    return [
+      {
+        source: '/:path*', // 全てのパスを対象にする
+        has: [
+          {
+            type: 'host',
+            value: 'tomocan.site', // wwwなしのドメイン名を指定
+          },
+        ],
+        destination: 'https://www.tomocan.site/:path*', // www付きにリダイレクト
+        permanent: true, // 301リダイレクト
+      },
+    ];
+  },
 };
 
-// リダイレクト設定を個別に定義
-async function redirects() {
-  return [
-    {
-      source: '/:path*',
-      has: [
-        {
-          type: 'host',
-          value: 'tomocan.site',
-        },
-      ],
-      destination: 'https://www.tomocan.site/:path*',
-      permanent: true,
-    },
-  ];
-}
-
-// 全体設定をエクスポート
-module.exports = {
-  ...nextConfig,
-  redirects, // リダイレクト関数を追加
-};
+export default nextConfig;
