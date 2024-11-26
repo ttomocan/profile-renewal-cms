@@ -37,3 +37,4 @@ next-env.d.ts
 
 # traning-site
 _backup
+next.config.mjs
