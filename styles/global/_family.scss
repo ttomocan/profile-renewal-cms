@@ -11,6 +11,7 @@
   src: url('/fonts/Roboto/Roboto-Medium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -18,6 +19,7 @@
   src: url('/fonts/Roboto/Roboto-Bold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Noto Sans JP */
@@ -26,6 +28,7 @@
   src: url('/fonts/Noto_Sans_JP/NotoSansJP-VariableFont_wght.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -33,6 +36,7 @@
   src: url('/fonts/Noto_Sans_JP/NotoSansJP-VariableFont_wght.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 /* Caveat_Brush */
@@ -41,4 +45,5 @@
   src: url('/fonts/Caveat_Brush/CaveatBrush-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
