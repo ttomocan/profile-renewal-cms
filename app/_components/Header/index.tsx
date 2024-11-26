@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import MenuBtn from '../MenuBtn';
 import MenuNav from '../MenuNav';
 
 export default function Header() {
@@ -11,7 +10,13 @@ export default function Header() {
           <Image src="/img/common/h_logo.svg" alt="ともきゃんスタイル" width={400} height={33} priority />
         </Link>
       </h1>
-      <MenuBtn />
+      <div className="l-header__menuBtn">
+        <button className="l-header__menuBtn-button" aria-label="メニューを開く">
+          <span className="top"></span>
+          <span className="middle"></span>
+          <span className="bottom"></span>
+        </button>
+      </div>
       <MenuNav />
     </header>
   );
