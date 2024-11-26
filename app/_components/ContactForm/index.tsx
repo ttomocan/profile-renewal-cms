@@ -27,55 +27,55 @@ export default function ContactForm() {
     );
   }
   return (
-    <form className="l-form" action={formAction} onSubmit={handleSubmit}>
+    <form className="c-form" action={formAction} onSubmit={handleSubmit}>
       {/* お名前 */}
-      <div className="l-form__item">
-        <div className="l-form__heading">
+      <div className="c-form__item">
+        <div className="c-form__heading">
           <label className="label" htmlFor="namae">
             お名前
           </label>
-          <span className="l-form__required">必須</span>
+          <span className="c-form__required">必須</span>
         </div>
-        <div className="l-form__input">
+        <div className="c-form__input">
           <input type="text" name="namae" id="namae" className="textfield" />
         </div>
       </div>
 
       {/* ふりがな */}
-      <div className="l-form__item">
-        <div className="l-form__heading">
+      <div className="c-form__item">
+        <div className="c-form__heading">
           <label className="label" htmlFor="furigana">
             ふりがな
           </label>
-          <span className="l-form__required">必須</span>
+          <span className="c-form__required">必須</span>
         </div>
-        <div className="l-form__input">
+        <div className="c-form__input">
           <input type="text" name="furigana" id="furigana" className="textfield" />
         </div>
       </div>
 
       {/* メールアドレス */}
-      <div className="l-form__item">
-        <div className="l-form__heading">
+      <div className="c-form__item">
+        <div className="c-form__heading">
           <label className="label" htmlFor="email">
             メールアドレス
           </label>
-          <span className="l-form__required">必須</span>
+          <span className="c-form__required">必須</span>
         </div>
-        <div className="l-form__input">
+        <div className="c-form__input">
           <input type="text" name="email" id="email" className="textfield" />
         </div>
       </div>
 
       {/* お問い合わせ項目 */}
-      <div className="l-form__item">
-        <div className="l-form__heading">
+      <div className="c-form__item">
+        <div className="c-form__heading">
           <label className="label" htmlFor="item">
             お問い合わせ項目
           </label>
-          <span className="l-form__required">必須</span>
+          <span className="c-form__required">必須</span>
         </div>
-        <div className="l-form__input">
+        <div className="c-form__input">
           <label className="checkbox">
             <input type="radio" name="item" value="website_request" />
             <span className="checkbox-text">Webサイト制作の依頼</span>
@@ -103,26 +103,26 @@ export default function ContactForm() {
       </FormItem> */}
 
       {/* お問い合わせ内容 */}
-      <div className="l-form__item">
-        <div className="l-form__heading">
+      <div className="c-form__item">
+        <div className="c-form__heading">
           <label className="label" htmlFor="message">
             お問い合わせ内容
           </label>
-          <span className="l-form__required">必須</span>
+          <span className="c-form__required">必須</span>
         </div>
-        <div className="l-form__input">
+        <div className="c-form__input">
           <textarea className="textarea" id="message" name="message" />
         </div>
       </div>
 
       {/* 添付ファイル */}
-      <div className="l-form__item">
-        <div className="l-form__heading">
+      <div className="c-form__item">
+        <div className="c-form__heading">
           <label className="label" htmlFor="file">
             添付ファイル
           </label>
         </div>
-        <div className="l-form__input">
+        <div className="c-form__input">
           <div className="attachment">
             <label>
               <input type="file" name="file" id="file" className="attachment-fileinput" />
@@ -138,7 +138,7 @@ export default function ContactForm() {
       {state.status === 'error' && <p className={styles.error}>{state.message}</p>}
 
       {/* ボタン */}
-      <div className="l-form__button">
+      <div className="c-form__button">
         {/* <button type="submit" className="c-button__link --return --gray">
           戻る
         </button> */}

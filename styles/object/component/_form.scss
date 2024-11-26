@@ -16,7 +16,7 @@
   }
 }
 
-.l-form {
+.c-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -29,6 +29,7 @@
 
   textarea {
     @extend %input;
+    height: 150px;
   }
 
   .select {
@@ -238,7 +239,7 @@
 /* SP：フォーム
 	================================== */
 @include mq(sp) {
-  .l-form {
+  .c-form {
     &__button {
       display: flex;
       flex-flow: column;
