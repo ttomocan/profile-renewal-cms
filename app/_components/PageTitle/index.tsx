@@ -13,7 +13,7 @@ export default function PageTitle({ title, sub, img }: Props) {
   return (
     <div className="pagetitle">
       <div className="pagetitle__image">
-        <Image src={img} alt="" width={1366} height={400} sizes="100vw" />
+        <Image src={img} alt="{sub}のイメージ画像" width={1366} height={400} priority sizes="(max-width: 767px) 100vw, 1366px" />
       </div>
       <div className="l-inner">
         {/* titleを1文字ずつ<span>で囲む */}
