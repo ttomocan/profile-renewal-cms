@@ -14,7 +14,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
   const isHomePage = pathname === '/';
 
   return {
-    metadataBase: new URL('http://localhost:3000'),
+    metadataBase: new URL('https://www.tomocan.site'),
     title: {
       template: '%s | ともきゃんスタイル - プロフィールサイト',
       default: 'ともきゃんスタイル - プロフィールサイト',
@@ -28,7 +28,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       title: 'ともきゃんスタイル - プロフィールサイト',
       type: isHomePage ? 'website' : 'article',
       description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
-      images: ['/common/ogp.png'],
+      images: ['/img/common/ogp.png'],
     },
     twitter: {
       card: 'summary_large_image',
@@ -37,7 +37,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
     },
     alternates: {
-      canonical: 'http://localhost:3000',
+      canonical: 'https://www.tomocan.site',
     },
   };
 }
