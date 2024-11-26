@@ -21,8 +21,11 @@
     align-self: stretch;
     a {
       color: #ffffff;
-      font-weight: 500;
-      font-family: Roboto;
+      font: {
+        family: 'Roboto', sans-serif;
+        size: 20px;
+        weight: 500;
+      }
       letter-spacing: 0.2em;
       padding-bottom: 10px;
       position: relative;
