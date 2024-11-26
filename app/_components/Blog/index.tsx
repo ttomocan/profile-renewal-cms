@@ -16,13 +16,23 @@ export default function Blog() {
           <span className="c-heading-lv2-ja">ブログ</span>
         </h2>
         <p className="flipDownTrigger">
-          「ともきゃんのボイトレ生活」では、ボイトレと話し方のスキルアップに役立つ情報をたっぷりお届け中！
+          「ともきゃんのボイトレ生活」では、
+          <wbr />
+          ボイトレと話し方のスキルアップに役立つ情報を
+          <wbr />
+          たっぷりお届け中！
           <br />
-          新しい知識や実践からの学びをシェアし、あなたの成長を応援します。
+          新しい知識や実践からの学びをシェアし、
+          <wbr />
+          あなたの成長を応援します。
           <br />
-          「ブログデザインマニア」では、実務で培ったブログ構築のテクニックとデザインのコツを発信中。
+          「ブログデザインマニア」では、
+          <wbr />
+          実務で培ったブログ構築のテクニックとデザインのコツを発信中。
           <br />
-          あなたのブログをさらに魅力的にアップデートして、一段上の見せ方を目指しましょう！
+          あなたのブログを魅力的にアップデートして、
+          <wbr />
+          一段上の見せ方を目指しましょう！
         </p>
         <div className="blog__button flipDownTrigger">
           <Link href="https://www.newagevoice.com/" target="_blank" className="c-button__link-external c-link-external --w">

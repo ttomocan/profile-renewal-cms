@@ -191,6 +191,10 @@
     position: relative;
     text-align: center;
     z-index: 1;
+    p {
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+    }
   }
   &__button {
     display: flex;
