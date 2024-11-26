@@ -17,7 +17,7 @@ function fadeAnime() {
     { selector: '.fadeDownTrigger', classToAdd: 'fadeDown', offset: 100 },
     { selector: '.fadeLeftTrigger', classToAdd: 'fadeLeft', offset: 100 },
     { selector: '.fadeRightTrigger', classToAdd: 'fadeRight', offset: 40 },
-    { selector: '.flipDownTrigger', classToAdd: 'flipDown', offset: 200 },
+    { selector: '.flipDownTrigger', classToAdd: 'flipDown', offset: 150 },
     { selector: '.flipLeftTrigger', classToAdd: 'flipLeft', offset: -50 },
     { selector: '.flipLeftTopTrigger', classToAdd: 'flipLeftTop', offset: -50 },
     { selector: '.flipRightTrigger', classToAdd: 'flipRight', offset: -50 },
