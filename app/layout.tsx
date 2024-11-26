@@ -46,8 +46,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <head>
-        <script src="/scripts/animation.js" async></script>
-        <script src="/scripts/script.js" async></script>
+        <script src="/scripts/script.js" defer></script>
+        <script src="/scripts/animation.js" defer></script>
       </head>
       <body>
         <DynamicBodyClass />
