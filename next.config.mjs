@@ -12,3 +12,21 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/:path*',
+        has: [
+          {
+            type: 'host',
+            value: 'tomocan.site', // wwwなしのドメイン
+          },
+        ],
+        destination: 'https://www.tomocan.site/:path*', // wwwありのドメイン
+        permanent: true, // 永続的なリダイレクト
+      },
+    ];
+  },
+};
