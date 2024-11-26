@@ -1,7 +1,10 @@
-var script = document.createElement('script');
-script.src = '/scripts/jquery-3.7.1.min.js';
-script.onload = function () {
-  $('.loading').fadeOut(400);
+window.onload = function () {
+  // Loadingアニメーション
+  document.querySelectorAll('.loading').forEach((el) => {
+    el.style.transition = 'opacity 0.4s';
+    el.style.opacity = 0;
+    setTimeout(() => (el.style.display = 'none'), 400);
+  });
 
   // 固定要素の設定
   const header = document.querySelector('.l-header');
@@ -9,44 +12,40 @@ script.onload = function () {
   const headerClone = header?.cloneNode(true);
   const headerDiv = document.createElement('div');
   headerDiv.className = 'scroll l-header';
-  headerDiv.appendChild(headerClone?.firstChild);
-  //document.body.appendChild(headerDiv);
+  if (headerClone?.firstChild) headerDiv.appendChild(headerClone.firstChild);
   const headerHeight = header?.offsetHeight || 0;
 
   // スクロール時
-  const updateHeaderPosition = function () {
+  const updateHeaderPosition = () => {
     const scrollTop = window.scrollY;
 
-    // ヘッダーの表示切り替え
-    //headerDiv.style.top = scrollTop > 300 ? '0' : `-${headerHeight}px`;
-
     // ページトップボタンの表示切り替え
-    pagetop?.classList.toggle('show', scrollTop > 300);
+    if (pagetop) {
+      pagetop.classList.toggle('show', scrollTop > 300);
 
-    // フッターの位置を確認
-    const blog = document.querySelector('.blog');
-    const blogPosition = blog?.getBoundingClientRect().top + window.scrollY || 0;
-    const scrollPosition = window.scrollY + window.innerHeight;
+      const blog = document.querySelector('.blog');
+      const blogPosition = blog?.getBoundingClientRect().top + window.scrollY || 0;
+      const scrollPosition = window.scrollY + window.innerHeight;
 
-    pagetop?.classList.toggle('on-footer', scrollPosition >= blogPosition);
+      pagetop.classList.toggle('on-footer', scrollPosition >= blogPosition);
+    }
   };
-
   updateHeaderPosition();
   window.addEventListener('scroll', updateHeaderPosition);
 
   // ページ内リンク
-  $('a[href^="#"]').click(function (event) {
-    event.preventDefault();
-    var href = $(this).attr('href');
-    var target = $(href === '#' || href === '' ? 'html' : href);
-    var position = target.offset().top - headerHeight;
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (event) => {
+      event.preventDefault();
+      const href = anchor.getAttribute('href');
+      const target = document.querySelector(href === '#' || href === '' ? 'html' : href);
+      const position = (target?.offsetTop || 0) - headerHeight;
 
-    $('html, body').animate(
-      {
-        scrollTop: position,
-      },
-      500
-    );
+      window.scrollTo({
+        top: position,
+        behavior: 'smooth',
+      });
+    });
   });
 
   // ページ遷移時の位置
@@ -61,12 +60,16 @@ script.onload = function () {
   document.querySelectorAll('.accordion__detail').forEach((detail) => {
     detail.style.display = 'none';
   });
-
   document.querySelectorAll('.accordion__title').forEach((title) => {
-    title.addEventListener('click', function () {
-      const detail = this.nextElementSibling;
-      detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
-      this.querySelector('.accordion__title-icon')?.classList.toggle('open');
+    title.addEventListener('click', () => {
+      const detail = title.nextElementSibling;
+      if (detail) {
+        detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
+      }
+      const icon = title.querySelector('.accordion__title-icon');
+      if (icon) {
+        icon.classList.toggle('open');
+      }
     });
   });
 
@@ -93,10 +96,10 @@ script.onload = function () {
 
   // 添付ファイル
   document.querySelectorAll('.attachment-fileinput').forEach((input) => {
-    input.addEventListener('change', function () {
-      const file = this.files[0];
-      const filenameElement = this.closest('.attachment')?.querySelector('.attachment-filename');
-      if (filenameElement) {
+    input.addEventListener('change', () => {
+      const file = input.files[0];
+      const filenameElement = input.closest('.attachment')?.querySelector('.attachment-filename');
+      if (filenameElement && file) {
         filenameElement.textContent = file.name;
       }
     });
@@ -161,17 +164,15 @@ script.onload = function () {
 
   // メニュー設定
   function initSPMenu() {
-    const menuButtons = document.querySelectorAll('.l-header__menuBtn,.l-header__link a');
+    const menuButtons = document.querySelectorAll('.l-header__menuBtn, .l-header__link a');
     menuButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         document.body.classList.toggle('no-scroll');
         document.querySelector('.l-header__link')?.classList.toggle('menu-open');
-        if ($('.l-header__menuBtn').hasClass('open')) {
-          // openクラスがある場合
-          $('.l-header__menuBtn').removeClass('open').addClass('close');
-        } else {
-          // openクラスがない場合
-          $('.l-header__menuBtn').removeClass('close').addClass('open');
+        const menuBtn = document.querySelector('.l-header__menuBtn');
+        if (menuBtn) {
+          menuBtn.classList.toggle('open');
+          menuBtn.classList.toggle('close');
         }
       });
     });
@@ -188,4 +189,3 @@ script.onload = function () {
   handleResize();
   window.addEventListener('resize', handleResize);
 };
-document.head.appendChild(script);
