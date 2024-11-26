@@ -1,0 +1,13 @@
+@use '../../global' as *;
+
+@include mq(pcTab) {
+  .u-sp-only {
+    display: none !important;
+  }
+}
+
+@include mq(sp) {
+  .u-pc-only {
+    display: none !important;
+  }
+}
