@@ -170,9 +170,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.classList.toggle('no-scroll');
         document.querySelector('.l-header__link')?.classList.toggle('menu-open');
         const menuBtn = document.querySelector('.l-header__menuBtn');
-        if (menuBtn) {
-          menuBtn.classList.toggle('open');
-          menuBtn.classList.toggle('close');
+        if (menuBtn.classList.contains('open')) {
+          menuBtn.classList.remove('open');
+          menuBtn.classList.add('close');
+        } else {
+          menuBtn.classList.remove('close');
+          menuBtn.classList.add('open');
         }
       });
     });
