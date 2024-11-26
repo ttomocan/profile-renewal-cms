@@ -1,4 +1,4 @@
-window.onload = function () {
+document.addEventListener('DOMContentLoaded', () => {
   // Loadingアニメーション
   document.querySelectorAll('.loading').forEach((el) => {
     el.style.transition = 'opacity 0.4s';
@@ -188,4 +188,4 @@ window.onload = function () {
 
   handleResize();
   window.addEventListener('resize', handleResize);
-};
+});
