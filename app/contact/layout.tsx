@@ -11,7 +11,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <>
-      <PageTitle title="Contact" sub="お問い合わせ" />
+      <PageTitle title="Contact" sub="お問い合わせ" img="/img/pages/contact/img_hero.jpg" />
       <main>{children}</main>
     </>
   );

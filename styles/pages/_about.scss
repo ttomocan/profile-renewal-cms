@@ -6,10 +6,6 @@
 /* ともきゃんはこんな人
 ================================== */
 .about {
-  .pagetitle {
-    @include background(#000000, url('/img/pages/about/img_hero.jpg'), center, cover, no-repeat);
-  }
-
   .greeting {
     padding-bottom: 80px;
     img {

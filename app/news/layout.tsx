@@ -13,7 +13,7 @@ export const revalidate = 60;
 export default function NewsLayout({ children }: Props) {
   return (
     <>
-      <PageTitle title="News" sub="ニュース" />
+      <PageTitle title="News" sub="ニュース" img="/img/pages/news/img_hero.jpg" />
       <main>{children}</main>
     </>
   );
