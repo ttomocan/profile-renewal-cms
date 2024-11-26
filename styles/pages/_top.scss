@@ -151,6 +151,14 @@
       }
     }
 
+    .about {
+      &__cont {
+        p {
+          text-align: left;
+        }
+      }
+    }
+
     .skill {
       padding-bottom: 80px;
       img {
