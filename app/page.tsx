@@ -12,7 +12,7 @@ export default async function Home() {
     <>
       <div className="hero">
         <div className="hero__image">
-          <Image src="/img/pages/top/img_hero.jpg" alt="" width={1366} height={400} priority sizes="(max-width: 640px) 100vw, 100vw" />
+          <Image src="/img/pages/top/img_hero.jpg" alt="" width={1366} height={400} priority sizes="100vw" />
         </div>
         <div className="hero__wrap l-inner">
           <p className="hero__en">
