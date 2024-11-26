@@ -1,5 +1,5 @@
 var script = document.createElement('script');
-script.src = '/scripts/jquery-3.7.1.js';
+script.src = '/scripts/jquery-3.7.1.min.js';
 script.onload = function () {
   $('.loading').fadeOut(400);
 
