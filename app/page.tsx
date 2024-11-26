@@ -12,7 +12,10 @@ export default async function Home() {
     <>
       <div className="hero">
         <div className="hero__image">
-          <Image src="/img/pages/top/img_hero.jpg" alt="" width={1366} height={400} priority sizes="100vw" />
+          <picture>
+            <source srcSet="/img/pages/top/img_hero_sp.jpg" media="(max-width: 767px)" />
+            <Image src="/img/pages/top/img_hero.jpg" alt="" width={1366} height={400} priority sizes="100vw" />
+          </picture>
         </div>
         <div className="hero__wrap l-inner">
           <p className="hero__en">
