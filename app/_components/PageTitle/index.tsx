@@ -21,9 +21,7 @@ export default function PageTitle({ title, sub }: Props) {
         </picture>
       </div>
       <div className="l-inner">
-        {/* titleを1文字ずつ<span>で囲む */}
         <p className="pagetitle__en">{wrapWithSpan(title)}</p>
-        {/* subを1文字ずつ<span>で囲む */}
         <h1 className="pagetitle__ja">{wrapWithSpan(sub)}</h1>
       </div>
     </div>
