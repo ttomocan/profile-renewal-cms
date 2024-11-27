@@ -6,9 +6,11 @@
 }
 
 .description {
+  background-color: #fdebde;
   font-size: 0.9rem;
   color: #f36b0a;
   margin: 0 0 20px;
+  padding: 4px 10px;
   text-align: left;
 }
 
@@ -31,6 +33,11 @@
   margin-bottom: 30px;
 }
 
+.content {
+  border-top: 1px solid #dbd1c9;
+  padding-top: 30px;
+}
+
 .content *:first-child {
   margin-top: 0;
 }
@@ -43,9 +50,11 @@
 }
 
 .content > h2 {
+  border-left: 5px solid #f36b0a;
   font-size: 1.6rem;
   font-weight: bold;
-  margin: 2.8em 0 1rem;
+  margin: 2.8rem 0 1.2rem;
+  padding-left: 0.6em;
 }
 
 .content > h3 {
@@ -66,9 +75,8 @@
   margin: 2.8rem 0 1rem;
 }
 
-.content > p {
-  margin: 2rem 0 0.5rem;
-  line-height: 2;
+.content > p:has(+ *) {
+  margin: 0 0 1.5rem;
 }
 
 .content > pre {
