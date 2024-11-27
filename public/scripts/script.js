@@ -1,5 +1,5 @@
 if (typeof window !== 'undefined') {
-  document.addEventListener('load', () => {
+  window.addEventListener('load', function () {
     // Loadingアニメーション
     document.querySelectorAll('.loading').forEach((el) => {
       el.style.transition = 'opacity 0.4s';
