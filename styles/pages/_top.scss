@@ -108,7 +108,29 @@
     &__button {
       display: flex;
       justify-content: center;
-      margin-top: 50px;
+      margin-top: 40px;
+    }
+  }
+
+  .diary {
+    padding-bottom: 80px;
+    &__item {
+      &__heading {
+        padding: 15px 0;
+      }
+    }
+    &__cont {
+      text-align: center;
+    }
+    &__list {
+      border-bottom: 1px solid #dbd1c9;
+      border-top: 1px solid #dbd1c9;
+      margin-top: 30px;
+    }
+    &__button {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
     }
   }
 

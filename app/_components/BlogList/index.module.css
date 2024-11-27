@@ -1,5 +1,5 @@
 .list {
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #dbd1c9;
 }
 .list:last-child {
   border-bottom: none;
@@ -8,8 +8,8 @@
 .link {
   display: flex;
   align-items: flex-start;
-  gap: 40px;
-  padding: 24px 0;
+  gap: 30px;
+  padding: 20px 0;
 }
 
 .image {
