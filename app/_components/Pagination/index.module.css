@@ -9,7 +9,7 @@
 
 .item {
   color: #383838;
-  background-color: rgba(243, 107, 10, 0.2);
+  background-color: rgba(243, 107, 10, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
