@@ -39,6 +39,11 @@ export default function Menu() {
             </Link>
           </li>
           <li className="l-navigation__item">
+            <Link href="/blog/" className={`l-navigation__item ${pathname === '/blog/' ? 'current' : ''}`}>
+              Blog
+            </Link>
+          </li>
+          <li className="l-navigation__item">
             <Link href="/contact/" className={`l-navigation__item ${pathname === '/contact/' ? 'current' : ''}`}>
               Contact
             </Link>
