@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getBlogDetail } from '@/app/_libs/microcms';
 import Article from '@/app/_components/Article';
+import Link from 'next/link';
 import styles from './page.module.css';
 
 type Props = {
@@ -39,9 +40,9 @@ export default async function Page({ params, searchParams }: Props) {
       <section className="l-inner">
         <Article data={data} />
         <div className={styles.footer}>
-          <a href="/blog/" className={'c-button__link --return'}>
+          <Link href="/blog/" className={'c-button__link --return'}>
             日記一覧へ
-          </a>
+          </Link>
         </div>
       </section>
     </>
