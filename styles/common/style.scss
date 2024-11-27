@@ -126,7 +126,7 @@
     font: {
       family: 'Roboto', sans-serif;
       weight: 700;
-      size: 18px;
+      size: clamp(20px, 5vw, 25px);
     }
     letter-spacing: 0.1em;
     position: relative;
