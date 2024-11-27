@@ -144,7 +144,7 @@ if (typeof window !== 'undefined') {
 
     // メニュー設定
     function initSPMenu() {
-      const menuButtons = document.querySelectorAll('.l-header__menuBtn, .l-header__link a');
+      const menuButtons = document.querySelectorAll('.l-header__menuBtn');
 
       menuButtons.forEach((btn) => {
         const toggleMenu = () => {
