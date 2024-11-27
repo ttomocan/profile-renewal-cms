@@ -12,7 +12,7 @@ type Props = {
 
 export default function BlogList({ blog }: Props) {
   if (blog.length === 0) {
-    return <p>記事がありません。</p>;
+    return <p className={styles.title}>記事がありません。</p>;
   }
   return (
     <ul>
