@@ -116,7 +116,7 @@ export default async function Home() {
             </Link>
           </div>
         </section>
-        <section className="blog l-inner">
+        <section className="diary l-inner">
           <h2 className="c-heading-lv2 flipDownTrigger">
             <span className="c-heading-lv2-en">Dialy</span>
             <span className="c-heading-lv2-ja">日記</span>
@@ -138,9 +138,9 @@ export default async function Home() {
               <p>SEOに配慮したコーディングとコンテンツ制作が得意です。5年間のブログ運営で培った経験を活かし、キーワード選定や内部対策、効果的なWebライティングを行います。検索エンジンに強いサイト構築を目指し、ユーザーの検索意図に応えるコンテンツを作成し、上位表示を実現します。また、アクセス解析を通じて改善策を提案し、サイト全体のパフォーマンス向上をサポートします。</p>
             </div>
           </div>
-          <div className="skill__button flipDownTrigger">
-            <Link href="./skill/" className="c-button__link">
-              ともきゃんのできることを見る
+          <div className="diary__button flipDownTrigger">
+            <Link href="./blog/" className="c-button__link">
+              ともきゃんの日記を読む
             </Link>
           </div>
         </section>
