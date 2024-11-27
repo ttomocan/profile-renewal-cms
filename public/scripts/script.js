@@ -145,8 +145,9 @@ if (typeof window !== 'undefined') {
     // メニュー設定
     function initSPMenu() {
       const menuButtons = document.querySelectorAll('.l-header__menuBtn, .l-header__link a');
+
       menuButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
+        const toggleMenu = () => {
           document.body.classList.toggle('no-scroll');
           document.querySelector('.l-header__link')?.classList.toggle('menu-open');
           const menuBtn = document.querySelector('.l-header__menuBtn');
@@ -157,6 +158,18 @@ if (typeof window !== 'undefined') {
             menuBtn.classList.remove('close');
             menuBtn.classList.add('open');
           }
+        };
+
+        // click イベントの追加
+        btn.addEventListener('click', (event) => {
+          event.preventDefault();
+          toggleMenu();
+        });
+
+        // touchstart イベントの追加
+        btn.addEventListener('touchstart', (event) => {
+          event.preventDefault();
+          toggleMenu();
         });
       });
     }
