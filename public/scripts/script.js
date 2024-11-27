@@ -34,19 +34,28 @@ if (typeof window !== 'undefined') {
     updateHeaderPosition();
     window.addEventListener('scroll', updateHeaderPosition);
 
-    // ページ内リンク
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', (event) => {
-        event.preventDefault();
-        const href = anchor.getAttribute('href');
-        const target = document.querySelector(href === '#' || href === '' ? 'html' : href);
-        const position = (target?.offsetTop || 0) - headerHeight;
+    // スムーススクロール処理
+    function handleSmoothScroll(event) {
+      const anchor = event.currentTarget;
 
-        window.scrollTo({
-          top: position,
-          behavior: 'smooth',
-        });
+      // スムーススクロールのキャンセルを処理
+      if (!anchor.matches('.l-header__link a')) {
+        event.preventDefault();
+      }
+
+      const href = anchor.getAttribute('href');
+      const target = document.querySelector(href === '#' || href === '' ? 'html' : href);
+      const position = (target?.offsetTop || 0) - headerHeight;
+
+      window.scrollTo({
+        top: position,
+        behavior: 'smooth',
       });
+    }
+
+    // スムーススクロール処理を特定のアンカーリンクに適用
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', handleSmoothScroll);
     });
 
     // ページ遷移時の位置
@@ -56,23 +65,6 @@ if (typeof window !== 'undefined') {
       const position = (target?.offsetTop || 0) - headerHeight;
       window.scrollTo({ top: position, behavior: 'smooth' });
     }
-
-    // アコーディオン
-    document.querySelectorAll('.accordion__detail').forEach((detail) => {
-      detail.style.display = 'none';
-    });
-    document.querySelectorAll('.accordion__title').forEach((title) => {
-      title.addEventListener('click', () => {
-        const detail = title.nextElementSibling;
-        if (detail) {
-          detail.style.display = detail.style.display === 'none' ? 'block' : 'none';
-        }
-        const icon = title.querySelector('.accordion__title-icon');
-        if (icon) {
-          icon.classList.toggle('open');
-        }
-      });
-    });
 
     // 添付ファイル
     document.querySelectorAll('.attachment-fileinput').forEach((input) => {
