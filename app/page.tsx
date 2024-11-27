@@ -83,7 +83,7 @@ export default async function Home() {
               <p>Webサイト制作の現場で経験した豊富なノウハウを活かし、あなただけのサイトやブログを丁寧に作り上げます。まずはお気軽にご相談ください。</p>
             </div>
             <div className="about__button flipDownTrigger">
-              <Link href="./about/" className="c-button__link">
+              <Link href="/about/" className="c-button__link">
                 ともきゃんについて知る
               </Link>
             </div>
@@ -112,7 +112,7 @@ export default async function Home() {
             </div>
           </div>
           <div className="skill__button flipDownTrigger">
-            <Link href="./skill/" className="c-button__link">
+            <Link href="/skill/" className="c-button__link">
               ともきゃんのできることを見る
             </Link>
           </div>
@@ -131,7 +131,7 @@ export default async function Home() {
             <BlogList blog={data.contents} />
           </div>
           <div className="diary__button flipDownTrigger">
-            <Link href="./blog/" className="c-button__link">
+            <Link href="/blog/" className="c-button__link">
               ともきゃんの日記を読む
             </Link>
           </div>
@@ -152,7 +152,7 @@ export default async function Home() {
                 あなたの課題に寄り添い、最適な解決策をご提案いたします。
               </p>
               <div className="contact__button">
-                <Link href="./contact/" className="c-button__link">
+                <Link href="/contact/" className="c-button__link">
                   ともきゃんに相談する
                 </Link>
               </div>
