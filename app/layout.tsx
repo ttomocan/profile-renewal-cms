@@ -46,10 +46,6 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <head>
-        <script src="/scripts/script.js" defer></script>
-        <script src="/scripts/animation.js" defer></script>
-      </head>
       <body>
         <DynamicBodyClass />
         <Loading />
@@ -58,6 +54,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Blog />
         <Footer />
         <PageTop />
+        <Script src="/scripts/script.js" strategy="beforeInteractive" />
+        <Script src="/scripts/animation.js" strategy="beforeInteractive" />
       </body>
       {/* <GoogleAnalytics gaId="G-XXXXX" /> */}
     </html>
