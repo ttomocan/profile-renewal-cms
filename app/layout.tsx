@@ -54,8 +54,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Blog />
         <Footer />
         <PageTop />
-        <Script src="/scripts/script.js" strategy="afterInteractive" />
-        <Script src="/scripts/animation.js" strategy="afterInteractive" />
+        <Script src="/scripts/script.js" strategy="beforeInteractive" />
+        <Script src="/scripts/animation.js" strategy="beforeInteractive" />
       </body>
       {/* <GoogleAnalytics gaId="G-XXXXX" /> */}
     </html>
