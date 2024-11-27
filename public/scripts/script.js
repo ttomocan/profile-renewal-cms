@@ -73,27 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ナビゲーションのカレント
-  const currentUrl = window.location.href;
-  const currentPath = window.location.pathname;
-
-  document.querySelectorAll('.l-header__navigation a, .l-footer__navigation a').forEach((link) => {
-    const linkUrl = link.getAttribute('href');
-    if (!linkUrl) return;
-
-    const linkPath = new URL(linkUrl, window.location.origin).pathname;
-    if (linkUrl === currentUrl) {
-      link.classList.add('current');
-    } else {
-      const linkPathParts = linkPath.split('/').filter((part) => part !== '');
-      const currentPathParts = currentPath.split('/').filter((part) => part !== '');
-
-      if (linkPathParts.length > 1 && currentPath.startsWith(linkPath) && currentPathParts.length > linkPathParts.length) {
-        link.classList.add('current');
-      }
-    }
-  });
-
   // 添付ファイル
   document.querySelectorAll('.attachment-fileinput').forEach((input) => {
     input.addEventListener('change', () => {

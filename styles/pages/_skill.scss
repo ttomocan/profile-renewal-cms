@@ -55,5 +55,8 @@
   }
 
   @include mq(sp) {
+    .first {
+      text-align: left;
+    }
   }
 }

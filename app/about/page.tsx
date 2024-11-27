@@ -90,7 +90,7 @@ export default async function Page() {
           <li>Webクリエイター能力認定 エキスパート</li>
           <li>マルチメディア検定 エキスパート</li>
           <li>Webデザイナー検定 エキスパート</li>
-          <li>ITパスポード</li>
+          <li>ITパスポート</li>
         </ul>
       </section>
       <section className="result l-inner l-inner-s">
