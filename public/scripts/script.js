@@ -2,9 +2,9 @@ if (typeof window !== 'undefined') {
   window.addEventListener('load', function () {
     // Loadingアニメーション
     document.querySelectorAll('.loading').forEach((el) => {
-      el.style.transition = 'opacity 0.4s';
+      el.style.transition = 'opacity 0.3s';
       el.style.opacity = 0;
-      setTimeout(() => (el.style.display = 'none'), 400);
+      setTimeout(() => (el.style.display = 'none'), 300);
     });
 
     // 固定要素の設定
