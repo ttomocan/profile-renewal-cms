@@ -144,7 +144,8 @@ if (typeof window !== 'undefined') {
 
     // メニュー設定
     function initSPMenu() {
-      const menuButtons = document.querySelectorAll('.l-header__menuBtn');
+      const menuButtons = document.querySelectorAll('.menu-button'); // ボタンのクラス名を確認してください
+      const headerLinks = document.querySelectorAll('.l-header__link a'); // 対象リンクを選択
 
       menuButtons.forEach((btn) => {
         const toggleMenu = () => {
@@ -162,13 +163,17 @@ if (typeof window !== 'undefined') {
 
         // click イベントの追加
         btn.addEventListener('click', (event) => {
-          event.preventDefault();
+          if (!event.target.closest('.l-header__link a')) {
+            event.preventDefault(); // .l-header__link a 以外ではデフォルト動作を防止
+          }
           toggleMenu();
         });
 
         // touchstart イベントの追加
         btn.addEventListener('touchstart', (event) => {
-          event.preventDefault();
+          if (!event.target.closest('.l-header__link a')) {
+            event.preventDefault(); // .l-header__link a 以外ではデフォルト動作を防止
+          }
           toggleMenu();
         });
       });
