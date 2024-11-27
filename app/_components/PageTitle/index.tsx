@@ -5,7 +5,7 @@ type Props = {
   sub: string;
 };
 
-export default function PageTitle({ title, sub, img }: Props) {
+export default function PageTitle({ title, sub }: Props) {
   // 文字列を1文字ずつ分割して <span> タグでラップする関数
   const wrapWithSpan = (text: string) => text.split('').map((char, index) => <span key={index}>{char}</span>);
 
