@@ -190,11 +190,6 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
-      &__item {
-        &__heading {
-          padding: 15px 0;
-        }
-      }
       &__button {
         display: flex;
         justify-content: center;
