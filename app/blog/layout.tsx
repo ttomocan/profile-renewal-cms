@@ -13,7 +13,7 @@ export const revalidate = 60;
 export default function BlogLayout({ children }: Props) {
   return (
     <>
-      <PageTitle title="Dialy" sub="日記" />
+      <PageTitle title="Diary" sub="日記" />
       <main>{children}</main>
     </>
   );
