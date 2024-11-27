@@ -10,11 +10,6 @@ if (typeof window !== 'undefined') {
     // 固定要素の設定
     const header = document.querySelector('.l-header');
     const pagetop = document.querySelector('.c-pagetop');
-    const headerClone = header?.cloneNode(true);
-    const headerDiv = document.createElement('div');
-    headerDiv.className = 'scroll l-header';
-    if (headerClone?.firstChild) headerDiv.appendChild(headerClone.firstChild);
-    const headerHeight = header?.offsetHeight || 0;
 
     // スクロール時
     const updateHeaderPosition = () => {
@@ -24,7 +19,7 @@ if (typeof window !== 'undefined') {
       if (pagetop) {
         pagetop.classList.toggle('show', scrollTop > 300);
 
-        const blog = document.querySelector('.blog');
+        const blog = document.querySelector('.blog-area');
         const blogPosition = blog?.getBoundingClientRect().top + window.scrollY || 0;
         const scrollPosition = window.scrollY + window.innerHeight;
 
