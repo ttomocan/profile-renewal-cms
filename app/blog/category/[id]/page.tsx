@@ -4,6 +4,7 @@ import BlogList from '@/app/_components/BlogList';
 import Pagination from '@/app/_components/Pagination';
 import Category from '@/app/_components/Category';
 import { BLOG_LIST_LIMIT } from '@/app/_constants';
+import styles from './page.module.css';
 
 type Props = {
   params: {
@@ -22,9 +23,9 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <section className="l-inner">
-        <p>
+        <h2 className={styles.category_title}>
           <Category category={category} /> の一覧
-        </p>
+        </h2>
         <BlogList blog={blog} />
         <Pagination totalCount={totalCount} basePath={`/blog/category/${category.id}`} />
       </section>
