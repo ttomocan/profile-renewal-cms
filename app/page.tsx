@@ -72,7 +72,7 @@ export default async function Home() {
       </div>
       <main>
         <section className="about l-inner l-inner-s">
-          <h2 className="c-heading-lv2">
+          <h2 className="c-heading-lv2 flipDownTrigger">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
           </h2>
@@ -131,7 +131,7 @@ export default async function Home() {
             <span className="c-heading-lv2-en">Diary</span>
             <span className="c-heading-lv2-ja">日記</span>
           </h2>
-          <div className="diary__cont">
+          <div className="diary__cont flipDownTrigger">
             <p>
               「スタバのジンジャーブレッドラテが美味しすぎて年中飲みたい！」そんな日常の<b>“なんで？”</b>や<b>“楽しい”</b>をシェアします。SEOに縛られない、気ままなエピソードやお気に入りの話題を更新していきます。
             </p>
