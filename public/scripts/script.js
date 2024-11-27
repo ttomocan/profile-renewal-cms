@@ -3,9 +3,9 @@ if (typeof window !== 'undefined') {
     // Loadingアニメーション
     document.querySelectorAll('.loading').forEach((el) => {
       // トランジション時間を調整（ゆっくりフェードアウト）
-      const fadeOutDuration = 300; // 1秒（ミリ秒）
+      const fadeOutDuration = 300;
 
-      el.style.transition = `opacity ${fadeOutDuration / 1000}s`; // 秒に変換
+      el.style.transition = `opacity ${fadeOutDuration / 1000}s`;
       el.style.opacity = 0;
 
       // フェードアウト後に非表示

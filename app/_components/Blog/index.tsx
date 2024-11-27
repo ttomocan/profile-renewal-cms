@@ -9,7 +9,7 @@ export default function Blog() {
           <source srcSet="/img/common/bg_blog_sp.webp" type="image/webp" media="(max-width: 767px)" />
           <source srcSet="/img/common/bg_blog_sp.jpg" media="(max-width: 767px)" />
           <source srcSet="/img/common/bg_blog.webp" type="image/webp" />
-          <Image src="/img/common/bg_blog.jpg" alt="" width={1366} height={400} sizes="(max-width: 767px) 100vw, 1366px" />
+          <Image src="/img/common/bg_blog.jpg" alt="" width={1366} height={400} sizes="100vw" />
         </picture>
       </div>
       <div className="blog-area__wrap l-inner">

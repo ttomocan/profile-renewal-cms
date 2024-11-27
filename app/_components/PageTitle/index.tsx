@@ -17,7 +17,7 @@ export default function PageTitle({ title, sub }: Props) {
       <div className="pagetitle__image">
         <picture>
           <source srcSet={'/img/pages/' + lowerCaseTitle + '/img_hero.webp'} type="image/webp" />
-          <Image src={'/img/pages/' + lowerCaseTitle + '/img_hero.jpg'} alt={sub + 'のイメージ画像'} width={1366} height={400} priority sizes="(max-width: 767px) 100vw, 1366px" />
+          <Image src={'/img/pages/' + lowerCaseTitle + '/img_hero.jpg'} alt={sub + 'のイメージ画像'} width={1366} height={400} priority sizes="100vw" />
         </picture>
       </div>
       <div className="l-inner">
