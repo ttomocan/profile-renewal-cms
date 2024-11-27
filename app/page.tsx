@@ -116,6 +116,34 @@ export default async function Home() {
             </Link>
           </div>
         </section>
+        <section className="blog l-inner">
+          <h2 className="c-heading-lv2 flipDownTrigger">
+            <span className="c-heading-lv2-en">Dialy</span>
+            <span className="c-heading-lv2-ja">日記</span>
+          </h2>
+          <div className="skill__cont c-row">
+            <div className="skill__item col flipDownTrigger">
+              <Image src="/img/pages/top/img_programming.jpg" alt="プログラミングのイメージ写真" width={300} height={200} />
+              <h3 className="skill__item__heading c-heading-lv3">プログラミング</h3>
+              <p>HTML、CSS、JavaScript、PHPを用いたWebサイト構築が得意です。特にWordPressのカスタマイズに強みを持ち、独自のテーマを作成します。お客様のご要望に合わせて、管理画面の更新機能やサイトのレイアウトを自在に調整し、ユーザビリティを向上させます。また、SEOに配慮したコーディングも行い、検索エンジンでの集客力アップをサポートします。</p>
+            </div>
+            <div className="skill__item col flipDownTrigger">
+              <Image src="/img/pages/top/img_web-tool.jpg" alt="サイト制作ツールのイメージ写真" width={300} height={200} />
+              <h3 className="skill__item__heading c-heading-lv3">サイト制作ツール</h3>
+              <p>Visual Studio Code、Figma、Photoshop、Illustratorを使いこなし、効率的かつ美しいデザインを実現します。さらに、CanvaやAdobe Expressといったオンラインツールも活用し、短時間で効果的なビジュアルを作成。プロジェクトの進行スピードを速めつつ、クオリティを保つことができます。各ツールの特性を活かして、ユーザーにとってわかりやすく魅力的なデザインを提供します。</p>
+            </div>
+            <div className="skill__item col flipDownTrigger">
+              <Image src="/img/pages/top/img_seo.jpg" alt="SEOのイメージ写真" width={300} height={200} />
+              <h3 className="skill__item__heading c-heading-lv3">SEO</h3>
+              <p>SEOに配慮したコーディングとコンテンツ制作が得意です。5年間のブログ運営で培った経験を活かし、キーワード選定や内部対策、効果的なWebライティングを行います。検索エンジンに強いサイト構築を目指し、ユーザーの検索意図に応えるコンテンツを作成し、上位表示を実現します。また、アクセス解析を通じて改善策を提案し、サイト全体のパフォーマンス向上をサポートします。</p>
+            </div>
+          </div>
+          <div className="skill__button flipDownTrigger">
+            <Link href="./skill/" className="c-button__link">
+              ともきゃんのできることを見る
+            </Link>
+          </div>
+        </section>
         <section className="contact l-inner">
           <h2 className="c-heading-lv2 flipDownTrigger">
             <span className="c-heading-lv2-en">Contact</span>
