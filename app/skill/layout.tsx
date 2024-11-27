@@ -11,7 +11,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <>
-      <PageTitle title="Skill" sub="ともきゃんができること" img="/img/pages/skill/img_hero.jpg" />
+      <PageTitle title="Skill" sub="ともきゃんができること" />
       <main>{children}</main>
     </>
   );

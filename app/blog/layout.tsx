@@ -1,7 +1,7 @@
 import PageTitle from '@/app/_components/PageTitle';
 
 export const metadata = {
-  title: 'ブログ',
+  title: '日記',
 };
 
 type Props = {
@@ -10,10 +10,10 @@ type Props = {
 
 export const revalidate = 60;
 
-export default function NewsLayout({ children }: Props) {
+export default function BlogLayout({ children }: Props) {
   return (
     <>
-      <PageTitle title="Blog" sub="ブログ" img="/img/pages/blog/img_hero.jpg" />
+      <PageTitle title="Diary" sub="日記" />
       <main>{children}</main>
     </>
   );

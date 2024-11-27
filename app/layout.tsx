@@ -1,5 +1,5 @@
-import '../styles/common/style.scss';
-import '../styles/common/animation.scss';
+import '@/styles/common/style.scss';
+import '@/styles/common/animation.scss';
 
 //import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
@@ -45,10 +45,6 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <head>
-        <script src="/scripts/script.js" defer></script>
-        <script src="/scripts/animation.js" defer></script>
-      </head>
       <body>
         <DynamicBodyClass />
         <Loading />
@@ -57,6 +53,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Blog />
         <Footer />
         <PageTop />
+        <script src="/scripts/script.js" async></script>
+        <script src="/scripts/animation.js" async></script>
       </body>
       {/* <GoogleAnalytics gaId="G-XXXXX" /> */}
     </html>

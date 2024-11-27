@@ -1,7 +1,8 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { getNewsDetail } from '@/app/_libs/microcms';
+import { getBlogDetail } from '@/app/_libs/microcms';
 import Article from '@/app/_components/Article';
+import Link from 'next/link';
 import styles from './page.module.css';
 
 type Props = {
@@ -14,7 +15,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
-  const data = await getNewsDetail(params.slug, {
+  const data = await getBlogDetail(params.slug, {
     draftKey: searchParams.dk,
   });
 
@@ -30,16 +31,20 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 }
 
 export default async function Page({ params, searchParams }: Props) {
-  const data = await getNewsDetail(params.slug, {
+  const data = await getBlogDetail(params.slug, {
     draftKey: searchParams.dk,
   }).catch(notFound);
 
   return (
     <>
-      <Article data={data} />
-      <div className={styles.footer}>
-        <a href="/news">ニュース一覧へ</a>
-      </div>
+      <section className="l-inner">
+        <Article data={data} />
+        <div className={styles.footer}>
+          <Link href="/blog/" className={'c-button__link --return'}>
+            日記一覧へ
+          </Link>
+        </div>
+      </section>
     </>
   );
 }

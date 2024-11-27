@@ -1,18 +1,17 @@
-'use client';
-
 function fadeAnime() {
-  // ふわっと表示するトリガーの処理
-  document.querySelectorAll('.fadeInTrigger').forEach((element) => {
-    const elemPos = element.getBoundingClientRect().top + window.pageYOffset - 100;
-    const scroll = window.scrollY;
-    const windowHeight = window.innerHeight;
-    if (scroll >= elemPos - windowHeight) {
-      element.classList.add('fadeIn');
-    }
-  });
+  const handleAnimation = (elements, classToAdd, offset = 0) => {
+    elements.forEach((element) => {
+      const elemPos = element.getBoundingClientRect().top + window.pageYOffset + offset;
+      const scroll = window.scrollY;
+      const windowHeight = window.innerHeight;
+      if (scroll >= elemPos - windowHeight) {
+        element.classList.add(classToAdd);
+      }
+    });
+  };
 
-  // その他のアニメーション処理も同様に変換
   const animationTypes = [
+    { selector: '.fadeInTrigger', classToAdd: 'fadeIn', offset: -100 },
     { selector: '.fadeUpTrigger', classToAdd: 'fadeUp', offset: 150 },
     { selector: '.fadeDownTrigger', classToAdd: 'fadeDown', offset: 100 },
     { selector: '.fadeLeftTrigger', classToAdd: 'fadeLeft', offset: 100 },
@@ -28,15 +27,11 @@ function fadeAnime() {
     { selector: '.rotateRightZTrigger', classToAdd: 'rotateRightZ', offset: -50 },
   ];
 
-  animationTypes.forEach((type) => {
-    document.querySelectorAll(type.selector).forEach((element) => {
-      const elemPos = element.getBoundingClientRect().top + window.pageYOffset + type.offset;
-      const scroll = window.scrollY;
-      const windowHeight = window.innerHeight;
-      if (scroll >= elemPos - windowHeight) {
-        element.classList.add(type.classToAdd);
-      }
-    });
+  animationTypes.forEach(({ selector, classToAdd, offset }) => {
+    const elements = document.querySelectorAll(selector);
+    if (elements.length > 0) {
+      handleAnimation(elements, classToAdd, offset);
+    }
   });
 }
 

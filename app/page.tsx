@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getNewsList } from '@/app/_libs/microcms';
-import { TOP_NEWS_LIMIT } from '@/app/_constants';
+import BlogList from '@/app/_components/BlogList';
+import { getBlogList } from '@/app/_libs/microcms';
+import { TOP_BLOG_LIMIT } from '@/app/_constants';
 
 export default async function Home() {
-  const data = await getNewsList({
-    limit: TOP_NEWS_LIMIT,
+  const data = await getBlogList({
+    limit: TOP_BLOG_LIMIT,
   });
 
   return (
@@ -16,7 +17,7 @@ export default async function Home() {
             <source srcSet="/img/pages/top/img_hero_sp.webp" type="image/webp" media="(max-width: 767px)" />
             <source srcSet="/img/pages/top/img_hero_sp.jpg" media="(max-width: 767px)" />
             <source srcSet="/img/pages/top/img_hero.webp" type="image/webp" />
-            <Image src="/img/pages/top/img_hero.jpg" alt="ノートパソコン" width={1366} height={400} priority sizes="(max-width: 767px) 100vw, 1366px" />
+            <Image src="/img/pages/top/img_hero.jpg" alt="ノートパソコン" width={1366} height={400} priority sizes="(max-width: 767px) 100vw, 1366px" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" />
           </picture>
         </div>
         <div className="hero__wrap l-inner">
@@ -62,7 +63,7 @@ export default async function Home() {
       </div>
       <main>
         <section className="about l-inner l-inner-s">
-          <h2 className="c-heading-lv2">
+          <h2 className="c-heading-lv2 flipDownTrigger">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
           </h2>
@@ -82,7 +83,7 @@ export default async function Home() {
               <p>Webサイト制作の現場で経験した豊富なノウハウを活かし、あなただけのサイトやブログを丁寧に作り上げます。まずはお気軽にご相談ください。</p>
             </div>
             <div className="about__button flipDownTrigger">
-              <Link href="./about/" className="c-button__link">
+              <Link href="/about/" className="c-button__link">
                 ともきゃんについて知る
               </Link>
             </div>
@@ -111,8 +112,27 @@ export default async function Home() {
             </div>
           </div>
           <div className="skill__button flipDownTrigger">
-            <Link href="./skill/" className="c-button__link">
+            <Link href="/skill/" className="c-button__link">
               ともきゃんのできることを見る
+            </Link>
+          </div>
+        </section>
+        <section className="diary l-inner">
+          <h2 className="c-heading-lv2 flipDownTrigger">
+            <span className="c-heading-lv2-en">Diary</span>
+            <span className="c-heading-lv2-ja">日記</span>
+          </h2>
+          <div className="diary__cont flipDownTrigger">
+            <p>
+              「スタバのジンジャーブレッドラテが美味しすぎて年中飲みたい！」そんな日常の<b>“なんで？”</b>や<b>“楽しい”</b>をシェアします。SEOに縛られない、気ままなエピソードやお気に入りの話題を更新していきます。
+            </p>
+          </div>
+          <div className="diary__list">
+            <BlogList blog={data.contents} />
+          </div>
+          <div className="diary__button flipDownTrigger">
+            <Link href="/blog/" className="c-button__link">
+              ともきゃんの日記を読む
             </Link>
           </div>
         </section>
@@ -132,7 +152,7 @@ export default async function Home() {
                 あなたの課題に寄り添い、最適な解決策をご提案いたします。
               </p>
               <div className="contact__button">
-                <Link href="./contact/" className="c-button__link">
+                <Link href="/contact/" className="c-button__link">
                   ともきゃんに相談する
                 </Link>
               </div>

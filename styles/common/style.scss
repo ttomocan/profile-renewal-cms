@@ -71,7 +71,7 @@
     z-index: 1;
   }
   &::before {
-    @include animation($name: hero-before, $duration: 0.5s, $timing-function: ease, $delay: 0.5s, $fill-mode: both);
+    @include animation($name: hero-before, $duration: 0.5s, $timing-function: ease, $delay: 0.4s, $fill-mode: both);
     rotate: 45deg;
     transform-origin: center;
     @keyframes hero-before {
@@ -85,7 +85,7 @@
     }
   }
   &::after {
-    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 1s, $fill-mode: both);
+    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 0.9s, $fill-mode: both);
     rotate: -45deg;
     transform-origin: center;
     @keyframes hero-after {
@@ -126,7 +126,7 @@
     font: {
       family: 'Roboto', sans-serif;
       weight: 700;
-      size: 18px;
+      size: clamp(20px, 5vw, 25px);
     }
     letter-spacing: 0.1em;
     position: relative;
@@ -158,7 +158,7 @@
 /* ======================================= */
 /* 　ブログエリア
 /* ======================================= */
-.blog {
+.blog-area {
   color: #ffffff;
   padding: 60px 0 140px;
   position: relative;

@@ -102,13 +102,35 @@
     padding-bottom: 80px;
     &__item {
       &__heading {
-        padding: 15px 0;
+        padding: 15px 0 10px;
       }
     }
     &__button {
       display: flex;
       justify-content: center;
-      margin-top: 50px;
+      margin-top: 40px;
+    }
+  }
+
+  .diary {
+    padding-bottom: 80px;
+    &__item {
+      &__heading {
+        padding: 15px 0;
+      }
+    }
+    &__cont {
+      text-align: center;
+    }
+    &__list {
+      border-bottom: 1px solid #dbd1c9;
+      border-top: 1px solid #dbd1c9;
+      margin-top: 30px;
+    }
+    &__button {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
     }
   }
 
@@ -168,11 +190,6 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
-      &__item {
-        &__heading {
-          padding: 15px 0;
-        }
-      }
       &__button {
         display: flex;
         justify-content: center;
@@ -184,7 +201,11 @@
       img {
         width: 100%;
       }
+      &__cont {
+        gap: 20px;
+      }
       &__button {
+        margin-top: 20px;
         text-align: center;
       }
     }

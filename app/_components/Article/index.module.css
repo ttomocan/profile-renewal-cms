@@ -1,13 +1,17 @@
 .title {
-  font-size: 2.4rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.5;
   margin-bottom: 24px;
   text-align: left;
 }
 
 .description {
+  background-color: #fdebde;
   font-size: 0.9rem;
-  color: var(--color-text-sub);
-  margin: 24px 0;
+  color: #f36b0a;
+  margin: 0 0 20px;
+  padding: 4px 10px;
   text-align: left;
 }
 
@@ -17,7 +21,7 @@
   align-items: center;
   flex-shrink: 1;
   gap: 24px;
-  margin-bottom: 64px;
+  margin-bottom: 30px;
 }
 
 .categoryLink {
@@ -27,7 +31,12 @@
 .thumbnail {
   width: 100%;
   height: auto;
-  margin-bottom: 64px;
+  margin-bottom: 30px;
+}
+
+.content {
+  border-top: 1px solid #dbd1c9;
+  padding-top: 30px;
 }
 
 .content *:first-child {
@@ -37,19 +46,21 @@
 .content > h1 {
   font-size: 2rem;
   font-weight: bold;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid #eeeeee;
   margin: 2.8rem 0 1rem;
 }
 
 .content > h2 {
-  font-size: 1.6rem;
+  border-left: 5px solid #f36b0a;
+  font-size: 1.5rem;
   font-weight: bold;
-  margin: 2.8em 0 1rem;
+  margin: 2.8rem 0 1.1.5rem;
+  padding-left: 0.6em;
 }
 
 .content > h3 {
   font-size: 1.4rem;
-  font-weight: bold;
+  font-weight: 500;
   margin: 2.8rem 0 1rem;
 }
 
@@ -65,9 +76,8 @@
   margin: 2.8rem 0 1rem;
 }
 
-.content > p {
-  margin: 2rem 0 0.5rem;
-  line-height: 2;
+.content > p:has(+ *) {
+  margin: 0 0 1.5rem;
 }
 
 .content > pre {
@@ -75,7 +85,7 @@
 }
 
 .content pre > code {
-  background-color: var(--color-bg-code);
+  background-color: #eeeeee;
   display: block;
   overflow-x: auto;
   padding: 16px;
@@ -83,24 +93,25 @@
 
 .content div[data-filename]::before {
   display: inline-block;
-  background-color: var(--color-bg-sub);
+  background-color: #eeeeee;
   content: attr(data-filename);
   margin: 1em 0 0;
   font-family: menlo, inconsolata, monospace;
   font-size: 0.8rem;
   padding: 4px 16px;
-  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  border-radius: 50% 50% 0 0;
 }
 
 .content ul,
 .content ol {
-  margin: 0.5rem 0 0.5rem 2rem;
+  line-height: 1.5;
+  margin: 0.5rem 0 0.5rem 1.5rem;
 }
 
 .content > ul,
 .content > ol {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .content ul > li {
@@ -111,8 +122,8 @@
   list-style: decimal;
 }
 
-.content li {
-  margin: 0.5rem 0;
+.content li:has(+ li) {
+  margin-bottom: 0.5rem;
 }
 
 .content a {
@@ -122,7 +133,7 @@
 .content > figure > img {
   max-width: 100%;
   height: auto;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 .content > strong {
@@ -130,26 +141,26 @@
 }
 
 .content > blockquote {
-  border-left: 4px solid var(--color-border);
+  border-left: 4px solid #eeeeee;
   padding-left: 1rem;
   font-style: italic;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 .content > hr {
-  margin: 4rem 0;
+  margin: 3rem 0;
   height: 1px;
-  background-color: var(--color-border);
+  background-color: #eeeeee;
   border: none;
 }
 
 .content > table {
   width: 100%;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
 }
 
 .content > table th {
-  background-color: var(--color-bg-sub);
+  background-color: #eeeeee;
   text-align: left;
   padding: 1rem;
 }
@@ -167,8 +178,6 @@
 
   .description {
     font-size: 0.9rem;
-    color: var(--color-text-sub);
-    margin: 24px 0 40px;
   }
 
   .meta {
@@ -191,7 +200,7 @@
   .content > h1 {
     font-size: 1.5rem;
     font-weight: bold;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid #eeeeee;
     margin: 2.8rem 0 1rem;
   }
 
