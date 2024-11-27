@@ -148,22 +148,24 @@ if (typeof window !== 'undefined') {
 
       // イベント処理関数
       function handleMenuToggle(event) {
-        // デフォルトの挙動をキャンセル（タッチデバイスでクリックを防ぐため）
-        if (event.type === 'touchstart') {
+        // .l-header__link a 以外の場合のみデフォルト挙動をキャンセル
+        if (event.type === 'touchstart' && !event.target.matches('.l-header__link a')) {
           event.preventDefault();
         }
 
-        // メニュー開閉処理
-        document.body.classList.toggle('no-scroll');
-        document.querySelector('.l-header__link')?.classList.toggle('menu-open');
+        // メニュー開閉処理（.l-header__link aの場合はスキップ）
+        if (!event.target.matches('.l-header__link a')) {
+          document.body.classList.toggle('no-scroll');
+          document.querySelector('.l-header__link')?.classList.toggle('menu-open');
 
-        const menuBtn = document.querySelector('.l-header__menuBtn');
-        if (menuBtn.classList.contains('open')) {
-          menuBtn.classList.remove('open');
-          menuBtn.classList.add('close');
-        } else {
-          menuBtn.classList.remove('close');
-          menuBtn.classList.add('open');
+          const menuBtn = document.querySelector('.l-header__menuBtn');
+          if (menuBtn.classList.contains('open')) {
+            menuBtn.classList.remove('open');
+            menuBtn.classList.add('close');
+          } else {
+            menuBtn.classList.remove('close');
+            menuBtn.classList.add('open');
+          }
         }
       }
 
