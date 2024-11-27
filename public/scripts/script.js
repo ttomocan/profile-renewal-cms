@@ -144,38 +144,38 @@ if (typeof window !== 'undefined') {
 
     // メニュー設定
     function initSPMenu() {
-      const menuButtons = document.querySelectorAll('.menu-button'); // ボタンのクラス名を確認してください
-      const headerLinks = document.querySelectorAll('.l-header__link a'); // 対象リンクを選択
+      const menuButtons = document.querySelectorAll('.l-header__menuBtn, .l-header__link a');
 
+      // イベント処理関数
+      function handleMenuToggle(event) {
+        // デフォルトの挙動をキャンセル（タッチデバイスでクリックを防ぐため）
+        if (event.type === 'touchstart') {
+          event.preventDefault();
+        }
+
+        // メニュー開閉処理
+        document.body.classList.toggle('no-scroll');
+        document.querySelector('.l-header__link')?.classList.toggle('menu-open');
+
+        const menuBtn = document.querySelector('.l-header__menuBtn');
+        if (menuBtn.classList.contains('open')) {
+          menuBtn.classList.remove('open');
+          menuBtn.classList.add('close');
+        } else {
+          menuBtn.classList.remove('close');
+          menuBtn.classList.add('open');
+        }
+      }
+
+      // イベントの追加処理
       menuButtons.forEach((btn) => {
-        const toggleMenu = () => {
-          document.body.classList.toggle('no-scroll');
-          document.querySelector('.l-header__link')?.classList.toggle('menu-open');
-          const menuBtn = document.querySelector('.l-header__menuBtn');
-          if (menuBtn.classList.contains('open')) {
-            menuBtn.classList.remove('open');
-            menuBtn.classList.add('close');
-          } else {
-            menuBtn.classList.remove('close');
-            menuBtn.classList.add('open');
-          }
-        };
-
-        // click イベントの追加
-        btn.addEventListener('click', (event) => {
-          if (!event.target.closest('.l-header__link a')) {
-            event.preventDefault(); // .l-header__link a 以外ではデフォルト動作を防止
-          }
-          toggleMenu();
-        });
-
-        // touchstart イベントの追加
-        btn.addEventListener('touchstart', (event) => {
-          if (!event.target.closest('.l-header__link a')) {
-            event.preventDefault(); // .l-header__link a 以外ではデフォルト動作を防止
-          }
-          toggleMenu();
-        });
+        if ('ontouchstart' in window) {
+          // タッチデバイスの場合
+          btn.addEventListener('touchstart', handleMenuToggle);
+        } else {
+          // 非タッチデバイスの場合
+          btn.addEventListener('click', handleMenuToggle);
+        }
       });
     }
 
