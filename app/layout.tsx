@@ -10,6 +10,7 @@ import Blog from './_components/Blog';
 import Footer from './_components/Footer';
 import PageTop from './_components/PageTop';
 import DynamicBodyClass from './DynamicBodyClass';
+import ScriptManager from './ScriptManager';
 
 export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
   const isHomePage = pathname === '/';
@@ -54,8 +55,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Blog />
         <Footer />
         <PageTop />
-        <Script src="/scripts/script.js" strategy="beforeInteractive" />
-        <Script src="/scripts/animation.js" strategy="beforeInteractive" />
+        <script src="/scripts/script.js" async></script>
+        <script src="/scripts/animation.js" async></script>
       </body>
       {/* <GoogleAnalytics gaId="G-XXXXX" /> */}
     </html>
