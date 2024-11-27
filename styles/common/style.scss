@@ -71,7 +71,7 @@
     z-index: 1;
   }
   &::before {
-    @include animation($name: hero-before, $duration: 0.5s, $timing-function: ease, $delay: 0.5s, $fill-mode: both);
+    @include animation($name: hero-before, $duration: 0.5s, $timing-function: ease, $delay: 0.4s, $fill-mode: both);
     rotate: 45deg;
     transform-origin: center;
     @keyframes hero-before {
@@ -85,7 +85,7 @@
     }
   }
   &::after {
-    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 1s, $fill-mode: both);
+    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 9s, $fill-mode: both);
     rotate: -45deg;
     transform-origin: center;
     @keyframes hero-after {
@@ -137,7 +137,7 @@
     @include animation($name: kf-animate-chars, $duration: 0.5s, $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1), $fill-mode: both);
     @for $i from 1 through 18 {
       &:nth-child(#{$i}) {
-        animation-delay: ($i * 0.08s) + 1.2s;
+        animation-delay: ($i * 0.08s) + 1s;
       }
     }
 
