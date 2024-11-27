@@ -2,9 +2,20 @@ if (typeof window !== 'undefined') {
   window.addEventListener('load', function () {
     // Loadingアニメーション
     document.querySelectorAll('.loading').forEach((el) => {
-      el.style.transition = 'opacity 0.3s';
+      // トランジション時間を調整（ゆっくりフェードアウト）
+      const fadeOutDuration = 300; // 1秒（ミリ秒）
+
+      el.style.transition = `opacity ${fadeOutDuration / 1000}s`; // 秒に変換
       el.style.opacity = 0;
-      setTimeout(() => (el.style.display = 'none'), 10);
+
+      // フェードアウト後に非表示
+      el.addEventListener(
+        'transitionend',
+        () => {
+          el.style.display = 'none';
+        },
+        { once: true }
+      ); // イベントは一度だけ実行
     });
 
     // 固定要素の設定
