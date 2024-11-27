@@ -15,27 +15,15 @@ function SearchFieldComponent() {
     if (q instanceof HTMLInputElement) {
       const params = new URLSearchParams();
       params.set('q', q.value.trim());
-      router.push(`/news/search?${params.toString()}`);
+      router.push(`/blog/search?${params.toString()}`);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label className={styles.search}>
-        <Image
-          src="/search.svg"
-          alt="検索"
-          width={16}
-          height={16}
-          loading="eager"
-        />
-        <input
-          type="text"
-          name="q"
-          defaultValue={searchParams.get('q') ?? undefined}
-          placeholder="キーワードを入力"
-          className={styles.searchInput}
-        />
+        <Image src="/search.svg" alt="検索" width={16} height={16} loading="eager" />
+        <input type="text" name="q" defaultValue={searchParams.get('q') ?? undefined} placeholder="キーワードを入力" className={styles.searchInput} />
       </label>
     </form>
   );

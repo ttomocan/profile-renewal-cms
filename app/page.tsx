@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getNewsList } from '@/app/_libs/microcms';
-import { TOP_NEWS_LIMIT } from '@/app/_constants';
+import { getBlogList } from '@/app/_libs/microcms';
+import { TOP_BLOG_LIMIT } from '@/app/_constants';
 
 export default async function Home() {
-  const data = await getNewsList({
-    limit: TOP_NEWS_LIMIT,
+  const data = await getBlogList({
+    limit: TOP_BLOG_LIMIT,
   });
 
   return (
