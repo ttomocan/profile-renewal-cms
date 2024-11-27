@@ -4,6 +4,7 @@ import '../styles/common/animation.scss';
 //import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
 import Loading from './_components/Loading';
+import Script from 'next/script';
 import Header from './_components/Header';
 import Blog from './_components/Blog';
 import Footer from './_components/Footer';
