@@ -1,7 +1,5 @@
 .footer {
   display: flex;
-  justify-content: flex-end;
-  border-top: 1px solid var(--color-border);
+  justify-content: center;
   margin-top: 80px;
-  padding-top: 40px;
 }

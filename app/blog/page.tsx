@@ -11,9 +11,11 @@ export default async function Page() {
 
   return (
     <>
-      <SearchField />
-      <BlogList blog={blog} />
-      <Pagination totalCount={totalCount} />
+      <section className="l-inner">
+        <SearchField />
+        <BlogList blog={blog} />
+        <Pagination totalCount={totalCount} />
+      </section>
     </>
   );
 }

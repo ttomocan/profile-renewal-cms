@@ -1,5 +1,5 @@
 .list {
-  border-bottom: 1px solid var(--color-border-light);
+  border-bottom: 1px solid #eeeeee;
 }
 .list:last-child {
   border-bottom: none;
@@ -15,7 +15,6 @@
 .image {
   width: 200px;
   height: auto;
-  border-radius: var(--border-radius);
 }
 
 .title {

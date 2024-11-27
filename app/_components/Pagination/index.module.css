@@ -1,25 +1,25 @@
 .container {
   display: flex;
+  gap: 10px;
   justify-content: center;
   align-items: center;
   padding: 24px;
   margin-top: 24px;
 }
 
-.list {
-  margin: 0 4px;
-}
-
 .item {
+  color: #383838;
+  background-color: rgba(243, 107, 10, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 36px;
   height: 36px;
-  border-radius: var(--border-radius);
+  border-radius: 50%;
 }
 
+.item:hover,
 .current {
-  color: var(--color-text-unpainted);
-  background-color: var(--color-button-primary);
+  color: #ffffff;
+  background-color: #f36b0a;
 }

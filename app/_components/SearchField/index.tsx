@@ -22,7 +22,7 @@ function SearchFieldComponent() {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label className={styles.search}>
-        <Image src="/search.svg" alt="検索" width={16} height={16} loading="eager" />
+        <Image src="/img/common/search.svg" alt="検索" width={16} height={16} loading="eager" />
         <input type="text" name="q" defaultValue={searchParams.get('q') ?? undefined} placeholder="キーワードを入力" className={styles.searchInput} />
       </label>
     </form>

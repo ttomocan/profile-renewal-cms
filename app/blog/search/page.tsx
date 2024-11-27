@@ -17,8 +17,10 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <>
-      <SearchField />
-      <BlogList blog={blog} />
+      <section className="l-inner">
+        <SearchField />
+        <BlogList blog={blog} />
+      </section>
     </>
   );
 }

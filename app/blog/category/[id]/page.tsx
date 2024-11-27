@@ -21,11 +21,13 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <p>
-        <Category category={category} /> の一覧
-      </p>
-      <BlogList blog={blog} />
-      <Pagination totalCount={totalCount} basePath={`/blog/category/${category.id}`} />
+      <section className="l-inner">
+        <p>
+          <Category category={category} /> の一覧
+        </p>
+        <BlogList blog={blog} />
+        <Pagination totalCount={totalCount} basePath={`/blog/category/${category.id}`} />
+      </section>
     </>
   );
 }

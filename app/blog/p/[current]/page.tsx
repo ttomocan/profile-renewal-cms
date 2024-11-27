@@ -28,8 +28,10 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <BlogList blog={blog} />
-      <Pagination totalCount={totalCount} current={current} />
+      <section className="l-inner">
+        <BlogList blog={blog} />
+        <Pagination totalCount={totalCount} current={current} />
+      </section>
     </>
   );
 }

@@ -36,10 +36,14 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <>
-      <Article data={data} />
-      <div className={styles.footer}>
-        <a href="/blog/">ニュース一覧へ</a>
-      </div>
+      <section className="l-inner">
+        <Article data={data} />
+        <div className={styles.footer}>
+          <a href="/blog/" className={'c-button__link --return'}>
+            ニュース一覧へ
+          </a>
+        </div>
+      </section>
     </>
   );
 }
