@@ -1,10 +1,10 @@
 if (typeof window !== 'undefined') {
-  document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('load', function () {
     // Loadingアニメーション
     document.querySelectorAll('.loading').forEach((el) => {
       el.style.transition = 'opacity 0.3s';
       el.style.opacity = 0;
-      setTimeout(() => (el.style.display = 'none'), 500);
+      setTimeout(() => (el.style.display = 'none'), 10);
     });
 
     // 固定要素の設定
