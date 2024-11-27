@@ -85,7 +85,7 @@
     }
   }
   &::after {
-    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 9s, $fill-mode: both);
+    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 0.9s, $fill-mode: both);
     rotate: -45deg;
     transform-origin: center;
     @keyframes hero-after {
