@@ -73,7 +73,7 @@ export default async function Home() {
             </div>
             <div className="about__detail flipDownTrigger">
               <p>
-                愛知在住のWebエンジニア兼ブロガー、「ともきゃん」です。
+                名古屋在住のWebエンジニア兼ブロガー、「ともきゃん」です。
                 <br />
                 プロフィールサイトをご覧いただき、ありがとうございます。
                 <br />
