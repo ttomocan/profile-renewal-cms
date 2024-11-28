@@ -37,7 +37,7 @@ export default async function Page({ params, searchParams }: Props) {
 
   return (
     <>
-      <article className="content l-inner">
+      <article className="l-inner">
         <Article data={data} />
         <div className={styles.footer}>
           <Link href="/blog/" className={'c-button__link --return'}>
