@@ -36,7 +36,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       site: '@t_tomocan',
       title: 'ともきゃんスタイル - プロフィールサイト',
       description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
-      images: ['/img/common/ogp.png'],
+      images: ['/img/common/ogp.png?timestamp=20241128'],
     },
     alternates: {
       canonical: 'https://www.tomocan.site',
