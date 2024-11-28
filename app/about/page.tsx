@@ -52,7 +52,7 @@ export default async function Page() {
                 <td>男性</td>
               </tr>
               <tr>
-                <th>職業</th>
+                <th>職種</th>
                 <td>Webエンジニア、ブロガー</td>
               </tr>
               <tr>
@@ -61,10 +61,6 @@ export default async function Page() {
               </tr>
               <tr>
                 <th>座右の銘</th>
-                <td>Webエンジニア、ブロガー</td>
-              </tr>
-              <tr>
-                <th>職業</th>
                 <td>遊ぶように生きる</td>
               </tr>
               <tr>
