@@ -6,8 +6,26 @@ import Link from 'next/link';
 import MenuNav from '../MenuNav';
 
 export default function Header() {
+  const toggleMenuBtnState = () => {
+    const menuBtn = document.querySelector('.l-header__menuBtn');
+    if (menuBtn) {
+      if (menuBtn.classList.contains('open')) {
+        menuBtn.classList.remove('open');
+        menuBtn.classList.add('close');
+      } else {
+        menuBtn.classList.remove('close');
+        menuBtn.classList.add('open');
+      }
+    }
+  };
+
   const open = () => {
+    // メニューの開閉状態を切り替え
+    document.body.classList.toggle('no-scroll');
     document.querySelector('.l-header__link')?.classList.toggle('menu-open');
+
+    // メニューボタンの状態を切り替え
+    toggleMenuBtnState();
   };
 
   useEffect(() => {
@@ -15,6 +33,8 @@ export default function Header() {
 
     const closeMenu = () => {
       document.querySelector('.l-header__link')?.classList.remove('menu-open');
+      document.body.classList.remove('no-scroll');
+      toggleMenuBtnState();
     };
 
     links.forEach((link) => {

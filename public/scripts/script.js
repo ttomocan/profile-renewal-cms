@@ -145,29 +145,9 @@ if (typeof window !== 'undefined') {
 
     if (canvasList.length > 0) update();
 
-    // メニュー設定
-    function initSPMenu() {
-      const menuButtons = document.querySelectorAll('.l-header__menuBtn, .l-header__link a');
-      menuButtons.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          document.body.classList.toggle('no-scroll');
-          const menuBtn = document.querySelector('.l-header__menuBtn');
-          if (menuBtn.classList.contains('open')) {
-            menuBtn.classList.remove('open');
-            menuBtn.classList.add('close');
-          } else {
-            menuBtn.classList.remove('close');
-            menuBtn.classList.add('open');
-          }
-        });
-      });
-    }
-
     function handleResize() {
       if (window.matchMedia('(min-width: 1041px)').matches) {
-        // PCメニューの初期化
       } else if (window.matchMedia('(max-width: 1040px)').matches) {
-        initSPMenu();
       }
     }
 
