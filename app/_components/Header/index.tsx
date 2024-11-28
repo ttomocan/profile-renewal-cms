@@ -1,12 +1,36 @@
+'use client';
+
+import { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import MenuNav from '../MenuNav';
-import { useState } from 'react';
 
 export default function Header() {
-  const [isOpen, setOpen] = useState<boolean>(false);
-  const open = () => setOpen(true);
-  const close = () => setOpen(false);
+  const open = () => {
+    document.querySelector('.l-header__link')?.classList.toggle('menu-open');
+  };
+
+  useEffect(() => {
+    const links = document.querySelectorAll('.l-header__link a');
+
+    const closeMenu = () => {
+      document.querySelector('.l-header__link')?.classList.remove('menu-open');
+    };
+
+    links.forEach((link) => {
+      link.addEventListener('click', closeMenu);
+      link.addEventListener('touchstart', closeMenu);
+    });
+
+    // クリーンアップ処理
+    return () => {
+      links.forEach((link) => {
+        link.removeEventListener('click', closeMenu);
+        link.removeEventListener('touchstart', closeMenu);
+      });
+    };
+  }, []);
+
   return (
     <header className="l-header">
       <h1 className="l-header__logo">
@@ -21,7 +45,9 @@ export default function Header() {
           <span className="bottom"></span>
         </button>
       </div>
-      <MenuNav />
+      <div className="l-header__link">
+        <MenuNav />
+      </div>
     </header>
   );
 }

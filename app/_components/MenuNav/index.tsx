@@ -1,4 +1,4 @@
-'use client'; // クライアントコンポーネントとして宣言
+'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +8,7 @@ export default function Menu() {
   const pathname = usePathname();
 
   return (
-    <div className="l-header__link">
+    <>
       <ul className="l-header__blog">
         <li className="l-header__blog__item">
           <Link href="https://www.newagevoice.com/" target="_blank" className="c-link-external">
@@ -58,6 +58,6 @@ export default function Menu() {
           <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} style={{ width: 'auto', height: '40px' }} />
         </Link>
       </div>
-    </div>
+    </>
   );
 }

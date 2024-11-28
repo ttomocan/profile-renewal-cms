@@ -149,16 +149,8 @@ if (typeof window !== 'undefined') {
     function initSPMenu() {
       const menuButtons = document.querySelectorAll('.l-header__menuBtn, .l-header__link a');
 
-      // イベント処理関数
-      function handleMenuToggle(event) {
-        // .l-header__link a 以外の場合のみデフォルト挙動をキャンセル
-        if (event.type === 'touchstart' && !event.target.matches('.l-header__link a')) {
-          event.preventDefault();
-        }
-
+      const toggleMenu = () => {
         document.body.classList.toggle('no-scroll');
-        document.querySelector('.l-header__link')?.classList.toggle('menu-open');
-
         const menuBtn = document.querySelector('.l-header__menuBtn');
         if (menuBtn.classList.contains('open')) {
           menuBtn.classList.remove('open');
@@ -167,17 +159,11 @@ if (typeof window !== 'undefined') {
           menuBtn.classList.remove('close');
           menuBtn.classList.add('open');
         }
-      }
+      };
 
-      // イベントの追加処理
       menuButtons.forEach((btn) => {
-        if ('ontouchstart' in window) {
-          // タッチデバイスの場合
-          btn.addEventListener('touchstart', handleMenuToggle);
-        } else {
-          // 非タッチデバイスの場合
-          btn.addEventListener('click', handleMenuToggle);
-        }
+        // タッチイベントの登録（クリックの補完として追加）
+        btn.addEventListener('touchstart', toggleMenu);
       });
     }
 
