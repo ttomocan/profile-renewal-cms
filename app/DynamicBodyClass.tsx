@@ -7,10 +7,22 @@ export default function DynamicBodyClass() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // パスごとのクラス名を設定
-    const bodyClassName = pathname === '/' ? 'top' : pathname === '/about/' ? 'about' : pathname === '/skill/' ? 'skill' : pathname === '/contact/' ? 'contact' : pathname === '/blog/' ? 'blog' : '';
+    // パスに特定の文字列が含まれるかでクラスを設定
+    let bodyClassName = '';
 
-    // 既存クラスを保存して、必要なクラスだけ追加
+    if (pathname === '/') {
+      bodyClassName = 'top';
+    } else if (pathname.includes('/about')) {
+      bodyClassName = 'about';
+    } else if (pathname.includes('/skill')) {
+      bodyClassName = 'skill';
+    } else if (pathname.includes('/contact')) {
+      bodyClassName = 'contact';
+    } else if (pathname.includes('/blog')) {
+      bodyClassName = 'blog';
+    }
+
+    // クラスの適用
     const body = document.body;
     if (bodyClassName) {
       body.classList.add(bodyClassName);

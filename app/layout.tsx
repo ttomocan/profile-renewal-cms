@@ -1,5 +1,6 @@
 import '@/styles/common/style.scss';
 import '@/styles/common/animation.scss';
+import './globals.css';
 
 //import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';

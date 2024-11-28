@@ -1,0 +1,6 @@
+@layer components {
+  .blog p > span.text-large {
+    font-size: 24px;
+    font-weight: bold;
+  }
+}
