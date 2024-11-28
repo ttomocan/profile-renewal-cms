@@ -19,9 +19,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  flex-shrink: 1;
   gap: 24px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .categoryLink {
