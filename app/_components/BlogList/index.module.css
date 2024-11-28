@@ -1,6 +1,13 @@
+.list_parent {
+  border-bottom: 1px solid #dbd1c9;
+  border-top: 1px solid #dbd1c9;
+  margin-top: 30px;
+}
+
 .list {
   border-bottom: 1px solid #dbd1c9;
 }
+
 .list:last-child {
   border-bottom: none;
 }

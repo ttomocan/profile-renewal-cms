@@ -127,7 +127,7 @@ export default async function Home() {
               「スタバのジンジャーブレッドラテが美味しすぎて年中飲みたい！」そんな日常の<b>“なんで？”</b>や<b>“楽しい”</b>をシェアします。SEOに縛られない、気ままなエピソードやお気に入りの話題を更新していきます。
             </p>
           </div>
-          <div className="diary__list">
+          <div className="diary__list flipDownTrigger">
             <BlogList blog={data.contents} />
           </div>
           <div className="diary__button flipDownTrigger">

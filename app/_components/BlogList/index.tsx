@@ -15,9 +15,9 @@ export default function BlogList({ blog }: Props) {
     return <p className={styles.title}>記事がありません。</p>;
   }
   return (
-    <ul>
+    <ul className={styles.list_parent}>
       {blog.map((article) => (
-        <li key={article.id} className={'${styles.list} flipDownTrigger'}>
+        <li key={article.id} className={`${styles.list}`}>
           <Link href={`/blog/${article.id}/`} className={styles.link}>
             {article.thumbnail ? <Image src={article.thumbnail.url} alt="" className={styles.image} width={article.thumbnail.width} height={article.thumbnail.height} /> : <Image className={styles.image} src="/img/common/ogp.png" alt="No Image" width={200} height={105} />}
             <dl className={styles.content}>
