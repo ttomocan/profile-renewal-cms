@@ -148,22 +148,18 @@ if (typeof window !== 'undefined') {
     // メニュー設定
     function initSPMenu() {
       const menuButtons = document.querySelectorAll('.l-header__menuBtn, .l-header__link a');
-
-      const toggleMenu = () => {
-        document.body.classList.toggle('no-scroll');
-        const menuBtn = document.querySelector('.l-header__menuBtn');
-        if (menuBtn.classList.contains('open')) {
-          menuBtn.classList.remove('open');
-          menuBtn.classList.add('close');
-        } else {
-          menuBtn.classList.remove('close');
-          menuBtn.classList.add('open');
-        }
-      };
-
       menuButtons.forEach((btn) => {
-        // タッチイベントの登録（クリックの補完として追加）
-        btn.addEventListener('touchstart', toggleMenu);
+        btn.addEventListener('click', () => {
+          document.body.classList.toggle('no-scroll');
+          const menuBtn = document.querySelector('.l-header__menuBtn');
+          if (menuBtn.classList.contains('open')) {
+            menuBtn.classList.remove('open');
+            menuBtn.classList.add('close');
+          } else {
+            menuBtn.classList.remove('close');
+            menuBtn.classList.add('open');
+          }
+        });
       });
     }
 
