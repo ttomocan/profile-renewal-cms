@@ -19,14 +19,12 @@ export default function Header() {
 
     links.forEach((link) => {
       link.addEventListener('click', closeMenu);
-      link.addEventListener('touchstart', closeMenu);
     });
 
     // クリーンアップ処理
     return () => {
       links.forEach((link) => {
         link.removeEventListener('click', closeMenu);
-        link.removeEventListener('touchstart', closeMenu);
       });
     };
   }, []);
