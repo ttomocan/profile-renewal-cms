@@ -92,11 +92,6 @@
   margin: 0 0 1.5rem;
 }
 
-.content > p > span.text-large {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
 .content > pre {
   overflow-x: auto;
 }
@@ -185,6 +180,12 @@
 .content > table td {
   text-align: left;
   padding: 1rem;
+}
+
+/* カスタムclass */
+.content > p > span.text-large {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 @media (max-width: 640px) {
