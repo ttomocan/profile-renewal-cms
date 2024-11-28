@@ -195,14 +195,14 @@
   .meta {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     font-size: 0.9rem;
   }
 
   .thumbnail {
     width: 100%;
     height: auto;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
   .content {
