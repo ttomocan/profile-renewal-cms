@@ -98,11 +98,20 @@ if (typeof window !== 'undefined') {
     if (waveCanvas) {
       canvasList.push(waveCanvas);
       colorList.push(['#f36b0a', '#f36b0a', '#f36b0a']);
-      waveCanvas.width = document.documentElement.clientWidth;
-      waveCanvas.height = 100;
       waveCanvas.contextCache = waveCanvas.getContext('2d');
+      updateCanvasSize(waveCanvas); // 初期サイズの設定
     }
 
+    let animationFrameId; // アニメーションのIDを保持
+    let resizeTimeout; // リサイズ処理をデバウンスするためのタイマー
+
+    // キャンバスのサイズを更新
+    function updateCanvasSize(canvas) {
+      canvas.width = document.documentElement.clientWidth;
+      canvas.height = 100;
+    }
+
+    // 描画処理
     function draw(canvas, color) {
       const context = canvas.contextCache;
       context.clearRect(0, 0, canvas.width, canvas.height);
@@ -136,15 +145,29 @@ if (typeof window !== 'undefined') {
       }
     }
 
+    // アニメーションの更新処理
     function update() {
       canvasList.forEach((canvas, index) => draw(canvas, colorList[index]));
-      info.seconds += 0.014;
+      info.seconds += 0.005; // 波の速さをゆっくりに（元は0.014）
       info.t = info.seconds * Math.PI;
-      setTimeout(update, 35);
+      animationFrameId = requestAnimationFrame(update); // アニメーションフレームを使用
     }
 
+    // ウィンドウリサイズ時の処理
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      cancelAnimationFrame(animationFrameId); // アニメーションを一時停止
+      resizeTimeout = setTimeout(() => {
+        canvasList.forEach((canvas) => updateCanvasSize(canvas)); // キャンバスのサイズ更新
+        info.seconds = 0; // アニメーションをリセット
+        update(); // アニメーション再開
+      }, 200); // 200msのデバウンス
+    });
+
+    // アニメーションの開始
     if (canvasList.length > 0) update();
 
+    // メディアクエリ
     function handleResize() {
       if (window.matchMedia('(min-width: 1041px)').matches) {
       } else if (window.matchMedia('(max-width: 1040px)').matches) {
