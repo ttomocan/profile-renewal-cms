@@ -52,7 +52,7 @@ export default function Menu() {
       </nav>
       <div className="l-header__sns">
         <Link href="https://x.com/t_tomocan" className="l-header__sns__item --x" target="_blank">
-          <Image src="/img/common/icon_x.svg" alt="X" width={40} height={40} style={{ width: 'auto', height: '40px' }} />
+          <Image src="/img/common/icon_x.svg" alt="X" width={30} height={30} style={{ width: 'auto', height: '30px' }} />
         </Link>
         <Link href="https://coconala.com/users/1531202" className="l-header__sns__item --coconala" target="_blank">
           <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} style={{ width: 'auto', height: '40px' }} />

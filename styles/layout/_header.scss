@@ -87,7 +87,7 @@
         justify-content: center;
         width: 50px;
         &.--x {
-          background-color: rgba(29, 161, 242, 0.15);
+          background-color: rgba(0, 0, 0, 0.15);
         }
         &.--coconala {
           background-color: rgba(243, 107, 10, 0.15);
@@ -97,7 +97,7 @@
         }
         &:hover {
           &.--x {
-            background-color: rgba(29, 161, 242, 0.4);
+            background-color: rgba(0, 0, 0, 0.4);
           }
           &.--coconala {
             background-color: rgba(243, 107, 10, 0.4);
