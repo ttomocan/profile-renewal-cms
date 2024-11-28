@@ -183,7 +183,7 @@
 }
 
 /* カスタムclass */
-.content p span.text-large {
+.content p .text-large {
   font-size: 1.5rem;
   font-weight: bold;
 }
