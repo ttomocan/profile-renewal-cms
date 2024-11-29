@@ -14,9 +14,8 @@ export default async function Home() {
       <div className="hero">
         <div className="hero__image">
           <picture>
-            <source srcSet="/img/pages/top/img_hero_sp.webp" type="image/webp" media="(max-width: 767px)" />
-            <source srcSet="/img/pages/top/img_hero_sp.jpg" media="(max-width: 767px)" />
-            <source srcSet="/img/pages/top/img_hero.webp" type="image/webp" />
+            <source srcSet="/img/pages/top/img_hero_sp.webp 400w,/img/pages/top/img_hero_sp.webp 800w,/img/pages/top/img_hero-1000.webp 1000w,/img/pages/top/img_hero-1500.webp 1500w,/img/pages/top/img_hero-2000.webp 2000w" sizes="100vw" type="image/webp" />
+            <source srcSet="/img/pages/top/img_hero_sp.jpg 400w,/img/pages/top/img_hero_sp.jpg 800w,/img/pages/top/img_hero-1000.jpg 1000w,/img/pages/top/img_hero-1500.jpg 1500w,/img/img_hero-2000.jpg 2000w" sizes="100vw" type="image/jpeg" />
             <Image src="/img/pages/top/img_hero.jpg" alt="ノートパソコン" width={2732} height={1000} priority sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" />
           </picture>
         </div>
