@@ -1,3 +1,4 @@
+import '../globals.css';
 import PageTitle from '@/app/_components/PageTitle';
 
 export const metadata = {
