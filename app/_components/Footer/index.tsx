@@ -48,7 +48,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className="l-footer__copyright">
-          <small>&copy; 2024 ともきゃんスタイル inc.</small>
+          <small>&copy; {new Date().getFullYear()} ともきゃんスタイル inc.</small>
         </div>
       </footer>
     </>
