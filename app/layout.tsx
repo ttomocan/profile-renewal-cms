@@ -1,8 +1,5 @@
-import fs from 'fs';
-import path from 'path';
-
-const styleCss = fs.readFileSync(path.resolve(process.cwd(), 'styles/common/style.css'), 'utf-8');
-const animationCss = fs.readFileSync(path.resolve(process.cwd(), 'styles/common/animation.css'), 'utf-8');
+import '@/styles/common/style.scss';
+import '@/styles/common/animation.scss';
 
 //import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
