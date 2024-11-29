@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "node server.js",
     "lint": "next lint",
-    "postbuild": "next-sitemap"
+    "postbuild": "next-sitemap",
+    "build:css": "sass styles/common/style.scss styles/common/style.css && sass styles/common/animation.scss styles/common/animation.css"
   },
   "dependencies": {
     "@next/third-parties": "^14.1.4",

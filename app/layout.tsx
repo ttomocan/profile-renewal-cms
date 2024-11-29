@@ -1,5 +1,8 @@
-import '@/styles/common/style.scss';
-import '@/styles/common/animation.scss';
+import fs from 'fs';
+import path from 'path';
+
+const styleCss = fs.readFileSync(path.resolve(process.cwd(), 'styles/common/style.css'), 'utf-8');
+const animationCss = fs.readFileSync(path.resolve(process.cwd(), 'styles/common/animation.css'), 'utf-8');
 
 //import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata } from 'next';
@@ -46,6 +49,10 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
+      <head>
+        <style>{styleCss}</style>
+        <style>{animationCss}</style>
+      </head>
       <body>
         <DynamicBodyClass />
         <Loading />
