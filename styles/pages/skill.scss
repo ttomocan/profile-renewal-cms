@@ -6,10 +6,6 @@
 /* ともきゃんができること
 ================================== */
 .skill {
-  .pagetitle {
-    @include background(#000000, url('/img/pages/skill/img_hero.jpg'), center, cover, no-repeat);
-  }
-
   .first {
     font-size: 16px;
     text-align: center;

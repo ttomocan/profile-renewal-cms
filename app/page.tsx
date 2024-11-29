@@ -1,3 +1,5 @@
+import '@/styles/pages/top.scss';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogList from '@/app/_components/BlogList';

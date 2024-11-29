@@ -1,3 +1,4 @@
+import '@/styles/pages/skill.scss';
 import PageTitle from '@/app/_components/PageTitle';
 
 export const metadata = {
