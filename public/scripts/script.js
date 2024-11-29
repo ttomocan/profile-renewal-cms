@@ -2,7 +2,6 @@ if (typeof window !== 'undefined') {
   window.addEventListener('load', function () {
     // Loadingアニメーション
     document.querySelectorAll('.loading').forEach((el) => {
-      // トランジション時間を調整（ゆっくりフェードアウト）
       const fadeOutDuration = 300;
 
       el.style.transition = `opacity ${fadeOutDuration / 1000}s`;
@@ -15,7 +14,7 @@ if (typeof window !== 'undefined') {
           el.style.display = 'none';
         },
         { once: true }
-      ); // イベントは一度だけ実行
+      );
     });
 
     // 固定要素の設定
