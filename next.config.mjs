@@ -27,3 +27,9 @@ const nextConfig = {
 };
 
 export default nextConfig;
+
+module.exports = {
+  images: {
+    domains: ['profile-renewal-m0598xmda-tomocans-projects.vercel.app'],
+  },
+};
