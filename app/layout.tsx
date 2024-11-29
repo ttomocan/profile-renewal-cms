@@ -23,7 +23,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
     description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
     icons: {
       icon: '/favicon.ico',
-      apple: '/apple-touch-icon.png',
+      apple: '/apple-icon.png',
     },
     openGraph: {
       title: 'ともきゃんスタイル - プロフィールサイト',
