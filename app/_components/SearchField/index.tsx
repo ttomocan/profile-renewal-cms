@@ -24,6 +24,9 @@ function SearchFieldComponent() {
       <label className={styles.search}>
         <Image src="/img/common/search.svg" alt="検索" width={16} height={16} loading="eager" />
         <input type="text" name="q" defaultValue={searchParams.get('q') ?? undefined} placeholder="キーワードを入力" className={styles.searchInput} />
+        <button type="submit" className={styles.submitButton}>
+          検索
+        </button>
       </label>
     </form>
   );
