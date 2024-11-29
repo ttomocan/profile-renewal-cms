@@ -7,6 +7,7 @@ const nextConfig = {
         hostname: 'images.microcms-assets.io',
       },
     ],
+    domains: ['profile-renewal-m0598xmda-tomocans-projects.vercel.app'],
   },
   trailingSlash: true,
   async redirects() {
@@ -27,9 +28,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-
-module.exports = {
-  images: {
-    domains: ['profile-renewal-m0598xmda-tomocans-projects.vercel.app'],
-  },
-};
