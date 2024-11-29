@@ -1,4 +1,4 @@
-import '../globals.css';
+import './globals.css';
 import '@/styles/pages/blog.scss';
 import PageTitle from '@/app/_components/PageTitle';
 
