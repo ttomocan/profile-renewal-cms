@@ -17,7 +17,7 @@ export default async function Home() {
             <source srcSet="/img/pages/top/img_hero_sp.webp" type="image/webp" media="(max-width: 767px)" />
             <source srcSet="/img/pages/top/img_hero_sp.jpg" media="(max-width: 767px)" />
             <source srcSet="/img/pages/top/img_hero.webp" type="image/webp" />
-            <Image src="/img/pages/top/img_hero.jpg" alt="ノートパソコン" width={1366} height={400} priority sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" />
+            <Image src="/img/pages/top/img_hero.jpg" alt="ノートパソコン" width={2732} height={1000} priority sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" />
           </picture>
         </div>
         <div className="hero__wrap l-inner">
