@@ -1,7 +1,4 @@
 @charset "UTF-8";
-/* ======================================= */
-/* 　他ファイル読み込み
-/* ======================================= */
 /*! destyle.css v4.0.1 | MIT License | https://github.com/nicolas-cusan/destyle.css */
 /* Reset box-model and set borders */
 /* ============================================ */
@@ -2022,7 +2019,7 @@ section * ~ section:not(:last-of-type) {
 }
 
 /* ======================================= */
-/* ローディング
+/* 初回ローディング
 /* ======================================= */
 .loading {
   background-color: #fef6f0;
