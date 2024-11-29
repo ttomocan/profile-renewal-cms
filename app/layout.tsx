@@ -46,10 +46,6 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <head>
-        <style>{styleCss}</style>
-        <style>{animationCss}</style>
-      </head>
       <body>
         <DynamicBodyClass />
         <Loading />
