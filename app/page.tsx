@@ -14,10 +14,10 @@ export default async function Home() {
       <div className="hero">
         <div className="hero__image">
           <picture>
-            <source srcSet="https://profile-renewal-cms-git-main-tomocans-projects.vercel.app/_next/img/pages/top/img_hero_sp.webp" type="image/webp" media="(max-width: 767px)" />
-            <source srcSet="https://profile-renewal-cms-git-main-tomocans-projects.vercel.app/_next/img/pages/top/img_hero_sp.jpg" type="image/jpg" media="(max-width: 767px)" />
-            <source srcSet="https://profile-renewal-cms-git-main-tomocans-projects.vercel.app/_next/img/pages/top/img_hero.webp" type="image/webp" />
-            <Image src="https://profile-renewal-cms-git-main-tomocans-projects.vercel.app/_next/image?url=/img/pages/top/img_hero-placeholder.jpg" alt="ノートパソコン" width={2732} height={1000} priority sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" />
+            <source srcSet="https://images.microcms-assets.io/_next/img/pages/top/img_hero_sp.webp" type="image/webp" media="(max-width: 767px)" />
+            <source srcSet="https://images.microcms-assets.io/_next/img/pages/top/img_hero_sp.jpg" type="image/jpg" media="(max-width: 767px)" />
+            <source srcSet="https://images.microcms-assets.io/_next/img/pages/top/img_hero.webp" type="image/webp" />
+            <Image src="https://images.microcms-assets.io/_next/image?url=/img/pages/top/img_hero-placeholder.jpg" alt="ノートパソコン" width={2732} height={1000} priority sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" />
           </picture>
         </div>
 
