@@ -66,15 +66,15 @@ export default async function Home() {
       </div>
       <main>
         <section className="about l-inner l-inner-s">
-          <h2 className="c-heading-lv2 flipDownTrigger">
+          <h2 className="c-heading-lv2 fadeUp">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
           </h2>
           <div className="about__cont">
-            <div className="about__image flipDownTrigger">
+            <div className="about__image fadeUp">
               <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} />
             </div>
-            <div className="about__detail flipDownTrigger">
+            <div className="about__detail fadeUp">
               <p>
                 名古屋在住のWebエンジニア兼ブロガー、「ともきゃん」です。
                 <br />
@@ -85,7 +85,7 @@ export default async function Home() {
               <p>お客様の「集客力を上げたい」「WordPressブログを収益化したい」「既存サイトのデザインを見直したい」といったご要望に対して、Webの力で解決策を提供します。</p>
               <p>Webサイト制作の現場で経験した豊富なノウハウを活かし、あなただけのサイトやブログを丁寧に作り上げます。まずはお気軽にご相談ください。</p>
             </div>
-            <div className="about__button flipDownTrigger">
+            <div className="about__button fadeUp">
               <Link href="/about/" className="c-button__link">
                 ともきゃんについて知る
               </Link>
@@ -93,58 +93,58 @@ export default async function Home() {
           </div>
         </section>
         <section className="skill l-inner">
-          <h2 className="c-heading-lv2 flipDownTrigger">
+          <h2 className="c-heading-lv2 fadeUp">
             <span className="c-heading-lv2-en">Skill</span>
             <span className="c-heading-lv2-ja">ともきゃんができること</span>
           </h2>
           <div className="skill__cont c-row">
-            <div className="skill__item col flipDownTrigger">
+            <div className="skill__item col fadeUp">
               <Image src="/img/pages/top/img_programming.jpg" alt="プログラミングのイメージ写真" width={300} height={200} />
               <h3 className="skill__item__heading c-heading-lv3">プログラミング</h3>
               <p>HTML、CSS、JavaScript、PHPを用いたWebサイト構築が得意です。特にWordPressのカスタマイズに強みを持ち、独自のテーマを作成します。お客様のご要望に合わせて、管理画面の更新機能やサイトのレイアウトを自在に調整し、ユーザビリティを向上させます。また、SEOに配慮したコーディングも行い、検索エンジンでの集客力アップをサポートします。</p>
             </div>
-            <div className="skill__item col flipDownTrigger">
+            <div className="skill__item col fadeUp">
               <Image src="/img/pages/top/img_web-tool.jpg" alt="サイト制作ツールのイメージ写真" width={300} height={200} />
               <h3 className="skill__item__heading c-heading-lv3">サイト制作ツール</h3>
               <p>Visual Studio Code、Figma、Photoshop、Illustratorを使いこなし、効率的かつ美しいデザインを実現します。さらに、CanvaやAdobe Expressといったオンラインツールも活用し、短時間で効果的なビジュアルを作成。プロジェクトの進行スピードを速めつつ、クオリティを保つことができます。各ツールの特性を活かして、ユーザーにとってわかりやすく魅力的なデザインを提供します。</p>
             </div>
-            <div className="skill__item col flipDownTrigger">
+            <div className="skill__item col fadeUp">
               <Image src="/img/pages/top/img_seo.jpg" alt="SEOのイメージ写真" width={300} height={200} />
               <h3 className="skill__item__heading c-heading-lv3">SEO</h3>
               <p>SEOに配慮したコーディングとコンテンツ制作が得意です。5年間のブログ運営で培った経験を活かし、キーワード選定や内部対策、効果的なWebライティングを行います。検索エンジンに強いサイト構築を目指し、ユーザーの検索意図に応えるコンテンツを作成し、上位表示を実現します。また、アクセス解析を通じて改善策を提案し、サイト全体のパフォーマンス向上をサポートします。</p>
             </div>
           </div>
-          <div className="skill__button flipDownTrigger">
+          <div className="skill__button fadeUp">
             <Link href="/skill/" className="c-button__link">
               ともきゃんのできることを見る
             </Link>
           </div>
         </section>
         <section className="diary l-inner">
-          <h2 className="c-heading-lv2 flipDownTrigger">
+          <h2 className="c-heading-lv2 fadeUp">
             <span className="c-heading-lv2-en">Diary</span>
             <span className="c-heading-lv2-ja">日記</span>
           </h2>
-          <div className="diary__cont flipDownTrigger">
+          <div className="diary__cont fadeUp">
             <p>
               「スタバのジンジャーブレッドラテが美味しすぎて年中飲みたい！」そんな日常の<b>“なんで？”</b>や<b>“楽しい”</b>をシェアします。SEOに縛られない、気ままなエピソードやお気に入りの話題を更新していきます。
             </p>
           </div>
-          <div className="diary__list flipDownTrigger">
+          <div className="diary__list fadeUp">
             <BlogList blog={data.contents} />
           </div>
-          <div className="diary__button flipDownTrigger">
+          <div className="diary__button fadeUp">
             <Link href="/blog/" className="c-button__link">
               ともきゃんの日記を読む
             </Link>
           </div>
         </section>
         <section className="contact l-inner">
-          <h2 className="c-heading-lv2 flipDownTrigger">
+          <h2 className="c-heading-lv2 fadeUp">
             <span className="c-heading-lv2-en">Contact</span>
             <span className="c-heading-lv2-ja">お問い合わせ</span>
           </h2>
-          <div className="contact__cont c-row flipDownTrigger">
+          <div className="contact__cont c-row fadeUp">
             <div className="contact__img col-img">
               <Image src="/img/pages/top/img_contact.jpg" alt="お問い合わせのイメージ写真" width={310} height={200} />
             </div>

@@ -13,11 +13,11 @@ export default function Blog() {
         </picture>
       </div>
       <div className="blog-area__wrap l-inner">
-        <h2 className="c-heading-lv2 flipDownTrigger --color-w">
+        <h2 className="c-heading-lv2 fadeUp --color-w">
           <span className="c-heading-lv2-en">Blog</span>
           <span className="c-heading-lv2-ja">ブログ</span>
         </h2>
-        <p className="flipDownTrigger">
+        <p className="fadeUp">
           「ともきゃんのボイトレ生活」では、
           <wbr />
           ボイトレと話し方のスキルアップに役立つ情報を
@@ -38,7 +38,7 @@ export default function Blog() {
           <wbr />
           一段上の見せ方を目指しましょう！
         </p>
-        <div className="blog-area__button flipDownTrigger">
+        <div className="blog-area__button fadeUp">
           <Link href="https://www.newagevoice.com/" target="_blank" className="c-button__link-external c-link-external --w">
             ともきゃんのボイトレ生活
           </Link>
