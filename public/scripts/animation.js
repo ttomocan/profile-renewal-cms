@@ -37,4 +37,3 @@ function fadeAnime() {
 
 // スクロールとロードイベントにリスナーを追加
 window.addEventListener('scroll', fadeAnime);
-window.addEventListener('load', fadeAnime);
