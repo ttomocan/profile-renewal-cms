@@ -4,17 +4,17 @@ export default async function Page() {
   return (
     <>
       <section className="greeting l-inner l-inner-s">
-        <h2 className="c-heading-lv2 fadeUp">
+        <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Greeting</span>
           <span className="c-heading-lv2-ja">ご挨拶</span>
         </h2>
         <div className="greeting__cont">
-          <div className="greeting__image fadeUp">
+          <div className="greeting__image fadeUpTrigger">
             <Image src="/img/pages/about/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} priority sizes="100vw" />
             <p className="greeting__name">ともきゃん</p>
             <p className="greeting__occupation">Webエンジニア / ブロガー</p>
           </div>
-          <div className="greeting__detail fadeUp">
+          <div className="greeting__detail fadeUpTrigger">
             <p>
               はじめまして、名古屋在住のWebエンジニア兼ブロガーの「ともきゃん」です。妻と息子の3人で暮らしています。
               <br />
@@ -28,11 +28,11 @@ export default async function Page() {
         </div>
       </section>
       <section className="profile l-inner l-inner-s">
-        <h2 className="c-heading-lv2 fadeUp">
+        <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Profile</span>
           <span className="c-heading-lv2-ja">プロフィール</span>
         </h2>
-        <div className="profile__cont fadeUp">
+        <div className="profile__cont fadeUpTrigger">
           <table className="c-table-01">
             <tbody>
               <tr>
@@ -76,11 +76,11 @@ export default async function Page() {
         </div>
       </section>
       <section className="license l-inner l-inner-s">
-        <h2 className="c-heading-lv2 fadeUp">
+        <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">License</span>
           <span className="c-heading-lv2-ja">資格</span>
         </h2>
-        <ul className="license__cont c-list fadeUp">
+        <ul className="license__cont c-list fadeUpTrigger">
           <li>ウェブデザイン技能検定1級</li>
           <li>色彩検定1級</li>
           <li>Webクリエイター能力認定 エキスパート</li>
@@ -90,11 +90,11 @@ export default async function Page() {
         </ul>
       </section>
       <section className="result l-inner l-inner-s">
-        <h2 className="c-heading-lv2 fadeUp">
+        <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Result</span>
           <span className="c-heading-lv2-ja">実績</span>
         </h2>
-        <ul className="result__cont c-list fadeUp">
+        <ul className="result__cont c-list fadeUpTrigger">
           <li>Webエンジニアとしての経験は9年間</li>
           <li>2社のWeb制作会社でWebエンジニアとして活動</li>
           <li>これまでに手掛けたWebサイトの構築数は150件以上</li>
