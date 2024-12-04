@@ -1,5 +1,5 @@
 import './globals.css';
-import '@/styles/pages/blog.scss';
+import '@/styles/pages/diary.scss';
 import PageTitle from '@/app/_components/PageTitle';
 
 export const metadata = {
