@@ -36,8 +36,8 @@ export default function Footer() {
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/blog/" className={`l-navigation__item ${isCurrent('/blog') ? 'current' : ''}`}>
-                Blog
+              <Link href="/diary/" className={`l-navigation__item ${isCurrent('/diary') ? 'current' : ''}`}>
+                Diary
               </Link>
             </li>
             <li className="l-navigation__item">

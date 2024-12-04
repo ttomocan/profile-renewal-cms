@@ -32,7 +32,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
     },
     {
-      url: buildUrl('/blog'),
+      url: buildUrl('/diary'),
       lastModified: now,
     },
     ...blogUrls,
