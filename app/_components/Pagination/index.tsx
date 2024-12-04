@@ -8,7 +8,7 @@ type Props = {
   basePath?: string;
 };
 
-export default function Pagination({ totalCount, current = 1, basePath = '/blog/' }: Props) {
+export default function Pagination({ totalCount, current = 1, basePath = '/diary/' }: Props) {
   const pages = Array.from({ length: Math.ceil(totalCount / BLOG_LIST_LIMIT) }, (_, i) => i + 1);
 
   return (

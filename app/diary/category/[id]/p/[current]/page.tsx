@@ -33,7 +33,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <BlogList blog={blog} />
-      <Pagination totalCount={totalCount} current={current} basePath={`/blog/category/${category.id}`} />
+      <Pagination totalCount={totalCount} current={current} basePath={`/diary/category/${category.id}`} />
     </>
   );
 }

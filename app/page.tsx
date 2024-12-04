@@ -134,7 +134,7 @@ export default async function Home() {
             <BlogList blog={data.contents} />
           </div>
           <div className="diary__button fadeUpTrigger">
-            <Link href="/blog/" className="c-button__link">
+            <Link href="/diary/" className="c-button__link">
               ともきゃんの日記を読む
             </Link>
           </div>

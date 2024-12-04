@@ -18,7 +18,7 @@ export default function BlogList({ blog }: Props) {
     <ul className={styles.list_parent}>
       {blog.map((article) => (
         <li key={article.id} className={`${styles.list}`}>
-          <Link href={`/blog/${article.id}/`} className={styles.link}>
+          <Link href={`/diary/${article.id}/`} className={styles.link}>
             {article.thumbnail ? <Image src={article.thumbnail.url} alt="" className={styles.image} width={article.thumbnail.width} height={article.thumbnail.height} /> : <Image className={styles.image} src="/img/common/ogp.png" alt="No Image" width={200} height={105} />}
             <dl className={styles.content}>
               <dt className={styles.title}>{article.title}</dt>

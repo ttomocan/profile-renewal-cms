@@ -18,8 +18,8 @@ export default function DynamicBodyClass() {
       bodyClassName = 'skill';
     } else if (pathname.includes('/contact')) {
       bodyClassName = 'contact';
-    } else if (pathname.includes('/blog')) {
-      bodyClassName = 'blog';
+    } else if (pathname.includes('/diary')) {
+      bodyClassName = 'diary';
     }
 
     // クラスの適用
