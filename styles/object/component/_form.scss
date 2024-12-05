@@ -42,10 +42,18 @@
     }
   }
 
+  &__success {
+    background-color: rgba(0, 0, 255, 0.05);
+    margin-top: 30px;
+    text-align: center;
+    padding: 20px;
+  }
+
   &__error {
+    background-color: rgba(255, 0, 0, 0.05);
     color: #ff0000;
-    display: block;
-    margin-top: 10px;
+    margin-top: 30px;
+    padding: 20px;
   }
 
   &__item {
@@ -224,6 +232,9 @@
 	================================== */
 @include mq(sp) {
   .c-form {
+    &__success {
+      text-align: left;
+    }
     &__button {
       display: flex;
       flex-flow: column;

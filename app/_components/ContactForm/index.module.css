@@ -23,7 +23,6 @@
 }
 
 .textfield {
-  border: 1px solid var(--color-border);
   padding: 8px;
   border-radius: 4px;
   line-height: 1.5;
@@ -31,7 +30,6 @@
 }
 
 .textarea {
-  border: 1px solid var(--color-border);
   padding: 8px;
   border-radius: 4px;
   line-height: 1.5;
@@ -45,30 +43,8 @@
 
 .button {
   border: none;
-  background-color: var(--color-button-primary);
   padding: 16px 40px;
   font-size: 16px;
   border-radius: 4px;
-  color: var(--color-text-unpainted);
   cursor: pointer;
-}
-
-.success {
-  background-color: rgba(0, 0, 255, 0.05);
-  margin-top: 30px;
-  text-align: center;
-  padding: 20px;
-}
-
-.error {
-  background-color: rgba(255, 0, 0, 0.05);
-  color: #f00;
-  margin-top: 30px;
-  padding: 20px;
-}
-
-@media (max-width: 640px) {
-  .success {
-    text-align: left;
-  }
 }
