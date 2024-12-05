@@ -2,7 +2,7 @@ import '@/styles/pages/top.scss';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import BlogList from '@/app/_components/DiaryList';
+import DiaryList from '@/app/_components/DiaryList';
 import { getBlogList } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 
@@ -131,7 +131,7 @@ export default async function Home() {
             </p>
           </div>
           <div className="diary__list fadeUpTrigger">
-            <BlogList blog={data.contents} />
+            <DiaryList blog={data.contents} />
           </div>
           <div className="diary__button fadeUpTrigger">
             <Link href="/diary/" className="c-button__link">

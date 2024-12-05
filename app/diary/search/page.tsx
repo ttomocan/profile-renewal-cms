@@ -1,6 +1,6 @@
 import { getBlogList } from '@/app/_libs/microcms';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
-import BlogList from '@/app/_components/DiaryList';
+import DiaryList from '@/app/_components/DiaryList';
 import SearchField from '@/app/_components/SearchField';
 
 type Props = {
@@ -19,7 +19,7 @@ export default async function Page({ searchParams }: Props) {
     <>
       <section className="l-inner">
         <SearchField />
-        <BlogList blog={blog} />
+        <DiaryList blog={blog} />
       </section>
     </>
   );

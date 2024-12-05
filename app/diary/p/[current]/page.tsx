@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getBlogList } from '@/app/_libs/microcms';
-import BlogList from '@/app/_components/DiaryList';
+import DiaryList from '@/app/_components/DiaryList';
 import Pagination from '@/app/_components/Pagination';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 
@@ -29,7 +29,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <section className="l-inner">
-        <BlogList blog={blog} />
+        <DiaryList blog={blog} />
         <Pagination totalCount={totalCount} current={current} />
       </section>
     </>
