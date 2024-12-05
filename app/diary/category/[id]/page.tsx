@@ -1,6 +1,6 @@
 import { getCategoryDetail, getBlogList } from '@/app/_libs/microcms';
 import { notFound } from 'next/navigation';
-import BlogList from '@/app/_components/BlogList';
+import BlogList from '@/app/_components/DiaryList';
 import Pagination from '@/app/_components/Pagination';
 import Category from '@/app/_components/Category';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';

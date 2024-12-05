@@ -1,6 +1,6 @@
 import { getBlogList } from '@/app/_libs/microcms';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
-import BlogList from '@/app/_components/BlogList';
+import BlogList from '@/app/_components/DiaryList';
 import SearchField from '@/app/_components/SearchField';
 
 type Props = {

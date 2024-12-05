@@ -2,7 +2,7 @@ import '@/styles/pages/top.scss';
 
 import Image from 'next/image';
 import Link from 'next/link';
-import BlogList from '@/app/_components/BlogList';
+import BlogList from '@/app/_components/DiaryList';
 import { getBlogList } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 
