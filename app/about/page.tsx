@@ -61,7 +61,7 @@ export default async function Page() {
               </tr>
               <tr>
                 <th>座右の銘</th>
-                <td>遊ぶように生きる</td>
+                <td>遊ぶように生きる（人生というゲームを、ワクワクしながらプレイすること）</td>
               </tr>
               <tr>
                 <th>ロールモデル</th>
