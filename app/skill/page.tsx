@@ -110,16 +110,15 @@ export default async function Page() {
           <span className="c-heading-lv2-en">Other</span>
           <span className="c-heading-lv2-ja">その他</span>
         </h2>
-        <ul className="other__cont c-list fadeUpTrigger">
-          <li>CSS設計（BEM・FLOCSS）</li>
-          <li>SEO対策（構造化マークアップ・内部設計・表示速度改善）</li>
-          <li>バージョン管理（Git・Subversion）</li>
-          <li>データベース言語（SQL）</li>
-          <li>Webライティング</li>
-          <li>CMSサイトの構築（WP・MT）</li>
-          <li>ヘッドレスCMS（microCMS）</li>
-          <li>バナーやサムネイル画像の作成</li>
-        </ul>
+        <div className="other__cont c-list fadeUpTrigger">
+          <div className="other__card">CSS設計（BEM・FLOCSS）</div>
+          <div className="other__card">SEO対策（構造化マークアップ・表示速度改善）</div>
+          <div className="other__card">バージョン管理（Git・Subversion）</div>
+          <div className="other__card">データベース言語（SQL）</div>
+          <div className="other__card">CMSサイトの構築（WP・MT）</div>
+          <div className="other__card">ヘッドレスCMS（microCMS）</div>
+          <div className="other__card">バナーやサムネイル画像の作成</div>
+        </div>
       </section>
     </>
   );

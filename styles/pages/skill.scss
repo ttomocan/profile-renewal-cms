@@ -45,8 +45,18 @@
 
   .other {
     &__cont {
-      display: grid;
-      place-content: center;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    &__card {
+      border: 1px solid #6a6a6a;
+      border-radius: 10px;
+      color: #6a6a6a;
+      padding: 5px 15px;
     }
   }
 
