@@ -12,7 +12,6 @@ import DynamicBodyClass from './DynamicBodyClass';
 
 export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
   const isHomePage = pathname === '/';
-  const page = await getPageData(params.slug);
 
   return {
     metadataBase: new URL('https://www.tomocan.site'),
@@ -39,7 +38,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
         default: 'ともきゃんスタイル - プロフィールサイト',
       },
       description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
-      images: [page.ogImageUrl],
+      images: ['/img/common/ogp.png?timestamp=20241128'],
     },
     alternates: {
       canonical: 'https://www.tomocan.site',
