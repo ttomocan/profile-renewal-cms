@@ -18,6 +18,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const data = await getBlogDetail(params.slug, {
     draftKey: searchParams.dk,
   });
+  const ogImageUrl = data.thumbnail?.url;
 
   return {
     title: data.title,
@@ -26,6 +27,15 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       title: data.title,
       description: data.description,
       images: [data?.thumbnail?.url ?? ''],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      site: '@t_tomocan',
+      title: data.title,
+      description: data.description,
+      images: ogImageUrl
+        ? [ogImageUrl] // microCMS で指定があればそれを使う
+        : ['/img/common/ogp.png?timestamp=20241128'], // なければデフォルト
     },
   };
 }
