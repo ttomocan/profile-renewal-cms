@@ -18,7 +18,10 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const data = await getBlogDetail(params.slug, {
     draftKey: searchParams.dk,
   });
-  const ogImageUrl = data.thumbnail?.url;
+  const baseImageUrl = data.thumbnail?.url ?? '/img/common/ogp.png';
+
+  const version = encodeURIComponent(data.revisedAt ?? data.publishedAt ?? Date.now());
+  const imageUrl = `${baseImageUrl}?v=${version}`;
 
   return {
     title: data.title,
@@ -26,16 +29,14 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     openGraph: {
       title: data.title,
       description: data.description,
-      images: [data?.thumbnail?.url ?? ''],
+      images: [imageUrl],
     },
     twitter: {
       card: 'summary_large_image',
       site: '@t_tomocan',
       title: data.title,
       description: data.description,
-      images: ogImageUrl
-        ? [ogImageUrl] // microCMS で指定があればそれを使う
-        : ['/img/common/ogp.png?timestamp=20241128'], // なければデフォルト
+      images: [imageUrl],
     },
   };
 }
