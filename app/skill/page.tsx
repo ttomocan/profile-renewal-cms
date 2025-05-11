@@ -100,7 +100,7 @@ export default async function Page() {
             <Image src="/img/pages/skill/img_chatgpt.svg" alt="ChatGPT" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="tool__detail">
-            <h3 className="programming__heading">ChatGPT・Adobe Firefly</h3>
+            <h3 className="programming__heading">ChatGPT・Perplexity・Canva AI</h3>
             <p>ブログや当サイトの文章、画像生成、ビジネスのアイデア出しに活用しています。効率的なコンテンツ作成やクリエイティブな発想を支援するAIツールとして役立てています。</p>
           </div>
         </div>
