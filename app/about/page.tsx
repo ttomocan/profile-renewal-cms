@@ -79,7 +79,7 @@ export default async function Page() {
               </tr>
               <tr>
                 <th>趣味</th>
-                <td>ブログ、読書、カラオケ</td>
+                <td>ブログ、読書、ゲーム</td>
               </tr>
               <tr>
                 <th>座右の銘</th>
