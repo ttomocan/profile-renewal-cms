@@ -1,6 +1,6 @@
 @use '../../global' as *;
 
-.c-text {
+.u-text {
   &-lead {
     font: {
       size: 28px;
@@ -8,12 +8,22 @@
     }
     letter-spacing: 0.1em;
   }
-  &-color {
-    color: $mainC;
-    &-w {
-      color: #ffffff;
+
+  $colors: (
+    'color': $mainC,
+    'color-w': '#ffffff',
+  );
+
+  @each $color-name, $color in $colors {
+    &-#{$color-name} {
+      color: $color;
     }
   }
+
+  &-link {
+    text-decoration: underline;
+  }
+
   &-note {
     font-size: 0.875em;
     margin-top: 0;
