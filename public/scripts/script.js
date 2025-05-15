@@ -1,13 +1,20 @@
-if (typeof window !== 'undefined') {
-  window.addEventListener('load', function () {
-    // Loadingアニメーション
+// 定数
+const CONSTANTS = {
+  FADE_OUT_DURATION: 300,
+  SCROLL_THRESHOLD: 300,
+  WAVE: {
+    UNIT: 80,
+    SPEED: 0.005,
+    HEIGHT: 100,
+  },
+};
+
+// ローディングアニメーション管理クラス
+class LoadingManager {
+  static init() {
     document.querySelectorAll('.loading').forEach((el) => {
-      const fadeOutDuration = 300;
-
-      el.style.transition = `opacity ${fadeOutDuration / 1000}s`;
+      el.style.transition = `opacity ${CONSTANTS.FADE_OUT_DURATION / 1000}s`;
       el.style.opacity = 0;
-
-      // フェードアウト後に非表示
       el.addEventListener(
         'transitionend',
         () => {
@@ -16,67 +23,79 @@ if (typeof window !== 'undefined') {
         { once: true }
       );
     });
+  }
+}
 
-    // 固定要素の設定
-    const header = document.querySelector('.l-header');
-    const pagetop = document.querySelector('.c-pagetop');
-    // const headerClone = header?.cloneNode(true);
-    // const headerDiv = document.createElement('div');
-    // headerDiv.className = 'scroll l-header';
-    // if (headerClone?.firstChild) headerDiv.appendChild(headerClone.firstChild);
-    const headerHeight = header?.offsetHeight || 0;
+// ヘッダー管理クラス
+class HeaderManager {
+  constructor() {
+    this.header = document.querySelector('.l-header');
+    this.pagetop = document.querySelector('.c-pagetop');
+    this.headerHeight = this.header?.offsetHeight || 0;
+    this.bindEvents();
+  }
 
-    // スクロール時
-    const updateHeaderPosition = () => {
-      const scrollTop = window.scrollY;
+  bindEvents() {
+    this.updateHeaderPosition = this.updateHeaderPosition.bind(this);
+    window.addEventListener('scroll', this.updateHeaderPosition);
+    this.updateHeaderPosition();
+  }
 
-      // ページトップボタンの表示切り替え
-      if (pagetop) {
-        pagetop.classList.toggle('show', scrollTop > 300);
+  updateHeaderPosition() {
+    const scrollTop = window.scrollY;
+    if (this.pagetop) {
+      this.pagetop.classList.toggle('show', scrollTop > CONSTANTS.SCROLL_THRESHOLD);
+      const blog = document.querySelector('.blog-area');
+      const blogPosition = blog?.getBoundingClientRect().top + window.scrollY || 0;
+      const scrollPosition = window.scrollY + window.innerHeight;
+      this.pagetop.classList.toggle('on-footer', scrollPosition >= blogPosition);
+    }
+  }
+}
 
-        const blog = document.querySelector('.blog-area');
-        const blogPosition = blog?.getBoundingClientRect().top + window.scrollY || 0;
-        const scrollPosition = window.scrollY + window.innerHeight;
+// スムーススクロール管理クラス
+class SmoothScrollManager {
+  constructor(headerHeight) {
+    this.headerHeight = headerHeight;
+    this.bindEvents();
+    this.handleInitialHash();
+  }
 
-        pagetop.classList.toggle('on-footer', scrollPosition >= blogPosition);
-      }
-    };
-    updateHeaderPosition();
-    window.addEventListener('scroll', updateHeaderPosition);
+  bindEvents() {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', this.handleSmoothScroll.bind(this));
+    });
+  }
 
-    // スムーススクロール処理
-    function handleSmoothScroll(event) {
-      const anchor = event.currentTarget;
-
-      // スムーススクロールのキャンセルを処理
-      if (!anchor.matches('.l-header__link a')) {
-        event.preventDefault();
-      }
-
-      const href = anchor.getAttribute('href');
-      const target = document.querySelector(href === '#' || href === '' ? 'html' : href);
-      const position = (target?.offsetTop || 0) - headerHeight;
-
-      window.scrollTo({
-        top: position,
-        behavior: 'smooth',
-      });
+  handleSmoothScroll(event) {
+    const anchor = event.currentTarget;
+    if (!anchor.matches('.l-header__link a')) {
+      event.preventDefault();
     }
 
-    // スムーススクロール処理を特定のアンカーリンクに適用
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener('click', handleSmoothScroll);
-    });
+    const href = anchor.getAttribute('href');
+    const target = document.querySelector(href === '#' || href === '' ? 'html' : href);
+    const position = (target?.offsetTop || 0) - this.headerHeight;
 
-    // ページ遷移時の位置
+    window.scrollTo({
+      top: position,
+      behavior: 'smooth',
+    });
+  }
+
+  handleInitialHash() {
     const hash = window.location.hash;
     if (hash) {
       const target = document.querySelector(hash);
-      const position = (target?.offsetTop || 0) - headerHeight;
+      const position = (target?.offsetTop || 0) - this.headerHeight;
       window.scrollTo({ top: position, behavior: 'smooth' });
     }
+  }
+}
 
-    // 添付ファイル
+// 添付ファイル管理クラス
+class AttachmentManager {
+  static init() {
     document.querySelectorAll('.attachment-fileinput').forEach((input) => {
       input.addEventListener('change', () => {
         const file = input.files[0];
@@ -86,94 +105,118 @@ if (typeof window !== 'undefined') {
         }
       });
     });
+  }
+}
 
-    // 波のアニメーション
-    const unit = 80;
-    const canvasList = [];
-    const colorList = [];
-    const info = { seconds: 0, t: 0 };
+// 波アニメーション管理クラス
+class WaveAnimationManager {
+  constructor() {
+    this.canvasList = [];
+    this.colorList = [];
+    this.info = { seconds: 0, t: 0 };
+    this.animationFrameId = null;
+    this.resizeTimeout = null;
+    this.init();
+  }
 
+  init() {
     const waveCanvas = document.getElementById('waveCanvas');
     if (waveCanvas) {
-      canvasList.push(waveCanvas);
-      colorList.push(['#f36b0a', '#f36b0a', '#f36b0a']);
+      this.canvasList.push(waveCanvas);
+      this.colorList.push(['#f36b0a', '#f36b0a', '#f36b0a']);
       waveCanvas.contextCache = waveCanvas.getContext('2d');
-      updateCanvasSize(waveCanvas); // 初期サイズの設定
+      this.updateCanvasSize(waveCanvas);
     }
 
-    let animationFrameId; // アニメーションのIDを保持
-    let resizeTimeout; // リサイズ処理をデバウンスするためのタイマー
-
-    // キャンバスのサイズを更新
-    function updateCanvasSize(canvas) {
-      canvas.width = document.documentElement.clientWidth;
-      canvas.height = 100;
+    if (this.canvasList.length > 0) {
+      this.update();
+      this.bindEvents();
     }
+  }
 
-    // 描画処理
-    function draw(canvas, color) {
-      const context = canvas.contextCache;
-      context.clearRect(0, 0, canvas.width, canvas.height);
-      drawWave(canvas, color[0], 1, 3, 0);
-      drawWave(canvas, color[1], 0.6, 2, 250);
-      drawWave(canvas, color[2], 0.3, 1.6, 100);
-    }
-
-    function drawWave(canvas, color, alpha, zoom, delay) {
-      const context = canvas.contextCache;
-      context.fillStyle = color;
-      context.globalAlpha = alpha;
-      context.beginPath();
-      drawSine(canvas, info.t / 0.5, zoom, delay);
-      context.lineTo(canvas.width + 10, canvas.height);
-      context.lineTo(0, canvas.height);
-      context.closePath();
-      context.fill();
-    }
-
-    function drawSine(canvas, t, zoom, delay) {
-      const context = canvas.contextCache;
-      const xAxis = Math.floor(canvas.height / 2);
-      let x = t;
-      let y = Math.sin(x) / zoom;
-      context.moveTo(0, unit * y + xAxis);
-      for (let i = 0; i <= canvas.width + 10; i += 10) {
-        x = t + (i - 0) / unit / zoom;
-        y = Math.sin(x - delay) / 3;
-        context.lineTo(i, unit * y + xAxis);
-      }
-    }
-
-    // アニメーションの更新処理
-    function update() {
-      canvasList.forEach((canvas, index) => draw(canvas, colorList[index]));
-      info.seconds += 0.005; // 波の速さをゆっくりに（元は0.014）
-      info.t = info.seconds * Math.PI;
-      animationFrameId = requestAnimationFrame(update); // アニメーションフレームを使用
-    }
-
-    // ウィンドウリサイズ時の処理
+  bindEvents() {
     window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      cancelAnimationFrame(animationFrameId); // アニメーションを一時停止
-      resizeTimeout = setTimeout(() => {
-        canvasList.forEach((canvas) => updateCanvasSize(canvas)); // キャンバスのサイズ更新
-        info.seconds = 0; // アニメーションをリセット
-        update(); // アニメーション再開
-      }, 200); // 200msのデバウンス
+      clearTimeout(this.resizeTimeout);
+      cancelAnimationFrame(this.animationFrameId);
+      this.resizeTimeout = setTimeout(() => {
+        this.canvasList.forEach((canvas) => this.updateCanvasSize(canvas));
+        this.info.seconds = 0;
+        this.update();
+      }, 200);
     });
+  }
 
-    // アニメーションの開始
-    if (canvasList.length > 0) update();
+  updateCanvasSize(canvas) {
+    canvas.width = document.documentElement.clientWidth;
+    canvas.height = CONSTANTS.WAVE.HEIGHT;
+  }
 
-    // メディアクエリ
-    function handleResize() {
-      if (window.matchMedia('(min-width: 1041px)').matches) {
-      } else if (window.matchMedia('(max-width: 1040px)').matches) {
-      }
+  draw(canvas, color) {
+    const context = canvas.contextCache;
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    this.drawWave(canvas, color[0], 1, 3, 0);
+    this.drawWave(canvas, color[1], 0.6, 2, 250);
+    this.drawWave(canvas, color[2], 0.3, 1.6, 100);
+  }
+
+  drawWave(canvas, color, alpha, zoom, delay) {
+    const context = canvas.contextCache;
+    context.fillStyle = color;
+    context.globalAlpha = alpha;
+    context.beginPath();
+    this.drawSine(canvas, this.info.t / 0.5, zoom, delay);
+    context.lineTo(canvas.width + 10, canvas.height);
+    context.lineTo(0, canvas.height);
+    context.closePath();
+    context.fill();
+  }
+
+  drawSine(canvas, t, zoom, delay) {
+    const context = canvas.contextCache;
+    const xAxis = Math.floor(canvas.height / 2);
+    let x = t;
+    let y = Math.sin(x) / zoom;
+    context.moveTo(0, CONSTANTS.WAVE.UNIT * y + xAxis);
+
+    for (let i = 0; i <= canvas.width + 10; i += 10) {
+      x = t + (i - 0) / CONSTANTS.WAVE.UNIT / zoom;
+      y = Math.sin(x - delay) / 3;
+      context.lineTo(i, CONSTANTS.WAVE.UNIT * y + xAxis);
     }
+  }
+
+  update() {
+    this.canvasList.forEach((canvas, index) => this.draw(canvas, this.colorList[index]));
+    this.info.seconds += CONSTANTS.WAVE.SPEED;
+    this.info.t = this.info.seconds * Math.PI;
+    this.animationFrameId = requestAnimationFrame(() => this.update());
+  }
+}
+
+// メディアクエリ管理クラス
+class MediaQueryManager {
+  static init() {
+    const handleResize = () => {
+      if (window.matchMedia('(min-width: 1041px)').matches) {
+        // PC用の処理
+      } else if (window.matchMedia('(max-width: 1040px)').matches) {
+        // スマートフォン用の処理
+      }
+    };
 
     handleResize();
     window.addEventListener('resize', handleResize);
+  }
+}
+
+// アプリケーション初期化
+if (typeof window !== 'undefined') {
+  window.addEventListener('load', () => {
+    LoadingManager.init();
+    const headerManager = new HeaderManager();
+    new SmoothScrollManager(headerManager.headerHeight);
+    AttachmentManager.init();
+    new WaveAnimationManager();
+    MediaQueryManager.init();
   });
 }
