@@ -23,7 +23,7 @@ export default async function Page() {
               Webの力で一歩前に進みたい方、お気軽にご相談ください。
             </p>
             <p className="greeting__detail__sign">
-              <Image src="/img/pages/about/text_sign.svg" alt="ともきゃんのサイン" width={190} height={36} />
+              <Image src="/img/pages/about/text_sign.svg" alt="ともきゃんのサイン" width={135} height={27} />
             </p>
           </div>
         </div>
