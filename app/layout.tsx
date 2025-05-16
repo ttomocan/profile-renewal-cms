@@ -33,13 +33,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       },
       type: isHomePage ? 'website' : 'article',
       description,
-      images: [
-        {
-          url: '/img/common/ogp.png',
-          width: 1200,
-          alt: 'ともきゃんスタイル',
-        },
-      ],
+      images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
       siteName: 'ともきゃんスタイル',
       locale: 'ja_JP',
     },
