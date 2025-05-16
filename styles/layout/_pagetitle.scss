@@ -1,0 +1,108 @@
+@use '../global' as *;
+
+/* ======================================= */
+/* 　タイトルエリア
+/* ======================================= */
+.pagetitle {
+  align-content: center;
+  display: grid;
+  min-height: clamp(200px, 30vw, 400px);
+  overflow: hidden;
+  place-content: center;
+  position: relative;
+  text-align: center;
+  &::before,
+  &::after {
+    background-color: rgba(0, 0, 0, 0.5);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -20vw;
+    width: 140vw;
+    height: 100%;
+    z-index: 1;
+  }
+  &::before {
+    @include animation($name: hero-before, $duration: 0.5s, $timing-function: ease, $delay: 0.4s, $fill-mode: both);
+    rotate: 45deg;
+    transform-origin: center;
+    @keyframes hero-before {
+      0% {
+        translate: -150vw -150vw;
+      }
+
+      100% {
+        translate: 0 0;
+      }
+    }
+  }
+  &::after {
+    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 0.9s, $fill-mode: both);
+    rotate: -45deg;
+    transform-origin: center;
+    @keyframes hero-after {
+      0% {
+        translate: 150vw -150vw;
+      }
+
+      100% {
+        translate: 0 0;
+      }
+    }
+  }
+  &__image {
+    inset: 0;
+    position: absolute;
+    img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      width: 100%;
+    }
+  }
+  &__en {
+    color: #ffffff;
+    font: {
+      family: 'Caveat Brush', cursive;
+      weight: 400;
+      size: clamp(50px, 6vw, 72px);
+    }
+    line-height: 1;
+    letter-spacing: 0.2em;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+  }
+  &__ja {
+    color: #ffffff;
+    font: {
+      family: 'Roboto', sans-serif;
+      weight: 700;
+      size: clamp(20px, 5vw, 25px);
+    }
+    letter-spacing: 0.1em;
+    position: relative;
+    z-index: 2;
+  }
+  span {
+    display: inline-block;
+    @include animation($name: kf-animate-chars, $duration: 0.5s, $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1), $fill-mode: both);
+    @for $i from 1 through 18 {
+      &:nth-child(#{$i}) {
+        animation-delay: ($i * 0.08s) + 1.2s;
+      }
+    }
+
+    @keyframes kf-animate-chars {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
