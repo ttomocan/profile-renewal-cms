@@ -14,7 +14,6 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
   const isHomePage = pathname === '/';
   const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
   const description = 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！';
-  const fullPath = isHomePage ? '' : pathname;
 
   return {
     metadataBase: new URL('https://www.tomocan.site'),
@@ -55,7 +54,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
     },
     alternates: {
-      canonical: pathname === '/' ? 'https://www.tomocan.site' : `https://www.tomocan.site${fullPath}`,
+      canonical: pathname === '/' ? 'https://www.tomocan.site' : `https://www.tomocan.site${pathname}`,
     },
   };
 }
