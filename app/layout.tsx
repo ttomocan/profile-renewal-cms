@@ -25,21 +25,24 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       apple: '/apple-icon.png',
     },
     openGraph: {
-      title: {
-        template: '%s | ともきゃんスタイル - プロフィールサイト',
-        default: 'ともきゃんスタイル - プロフィールサイト',
-      },
+      title: isHomePage ? 'ともきゃんスタイル - プロフィールサイト' : '%s | ともきゃんスタイル - プロフィールサイト',
       type: isHomePage ? 'website' : 'article',
       description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
-      images: ['/img/common/ogp.png'],
+      images: [
+        {
+          url: '/img/common/ogp.png',
+          width: 1200,
+          height: 630,
+          alt: 'ともきゃんスタイル',
+        },
+      ],
+      siteName: 'ともきゃんスタイル',
+      locale: 'ja_JP',
     },
     twitter: {
       card: 'summary_large_image',
       site: '@t_tomocan',
-      title: {
-        template: '%s | ともきゃんスタイル - プロフィールサイト',
-        default: 'ともきゃんスタイル - プロフィールサイト',
-      },
+      title: isHomePage ? 'ともきゃんスタイル - プロフィールサイト' : '%s | ともきゃんスタイル - プロフィールサイト',
       description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
       images: ['/img/common/ogp.png?timestamp=20241128'],
     },
