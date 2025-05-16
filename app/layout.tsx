@@ -51,7 +51,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
         default: baseTitle,
       },
       description,
-      images: ['/img/common/ogp.png?timestamp=20241128'],
+      images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
     },
     alternates: {
       canonical: 'https://www.tomocan.site',
