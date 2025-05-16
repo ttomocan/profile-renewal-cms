@@ -10,12 +10,11 @@ import Footer from './_components/Footer';
 import PageTop from './_components/PageTop';
 import DynamicBodyClass from './DynamicBodyClass';
 
-export async function generateMetadata({ params }: { params: { pathname: string } }): Promise<Metadata> {
-  const isHomePage = params.pathname === '/';
+export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
+  const isHomePage = pathname === '/';
   const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
   const description = 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！';
-
-  const canonicalPath = params.pathname === '/' ? '/' : params.pathname.endsWith('/') ? params.pathname : `${params.pathname}/`;
+  const canonicalPath = pathname === '/' ? 'https://www.tomocan.site/' : `https://www.tomocan.site${pathname.endsWith('/') ? pathname : `${pathname}/`}`;
 
   return {
     metadataBase: new URL('https://www.tomocan.site'),
