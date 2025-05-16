@@ -25,7 +25,10 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       apple: '/apple-icon.png',
     },
     openGraph: {
-      title: 'ともきゃんスタイル - プロフィールサイト',
+      title: {
+        template: '%s | ともきゃんスタイル - プロフィールサイト',
+        default: 'ともきゃんスタイル - プロフィールサイト',
+      },
       type: isHomePage ? 'website' : 'article',
       description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
       images: ['/img/common/ogp.png'],
