@@ -3,6 +3,12 @@ import PageTitle from '@/app/_components/PageTitle';
 
 export const metadata = {
   title: 'ともきゃんはこんな人',
+  openGraph: {
+    title: 'ともきゃんはこんな人',
+  },
+  twitter: {
+    title: 'ともきゃんはこんな人',
+  },
 };
 
 type Props = {

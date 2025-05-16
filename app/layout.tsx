@@ -12,27 +12,31 @@ import DynamicBodyClass from './DynamicBodyClass';
 
 export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
   const isHomePage = pathname === '/';
+  const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
+  const description = 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！';
 
   return {
     metadataBase: new URL('https://www.tomocan.site'),
     title: {
-      template: '%s | ともきゃんスタイル - プロフィールサイト',
-      default: 'ともきゃんスタイル - プロフィールサイト',
+      template: `%s | ${baseTitle}`,
+      default: baseTitle,
     },
-    description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
+    description,
     icons: {
       icon: '/favicon.ico',
       apple: '/apple-icon.png',
     },
     openGraph: {
-      title: isHomePage ? 'ともきゃんスタイル - プロフィールサイト' : '%s | ともきゃんスタイル - プロフィールサイト',
+      title: {
+        template: `%s | ${baseTitle}`,
+        default: baseTitle,
+      },
       type: isHomePage ? 'website' : 'article',
-      description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
+      description,
       images: [
         {
           url: '/img/common/ogp.png',
           width: 1200,
-          height: 630,
           alt: 'ともきゃんスタイル',
         },
       ],
@@ -42,8 +46,11 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
     twitter: {
       card: 'summary_large_image',
       site: '@t_tomocan',
-      title: isHomePage ? 'ともきゃんスタイル - プロフィールサイト' : '%s | ともきゃんスタイル - プロフィールサイト',
-      description: 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！',
+      title: {
+        template: `%s | ${baseTitle}`,
+        default: baseTitle,
+      },
+      description,
       images: ['/img/common/ogp.png?timestamp=20241128'],
     },
     alternates: {

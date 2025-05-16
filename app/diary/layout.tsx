@@ -4,6 +4,12 @@ import PageTitle from '@/app/_components/PageTitle';
 
 export const metadata = {
   title: '日記',
+  openGraph: {
+    title: 'お問い合わせ',
+  },
+  twitter: {
+    title: 'お問い合わせ',
+  },
 };
 
 type Props = {
