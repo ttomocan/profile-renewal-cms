@@ -34,7 +34,7 @@
     }
   }
 
-  .license {
+  %card-list {
     &__cont {
       display: flex;
       flex-wrap: wrap;
@@ -47,25 +47,16 @@
       border: 1px solid #6a6a6a;
       border-radius: 10px;
       color: #6a6a6a;
-      padding: 5px 15px;
+      padding: 2px 15px;
     }
   }
 
-  .result {
-    &__cont {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
+  .license {
+    @extend %card-list;
+  }
 
-    &__card {
-      border: 1px solid #6a6a6a;
-      border-radius: 10px;
-      color: #6a6a6a;
-      padding: 5px 15px;
-    }
+  .result {
+    @extend %card-list;
   }
 
   @include mq(sp) {
