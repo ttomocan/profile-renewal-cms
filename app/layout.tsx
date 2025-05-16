@@ -54,7 +54,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
     },
     alternates: {
-      canonical: 'https://www.tomocan.site',
+      canonical: pathname === '/' ? 'https://www.tomocan.site' : `https://www.tomocan.site${pathname}`,
     },
   };
 }
