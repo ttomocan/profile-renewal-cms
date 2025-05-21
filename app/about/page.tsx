@@ -97,7 +97,7 @@ export default async function Page() {
         </h2>
         <div className="result__cont c-list fadeUpTrigger">
           <div className="result__card">Webエンジニア経験9年間</div>
-          <div className="result__card">Web制作会社2社でWebエンジニアの実務経験あり</div>
+          <div className="result__card">Web制作会社2社で実務経験あり</div>
           <div className="result__card">Webサイトの構築数は200件以上</div>
           <div className="result__card">ブログの広告収益は累計100万円以上</div>
           <div className="result__card">coconalaの売上累計120万円以上</div>
