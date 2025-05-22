@@ -106,7 +106,7 @@ export default async function Home() {
             <div className="skill__item col fadeUpTrigger">
               <Image src="/img/pages/top/img_web-tool.jpg" alt="サイト制作ツールのイメージ写真" width={300} height={200} />
               <h3 className="skill__item__heading c-heading-lv3">サイト制作ツール</h3>
-              <p>Visual Studio Code、Figma、Photoshop、Illustratorを使いこなし、効率的かつ美しいデザインを実現します。さらに、CanvaやAdobe Expressといったオンラインツールも活用し、短時間で効果的なビジュアルを作成。プロジェクトの進行スピードを速めつつ、クオリティを保つことができます。各ツールの特性を活かして、ユーザーにとってわかりやすく魅力的なデザインを提供します。</p>
+              <p>Cursor、Figma、Photoshop、Illustratorを使いこなし、効率的かつ美しいデザインを実現します。さらに、CanvaやAdobe Expressといったオンラインツールも活用し、短時間で効果的なビジュアルを作成。プロジェクトの進行スピードを速めつつ、クオリティを保つことができます。各ツールの特性を活かして、ユーザーにとってわかりやすく魅力的なデザインを提供します。</p>
             </div>
             <div className="skill__item col fadeUpTrigger">
               <Image src="/img/pages/top/img_seo.jpg" alt="SEOのイメージ写真" width={300} height={200} />

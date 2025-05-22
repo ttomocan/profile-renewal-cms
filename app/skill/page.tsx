@@ -64,8 +64,8 @@ export default async function Page() {
             <Image src="/img/pages/skill/img_vscode.svg" alt="Visual Studio Code" width="100" height="100" priority sizes="100vw" />
           </div>
           <div className="tool__detail">
-            <h3 className="programming__heading">Visual Studio Code</h3>
-            <p>サイト構築時に使用するエディタ。拡張機能を活用し、開発環境を最適化して、コーディングの効率を高めています。</p>
+            <h3 className="programming__heading">Cursor・Visual Studio Code</h3>
+            <p>サイト構築時に使用するコードエディタ。AIや拡張機能を活用し、開発環境を最適化して、コーディングの効率を高めています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
