@@ -106,12 +106,12 @@ export default async function Page() {
           <span className="c-heading-lv2-ja">実績</span>
         </h2>
         <div className="result__cont c-list fadeUpTrigger">
-          <div className="result__card">Webエンジニア経験9年間</div>
+          <div className="result__card">Webエンジニア経験9年</div>
           <div className="result__card">Web制作会社2社で実務経験あり</div>
-          <div className="result__card">Webサイトの構築数は200件以上</div>
-          <div className="result__card">ブログの広告収益は累計100万円以上</div>
+          <div className="result__card">Webサイトの構築数200件以上</div>
+          <div className="result__card">ブログの広告収益累計100万円以上</div>
           <div className="result__card">coconalaの売上累計120万円以上</div>
-          <div className="result__card">ブログの月間平均PV数は1万PV以上</div>
+          <div className="result__card">ブログの月間平均PV数1万PV以上</div>
         </div>
       </section>
     </>
