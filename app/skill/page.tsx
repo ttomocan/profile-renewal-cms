@@ -7,7 +7,7 @@ export default async function Page() {
         <p className="fadeUpTrigger">
           私が実務でよく使っているスキルとサイト制作ツールを紹介します。
           <br />
-          SEO対策を考慮したコーディングはもちろん、WordPressサイトの構築・カスタマイズや、ユーザビリティを考慮したデザイン調整など、Webサイトに関する幅広いサポートを行っています。
+          SEO対策を考慮したコーディングはもちろん、WordPressサイトの構築・カスタマイズや、ユーザビリティを考慮したデザイン調整など、Webサイトに関する活動を行っています。
           <br />
           また、ブログ運営で培ったノウハウを活かしたWebライティングやコンテンツマーケティングも得意としています。お客様の「やりたいこと」を形にし、ビジネスの成長を手助けすることが信念です。
         </p>
@@ -23,7 +23,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">HTML5</h3>
-            <p>HTMLを使って、Webサイトの構造を設計し、ユーザビリティとSEOに配慮したコードを書くことが得意です。お客様のニーズに合わせた柔軟な対応が可能です。</p>
+            <p>セマンティックHTMLを使用してWebサイトの構造を設計し、アクセシビリティとSEOを意識したマークアップを心がけています。また、レスポンシブ対応やパフォーマンス最適化など、モダンな実装にも対応可能です。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -32,7 +32,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">CSS3</h3>
-            <p>普段は、スタイリングやレイアウトのコーディングにSCSSを使用しています。アニメーションの実装に強みがあり、視覚的に魅力的で動きのあるデザインを実装します。</p>
+            <p>SCSSを使用してスタイリングやレイアウトのコーディングを行います。レスポンシブデザインやアニメーションの実装に強みがあり、視覚的に魅力的で使いやすいデザインを実現します。また、BEM設計を取り入れ、保守性の高いCSSコーディングを心がけています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -41,7 +41,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">JavaScript</h3>
-            <p>JavaScriptを駆使し、jQueryやVue、Next.jsなどのフレームワークを活用して、インタラクティブで動的なWebサイトを構築します。</p>
+            <p>JavaScriptを活用し、インタラクティブな機能やアニメーションを実装します。また、Next.jsやVueなどのモダンなフレームワークを使用して、パフォーマンスの高いWebサイトを構築できます。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -50,7 +50,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">PHP</h3>
-            <p>PHPを使用し、お問い合わせフォームやWordPressの検索・更新機能など、柔軟にカスタマイズします。お客様のニーズに合わせた機能追加や最適化が可能です。</p>
+            <p>PHPを活用して、WordPressテーマやプラグインのカスタマイズを得意としています。お問い合わせフォームの作成や投稿機能の拡張、データベース連携など、お客様の要望に応じた機能開発が可能です。</p>
           </div>
         </div>
       </section>
@@ -65,7 +65,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Cursor・Visual Studio Code</h3>
-            <p>サイト構築時に使用するコードエディタ。AIや拡張機能を活用し、開発環境を最適化して、コーディングの効率を高めています。</p>
+            <p>サイト構築時のメインエディタとして使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -83,7 +83,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Photoshop・Illustrator</h3>
-            <p>コーディング時の画像書き出しや編集に使用します。デザインの微調整や最適化を行い、Webサイトに最適なビジュアルを作成します。</p>
+            <p>画像の編集や加工、ロゴやアイコンの作成など、グラフィックデザインに関する作業全般を行います。Webサイトに最適な形式での書き出しや、デザインの微調整を行い、高品質なビジュアルを提供します。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -92,7 +92,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Canva・Adobe Express</h3>
-            <p>ブログ用の画像作成に活用しています。手軽にデザインができ、視覚的に魅力あるコンテンツを作成するためのツールとして活用しています。</p>
+            <p>ブログのサムネイル画像やSNS投稿用の画像作成に活用しています。豊富なテンプレートと直感的な操作で、短時間で魅力的なビジュアルを作成しています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -101,7 +101,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">ChatGPT・Perplexity・Canva AI</h3>
-            <p>ブログや当サイトの文章、画像生成、ビジネスのアイデア出しに活用しています。効率的なコンテンツ作成やクリエイティブな発想を支援するAIツールとして役立てています。</p>
+            <p>ブログや当サイトの文章作成、画像生成、アイデア出しなど、幅広い用途で活用しています。AIの特性を活かして、より質の高いコンテンツ制作や、新しい発想を得るためのツールとして重宝しています。</p>
           </div>
         </div>
       </section>
