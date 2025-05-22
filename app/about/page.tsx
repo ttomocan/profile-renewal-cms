@@ -14,9 +14,9 @@ export default async function Page() {
           </div>
           <div className="greeting__detail fadeUpTrigger">
             <p>
-              はじめまして、名古屋在住のWebエンジニア兼ブロガーの「ともきゃん」です。妻と息子の3人で暮らしています。
+              はじめまして、名古屋在住のWebエンジニア兼ブロガーの「ともきゃん」です。妻と息子の3人家族で、毎日ゆるく暮らしています。
               <br />
-              普段はWeb制作会社で働きながら、サイト作りやデザインの改善をメインでやっています！
+              普段はWeb制作会社でWebエンジニアとして働きながら、個人でWebサイト制作やブログ運営を行っています。
               <br />
               趣味で始めたブログが思いがけず月間1万PVまで成長して、今では個人サービスの販売もやっています。
               <br />
@@ -78,6 +78,10 @@ export default async function Page() {
                 <th>人生のバイブル</th>
                 <td>NARUTO</td>
               </tr>
+              <tr>
+                <th>活動拠点</th>
+                <td>名古屋市</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -107,6 +111,7 @@ export default async function Page() {
           <div className="result__card">Webサイトの構築数は200件以上</div>
           <div className="result__card">ブログの広告収益は累計100万円以上</div>
           <div className="result__card">coconalaの売上累計120万円以上</div>
+          <div className="result__card">ブログの月間平均PV数は1万PV以上</div>
         </div>
       </section>
     </>
