@@ -18,7 +18,7 @@ export default async function Page() {
         <br />
         お問い合わせ内容を確認したら、3日以内に返信します。あなたに合った最適な解決策を一緒に考えて、次のステップに進むサポートしますので、お気軽にご相談ください！
       </p>
-      <p className="u-text-note fadeUpTrigger">ご返信には、必ずお名前とメールアドレスの記載をお願いいたします。記載がない場合、返信できないことがありますので、あらかじめご了承ください。</p>
+      <p className="u-text-note fadeUpTrigger">ご返信には、必ずお名前とメールアドレスの記載をお願いします。記載がない場合、返信できないことがありますので、あらかじめご了承ください。</p>
       <ContactForm />
     </section>
   );
