@@ -123,7 +123,7 @@ export default async function Home() {
         <section className="diary l-inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">Diary</span>
-            <span className="c-heading-lv2-ja">日記</span>
+            <span className="c-heading-lv2-ja">ともきゃん日記</span>
           </h2>
           <div className="diary__cont fadeUpTrigger">
             <p>
@@ -135,7 +135,7 @@ export default async function Home() {
           </div>
           <div className="diary__button fadeUpTrigger">
             <Link href="/diary/" className="c-button__link">
-              ともきゃんの日記を読む
+              ともきゃん日記を読む
             </Link>
           </div>
         </section>
