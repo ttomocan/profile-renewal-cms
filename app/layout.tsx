@@ -31,7 +31,6 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
         template: `%s | ${baseTitle}`,
         default: baseTitle,
       },
-      type: isHomePage ? 'website' : 'article',
       description,
       images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
       siteName: 'ともきゃんスタイル',
