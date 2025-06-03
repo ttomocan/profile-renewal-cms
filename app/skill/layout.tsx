@@ -3,13 +3,17 @@ import PageTitle from '@/app/_components/PageTitle';
 
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
+const pageTitle = 'ともきゃんができること';
 export const metadata = {
-  title: 'ともきゃんができること',
+  title: {
+    template: `%s | ${baseTitle}`,
+    default: pageTitle,
+  },
 
 	openGraph: {
 		title: {
 			template: `%s | ${baseTitle}`,
-			default: baseTitle,
+    	default: pageTitle,
 		},
 		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
 		siteName: baseTitle,
@@ -19,7 +23,7 @@ export const metadata = {
 		site: '@t_tomocan',
 		title: {
 			template: `%s | ${baseTitle}`,
-			default: baseTitle,
+    	default: pageTitle,
 		},
 		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
 	},

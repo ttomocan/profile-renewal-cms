@@ -2,16 +2,17 @@ import '@/styles/pages/about.scss';
 import PageTitle from '@/app/_components/PageTitle';
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
+const pageTitle = 'ともきゃんはこんな人';
 export const metadata = {
   title: {
     template: `%s | ${baseTitle}`,
-    default: 'ともきゃんはこんな人',
+    default: pageTitle,
   },
 
 	openGraph: {
 		title: {
 			template: `%s | ${baseTitle}`,
-    	default: 'ともきゃんはこんな人',
+    	default: pageTitle,
 		},
 		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
 		siteName: baseTitle,
@@ -21,7 +22,7 @@ export const metadata = {
 		site: '@t_tomocan',
 		title: {
 			template: `%s | ${baseTitle}`,
-			default: 'ともきゃんはこんな人',
+			default: pageTitle,
 		},
 		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
 	}
