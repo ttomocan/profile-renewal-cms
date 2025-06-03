@@ -5,7 +5,7 @@ import { getBlogList } from '@/app/_libs/microcms';
 import type { Metadata } from 'next';
 
 // メタデータの定数
-const META_TITLE = '日記';
+const META_TITLE = 'ともきゃん日記';
 const DEFAULT_OGP_IMAGE = '/img/common/ogp.png';
 
 /**
