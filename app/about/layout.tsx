@@ -3,12 +3,15 @@ import PageTitle from '@/app/_components/PageTitle';
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 export const metadata = {
-  title: 'ともきゃんはこんな人',
+  title: {
+    template: `%s | ${baseTitle}`,
+    default: 'ともきゃんはこんな人',
+  },
 
 	openGraph: {
 		title: {
 			template: `%s | ${baseTitle}`,
-			default: baseTitle,
+    	default: 'ともきゃんはこんな人',
 		},
 		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
 		siteName: baseTitle,
@@ -18,14 +21,14 @@ export const metadata = {
 		site: '@t_tomocan',
 		title: {
 			template: `%s | ${baseTitle}`,
-			default: baseTitle,
+			default: 'ともきゃんはこんな人',
 		},
 		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
-	},
+	}
 };
 
 type Props = {
-  children: React.ReactNode;
+	children: React.ReactNode;
 };
 
 export default function RootLayout({ children }: Props) {
