@@ -1,6 +1,7 @@
 import '@/styles/pages/about.scss';
 import PageTitle from '@/app/_components/PageTitle';
 
+const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 export const metadata = {
   title: 'ともきゃんはこんな人',
 
