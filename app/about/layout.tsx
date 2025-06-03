@@ -3,12 +3,23 @@ import PageTitle from '@/app/_components/PageTitle';
 
 export const metadata = {
   title: 'ともきゃんはこんな人',
-  openGraph: {
-    title: 'ともきゃんはこんな人',
-  },
-  twitter: {
-    title: 'ともきゃんはこんな人',
-  },
+
+	openGraph: {
+		title: {
+			template: `%s | ${baseTitle}`,
+			default: baseTitle,
+		},
+		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		site: '@t_tomocan',
+		title: {
+			template: `%s | ${baseTitle}`,
+			default: baseTitle,
+		},
+		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+	},
 };
 
 type Props = {
