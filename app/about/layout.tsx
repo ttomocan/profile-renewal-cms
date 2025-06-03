@@ -11,6 +11,7 @@ export const metadata = {
 			default: baseTitle,
 		},
 		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+		siteName: baseTitle,
 	},
 	twitter: {
 		card: 'summary_large_image',
