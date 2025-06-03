@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 import { getAllCategoryList, getAllBlogList } from './_libs/microcms';
 
-const buildUrl = (path?: string) => `http://localhost:3000${path ?? ''}`;
+const buildUrl = (path?: string) => `https://www.tomocan.site/${path ?? '/'}`;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogContents = await getAllBlogList();
@@ -24,11 +24,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
     },
     {
-      url: buildUrl('/members'),
+      url: buildUrl('/about'),
       lastModified: now,
     },
     {
       url: buildUrl('/contact'),
+      lastModified: now,
+    },
+    {
+      url: buildUrl('/skill'),
       lastModified: now,
     },
     {
