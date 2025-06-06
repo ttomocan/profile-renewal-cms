@@ -236,12 +236,8 @@
         a {
           color: #ffffff;
           display: inline-block;
-          font: {
-            family: 'Roboto', sans-serif;
-            size: 20px;
-            weight: 500;
-          }
-          letter-spacing: 0.2em;
+          @include font-properties(Roboto, 400, 20px);
+          letter-spacing: 0.1em;
           position: relative;
           text-decoration: none;
 
