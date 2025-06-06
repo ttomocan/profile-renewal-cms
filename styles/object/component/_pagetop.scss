@@ -51,7 +51,7 @@ $color: #fff9f4;
     color: $color;
     display: inline-block;
     @include font-properties(Roboto, 400, 15px);
-    letter-spacing: 0.075em;
+    letter-spacing: 0.05em;
     line-height: 1;
     padding-top: 20px;
     writing-mode: vertical-rl;
