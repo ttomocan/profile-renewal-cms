@@ -1,6 +1,6 @@
 @use '../../global' as *;
 
-.c-form {
+.p-form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -231,7 +231,7 @@
 /* SP：フォーム
 	================================== */
 @include mq(sp) {
-  .c-form {
+  .p-form {
     &__success {
       text-align: left;
     }

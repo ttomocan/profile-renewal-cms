@@ -23,7 +23,7 @@ export default async function Home() {
           </picture>
         </div>
 
-        <div className="hero__wrap l-inner">
+        <div className="hero__wrap inner">
           <p className="hero__en">
             <span className="char">T</span>
             <span className="char">O</span>
@@ -65,7 +65,7 @@ export default async function Home() {
         </div>
       </div>
       <main>
-        <section className="about l-inner l-inner-s">
+        <section className="about inner inner-s">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
@@ -92,7 +92,7 @@ export default async function Home() {
             </div>
           </div>
         </section>
-        <section className="skill l-inner">
+        <section className="skill inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">Skill</span>
             <span className="c-heading-lv2-ja">ともきゃんができること</span>
@@ -120,7 +120,7 @@ export default async function Home() {
             </Link>
           </div>
         </section>
-        <section className="diary l-inner">
+        <section className="diary inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">Diary</span>
             <span className="c-heading-lv2-ja">ともきゃん日記</span>
@@ -139,7 +139,7 @@ export default async function Home() {
             </Link>
           </div>
         </section>
-        <section className="contact l-inner">
+        <section className="contact inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">Contact</span>
             <span className="c-heading-lv2-ja">お問い合わせ</span>

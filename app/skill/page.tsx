@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default async function Page() {
   return (
     <>
-      <section className="first l-inner">
+      <section className="first inner">
         <p className="fadeUpTrigger">
           私が実務でよく使っているスキルとサイト制作ツールを紹介します。
           <br />
@@ -12,7 +12,7 @@ export default async function Page() {
           また、ブログ運営で培ったノウハウを活かしたWebライティングやコンテンツマーケティングも得意としています。お客様の「やりたいこと」を形にし、ビジネスの成長を手助けすることが信念です。
         </p>
       </section>
-      <section className="programming l-inner l-inner-s">
+      <section className="programming inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Programming</span>
           <span className="c-heading-lv2-ja">プログラミング言語</span>
@@ -54,7 +54,7 @@ export default async function Page() {
           </div>
         </div>
       </section>
-      <section className="tool l-inner l-inner-s">
+      <section className="tool inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Tool</span>
           <span className="c-heading-lv2-ja">サイト制作ツール</span>
@@ -105,7 +105,7 @@ export default async function Page() {
           </div>
         </div>
       </section>
-      <section className="other l-inner l-inner-s">
+      <section className="other inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Other</span>
           <span className="c-heading-lv2-ja">その他</span>

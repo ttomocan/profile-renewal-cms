@@ -1,0 +1,49 @@
+@charset "UTF-8";
+/* =============================== */
+/* ともきゃんはこんな人
+================================== */
+.about .greeting {
+  padding-bottom: 80px;
+}
+.about .greeting__cont {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.about .greeting__image {
+  flex: 0 0 150px;
+  text-align: center;
+}
+.about .greeting__image img {
+  border: 1px solid #6a6a6a;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.about .greeting__occupation {
+  font-size: 13px;
+  white-space: nowrap;
+}
+.about .greeting__detail__sign {
+  margin-top: 20px;
+  text-align: right;
+}
+.about .license__cont,
+.about .result__cont {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.about .license__card,
+.about .result__card {
+  border: 1px solid #383838;
+  border-radius: 10px;
+  color: #383838;
+  padding: 2px 15px;
+}
+@media (max-width: 767px) {
+  .about .greeting__cont {
+    flex-direction: column;
+  }
+}/*# sourceMappingURL=about.css.map */

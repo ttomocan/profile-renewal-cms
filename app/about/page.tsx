@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default async function Page() {
   return (
     <>
-      <section className="greeting l-inner l-inner-s">
+      <section className="greeting inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Greeting</span>
           <span className="c-heading-lv2-ja">ご挨拶</span>
@@ -34,7 +34,7 @@ export default async function Page() {
           </div>
         </div>
       </section>
-      <section className="profile l-inner l-inner-s">
+      <section className="profile inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Profile</span>
           <span className="c-heading-lv2-ja">プロフィール</span>
@@ -86,7 +86,7 @@ export default async function Page() {
           </table>
         </div>
       </section>
-      <section className="license l-inner l-inner-s">
+      <section className="license inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">License</span>
           <span className="c-heading-lv2-ja">資格</span>
@@ -100,7 +100,7 @@ export default async function Page() {
           <div className="license__card">ITパスポート</div>
         </div>
       </section>
-      <section className="result l-inner l-inner-s">
+      <section className="result inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Result</span>
           <span className="c-heading-lv2-ja">実績</span>

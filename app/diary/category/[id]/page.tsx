@@ -22,7 +22,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <section className="l-inner">
+      <section className="inner">
         <h2 className={styles.category_title}>
           <Category category={category} /> の一覧
         </h2>

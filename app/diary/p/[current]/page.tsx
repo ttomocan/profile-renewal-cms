@@ -28,7 +28,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <>
-      <section className="l-inner">
+      <section className="inner">
         <DiaryList blog={blog} />
         <Pagination totalCount={totalCount} current={current} />
       </section>

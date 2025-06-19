@@ -11,7 +11,7 @@ export default async function Page() {
 
   return (
     <>
-      <section className="l-inner">
+      <section className="inner">
         <SearchField />
         <DiaryList blog={blog} />
         <Pagination totalCount={totalCount} />

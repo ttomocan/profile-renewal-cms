@@ -18,7 +18,7 @@ export default function ContactForm() {
   };
   if (state.status === 'success') {
     return (
-      <p className="c-form__success">
+      <p className="p-form__success">
         お問い合わせいただき、ありがとうございます。
         <br />
         お返事まで今しばらくお待ちください。
@@ -26,55 +26,55 @@ export default function ContactForm() {
     );
   }
   return (
-    <form className="c-form" action={formAction} onSubmit={handleSubmit}>
+    <form className="p-form" action={formAction} onSubmit={handleSubmit}>
       {/* お名前 */}
-      <div className="c-form__item">
-        <div className="c-form__heading">
+      <div className="p-form__item">
+        <div className="p-form__heading">
           <label className="label" htmlFor="namae">
             お名前
           </label>
-          <span className="c-form__required">必須</span>
+          <span className="p-form__required">必須</span>
         </div>
-        <div className="c-form__input">
+        <div className="p-form__input">
           <input type="text" name="namae" id="namae" className="textfield" />
         </div>
       </div>
 
       {/* ふりがな */}
-      <div className="c-form__item">
-        <div className="c-form__heading">
+      <div className="p-form__item">
+        <div className="p-form__heading">
           <label className="label" htmlFor="furigana">
             ふりがな
           </label>
-          <span className="c-form__required">必須</span>
+          <span className="p-form__required">必須</span>
         </div>
-        <div className="c-form__input">
+        <div className="p-form__input">
           <input type="text" name="furigana" id="furigana" className="textfield" />
         </div>
       </div>
 
       {/* メールアドレス */}
-      <div className="c-form__item">
-        <div className="c-form__heading">
+      <div className="p-form__item">
+        <div className="p-form__heading">
           <label className="label" htmlFor="email">
             メールアドレス
           </label>
-          <span className="c-form__required">必須</span>
+          <span className="p-form__required">必須</span>
         </div>
-        <div className="c-form__input">
+        <div className="p-form__input">
           <input type="text" name="email" id="email" className="textfield" />
         </div>
       </div>
 
       {/* お問い合わせ項目 */}
-      <div className="c-form__item">
-        <div className="c-form__heading">
+      <div className="p-form__item">
+        <div className="p-form__heading">
           <label className="label" htmlFor="item">
             お問い合わせ項目
           </label>
-          <span className="c-form__required">必須</span>
+          <span className="p-form__required">必須</span>
         </div>
-        <div className="c-form__input">
+        <div className="p-form__input">
           <label className="checkbox">
             <input type="radio" name="item" value="Webサイト制作の依頼" />
             <span className="checkbox-text">Webサイト制作の依頼</span>
@@ -102,26 +102,26 @@ export default function ContactForm() {
       </FormItem> */}
 
       {/* お問い合わせ内容 */}
-      <div className="c-form__item">
-        <div className="c-form__heading">
+      <div className="p-form__item">
+        <div className="p-form__heading">
           <label className="label" htmlFor="message">
             お問い合わせ内容
           </label>
-          <span className="c-form__required">必須</span>
+          <span className="p-form__required">必須</span>
         </div>
-        <div className="c-form__input">
+        <div className="p-form__input">
           <textarea className="textarea" id="message" name="message" />
         </div>
       </div>
 
       {/* 添付ファイル */}
-      <div className="c-form__item">
-        <div className="c-form__heading">
+      <div className="p-form__item">
+        <div className="p-form__heading">
           <label className="label" htmlFor="file">
             添付ファイル
           </label>
         </div>
-        <div className="c-form__input">
+        <div className="p-form__input">
           <div className="attachment">
             <label>
               <input type="file" name="file" id="file" className="attachment-fileinput" />
@@ -134,10 +134,10 @@ export default function ContactForm() {
       </div>
 
       {/* エラー */}
-      {state.status === 'error' && <p className="c-form__error">{state.message}</p>}
+      {state.status === 'error' && <p className="p-form__error">{state.message}</p>}
 
       {/* ボタン */}
-      <div className="c-form__button">
+      <div className="p-form__button">
         {/* <button type="submit" className="c-button__link --return --gray">
           戻る
         </button> */}

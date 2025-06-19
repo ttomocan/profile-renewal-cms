@@ -100,3 +100,12 @@ sup {
 small {
   font-size: 0.875em;
 }
+
+.inner {
+  $block: &;
+  @extend %inner;
+  max-width: calc(#{$inner} + 40px);
+  &#{$block}-s {
+    max-width: calc(#{$innerSmall} + 40px);
+  }
+}

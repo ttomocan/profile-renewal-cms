@@ -12,7 +12,7 @@ export default function Blog() {
           <Image src="/img/common/bg_blog.jpg" alt="" width={1366} height={400} sizes="100vw" />
         </picture>
       </div>
-      <div className="blog-area__wrap l-inner">
+      <div className="blog-area__wrap inner">
         <h2 className="c-heading-lv2 fadeUpTrigger --color-w">
           <span className="c-heading-lv2-en">Blog</span>
           <span className="c-heading-lv2-ja">ブログ</span>

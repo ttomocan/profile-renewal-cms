@@ -20,7 +20,7 @@ export default function PageTitle({ title, sub }: Props) {
           <Image src={'/img/pages/' + lowerCaseTitle + '/img_hero.jpg'} alt={sub + 'のイメージ画像'} width={1366} height={400} priority sizes="100vw" />
         </picture>
       </div>
-      <div className="l-inner">
+      <div className="inner">
         <p className="pagetitle__en">{wrapWithSpan(title)}</p>
         <h1 className="pagetitle__ja">{wrapWithSpan(sub)}</h1>
       </div>

@@ -2,7 +2,7 @@ import ContactForm from '@/app/_components/ContactForm';
 
 export default async function Page() {
   return (
-    <section className="l-inner">
+    <section className="inner">
       <p className="fadeUpTrigger">
         Webサイト制作やブログ運営に関するお悩みはありませんか？
         <br />

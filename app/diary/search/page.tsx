@@ -17,7 +17,7 @@ export default async function Page({ searchParams }: Props) {
 
   return (
     <>
-      <section className="l-inner">
+      <section className="inner">
         <SearchField />
         <DiaryList blog={blog} />
       </section>

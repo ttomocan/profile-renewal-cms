@@ -7,7 +7,7 @@ export const metadata = {
 export default function NotFound() {
   return (
     <main>
-      <div className={`${styles.container} l-inner`}>
+      <div className={`${styles.container} inner`}>
         <dl>
           <dt className={styles.title}>ページが見つかりませんでした</dt>
           <dd className={styles.text}>
