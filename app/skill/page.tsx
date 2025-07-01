@@ -32,7 +32,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">CSS3</h3>
-            <p>SCSSを使用してスタイリングやレイアウトのコーディングを行います。レスポンシブデザインやアニメーションの実装に強みがあり、視覚的に魅力的で使いやすいデザインを実現します。また、BEM設計を取り入れ、保守性の高いCSSコーディングを心がけています。</p>
+            <p>SCSSを使用してスタイリングやレイアウトのコーディングを行います。レスポンシブデザインやアニメーションの実装に強みがあり、視覚的に魅力的で使いやすいデザインを実現します。また、BEM・FLOCSSを用いたCSS設計を取り入れ、保守性の高いコーディングを心がけています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -61,11 +61,11 @@ export default async function Page() {
         </h2>
         <div className="tool__item fadeUpTrigger">
           <div className="tool__image">
-            <Image src="/img/pages/skill/img_vscode.svg" alt="Visual Studio Code" width="100" height="100" priority sizes="100vw" />
+            <Image src="/img/pages/skill/img_cursor.svg" alt="Cursor" width="100" height="100" priority sizes="100vw" />
           </div>
           <div className="tool__detail">
-            <h3 className="programming__heading">Cursor・Visual Studio Code</h3>
-            <p>サイト構築時のメインエディタとして使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。</p>
+            <h3 className="programming__heading">Cursor・Visual Studio Code・Git</h3>
+            <p>サイト構築時のメインエディタとして使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。また、Gitを用いたバージョン管理も行っています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -100,8 +100,8 @@ export default async function Page() {
             <Image src="/img/pages/skill/img_chatgpt.svg" alt="ChatGPT" width={100} height={100} style={{ width: 'auto', height: '100px' }} />
           </div>
           <div className="tool__detail">
-            <h3 className="programming__heading">ChatGPT・Perplexity・Canva AI</h3>
-            <p>ブログや当サイトの文章作成、画像生成、アイデア出しなど、幅広い用途で活用しています。AIの特性を活かして、より質の高いコンテンツ制作や、新しい発想を得るためのツールとして重宝しています。</p>
+            <h3 className="programming__heading">ChatGPT・Perplexity・Gemini・NotebookLM</h3>
+            <p>ブログやサイトの文章を考えたり、画像を作ったり、アイデアを出したりと、いろんな場面でAIツールを使っています。コンテンツのクオリティアップや作業の時短、新しい発想をもらうのにもすごく便利です。</p>
           </div>
         </div>
       </section>
