@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 export default function Blog() {
   return (
-    <div className="blog-area">
-      <div className="blog-area__image">
+    <div className="l-blog-area">
+      <div className="l-blog-area__image">
         <picture>
           <source srcSet="/img/common/bg_blog_sp.webp" type="image/webp" media="(max-width: 767px)" />
           <source srcSet="/img/common/bg_blog_sp.jpg" media="(max-width: 767px)" />
@@ -12,7 +12,7 @@ export default function Blog() {
           <Image src="/img/common/bg_blog.jpg" alt="" width={1366} height={400} sizes="100vw" />
         </picture>
       </div>
-      <div className="blog-area__wrap inner">
+      <div className="l-blog-area__wrap inner">
         <h2 className="c-heading-lv2 fadeUpTrigger --color-w">
           <span className="c-heading-lv2-en">Blog</span>
           <span className="c-heading-lv2-ja">ブログ</span>
@@ -34,7 +34,7 @@ export default function Blog() {
           <wbr />
           一段上の見せ方を目指しましょう！
         </p>
-        <div className="blog-area__button fadeUpTrigger">
+        <div className="l-blog-area__button fadeUpTrigger">
           <Link href="https://www.newagevoice.com/" target="_blank" className="c-button__link-external c-link-external --w">
             ともきゃんのボイトレ生活
           </Link>
