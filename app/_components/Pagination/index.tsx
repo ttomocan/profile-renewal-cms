@@ -16,11 +16,6 @@ export default function Pagination({ totalCount, current = 1, basePath = '/diary
   const totalPages = Math.ceil(totalCount / DIARY_LIST_LIMIT);
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  // ページが1ページ以下の場合は何も表示しない
-  if (totalPages <= 1) {
-    return null;
-  }
-
   // 画面幅に応じてモバイル判定を行う
   useEffect(() => {
     const checkIfMobile = () => {
@@ -31,6 +26,11 @@ export default function Pagination({ totalCount, current = 1, basePath = '/diary
     window.addEventListener('resize', checkIfMobile);
     return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
+
+  // ページが1ページ以下の場合は何も表示しない
+  if (totalPages <= 1) {
+    return null;
+  }
 
   // モバイル表示用に表示するページ番号を絞り込む
   const getVisiblePages = () => {
