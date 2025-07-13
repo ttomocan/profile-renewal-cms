@@ -13,26 +13,16 @@ const CONSTANTS = {
 class HeaderManager {
   constructor() {
     this.header = document.querySelector('.l-header');
-    this.pagetop = document.querySelector('.c-pagetop');
     this.headerHeight = this.header?.offsetHeight || 0;
-    this.bindEvents();
+    // PageTop要素の参照を削除（Reactコンポーネントで処理するため）
   }
 
   bindEvents() {
-    this.updateHeaderPosition = this.updateHeaderPosition.bind(this);
-    window.addEventListener('scroll', this.updateHeaderPosition);
-    this.updateHeaderPosition();
+    // スクロールイベントリスナーは不要になったため削除
   }
 
   updateHeaderPosition() {
-    const scrollTop = window.scrollY;
-    if (this.pagetop) {
-      this.pagetop.classList.toggle('show', scrollTop > CONSTANTS.SCROLL_THRESHOLD);
-      const blog = document.querySelector('.blog-area');
-      const blogPosition = blog?.getBoundingClientRect().top + window.scrollY || 0;
-      const scrollPosition = window.scrollY + window.innerHeight;
-      this.pagetop.classList.toggle('on-footer', scrollPosition >= blogPosition);
-    }
+    // PageTopの処理を削除（Reactコンポーネントで処理するため）
   }
 }
 
