@@ -11,6 +11,9 @@ type Props = {
   basePath?: string;
 };
 
+// ページ番号の型定義（数値またはellipsisで始まる文字列）
+type PageItem = number | string;
+
 export default function Pagination({ totalCount, current = 1, basePath = '/diary/' }: Props) {
   const [isMobile, setIsMobile] = useState(false);
   const totalPages = Math.ceil(totalCount / DIARY_LIST_LIMIT);
@@ -44,7 +47,7 @@ export default function Pagination({ totalCount, current = 1, basePath = '/diary
       return pages;
     }
 
-    let visiblePages = [];
+    let visiblePages: number[] = [];
 
     // 常に最初のページを表示
     visiblePages.push(1);
@@ -60,7 +63,7 @@ export default function Pagination({ totalCount, current = 1, basePath = '/diary
     visiblePages.push(totalPages);
 
     // 連続していないページの間に省略記号を挿入
-    const pagesWithEllipsis = [];
+    const pagesWithEllipsis: PageItem[] = [];
     let prevPage = 0;
 
     visiblePages.forEach((page) => {
