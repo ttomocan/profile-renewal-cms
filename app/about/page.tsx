@@ -43,45 +43,49 @@ export default async function Page() {
         <div className="profile__cont fadeUpTrigger">
           <table className="c-table-01">
             <tbody>
-              <tr>
-                <th>名前</th>
-                <td>ともきゃん</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">名前</th>
+                <td className="c-profile-table__td">ともきゃん</td>
               </tr>
-              <tr>
-                <th>生年月</th>
-                <td>1994年1月生まれ</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">生年月</th>
+                <td className="c-profile-table__td">1994年1月生まれ</td>
               </tr>
-              <tr>
-                <th>出身地</th>
-                <td>愛知県</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">出身地</th>
+                <td className="c-profile-table__td">愛知県</td>
               </tr>
-              <tr>
-                <th>性別</th>
-                <td>男性</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">性別</th>
+                <td className="c-profile-table__td">男性</td>
               </tr>
-              <tr>
-                <th>職種</th>
-                <td>Webエンジニア、ブロガー</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">職種</th>
+                <td className="c-profile-table__td">Webエンジニア、ブロガー</td>
               </tr>
-              <tr>
-                <th>趣味</th>
-                <td>ブログ、読書、ゲーム</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">趣味</th>
+                <td className="c-profile-table__td">ブログ、読書、ゲーム</td>
               </tr>
-              <tr>
-                <th>座右の銘</th>
-                <td>遊ぶように生きる（人生というゲームを、ワクワクしながらプレイすること）</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">座右の銘</th>
+                <td className="c-profile-table__td">遊ぶように生きる（人生というゲームを、ワクワクしながらプレイすること）</td>
               </tr>
-              <tr>
-                <th>ロールモデル</th>
-                <td>前田裕二氏</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">ロールモデル</th>
+                <td className="c-profile-table__td">前田裕二氏</td>
               </tr>
-              <tr>
-                <th>人生のバイブル</th>
-                <td>NARUTO</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">人生のバイブル</th>
+                <td className="c-profile-table__td">NARUTO</td>
               </tr>
-              <tr>
-                <th>活動拠点</th>
-                <td>名古屋市</td>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">ブログ実績</th>
+                <td className="c-profile-table__td">月間PV 10,000+、月間収益 5万円+</td>
+              </tr>
+              <tr className="c-profile-table__row">
+                <th className="c-profile-table__th">活動拠点</th>
+                <td className="c-profile-table__td">名古屋市（リモートワーク対応可能）</td>
               </tr>
             </tbody>
           </table>

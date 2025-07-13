@@ -5,213 +5,205 @@
 /* =============================== */
 /* トップページ
 ================================== */
-.top {
-  .hero {
-    align-items: center;
-    display: flex;
-    min-height: 500px;
-    overflow: hidden;
-    padding: 20px;
+.p-top-hero {
+  align-items: center;
+  display: flex;
+  min-height: 500px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+
+  &__image {
+    background-color: #f3f3f3;
+    inset: 0;
+    position: absolute;
+    img {
+      height: 100%;
+      object-fit: cover;
+      object-position: bottom;
+      width: 100%;
+    }
+  }
+  &__wrap {
+    background: rgba(243, 107, 10, 0.7);
+    display: grid;
+    gap: 10px;
+    line-height: 1;
+    place-content: center;
     position: relative;
-    &__image {
-      background-color: #f3f3f3;
-      inset: 0;
-      position: absolute;
-      img {
-        height: 100%;
-        object-fit: cover;
-        object-position: bottom;
-        width: 100%;
+    text-align: center;
+    max-width: 1000px;
+    min-height: 340px;
+    width: 100%;
+  }
+  &__en {
+    color: #fff;
+    font-size: 0;
+    &__char {
+      @include font-properties('Caveat Brush', 400, min(8vw, 84px));
+    }
+  }
+  &__ja {
+    color: #fff;
+    font-size: 0;
+    line-height: 1.5;
+    &__char {
+      @include font-properties('Roboto', 700, min(3vw, 32px));
+    }
+  }
+  .char {
+    display: inline-block;
+    letter-spacing: 0.1em;
+    @include animation($name: kf-animate-chars, $duration: 0.5s, $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1), $fill-mode: both);
+    @for $i from 1 through 18 {
+      &:nth-child(#{$i}) {
+        animation-delay: ($i * 0.08s) + 0.2s;
       }
     }
+    @keyframes kf-animate-chars {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+// About Section
+.p-top-about {
+  &__cont {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    p {
+      text-align: center;
+    }
+  }
+  &__image {
+    border: 1px solid #6a6a6a;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+}
+
+// Skill Section
+.p-top-skill {
+  &__cont {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+  &__item-heading {
+    padding: 15px 0 10px;
+  }
+  &__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+}
+
+// Diary Section
+.p-top-diary {
+  &__cont {
+    text-align: center;
+  }
+  &__list {
+    margin-top: 30px;
+  }
+  &__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+  }
+}
+
+.p-top-contact {
+  &__button {
+    margin-top: 30px;
+  }
+}
+
+@include mq(sp) {
+  .p-top-hero {
+    align-items: center;
+    display: flex;
+    min-height: 400px;
+    padding: 20px;
     &__wrap {
       background: rgba(243, 107, 10, 0.7);
       display: grid;
       gap: 10px;
-      line-height: 1;
       place-content: center;
-      position: relative;
-      text-align: center;
       max-width: 1000px;
-      min-height: 340px;
       width: 100%;
+      min-height: 300px;
     }
     &__en {
       color: #fff;
       font-size: 0;
-      .char {
-        @include font-properties('Caveat Brush', 400, min(8vw, 84px));
+      line-height: 1;
+      &__char {
+        @include font-properties('Caveat Brush', 400, clamp(52px, 15vw, 70px));
       }
     }
     &__ja {
       color: #fff;
       font-size: 0;
-      line-height: 1.5;
-      .char {
-        @include font-properties('Roboto', 700, min(3vw, 32px));
-      }
-    }
-    .char {
-      display: inline-block;
-      letter-spacing: 0.1em;
-
-      @include animation($name: kf-animate-chars, $duration: 0.5s, $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1), $fill-mode: both);
-
-      @for $i from 1 through 18 {
-        &:nth-child(#{$i}) {
-          animation-delay: ($i * 0.08s) + 0.2s;
-        }
-      }
-
-      @keyframes kf-animate-chars {
-        0% {
-          opacity: 0;
-          transform: translateY(-50%);
-        }
-
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    }
-  }
-
-  .about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 80px;
-    img {
-      border: 1px solid #6a6a6a;
-      border-radius: 50%;
-    }
-    &__cont {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 30px;
-      p {
-        text-align: center;
-      }
-    }
-  }
-
-  .skill {
-    padding-bottom: 80px;
-    &__item {
-      &__heading {
-        padding: 15px 0 10px;
-      }
-    }
-    &__button {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
-    }
-  }
-
-  .diary {
-    padding-bottom: 80px;
-    &__item {
-      &__heading {
-        padding: 15px 0;
-      }
-    }
-    &__cont {
       text-align: center;
-    }
-    &__list {
-      margin-top: 30px;
-    }
-    &__button {
-      display: flex;
-      justify-content: center;
-      margin-top: 40px;
+      &__char {
+        @include font-properties('Roboto', 700, clamp(20px, 6vw, 30px));
+      }
     }
   }
 
-  .contact {
-    &__button {
-      margin-top: 30px;
-    }
-  }
-
-  @include mq(sp) {
-    .hero {
-      align-items: center;
-      display: flex;
-      min-height: 400px;
-      padding: 20px;
-      &__wrap {
-        background: rgba(243, 107, 10, 0.7);
-        display: grid;
-        gap: 10px;
-        place-content: center;
-        max-width: 1000px;
-        width: 100%;
-        min-height: 300px;
-      }
-      &__en {
-        color: #fff;
-        font-size: 0;
-        line-height: 1;
-        .char {
-          @include font-properties('Caveat Brush', 400, clamp(52px, 15vw, 70px));
-        }
-      }
-      &__ja {
-        color: #fff;
-        font-size: 0;
-        text-align: center;
-        .char {
-          @include font-properties('Roboto', 700, clamp(20px, 6vw, 30px));
-        }
-      }
-    }
-
-    .about {
-      &__cont {
-        p {
-          text-align: left;
-        }
-      }
-    }
-
-    .skill {
-      padding-bottom: 80px;
-      img {
-        width: 100%;
-      }
-      &__cont {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      }
-      &__button {
-        display: flex;
-        justify-content: center;
-        margin-top: 50px;
-      }
-    }
-
-    .diary {
-      &__cont {
+  .p-top-about {
+    &__cont {
+      p {
         text-align: left;
       }
     }
+  }
 
-    .contact {
-      img {
-        width: 100%;
-      }
-      &__cont {
-        gap: 20px;
-      }
-      &__button {
-        margin-top: 20px;
-        text-align: center;
-      }
+  .p-top-skill {
+    padding-bottom: 80px;
+    img {
+      width: 100%;
+    }
+    &__cont {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    &__button {
+      display: flex;
+      justify-content: center;
+      margin-top: 50px;
+    }
+  }
+
+  .p-top-diary {
+    &__cont {
+      text-align: left;
+    }
+  }
+
+  .p-top-contact {
+    img {
+      width: 100%;
+    }
+    &__cont {
+      gap: 20px;
+    }
+    &__button {
+      margin-top: 20px;
+      text-align: center;
     }
   }
 }
