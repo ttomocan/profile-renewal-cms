@@ -168,8 +168,6 @@ export default async function Page() {
           <span className="c-heading-lv2-ja">その他</span>
         </h2>
         <div className="other__cont c-list fadeUpTrigger">
-          <div className="other__card">React Hooks / Context API</div>
-          <div className="other__card">Next.js App Router</div>
           <div className="other__card">CSS設計（BEM・FLOCSS）</div>
           <div className="other__card">SEO対策（構造化マークアップ・表示速度改善）</div>
           <div className="other__card">バージョン管理（Git・GitHub）</div>
@@ -178,8 +176,7 @@ export default async function Page() {
           <div className="other__card">ヘッドレスCMS（microCMS）</div>
           <div className="other__card">バナーやサムネイル画像の作成</div>
           <div className="other__card">JSON-LD構造化データ</div>
-          <div className="other__card">Responsive Web Design</div>
-          <div className="other__card">Web Accessibility</div>
+          <div className="other__card">ウェブアクセシビリティ</div>
         </div>
       </section>
     </>
