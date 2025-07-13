@@ -17,7 +17,7 @@
     &__item {
       align-items: center;
       display: flex;
-      gap: 20px;
+      gap: 20px 30px;
       &:has(+ div) {
         margin-bottom: 20px;
       }
