@@ -9,23 +9,6 @@ const CONSTANTS = {
   },
 };
 
-// ローディングアニメーション管理クラス
-class LoadingManager {
-  static init() {
-    document.querySelectorAll('.loading').forEach((el) => {
-      el.style.transition = `opacity ${CONSTANTS.FADE_OUT_DURATION / 1000}s`;
-      el.style.opacity = 0;
-      el.addEventListener(
-        'transitionend',
-        () => {
-          el.style.display = 'none';
-        },
-        { once: true }
-      );
-    });
-  }
-}
-
 // ヘッダー管理クラス
 class HeaderManager {
   constructor() {
@@ -125,7 +108,7 @@ class WaveAnimationManager {
       this.canvasList.push(waveCanvas);
       this.colorList.push(['#f36b0a', '#f36b0a', '#f36b0a']);
       waveCanvas.contextCache = waveCanvas.getContext('2d');
-      this.updateCanvasSize(waveCanvas);
+      // キャンバスのサイズはReactコンポーネントで設定するため、ここでは設定しない
     }
 
     if (this.canvasList.length > 0) {
@@ -139,20 +122,17 @@ class WaveAnimationManager {
       clearTimeout(this.resizeTimeout);
       cancelAnimationFrame(this.animationFrameId);
       this.resizeTimeout = setTimeout(() => {
-        this.canvasList.forEach((canvas) => this.updateCanvasSize(canvas));
+        // サイズ更新はReactコンポーネントで行うため、ここでは行わない
         this.info.seconds = 0;
         this.update();
       }, 200);
     });
   }
 
-  updateCanvasSize(canvas) {
-    canvas.width = document.documentElement.clientWidth;
-    canvas.height = CONSTANTS.WAVE.HEIGHT;
-  }
-
   draw(canvas, color) {
     const context = canvas.contextCache;
+    if (!context) return;
+
     context.clearRect(0, 0, canvas.width, canvas.height);
     this.drawWave(canvas, color[0], 1, 3, 0);
     this.drawWave(canvas, color[1], 0.6, 2, 250);
@@ -161,6 +141,8 @@ class WaveAnimationManager {
 
   drawWave(canvas, color, alpha, zoom, delay) {
     const context = canvas.contextCache;
+    if (!context) return;
+
     context.fillStyle = color;
     context.globalAlpha = alpha;
     context.beginPath();
@@ -173,6 +155,8 @@ class WaveAnimationManager {
 
   drawSine(canvas, t, zoom, delay) {
     const context = canvas.contextCache;
+    if (!context) return;
+
     const xAxis = Math.floor(canvas.height / 2);
     let x = t;
     let y = Math.sin(x) / zoom;
@@ -212,7 +196,7 @@ class MediaQueryManager {
 // アプリケーション初期化
 if (typeof window !== 'undefined') {
   window.addEventListener('load', () => {
-    LoadingManager.init();
+    // LoadingManagerは削除（Reactコンポーネントで処理）
     const headerManager = new HeaderManager();
     new SmoothScrollManager(headerManager.headerHeight);
     AttachmentManager.init();

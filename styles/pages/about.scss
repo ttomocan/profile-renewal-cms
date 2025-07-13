@@ -10,6 +10,7 @@
     padding-bottom: 80px;
     &__cont {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       gap: 30px;
     }
@@ -49,14 +50,6 @@
       border-radius: 10px;
       color: #383838;
       padding: 2px 15px;
-    }
-  }
-
-  @include mq(sp) {
-    .greeting {
-      &__cont {
-        flex-direction: column;
-      }
     }
   }
 }

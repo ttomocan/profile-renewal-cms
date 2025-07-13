@@ -1,53 +1,30 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import MenuNav from '../MenuNav';
 
 export default function Header() {
-  const toggleMenuBtnState = () => {
-    const menuBtn = document.querySelector('.l-header__menuBtn');
-    if (menuBtn) {
-      if (menuBtn.classList.contains('open')) {
-        menuBtn.classList.remove('open');
-        menuBtn.classList.add('close');
-      } else {
-        menuBtn.classList.remove('close');
-        menuBtn.classList.add('open');
-      }
-    }
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const open = () => {
-    // メニューの開閉状態を切り替え
-    document.body.classList.toggle('no-scroll');
-    document.querySelector('.l-header__link')?.classList.toggle('menu-open');
-
-    // メニューボタンの状態を切り替え
-    toggleMenuBtnState();
-  };
-
+  // メニューが開いているときは背景スクロールを無効化
   useEffect(() => {
-    const links = document.querySelectorAll('.l-header__link a');
-
-    const closeMenu = () => {
-      document.querySelector('.l-header__link')?.classList.remove('menu-open');
+    if (isMenuOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
       document.body.classList.remove('no-scroll');
-      toggleMenuBtnState();
-    };
+    }
 
-    links.forEach((link) => {
-      link.addEventListener('click', closeMenu);
-    });
-
-    // クリーンアップ処理
+    // クリーンアップ関数
     return () => {
-      links.forEach((link) => {
-        link.removeEventListener('click', closeMenu);
-      });
+      document.body.classList.remove('no-scroll');
     };
-  }, []);
+  }, [isMenuOpen]);
 
   return (
     <header className="l-header">
@@ -56,15 +33,15 @@ export default function Header() {
           <Image src="/img/common/h_logo.png" alt="ともきゃんスタイルのロゴ" width={400} height={33} priority sizes="(max-width: 767px) 60vw, 400px" />
         </Link>
       </h1>
-      <div className="l-header__menuBtn">
-        <button className="l-header__menuBtn-button" aria-label="メニューを開く" onClick={open}>
+      <div className={`l-header__menuBtn ${isMenuOpen ? 'open' : 'close'}`}>
+        <button className="l-header__menuBtn-button" aria-label={isMenuOpen ? 'メニューを閉じる' : 'メニューを開く'} onClick={toggleMenu} aria-expanded={isMenuOpen}>
           <span className="top"></span>
           <span className="middle"></span>
           <span className="bottom"></span>
         </button>
       </div>
-      <div className="l-header__link">
-        <MenuNav />
+      <div className={`l-header__link ${isMenuOpen ? 'menu-open' : ''}`}>
+        <MenuNav onLinkClick={() => setIsMenuOpen(false)} />
       </div>
     </header>
   );

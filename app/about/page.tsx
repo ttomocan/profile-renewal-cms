@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import PersonJsonLd from '@/app/_components/PersonJsonLd';
 
 export default async function Page() {
   return (
@@ -26,7 +27,7 @@ export default async function Page() {
               <br />
               休日は家族の時間を大切に過ごしながら、ブログ執筆や読書を楽しみ、時にはコメダ珈琲やコワーキングスペースで作業に集中しています。
               <br />
-              Webサイトやブログを通じて新しい一歩を踏み出したい方、お気軽にご相談ください。
+              Webサイトやブログで「何か始めてみたいな」と思ったら、気軽にお声がけください！
             </p>
             <p className="greeting__detail__sign">
               <Image src="/img/pages/about/text_sign.svg" alt="ともきゃんのサイン" width={135} height={27} />
@@ -100,7 +101,7 @@ export default async function Page() {
           <div className="license__card">ITパスポート</div>
         </div>
       </section>
-      <section className="result inner inner-s">
+      <section className="result inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Result</span>
           <span className="c-heading-lv2-ja">実績</span>
@@ -114,6 +115,7 @@ export default async function Page() {
           <div className="result__card">ブログの月間平均PV数1万PV以上</div>
         </div>
       </section>
+      <PersonJsonLd />
     </>
   );
 }

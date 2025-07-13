@@ -1,3 +1,7 @@
+.pagination {
+  margin: 2rem 0;
+}
+
 .container {
   display: flex;
   gap: 10px;
@@ -5,6 +9,7 @@
   align-items: center;
   padding: 24px;
   margin-top: 24px;
+  flex-wrap: wrap;
 }
 
 .item {
@@ -16,10 +21,64 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  user-select: none;
 }
 
 .item:hover,
 .current {
   color: #ffffff;
   background-color: #f36b0a;
+}
+
+.arrow {
+  font-weight: bold;
+}
+
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ellipsisItem {
+  color: #383838;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  letter-spacing: 2px;
+  user-select: none;
+}
+
+/* タッチデバイス向けの調整 */
+@media (hover: none) {
+  .item {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    gap: 5px;
+    padding: 16px;
+    margin-top: 16px;
+  }
+
+  .item {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  /* タッチデバイス向けの調整（モバイル） */
+  @media (hover: none) {
+    .item {
+      min-width: 40px;
+      min-height: 40px;
+    }
+  }
 }

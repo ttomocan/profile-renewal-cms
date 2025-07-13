@@ -24,15 +24,50 @@ export default function DynamicBodyClass() {
 
     // クラスの適用
     const body = document.body;
+
+    // 既存のページクラスをすべて削除
+    const pageClasses = ['top', 'about', 'skill', 'contact', 'diary'];
+    pageClasses.forEach((cls) => {
+      body.classList.remove(cls);
+    });
+
+    // 新しいクラスを追加
     if (bodyClassName) {
       body.classList.add(bodyClassName);
     }
 
-    // クリーンアップ時にクラスを削除
+    // Chrome拡張機能などによって追加される可能性のある属性を削除
+    const removeUnwantedAttributes = () => {
+      const unwantedAttributes = ['cz-shortcut-listen', 'data-new-gr-c-s-check-loaded', 'data-gr-ext-installed'];
+
+      unwantedAttributes.forEach((attr) => {
+        if (body.hasAttribute(attr)) {
+          body.removeAttribute(attr);
+        }
+      });
+    };
+
+    // 初回実行
+    removeUnwantedAttributes();
+
+    // MutationObserverを使用して属性の変更を監視
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes') {
+          removeUnwantedAttributes();
+        }
+      });
+    });
+
+    // body要素の属性変更を監視
+    observer.observe(body, { attributes: true });
+
+    // クリーンアップ時にクラスを削除とオブザーバーを停止
     return () => {
       if (bodyClassName) {
         body.classList.remove(bodyClassName);
       }
+      observer.disconnect();
     };
   }, [pathname]);
 

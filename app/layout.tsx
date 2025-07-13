@@ -9,11 +9,15 @@ import Blog from './_components/Blog';
 import Footer from './_components/Footer';
 import PageTop from './_components/PageTop';
 import DynamicBodyClass from './DynamicBodyClass';
+import WebsiteJsonLd from './_components/WebsiteJsonLd';
 
 export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
   const isHomePage = pathname === '/';
   const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
   const description = 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！';
+
+  // タイムスタンプの生成をサーバーサイドに固定
+  const timestamp = Date.now();
 
   return {
     metadataBase: new URL('https://www.tomocan.site'),
@@ -33,7 +37,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       },
       type: isHomePage ? 'website' : 'article',
       description,
-      images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+      images: [`/img/common/ogp.png?timestamp=${timestamp}`],
       siteName: 'ともきゃんスタイル',
       locale: 'ja_JP',
     },
@@ -45,7 +49,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
         default: baseTitle,
       },
       description,
-      images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+      images: [`/img/common/ogp.png?timestamp=${timestamp}`],
     },
   };
 }
@@ -53,7 +57,11 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body>
+      {/*
+        suppressHydrationWarning を追加して、Chrome拡張機能などによる属性の追加によるハイドレーションミスマッチを抑制
+        これにより、cz-shortcut-listen などの属性によるエラーを防止します
+      */}
+      <body suppressHydrationWarning>
         <DynamicBodyClass />
         <Loading />
         <Header />
@@ -63,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PageTop />
         <script src="/scripts/script.js" async></script>
         <script src="/scripts/animation.js" async></script>
+        <WebsiteJsonLd />
       </body>
       {/* <GoogleAnalytics gaId="G-XXXXX" /> */}
     </html>

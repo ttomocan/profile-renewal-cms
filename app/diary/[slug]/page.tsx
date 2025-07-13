@@ -4,6 +4,7 @@ import { getBlogDetail } from '@/app/_libs/microcms';
 import Article from '@/app/_components/Article';
 import Link from 'next/link';
 import styles from './page.module.css';
+import BlogPostJsonLd from '@/app/_components/BlogPostJsonLd';
 
 type Props = {
   params: {
@@ -46,6 +47,8 @@ export default async function Page({ params, searchParams }: Props) {
     draftKey: searchParams.dk,
   }).catch(notFound);
 
+  const pageUrl = `https://www.tomocan.site/diary/${params.slug}`;
+
   return (
     <>
       <article className="inner">
@@ -56,6 +59,7 @@ export default async function Page({ params, searchParams }: Props) {
           </Link>
         </div>
       </article>
+      <BlogPostJsonLd blog={data} url={pageUrl} />
     </>
   );
 }
