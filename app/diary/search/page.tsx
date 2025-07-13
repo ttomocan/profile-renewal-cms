@@ -4,6 +4,7 @@ import { DIARY_LIST_LIMIT } from '@/app/_constants';
 import DiaryList from '@/app/_components/DiaryList';
 import DiaryListSkeleton from '@/app/_components/DiaryListSkeleton';
 import SearchField from '@/app/_components/SearchField';
+import styles from './page.module.css';
 
 type Props = {
   searchParams: {
@@ -21,7 +22,7 @@ async function SearchResults({ query }: { query: string | undefined }) {
   return (
     <>
       {query && (
-        <div className="search-info">
+        <div className={styles['search-info']}>
           <p>
             「{query}」の検索結果: {totalCount}件
           </p>
@@ -43,15 +44,6 @@ export default function Page({ searchParams }: Props) {
           <SearchResults query={query} />
         </Suspense>
       </section>
-      <style jsx>{`
-        .search-info {
-          margin: 20px 0;
-          padding: 10px 15px;
-          background-color: #f5f5f5;
-          border-radius: 6px;
-          font-size: 0.95rem;
-        }
-      `}</style>
     </>
   );
 }
