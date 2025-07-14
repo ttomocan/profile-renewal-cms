@@ -25,13 +25,13 @@
   }
 
   &-note {
+    display: block;
     font-size: 0.875em;
+    line-height: 1.5;
     margin-top: 0;
-    padding-left: 1em;
     &::before {
       content: '※';
       display: inline-block;
-      text-indent: -1em;
     }
   }
 }

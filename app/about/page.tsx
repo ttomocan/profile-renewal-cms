@@ -47,8 +47,7 @@ export default async function Page() {
                 <th className="c-profile-table__th">名前</th>
                 <td className="c-profile-table__td">
                   ともきゃん
-                  <br />
-                  ※本名＋英語の「can（できる）」を組み合わせた造語。「自分ならできる！」という意味を込めています。
+                  <span className="u-text-note">本名＋英語の「can（できる）」を組み合わせた造語。「自分ならできる！」という意味を込めました。</span>
                 </td>
               </tr>
               <tr className="c-profile-table__row">
