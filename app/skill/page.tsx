@@ -59,9 +59,7 @@ export default async function Page() {
           <span className="c-heading-lv2-en">Modern Frontend</span>
           <span className="c-heading-lv2-ja">モダンフロントエンド</span>
         </h2>
-        <p className="programming__note">
-          ※以下は主に個人開発や学習を通じて身につけたスキルです。
-        </p>
+        <p className="programming__note">※以下は主に個人開発や学習を通じて身につけたスキルです。</p>
         <div className="programming__item fadeUpTrigger">
           <div className="programming__image">
             <svg width="100" height="100" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
@@ -81,9 +79,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">Next.js</h3>
-            <p>
-              個人開発や学習を通じて、Next.jsを使ったモダンなWebアプリケーション開発に取り組んでいます。App RouterやServer Componentsなどの最新機能も積極的に試し、SEOやパフォーマンスを意識したサイト構築を実践しています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も用途に応じて使い分けています。
-            </p>
+            <p>個人開発や学習を通じて、Next.jsを使ったモダンなWebアプリケーション開発に取り組んでいます。App RouterやServer Componentsなどの最新機能も積極的に試し、SEOやパフォーマンスを意識したサイト構築を実践しています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も用途に応じて使い分けています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -97,7 +93,6 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">React</h3>
-            <p>
             <p>Reactを使用したコンポーネント設計とステート管理を得意としています。Hooksを活用した関数コンポーネントの実装や、Context APIやReduxによる状態管理など、モダンなReact開発手法を実践しています。また、パフォーマンス最適化やコンポーネントの再利用性を考慮した設計を心がけています。</p>
           </div>
         </div>
@@ -115,7 +110,6 @@ export default async function Page() {
             <h3 className="programming__heading">TypeScript</h3>
             <p>個人開発を通じて、TypeScriptによる型安全なコーディングに取り組んでいます。インターフェースやジェネリクス、型推論などの機能を活用し、可読性と保守性の高いコードを意識しています。特にReactとの併用による型定義付きコンポーネント設計に注力しており、今後も実務レベルで活用できるよう学習を続けています。</p>
           </div>
-        </div>
         </div>
       </section>
       <section className="tool inner inner-s">
