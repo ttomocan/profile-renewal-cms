@@ -16,13 +16,22 @@
     padding-bottom: 80px;
     &__note {
       padding-bottom: 30px;
+      text-align: center;
+      background: #fff6ed;
+      border: 1px solid #f36b0a;
+      border-radius: 8px;
+      color: #f36b0a;
+      font-weight: bold;
+      padding: 16px 24px 16px 24px;
+      margin-bottom: 24px;
+      font-size: 15px;
     }
     &__item {
       align-items: center;
       display: flex;
       gap: 20px 30px;
       &:has(+ div) {
-        margin-bottom: 20px;
+        margin-bottom: 30px;
       }
     }
     &__heading {
@@ -66,6 +75,39 @@
   @include mq(sp) {
     .first {
       text-align: left;
+    }
+
+    .programming,
+    .tool {
+      padding-bottom: 80px;
+      &__note {
+        padding-bottom: 30px;
+        text-align: center;
+        background: #fff6ed;
+        border: 1px solid #f36b0a;
+        border-radius: 8px;
+        color: #f36b0a;
+        font-weight: bold;
+        padding: 16px 24px 16px 24px;
+        margin-bottom: 24px;
+        font-size: 15px;
+      }
+      &__item {
+        align-items: center;
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        gap: 20px;
+      }
+      &__detail {
+        display: contents;
+      }
+      &__description {
+        grid-column: span 2;
+      }
+      &__occupation {
+        font-size: 13px;
+        white-space: nowrap;
+      }
     }
   }
 }

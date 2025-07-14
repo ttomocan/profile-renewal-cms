@@ -23,7 +23,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">HTML5</h3>
-            <p>セマンティックHTMLを使用してWebサイトの構造を設計し、アクセシビリティとSEOを意識したマークアップを心がけています。また、レスポンシブ対応やパフォーマンス最適化など、モダンな実装にも対応可能です。</p>
+            <p className="programming__description">セマンティックHTMLを使用してWebサイトの構造を設計し、アクセシビリティとSEOを意識したマークアップを心がけています。また、レスポンシブ対応やパフォーマンス最適化など、モダンな実装にも対応可能です。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -32,7 +32,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">CSS3</h3>
-            <p>SCSSを使用してスタイリングやレイアウトのコーディングを行います。レスポンシブデザインやアニメーションの実装に強みがあり、視覚的に魅力的で使いやすいデザインを実現します。また、BEM・FLOCSSを用いたCSS設計を取り入れ、保守性の高いコーディングを心がけています。</p>
+            <p className="programming__description">SCSSを使用してスタイリングやレイアウトのコーディングを行います。レスポンシブデザインやアニメーションの実装に強みがあり、視覚的に魅力的で使いやすいデザインを実現します。また、BEM・FLOCSSを用いたCSS設計を取り入れ、保守性の高いコーディングを心がけています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -41,7 +41,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">JavaScript</h3>
-            <p>JavaScriptを活用し、インタラクティブな機能やアニメーションを実装します。ES6+の最新構文やモジュールシステムを活用した効率的なコード開発を行い、パフォーマンスとユーザビリティの高いWebサイトを構築します。</p>
+            <p className="programming__description">JavaScriptを活用し、インタラクティブな機能やアニメーションを実装します。ES6+の最新構文やモジュールシステムを活用した効率的なコード開発を行い、パフォーマンスとユーザビリティの高いWebサイトを構築します。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -50,7 +50,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">PHP</h3>
-            <p>PHPを活用して、WordPressテーマやプラグインのカスタマイズを得意としています。お問い合わせフォームの作成や投稿機能の拡張、データベース連携など、お客様の要望に応じた機能開発が可能です。</p>
+            <p className="programming__description">PHPを活用して、WordPressテーマやプラグインのカスタマイズを得意としています。お問い合わせフォームの作成や投稿機能の拡張、データベース連携など、お客様の要望に応じた機能開発が可能です。</p>
           </div>
         </div>
       </section>
@@ -79,7 +79,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">Next.js</h3>
-            <p>個人開発や学習を通じて、Next.jsを使ったモダンなWebアプリケーション開発に取り組んでいます。App RouterやServer Componentsなどの最新機能も積極的に試し、SEOやパフォーマンスを意識したサイト構築を実践しています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も用途に応じて使い分けています。</p>
+            <p className="programming__description">個人開発や学習を通じて、Next.jsを使ったモダンなWebアプリケーション開発に取り組んでいます。App RouterやServer Componentsなどの最新機能も積極的に試し、SEOやパフォーマンスを意識したサイト構築を実践しています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も用途に応じて使い分けています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -93,7 +93,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">React</h3>
-            <p>Reactを使用したコンポーネント設計とステート管理を得意としています。Hooksを活用した関数コンポーネントの実装や、Context APIやReduxによる状態管理など、モダンなReact開発手法を実践しています。また、パフォーマンス最適化やコンポーネントの再利用性を考慮した設計を心がけています。</p>
+            <p className="programming__description">Reactを使用したコンポーネント設計とステート管理を得意としています。Hooksを活用した関数コンポーネントの実装や、Context APIやReduxによる状態管理など、モダンなReact開発手法を実践しています。また、パフォーマンス最適化やコンポーネントの再利用性を考慮した設計を心がけています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -108,7 +108,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">TypeScript</h3>
-            <p>個人開発を通じて、TypeScriptによる型安全なコーディングに取り組んでいます。インターフェースやジェネリクス、型推論などの機能を活用し、可読性と保守性の高いコードを意識しています。特にReactとの併用による型定義付きコンポーネント設計に注力しており、今後も実務レベルで活用できるよう学習を続けています。</p>
+            <p className="programming__description">個人開発を通じて、TypeScriptによる型安全なコーディングに取り組んでいます。インターフェースやジェネリクス、型推論などの機能を活用し、可読性と保守性の高いコードを意識しています。特にReactとの併用による型定義付きコンポーネント設計に注力しており、今後も実務レベルで活用できるよう学習を続けています。</p>
           </div>
         </div>
       </section>
@@ -123,7 +123,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Cursor・Visual Studio Code・Git</h3>
-            <p>サイト構築時のメインエディタとして使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。また、Gitを用いたバージョン管理も行っています。</p>
+            <p className="programming__description">サイト構築時のメインエディタとして使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。また、Gitを用いたバージョン管理も行っています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -132,7 +132,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Figma</h3>
-            <p>サイト構築時のデザイン作成や、サムネイル、バナー、図形の作成に活用しています。直感的な操作で効率的にビジュアルを制作し、クオリティを高めています。</p>
+            <p className="programming__description">サイト構築時のデザイン作成や、サムネイル、バナー、図形の作成に活用しています。直感的な操作で効率的にビジュアルを制作し、クオリティを高めています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -141,7 +141,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Photoshop・Illustrator</h3>
-            <p>画像の編集や加工、ロゴやアイコンの作成など、グラフィックデザインに関する作業全般を行います。Webサイトに最適な形式での書き出しや、デザインの微調整を行い、高品質なビジュアルを提供します。</p>
+            <p className="programming__description">画像の編集や加工、ロゴやアイコンの作成など、グラフィックデザインに関する作業全般を行います。Webサイトに最適な形式での書き出しや、デザインの微調整を行い、高品質なビジュアルを提供します。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -150,7 +150,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Canva・Adobe Express</h3>
-            <p>ブログのサムネイル画像やSNS投稿用の画像作成に活用しています。豊富なテンプレートと直感的な操作で、短時間で魅力的なビジュアルを作成しています。</p>
+            <p className="programming__description">ブログのサムネイル画像やSNS投稿用の画像作成に活用しています。豊富なテンプレートと直感的な操作で、短時間で魅力的なビジュアルを作成しています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -159,7 +159,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">ChatGPT・Perplexity・Gemini・NotebookLM</h3>
-            <p>ブログやサイトの文章を考えたり、画像を作ったり、アイデアを出したりと、いろんな場面でAIツールを使っています。コンテンツのクオリティアップや作業の時短、新しい発想をもらうのにもすごく便利です。</p>
+            <p className="programming__description">ブログやサイトの文章を考えたり、画像を作ったり、アイデアを出したりと、いろんな場面でAIツールを使っています。コンテンツのクオリティアップや作業の時短、新しい発想をもらうのにもすごく便利です。</p>
           </div>
         </div>
       </section>
