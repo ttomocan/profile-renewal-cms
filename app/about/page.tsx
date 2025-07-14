@@ -118,7 +118,7 @@ export default async function Page() {
           <div className="result__card">Webエンジニア経験9年</div>
           <div className="result__card">Web制作会社2社で実務経験あり</div>
           <div className="result__card">Webサイトの構築数200件以上</div>
-          <div className="result__card">ブログの広告収益累計100万円以上</div>
+          <div className="result__card">ブログの広告収益累計150万円以上</div>
           <div className="result__card">coconalaの売上累計120万円以上</div>
           <div className="result__card">ブログの月間平均PV数1万PV以上</div>
         </div>
