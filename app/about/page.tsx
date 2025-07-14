@@ -45,7 +45,11 @@ export default async function Page() {
             <tbody>
               <tr className="c-profile-table__row">
                 <th className="c-profile-table__th">名前</th>
-                <td className="c-profile-table__td">ともきゃん</td>
+                <td className="c-profile-table__td">
+                  ともきゃん
+                  <br />
+                  ※本名＋英語の「can（できる）」を組み合わせた造語。「自分ならできる！」という意味を込めています。
+                </td>
               </tr>
               <tr className="c-profile-table__row">
                 <th className="c-profile-table__th">生年月</th>
@@ -81,7 +85,7 @@ export default async function Page() {
               </tr>
               <tr className="c-profile-table__row">
                 <th className="c-profile-table__th">ブログ実績</th>
-                <td className="c-profile-table__td">月間PV 10,000+、月間収益 5万円+</td>
+                <td className="c-profile-table__td">月間PV 10,000以上、月間収益 約5万円</td>
               </tr>
               <tr className="c-profile-table__row">
                 <th className="c-profile-table__th">活動拠点</th>
