@@ -59,7 +59,7 @@ export default async function Page() {
           <span className="c-heading-lv2-en">Modern Frontend</span>
           <span className="c-heading-lv2-ja">モダンフロントエンド</span>
         </h2>
-        <p className="programming__note">※以下は主に個人開発や学習を通じて身につけたスキルです。</p>
+        <p className="programming__note fadeUpTrigger">※以下は主に個人開発や学習を通じて身につけたスキルです。</p>
         <div className="programming__item fadeUpTrigger">
           <div className="programming__image">
             <svg width="100" height="100" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
