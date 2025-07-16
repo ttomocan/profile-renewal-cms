@@ -15,14 +15,14 @@ export default function Header() {
   // メニューが開いているときは背景スクロールを無効化
   useEffect(() => {
     if (isMenuOpen) {
-      document.body.classList.add('no-scroll');
+      document.body.classList.add('header-no-scroll');
     } else {
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove('header-no-scroll');
     }
 
     // クリーンアップ関数
     return () => {
-      document.body.classList.remove('no-scroll');
+      document.body.classList.remove('header-no-scroll');
     };
   }, [isMenuOpen]);
 
@@ -33,7 +33,7 @@ export default function Header() {
           <Image src="/img/common/h_logo.png" alt="ともきゃんスタイルのロゴ" width={400} height={33} priority sizes="(max-width: 767px) 60vw, 400px" />
         </Link>
       </h1>
-      <div className={`l-header__menuBtn ${isMenuOpen ? 'open' : 'close'}`}>
+      <div className={`l-header__menuBtn ${isMenuOpen ? 'is-open' : 'is-close'}`}>
         <button className="l-header__menuBtn-button" aria-label={isMenuOpen ? 'メニューを閉じる' : 'メニューを開く'} onClick={toggleMenu} aria-expanded={isMenuOpen}>
           <span className="top"></span>
           <span className="middle"></span>

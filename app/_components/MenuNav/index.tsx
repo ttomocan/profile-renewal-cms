@@ -4,6 +4,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+type MenuNavLinkProps = React.ComponentProps<typeof Link> & {
+  onLinkClick?: () => void;
+};
+
+function MenuNavLink({ onLinkClick, ...props }: MenuNavLinkProps) {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    if (onLinkClick) onLinkClick();
+    if (props.onClick) props.onClick(e);
+  };
+  return <Link {...props} onClick={handleClick} />;
+}
+
 type MenuNavProps = {
   onLinkClick?: () => void;
 };
@@ -12,68 +24,64 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
   const pathname = usePathname();
 
   const isCurrent = (path: string) => {
+    // パスの末尾に'/'がなければ付与
+    const normalize = (p: string) => (p.endsWith('/') ? p : p + '/');
     if (path === '/') {
       return pathname === '/';
     }
-    return pathname.startsWith(path);
-  };
-
-  const handleClick = () => {
-    if (onLinkClick) {
-      onLinkClick();
-    }
+    return normalize(pathname).startsWith(normalize(path));
   };
 
   return (
     <>
       <ul className="l-header__blog">
         <li className="l-header__blog__item">
-          <Link href="https://www.newagevoice.com/" target="_blank" className="c-link-external" onClick={handleClick}>
+          <MenuNavLink href="https://www.newagevoice.com/" target="_blank" className="c-link-external" rel="noopener noreferrer" onLinkClick={onLinkClick}>
             ともきゃんのボイトレ生活
-          </Link>
+          </MenuNavLink>
         </li>
         <li className="l-header__blog__item">
-          <Link href="https://www.blogdesign-mania.com/" target="_blank" className="c-link-external" onClick={handleClick}>
+          <MenuNavLink href="https://www.blogdesign-mania.com/" target="_blank" className="c-link-external" rel="noopener noreferrer" onLinkClick={onLinkClick}>
             ブログデザインマニア
-          </Link>
+          </MenuNavLink>
         </li>
       </ul>
       <nav className="l-header__navigation" role="navigation" aria-label="グローバルナビゲーション">
         <ul className="l-navigation">
           <li className="l-navigation__item">
-            <Link href="/" className={`l-navigation__item ${isCurrent('/') ? 'current' : ''}`} onClick={handleClick}>
+            <MenuNavLink href="/" className={`c-navigation-link${isCurrent('/') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Top
-            </Link>
+            </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <Link href="/about/" className={`l-navigation__item ${isCurrent('/about') ? 'current' : ''}`} onClick={handleClick}>
+            <MenuNavLink href="/about/" className={`c-navigation-link${isCurrent('/about') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               About
-            </Link>
+            </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <Link href="/skill/" className={`l-navigation__item ${isCurrent('/skill') ? 'current' : ''}`} onClick={handleClick}>
+            <MenuNavLink href="/skill/" className={`c-navigation-link${isCurrent('/skill') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Skill
-            </Link>
+            </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <Link href="/diary/" className={`l-navigation__item ${isCurrent('/diary') ? 'current' : ''}`} onClick={handleClick}>
+            <MenuNavLink href="/diary/" className={`c-navigation-link${isCurrent('/diary') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Diary
-            </Link>
+            </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <Link href="/contact/" className={`l-navigation__item ${isCurrent('/contact') ? 'current' : ''}`} onClick={handleClick}>
+            <MenuNavLink href="/contact/" className={`c-navigation-link${isCurrent('/contact') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Contact
-            </Link>
+            </MenuNavLink>
           </li>
         </ul>
       </nav>
       <div className="l-header__sns">
-        <Link href="https://x.com/t_tomocan" className="l-header__sns__item --x" target="_blank" onClick={handleClick}>
-          <Image src="/img/common/icon_x.svg" alt="X" width={30} height={30} style={{ width: 'auto', height: '30px' }} />
-        </Link>
-        <Link href="https://coconala.com/users/1531202" className="l-header__sns__item --coconala" target="_blank" onClick={handleClick}>
-          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} style={{ width: 'auto', height: '40px' }} />
-        </Link>
+        <MenuNavLink href="https://x.com/t_tomocan" className="l-header__sns__item --x" target="_blank" rel="noopener noreferrer" onLinkClick={onLinkClick}>
+          <Image src="/img/common/icon_x.svg" alt="X" width={30} height={30} />
+        </MenuNavLink>
+        <MenuNavLink href="https://coconala.com/users/1531202" className="l-header__sns__item --coconala" target="_blank" rel="noopener noreferrer" onLinkClick={onLinkClick}>
+          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} />
+        </MenuNavLink>
       </div>
     </>
   );

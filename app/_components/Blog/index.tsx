@@ -9,7 +9,7 @@ export default function Blog() {
           <source srcSet="/img/common/bg_blog_sp.webp" type="image/webp" media="(max-width: 767px)" />
           <source srcSet="/img/common/bg_blog_sp.jpg" media="(max-width: 767px)" />
           <source srcSet="/img/common/bg_blog.webp" type="image/webp" />
-          <Image src="/img/common/bg_blog.jpg" alt="" width={1366} height={400} sizes="100vw" />
+          <img src="/img/common/bg_blog.jpg" alt="ブログエリアの背景画像" width={1366} height={400} sizes="100vw" />
         </picture>
       </div>
       <div className="l-blog-area__wrap inner">
@@ -35,10 +35,10 @@ export default function Blog() {
           一段上の見せ方を目指しましょう！
         </p>
         <div className="l-blog-area__button fadeUpTrigger">
-          <Link href="https://www.newagevoice.com/" target="_blank" className="c-button__link-external c-link-external --w">
+          <Link href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
             ともきゃんのボイトレ生活
           </Link>
-          <Link href="https://www.blogdesign-mania.com/" target="_blank" className="c-button__link-external c-link-external --w">
+          <Link href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
             ブログデザインマニア
           </Link>
         </div>

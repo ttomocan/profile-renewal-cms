@@ -63,10 +63,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/Roboto/Roboto-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Caveat_Brush/CaveatBrush-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
-      {/*
-        suppressHydrationWarning を追加して、Chrome拡張機能などによる属性の追加によるハイドレーションミスマッチを抑制
-        これにより、cz-shortcut-listen などの属性によるエラーを防止します
-      */}
       <body suppressHydrationWarning>
         <DynamicBodyClass />
         <Loading />

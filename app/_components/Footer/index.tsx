@@ -58,27 +58,27 @@ export default function Footer() {
         <div className="l-footer__navigation" role="navigation" aria-label="グローバルナビゲーション">
           <ul className="l-navigation">
             <li className="l-navigation__item">
-              <Link href="/" className={`l-navigation__item ${isCurrent('/') ? 'current' : ''}`}>
+              <Link href="/" className={`c-navigation-link ${isCurrent('/') ? 'current' : ''}`}>
                 Top
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/about/" className={`l-navigation__item ${isCurrent('/about') ? 'current' : ''}`}>
+              <Link href="/about/" className={`c-navigation-link ${isCurrent('/about') ? 'current' : ''}`}>
                 About
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/skill/" className={`l-navigation__item ${isCurrent('/skill') ? 'current' : ''}`}>
+              <Link href="/skill/" className={`c-navigation-link ${isCurrent('/skill') ? 'current' : ''}`}>
                 Skill
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/diary/" className={`l-navigation__item ${isCurrent('/diary') ? 'current' : ''}`}>
+              <Link href="/diary/" className={`c-navigation-link ${isCurrent('/diary') ? 'current' : ''}`}>
                 Diary
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/contact/" className={`l-navigation__item ${isCurrent('/contact') ? 'current' : ''}`}>
+              <Link href="/contact/" className={`c-navigation-link ${isCurrent('/contact') ? 'current' : ''}`}>
                 Contact
               </Link>
             </li>

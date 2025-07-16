@@ -323,7 +323,7 @@
       }
 
       /* メニューが閉じる時のアニメーション */
-      &.close {
+      &.is-close {
         .top {
           animation: menu_top 0.5s {
             fill-mode: forwards;
@@ -341,7 +341,7 @@
       }
 
       /* メニューが開く時のアニメーション */
-      &.open {
+      &.is-open {
         .top {
           animation: menu_top_close 0.5s {
             fill-mode: forwards;
@@ -360,7 +360,7 @@
     }
   }
 
-  .no-scroll {
+  .header-no-scroll {
     overflow: hidden;
     .l-header {
       &__link {
