@@ -19,7 +19,7 @@ export default async function Home() {
             <source srcSet="/img/pages/top/img_hero_sp.webp" type="image/webp" media="(max-width: 767px)" />
             <source srcSet="/img/pages/top/img_hero_sp.jpg" type="image/jpg" media="(max-width: 767px)" />
             <source srcSet="/img/pages/top/img_hero.webp" type="image/webp" />
-            <Image src="/img/pages/top/img_hero.jpg" alt="ノートパソコン" width={2732} height={1000} priority sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" />
+            <Image src="/img/pages/top/img_hero.jpg" alt="メインビジュアルの背景画像" width={2732} height={1000} priority sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" />
           </picture>
         </div>
 
@@ -149,7 +149,7 @@ export default async function Home() {
               <Image src="/img/pages/top/img_contact.jpg" alt="お問い合わせのイメージ写真" width={310} height={200} />
             </div>
             <div className="p-top-contact__detail col-text">
-              <p>Webサイト制作やブログのデザイン相談、その他Web関連のお悩みなど、幅広いご相談を承っております。お問い合わせフォームやココナラを通じて、お気軽にご連絡ください。丁寧なヒアリングを通じて、お客様のご要望に沿ったご提案をさせていただきます。</p>
+              <p>Webサイト制作やブログのデザイン、Webに関するさまざまなお悩み・ご相談を受け付けています。お問い合わせフォームやココナラから、どうぞお気軽にご連絡ください。丁寧なヒアリングを行い、ご希望に合わせた最適なご提案をいたします。</p>
               <div className="p-top-contact__button">
                 <Link href="/contact/" className="c-button__link">
                   ともきゃんに相談する
