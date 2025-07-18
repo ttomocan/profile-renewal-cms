@@ -1,45 +1,34 @@
 import { MetadataRoute } from 'next';
 import { getAllCategoryList, getAllBlogList } from './_libs/microcms';
 
-const buildUrl = (path?: string) => `https://www.tomocan.site/${path ?? '/'}`;
+const BASE_URL = 'https://www.tomocan.site';
+
+const buildUrl = (path: string = '/') => {
+  if (path === '/' || path === '') return `${BASE_URL}/`;
+  return `${BASE_URL}/${path.replace(/^\/+/, '')}`;
+};
+
+const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const blogContents = await getAllBlogList();
-  const categoryContents = await getAllCategoryList();
-
-  const blogUrls: MetadataRoute.Sitemap = blogContents.map((content) => ({
-    url: buildUrl(`/diary/${content.id}`),
-    lastModified: content.revisedAt,
-  }));
-  const categoryUrls: MetadataRoute.Sitemap = categoryContents.map((content) => ({
-    url: buildUrl(`/diary/category/${content.id}`),
-    lastModified: content.revisedAt,
-  }));
+  const [blogContents, categoryContents] = await Promise.all([getAllBlogList(), getAllCategoryList()]);
 
   const now = new Date();
 
-  return [
-    {
-      url: buildUrl(),
-      lastModified: now,
-    },
-    {
-      url: buildUrl('about'),
-      lastModified: now,
-    },
-    {
-      url: buildUrl('contact'),
-      lastModified: now,
-    },
-    {
-      url: buildUrl('skill'),
-      lastModified: now,
-    },
-    {
-      url: buildUrl('diary'),
-      lastModified: now,
-    },
-    ...blogUrls,
-    ...categoryUrls,
-  ];
+  const staticUrls: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
+    url: buildUrl(path),
+    lastModified: now,
+  }));
+
+  const blogUrls: MetadataRoute.Sitemap = blogContents.map(({ id, revisedAt }) => ({
+    url: buildUrl(`diary/${id}`),
+    lastModified: revisedAt,
+  }));
+
+  const categoryUrls: MetadataRoute.Sitemap = categoryContents.map(({ id, revisedAt }) => ({
+    url: buildUrl(`diary/category/${id}`),
+    lastModified: revisedAt,
+  }));
+
+  return [...staticUrls, ...blogUrls, ...categoryUrls];
 }
