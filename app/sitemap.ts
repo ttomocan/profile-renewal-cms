@@ -24,19 +24,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
     },
     {
-      url: buildUrl('/about'),
+      url: buildUrl('about'),
       lastModified: now,
     },
     {
-      url: buildUrl('/contact'),
+      url: buildUrl('contact'),
       lastModified: now,
     },
     {
-      url: buildUrl('/skill'),
+      url: buildUrl('skill'),
       lastModified: now,
     },
     {
-      url: buildUrl('/diary'),
+      url: buildUrl('diary'),
       lastModified: now,
     },
     ...blogUrls,
