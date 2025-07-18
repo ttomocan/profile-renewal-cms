@@ -1,0 +1,59 @@
+.categoryFilter {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-radius: 4px;
+}
+
+.label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.selectWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.select {
+  padding: 0.5rem 1rem;
+  padding-right: 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  min-width: 200px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.select:focus {
+  outline: none;
+}
+
+.selectIcon {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: #666;
+}
+
+@media (max-width: 768px) {
+  .categoryFilter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .select {
+    min-width: auto;
+  }
+}

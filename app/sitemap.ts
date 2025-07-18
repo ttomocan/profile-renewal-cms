@@ -5,7 +5,7 @@ const BASE_URL = 'https://www.tomocan.site';
 
 const buildUrl = (path: string = '/') => {
   if (path === '/' || path === '') return `${BASE_URL}/`;
-  return `${BASE_URL}/${path.replace(/^\/+/, '')}`;
+  return `${BASE_URL}/${path.replace(/^\/+/, '')}/`;
 };
 
 const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary'];

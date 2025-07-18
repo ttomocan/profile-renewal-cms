@@ -22,15 +22,22 @@ function SearchFieldComponent({ defaultValue }: SearchFieldComponentProps) {
     if (q instanceof HTMLInputElement) {
       const query = q.value.trim();
 
-      // 空の検索クエリの場合は日記一覧ページにリダイレクト
-      if (!query) {
-        router.push('/diary/');
-        return;
+      const params = new URLSearchParams();
+
+      // 検索クエリがある場合は追加
+      if (query) {
+        params.set('q', query);
       }
 
-      const params = new URLSearchParams();
-      params.set('q', query);
-      router.push(`/diary/search?${params.toString()}`);
+      // 現在のカテゴリー絞り込みを保持
+      const currentCategory = searchParams.get('category');
+      if (currentCategory) {
+        params.set('category', currentCategory);
+      }
+
+      const queryString = params.toString();
+      const url = queryString ? `/diary/?${queryString}` : '/diary/';
+      router.push(url);
     }
   };
 
