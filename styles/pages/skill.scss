@@ -37,6 +37,7 @@
     &__heading {
       font-size: 18px;
       font-weight: 500;
+      line-height: 1.7;
     }
     &__image {
       flex: 0 0 100px;
@@ -96,7 +97,7 @@
         align-items: center;
         display: grid;
         grid-template-columns: 100px 1fr;
-        gap: 20px;
+        gap: 15px 20px;
       }
       &__detail {
         display: contents;
