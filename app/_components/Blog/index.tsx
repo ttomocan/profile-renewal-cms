@@ -17,7 +17,9 @@ export default function Blog() {
           <span className="c-heading-lv2-ja">ブログ</span>
         </h2>
         <p className="fadeUpTrigger">
-          「ともきゃんのボイトレ生活」では、ボイストレーニングや話し方の上達に役立つ情報をわかりやすく発信しています。
+          「ともきゃんのボイトレ生活」では、
+          <br className="u-pc-only" />
+          ボイストレーニングや話し方の上達に役立つ情報をわかりやすく発信しています。
           <br />
           実際の体験や学びをもとに、あなたのスキルアップを全力でサポート！
           <br />
