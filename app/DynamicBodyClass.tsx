@@ -50,6 +50,12 @@ export default function DynamicBodyClass() {
     // 初回実行
     removeUnwantedAttributes();
 
+    // アニメーションクラスの初期化
+    // fadeUpクラスがすでに付いていたら削除（サーバーとクライアントの不一致を防ぐ）
+    document.querySelectorAll('.fadeUp').forEach((el) => {
+      el.classList.remove('fadeUp');
+    });
+
     // MutationObserverを使用して属性の変更を監視
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
