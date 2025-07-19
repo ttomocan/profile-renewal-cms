@@ -79,7 +79,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">Next.js</h3>
-            <p className="programming__description">個人開発や学習を通じて、Next.jsを使ったモダンなWebアプリケーション開発に取り組んでいます。App RouterやServer Componentsなどの最新機能も積極的に試し、SEOやパフォーマンスを意識したサイト構築を実践しています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も用途に応じて使い分けています。</p>
+            <p className="programming__description">当サイトも含め、Next.jsを用いたモダンなWebアプリケーションの開発経験があります。App RouterやServer Componentsなどの最新機能を積極的に活用し、SEOやパフォーマンスを重視した設計・実装を行っています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も要件に応じて適切に使い分けています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -93,7 +93,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">React</h3>
-            <p className="programming__description">Reactを使用したコンポーネント設計とステート管理を得意としています。Hooksを活用した関数コンポーネントの実装や、Context APIやReduxによる状態管理など、モダンなReact開発手法を実践しています。また、パフォーマンス最適化やコンポーネントの再利用性を考慮した設計を心がけています。</p>
+            <p className="programming__description">Reactによるコンポーネント設計や状態管理（Hooks、Context APIなど）を得意としています。関数コンポーネントを中心に、再利用性や保守性を意識した設計・実装を行い、パフォーマンス最適化にも配慮しています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -108,7 +108,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">TypeScript</h3>
-            <p className="programming__description">個人開発を通じて、TypeScriptによる型安全なコーディングに取り組んでいます。インターフェースやジェネリクス、型推論などの機能を活用し、可読性と保守性の高いコードを意識しています。特にReactとの併用による型定義付きコンポーネント設計に注力しており、今後も実務レベルで活用できるよう学習を続けています。</p>
+            <p className="programming__description">TypeScriptによる型安全なコーディングを実践しています。PropsやStateの型定義、ユニオン型・ジェネリクス・型推論などを活用し、エラーの早期発見や保守性の向上に努めています。特にNext.jsやReactとの組み合わせで、型定義を意識したコンポーネント設計・実装を行い、実運用に耐えうる堅牢なコードを目指しています。</p>
           </div>
         </div>
       </section>
@@ -159,7 +159,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">ChatGPT・Perplexity・Gemini・NotebookLM</h3>
-            <p className="programming__description">ブログやサイトの文章を考えたり、画像を作ったり、アイデアを出したりと、いろんな場面でAIツールを使っています。コンテンツのクオリティアップや作業の時短、新しい発想をもらうのにもすごく便利です。</p>
+            <p className="programming__description">ChatGPTやPerplexity、Gemini、NotebookLMなどのAIツールを活用し、Webサイトやブログのテキスト作成、画像生成、アイデア出しなど幅広い業務を効率化しています。AIの特性を活かしてコンテンツの品質向上や作業時間の短縮、新しい発想の提案など、ポートフォリオ制作にも積極的に取り入れています。</p>
           </div>
         </div>
       </section>

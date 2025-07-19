@@ -17,15 +17,13 @@ export default function Blog() {
           <span className="c-heading-lv2-ja">ブログ</span>
         </h2>
         <p className="fadeUpTrigger">
-          「ともきゃんのボイトレ生活」では、
+          私が運営する2つのブログを紹介します。
           <br className="u-pc-only" />
-          ボイストレーニングや話し方の上達に役立つ情報をわかりやすく発信しています。
+          「ともきゃんのボイトレ生活」では、ボイストレーニングや話し方に関する実践的なノウハウを発信し、初心者から経験者まで幅広くサポートしています。
           <br />
-          実際の体験や学びをもとに、あなたのスキルアップを全力でサポート！
+          「ブログデザインマニア」では、Web制作現場で培った知識をもとに、ブログ運営やデザインのコツ、収益化のポイントなどを詳しく解説しています。
           <br />
-          「ブログデザインマニア」では、現場で培ったブログ制作ノウハウやデザインのポイントを詳しく解説。
-          <br />
-          あなたのブログをより魅力的に進化させるヒントをお届けします。
+          どちらも実体験に基づいた情報をわかりやすくまとめており、読者の課題解決やスキルアップに貢献できる内容を心がけています。
         </p>
         <div className="l-blog-area__button fadeUpTrigger">
           <Link href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
