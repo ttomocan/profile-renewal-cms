@@ -32,12 +32,12 @@ export default function Blog() {
           読者の課題解決やスキルアップに貢献できる内容を心がけています。
         </p>
         <div className="l-blog-area__button fadeUpTrigger">
-          <Link href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
+          <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
             ともきゃんのボイトレ生活
-          </Link>
-          <Link href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
+          </a>
+          <a href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
             ブログデザインマニア
-          </Link>
+          </a>
         </div>
       </div>
     </div>
