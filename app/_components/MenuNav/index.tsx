@@ -36,14 +36,14 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
     <>
       <ul className="l-header__blog">
         <li className="l-header__blog__item">
-          <MenuNavLink href="https://www.newagevoice.com/" target="_blank" className="c-link-external" rel="noopener noreferrer" onLinkClick={onLinkClick}>
+          <a href="https://www.newagevoice.com/" target="_blank" className="c-link-external" rel="noopener noreferrer">
             ともきゃんのボイトレ生活
-          </MenuNavLink>
+          </a>
         </li>
         <li className="l-header__blog__item">
-          <MenuNavLink href="https://www.blogdesign-mania.com/" target="_blank" className="c-link-external" rel="noopener noreferrer" onLinkClick={onLinkClick}>
+          <a href="https://www.blogdesign-mania.com/" target="_blank" className="c-link-external" rel="noopener noreferrer">
             ブログデザインマニア
-          </MenuNavLink>
+          </a>
         </li>
       </ul>
       <nav className="l-header__navigation" role="navigation" aria-label="グローバルナビゲーション">
