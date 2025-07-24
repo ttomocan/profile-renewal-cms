@@ -14,6 +14,15 @@ class HeaderManager {
   constructor() {
     this.header = document.querySelector('.l-header');
     this.headerHeight = this.header?.offsetHeight || 0;
+    // PageTop要素の参照を削除（Reactコンポーネントで処理するため）
+  }
+
+  bindEvents() {
+    // スクロールイベントリスナーは不要になったため削除
+  }
+
+  updateHeaderPosition() {
+    // PageTopの処理を削除（Reactコンポーネントで処理するため）
   }
 }
 
@@ -86,11 +95,10 @@ class WaveAnimationManager {
   init() {
     const waveCanvas = document.getElementById('waveCanvas');
     if (waveCanvas) {
-      const canvas = waveCanvas;
-      const colors = ['#f36b0a', '#f36b0a', '#f36b0a'];
-      this.canvasList.push(canvas);
-      this.colorList.push(colors);
+      this.canvasList.push(waveCanvas);
+      this.colorList.push(['#f36b0a', '#f36b0a', '#f36b0a']);
       waveCanvas.contextCache = waveCanvas.getContext('2d');
+      // キャンバスのサイズはReactコンポーネントで設定するため、ここでは設定しない
     }
 
     if (this.canvasList.length > 0) {
@@ -104,6 +112,7 @@ class WaveAnimationManager {
       clearTimeout(this.resizeTimeout);
       cancelAnimationFrame(this.animationFrameId);
       this.resizeTimeout = setTimeout(() => {
+        // サイズ更新はReactコンポーネントで行うため、ここでは行わない
         this.info.seconds = 0;
         this.update();
       }, 200);
@@ -176,8 +185,8 @@ class MediaQueryManager {
 
 // アプリケーション初期化
 if (typeof window !== 'undefined') {
-  // DOMContentLoadedを待ってからスクリプトを実行
-  document.addEventListener('DOMContentLoaded', () => {
+  window.addEventListener('load', () => {
+    // LoadingManagerは削除（Reactコンポーネントで処理）
     const headerManager = new HeaderManager();
     new SmoothScrollManager(headerManager.headerHeight);
     AttachmentManager.init();

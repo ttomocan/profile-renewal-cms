@@ -1,12 +1,6 @@
 function fadeAnime() {
-  // クライアントサイドのみで実行されることを確認
-  if (typeof window === 'undefined') return;
-
   const handleAnimation = (elements, classToAdd, offset = 0) => {
     elements.forEach((element) => {
-      // すでにクラスが追加されている場合はスキップ
-      if (element.classList.contains(classToAdd)) return;
-
       const elemPos = element.getBoundingClientRect().top + window.pageYOffset + offset;
       const scroll = window.scrollY;
       const windowHeight = window.innerHeight;
@@ -41,12 +35,5 @@ function fadeAnime() {
   });
 }
 
-// クライアントサイドでのみスクリプトを実行
-if (typeof window !== 'undefined') {
-  // DOMContentLoadedを待ってからイベントリスナーを設定
-  document.addEventListener('DOMContentLoaded', () => {
-    window.addEventListener('scroll', fadeAnime);
-    // 初期表示時にもアニメーションを適用
-    setTimeout(fadeAnime, 100);
-  });
-}
+window.addEventListener('scroll', fadeAnime);
+window.addEventListener('load', fadeAnime);

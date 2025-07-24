@@ -50,11 +50,80 @@ export default function DynamicBodyClass() {
     // 初回実行
     removeUnwantedAttributes();
 
-    // アニメーションクラスの初期化
-    // fadeUpクラスがすでに付いていたら削除（サーバーとクライアントの不一致を防ぐ）
-    document.querySelectorAll('.fadeUp').forEach((el) => {
-      el.classList.remove('fadeUp');
-    });
+    // アニメーションクラスの初期化（Hydrationエラー対策）
+    const initializeAnimationClasses = () => {
+      // すべてのアニメーションクラスを削除してサーバーとクライアントの状態を一致させる
+      const animationClasses = ['fadeIn', 'fadeUp', 'fadeDown', 'fadeLeft', 'fadeRight', 'flipDown', 'flipLeft', 'flipLeftTop', 'flipRight', 'flipRightTop', 'rotateX', 'rotateY', 'rotateLeftZ', 'rotateRightZ', 'zoomIn', 'zoomOut', 'blur', 'smooth'];
+
+      animationClasses.forEach((className) => {
+        document.querySelectorAll(`.${className}`).forEach((el) => {
+          el.classList.remove(className);
+        });
+      });
+    };
+
+    // 初期化実行
+    initializeAnimationClasses();
+
+    // アニメーション処理を遅延実行（DOM安定化後）
+    const initializeAnimations = () => {
+      // animation.jsの処理を再現
+      const fadeAnime = () => {
+        const handleAnimation = (elements: NodeListOf<Element>, classToAdd: string, offset = 0) => {
+          elements.forEach((element) => {
+            const elemPos = element.getBoundingClientRect().top + window.pageYOffset + offset;
+            const scroll = window.scrollY;
+            const windowHeight = window.innerHeight;
+            if (scroll >= elemPos - windowHeight) {
+              element.classList.add(classToAdd);
+            }
+          });
+        };
+
+        const animationTypes = [
+          { selector: '.fadeInTrigger', classToAdd: 'fadeIn', offset: -100 },
+          { selector: '.fadeUpTrigger', classToAdd: 'fadeUp', offset: 150 },
+          { selector: '.fadeDownTrigger', classToAdd: 'fadeDown', offset: 100 },
+          { selector: '.fadeLeftTrigger', classToAdd: 'fadeLeft', offset: 100 },
+          { selector: '.fadeRightTrigger', classToAdd: 'fadeRight', offset: 40 },
+          { selector: '.flipDownTrigger', classToAdd: 'flipDown', offset: 150 },
+          { selector: '.flipLeftTrigger', classToAdd: 'flipLeft', offset: -50 },
+          { selector: '.flipLeftTopTrigger', classToAdd: 'flipLeftTop', offset: -50 },
+          { selector: '.flipRightTrigger', classToAdd: 'flipRight', offset: -50 },
+          { selector: '.flipRightTopTrigger', classToAdd: 'flipRightTop', offset: -50 },
+          { selector: '.rotateXTrigger', classToAdd: 'rotateX', offset: -50 },
+          { selector: '.rotateYTrigger', classToAdd: 'rotateY', offset: -50 },
+          { selector: '.rotateLeftZTrigger', classToAdd: 'rotateLeftZ', offset: -50 },
+          { selector: '.rotateRightZTrigger', classToAdd: 'rotateRightZ', offset: -50 },
+        ];
+
+        animationTypes.forEach(({ selector, classToAdd, offset }) => {
+          const elements = document.querySelectorAll(selector);
+          if (elements.length > 0) {
+            handleAnimation(elements, classToAdd, offset);
+          }
+        });
+      };
+
+      // 初回実行
+      fadeAnime();
+
+      // スクロールイベントリスナーを削除してから再追加
+      window.removeEventListener('scroll', fadeAnime);
+      window.removeEventListener('load', fadeAnime);
+      window.addEventListener('scroll', fadeAnime);
+      window.addEventListener('load', fadeAnime);
+
+      return fadeAnime;
+    };
+
+    // DOM安定化後にアニメーションを初期化（Hydration完了まで待機）
+    const timer = setTimeout(() => {
+      // DOM更新が完了するまで追加待機
+      requestAnimationFrame(() => {
+        initializeAnimations();
+      });
+    }, 150);
 
     // MutationObserverを使用して属性の変更を監視
     const observer = new MutationObserver((mutations) => {
@@ -73,6 +142,7 @@ export default function DynamicBodyClass() {
       if (bodyClassName) {
         body.classList.remove(bodyClassName);
       }
+      clearTimeout(timer);
       observer.disconnect();
     };
   }, [pathname]);
