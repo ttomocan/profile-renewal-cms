@@ -46,7 +46,7 @@
 
 .content {
   flex: 1;
-  min-width: 0; /* 子要素がはみ出さないようにする */
+  min-width: 0;
 }
 
 .title {
