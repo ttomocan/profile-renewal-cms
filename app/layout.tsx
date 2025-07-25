@@ -10,6 +10,7 @@ import Footer from './_components/Footer';
 import PageTop from './_components/PageTop';
 import DynamicBodyClass from './DynamicBodyClass';
 import WebsiteJsonLd from './_components/WebsiteJsonLd';
+import ClientSmoothScrollProvider from './_components/ClientSmoothScrollProvider';
 
 export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
   const isHomePage = pathname === '/';
@@ -64,6 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/Caveat_Brush/CaveatBrush-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
       </head>
       <body suppressHydrationWarning>
+        <ClientSmoothScrollProvider />
         <DynamicBodyClass />
         <Loading />
         <Header />

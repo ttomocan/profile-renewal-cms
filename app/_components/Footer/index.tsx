@@ -2,11 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import WaveAnimation from '@/app/_components/WaveAnimation';
 
 export default function Footer() {
   const pathname = usePathname();
-  const canvasRef = useRef<HTMLCanvasElement>(null);
   // クライアントサイドでのみ年号を設定するため、初期値はnull
   const [currentYear, setCurrentYear] = useState<number | null>(null);
 
@@ -17,33 +17,6 @@ export default function Footer() {
     return pathname.startsWith(path);
   };
 
-  // waveCanvasの初期化をクライアントサイドのみで行う
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    // キャンバスのサイズをクライアント側で設定
-    const updateCanvasSize = () => {
-      canvas.width = document.documentElement.clientWidth;
-      canvas.height = 100; // 固定の高さ
-    };
-
-    // 初期サイズ設定
-    updateCanvasSize();
-
-    // リサイズイベントのハンドラ
-    const handleResize = () => {
-      updateCanvasSize();
-    };
-
-    // リサイズイベントリスナー
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
   // 年号をクライアントサイドでのみ設定
   useEffect(() => {
     setCurrentYear(new Date().getFullYear());
@@ -52,7 +25,7 @@ export default function Footer() {
   return (
     <>
       <div className="c-wave">
-        <canvas id="waveCanvas" ref={canvasRef}></canvas>
+        <WaveAnimation height={100} />
       </div>
       <footer className="l-footer">
         <div className="l-footer__navigation" role="navigation" aria-label="グローバルナビゲーション">
