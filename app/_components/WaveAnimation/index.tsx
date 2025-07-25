@@ -124,7 +124,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     start();
 
     // ResizeObserver でリサイズを監視
-    let resizeObserver: ResizeObserver;
+    let resizeObserver: ResizeObserver | undefined = undefined;
 
     if ('ResizeObserver' in window) {
       resizeObserver = new ResizeObserver(() => {
@@ -132,7 +132,9 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
       });
       resizeObserver.observe(canvas);
     } else {
-      window.addEventListener('resize', handleResize);
+      // 型エラー回避のためwindowに明示的にaddEventListener
+      (window as Window).addEventListener('resize', handleResize);
+      resizeObserver = undefined;
     }
 
     return () => {
@@ -140,7 +142,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
       if (resizeObserver) {
         resizeObserver.disconnect();
       } else {
-        window.removeEventListener('resize', handleResize);
+        (window as Window).removeEventListener('resize', handleResize);
       }
     };
   }, [adjustCanvasForHiDPI, start, stop, handleResize]);
