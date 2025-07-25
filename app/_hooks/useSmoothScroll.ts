@@ -24,7 +24,7 @@ export function useSmoothScroll() {
       event.preventDefault();
 
       const href = anchor.getAttribute('href');
-      const targetSelector = href === '#' || href === '' ? 'html' : href;
+      const targetSelector = !href || href === '#' ? 'html' : href;
       const target = document.querySelector(targetSelector) as HTMLElement;
 
       if (!target) return;
