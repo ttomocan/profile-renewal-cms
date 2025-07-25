@@ -1,23 +1,17 @@
 'use client';
 
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function PageTop() {
-  // クラス名の状態を管理
   const [isVisible, setIsVisible] = useState(false);
   const [isOnFooter, setIsOnFooter] = useState(false);
 
   useEffect(() => {
-    // スクロール位置に応じてクラスを切り替える
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const scrollThreshold = 300;
-
-      // スクロール位置に応じて表示/非表示を切り替え
       setIsVisible(scrollTop > scrollThreshold);
 
-      // フッター位置に応じてクラスを切り替え
       const blog = document.querySelector('.blog-area');
       if (blog) {
         const blogPosition = blog.getBoundingClientRect().top + window.scrollY;
@@ -26,27 +20,25 @@ export default function PageTop() {
       }
     };
 
-    // 初期状態を設定
     handleScroll();
-
-    // スクロールイベントリスナーを追加
     window.addEventListener('scroll', handleScroll);
-
-    // クリーンアップ
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // クラス名を動的に生成
   const className = `c-pagetop${isVisible ? ' show' : ''}${isOnFooter ? ' on-footer' : ''}`;
+
+  // スムーススクロールでトップへ
+  const handlePageTop = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className={className}>
       <div className="c-pagetop__icon"></div>
-      <Link href="#" className="c-pagetop__link">
+      <a href="#" className="c-pagetop__link" onClick={handlePageTop}>
         PAGE TOP
-      </Link>
+      </a>
     </div>
   );
 }
