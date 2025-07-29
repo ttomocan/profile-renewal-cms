@@ -30,7 +30,7 @@ export default function Header() {
     <header className="l-header">
       <h1 className="l-header__logo">
         <Link href="/">
-          <Image src="/img/common/h_logo.png" alt="ともきゃんスタイルのロゴ" width={400} height={33} priority sizes="(max-width: 767px) 60vw, 400px" />
+          <Image src="/img/common/h_logo.png" alt="ともきゃんスタイルのロゴ" width={400} height={33} sizes="(max-width: 767px) 60vw, 400px" />
         </Link>
       </h1>
       <div className={`l-header__menuBtn ${isMenuOpen ? 'is-open' : 'is-close'}`}>

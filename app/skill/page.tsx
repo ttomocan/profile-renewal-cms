@@ -121,7 +121,7 @@ export default async function Page() {
         </h2>
         <div className="tool__item fadeUpTrigger">
           <div className="tool__image">
-            <Image src="/img/pages/skill/img_cursor.svg" alt="Cursor" width="100" height="100" priority sizes="100vw" />
+            <Image src="/img/pages/skill/img_cursor.svg" alt="Cursor" width="100" height="100" sizes="100vw" />
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Cursor・Visual Studio Code・Git</h3>

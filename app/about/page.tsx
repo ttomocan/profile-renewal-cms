@@ -11,7 +11,7 @@ export default async function Page() {
         </h2>
         <div className="greeting__cont">
           <div className="greeting__image fadeUpTrigger">
-            <Image src="/img/pages/about/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} priority sizes="100vw" />
+            <Image src="/img/pages/about/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} sizes="100vw" />
           </div>
           <div className="greeting__detail fadeUpTrigger">
             <p>
