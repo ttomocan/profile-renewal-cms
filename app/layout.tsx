@@ -73,9 +73,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Blog />
         <Footer />
         <PageTop />
-        <script src="/scripts/script.js" async></script>
-        {/* animation.jsは DynamicBodyClass で処理するため無効化 */}
-        {/* <script src="/scripts/animation.js" async></script> */}
         <WebsiteJsonLd />
       </body>
       {/* <GoogleAnalytics gaId="G-XXXXX" /> */}
