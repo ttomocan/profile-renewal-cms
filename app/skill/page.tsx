@@ -81,7 +81,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">Next.js</h3>
-            <p className="programming__description">当サイトも含め、Next.jsを用いたモダンなWebアプリケーションの開発経験があります。App RouterやServer Componentsなどの最新機能を積極的に活用し、SEOやパフォーマンスを重視した設計・実装を行っています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も要件に応じて適切に使い分けています。</p>
+            <p className="programming__description">Next.jsを用いたモダンなWebアプリケーションの開発経験があります。App RouterやServer Componentsなどの最新機能を積極的に活用し、SEOやパフォーマンスを重視した設計・実装を行っています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も要件に応じて適切に使い分けています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
