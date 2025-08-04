@@ -32,7 +32,7 @@ export const getBlogList = async (queries?: MicroCMSQueries) => {
     queries,
     customRequestInit: {
       next: {
-        revalidate: 10,
+        revalidate: 30,
       },
     },
   });
@@ -46,7 +46,7 @@ export const getBlogDetail = async (contentId: string, queries?: MicroCMSQueries
     queries,
     customRequestInit: {
       next: {
-        revalidate: queries?.draftKey === undefined ? 10 : 0,
+        revalidate: queries?.draftKey === undefined ? 30 : 0,
       },
     },
   });
@@ -69,7 +69,7 @@ export const getAllBlogList = async () => {
     endpoint: 'blog',
     customRequestInit: {
       next: {
-        revalidate: 10,
+        revalidate: 30,
       },
     },
   });
@@ -82,7 +82,7 @@ export const getAllCategoryList = async () => {
     endpoint: 'categories',
     customRequestInit: {
       next: {
-        revalidate: 10,
+        revalidate: 30,
       },
     },
   });
