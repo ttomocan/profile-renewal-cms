@@ -30,6 +30,11 @@ export const getBlogList = async (queries?: MicroCMSQueries) => {
   const listData = await client.getList<Blog>({
     endpoint: 'blog',
     queries,
+    customRequestInit: {
+      next: {
+        revalidate: 10,
+      },
+    },
   });
   return listData;
 };
@@ -41,7 +46,7 @@ export const getBlogDetail = async (contentId: string, queries?: MicroCMSQueries
     queries,
     customRequestInit: {
       next: {
-        revalidate: queries?.draftKey === undefined ? 60 : 0,
+        revalidate: queries?.draftKey === undefined ? 10 : 0,
       },
     },
   });
@@ -62,6 +67,11 @@ export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQue
 export const getAllBlogList = async () => {
   const listData = await client.getAllContents<Blog>({
     endpoint: 'blog',
+    customRequestInit: {
+      next: {
+        revalidate: 10,
+      },
+    },
   });
 
   return listData;
@@ -70,6 +80,11 @@ export const getAllBlogList = async () => {
 export const getAllCategoryList = async () => {
   const listData = await client.getAllContents<Category>({
     endpoint: 'categories',
+    customRequestInit: {
+      next: {
+        revalidate: 10,
+      },
+    },
   });
 
   return listData;

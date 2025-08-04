@@ -8,7 +8,8 @@
     "start": "node server.js",
     "lint": "next lint",
     "postbuild": "next-sitemap",
-    "build:css": "sass styles/common/style.scss styles/common/style.css && sass styles/common/animation.scss styles/common/animation.css"
+    "build:css": "sass styles/common/style.scss styles/common/style.css && sass styles/common/animation.scss styles/common/animation.css",
+    "clean": "rm -rf .next && rm -rf out"
   },
   "dependencies": {
     "@next/third-parties": "^14.1.4",
