@@ -1,5 +1,4 @@
 import './globals.css';
-import '@/styles/pages/diary.scss';
 import PageTitle from '@/app/_components/PageTitle';
 import { getBlogList } from '@/app/_libs/microcms';
 import type { Metadata } from 'next';

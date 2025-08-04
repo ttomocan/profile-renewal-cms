@@ -1,6 +1,4 @@
-import '@/styles/pages/contact.scss';
 import PageTitle from '@/app/_components/PageTitle';
-
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 const pageTitle = 'お問い合わせ';
@@ -10,23 +8,23 @@ export const metadata = {
     default: pageTitle,
   },
 
-	openGraph: {
-		title: {
-			template: `%s | ${baseTitle}`,
-    	default: pageTitle,
-		},
-		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
-		siteName: baseTitle,
-	},
-	twitter: {
-		card: 'summary_large_image',
-		site: '@t_tomocan',
-		title: {
-			template: `%s | ${baseTitle}`,
-    	default: pageTitle,
-		},
-		images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
-	},
+  openGraph: {
+    title: {
+      template: `%s | ${baseTitle}`,
+      default: pageTitle,
+    },
+    images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+    siteName: baseTitle,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@t_tomocan',
+    title: {
+      template: `%s | ${baseTitle}`,
+      default: pageTitle,
+    },
+    images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+  },
 };
 
 type Props = {
