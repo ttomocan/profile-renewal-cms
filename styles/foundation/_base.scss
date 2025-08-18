@@ -5,9 +5,10 @@ body {
   color: $textC;
   display: flex;
   flex-flow: column;
-  font-family: -apple-system, 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, BlinkMacSystemFont, sans-serif;
   font-optical-sizing: auto;
   font-size: 15px;
+  font-weight: 400;
   min-height: 100vh;
   letter-spacing: 0.025em;
   line-break: strict;
