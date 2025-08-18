@@ -81,7 +81,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">Next.js</h3>
-            <p className="programming__description">Next.jsを用いたモダンなWebアプリケーションの開発経験があります。App RouterやServer Componentsなどの最新機能を積極的に活用し、SEOやパフォーマンスを重視した設計・実装を行っています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も要件に応じて適切に使い分けています。</p>
+            <p className="programming__description">Next.jsを用いたモダンなWebアプリケーションの開発に取り組んでいます。App RouterやServer Componentsなどの最新機能を積極的に活用し、SEOやパフォーマンスを重視した設計・実装を行っています。静的生成（SSG）やサーバーサイドレンダリング（SSR）も要件に応じて適切に使い分けています。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
@@ -111,6 +111,23 @@ export default async function Page() {
           <div className="programming__detail">
             <h3 className="programming__heading">TypeScript</h3>
             <p className="programming__description">TypeScriptによる型安全なコーディングを実践しています。PropsやStateの型定義、ユニオン型・ジェネリクス・型推論などを活用し、エラーの早期発見や保守性の向上に努めています。特にNext.jsやReactとの組み合わせで、型定義を意識したコンポーネント設計・実装を行い、実運用に耐えうる堅牢なコードを目指しています。</p>
+          </div>
+        </div>
+        <div className="programming__item fadeUpTrigger">
+          <div className="programming__image">
+            <svg width="100" height="100" viewBox="0 0 256 154" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
+              <defs>
+                <linearGradient x1="-2.778%" y1="32%" x2="100%" y2="67.556%" id="gradient">
+                  <stop stopColor="#2298BD" offset="0%" />
+                  <stop stopColor="#0ED7B5" offset="100%" />
+                </linearGradient>
+              </defs>
+              <path d="M128 0C93.867 0 72.533 17.067 64 51.2 76.8 34.133 91.733 27.733 108.8 32c9.737 2.434 16.697 9.499 24.401 17.318C145.751 62.057 160.275 76.8 192 76.8c34.133 0 55.467-17.067 64-51.2-12.8 17.067-27.733 23.467-44.8 19.2-9.737-2.434-16.697-9.499-24.401-17.318C174.249 14.743 159.725 0 128 0ZM64 76.8C29.867 76.8 8.533 93.867 0 128c12.8-17.067 27.733-23.467 44.8-19.2 9.737 2.434 16.697 9.499 24.401 17.318C81.751 138.857 96.275 153.6 128 153.6c34.133 0 55.467-17.067 64-51.2-12.8 17.067-27.733 23.467-44.8 19.2-9.737-2.434-16.697-9.499-24.401-17.318C110.249 91.543 95.725 76.8 64 76.8Z" fill="url(#gradient)" />
+            </svg>
+          </div>
+          <div className="programming__detail">
+            <h3 className="programming__heading">Tailwind CSS</h3>
+            <p className="programming__description">Tailwind CSSの基本的なユーティリティクラスを学習しています。従来のCSSとは異なるアプローチで、クラス名を組み合わせてスタイリングを行う手法に取り組んでおり、レスポンシブデザインや基本的なレイアウト作成ができるレベルです。まだ学習段階ですが、効率的なスタイリング手法として積極的に習得を進めています。</p>
           </div>
         </div>
       </section>
