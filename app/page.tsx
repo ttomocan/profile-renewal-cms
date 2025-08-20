@@ -120,7 +120,7 @@ export default async function Home() {
           </div>
           <div className="p-top-skill__button fadeUpTrigger">
             <Link href="/skill/" className="c-button__link">
-              ともきゃんのできることを見る
+              ともきゃんができることを見る
             </Link>
           </div>
         </section>
