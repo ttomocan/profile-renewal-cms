@@ -142,7 +142,7 @@ export default async function Page() {
           </div>
           <div className="tool__detail">
             <h3 className="programming__heading">Cursor・Visual Studio Code・Git</h3>
-            <p className="programming__description">サイト構築時のメインエディタとしてCursorを使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。また、Gitを用いたバージョン管理も行っています。</p>
+            <p className="programming__description">サイト構築時のメインエディタとしてCursorを使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。また、GitHubを用いたバージョン管理も行っています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
