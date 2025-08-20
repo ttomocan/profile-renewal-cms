@@ -1,6 +1,7 @@
 @use '../../global' as *;
 
 .c-wave {
+  overflow-x: clip;
   position: relative;
 
   canvas {
