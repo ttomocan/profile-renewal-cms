@@ -7,7 +7,7 @@ export default async function Page() {
         <p className="fadeUpTrigger">
           私が実務でよく使っているスキルやサイト制作ツールを紹介します。
           <br />
-          CSS設計（BEM・FLOCSSなど）に配慮した保守性の高いコーディングと、WordPressサイトの構築・カスタマイズが得意です。
+          私の得意なスキルは、CSS設計（BEM・FLOCSSなど）に配慮した保守性の高いコーディングと、WordPressサイトの構築・カスタマイズです。
           <br />
           現在では、モダンなフロントエンド技術（Next.js、React、TypeScript）を活用したWebアプリケーション開発や、SEO対策を意識したWebサイトの実装にも取り組んでいます。
           <br />
