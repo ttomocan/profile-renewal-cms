@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next';
-import { getAllCategoryList, getAllBlogList } from './_libs/microcms';
+import { getAllCategoryList, getAllBlogList, getResults } from './_libs/microcms';
 
 const BASE_URL = 'https://www.tomocan.site';
 
@@ -8,10 +8,14 @@ const buildUrl = (path: string = '/') => {
   return `${BASE_URL}/${path.replace(/^\/+/, '')}/`;
 };
 
-const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary'];
+const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary', 'results'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [blogContents, categoryContents] = await Promise.all([getAllBlogList(), getAllCategoryList()]);
+  const [blogContents, categoryContents, resultsData] = await Promise.all([
+    getAllBlogList(),
+    getAllCategoryList(),
+    getResults({ limit: 1000 }) // 全実績を取得
+  ]);
 
   const now = new Date();
 
@@ -30,5 +34,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: revisedAt,
   }));
 
-  return [...staticUrls, ...blogUrls, ...categoryUrls];
+  const resultUrls: MetadataRoute.Sitemap = resultsData.contents.map(({ id, updatedAt }) => ({
+    url: buildUrl(`results/${id}`),
+    lastModified: updatedAt,
+  }));
+
+  return [...staticUrls, ...blogUrls, ...categoryUrls, ...resultUrls];
 }

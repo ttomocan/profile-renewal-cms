@@ -63,6 +63,12 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
               Skill
             </MenuNavLink>
           </li>
+          {/* 実績ページは本番動作チェックのため一時的に非表示 */}
+          {/* <li className="l-navigation__item">
+            <MenuNavLink href="/results/" className={`c-navigation-link${isCurrent('/results') ? ' current' : ''}`} onLinkClick={onLinkClick}>
+              Result
+            </MenuNavLink>
+          </li> */}
           <li className="l-navigation__item">
             <MenuNavLink href="/diary/" className={`c-navigation-link${isCurrent('/diary') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Diary
@@ -80,7 +86,7 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
           <Image src="/img/common/icon_x.svg" alt="X" width={30} height={30} />
         </MenuNavLink>
         <MenuNavLink href="https://coconala.com/users/1531202" className="l-header__sns__item --coconala" target="_blank" rel="noopener noreferrer" onLinkClick={onLinkClick}>
-          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} />
+          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} style={{ height: 'auto' }} />
         </MenuNavLink>
       </div>
     </>

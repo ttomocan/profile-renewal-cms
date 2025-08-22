@@ -7,6 +7,7 @@ import { getBlogList } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 
 export default async function Home() {
+  // ブログデータを取得
   const data = await getBlogList({
     limit: TOP_DIARY_LIMIT,
   });
@@ -124,6 +125,37 @@ export default async function Home() {
             </Link>
           </div>
         </section>
+        {/* 実績セクションは本番動作チェックのため一時的に非表示 */}
+        {/* <section className="p-top-results inner">
+          <div className="results-inner">
+            <h2 className="c-heading-lv2 fadeUpTrigger">
+              <span className="c-heading-lv2-en">Results</span>
+              <span className="c-heading-lv2-ja">実績紹介</span>
+            </h2>
+            <div className="p-top-results__cont fadeUpTrigger">
+              <p>これまでに手がけた制作実績をご紹介します。Webサイト制作、ブログカスタマイズ、UI/UXデザインなど、様々なプロジェクトに対応しています。お客様のご要望に合わせて、目的に沿った最適なソリューションを提供いたします。</p>
+            </div>
+            {resultsData.contents.length > 0 && (
+              <div className="p-top-results__list fadeUpTrigger">
+                <div className="results-grid">
+                  {resultsData.contents.map((result, index) => (
+                    <ResultCard
+                      key={`${result.id}-${index}`}
+                      result={result}
+                      priority={index === 0} // 最初の画像のみ優先読み込み
+                      disableLink={true} // 本番動作チェックのためリンクを無効化
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+            <div className="p-top-results__button fadeUpTrigger">
+              <Link href="/results/" className="c-button__link">
+                実績をもっと見る
+              </Link>
+            </div>
+          </div>
+        </section> */}
         <section className="p-top-diary inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">Diary</span>
