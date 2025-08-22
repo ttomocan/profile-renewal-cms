@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { getResultDetail } from '@/app/_libs/microcms';
 import { parseTechStack, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover } from '@/lib/parse';
+import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
 import '@/styles/pages/results.scss';
 
@@ -207,8 +208,8 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">サイトURL</h2>
                 <a href={siteUrl} target="_blank" rel="noopener noreferrer" className="site-link-card">
-                  <div className="site-link-card__image">
-                    <Image src={cover.url} alt={`${title}のサイト画像`} fill sizes="160px" />
+                  <div className="site-link-card__favicon">
+                    <Image src={getFaviconUrl(siteUrl)} alt={`${title}のファビコン`} width={64} height={64} unoptimized={true} />
                   </div>
                   <div className="site-link-card__content">
                     <div className="site-link-card__header">
