@@ -212,8 +212,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               </svg>
               実績一覧に戻る
             </Link>
-
-            <div className="result-detail__navigation-label">実績詳細</div>
           </div>
         </nav>
       </div>
