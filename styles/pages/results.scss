@@ -207,8 +207,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   &__meta {
     display: flex;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 20px;
+    gap: 15px;
+    margin-bottom: 15px;
     flex-wrap: wrap;
   }
 
@@ -245,7 +245,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 800;
     line-height: 1.4;
     color: $text-color;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -258,7 +258,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 15px;
     line-height: 1.7;
     color: $gray-600;
-    margin-bottom: 24px;
+    margin-bottom: 15px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
@@ -271,7 +271,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 12px;
     color: $gray-400;
     font-weight: 600;
-    padding-top: 20px;
+    padding-top: 15px;
     border-top: 1px solid rgba(243, 107, 10, 0.3);
     margin-top: auto;
     letter-spacing: 0.025em;
