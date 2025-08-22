@@ -64,11 +64,11 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
             </MenuNavLink>
           </li>
           {/* 実績ページは本番動作チェックのため一時的に非表示 */}
-          {/* <li className="l-navigation__item">
+          <li className="l-navigation__item">
             <MenuNavLink href="/results/" className={`c-navigation-link${isCurrent('/results') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Result
             </MenuNavLink>
-          </li> */}
+          </li>
           <li className="l-navigation__item">
             <MenuNavLink href="/diary/" className={`c-navigation-link${isCurrent('/diary') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Diary

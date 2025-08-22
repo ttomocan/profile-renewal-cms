@@ -61,6 +61,9 @@ function formatSinglePeriod(period: string): string {
     const year = period.substring(0, 4);
     const month = period.substring(4, 6);
     return `${year}年${parseInt(month, 10)}月`;
+  } else if (/^\d+$/.test(period)) {
+    // 数値のみの場合は制作期間（月数）として扱う
+    return `${period}ヶ月`;
   }
 
   return period;
@@ -204,10 +207,15 @@ export function safeGetClientName(clientName?: string): string {
 
 /**
  * カバー画像の安全な取得（未設定対応）
+ * @param result - 実績データ
+ * @param useOgpForDefault - 未設定時にOGP画像を使用するかどうか（一覧ページ用）
  */
-export function safeGetCover(result: { cover?: { url: string; width: number; height: number } }): { url: string; width: number; height: number } {
+export function safeGetCover(
+  result: { cover?: { url: string; width: number; height: number } },
+  useOgpForDefault: boolean = false
+): { url: string; width: number; height: number } {
   return result.cover || {
-    url: '/img/common/default-cover.svg',
+    url: useOgpForDefault ? '/img/common/ogp.png' : '/img/common/default-cover.svg',
     width: 800,
     height: 400
   };

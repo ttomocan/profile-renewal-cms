@@ -1,94 +1,96 @@
+@use '../global/variables' as *;
+@use '../global/mixin' as *;
+
 // ===============================================
-// Results ページのスタイル
+// Results ページのスタイル（リニューアル版）
 // ===============================================
 
-// カラーパレット
-$primary-color: #2563eb;
-$primary-hover: #1d4ed8;
-$primary-light: #dbeafe;
+// サイト統一カラーを使用
+$primary-color: $mainC; // #f36b0a
+$primary-light: rgba(243, 107, 10, 0.1);
+$primary-lighter: rgba(243, 107, 10, 0.05);
+$base-color: $baseC; // #fcf6f1
+$text-color: $textC; // #282828
 
-$secondary-color: #64748b;
-$secondary-light: #f1f5f9;
-
-$success-color: #059669;
-$success-light: #d1fae5;
-
-$warning-color: #d97706;
-$warning-light: #fef3c7;
-
-$danger-color: #dc2626;
-$danger-light: #fee2e2;
-
-$gray-50: #f9fafb;
-$gray-100: #f3f4f6;
-$gray-200: #e5e7eb;
-$gray-300: #d1d5db;
-$gray-400: #9ca3af;
-$gray-500: #6b7280;
-$gray-600: #4b5563;
-$gray-700: #374151;
-$gray-800: #1f2937;
-$gray-900: #111827;
+// グレーパレット
+$gray-50: #fafaf9;
+$gray-100: #f5f5f4;
+$gray-200: #e7e5e4;
+$gray-300: #d6d3d1;
+$gray-400: #a8a29e;
+$gray-500: #78716c;
+$gray-600: #57534e;
+$gray-700: #44403c;
+$gray-800: #292524;
+$gray-900: #1c1917;
 
 $white: #ffffff;
-$black: #000000;
 
-// ページ全体のレイアウト
-.results-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-// シャドウ
-$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-$shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+// シャドウ（温かみのある色合いに調整）
+$shadow-sm: 0 1px 2px 0 rgba(243, 107, 10, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(243, 107, 10, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(243, 107, 10, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl: 0 20px 25px -5px rgba(243, 107, 10, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
 // トランジション
 $transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
-// ブレイクポイント
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
+// ===============================================
+// ページ全体のレイアウト
+// ===============================================
+.results-inner {
+  max-width: $inner;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+
+  @include mq('sp') {
+    padding: 0 16px;
+  }
+}
 
 // ===============================================
 // 実績カード
 // ===============================================
 .result-card {
   background: $white;
-  border-radius: 20px;
   box-shadow: $shadow-sm;
-  border: 1px solid $gray-100;
+  border: 1px solid rgba(243, 107, 10, 0.08);
   overflow: hidden;
   transition: $transition-base;
   position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &:hover {
-    transform: translateY(-8px);
     box-shadow: $shadow-xl;
-    border-color: $gray-200;
+    border-color: rgba(243, 107, 10, 0.2);
 
     .result-card__image-img {
-      transform: scale(1.05);
+      transform: scale(1.08);
     }
 
-    .result-card__title {
+    .result-card__title,
+    .result-card__summary {
       color: $primary-color;
     }
 
     .result-card__action-icon {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateX(0) scale(1.1);
+    }
+
+    .result-card__overlay {
+      opacity: 1;
     }
   }
 
   &__link {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     text-decoration: none;
     color: inherit;
   }
@@ -97,174 +99,167 @@ $breakpoint-xl: 1280px;
     position: relative;
     aspect-ratio: 16 / 10;
     overflow: hidden;
-    background: linear-gradient(135deg, $gray-50 0%, $gray-100 100%);
+    background: linear-gradient(135deg, $base-color 0%, $gray-100 100%);
 
     &-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
+  }
 
-    // グラデーションオーバーレイ
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    &:hover::after {
-      opacity: 1;
-    }
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(243, 107, 10, 0.15) 0%, rgba(243, 107, 10, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
 
   &__badge {
     position: absolute;
-    top: 16px;
-    left: 16px;
+    top: 10px;
+    left: 10px;
     z-index: 10;
   }
 
   &__work-type {
+    color: #ffffff;
     display: inline-flex;
     align-items: center;
-    padding: 8px 16px;
-    border-radius: 50px;
+    padding: 3px 12px;
+    border-radius: calc(infinity * 1px);
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.025em;
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    text-transform: uppercase;
 
-    // 案件区分別カラースキーム
-    &.work-type-work-type-main {
-      background: linear-gradient(135deg, $primary-color 0%, #1e40af 100%);
+    // 案件区分別カラースキーム（メインカラーベース）
+    &.work-type-work-type-main,
+    &.work-type-main {
+      background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
       color: $white;
     }
 
-    &.work-type-work-type-side {
-      background: linear-gradient(135deg, $success-color 0%, #047857 100%);
+    &.work-type-work-type-side,
+    &.work-type-side {
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
       color: $white;
     }
 
-    &.work-type-work-type-freelance {
-      background: linear-gradient(135deg, $warning-color 0%, #b45309 100%);
+    &.work-type-work-type-freelance,
+    &.work-type-freelance {
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
       color: $white;
     }
 
     &.work-type-personal {
-      background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
       color: $white;
     }
 
-    // 古いクラス名との互換性
-    &.work-type-main {
-      background: linear-gradient(135deg, $primary-color 0%, #1e40af 100%);
-      color: $white;
-    }
-
-    &.work-type-side {
-      background: linear-gradient(135deg, $success-color 0%, #047857 100%);
-      color: $white;
-    }
-
-    &.work-type-freelance {
-      background: linear-gradient(135deg, $warning-color 0%, #b45309 100%);
+    &.work-type-未分類 {
+      background: linear-gradient(135deg, $gray-600 0%, $gray-700 100%);
       color: $white;
     }
   }
 
   &__action-icon {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 40px;
-    height: 40px;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(16px);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transform: translateX(8px);
+    transform: translateX(12px) scale(0.9);
     transition: $transition-base;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    z-index: 10;
 
     svg {
-      width: 18px;
-      height: 18px;
-      color: $gray-700;
+      width: 20px;
+      height: 20px;
+      color: $primary-color;
     }
   }
 
   &__content {
-    padding: 24px;
-    height: calc(100% - 200px); // 画像の高さを除いた部分
+    padding: 15px;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    background: linear-gradient(135deg, $white 0%, rgba(252, 246, 241, 0.3) 100%);
   }
 
   &__meta {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
+    gap: 16px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
   }
 
   &__category {
     display: inline-flex;
     align-items: center;
-    padding: 6px 12px;
-    background: $primary-light;
+    padding: 4px 12px;
+    background: $primary-lighter;
     color: $primary-color;
     font-size: 12px;
-    font-weight: 500;
-    border-radius: 8px;
-    border: 1px solid rgba(37, 99, 235, 0.2);
+    font-weight: 600;
+    border-radius: 12px;
+    border: 1px solid rgba(243, 107, 10, 0.15);
+    letter-spacing: 0.025em;
   }
 
   &__period {
     font-size: 12px;
     color: $gray-500;
-    font-weight: 500;
+    font-weight: 600;
     display: flex;
     align-items: center;
+    letter-spacing: 0.025em;
 
     &::before {
-      content: '⏱';
-      margin-right: 4px;
+      content: '🕒';
+      margin-right: 6px;
+      font-size: 14px;
     }
   }
 
   &__title {
-    font-size: 18px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 800;
     line-height: 1.4;
-    color: $gray-900;
-    margin-bottom: 12px;
+    color: $text-color;
+    margin-bottom: 16px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    transition: color 0.2s ease;
-    flex: 0 0 auto;
+    transition: color 0.3s ease;
+    letter-spacing: -0.025em;
   }
 
   &__summary {
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 15px;
+    line-height: 1.7;
     color: $gray-600;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
@@ -276,10 +271,11 @@ $breakpoint-xl: 1280px;
   &__date {
     font-size: 12px;
     color: $gray-400;
-    font-weight: 500;
-    padding-top: 16px;
-    border-top: 1px solid $gray-100;
+    font-weight: 600;
+    padding-top: 20px;
+    border-top: 1px solid rgba(243, 107, 10, 0.1);
     margin-top: auto;
+    letter-spacing: 0.025em;
   }
 }
 
@@ -289,106 +285,17 @@ $breakpoint-xl: 1280px;
 .results-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 32px;
-  margin-bottom: 48px;
+  gap: 40px;
+  margin-bottom: 50px;
 
-  @media (min-width: $breakpoint-md) {
+  @include mq('pcTab') {
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: min(30px, 2vw);
   }
 
-  @media (min-width: $breakpoint-lg) {
+  @include mq('pc') {
     grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-  }
-
-  @media (min-width: $breakpoint-xl) {
-    gap: 40px;
-  }
-}
-
-// ===============================================
-// フィルター（現在は使用していないが、将来の拡張のため残す）
-// ===============================================
-// .results-filters などのスタイルは非表示中
-
-// ===============================================
-// ページネーション
-// ===============================================
-.results-pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 48px;
-  gap: 8px;
-
-  &__item {
-    padding: 12px 16px;
-    border: 2px solid $gray-200;
-    background: $white;
-    color: $gray-600;
-    text-decoration: none;
-    font-weight: 500;
-    border-radius: 12px;
-    transition: $transition-fast;
-    min-width: 48px;
-    text-align: center;
-
-    &:hover:not(&--current):not(&--disabled) {
-      background: $gray-50;
-      border-color: $gray-300;
-      color: $gray-800;
-    }
-
-    &--current {
-      background: $primary-color;
-      border-color: $primary-color;
-      color: $white;
-    }
-
-    &--disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      background: $gray-100;
-      color: $gray-400;
-    }
-
-    &--prev,
-    &--next {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-  }
-
-  &__info {
-    margin-left: 24px;
-    font-size: 14px;
-    color: $gray-600;
-    font-weight: 500;
-
-    @media (max-width: $breakpoint-sm) {
-      margin-left: 0;
-      margin-top: 16px;
-    }
-  }
-}
-
-// ===============================================
-// 結果表示
-// ===============================================
-.results-summary {
-  margin-bottom: 32px;
-
-  &__text {
-    font-size: 16px;
-    color: $gray-700;
-    font-weight: 500;
-
-    strong {
-      color: $primary-color;
-      font-weight: 700;
-    }
+    gap: min(30px, 2vw);
   }
 }
 
@@ -397,181 +304,86 @@ $breakpoint-xl: 1280px;
 // ===============================================
 .results-empty {
   text-align: center;
-  padding: 80px 24px;
-  background: linear-gradient(135deg, $gray-50 0%, $white 100%);
-  border-radius: 24px;
-  border: 2px dashed $gray-300;
+  padding: 80px 32px;
+  background: linear-gradient(135deg, $base-color 0%, $white 100%);
+  border: 2px dashed rgba(243, 107, 10, 0.2);
 
   &__icon {
-    font-size: 64px;
-    margin-bottom: 24px;
-    opacity: 0.6;
+    font-size: 72px;
+    margin-bottom: 32px;
+    opacity: 0.7;
   }
 
   &__title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
-    color: $gray-900;
-    margin-bottom: 12px;
+    color: $text-color;
+    margin-bottom: 16px;
+    letter-spacing: -0.025em;
   }
 
   &__description {
-    font-size: 16px;
+    font-size: 18px;
     color: $gray-600;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 }
 
 // ===============================================
-// 技術スタック・バッジ関連
+// ローディング状態
 // ===============================================
-.tech-tag {
-  display: inline-block;
-  background-color: $gray-100;
-  color: $gray-700;
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin: 2px;
-  font-weight: 500;
-  border: 1px solid $gray-200;
-  transition: $transition-fast;
+.results-loading {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
 
-  &:hover {
-    background-color: $primary-light;
-    color: $primary-color;
-    border-color: rgba(37, 99, 235, 0.2);
+  @include mq('pcTab') {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  @include mq('pc') {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
   }
 }
 
-.work-type-badge {
-  font-size: 12px;
-  font-weight: 500;
-  padding: 4px 12px;
-  border-radius: 9999px;
+.result-loading-card {
+  background: $white;
+  overflow: hidden;
+  box-shadow: $shadow-sm;
+  border: 1px solid rgba(243, 107, 10, 0.08);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
-  &.work-type-main,
-  &.work-type-work-type-main {
-    background-color: $primary-color;
-    color: $white;
+  &__image {
+    aspect-ratio: 16 / 10;
+    background: linear-gradient(135deg, $base-color 0%, $gray-200 100%);
   }
 
-  &.work-type-side,
-  &.work-type-work-type-side {
-    background-color: $success-color;
-    color: $white;
+  &__content {
+    padding: 28px;
   }
 
-  &.work-type-freelance,
-  &.work-type-work-type-freelance {
-    background-color: $warning-color;
-    color: $white;
-  }
-
-  &.work-type-personal {
-    background-color: #8b5cf6;
-    color: $white;
-  }
-}
-
-// ===============================================
-// アクセシビリティ対応
-// ===============================================
-.focus-visible:focus {
-  outline: 2px solid $primary-color;
-  outline-offset: 2px;
-}
-
-// ===============================================
-// 詳細ページのコンテンツスタイル追加
-// ===============================================
-.result-detail-content {
-  line-height: 1.7;
-
-  h2 {
-    margin-top: 32px;
+  &__line {
+    height: 14px;
+    background: linear-gradient(135deg, rgba(243, 107, 10, 0.1) 0%, $gray-200 100%);
+    border-radius: 8px;
     margin-bottom: 16px;
-    font-size: 24px;
-    font-weight: 600;
-    color: $gray-900;
-  }
 
-  h3 {
-    margin-top: 24px;
-    margin-bottom: 12px;
-    font-size: 20px;
-    font-weight: 500;
-    color: $gray-700;
-  }
-
-  p {
-    margin-bottom: 16px;
-    color: $gray-600;
-  }
-
-  ul {
-    margin-bottom: 16px;
-    padding-left: 24px;
-  }
-
-  li {
-    margin-bottom: 8px;
-    color: $gray-600;
-  }
-}
-
-// 引用スタイル（結果詳細ページ）
-.testimonial-quote {
-  position: relative;
-  font-style: italic;
-  color: $gray-600;
-
-  &::before {
-    content: '"';
-    font-size: 32px;
-    color: $gray-400;
-    position: absolute;
-    top: -8px;
-    left: -16px;
-  }
-
-  &::after {
-    content: '"';
-    font-size: 32px;
-    color: $gray-400;
-  }
-}
-
-// ===============================================
-// レスポンシブ調整
-// ===============================================
-@media (max-width: $breakpoint-sm) {
-  .result-card {
-    border-radius: 16px;
-
-    &__content {
-      padding: 20px;
+    &:last-child {
+      margin-bottom: 0;
     }
 
-    &__badge {
-      top: 12px;
-      left: 12px;
+    &--short {
+      width: 45%;
     }
 
-    &__work-type {
-      padding: 6px 12px;
-      font-size: 11px;
+    &--medium {
+      width: 75%;
     }
-  }
 
-  // .results-filters は非表示中のため削除
-
-  .results-pagination {
-    flex-direction: column;
-    gap: 16px;
-
-    &__info {
-      margin-left: 0;
+    &--long {
+      width: 95%;
     }
   }
 }
@@ -581,28 +393,33 @@ $breakpoint-xl: 1280px;
 // ===============================================
 .result-detail {
   &__breadcrumb {
-    margin-bottom: 32px;
+    margin-bottom: 40px;
 
     ol {
       display: flex;
       align-items: center;
       font-size: 14px;
       color: $gray-600;
+      list-style: none;
+      padding: 0;
+      margin: 0;
 
       li {
         display: flex;
         align-items: center;
 
         &:not(:last-child)::after {
-          content: '/';
-          margin: 0 8px;
-          color: $gray-400;
+          content: '>';
+          margin: 0 12px;
+          color: $primary-color;
+          font-weight: 600;
         }
 
         a {
-          color: $gray-600;
+          color: $text-color;
           text-decoration: none;
           transition: color 0.2s ease;
+          font-weight: 500;
 
           &:hover {
             color: $primary-color;
@@ -610,39 +427,49 @@ $breakpoint-xl: 1280px;
         }
 
         &:last-child {
-          color: $gray-900;
-          font-weight: 500;
+          color: $text-color;
+          font-weight: 600;
         }
       }
     }
   }
 
   &__header {
-    margin-bottom: 48px;
+    margin-bottom: 50px;
+    background: linear-gradient(135deg, $white 0%, $base-color 100%);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid rgba(243, 107, 10, 0.1);
+
+    @include mq('sp') {
+      padding: 28px 24px;
+    }
 
     &-badges {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
+      gap: 15px;
+      margin-bottom: 20px;
 
       .badge {
         display: inline-flex;
         align-items: center;
-        padding: 8px 16px;
-        border-radius: 20px;
+        padding: 6px 12px;
+        border-radius: 12px;
         font-size: 14px;
-        font-weight: 600;
+        font-weight: 700;
+        letter-spacing: 0.025em;
 
         &--work-type {
-          background: linear-gradient(135deg, $primary-color 0%, #1e40af 100%);
+          background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
           color: $white;
+          box-shadow: 0 4px 12px rgba(243, 107, 10, 0.3);
         }
 
         &--project-type {
           background: $gray-100;
-          color: $gray-700;
+          color: $text-color;
           border: 1px solid $gray-200;
         }
 
@@ -651,76 +478,65 @@ $breakpoint-xl: 1280px;
           color: $gray-500;
           background: transparent;
           padding: 0;
+          font-weight: 600;
 
           &::before {
-            content: '⏱';
-            margin-right: 6px;
+            content: '🕒';
+            margin-right: 8px;
+            font-size: 16px;
           }
         }
       }
     }
 
     &-title {
-      font-size: 36px;
-      font-weight: 800;
+      font-size: 42px;
+      font-weight: 900;
       line-height: 1.2;
-      color: $gray-900;
-      margin-bottom: 24px;
+      color: $text-color;
+      margin-bottom: 28px;
+      letter-spacing: -0.025em;
 
-      @media (max-width: $breakpoint-md) {
-        font-size: 28px;
+      @include mq('sp') {
+        font-size: 32px;
       }
     }
 
     &-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 16px;
-      font-size: 14px;
+      gap: 20px;
+      font-size: 15px;
       color: $gray-600;
-      padding-bottom: 24px;
-      border-bottom: 1px solid $gray-200;
+      padding-top: 28px;
+      border-top: 1px solid rgba(243, 107, 10, 0.4);
 
       time,
       span {
         display: flex;
         align-items: center;
-        font-weight: 500;
+        font-weight: 600;
+        gap: 8px;
       }
-    }
-  }
 
-  &__cover {
-    margin-bottom: 48px;
-
-    &-container {
-      position: relative;
-      aspect-ratio: 16 / 9;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: $shadow-xl;
-      background: linear-gradient(135deg, $gray-100 0%, $gray-200 100%);
-
-      img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+      .meta-icon {
+        width: 18px;
+        height: 18px;
+        color: $primary-color;
+        flex-shrink: 0;
       }
     }
   }
 
   &__section {
-    &:last-child {
-      margin-bottom: 0;
-    }
-
     &-title {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 700;
-      color: $gray-900;
-      margin-bottom: 24px;
+      color: $text-color;
+      margin-bottom: 20px;
       position: relative;
-      padding-left: 16px;
+      padding-left: 20px;
+      letter-spacing: -0.025em;
 
       &::before {
         content: '';
@@ -728,84 +544,38 @@ $breakpoint-xl: 1280px;
         left: 0;
         top: 50%;
         transform: translateY(-50%);
-        width: 4px;
-        height: 60%;
-        background: linear-gradient(135deg, $primary-color 0%, #1e40af 100%);
-        border-radius: 2px;
+        width: 6px;
+        height: 70%;
+        background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 15%) 100%);
+        border-radius: 3px;
       }
 
-      @media (max-width: $breakpoint-md) {
-        font-size: 24px;
+      @include mq('sp') {
+        font-size: 28px;
       }
     }
 
     &-content {
       background: $white;
-      border: 1px solid $gray-200;
-      border-radius: 16px;
-      padding: 32px;
+      border: 1px solid rgba(243, 107, 10, 0.1);
+      border-radius: 20px;
+      padding: 30px;
       box-shadow: $shadow-sm;
 
       &--summary {
-        background: linear-gradient(135deg, $gray-50 0%, $white 100%);
+        background: linear-gradient(135deg, $base-color 0%, $white 100%);
       }
 
       p {
-        font-size: 16px;
-        line-height: 1.7;
-        color: $gray-700;
+        font-size: 17px;
+        line-height: 1.8;
+        color: $text-color;
         margin: 0;
         white-space: pre-line;
       }
 
-      @media (max-width: $breakpoint-md) {
-        padding: 24px;
-      }
-    }
-
-    &-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 32px;
-
-      @media (min-width: $breakpoint-md) {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .info-block {
-        &__title {
-          font-size: 18px;
-          font-weight: 600;
-          color: $gray-900;
-          margin-bottom: 16px;
-        }
-
-        &__tags {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-
-          .tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 500;
-
-            &--role {
-              background: rgba(168, 85, 247, 0.1);
-              color: #8b5cf6;
-              border: 1px solid rgba(168, 85, 247, 0.2);
-            }
-
-            &--tech {
-              background: $primary-light;
-              color: $primary-color;
-              border: 1px solid rgba(37, 99, 235, 0.2);
-            }
-          }
-        }
+      @include mq('sp') {
+        padding: 28px 24px;
       }
     }
 
@@ -818,177 +588,272 @@ $breakpoint-xl: 1280px;
         li {
           display: flex;
           align-items: flex-start;
-          margin-bottom: 16px;
-          font-size: 16px;
-          line-height: 1.6;
-          color: $gray-700;
+          margin-bottom: 10px;
+          font-size: 17px;
+          line-height: 1.7;
+          color: $text-color;
 
           &:last-child {
             margin-bottom: 0;
           }
-
-          &::before {
-            content: '✨';
-            margin-right: 12px;
-            margin-top: 2px;
-            flex-shrink: 0;
-          }
         }
       }
     }
 
-    &-testimonial {
-      blockquote {
-        font-size: 18px;
-        line-height: 1.7;
-        color: $gray-700;
-        font-style: italic;
-        margin: 0 0 24px 0;
-      }
+    // 担当範囲・技術タグ
+    .info-block__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
 
-      cite {
-        display: block;
-        text-align: right;
-        font-size: 16px;
-        color: $gray-600;
-        font-style: normal;
-        font-weight: 500;
-      }
-    }
-
-    &-site {
-      .site-link {
+      .tag {
         display: inline-flex;
         align-items: center;
-        padding: 16px 24px;
-        background: $primary-color;
-        color: $white;
-        text-decoration: none;
-        border-radius: 12px;
+        padding: 12px 20px;
+        border-radius: 20px;
+        font-size: 14px;
         font-weight: 600;
-        transition: $transition-fast;
-        box-shadow: $shadow-md;
+        letter-spacing: 0.025em;
 
-        &:hover {
-          background: $primary-hover;
-          transform: translateY(-2px);
-          box-shadow: $shadow-lg;
+        &--role {
+          background: rgba(124, 58, 237, 0.1);
+          color: #7c3aed;
+          border: 1px solid rgba(124, 58, 237, 0.2);
         }
 
-        svg {
-          margin-left: 8px;
-          width: 18px;
-          height: 18px;
+        &--tech {
+          background: $primary-lighter;
+          color: $primary-color;
+          border: 1px solid rgba(243, 107, 10, 0.2);
         }
       }
     }
   }
 
   &__navigation {
-    margin-top: 64px;
-    padding-top: 32px;
-    border-top: 2px solid $gray-100;
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 2px solid rgba(243, 107, 10, 0.1);
 
     &-content {
       display: flex;
       justify-content: center;
       align-items: center;
-
-      @media (max-width: $breakpoint-sm) {
-        flex-direction: column;
-        gap: 16px;
-      }
     }
 
     &-back {
       display: inline-flex;
       align-items: center;
-      padding: 12px 20px;
+      padding: 16px 28px;
       background: $white;
-      border: 2px solid $gray-200;
-      border-radius: 12px;
+      border: 2px solid rgba(243, 107, 10, 0.2);
+      border-radius: 16px;
       color: $primary-color;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       transition: $transition-fast;
+      letter-spacing: 0.025em;
 
       &:hover {
-        background: $primary-light;
+        background: $primary-lighter;
         border-color: $primary-color;
+        transform: translateY(-2px);
+        box-shadow: $shadow-md;
       }
 
       svg {
-        margin-right: 8px;
-        width: 16px;
-        height: 16px;
+        margin-right: 12px;
+        width: 18px;
+        height: 18px;
       }
     }
-
-    &-label {
-      font-size: 14px;
-      color: $gray-500;
-      font-weight: 500;
-    }
   }
 }
 
-// ===============================================
-// ローディング状態
-// ===============================================
-.results-loading {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 32px;
+// お客様の声
+blockquote {
+  font-size: 19px;
+  line-height: 1.8;
+  color: $text-color;
+  font-style: italic;
+  margin: 0 0 28px 0;
+  position: relative;
+  padding: 0 20px;
 
-  @media (min-width: $breakpoint-md) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-
-  @media (min-width: $breakpoint-lg) {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+  &::before {
+    content: '"';
+    font-size: 48px;
+    color: rgba(243, 107, 10, 0.3);
+    position: absolute;
+    top: -12px;
+    left: -8px;
+    font-family: Georgia, serif;
   }
 }
 
-.result-loading-card {
+cite {
+  display: block;
+  text-align: right;
+  font-size: 16px;
+  color: $gray-600;
+  font-style: normal;
+  font-weight: 600;
+}
+
+// サイトリンクカード
+.site-link-card {
+  display: flex;
   background: $white;
+  border: 1px solid rgba(243, 107, 10, 0.1);
   border-radius: 20px;
   overflow: hidden;
+  transition: $transition-base;
   box-shadow: $shadow-sm;
-  border: 1px solid $gray-100;
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-lg;
+    border-color: rgba(243, 107, 10, 0.2);
+
+    .site-link-card__image img {
+      transform: scale(1.05);
+    }
+
+    .site-link-card__title {
+      color: $primary-color;
+    }
+
+    .site-link-card__action svg {
+      transform: translateX(4px);
+    }
+  }
 
   &__image {
-    aspect-ratio: 16 / 10;
-    background: linear-gradient(135deg, $gray-200 0%, $gray-300 100%);
+    flex: 0 0 160px;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, $base-color 0%, $gray-100 100%);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    @include mq('sp') {
+      flex: 0 0 120px;
+      height: 100px;
+    }
   }
 
   &__content {
+    flex: 1;
     padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 120px;
+
+    @include mq('sp') {
+      padding: 20px 16px;
+      min-height: 100px;
+    }
   }
 
-  &__line {
-    height: 12px;
-    background: linear-gradient(135deg, $gray-200 0%, $gray-300 100%);
-    border-radius: 6px;
-    margin-bottom: 12px;
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
 
-    &:last-child {
-      margin-bottom: 0;
-    }
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    color: $text-color;
+    line-height: 1.4;
+    margin: 0;
+    transition: color 0.2s ease;
+    letter-spacing: -0.025em;
 
-    &--short {
-      width: 40%;
+    @include mq('sp') {
+      font-size: 16px;
     }
+  }
 
-    &--medium {
-      width: 70%;
-    }
+  &__action {
+    flex-shrink: 0;
+    margin-left: 16px;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(243, 107, 10, 0.1);
+    color: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    &--long {
-      width: 90%;
+    svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s ease;
     }
+  }
+
+  &__description {
+    font-size: 14px;
+    color: $gray-600;
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__url {
+    font-size: 12px;
+    color: $gray-500;
+    margin-top: 8px;
+    font-weight: 500;
+    word-break: break-all;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// 従来のサイトリンク（下位互換のため残す）
+.site-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 20px 32px;
+  background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
+  color: $white;
+  text-decoration: none;
+  border-radius: 16px;
+  font-weight: 700;
+  transition: $transition-fast;
+  box-shadow: $shadow-md;
+  letter-spacing: 0.025em;
+  font-size: 16px;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+    background: linear-gradient(135deg, darken($primary-color, 5%) 0%, darken($primary-color, 15%) 100%);
+  }
+
+  svg {
+    margin-left: 12px;
+    width: 20px;
+    height: 20px;
   }
 }
 
@@ -1001,25 +866,53 @@ $breakpoint-xl: 1280px;
     opacity: 1;
   }
   50% {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 
-@keyframes skeleton {
-  0% {
-    background-position: -200px 0;
+// ===============================================
+// レスポンシブ調整
+// ===============================================
+@include mq('sp') {
+  .result-card {
+    border-radius: 20px;
+
+    &__content {
+      padding: 24px;
+    }
+
+    &__badge {
+      top: 16px;
+      left: 16px;
+    }
+
+    &__action-icon {
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &__work-type {
+      padding: 8px 14px;
+      font-size: 11px;
+    }
+
+    &__title {
+      font-size: 18px;
+    }
+
+    &__summary {
+      font-size: 14px;
+    }
   }
-  100% {
-    background-position: calc(200px + 100%) 0;
+
+  .results-grid {
+    gap: 32px;
   }
 }
-
-// スケルトンローディング用
-.skeleton {
-  background: linear-gradient(90deg, $gray-100 25%, $gray-200 50%, $gray-100 75%);
-  background-size: 200px 100%;
-  animation: skeleton 1.2s ease-in-out infinite;
-}
-
-// 使用しないアニメーション（将来の拡張用）
-// .filter-transition などは現在未使用

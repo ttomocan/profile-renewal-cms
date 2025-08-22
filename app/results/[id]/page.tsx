@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getResultDetail } from '@/app/_libs/microcms';
-import { parseTechStack, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetCover, safeGetWorkType } from '@/lib/parse';
+import { parseTechStack, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover } from '@/lib/parse';
 
 interface ResultDetailPageProps {
   params: {
@@ -63,7 +63,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const projectType = safeGetProjectType(result);
   const roles = safeGetRoles(result);
   const clientName = safeGetClientName(result.clientName);
-  const cover = safeGetCover(result);
+  const cover = safeGetCover(result); // サイトカードで使用
 
   const techStackArray = parseTechStack(techStack);
   const highlightsArray = splitHighlights(highlights);
@@ -98,23 +98,35 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             <div className="result-detail__header-badges">
               <span className="badge badge--work-type">{workType}</span>
               <span className="badge badge--project-type">{projectType}</span>
-              <span className="badge badge--period">制作期間: {formattedPeriod}</span>
             </div>
 
             <h1 className="result-detail__header-title">{title}</h1>
 
             <div className="result-detail__header-meta">
-              <time dateTime={publishedAt}>公開日: {publishedDate}</time>
-              <span>クライアント: {clientName}</span>
+              <time dateTime={publishedAt}>
+                <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                公開日: {publishedDate}
+              </time>
+              <span>
+                <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                制作期間: {formattedPeriod}
+              </span>
+              {result.clientName && result.clientName.trim() && (
+                <span>
+                  <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                  </svg>
+                  クライアント: {clientName}
+                </span>
+              )}
             </div>
           </header>
 
-          {/* カバー画像 */}
-          <div className="result-detail__cover">
-            <div className="result-detail__cover-container">
-              <Image src={cover.url} alt={`${title}のカバー画像`} fill sizes="(max-width: 768px) 100vw, 896px" className="object-cover" priority />
-            </div>
-          </div>
+          {/* カバー画像は非表示 */}
 
           {/* 概要 */}
           <section className="result-detail__section">
@@ -129,9 +141,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             <section className="result-detail__section">
               <h2 className="result-detail__section-title">担当範囲</h2>
               <div className="result-detail__section-content result-detail__section-content--summary">
-                <div className="info-block__tags">
-                  <span className="tag tag--role">{roles}</span>
-                </div>
+                <span className="tag tag--role">{roles}</span>
               </div>
             </section>
           )}
@@ -141,13 +151,11 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             <section className="result-detail__section">
               <h2 className="result-detail__section-title">使用技術</h2>
               <div className="result-detail__section-content result-detail__section-content--summary">
-                <div className="info-block__tags">
-                  {techStackArray.map((tech, index) => (
-                    <span key={index} className="tag tag--tech">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                {techStackArray.map((tech, index) => (
+                  <span key={index} className="tag tag--tech">
+                    {tech}
+                  </span>
+                ))}
               </div>
             </section>
           )}
@@ -157,11 +165,13 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             <section className="result-detail__section">
               <h2 className="result-detail__section-title">工夫したポイント</h2>
               <div className="result-detail__section-content result-detail__section-content--summary">
-                <ul className="result-detail__section-highlights">
-                  {highlightsArray.map((highlight, index) => (
-                    <li key={index}>{highlight}</li>
-                  ))}
-                </ul>
+                <div className="result-detail__section-highlights">
+                  <ul>
+                    {highlightsArray.map((highlight, index) => (
+                      <li key={index}>{highlight}</li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </section>
           )}
@@ -182,7 +192,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <h2 className="result-detail__section-title">お客様の声</h2>
               <div className="result-detail__section-content result-detail__section-content--summary">
                 <blockquote>&ldquo;{testimonial}&rdquo;</blockquote>
-                <cite>― {clientName} 様</cite>
+                {result.clientName && result.clientName.trim() && <cite>― {clientName} 様</cite>}
               </div>
             </section>
           )}
@@ -190,15 +200,24 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
           {/* サイトリンク */}
           {siteUrl && siteUrl.trim() && (
             <section className="result-detail__section">
-              <h2 className="result-detail__section-title">サイト</h2>
-              <div className="result-detail__section-content result-detail__section-content--summary">
-                <a href={siteUrl} target="_blank" rel="noopener noreferrer" className="site-link">
-                  <span>サイトを見る</span>
-                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </a>
-              </div>
+              <h2 className="result-detail__section-title">サイトURL</h2>
+              <a href={siteUrl} target="_blank" rel="noopener noreferrer" className="site-link-card">
+                <div className="site-link-card__image">
+                  <Image src={cover.url} alt={`${title}のサイト画像`} fill sizes="160px" />
+                </div>
+                <div className="site-link-card__content">
+                  <div className="site-link-card__header">
+                    <h3 className="site-link-card__title">{title}</h3>
+                    <div className="site-link-card__action">
+                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
+                  </div>
+                  <p className="site-link-card__description">{summary}</p>
+                  <div className="site-link-card__url">{siteUrl}</div>
+                </div>
+              </a>
             </section>
           )}
         </article>
