@@ -136,7 +136,7 @@ export const getResults = async (params: {
       limit,
       offset,
       orders,
-      fields: 'id,publishedAt,updatedAt,title,workType,result-project-type,result-role,cover,clientName,summary,period,techStack,highlights,testimonial,kpi,siteUrl'
+      fields: 'id,publishedAt,updatedAt,title,workType,project-type,project-roles,cover,clientName,summary,period,techStack,highlights,testimonial,kpi,siteUrl'
     };
 
     if (filters.length > 0) {
@@ -238,64 +238,25 @@ export const getTotalCount = async (params: {
 };
 
 /**
- * プロジェクトタイプ一覧を取得（results用）
+ * プロジェクトタイプの選択肢（セレクトフィールドの値）
  */
-export const getResultProjectTypes = async (): Promise<ProjectType[]> => {
-  try {
-    const response = await client.getAllContents<ProjectType>({
-      endpoint: 'project-types',
-      customRequestInit: {
-        next: {
-          revalidate: 300,
-        },
-      },
-    });
-
-    return response;
-  } catch (error) {
-    console.error('Error fetching result project types:', error);
-    return [];
-  }
+export const getResultProjectTypes = (): string[] => {
+  // セレクトフィールドで設定した値をここに定義
+  return ['コーポレートサイト', 'ブログ', 'ECサイト', 'ランディングページ', 'Webアプリ', 'その他'];
 };
 
 /**
- * 役割一覧を取得（results用）
+ * 担当範囲の選択肢（セレクトフィールドの値）
  */
-export const getResultRoles = async (): Promise<Role[]> => {
-  try {
-    const response = await client.getAllContents<Role>({
-      endpoint: 'roles',
-      customRequestInit: {
-        next: {
-          revalidate: 300,
-        },
-      },
-    });
-
-    return response;
-  } catch (error) {
-    console.error('Error fetching result roles:', error);
-    return [];
-  }
+export const getResultRoles = (): string[] => {
+  // セレクトフィールドで設定した値をここに定義
+  return ['UI/UXデザイン', 'フロントエンド開発', 'バックエンド開発', 'WordPress構築', 'SEO対策', 'コンサルティング'];
 };
 
 /**
- * 案件区分一覧を取得（results用）
+ * 案件区分の選択肢（セレクトフィールドの値）
  */
-export const getResultWorkTypes = async (): Promise<WorkType[]> => {
-  try {
-    const response = await client.getAllContents<WorkType>({
-      endpoint: 'work-types',
-      customRequestInit: {
-        next: {
-          revalidate: 300,
-        },
-      },
-    });
-
-    return response;
-  } catch (error) {
-    console.error('Error fetching result work types:', error);
-    return [];
-  }
+export const getResultWorkTypes = (): string[] => {
+  // セレクトフィールドで設定した値をここに定義
+  return ['メイン業務', 'フリーランス', '副業', 'その他'];
 };

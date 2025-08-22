@@ -1,19 +1,11 @@
-// 基本型定義
-export interface ProjectType {
-  id: string;
-  name: string;
-}
+// プロジェクトタイプの型定義（セレクトフィールドの値：単一または複数選択）
+export type ProjectType = string | string[];
 
-export interface Role {
-  id: string;
-  name: string;
-}
+// 担当範囲の型定義（セレクトフィールドの値：単一または複数選択）
+export type Role = string | string[];
 
-// 案件区分の型定義（microCMSから取得）
-export interface WorkType {
-  id: string;
-  name: string;
-}
+// 案件区分の型定義（セレクトフィールドの値：単一または複数選択）
+export type WorkType = string | string[];
 
 // microCMS の画像型
 export interface MicroCMSImage {
@@ -28,13 +20,13 @@ export interface ResultItem {
   publishedAt: string;
   updatedAt: string;
   title: string;
-  workType?: WorkType; // 案件区分
-  'result-project-type'?: ProjectType; // 案件種別
+  workType?: WorkType; // 案件区分（セレクトフィールドの文字列値）
+  'project-type'?: ProjectType; // 案件種別（セレクトフィールドの文字列値）
   cover?: MicroCMSImage; // オプショナルにして未設定に対応
   clientName?: string; // オプショナルにして未入力に対応
   summary: string;
   period?: number; // オプショナルにして未入力に対応
-  'result-role'?: Role[]; // 担当範囲
+  'project-roles'?: Role; // 担当範囲（セレクトフィールドの文字列値）
   techStack?: string; // オプショナルにして未入力に対応
   highlights?: string; // オプショナルにして未入力に対応
   testimonial?: string;
@@ -45,8 +37,8 @@ export interface ResultItem {
 // 検索・フィルタ用の型
 export interface ResultsSearchParams {
   workType?: string;
-  'result-project-type'?: string;
-  'result-role'?: string;
+  'project-type'?: string;
+  'project-roles'?: string;
   q?: string;
   sort?: 'new' | 'periodDesc';
   page?: string;
@@ -60,11 +52,11 @@ export interface ResultsResponse {
   limit: number;
 }
 
-// フィルタオプション型
+// フィルタオプション型（すべて文字列配列）
 export interface FilterOptions {
-  workTypes: WorkType[];
-  projectTypes: ProjectType[];
-  roles: Role[];
+  workTypes: string[];
+  projectTypes: string[];
+  roles: string[];
 }
 
 // ソートオプション型

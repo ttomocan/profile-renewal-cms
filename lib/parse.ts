@@ -127,11 +127,11 @@ export function buildMicroCMSFilters(params: {
   }
 
   if (params.projectTypeId) {
-    filters.push(`result-project-type[equals]${params.projectTypeId}`);
+    filters.push(`project-type[equals]${params.projectTypeId}`);
   }
 
   if (params.roleId) {
-    filters.push(`result-role[contains]${params.roleId}`);
+    filters.push(`project-roles[equals]${params.roleId}`);
   }
 
   if (params.q) {
@@ -152,23 +152,47 @@ export function buildMicroCMSFilters(params: {
 
 /**
  * プロジェクトタイプの安全な取得（未登録対応）
+ * 複数選択の場合は「 / 」で区切って返す
  */
-export function safeGetProjectType(result: { 'result-project-type'?: { id: string; name: string } }): { id: string; name: string } {
-  return result['result-project-type'] || { id: 'unknown', name: '未分類' };
+export function safeGetProjectType(result: { 'project-type'?: string | string[] }): string {
+  const projectType = result['project-type'];
+  if (!projectType) return '未分類';
+
+  if (Array.isArray(projectType)) {
+    return projectType.join(' / ');
+  }
+
+  return projectType;
 }
 
 /**
  * 案件区分の安全な取得（未登録対応）
+ * 複数選択の場合は「 / 」で区切って返す
  */
-export function safeGetWorkType(result: { workType?: WorkType }): { id: string; name: string } {
-  return result.workType || { id: 'unknown', name: '未分類' };
+export function safeGetWorkType(result: { workType?: WorkType }): string {
+  const workType = result.workType;
+  if (!workType) return '未分類';
+
+  if (Array.isArray(workType)) {
+    return workType.join(' / ');
+  }
+
+  return workType;
 }
 
 /**
- * 役割配列の安全な取得（未登録対応）
+ * 担当範囲の安全な取得（未登録対応）
+ * 複数選択の場合は「 / 」で区切って返す
  */
-export function safeGetRoles(result: { 'result-role'?: { id: string; name: string }[] }): { id: string; name: string }[] {
-  return result['result-role'] || [];
+export function safeGetRoles(result: { 'project-roles'?: string | string[] }): string {
+  const roles = result['project-roles'];
+  if (!roles) return '未分類';
+
+  if (Array.isArray(roles)) {
+    return roles.join(' / ');
+  }
+
+  return roles;
 }
 
 /**

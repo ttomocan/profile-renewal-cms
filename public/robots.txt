@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.tomocan.site
+
+# Sitemaps
+Sitemap: https://www.tomocan.site/sitemap.xml

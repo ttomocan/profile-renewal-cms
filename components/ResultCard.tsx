@@ -31,7 +31,7 @@ export default function ResultCard({ result, priority = false, disableLink = fal
 
             {/* バッジ */}
             <div className="result-card__badge">
-              <span className={`result-card__work-type work-type-${workType.id}`}>{workType.name}</span>
+              <span className={`result-card__work-type work-type-${workType}`}>{workType}</span>
             </div>
 
             {/* ホバー時のアクション（リンク無効時は非表示） */}
@@ -44,7 +44,7 @@ export default function ResultCard({ result, priority = false, disableLink = fal
 
           <div className="result-card__content">
             <div className="result-card__meta">
-              <span className="result-card__category">{projectType.name}</span>
+              <span className="result-card__category">{projectType}</span>
               <span className="result-card__period">{formatPeriod(period)}</span>
             </div>
 
@@ -64,7 +64,7 @@ export default function ResultCard({ result, priority = false, disableLink = fal
 
             {/* バッジ */}
             <div className="result-card__badge">
-              <span className={`result-card__work-type work-type-${workType.id}`}>{workType.name}</span>
+              <span className={`result-card__work-type work-type-${workType}`}>{workType}</span>
             </div>
 
             {/* ホバー時のアクション */}
@@ -77,7 +77,7 @@ export default function ResultCard({ result, priority = false, disableLink = fal
 
           <div className="result-card__content">
             <div className="result-card__meta">
-              <span className="result-card__category">{projectType.name}</span>
+              <span className="result-card__category">{projectType}</span>
               <span className="result-card__period">{formatPeriod(period)}</span>
             </div>
 
