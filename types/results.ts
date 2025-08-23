@@ -32,6 +32,7 @@ export interface ResultItem {
   testimonial?: string;
   kpi?: string;
   siteUrl?: string;
+  scale?: string; // プロジェクト規模（オプショナル）
 }
 
 // 検索・フィルタ用の型
@@ -68,5 +69,5 @@ export interface SortOption {
 // ソートオプション
 export const sortOptions: SortOption[] = [
   { value: 'new', label: '新着順' },
-  { value: 'periodDesc', label: '制作期間（降順）' }
+  { value: 'periodDesc', label: '制作期間（降順）' },
 ];

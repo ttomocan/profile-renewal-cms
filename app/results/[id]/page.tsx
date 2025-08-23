@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getResultDetail } from '@/app/_libs/microcms';
-import { parseTechStack, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover } from '@/lib/parse';
+import { parseTechStack, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
@@ -60,7 +60,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     notFound();
   }
 
-  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, publishedAt } = result;
+  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, scale, publishedAt } = result;
 
   // 安全な取得関数を使用
   const workType = safeGetWorkType(result);
@@ -68,6 +68,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const roles = safeGetRoles(result);
   const clientName = safeGetClientName(result.clientName);
   const cover = safeGetCover(result); // サイトカードで使用
+  const safeScale = safeGetScale(scale);
 
   const techStackArray = parseTechStack(techStack);
   const highlightsArray = splitHighlights(highlights);
@@ -146,6 +147,16 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 <h2 className="result-detail__section-title">担当範囲</h2>
                 <div className="result-detail__section-content result-detail__section-content--summary">
                   <p>{roles}</p>
+                </div>
+              </section>
+            )}
+
+            {/* プロジェクト規模 */}
+            {safeScale && (
+              <section className="result-detail__section">
+                <h2 className="result-detail__section-title">プロジェクト規模</h2>
+                <div className="result-detail__section-content result-detail__section-content--summary">
+                  <p>{safeScale}</p>
                 </div>
               </section>
             )}

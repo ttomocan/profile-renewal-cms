@@ -738,11 +738,6 @@ cite {
 
     @include mq('sp') {
       flex: 0 0 64px;
-
-      img {
-        width: 32px;
-        height: 32px;
-      }
     }
   }
 
@@ -789,6 +784,10 @@ cite {
     justify-content: center;
     margin-top: -8px;
     transform: translate(8px, 0);
+
+    @include mq('sp') {
+      margin-top: -12px;
+    }
 
     svg {
       width: 16px;

@@ -10,8 +10,8 @@ export function parseTechStack(str?: string): string[] {
 
   return str
     .split(',')
-    .map(tech => tech.trim())
-    .filter(tech => tech.length > 0);
+    .map((tech) => tech.trim())
+    .filter((tech) => tech.length > 0);
 }
 
 /**
@@ -24,8 +24,8 @@ export function splitHighlights(str?: string): string[] {
 
   return str
     .split('\n')
-    .map(line => line.trim())
-    .filter(line => line.length > 0);
+    .map((line) => line.trim())
+    .filter((line) => line.length > 0);
 }
 
 /**
@@ -97,10 +97,7 @@ export function normalizePage(page: string | null): number {
 /**
  * URLSearchParamsを安全に更新
  */
-export function updateSearchParams(
-  currentParams: URLSearchParams,
-  updates: Record<string, string | null>
-): URLSearchParams {
+export function updateSearchParams(currentParams: URLSearchParams, updates: Record<string, string | null>): URLSearchParams {
   const newParams = new URLSearchParams(currentParams);
 
   Object.entries(updates).forEach(([key, value]) => {
@@ -117,12 +114,7 @@ export function updateSearchParams(
 /**
  * microCMS の検索フィルタを構築
  */
-export function buildMicroCMSFilters(params: {
-  workTypeId?: string;
-  projectTypeId?: string;
-  roleId?: string;
-  q?: string;
-}): string[] {
+export function buildMicroCMSFilters(params: { workTypeId?: string; projectTypeId?: string; roleId?: string; q?: string }): string[] {
   const filters: string[] = [];
 
   if (params.workTypeId) {
@@ -139,12 +131,7 @@ export function buildMicroCMSFilters(params: {
 
   if (params.q) {
     // 複数フィールドでのOR検索は制限があるため、タイトルと概要のみに限定
-    const searchFields = [
-      `title[contains]${params.q}`,
-      `summary[contains]${params.q}`,
-      `techStack[contains]${params.q}`,
-      `highlights[contains]${params.q}`
-    ];
+    const searchFields = [`title[contains]${params.q}`, `summary[contains]${params.q}`, `techStack[contains]${params.q}`, `highlights[contains]${params.q}`];
     // OR条件は microCMS の制限により実装が複雑になるため、
     // 簡単のためタイトル検索のみに限定
     filters.push(`title[contains]${params.q}`);
@@ -210,13 +197,22 @@ export function safeGetClientName(clientName?: string): string {
  * @param result - 実績データ
  * @param useOgpForDefault - 未設定時にOGP画像を使用するかどうか（一覧ページ用）
  */
-export function safeGetCover(
-  result: { cover?: { url: string; width: number; height: number } },
-  useOgpForDefault: boolean = false
-): { url: string; width: number; height: number } {
-  return result.cover || {
-    url: useOgpForDefault ? '/img/common/ogp.png' : '/img/common/default-cover.svg',
-    width: 800,
-    height: 400
-  };
+export function safeGetCover(result: { cover?: { url: string; width: number; height: number } }, useOgpForDefault: boolean = false): { url: string; width: number; height: number } {
+  return (
+    result.cover || {
+      url: useOgpForDefault ? '/img/common/ogp.png' : '/img/common/default-cover.svg',
+      width: 800,
+      height: 400,
+    }
+  );
+}
+
+/**
+ * プロジェクト規模の安全な取得（未入力対応）
+ */
+export function safeGetScale(scale?: string): string | null {
+  if (!scale || typeof scale !== 'string' || !scale.trim()) {
+    return null;
+  }
+  return scale.trim();
 }

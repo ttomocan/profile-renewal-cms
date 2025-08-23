@@ -97,32 +97,26 @@ export const getAllCategoryList = async () => {
 /**
  * 実績一覧を取得
  */
-export const getResults = async (params: {
-  limit?: number;
-  offset?: number;
-  workTypeId?: string;
-  projectTypeId?: string;
-  roleId?: string;
-  q?: string;
-  sort?: 'new' | 'periodDesc';
-} = {}): Promise<ResultsResponse> => {
+export const getResults = async (
+  params: {
+    limit?: number;
+    offset?: number;
+    workTypeId?: string;
+    projectTypeId?: string;
+    roleId?: string;
+    q?: string;
+    sort?: 'new' | 'periodDesc';
+  } = {}
+): Promise<ResultsResponse> => {
   try {
-    const {
-      limit = 12,
-      offset = 0,
-      workTypeId,
-      projectTypeId,
-      roleId,
-      q,
-      sort = 'new'
-    } = params;
+    const { limit = 12, offset = 0, workTypeId, projectTypeId, roleId, q, sort = 'new' } = params;
 
     // フィルタ条件を構築
     const filters = buildMicroCMSFilters({
       workTypeId,
       projectTypeId,
       roleId,
-      q
+      q,
     });
 
     // ソート条件を設定
@@ -136,7 +130,7 @@ export const getResults = async (params: {
       limit,
       offset,
       orders,
-      fields: 'id,publishedAt,updatedAt,title,workType,project-type,project-roles,cover,clientName,summary,period,techStack,highlights,testimonial,kpi,siteUrl'
+      fields: 'id,publishedAt,updatedAt,title,workType,project-type,project-roles,cover,clientName,summary,period,techStack,highlights,testimonial,kpi,siteUrl,scale',
     };
 
     if (filters.length > 0) {
@@ -157,7 +151,7 @@ export const getResults = async (params: {
       contents: response.contents,
       totalCount: response.totalCount,
       offset: response.offset,
-      limit: response.limit
+      limit: response.limit,
     };
   } catch (error) {
     console.error('Error fetching results:', error);
@@ -165,7 +159,7 @@ export const getResults = async (params: {
       contents: [],
       totalCount: 0,
       offset: 0,
-      limit: 12
+      limit: 12,
     };
   }
 };
@@ -195,12 +189,14 @@ export const getResultDetail = async (id: string): Promise<ResultItem | null> =>
 /**
  * 実績の総数を取得（フィルタ条件付き）
  */
-export const getTotalCount = async (params: {
-  workTypeId?: string;
-  projectTypeId?: string;
-  roleId?: string;
-  q?: string;
-} = {}): Promise<number> => {
+export const getTotalCount = async (
+  params: {
+    workTypeId?: string;
+    projectTypeId?: string;
+    roleId?: string;
+    q?: string;
+  } = {}
+): Promise<number> => {
   try {
     const { workTypeId, projectTypeId, roleId, q } = params;
 
@@ -208,12 +204,12 @@ export const getTotalCount = async (params: {
       workTypeId,
       projectTypeId,
       roleId,
-      q
+      q,
     });
 
     const queries: MicroCMSQueries = {
       limit: 1,
-      fields: 'id'
+      fields: 'id',
     };
 
     if (filters.length > 0) {
