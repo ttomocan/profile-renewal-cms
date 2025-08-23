@@ -62,6 +62,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
 
   const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, scale, publishedAt } = result;
 
+  // デバッグ用ログ（一時的）
+  console.log('Result data:', { scale, scaleType: typeof scale });
+
   // 安全な取得関数を使用
   const workType = safeGetWorkType(result);
   const projectType = safeGetProjectType(result);
@@ -69,6 +72,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const clientName = safeGetClientName(result.clientName);
   const cover = safeGetCover(result); // サイトカードで使用
   const safeScale = safeGetScale(scale);
+
+  // デバッグ用ログ（一時的）
+  console.log('Safe scale:', safeScale);
 
   const techStackArray = parseTechStack(techStack);
   const highlightsArray = splitHighlights(highlights);
