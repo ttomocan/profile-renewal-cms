@@ -215,7 +215,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {siteUrl && siteUrl.trim() && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">サイトURL</h2>
-                <a href={siteUrl} target="_blank" rel="noopener noreferrer" className="site-link-card">
+                <a href={siteUrl} target="_blank" rel="noopener noreferrer nofollow" className="site-link-card">
                   <div className="site-link-card__favicon">
                     <Image src={getFaviconUrl(siteUrl)} alt={`${title}のファビコン`} width={64} height={64} unoptimized={true} />
                   </div>
