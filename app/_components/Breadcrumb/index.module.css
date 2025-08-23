@@ -16,9 +16,9 @@
   gap: 8px;
   list-style: none;
   margin: 0;
-  padding: 16px 0;
+  padding: 14px 0;
   font-size: 14px;
-  line-height: 1.4;
+  line-height: 1.5;
 
   @include mq('sp') {
     padding: 12px 0;
