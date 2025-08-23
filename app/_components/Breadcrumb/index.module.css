@@ -140,7 +140,6 @@
 @media (prefers-color-scheme: dark) {
   .breadcrumb {
     background: rgba(40, 40, 40, 0.6);
-    border-bottom-color: rgba(243, 107, 10, 0.2);
   }
 
   .item {
