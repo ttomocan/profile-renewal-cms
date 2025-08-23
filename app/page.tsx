@@ -81,26 +81,24 @@ export default async function Home() {
             <div className="p-top-about__image fadeUpTrigger">
               <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} />
             </div>
-            <div className="p-top-about__detail fadeUpTrigger">
-              <p>
-                名古屋を拠点に活動するWebエンジニア・ブロガーの「ともきゃん」です。
-                <br />
-                当プロフィールサイトをご覧いただき、ありがとうございます。
-                <br />
-                これまで2社のWeb制作会社で9年以上、コーポレートサイトや採用サイト、情報発信ブログなど、いろんなWebサイトの設計・開発・運用をやってきました。
-                <br />
-                また、個人でも2つのブログを運営し、独自にWebサービスを開発・販売するなど、幅広く活動しています。
-                <br />
-                「Webサイトの集客をもっと伸ばしたい」「ブログで結果を出したい」「デザインやUIをもっと良くしたい」など、あなたのお悩みに合わせてピッタリの解決策を一緒に考えてカタチにします。
-                <br />
-                現場で培った実践的なノウハウと最新の技術を活かし、目的に合わせた高品質なWebサイト・ブログを丁寧に制作します。ご相談・ご依頼はお気軽にご連絡ください。
-              </p>
+            <div className="p-top-about__text-area fadeUpTrigger">
+              <div className="p-top-about__speech-bubble">
+                <p>
+                  はじめまして！名古屋を拠点に活動するWebエンジニア・ブロガーの「ともきゃん」です。
+                  <br />
+                  Web制作会社で9年以上の経験を積み、現在は個人でもWebサイト制作やブログ運営を行っています。
+                  <br />
+                  「あなたのWebサイトをもっと良くしたい」そんな想いで、お客様のお悩みに合わせた解決策を一緒に考えてカタチにしてきました。
+                  <br />
+                  あなたの悩みを解決するため、お気軽にご相談ください！
+                </p>
+              </div>
             </div>
-            <div className="p-top-about__button fadeUpTrigger">
-              <Link href="/about/" className="c-button__link">
-                ともきゃんについて知る
-              </Link>
-            </div>
+          </div>
+          <div className="p-top-about__button fadeUpTrigger">
+            <Link href="/about/" className="c-button__link">
+              ともきゃんについて知る
+            </Link>
           </div>
         </section>
         <section className="p-top-skill inner">
