@@ -7,6 +7,9 @@ export type Role = string | string[];
 // 案件区分の型定義（セレクトフィールドの値：単一または複数選択）
 export type WorkType = string | string[];
 
+// プロジェクト規模の型定義（セレクトフィールドの値：単一または複数選択）
+export type Scale = string | string[];
+
 // microCMS の画像型
 export interface MicroCMSImage {
   url: string;
@@ -32,7 +35,7 @@ export interface ResultItem {
   testimonial?: string;
   kpi?: string;
   siteUrl?: string;
-  scale?: string; // プロジェクト規模（オプショナル）
+  scale?: Scale; // プロジェクト規模（セレクトフィールドの文字列値）
 }
 
 // 検索・フィルタ用の型

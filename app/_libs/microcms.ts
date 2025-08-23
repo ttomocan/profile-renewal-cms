@@ -172,9 +172,6 @@ export const getResultDetail = async (id: string): Promise<ResultItem | null> =>
     const response = await client.getListDetail<ResultItem>({
       endpoint: 'results',
       contentId: id,
-      queries: {
-        fields: 'id,publishedAt,updatedAt,title,workType,project-type,project-roles,cover,clientName,summary,period,techStack,highlights,testimonial,kpi,siteUrl,scale',
-      },
       customRequestInit: {
         next: {
           revalidate: 300, // 5分キャッシュ

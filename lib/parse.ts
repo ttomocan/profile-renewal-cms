@@ -1,4 +1,4 @@
-import type { WorkType } from '@/types/results';
+import type { WorkType, Scale } from '@/types/results';
 
 /**
  * カンマ区切りの技術スタック文字列を配列に変換
@@ -208,11 +208,16 @@ export function safeGetCover(result: { cover?: { url: string; width: number; hei
 }
 
 /**
- * プロジェクト規模の安全な取得（未入力対応）
+ * プロジェクト規模の安全な取得（未登録対応）
+ * 複数選択の場合は「 / 」で区切って返す
  */
-export function safeGetScale(scale?: string): string | null {
-  if (!scale || typeof scale !== 'string' || !scale.trim()) {
-    return null;
+export function safeGetScale(result: { scale?: string | string[] }): string {
+  const scale = result.scale;
+  if (!scale) return '未分類';
+
+  if (Array.isArray(scale)) {
+    return scale.join(' / ');
   }
-  return scale.trim();
+
+  return scale;
 }
