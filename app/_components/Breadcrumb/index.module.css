@@ -1,9 +1,7 @@
 .breadcrumb {
   background: rgba(40, 40, 40, 0.6);
-  border-bottom: 1px solid rgba(243, 107, 10, 0.2);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .list {
