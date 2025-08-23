@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { createContactData } from '@/app/_actions/contact';
-import { useActionState } from 'react';
+import { useFormState } from 'react-dom';
 import { sendGAEvent } from '@next/third-parties/google';
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
 };
 
 export default function ContactForm() {
-  const [state, formAction] = useActionState(createContactData, initialState);
+  const [state, formAction] = useFormState(createContactData, initialState);
   console.log(state);
   const handleSubmit = () => {
     sendGAEvent({ event: 'contact', value: 'submit' });

@@ -11,11 +11,26 @@ const buildUrl = (path: string = '/') => {
 const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary', 'results'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [blogContents, categoryContents, resultsData] = await Promise.all([
-    getAllBlogList(),
-    getAllCategoryList(),
-    getResults({ limit: 1000 }), // 全実績を取得
-  ]);
+  // 実績を全件取得するための関数
+  const getAllResults = async () => {
+    let allResults: any[] = [];
+    let offset = 0;
+    const limit = 100;
+
+    while (true) {
+      const data = await getResults({ limit, offset });
+      allResults = [...allResults, ...data.contents];
+
+      if (data.contents.length < limit) {
+        break; // 最後のページに到達
+      }
+      offset += limit;
+    }
+
+    return { contents: allResults };
+  };
+
+  const [blogContents, categoryContents, resultsData] = await Promise.all([getAllBlogList(), getAllCategoryList(), getAllResults()]);
 
   const now = new Date();
 
