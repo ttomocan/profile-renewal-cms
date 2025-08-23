@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [blogContents, categoryContents, resultsData] = await Promise.all([
     getAllBlogList(),
     getAllCategoryList(),
-    getResults({ limit: 1000 }) // 全実績を取得
+    getResults({ limit: 1000 }), // 全実績を取得
   ]);
 
   const now = new Date();

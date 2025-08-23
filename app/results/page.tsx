@@ -9,6 +9,7 @@ interface SimpleSearchParams {
 import ResultCard from '@/components/ResultCard';
 import Pagination from '@/components/Pagination';
 import PageTitle from '@/app/_components/PageTitle';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 import '@/styles/pages/results.scss';
 
 interface ResultsPageProps {
@@ -119,8 +120,16 @@ async function ResultsContent({ searchParams }: ResultsPageProps) {
 }
 
 export default function ResultsPage({ searchParams }: ResultsPageProps) {
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: '実績紹介', active: true },
+  ];
+
   return (
     <>
+      {/* パンくずリスト */}
+      <Breadcrumb items={breadcrumbItems} />
+
       {/* ページタイトル */}
       <PageTitle title="Results" sub="実績紹介" />
 

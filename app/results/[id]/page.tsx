@@ -6,6 +6,7 @@ import { getResultDetail } from '@/app/_libs/microcms';
 import { parseTechStack, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover } from '@/lib/parse';
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 import '@/styles/pages/results.scss';
 
 interface ResultDetailPageProps {
@@ -78,26 +79,22 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     day: 'numeric',
   });
 
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: '実績紹介', href: '/results/' },
+    { label: title, active: true },
+  ];
+
   return (
     <>
+      {/* パンくずリスト */}
+      <Breadcrumb items={breadcrumbItems} />
+
       {/* ページタイトル */}
       <PageTitle title="Results" sub="実績紹介" />
 
       <main className="results-main">
         <div className="results-inner">
-          {/* パンくずリスト */}
-          <nav className="result-detail__breadcrumb" aria-label="パンくずリスト">
-            <ol>
-              <li>
-                <Link href="/">ホーム</Link>
-              </li>
-              <li>
-                <Link href="/results">実績一覧</Link>
-              </li>
-              <li>{title}</li>
-            </ol>
-          </nav>
-
           {/* メインコンテンツ */}
           <article className="result-detail">
             {/* ヘッダー */}

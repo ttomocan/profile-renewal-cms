@@ -5,6 +5,7 @@ import Article from '@/app/_components/Article';
 import Link from 'next/link';
 import styles from './page.module.css';
 import BlogPostJsonLd from '@/app/_components/BlogPostJsonLd';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 
 type Props = {
   params: {
@@ -49,8 +50,15 @@ export default async function Page({ params, searchParams }: Props) {
 
   const pageUrl = `https://www.tomocan.site/diary/${params.slug}`;
 
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃん日記', href: '/diary/' },
+    { label: data.title, active: true },
+  ];
+
   return (
     <>
+      <Breadcrumb items={breadcrumbItems} />
       <article className="inner">
         <Article data={data} />
         <div className={styles.footer}>

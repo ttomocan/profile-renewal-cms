@@ -5,6 +5,7 @@ import Pagination from '@/app/_components/Pagination';
 import Category from '@/app/_components/Category';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 import styles from './page.module.css';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 
 type Props = {
   params: {
@@ -20,8 +21,15 @@ export default async function Page({ params }: Props) {
     filters: `category[equals]${category.id}`,
   });
 
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃん日記', href: '/diary/' },
+    { label: `${category.name}の記事`, active: true },
+  ];
+
   return (
     <>
+      <Breadcrumb items={breadcrumbItems} />
       <section className="inner">
         <h2 className={styles.category_title}>
           <Category category={category} /> の一覧

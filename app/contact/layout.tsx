@@ -1,4 +1,5 @@
 import PageTitle from '@/app/_components/PageTitle';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 const pageTitle = 'お問い合わせ';
@@ -32,8 +33,14 @@ type Props = {
 };
 
 export default function RootLayout({ children }: Props) {
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'お問い合わせ', active: true },
+  ];
+
   return (
     <>
+      <Breadcrumb items={breadcrumbItems} />
       <PageTitle title="Contact" sub="お問い合わせ" />
       <main>{children}</main>
     </>

@@ -4,6 +4,7 @@ import { getBlogList } from '@/app/_libs/microcms';
 import DiaryList from '@/app/_components/DiaryList';
 import DiaryListSkeleton from '@/app/_components/DiaryListSkeleton';
 import Pagination from '@/app/_components/Pagination';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 
 type Props = {
@@ -38,8 +39,15 @@ async function DiaryListContent({ current }: { current: number }) {
 export default function Page({ params }: Props) {
   const current = parseInt(params.current as string, 10);
 
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃん日記', href: '/diary/' },
+    { label: `${current}ページ目`, active: true },
+  ];
+
   return (
     <>
+      <Breadcrumb items={breadcrumbItems} />
       <section className="inner">
         <Suspense fallback={<DiaryListSkeleton />}>
           <DiaryListContent current={current} />

@@ -5,6 +5,7 @@ import DiaryList from '@/app/_components/DiaryList';
 import DiaryListSkeleton from '@/app/_components/DiaryListSkeleton';
 import SearchField from '@/app/_components/SearchField';
 import styles from './page.module.css';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 
 type Props = {
   searchParams: {
@@ -36,8 +37,15 @@ async function SearchResults({ query }: { query: string | undefined }) {
 export default function Page({ searchParams }: Props) {
   const query = searchParams.q;
 
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃん日記', href: '/diary/' },
+    { label: '記事検索', active: true },
+  ];
+
   return (
     <>
+      <Breadcrumb items={breadcrumbItems} />
       <section className="inner">
         <SearchField defaultValue={query} />
         <Suspense fallback={<DiaryListSkeleton />}>

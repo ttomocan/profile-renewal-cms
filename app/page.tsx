@@ -109,14 +109,14 @@ export default async function Home() {
               <p>HTML、CSS、JavaScript、PHPを用いたWebサイト構築が得意です。特にWordPressのカスタマイズに強みを持ち、独自のテーマを作成します。お客様のご要望に合わせて、管理画面の更新機能やサイトのレイアウトを自在に調整し、ユーザビリティを向上させます。また、SEOに配慮したコーディングも行い、検索エンジンでの集客力アップをサポートします。</p>
             </div>
             <div className="p-top-skill__item col fadeUpTrigger">
-              <Image src="/img/pages/top/img_web-tool.jpg" alt="サイト制作ツールのイメージ写真" width={300} height={200} />
-              <h3 className="p-top-skill__item-heading c-heading-lv3">サイト制作ツール</h3>
+              <Image src="/img/pages/top/img_web-tool.jpg" alt="ウェブ制作ツールのイメージ写真" width={300} height={200} />
+              <h3 className="p-top-skill__item-heading c-heading-lv3">ウェブ制作ツール</h3>
               <p>Cursor、Figma、Photoshop、Illustratorを使いこなし、効率的かつ美しいデザインを実現します。さらに、CanvaやAdobe Expressといったオンラインツールも活用し、短時間で効果的なビジュアルを作成。プロジェクトの進行スピードを速めつつ、クオリティを保つことができます。各ツールの特性を活かして、ユーザーにとってわかりやすく魅力的なデザインを提供します。</p>
             </div>
             <div className="p-top-skill__item col fadeUpTrigger">
-              <Image src="/img/pages/top/img_seo.jpg" alt="SEOのイメージ写真" width={300} height={200} />
-              <h3 className="p-top-skill__item-heading c-heading-lv3">SEO</h3>
-              <p>SEOに配慮したコーディングとコンテンツ制作が得意です。5年間のブログ運営で培った経験を活かし、キーワード選定や内部対策、効果的なWebライティングを行います。検索エンジンに強いサイト構築を目指し、ユーザーの検索意図に応えるコンテンツを作成し、上位表示を実現します。また、アクセス解析を通じて改善策を提案し、サイト全体のパフォーマンス向上をサポートします。</p>
+              <Image src="/img/pages/top/img_ai-tool.jpg" alt="AIツールのイメージ写真" width={300} height={200} />
+              <h3 className="p-top-skill__item-heading c-heading-lv3">AIツール</h3>
+              <p>ChatGPT、Claude、Geminiなどの最新AIツールを積極的に活用し、コーディングやデザイン、SEO対策、コンテンツ作成まで幅広く対応しています。AIの力を取り入れることで、作業効率とクオリティの両立を実現し、短期間で高品質なWebサイトや成果物を提供します。常に新しい技術を取り入れ、お客様のご要望に柔軟かつスピーディーに応えます。</p>
             </div>
           </div>
           <div className="p-top-skill__button fadeUpTrigger">

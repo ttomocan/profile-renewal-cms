@@ -1,5 +1,6 @@
 import './globals.css';
 import PageTitle from '@/app/_components/PageTitle';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 import { getBlogList } from '@/app/_libs/microcms';
 import type { Metadata } from 'next';
 
@@ -42,8 +43,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃん日記', active: true },
+  ];
+
   return (
     <>
+      <Breadcrumb items={breadcrumbItems} />
       <PageTitle title="Diary" sub={META_TITLE} />
       <main>{children}</main>
     </>

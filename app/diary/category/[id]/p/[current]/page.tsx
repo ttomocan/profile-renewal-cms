@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { getCategoryDetail, getBlogList } from '@/app/_libs/microcms';
 import DiaryList from '@/app/_components/DiaryList';
 import Pagination from '@/app/_components/Pagination';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 
 type Props = {
@@ -30,8 +31,16 @@ export default async function Page({ params }: Props) {
     notFound();
   }
 
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃん日記', href: '/diary/' },
+    { label: `${category.name}の記事`, href: `/diary/category/${category.id}/` },
+    { label: `${current}ページ目`, active: true },
+  ];
+
   return (
     <>
+      <Breadcrumb items={breadcrumbItems} />
       <DiaryList blog={blog} />
       <Pagination totalCount={totalCount} current={current} basePath={`/diary/category/${category.id}`} />
     </>
