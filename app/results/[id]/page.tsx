@@ -92,7 +92,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
       <Breadcrumb items={breadcrumbItems} />
 
       {/* ページタイトル */}
-      <PageTitle title="Result" sub="実績紹介" />
+      <PageTitle title="Results" sub="実績紹介" />
 
       <main className="results-main">
         <div className="results-inner">
