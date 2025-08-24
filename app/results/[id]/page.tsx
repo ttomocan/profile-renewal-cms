@@ -243,7 +243,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
-                実績一覧に戻る
+                実績紹介に戻る
               </Link>
             </div>
           </nav>

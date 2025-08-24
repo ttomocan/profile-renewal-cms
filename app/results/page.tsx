@@ -20,10 +20,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const siteName = 'ともきゃんスタイル';
 
   return {
-    title: `実績一覧 | ${siteName}`,
+    title: `実績紹介 | ${siteName}`,
     description: 'ともきゃんスタイルの制作実績を一覧でご覧いただけます。Webサイト制作、ブログカスタマイズ、デザイン制作など多数の実績をご紹介しています。',
     openGraph: {
-      title: `実績一覧 | ${siteName}`,
+      title: `実績紹介 | ${siteName}`,
       description: 'ともきゃんスタイルの制作実績を一覧でご覧いただけます。',
       type: 'website',
     },
@@ -92,7 +92,7 @@ async function ResultsContent({ searchParams }: ResultsPageProps) {
         </p>
       </div> */}
 
-      {/* 実績一覧 */}
+      {/* 実績紹介 */}
       {results.length > 0 ? (
         <>
           <div className="results-grid">

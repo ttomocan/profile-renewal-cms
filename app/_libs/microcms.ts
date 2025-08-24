@@ -95,7 +95,7 @@ export const getAllCategoryList = async () => {
 // ===== Results API関数 =====
 
 /**
- * 実績一覧を取得
+ * 実績紹介を取得
  */
 export const getResults = async (
   params: {
