@@ -60,7 +60,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     notFound();
   }
 
-  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, scale, publishedAt } = result;
+  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, scale } = result;
 
   // 安全な取得関数を使用
   const workType = safeGetWorkType(result);
@@ -73,12 +73,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const techStackArray = parseTechStack(techStack);
   const highlightsArray = splitHighlights(highlights);
   const formattedPeriod = formatPeriod(period);
-
-  const publishedDate = new Date(publishedAt).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 
   const breadcrumbItems = [
     { label: 'ホーム', href: '/' },
@@ -108,12 +102,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <h1 className="result-detail__header-title">{title}</h1>
 
               <div className="result-detail__header-meta">
-                <time dateTime={publishedAt}>
-                  <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  公開日: {publishedDate}
-                </time>
                 <span>
                   <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />

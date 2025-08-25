@@ -10,17 +10,11 @@ interface ResultCardProps {
 }
 
 export default function ResultCard({ result, priority = false, disableLink = false }: ResultCardProps) {
-  const { id, title, summary, period, publishedAt } = result;
+  const { id, title, summary, period } = result;
 
   const workType = safeGetWorkType(result);
   const projectType = safeGetProjectType(result);
   const cover = safeGetCover(result, true); // 一覧ページではOGP画像を使用
-
-  const publishedDate = new Date(publishedAt).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 
   return (
     <article className="result-card">
@@ -54,10 +48,6 @@ export default function ResultCard({ result, priority = false, disableLink = fal
             <h3 className="result-card__title">{title}</h3>
 
             <p className="result-card__summary">{summary}</p>
-
-            <time className="result-card__date" dateTime={publishedAt}>
-              公開日: {publishedDate}
-            </time>
           </div>
         </div>
       ) : (
@@ -90,10 +80,6 @@ export default function ResultCard({ result, priority = false, disableLink = fal
             <h3 className="result-card__title">{title}</h3>
 
             <p className="result-card__summary">{summary}</p>
-
-            <time className="result-card__date" dateTime={publishedAt}>
-              公開日: {publishedDate}
-            </time>
           </div>
         </Link>
       )}
