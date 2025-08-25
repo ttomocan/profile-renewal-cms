@@ -279,18 +279,9 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 .results-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
   margin-bottom: 50px;
-
-  @include mq('pcTab') {
-    grid-template-columns: repeat(2, 1fr);
-    gap: min(30px, 2vw);
-  }
-
-  @include mq('pc') {
-    grid-template-columns: repeat(3, 1fr);
-    gap: min(30px, 2vw);
-  }
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: min(30px, 2vw);
 }
 
 // ===============================================
@@ -860,22 +851,9 @@ cite {
 // ===============================================
 @include mq('sp') {
   .result-card {
-    border-radius: 20px;
-
-    &__content {
-      padding: 24px;
-    }
-
-    &__badge {
-      top: 16px;
-      left: 16px;
-    }
-
     &__action-icon {
-      top: 16px;
-      right: 16px;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
 
       svg {
         width: 18px;
@@ -884,7 +862,7 @@ cite {
     }
 
     &__work-type {
-      padding: 8px 14px;
+      padding: 5px 10px;
       font-size: 11px;
     }
 
