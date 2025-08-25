@@ -10,9 +10,11 @@
     padding-bottom: 80px;
     &__cont {
       display: flex;
-      flex-direction: column;
       justify-content: center;
       gap: 30px;
+      @include mq('sp') {
+        flex-direction: column;
+      }
     }
     &__image {
       flex: 0 0 150px;
