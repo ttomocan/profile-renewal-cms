@@ -108,6 +108,14 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                   </svg>
                   制作期間: {formattedPeriod}
                 </span>
+                {safeScale && safeScale !== '未分類' && (
+                  <span>
+                    <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16l-3-9m3 9l3-9" />
+                    </svg>
+                    プロジェクト規模: {safeScale}
+                  </span>
+                )}
                 {result.clientName && result.clientName.trim() && (
                   <span>
                     <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -135,16 +143,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 <h2 className="result-detail__section-title">担当範囲</h2>
                 <div className="result-detail__section-content result-detail__section-content--summary">
                   <p>{roles}</p>
-                </div>
-              </section>
-            )}
-
-            {/* プロジェクト規模 */}
-            {safeScale && safeScale !== '未分類' && (
-              <section className="result-detail__section">
-                <h2 className="result-detail__section-title">プロジェクト規模</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
-                  <p>{safeScale}</p>
                 </div>
               </section>
             )}

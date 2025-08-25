@@ -196,7 +196,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, $white 0%, rgba(252, 246, 241, 0.3) 100%);
+    background: #ffffff;
   }
 
   &__meta {
