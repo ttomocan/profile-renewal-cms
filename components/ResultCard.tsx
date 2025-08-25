@@ -17,7 +17,7 @@ export default function ResultCard({ result, priority = false, disableLink = fal
   const cover = safeGetCover(result, true); // 一覧ページではOGP画像を使用
 
   return (
-    <article className="result-card">
+    <article className="result-card fadeUpTrigger">
       {disableLink ? (
         <div className="result-card__link">
           <div className="result-card__image">
