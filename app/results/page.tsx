@@ -127,11 +127,11 @@ export default function ResultsPage({ searchParams }: ResultsPageProps) {
 
   return (
     <>
-      {/* パンくずリスト */}
-      <Breadcrumb items={breadcrumbItems} />
-
       {/* ページタイトル */}
       <PageTitle title="Results" sub="実績紹介" />
+
+      {/* パンくずリスト */}
+      <Breadcrumb items={breadcrumbItems} />
 
       <main className="results-main">
         <div className="results-inner">

@@ -40,7 +40,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 // ページ全体のレイアウト
 // ===============================================
 .results-inner {
-  max-width: $inner;
+  max-width: calc(#{$inner} + 40px);
   margin: 0 auto;
   width: 100%;
   padding: 0 20px;
@@ -511,6 +511,9 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__section {
+    &:not(:is(.pagetitle, :last-of-type)) {
+      padding-bottom: 80px;
+    }
     &-title {
       font-size: 32px;
       font-weight: 700;
@@ -725,10 +728,12 @@ cite {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
 
     @include mq('sp') {
-      padding: 20px 16px;
-      min-height: 100px;
+      min-height: 80px;
+      padding: 12px;
+      padding-right: 40px;
     }
   }
 
@@ -753,24 +758,27 @@ cite {
 
   &__action {
     flex-shrink: 0;
-    padding: 6px;
-    border-radius: 6px;
+    padding: 10px;
+    border-radius: 5px;
     background: rgba(243, 107, 10, 0.1);
     color: $primary-color;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -8px;
-    transform: translate(8px, 0);
-
-    @include mq('sp') {
-      margin-top: -12px;
-    }
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
 
     svg {
       width: 16px;
       height: 16px;
       transition: transform 0.2s ease;
+    }
+
+    @include mq('sp') {
+      padding: 6px;
+      right: 10px;
     }
   }
 

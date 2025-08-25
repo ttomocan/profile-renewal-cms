@@ -40,8 +40,8 @@ export default function RootLayout({ children }: Props) {
 
   return (
     <>
-      <Breadcrumb items={breadcrumbItems} />
       <PageTitle title="Contact" sub="お問い合わせ" />
+      <Breadcrumb items={breadcrumbItems} />
       <main>{children}</main>
     </>
   );

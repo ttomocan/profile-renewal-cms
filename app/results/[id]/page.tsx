@@ -82,11 +82,11 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
 
   return (
     <>
-      {/* パンくずリスト */}
-      <Breadcrumb items={breadcrumbItems} />
-
       {/* ページタイトル */}
       <PageTitle title="Results" sub="実績紹介" />
+
+      {/* パンくずリスト */}
+      <Breadcrumb items={breadcrumbItems} />
 
       <main className="results-main">
         <div className="results-inner">
@@ -214,7 +214,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                         </svg>
                       </div>
                     </div>
-                    <p className="site-link-card__description">{summary}</p>
                     <div className="site-link-card__url">{siteUrl}</div>
                   </div>
                 </a>
