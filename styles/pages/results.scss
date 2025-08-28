@@ -477,7 +477,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       font-weight: 700;
       line-height: 1.4;
       color: $text-color;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
 
       @include mq('sp') {
         font-size: 28px;
@@ -490,7 +490,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       gap: 5px 20px;
       font-size: 15px;
       color: $gray-600;
-      padding-top: 28px;
+      padding-top: 20px;
       border-top: 1px solid rgba(243, 107, 10, 0.4);
 
       time,
