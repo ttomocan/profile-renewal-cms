@@ -9,8 +9,8 @@ export default async function Page() {
         9年以上のWeb制作経験と、5年間のブログ運営で培ったノウハウを活かして、あなたのお悩みを解決するお手伝いをします。
       </p>
       <ul className="u-mt20 c-list fadeUpTrigger">
-        <li>Webサイト制作のご依頼</li>
-        <li>Webデザインのご相談</li>
+        <li>Webサイト制作の依頼</li>
+        <li>Webデザインの相談</li>
         <li>ブログに関する相談</li>
       </ul>
       <p className="u-mt20 u-mb20 fadeUpTrigger">
