@@ -64,7 +64,7 @@ $breakpoint: (
   text-align: center;
   transition: 0.2s;
   min-width: $width;
-  &::before {
+  &:not([target='_blank'])::before {
     border: 1px solid {
       color: $color $color transparent transparent;
     }
