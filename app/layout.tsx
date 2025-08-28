@@ -59,10 +59,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <head>
+        {/* DNS prefetch for external resources */}
+        <link rel="dns-prefetch" href="//images.microcms-assets.io" />
+
+        {/* Preload critical fonts */}
         <link rel="preload" href="/fonts/Roboto/Roboto-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Roboto/Roboto-Medium.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Roboto/Roboto-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Caveat_Brush/CaveatBrush-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+
+        {/* Resource hints for performance */}
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="theme-color" content="#3b82f6" />
       </head>
       <body suppressHydrationWarning>
         <ClientSmoothScrollProvider />
