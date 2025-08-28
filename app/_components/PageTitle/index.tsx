@@ -21,7 +21,7 @@ export default function PageTitle({ title, sub }: Props) {
         <picture>
           <source srcSet={`/img/pages/${lowerCaseTitle}/img_hero.webp`} type="image/webp" />
           <source srcSet={`/img/pages/${lowerCaseTitle}/img_hero.jpg`} type="image/jpg" />
-          <Image src={`/img/pages/${lowerCaseTitle}/img_hero.jpg`} alt={`${sub}ページのヒーロー画像`} width={1366} height={400} sizes="100vw" loading="eager" />
+          <Image src={`/img/pages/${lowerCaseTitle}/img_hero.webp`} alt={`${sub}ページのヒーロー画像`} width={1366} height={400} sizes="100vw" loading="eager" />
         </picture>
       </div>
       <div className="inner">
