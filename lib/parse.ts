@@ -63,7 +63,7 @@ function formatSinglePeriod(period: string): string {
     return `${year}年${parseInt(month, 10)}月`;
   } else if (/^\d+$/.test(period)) {
     // 数値のみの場合は制作期間（月数）として扱う
-    return `${period}ヶ月`;
+    return `約${period}ヶ月`;
   }
 
   return period;
