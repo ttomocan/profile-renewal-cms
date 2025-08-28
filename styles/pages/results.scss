@@ -57,6 +57,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   background: $white;
   box-shadow: $shadow-sm;
   border: 1px solid rgba(243, 107, 10, 0.2);
+  border-radius: 12px;
   overflow: hidden;
   transition: $transition-base;
   position: relative;
