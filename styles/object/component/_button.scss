@@ -47,6 +47,9 @@ $btn-colors: (
       &:focus {
         background-color: #ffffff;
         color: $textC;
+        &::after {
+          filter: brightness(0);
+        }
       }
     }
 
