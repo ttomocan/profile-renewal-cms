@@ -46,7 +46,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0 20px;
 
   @include mq('sp') {
-    padding: 0 16px;
+    padding: 0 15px;
   }
 }
 
@@ -427,7 +427,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid rgba(243, 107, 10, 0.3);
 
     @include mq('sp') {
-      padding: 20px;
+      padding: 15px;
     }
 
     &-badges {
@@ -541,21 +541,23 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-content {
-      background: $white;
-      border: 1px solid rgba(243, 107, 10, 0.3);
-      border-radius: 20px;
-      padding: 20px 25px;
+      &:not(:has(.tags-container)) {
+        background: $white;
+        border: 1px solid rgba(243, 107, 10, 0.3);
+        border-radius: 20px;
+        padding: 20px 25px;
 
-      p {
-        font-size: 17px;
-        line-height: 1.8;
-        color: $text-color;
-        margin: 0;
-        white-space: pre-line;
-      }
+        p {
+          font-size: 16px;
+          line-height: 1.8;
+          color: $text-color;
+          margin: 0;
+          white-space: pre-line;
+        }
 
-      @include mq('sp') {
-        padding: 15px 20px;
+        @include mq('sp') {
+          padding: 15px 20px;
+        }
       }
     }
 
@@ -568,43 +570,47 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         li {
           display: flex;
           align-items: flex-start;
-          margin-bottom: 10px;
-          font-size: 17px;
+          font-size: 16px;
           line-height: 1.7;
           color: $text-color;
 
-          &:last-child {
-            margin-bottom: 0;
+          &:not(:last-child) {
+            margin-bottom: 10px;
           }
         }
       }
     }
 
-    // 担当範囲・技術タグ
-    .info-block__tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    // 担当範囲・技術タグ表示
+    &-content--tags {
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
 
-      .tag {
-        display: inline-flex;
-        align-items: center;
-        padding: 12px 20px;
-        border-radius: 20px;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 0.025em;
+        .tag {
+          display: inline-flex;
+          align-items: center;
+          padding: 2px 12px;
+          border-radius: calc(infinity * 1px);
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: 0.025em;
+          transition: $transition-fast;
+          border: 1px solid transparent;
 
-        &--role {
-          background: rgba(124, 58, 237, 0.1);
-          color: #7c3aed;
-          border: 1px solid rgba(124, 58, 237, 0.2);
-        }
+          &--role {
+            background: rgba(124, 58, 237, 0.12);
+            color: #7c3aed;
+            border-color: rgba(124, 58, 237, 0.25);
+          }
 
-        &--tech {
-          background: $primary-lighter;
-          color: $primary-color;
-          border: 1px solid rgba(243, 107, 10, 0.2);
+          &--tech {
+            background: $primary-lighter;
+            color: $primary-color;
+            border-color: rgba(243, 107, 10, 0.25);
+          }
         }
       }
     }

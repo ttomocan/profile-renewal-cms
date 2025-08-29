@@ -186,6 +186,24 @@ export function safeGetRoles(result: { 'project-roles'?: string | string[] }): s
 }
 
 /**
+ * 担当範囲を配列で取得（タグ表示用）
+ */
+export function parseRoles(result: { 'project-roles'?: string | string[] }): string[] {
+  const roles = result['project-roles'];
+  if (!roles) return [];
+
+  if (Array.isArray(roles)) {
+    return roles.filter(role => role.trim().length > 0 && role !== '未分類');
+  }
+
+  // 文字列の場合は / で分割
+  return roles
+    .split('/')
+    .map(role => role.trim())
+    .filter(role => role.length > 0 && role !== '未分類');
+}
+
+/**
  * クライアント名の安全な取得（未入力対応）
  */
 export function safeGetClientName(clientName?: string): string {

@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getResultDetail } from '@/app/_libs/microcms';
-import { parseTechStack, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
+import { parseTechStack, parseRoles, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
@@ -71,6 +71,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const safeScale = safeGetScale(result);
 
   const techStackArray = parseTechStack(techStack);
+  const rolesArray = parseRoles(result);
   const highlightsArray = splitHighlights(highlights);
   const formattedPeriod = formatPeriod(period);
 
@@ -138,11 +139,17 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             </section>
 
             {/* 担当範囲 */}
-            {roles && roles !== '未分類' && (
+            {rolesArray.length > 0 && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">担当範囲</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
-                  <p>{roles}</p>
+                <div className="result-detail__section-content result-detail__section-content--tags">
+                  <div className="tags-container">
+                    {rolesArray.map((role, index) => (
+                      <span key={index} className="tag tag--role">
+                        {role}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </section>
             )}
@@ -151,8 +158,14 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {techStackArray.length > 0 && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">使用技術</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
-                  <p>{techStackArray.join('、')}</p>
+                <div className="result-detail__section-content result-detail__section-content--tags">
+                  <div className="tags-container">
+                    {techStackArray.map((tech, index) => (
+                      <span key={index} className="tag tag--tech">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </section>
             )}
