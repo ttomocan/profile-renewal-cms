@@ -93,7 +93,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__image {
     position: relative;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background: linear-gradient(135deg, $base-color 0%, $gray-100 100%);
 
@@ -341,7 +341,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
   &__image {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     background: linear-gradient(135deg, $base-color 0%, $gray-200 100%);
   }
 
