@@ -1,8 +1,11 @@
 @use '../global' as *;
 
+html,
 body {
   background-color: $baseC;
   color: $textC;
+}
+body {
   display: flex;
   flex-flow: column;
   font-family: -apple-system, Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, BlinkMacSystemFont, sans-serif;
