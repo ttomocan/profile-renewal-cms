@@ -11,6 +11,7 @@ import PageTop from './_components/PageTop';
 import DynamicBodyClass from './DynamicBodyClass';
 import WebsiteJsonLd from './_components/WebsiteJsonLd';
 import ClientSmoothScrollProvider from './_components/ClientSmoothScrollProvider';
+import ThemeColorProvider from './_components/ThemeColorProvider';
 
 export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
   const isHomePage = pathname === '/';
@@ -70,11 +71,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         {/* Resource hints for performance */}
         <meta name="format-detection" content="telephone=no" />
-        <meta name="theme-color" content="#3b82f6" />
       </head>
       <body suppressHydrationWarning>
         <ClientSmoothScrollProvider />
         <DynamicBodyClass />
+        <ThemeColorProvider />
         <Loading />
         <Header />
         <div className="l-content">{children}</div>
