@@ -27,7 +27,7 @@ export default function Blog() {
           <br className="u-pc-only" />
           収益化のポイントなどを詳しく解説しています。
           <br />
-          どちらも実体験に基づいた情報をわかりやすくまとめており、
+          どちらも実体験に基づいた情報をわかりやすくまとめ、
           <br className="u-pc-only" />
           読者の課題解決やスキルアップに貢献できる内容を心がけています。
         </p>

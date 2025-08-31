@@ -1,20 +1,23 @@
 .search {
   align-items: center;
   background-color: #fff;
-  border-radius: 4px;
+  border-radius: 12px;
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
   font-size: 16px;
   display: flex;
   gap: 12px;
   max-width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 10px 14px;
   width: 100%;
-  border: 1px solid #ddd;
-  box-shadow: none;
+  border: 1px solid #e9ecef;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
 }
 
 .search:focus-within {
-  border-color: #007bff;
+  border-color: #f36b0a;
+  box-shadow: 0 4px 12px rgba(243, 107, 10, 0.15);
+  transform: translateY(-1px);
 }
 
 .searchInput {
@@ -35,7 +38,15 @@
   font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
   font-size: 16px;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  background: #f36b0a;
+  color: white;
+  padding: 2px 12px;
+}
+
+.submitButton:hover {
+  background: #e55a0a;
+  transform: scale(1.05);
 }

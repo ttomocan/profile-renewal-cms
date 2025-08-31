@@ -3,7 +3,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getResultDetail } from '@/app/_libs/microcms';
-import { parseTechStack, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
+import { parseTechStack, parseRoles, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
@@ -60,7 +60,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     notFound();
   }
 
-  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, scale, publishedAt } = result;
+  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, scale } = result;
 
   // 安全な取得関数を使用
   const workType = safeGetWorkType(result);
@@ -71,14 +71,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const safeScale = safeGetScale(result);
 
   const techStackArray = parseTechStack(techStack);
+  const rolesArray = parseRoles(result);
   const highlightsArray = splitHighlights(highlights);
   const formattedPeriod = formatPeriod(period);
-
-  const publishedDate = new Date(publishedAt).toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 
   const breadcrumbItems = [
     { label: 'ホーム', href: '/' },
@@ -88,11 +83,11 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
 
   return (
     <>
-      {/* パンくずリスト */}
-      <Breadcrumb items={breadcrumbItems} />
-
       {/* ページタイトル */}
       <PageTitle title="Results" sub="実績紹介" />
+
+      {/* パンくずリスト */}
+      <Breadcrumb items={breadcrumbItems} />
 
       <main className="results-main">
         <div className="results-inner">
@@ -108,18 +103,20 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <h1 className="result-detail__header-title">{title}</h1>
 
               <div className="result-detail__header-meta">
-                <time dateTime={publishedAt}>
-                  <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
-                  公開日: {publishedDate}
-                </time>
                 <span>
                   <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   制作期間: {formattedPeriod}
                 </span>
+                {safeScale && safeScale !== '未分類' && (
+                  <span>
+                    <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2M4 6v10a2 2 0 002 2h12a2 2 0 002-2V6M4 6h16M7 10h3m-3 4h8m-8 4h8" />
+                    </svg>
+                    プロジェクト規模: {safeScale}
+                  </span>
+                )}
                 {result.clientName && result.clientName.trim() && (
                   <span>
                     <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,21 +139,17 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             </section>
 
             {/* 担当範囲 */}
-            {roles && roles !== '未分類' && (
+            {rolesArray.length > 0 && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">担当範囲</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
-                  <p>{roles}</p>
-                </div>
-              </section>
-            )}
-
-            {/* プロジェクト規模 */}
-            {safeScale && safeScale !== '未分類' && (
-              <section className="result-detail__section">
-                <h2 className="result-detail__section-title">プロジェクト規模</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
-                  <p>{safeScale}</p>
+                <div className="result-detail__section-content result-detail__section-content--tags">
+                  <div className="tags-container">
+                    {rolesArray.map((role, index) => (
+                      <span key={index} className="tag tag--role">
+                        {role}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </section>
             )}
@@ -165,8 +158,14 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {techStackArray.length > 0 && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">使用技術</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
-                  <p>{techStackArray.join('、')}</p>
+                <div className="result-detail__section-content result-detail__section-content--tags">
+                  <div className="tags-container">
+                    {techStackArray.map((tech, index) => (
+                      <span key={index} className="tag tag--tech">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </section>
             )}
@@ -215,7 +214,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {siteUrl && siteUrl.trim() && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">サイトURL</h2>
-                <a href={siteUrl} target="_blank" rel="noopener noreferrer nofollow" className="site-link-card">
+                <a href={siteUrl} target="_blank" rel="noopener noreferrer" className="site-link-card">
                   <div className="site-link-card__favicon">
                     <Image src={getFaviconUrl(siteUrl)} alt={`${title}のファビコン`} width={64} height={64} unoptimized={true} />
                   </div>
@@ -228,7 +227,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                         </svg>
                       </div>
                     </div>
-                    <p className="site-link-card__description">{summary}</p>
                     <div className="site-link-card__url">{siteUrl}</div>
                   </div>
                 </a>

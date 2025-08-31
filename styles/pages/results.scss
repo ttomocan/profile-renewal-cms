@@ -40,13 +40,13 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 // ページ全体のレイアウト
 // ===============================================
 .results-inner {
-  max-width: $inner;
+  max-width: calc(#{$inner} + 40px);
   margin: 0 auto;
   width: 100%;
   padding: 0 20px;
 
   @include mq('sp') {
-    padding: 0 16px;
+    padding: 0 15px;
   }
 }
 
@@ -57,6 +57,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   background: $white;
   box-shadow: $shadow-sm;
   border: 1px solid rgba(243, 107, 10, 0.2);
+  border-radius: 12px;
   overflow: hidden;
   transition: $transition-base;
   position: relative;
@@ -92,7 +93,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__image {
     position: relative;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     overflow: hidden;
     background: linear-gradient(135deg, $base-color 0%, $gray-100 100%);
 
@@ -196,7 +197,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(135deg, $white 0%, rgba(252, 246, 241, 0.3) 100%);
+    background: #ffffff;
   }
 
   &__meta {
@@ -210,7 +211,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   &__category {
     display: inline-flex;
     align-items: center;
-    padding: 4px 12px;
+    padding: 2px 12px;
     background: $primary-lighter;
     color: $primary-color;
     font-size: 12px;
@@ -279,18 +280,9 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 .results-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 40px;
   margin-bottom: 50px;
-
-  @include mq('pcTab') {
-    grid-template-columns: repeat(2, 1fr);
-    gap: min(30px, 2vw);
-  }
-
-  @include mq('pc') {
-    grid-template-columns: repeat(3, 1fr);
-    gap: min(30px, 2vw);
-  }
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: min(30px, 2vw);
 }
 
 // ===============================================
@@ -349,7 +341,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
   &__image {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     background: linear-gradient(135deg, $base-color 0%, $gray-200 100%);
   }
 
@@ -431,11 +423,11 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     margin-bottom: 50px;
     background: linear-gradient(135deg, $white 0%, $base-color 100%);
     border-radius: 20px;
-    padding: 30px;
+    padding: 25px;
     border: 1px solid rgba(243, 107, 10, 0.3);
 
     @include mq('sp') {
-      padding: 28px 24px;
+      padding: 15px;
     }
 
     &-badges {
@@ -482,24 +474,24 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-title {
-      font-size: 42px;
+      font-size: 36px;
       font-weight: 700;
-      line-height: 1.2;
+      line-height: 1.4;
       color: $text-color;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
 
       @include mq('sp') {
-        font-size: 32px;
+        font-size: 28px;
       }
     }
 
     &-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 20px;
+      gap: 5px 20px;
       font-size: 15px;
       color: $gray-600;
-      padding-top: 28px;
+      padding-top: 20px;
       border-top: 1px solid rgba(243, 107, 10, 0.4);
 
       time,
@@ -520,6 +512,9 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__section {
+    &:not(:is(.pagetitle, :last-of-type)) {
+      padding-bottom: 80px;
+    }
     &-title {
       font-size: 32px;
       font-weight: 700;
@@ -546,25 +541,23 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-content {
-      background: $white;
-      border: 1px solid rgba(243, 107, 10, 0.3);
-      border-radius: 20px;
-      padding: 20px 25px;
+      &:not(:has(.tags-container)) {
+        background: $white;
+        border: 1px solid rgba(243, 107, 10, 0.3);
+        border-radius: 20px;
+        padding: 20px 25px;
 
-      &--summary {
-        background: linear-gradient(135deg, $base-color 0%, $white 100%);
-      }
+        p {
+          font-size: 16px;
+          line-height: 1.8;
+          color: $text-color;
+          margin: 0;
+          white-space: pre-line;
+        }
 
-      p {
-        font-size: 17px;
-        line-height: 1.8;
-        color: $text-color;
-        margin: 0;
-        white-space: pre-line;
-      }
-
-      @include mq('sp') {
-        padding: 28px 24px;
+        @include mq('sp') {
+          padding: 15px 20px;
+        }
       }
     }
 
@@ -577,43 +570,47 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         li {
           display: flex;
           align-items: flex-start;
-          margin-bottom: 10px;
-          font-size: 17px;
+          font-size: 16px;
           line-height: 1.7;
           color: $text-color;
 
-          &:last-child {
-            margin-bottom: 0;
+          &:not(:last-child) {
+            margin-bottom: 10px;
           }
         }
       }
     }
 
-    // 担当範囲・技術タグ
-    .info-block__tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
+    // 担当範囲・技術タグ表示
+    &-content--tags {
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0;
 
-      .tag {
-        display: inline-flex;
-        align-items: center;
-        padding: 12px 20px;
-        border-radius: 20px;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 0.025em;
+        .tag {
+          display: inline-flex;
+          align-items: center;
+          padding: 2px 12px;
+          border-radius: calc(infinity * 1px);
+          font-size: 14px;
+          font-weight: 600;
+          letter-spacing: 0.025em;
+          transition: $transition-fast;
+          border: 1px solid transparent;
 
-        &--role {
-          background: rgba(124, 58, 237, 0.1);
-          color: #7c3aed;
-          border: 1px solid rgba(124, 58, 237, 0.2);
-        }
+          &--role {
+            background: rgba(124, 58, 237, 0.12);
+            color: #7c3aed;
+            border-color: rgba(124, 58, 237, 0.25);
+          }
 
-        &--tech {
-          background: $primary-lighter;
-          color: $primary-color;
-          border: 1px solid rgba(243, 107, 10, 0.2);
+          &--tech {
+            background: $primary-lighter;
+            color: $primary-color;
+            border-color: rgba(243, 107, 10, 0.25);
+          }
         }
       }
     }
@@ -738,10 +735,12 @@ cite {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
 
     @include mq('sp') {
-      padding: 20px 16px;
-      min-height: 100px;
+      min-height: 80px;
+      padding: 12px;
+      padding-right: 40px;
     }
   }
 
@@ -766,24 +765,27 @@ cite {
 
   &__action {
     flex-shrink: 0;
-    padding: 6px;
-    border-radius: 6px;
+    padding: 10px;
+    border-radius: 5px;
     background: rgba(243, 107, 10, 0.1);
     color: $primary-color;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: -8px;
-    transform: translate(8px, 0);
-
-    @include mq('sp') {
-      margin-top: -12px;
-    }
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
 
     svg {
       width: 16px;
       height: 16px;
       transition: transform 0.2s ease;
+    }
+
+    @include mq('sp') {
+      padding: 6px;
+      right: 10px;
     }
   }
 
@@ -860,22 +862,9 @@ cite {
 // ===============================================
 @include mq('sp') {
   .result-card {
-    border-radius: 20px;
-
-    &__content {
-      padding: 24px;
-    }
-
-    &__badge {
-      top: 16px;
-      left: 16px;
-    }
-
     &__action-icon {
-      top: 16px;
-      right: 16px;
-      width: 40px;
-      height: 40px;
+      width: 30px;
+      height: 30px;
 
       svg {
         width: 18px;
@@ -884,7 +873,7 @@ cite {
     }
 
     &__work-type {
-      padding: 8px 14px;
+      padding: 5px 10px;
       font-size: 11px;
     }
 

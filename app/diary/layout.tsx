@@ -50,8 +50,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <>
-      <Breadcrumb items={breadcrumbItems} />
       <PageTitle title="Diary" sub={META_TITLE} />
+      <Breadcrumb items={breadcrumbItems} />
       <main>{children}</main>
     </>
   );

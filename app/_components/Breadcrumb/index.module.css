@@ -1,28 +1,30 @@
 .breadcrumb {
-  background: rgba(40, 40, 40, 0.6);
-  backdrop-filter: blur(12px);
-  color: #fff;
-  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  color: #282828;
 }
 
 .list {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 4px;
   list-style: none;
   margin: 0;
-  padding: 10px 0;
+  padding: 20px 0 24px;
   font-size: 14px;
-  line-height: 1.5;
-  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+  animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 767px) {
   .list {
-    padding: 12px 0;
+    padding: 16px 0 20px;
     font-size: 13px;
-    gap: 6px;
+    gap: 2px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     white-space: nowrap;
@@ -31,7 +33,7 @@
   }
 
   .list::-webkit-scrollbar {
-    height: 4px;
+    height: 3px;
   }
 
   .list::-webkit-scrollbar-track {
@@ -39,12 +41,12 @@
   }
 
   .list::-webkit-scrollbar-thumb {
-    background: rgba(243, 107, 10, 0.3);
-    border-radius: 2px;
+    background: rgba(243, 107, 10, 0.4);
+    border-radius: 8px;
   }
 
   .list::-webkit-scrollbar-thumb:hover {
-    background: rgba(243, 107, 10, 0.5);
+    background: rgba(243, 107, 10, 0.6);
   }
 }
 
@@ -52,31 +54,43 @@
   display: flex;
   align-items: center;
   font-weight: 500;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  opacity: 0;
+  animation: slideInFromLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .item:not(:last-child)::after {
-  content: '';
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  border: 2px solid #ffffff;
-  border-left: none;
-  border-bottom: none;
-  transform: rotate(45deg);
-  margin: 0 14px;
+  content: '›';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #282828;
+  margin: 0 8px;
   opacity: 0.8;
   flex-shrink: 0;
-  transition: opacity 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: scale(1);
 }
 
 .item:hover:not(:last-child)::after {
   opacity: 1;
+  transform: scale(1.1);
+  color: #f36b0a;
 }
 
 .item:last-child {
-  color: #ffffff;
+  color: #282828;
   font-weight: 600;
+  background: rgba(243, 107, 10, 0.05);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(243, 107, 10, 0.15);
 }
 
 @media (max-width: 767px) {
@@ -85,52 +99,86 @@
   }
 
   .item:not(:last-child)::after {
-    margin: 0 10px;
-    width: 6px;
-    height: 6px;
-    border-width: 2px;
+    margin: 0 6px;
+    width: 16px;
+    height: 16px;
+    font-size: 14px;
+  }
+
+  .item:last-child {
+    padding: 4px 8px;
+    font-size: 13px;
   }
 }
 
 .link {
-  color: inherit;
+  color: #282828;
   text-decoration: none;
-  transition: color 0.3s ease, transform 0.2s ease;
-  border-radius: 4px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 6px;
   padding: 4px 8px;
   margin: -4px -8px;
   position: relative;
+  background: transparent;
 }
 
 .link:hover {
   color: #f36b0a;
+  background: rgba(243, 107, 10, 0.08);
 }
 
 .link:focus {
   outline: 2px solid #f36b0a;
   outline-offset: 2px;
+  background: rgba(243, 107, 10, 0.08);
+}
+
+.link:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 767px) {
   .link {
-    padding: 2px 4px;
-    margin: -2px -4px;
+    padding: 3px 5px;
+    margin: -3px -5px;
+    border-radius: 4px;
   }
 }
 
 .current {
-  color: inherit;
+  color: #282828;
   font-weight: inherit;
+  position: relative;
 }
 
 /* アニメーション効果 */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
+
+/* マイクロインタラクション用のアニメーション */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+.item:nth-child(1) { animation-delay: 0.1s; }
+.item:nth-child(2) { animation-delay: 0.2s; }
+.item:nth-child(3) { animation-delay: 0.3s; }
+.item:nth-child(4) { animation-delay: 0.4s; }
+.item:nth-child(5) { animation-delay: 0.5s; }

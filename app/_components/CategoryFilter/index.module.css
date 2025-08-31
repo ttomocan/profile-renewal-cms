@@ -16,10 +16,10 @@
 }
 
 .select {
-  padding: 0.5rem 1rem;
+  padding: 10px 16px;
   padding-right: 2.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
   background-color: #fff;
   font-size: 1rem;
   cursor: pointer;
@@ -27,14 +27,22 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  box-shadow: none;
-  transition: border-color 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease;
   width: 100%;
   box-sizing: border-box;
 }
 
+.select:hover {
+  border-color: #f36b0a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
 .select:focus {
   outline: none;
+  border-color: #f36b0a;
+  box-shadow: 0 4px 12px rgba(243, 107, 10, 0.15);
 }
 
 .selectIcon {

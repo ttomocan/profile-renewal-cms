@@ -42,19 +42,3 @@
     transform: rotate(359deg);
   }
 }
-
-/* =============================== */
-/* アイコン
-================================== */
-$icon-images: (
-  'tab': 'icon-tab.svg',
-);
-.icon {
-  @each $class, $icon-image in $icon-images {
-    &-#{$class} {
-      background: url('/img/common/' + $icon-image) no-repeat center right/auto 1.5em;
-      display: inline-block;
-      padding-right: 2em;
-    }
-  }
-}

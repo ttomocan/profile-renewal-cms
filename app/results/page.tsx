@@ -21,10 +21,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: `実績紹介 | ${siteName}`,
-    description: 'ともきゃんスタイルの制作実績を一覧でご覧いただけます。Webサイト制作、ブログカスタマイズ、デザイン制作など多数の実績をご紹介しています。',
+    description: 'ともきゃんの制作実績を一覧でご覧いただけます。Webサイト制作、ブログカスタマイズ、デザイン制作など多数の実績を紹介しています。',
     openGraph: {
       title: `実績紹介 | ${siteName}`,
-      description: 'ともきゃんスタイルの制作実績を一覧でご覧いただけます。',
+      description: 'ともきゃんの制作実績を一覧でご覧いただけます。',
       type: 'website',
     },
   };
@@ -127,11 +127,11 @@ export default function ResultsPage({ searchParams }: ResultsPageProps) {
 
   return (
     <>
-      {/* パンくずリスト */}
-      <Breadcrumb items={breadcrumbItems} />
-
       {/* ページタイトル */}
       <PageTitle title="Results" sub="実績紹介" />
+
+      {/* パンくずリスト */}
+      <Breadcrumb items={breadcrumbItems} />
 
       <main className="results-main">
         <div className="results-inner">

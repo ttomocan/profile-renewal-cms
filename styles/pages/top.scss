@@ -493,6 +493,9 @@
     }
 
     &__category {
+      border: 1px solid rgba(243, 107, 10, 0.15);
+      border-radius: 20px;
+      padding: 2px 10px;
       font-weight: 600;
       color: $mainC;
       text-transform: uppercase;
@@ -520,7 +523,6 @@
       font-size: 14px;
       line-height: 1.6;
       color: #57534e;
-      margin-bottom: 16px;
       flex: 1;
       transition: color 0.3s ease;
       display: -webkit-box;

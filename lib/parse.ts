@@ -63,7 +63,7 @@ function formatSinglePeriod(period: string): string {
     return `${year}年${parseInt(month, 10)}月`;
   } else if (/^\d+$/.test(period)) {
     // 数値のみの場合は制作期間（月数）として扱う
-    return `${period}ヶ月`;
+    return `約${period}ヶ月`;
   }
 
   return period;
@@ -183,6 +183,24 @@ export function safeGetRoles(result: { 'project-roles'?: string | string[] }): s
   }
 
   return roles;
+}
+
+/**
+ * 担当範囲を配列で取得（タグ表示用）
+ */
+export function parseRoles(result: { 'project-roles'?: string | string[] }): string[] {
+  const roles = result['project-roles'];
+  if (!roles) return [];
+
+  if (Array.isArray(roles)) {
+    return roles.filter(role => role.trim().length > 0 && role !== '未分類');
+  }
+
+  // 文字列の場合は / で分割
+  return roles
+    .split('/')
+    .map(role => role.trim())
+    .filter(role => role.length > 0 && role !== '未分類');
 }
 
 /**
