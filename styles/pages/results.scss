@@ -440,15 +440,17 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       .badge {
         display: inline-flex;
         align-items: center;
-        padding: 6px 12px;
-        border-radius: 12px;
+        padding: 2px 12px;
+        border-radius: calc(infinity * 1px);
         font-size: 14px;
         font-weight: 700;
         letter-spacing: 0.025em;
 
         &--work-type {
-          background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
-          color: $white;
+          background: rgba(243, 107, 10, 0.05);
+          border: 1px solid rgba(243, 107, 10, 0.15);
+          color: #f36b0a;
+          font-weight: 600;
         }
 
         &--project-type {
