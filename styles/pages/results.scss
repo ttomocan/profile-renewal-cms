@@ -241,7 +241,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 800;
     line-height: 1.4;
     color: $text-color;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -251,10 +251,9 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__summary {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.7;
     color: $gray-600;
-    margin-bottom: 15px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     line-clamp: 3;
