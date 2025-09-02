@@ -29,7 +29,7 @@ export default function Blog() {
           <br />
           どちらも知りたいことが詰まった実践的な内容で、
           <br className="u-pc-only" />
-          あなたの「できない」を「できる」に変えるヒントがきっと見つかります。
+          気になる記事からぜひチェックしてみてください！
         </p>
         <div className="l-blog-area__button fadeUpTrigger">
           <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
