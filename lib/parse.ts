@@ -4,14 +4,19 @@ import type { WorkType, Scale } from '@/types/results';
  * カンマ区切りの技術スタック文字列を配列に変換
  */
 export function parseTechStack(str?: string): string[] {
-  if (!str || typeof str !== 'string') {
+  try {
+    if (!str || typeof str !== 'string') {
+      return [];
+    }
+
+    return str
+      .split(',')
+      .map((tech) => tech.trim())
+      .filter((tech) => tech.length > 0 && tech !== '未分類');
+  } catch (error) {
+    console.warn('技術スタックのパース処理でエラーが発生しました:', error);
     return [];
   }
-
-  return str
-    .split(',')
-    .map((tech) => tech.trim())
-    .filter((tech) => tech.length > 0);
 }
 
 /**
@@ -189,18 +194,27 @@ export function safeGetRoles(result: { 'project-roles'?: string | string[] }): s
  * 担当範囲を配列で取得（タグ表示用）
  */
 export function parseRoles(result: { 'project-roles'?: string | string[] }): string[] {
-  const roles = result['project-roles'];
-  if (!roles) return [];
+  try {
+    const roles = result['project-roles'];
+    if (!roles) return [];
 
-  if (Array.isArray(roles)) {
-    return roles.filter(role => role.trim().length > 0 && role !== '未分類');
+    if (Array.isArray(roles)) {
+      return roles.filter(role => role && typeof role === 'string' && role.trim().length > 0 && role !== '未分類');
+    }
+
+    if (typeof roles === 'string') {
+      // 文字列の場合は / で分割
+      return roles
+        .split('/')
+        .map(role => role.trim())
+        .filter(role => role.length > 0 && role !== '未分類');
+    }
+
+    return [];
+  } catch (error) {
+    console.warn('担当範囲のパース処理でエラーが発生しました:', error);
+    return [];
   }
-
-  // 文字列の場合は / で分割
-  return roles
-    .split('/')
-    .map(role => role.trim())
-    .filter(role => role.length > 0 && role !== '未分類');
 }
 
 /**

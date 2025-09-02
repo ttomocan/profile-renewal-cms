@@ -143,9 +143,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">担当範囲</h2>
                 <div className="result-detail__section-content result-detail__section-content--tags">
-                  <div className="tags-container">
+                  <div className="tags-container" role="list" aria-label="担当範囲一覧">
                     {rolesArray.map((role, index) => (
-                      <span key={index} className="tag tag--role">
+                      <span key={index} className="tag tag--role" role="listitem" aria-label={`担当範囲: ${role}`}>
                         {role}
                       </span>
                     ))}
@@ -159,9 +159,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">使用技術</h2>
                 <div className="result-detail__section-content result-detail__section-content--tags">
-                  <div className="tags-container">
+                  <div className="tags-container" role="list" aria-label="使用技術一覧">
                     {techStackArray.map((tech, index) => (
-                      <span key={index} className="tag tag--tech">
+                      <span key={index} className="tag tag--tech" role="listitem" aria-label={`使用技術: ${tech}`}>
                         {tech}
                       </span>
                     ))}
