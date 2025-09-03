@@ -18,7 +18,7 @@ $btn-colors: (
 
 .c-button {
   &__link {
-    @include btn($mainC, #ffffff, 300px);
+    @include btn($mainC, #ffffff, 280px);
     @each $site_name, $color in $btn-colors {
       &.--#{$site_name} {
         background-color: map-get($color, bg-color);
@@ -42,7 +42,7 @@ $btn-colors: (
     }
 
     &-external {
-      @include btn(transparent, #ffffff, 300px);
+      @include btn(transparent, #ffffff, 280px);
       &:hover,
       &:focus {
         background-color: #ffffff;
