@@ -6,16 +6,16 @@
 
 .list {
   background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(219, 209, 201, 0.3);
+	box-shadow: 0 1px 2px 0 rgba(243, 107, 10, .05);
+	border: 1px solid rgba(243, 107, 10, .2);
+	border-radius: 12px;
+	overflow: hidden;
+	transition: all .3s cubic-bezier(.4,0,.2,1);
 }
 
 .list:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+	box-shadow: 0 20px 25px -5px rgba(243, 107, 10, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+	border-color: rgba(243, 107, 10, 0.5);
 }
 
 .link {
