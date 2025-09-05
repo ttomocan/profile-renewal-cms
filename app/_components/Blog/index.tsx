@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export default function Blog() {
   return (
     <div className="l-blog-area">
@@ -27,7 +25,7 @@ export default function Blog() {
           <br className="u-pc-only" />
           デザインのコツから収益化まで、現役Web制作者だからこそ知る秘訣をお伝えします。
           <br />
-          どちらも知りたいことが詰まった実践的な内容なので、
+          どちらも知りたいことが詰まった内容ばかりなので、
           <br className="u-pc-only" />
           気になる記事からぜひチェックしてみてください！
         </p>
