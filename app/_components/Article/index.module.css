@@ -153,13 +153,13 @@
 .content ul,
 .content ol {
   line-height: 1.5;
-  margin: 0.5rem 0 0.5rem 1.5rem;
+  margin: 0.5rem 0 0.5rem 1.8rem;
 }
 
 .content > ul,
 .content > ol {
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1.8rem;
+  margin-bottom: 1.8rem;
 }
 
 .content ul > li {
@@ -180,7 +180,7 @@
 
 .content > figure {
   display: inline-block;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.8rem;
 }
 
 .content > figure > img {
