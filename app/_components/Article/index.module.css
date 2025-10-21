@@ -178,10 +178,13 @@
   text-decoration: underline;
 }
 
+.content > figure {
+  margin-bottom: 1.5rem;
+}
+
 .content > figure > img {
   max-width: 100%;
   height: auto;
-  margin: 1.5rem 0;
 }
 
 .content > strong {
@@ -210,7 +213,7 @@
   position: absolute;
   top: 8px;
   left: 20px;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: Georgia, 'Times New Roman', serif;
   font-weight: bold;
   line-height: 1;
   pointer-events: none;
