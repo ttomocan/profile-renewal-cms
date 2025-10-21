@@ -184,6 +184,7 @@
 }
 
 .content > figure > img {
+  border: 2px solid #d7cdc6;
   max-width: 100%;
   height: auto;
 }
