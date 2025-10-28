@@ -3,11 +3,13 @@ import Image from 'next/image';
 export default async function Page() {
   return (
     <>
-      <section className="first inner">
+      <section className="first inner inner-s">
         <p className="fadeUpTrigger">
           私が実務でよく使っているスキルやウェブ制作ツールを紹介します。
           <br />
-          私の得意なスキルは、CSS設計（BEM・FLOCSS）に配慮した保守性の高いコーディングと、WordPressサイトの構築・カスタマイズです。
+          私の得意なスキルは、CSS設計（BEM・FLOCSS）に配慮した保守性の高いコーディングと、WordPressサイトの構築・カスタマイズです。自分の作ったものが、誰かの手で動く瞬間が好きなんです。
+          <br />
+          フロントエンドは、デザインとロジックの橋渡しとして、ユーザーの「使いやすい」「わかりやすい」を直接生み出せる場所。 コードで“体験”をつくる、その実感が僕をこの世界に夢中にさせています。
           <br />
           最近は、Next.jsやReact、TypeScriptといったモダンなフロントエンド技術を使ったWebアプリ開発にもチャレンジしています。SEO対策もしっかり意識して、成果につながるWebサイト作りを実践しています。
           <br />
