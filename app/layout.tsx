@@ -12,6 +12,7 @@ import DynamicBodyClass from './DynamicBodyClass';
 import WebsiteJsonLd from './_components/WebsiteJsonLd';
 import ClientSmoothScrollProvider from './_components/ClientSmoothScrollProvider';
 import ThemeColorProvider from './_components/ThemeColorProvider';
+import FontLoader from './_components/FontLoader';
 
 export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
   const isHomePage = pathname === '/';
@@ -76,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ClientSmoothScrollProvider />
         <DynamicBodyClass />
         <ThemeColorProvider />
+        <FontLoader />
         <Loading />
         <Header />
         <div className="l-content">{children}</div>

@@ -21,6 +21,22 @@ body {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Caveat Brushフォント読み込み前は非表示 */
+html:not(.fonts-loaded) {
+  .p-top-hero__en__char,
+  .pagetitle__en {
+    visibility: hidden;
+  }
+}
+
+/* フォント読み込み後に表示 */
+html.fonts-loaded {
+  .p-top-hero__en__char,
+  .pagetitle__en {
+    visibility: visible;
+  }
+}
+
 a {
   color: $linkC;
   cursor: pointer;
