@@ -84,7 +84,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   return (
     <>
       {/* ページタイトル */}
-      <PageTitle title="Results" sub="実績紹介" />
+      <PageTitle title="Result" sub="実績紹介" />
 
       {/* パンくずリスト */}
       <Breadcrumb items={breadcrumbItems} />
