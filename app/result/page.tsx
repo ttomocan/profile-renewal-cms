@@ -10,7 +10,7 @@ import ResultCard from '@/components/ResultCard';
 import Pagination from '@/components/Pagination';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
-import '@/styles/pages/results.scss';
+import '@/styles/pages/result.scss';
 
 interface ResultsPageProps {
   searchParams: SimpleSearchParams;

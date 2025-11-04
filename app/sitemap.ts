@@ -8,7 +8,7 @@ const buildUrl = (path: string = '/') => {
   return `${BASE_URL}/${path.replace(/^\/+/, '')}/`;
 };
 
-const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary', 'results'];
+const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary', 'result'];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // 実績を全件取得するための関数
@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const resultUrls: MetadataRoute.Sitemap = resultsData.contents.map(({ id, updatedAt }) => ({
-    url: buildUrl(`results/${id}`),
+    url: buildUrl(`result/${id}`),
     lastModified: updatedAt,
   }));
 

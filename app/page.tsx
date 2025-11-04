@@ -157,7 +157,7 @@ export default async function Home() {
             </div>
           )}
           <div className="p-top-results__button fadeUpTrigger">
-            <Link href="/results/" className="c-button__link">
+            <Link href="/result/" className="c-button__link">
               実績をもっと見る
             </Link>
           </div>
