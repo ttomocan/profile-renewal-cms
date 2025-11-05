@@ -72,7 +72,7 @@ export default async function Home() {
         </div>
       </div>
       <main>
-        <section className="p-top-about inner inner-s">
+        <section className="p-top-about inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
@@ -86,7 +86,7 @@ export default async function Home() {
                 <p>
                   はじめまして！名古屋を拠点に活動するWebエンジニアの「ともきゃん」です。
                   <br />
-                  Web制作会社で9年以上の経験を積み、200サイト超の実装を通じて培った「使いやすさ」と「速さ」を大切にしたWebサイト制作を行っています。
+                  Web制作会社で9年以上の実務経験があり、200サイト以上の制作実績を通じて、ユーザー視点に立った「使いやすさ」と、ビジネス成果につながる「価値提供」を重視したWebサイト制作を取り組んでいます。
                   <br />
                   「あなたのWebサイトをもっと良くしたい」そんな想いで、お客様のお悩みに合わせた解決策を一緒に考えてカタチにしてきました。
                   <br />
