@@ -84,7 +84,7 @@ export default async function Home() {
             <div className="p-top-about__text-area fadeUpTrigger">
               <div className="p-top-about__speech-bubble">
                 <p>
-                  はじめまして！名古屋を拠点に活動するWebエンジニアの「ともきゃん」です。
+                  名古屋を拠点に活動しているWebエンジニアの「ともきゃん」と言います。
                   <br />
                   Web制作会社で9年以上の実務経験があり、200サイト以上の制作実績を通じて、ユーザー視点に立った「使いやすさ」と、ビジネス成果につながる「価値提供」を重視したWebサイト制作を取り組んでいます。
                   <br />
