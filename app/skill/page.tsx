@@ -5,7 +5,7 @@ export default async function Page() {
     <>
       <section className="first inner">
         <p className="fadeUpTrigger">
-          私が実務でよく使っているスキルやウェブ制作ツールを紹介します。
+          私が実務でよく使っているスキルやWeb制作ツールを紹介します。
           <br />
           HTML/CSS/JavaScript、PHP、そしてWordPressのテーマ開発・カスタマイズをして、BEMやFLOCSSで“あとから直しやすい”設計を大切にしています。デザインの意図を汲み、コードで体験に落とし込む——その橋渡しが得意です。
           <br />
@@ -134,7 +134,7 @@ export default async function Page() {
       <section className="tool inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Web Tool</span>
-          <span className="c-heading-lv2-ja">ウェブ制作ツール</span>
+          <span className="c-heading-lv2-ja">Web制作ツール</span>
         </h2>
         <div className="tool__item fadeUpTrigger">
           <div className="tool__image">
@@ -274,7 +274,7 @@ export default async function Page() {
           <div className="other__card">CMSサイトの構築（WP・MT）</div>
           <div className="other__card">ヘッドレスCMS（microCMS）</div>
           <div className="other__card">バナーやサムネイル画像の作成</div>
-          <div className="other__card">ウェブアクセシビリティ</div>
+          <div className="other__card">Webアクセシビリティ</div>
           <div className="other__card">画像編集・写真加工</div>
           <div className="other__card">Webライティング</div>
         </div>
