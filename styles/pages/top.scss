@@ -341,18 +341,12 @@
   }
 
   @include mq('sp') {
-    margin-top: 60px;
-
     &__cont p {
       font-size: 15px;
     }
 
     &__list {
       margin-bottom: 40px;
-
-      .results-grid {
-        gap: 24px;
-      }
     }
   }
 }
