@@ -141,8 +141,17 @@ export default async function Page() {
             <Image src="/img/pages/skill/img_cursor.svg" alt="Cursor" width="100" height="100" sizes="100vw" />
           </div>
           <div className="tool__detail">
-            <h3 className="programming__heading">Cursor・Visual Studio Code・Git</h3>
-            <p className="programming__description">サイト構築時のメインエディタとしてCursorを使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。また、GitHubを用いたバージョン管理も行っています。</p>
+            <h3 className="programming__heading">Cursor・Visual Studio Code</h3>
+            <p className="programming__description">サイト構築時のメインエディタとしてCursorを使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。</p>
+          </div>
+        </div>
+        <div className="tool__item fadeUpTrigger">
+          <div className="tool__image">
+            <Image src="/img/pages/skill/img_git.svg" alt="Git" width="100" height="100" sizes="100vw" />
+          </div>
+          <div className="tool__detail">
+            <h3 className="programming__heading">Git</h3>
+            <p className="programming__description">Gitを使ったバージョン管理を実践しています。GitHubを活用してコードの変更履歴を管理し、ブランチを使った機能開発やバグ修正、コミット履歴による開発の可視化など、チーム開発にも対応できる体制を整えています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
