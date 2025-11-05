@@ -52,7 +52,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">PHP</h3>
-            <p className="programming__description">PHPを活用して、WordPressテーマやプラグインのカスタマイズを得意としています。お問い合わせフォームの作成や投稿機能の拡張、データベース連携など、お客様の要望に応じた機能開発が可能です。</p>
+            <p className="programming__description">PHPを活用してお問い合わせフォームの作成や、WordPressテーマのカスタマイズや新規テーマの開発、投稿機能の拡張、カスタムフィールドによる更新機能の実装など、お客様の要望に応じた機能開発が可能です。</p>
           </div>
         </div>
       </section>
