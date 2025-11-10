@@ -45,7 +45,7 @@ export default async function Page() {
                 <th className="c-profile-table__th">名前</th>
                 <td className="c-profile-table__td">
                   ともきゃん
-                  <span className="u-text-note">本名＋英語の「can（できる）」を組み合わせた造語。「自分ならできる！」という意味を込めました。</span>
+                  <span className="u-text-note">本名＋英語のcan（できる）を組み合わせた造語。「自分ならできる！」という意味を込めました。</span>
                 </td>
               </tr>
               <tr className="c-profile-table__row">
@@ -71,10 +71,6 @@ export default async function Page() {
               <tr className="c-profile-table__row">
                 <th className="c-profile-table__th">座右の銘</th>
                 <td className="c-profile-table__td">遊ぶように生きる（人生というゲームを、ワクワクしながらプレイすること）</td>
-              </tr>
-              <tr className="c-profile-table__row">
-                <th className="c-profile-table__th">ロールモデル</th>
-                <td className="c-profile-table__td">前田裕二氏</td>
               </tr>
               <tr className="c-profile-table__row">
                 <th className="c-profile-table__th">人生のバイブル</th>
