@@ -113,7 +113,7 @@ export default async function Page() {
           <div className="result__card">Webサイトの構築数200件以上</div>
           <div className="result__card">ブログの月間平均PV数1万PV以上</div>
           <div className="result__card">ブログの広告収益累計150万円以上</div>
-          <div className="result__card">coconalaの販売件数50件以上、満点評価</div>
+          <div className="result__card">coconalaの販売件数50件以上、平均評価満点</div>
           <div className="result__card">coconalaの売上累計120万円以上</div>
         </div>
       </section>
