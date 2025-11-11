@@ -65,7 +65,7 @@ export default function Page({ params }: Props) {
   const current = parseInt(params.current as string, 10);
 
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'ともきゃん日記', href: '/diary/' },
     { label: `${current}ページ目`, active: true },
   ];

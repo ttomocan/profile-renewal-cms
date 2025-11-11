@@ -38,7 +38,7 @@ async function DiaryListContent({ searchParams }: { searchParams: { q?: string; 
 export default async function Page({ searchParams }: { searchParams: { q?: string; category?: string } }) {
   const categories = await getAllCategoryList();
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'ともきゃん日記', active: true },
   ];
 

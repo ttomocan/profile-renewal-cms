@@ -26,3 +26,4 @@ export default function BreadcrumbListJsonLd({ items }: Props) {
 
   return <JsonLd jsonLd={jsonLd} />;
 }
+

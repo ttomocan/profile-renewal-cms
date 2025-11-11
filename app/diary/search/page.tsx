@@ -67,7 +67,7 @@ export default function Page({ searchParams }: Props) {
   const query = searchParams.q;
 
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'ともきゃん日記', href: '/diary/' },
     { label: '記事検索', active: true },
   ];

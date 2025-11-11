@@ -55,7 +55,7 @@ export default async function Page({ params, searchParams }: Props) {
   const pageUrl = `https://www.tomocan.site/diary/${params.slug}`;
 
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'ともきゃん日記', href: '/diary/' },
     { label: data.title, active: true },
   ];

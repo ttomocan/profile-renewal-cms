@@ -4,7 +4,7 @@ import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 export default async function Page() {
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'お問い合わせ', active: true },
   ];
 

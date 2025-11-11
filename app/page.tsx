@@ -6,7 +6,7 @@ import Link from 'next/link';
 import DiaryList from '@/app/_components/DiaryList';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
-import ResultCard from '@/components/ResultCard';
+import ResultsSlider from '@/app/_components/ResultsSlider';
 
 // トップページ専用のmetadata（og:type = website）
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default async function Home() {
       limit: TOP_DIARY_LIMIT,
     }),
     getResults({
-      limit: 3, // トップページには最大3件表示
+      limit: 6, // トップページには最大6件表示（3×2）
     }),
   ]);
 
@@ -153,15 +153,7 @@ export default async function Home() {
           </div>
           {resultsData.contents.length > 0 && (
             <div className="p-top-results__list fadeUpTrigger">
-              <div className="results-grid">
-                {resultsData.contents.slice(0, 3).map((result, index) => (
-                  <ResultCard
-                    key={`${result.id}-${index}`}
-                    result={result}
-                    priority={index === 0} // 最初の画像のみ優先読み込み
-                  />
-                ))}
-              </div>
+              <ResultsSlider results={resultsData.contents} />
             </div>
           )}
           <div className="p-top-results__button fadeUpTrigger">

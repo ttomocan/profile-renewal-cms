@@ -65,7 +65,7 @@ export default async function Page({ params }: Props) {
   }
 
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'ともきゃん日記', href: '/diary/' },
     { label: `${category.name}の記事`, href: `/diary/category/${category.id}/` },
     { label: `${current}ページ目`, active: true },

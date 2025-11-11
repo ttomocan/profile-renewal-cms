@@ -133,7 +133,7 @@ async function ResultsContent({ searchParams }: ResultsPageProps) {
 
 export default async function ResultsPage({ searchParams }: ResultsPageProps) {
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: '実績紹介', active: true },
   ];
 

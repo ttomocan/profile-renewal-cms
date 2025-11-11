@@ -81,7 +81,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const formattedPeriod = formatPeriod(period);
 
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: '実績紹介', href: '/result/' },
     { label: title, active: true },
   ];

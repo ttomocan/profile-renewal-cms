@@ -42,7 +42,7 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'お問い合わせ', active: true },
   ];
 
