@@ -410,17 +410,14 @@
     // disabled状態
     &.is-disabled,
     &:disabled {
-      opacity: 0.3;
-      cursor: not-allowed;
-      pointer-events: none;
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.6);
       border-color: rgba(0, 0, 0, 0.1);
       color: rgba(0, 0, 0, 0.3);
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 
       &:hover,
       &:active {
-        background: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.6);
         color: rgba(0, 0, 0, 0.3);
         border-color: rgba(0, 0, 0, 0.1);
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -467,7 +464,7 @@
     background: #ffffff;
     box-shadow: 0 1px 2px 0 rgba(243, 107, 10, 0.05);
     border: 1px solid rgba(243, 107, 10, 0.2);
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;

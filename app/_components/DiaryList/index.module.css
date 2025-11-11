@@ -8,7 +8,7 @@
   background: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(243, 107, 10, 0.05);
   border: 1px solid rgba(243, 107, 10, 0.2);
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -94,7 +94,7 @@
   padding: 60px 20px;
   text-align: center;
   background-color: #ffffff;
-  border-radius: 12px;
+  border-radius: 10px;
   margin: 40px 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(219, 209, 201, 0.3);
