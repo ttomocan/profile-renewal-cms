@@ -602,13 +602,13 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           border: 1px solid transparent;
 
           &--role {
-            background: rgba(124, 58, 237, 0.12);
-            color: #7c3aed;
-            border-color: rgba(124, 58, 237, 0.25);
+            background: $primary-lighter;
+            color: $primary-color;
+            border-color: rgba(243, 107, 10, 0.25);
 
             &:hover {
-              background: rgba(124, 58, 237, 0.18);
-              border-color: rgba(124, 58, 237, 0.4);
+              background: rgba(243, 107, 10, 0.12);
+              border-color: rgba(243, 107, 10, 0.4);
               transform: translateY(-1px);
             }
           }
