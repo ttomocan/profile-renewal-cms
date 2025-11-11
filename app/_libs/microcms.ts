@@ -3,6 +3,12 @@ import type { MicroCMSQueries, MicroCMSImage, MicroCMSListContent } from 'microc
 import type { ResultItem, WorkType, ProjectType, Role, ResultsResponse } from '@/types/results';
 import { buildMicroCMSFilters } from '@/lib/parse';
 
+// キャッシュ時間の定数（秒単位）
+const BLOG_LIST_CACHE_TIME = 60; // ブログ一覧: 60秒
+const BLOG_DETAIL_CACHE_TIME = 300; // ブログ詳細: 300秒（5分）
+const RESULTS_LIST_CACHE_TIME = 60; // 実績一覧: 60秒
+const RESULTS_DETAIL_CACHE_TIME = 300; // 実績詳細: 300秒（5分）
+
 export type Category = {
   name: string;
 } & MicroCMSListContent;
@@ -217,7 +223,7 @@ export const getTotalCount = async (
     }
 
     const response = await client.getList<ResultItem>({
-      endpoint: 'results',
+      endpoint: 'result',
       queries,
       customRequestInit: {
         next: {
