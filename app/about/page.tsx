@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import PersonJsonLd from '@/app/_components/PersonJsonLd';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 export default async function Page() {
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃんについて', active: true },
+  ];
   return (
     <>
       <section className="greeting inner inner-s">
@@ -11,7 +16,7 @@ export default async function Page() {
         </h2>
         <div className="greeting__cont">
           <div className="greeting__image fadeUpTrigger">
-            <Image src="/img/pages/about/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} sizes="100vw" />
+            <Image src="/img/pages/about/img_tomocan.jpg" alt="名古屋のWebエンジニア・ブロガー ともきゃんのプロフィール写真" width={200} height={200} sizes="100vw" priority />
           </div>
           <div className="greeting__detail fadeUpTrigger">
             <p>
@@ -28,7 +33,7 @@ export default async function Page() {
               Webサイトやブログで「何か始めてみたいな」と思ったら、気軽にお声がけください！
             </p>
             <p className="greeting__detail__sign">
-              <Image src="/img/pages/about/text_sign.svg" alt="ともきゃんのサイン" width={135} height={27} />
+              <Image src="/img/pages/about/text_sign.svg" alt="" width={135} height={27} aria-hidden="true" />
             </p>
           </div>
         </div>
@@ -118,6 +123,7 @@ export default async function Page() {
         </div>
       </section>
       <PersonJsonLd />
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }

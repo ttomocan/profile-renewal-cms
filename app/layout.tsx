@@ -17,7 +17,7 @@ import FontLoader from './_components/FontLoader';
 export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
   const isHomePage = pathname === '/';
   const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
-  const description = 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策など、私のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！';
+  const description = '名古屋のWebエンジニア兼ブロガー ともきゃんのプロフィールサイト。Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意。ブログ運営やWeb制作のお悩み解決をサポートします。';
 
   // タイムスタンプの生成をサーバーサイドに固定
   const timestamp = Date.now();
@@ -29,6 +29,9 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       default: baseTitle,
     },
     description,
+    alternates: {
+      canonical: 'https://www.tomocan.site/',
+    },
     icons: {
       icon: '/favicon.ico',
       apple: '/apple-icon.png',
@@ -40,6 +43,7 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       },
       type: isHomePage ? 'website' : 'article',
       description,
+      url: 'https://www.tomocan.site/',
       images: [`/img/common/ogp.png?timestamp=${timestamp}`],
       siteName: 'ともきゃんスタイル',
       locale: 'ja_JP',

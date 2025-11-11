@@ -5,6 +5,7 @@ import Article from '@/app/_components/Article';
 import Link from 'next/link';
 import styles from './page.module.css';
 import BlogPostJsonLd from '@/app/_components/BlogPostJsonLd';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 type Props = {
   params: {
@@ -27,9 +28,13 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   return {
     title: data.title,
     description: data.description,
+    alternates: {
+      canonical: `https://www.tomocan.site/diary/${params.slug}/`,
+    },
     openGraph: {
       title: data.title,
       description: data.description,
+      url: `https://www.tomocan.site/diary/${params.slug}/`,
       images: [imageUrl],
     },
     twitter: {
@@ -49,6 +54,12 @@ export default async function Page({ params, searchParams }: Props) {
 
   const pageUrl = `https://www.tomocan.site/diary/${params.slug}`;
 
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃん日記', href: '/diary/' },
+    { label: data.title, active: true },
+  ];
+
   return (
     <>
       <article className="inner">
@@ -60,6 +71,7 @@ export default async function Page({ params, searchParams }: Props) {
         </div>
       </article>
       <BlogPostJsonLd blog={data} url={pageUrl} />
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }

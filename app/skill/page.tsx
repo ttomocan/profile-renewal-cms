@@ -1,6 +1,13 @@
 import Image from 'next/image';
+import ServiceJsonLd from '@/app/_components/ServiceJsonLd';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 export default async function Page() {
+  const breadcrumbItems = [
+    { label: 'ホーム', href: '/' },
+    { label: 'ともきゃんができること', active: true },
+  ];
+
   return (
     <>
       <section className="first inner">
@@ -288,6 +295,13 @@ export default async function Page() {
           <div className="other__card">Webライティング</div>
         </div>
       </section>
+      <ServiceJsonLd
+        name="Web制作・開発サービス"
+        description="HTML/CSS/JavaScript、PHP、WordPress、Next.js、React、TypeScriptを使ったWeb制作。Figma、Photoshop、Illustratorでのデザイン制作。ChatGPT、Claude、GeminiなどAIツールを活用した効率的なWeb開発サービスを提供しています。"
+        serviceType={['Webサイト制作', 'WordPress開発', 'Next.js開発', 'React開発', 'Webデザイン', 'SEO対策', 'ブログカスタマイズ', 'UI/UX改善']}
+        url="https://www.tomocan.site/skill/"
+      />
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }

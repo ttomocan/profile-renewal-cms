@@ -26,7 +26,7 @@ export default async function Home() {
             <source srcSet="/img/pages/top/img_hero_sp.webp" type="image/webp" media="(max-width: 767px)" />
             <source srcSet="/img/pages/top/img_hero_sp.jpg" type="image/jpg" media="(max-width: 767px)" />
             <source srcSet="/img/pages/top/img_hero.webp" type="image/webp" />
-            <Image src="/img/pages/top/img_hero.webp" alt="メインビジュアルの背景画像" width={2732} height={1000} sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" priority loading="eager" />
+            <Image src="/img/pages/top/img_hero.webp" alt="ともきゃんスタイル - 名古屋のWebエンジニア・ブロガーのプロフィールサイト" width={2732} height={1000} sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" priority loading="eager" />
           </picture>
         </div>
 
@@ -79,7 +79,7 @@ export default async function Home() {
           </h2>
           <div className="p-top-about__cont">
             <div className="p-top-about__image fadeUpTrigger">
-              <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} />
+              <Image src="/img/pages/top/img_tomocan.jpg" alt="Webエンジニア・ブロガー ともきゃんのプロフィール画像" width={200} height={200} />
             </div>
             <div className="p-top-about__text-area fadeUpTrigger">
               <div className="p-top-about__speech-bubble">
@@ -108,17 +108,17 @@ export default async function Home() {
           </h2>
           <div className="p-top-skill__cont c-row">
             <div className="p-top-skill__item col fadeUpTrigger">
-              <Image src="/img/pages/top/img_programming.jpg" alt="プログラミングのイメージ写真" width={300} height={200} />
+              <Image src="/img/pages/top/img_programming.jpg" alt="HTML/CSS/JavaScript/PHPなどのプログラミング言語を使ったWeb制作" width={300} height={200} />
               <h3 className="p-top-skill__item-heading c-heading-lv3">プログラミング</h3>
               <p>HTML、CSS、JavaScript、PHPを用いたWebサイト構築が得意です。特にWordPressのカスタマイズに強みを持ち、独自のテーマを作成します。お客様のご要望に合わせて、管理画面の更新機能やサイトのレイアウトを自在に調整し、ユーザビリティを向上させます。また、SEOに配慮したコーディングも行い、検索エンジンでの集客力アップをサポートします。</p>
             </div>
             <div className="p-top-skill__item col fadeUpTrigger">
-              <Image src="/img/pages/top/img_web-tool.jpg" alt="Web制作ツールのイメージ写真" width={300} height={200} />
+              <Image src="/img/pages/top/img_web-tool.jpg" alt="Figma、Photoshop、IllustratorなどのWeb制作ツール" width={300} height={200} />
               <h3 className="p-top-skill__item-heading c-heading-lv3">Web制作ツール</h3>
               <p>Cursor、Figma、Photoshop、Illustratorを使いこなし、効率的かつ美しいデザインを実現します。さらに、CanvaやAdobe Expressといったオンラインツールも活用し、短時間で効果的なビジュアルを作成。プロジェクトの進行スピードを速めつつ、クオリティを保つことができます。各ツールの特性を活かして、ユーザーにとってわかりやすく魅力的なデザインを提供します。</p>
             </div>
             <div className="p-top-skill__item col fadeUpTrigger">
-              <Image src="/img/pages/top/img_ai-tool.jpg" alt="AIツールのイメージ写真" width={300} height={200} />
+              <Image src="/img/pages/top/img_ai-tool.jpg" alt="ChatGPT、Claude、GeminiなどのAIツールを活用したWeb制作" width={300} height={200} />
               <h3 className="p-top-skill__item-heading c-heading-lv3">AIツール</h3>
               <p>ChatGPT、Claude、Geminiなどの最新AIツールを積極的に活用し、コーディングやデザイン、SEO対策、コンテンツ作成まで幅広く対応しています。AIの力を取り入れることで、作業効率とクオリティの両立を実現し、短期間で高品質なWebサイトや成果物を提供します。常に新しい技術を取り入れ、お客様のご要望に柔軟かつスピーディーに応えます。</p>
             </div>
@@ -188,7 +188,7 @@ export default async function Home() {
           </h2>
           <div className="p-top-contact__cont c-row fadeUpTrigger">
             <div className="p-top-contact__img col-img">
-              <Image src="/img/pages/top/img_contact.jpg" alt="お問い合わせのイメージ写真" width={310} height={200} />
+              <Image src="/img/pages/top/img_contact.jpg" alt="Webサイト制作やブログ運営のお問い合わせ・ご相談" width={310} height={200} />
             </div>
             <div className="p-top-contact__detail col-text">
               <p>Webサイト制作やブログデザイン、UI/UX改善、SEO対策など、Webに関するご相談・ご依頼を承っています。ご要望やご予算に合わせて、最適なご提案・サポートをいたします。ご興味をお持ちいただけましたら、お気軽にお問い合わせフォームよりご連絡ください！</p>

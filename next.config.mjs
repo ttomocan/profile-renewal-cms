@@ -10,13 +10,13 @@ const nextConfig = {
   },
   trailingSlash: true,
   // HTML圧縮とパフォーマンス最適化
-  compress: true, // Gzip圧縮を有効化
+  // compress: true, // Gzip圧縮を有効化（一時的に無効化）
   poweredByHeader: false, // X-Powered-By ヘッダーを削除
   reactStrictMode: true, // React Strict Modeを有効化
-  swcMinify: true, // SWCによる最適化を有効化
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production', // 本番環境でconsole.logを削除
-  },
+  // swcMinify: true, // SWCによる最適化を有効化（一時的に無効化）
+  // compiler: {
+  //   removeConsole: process.env.NODE_ENV === 'production', // 本番環境でconsole.logを削除（一時的に無効化）
+  // },
   experimental: {
     // optimizeCss: true, // critters依存関係のため一時的に無効化
   },

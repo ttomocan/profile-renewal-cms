@@ -7,6 +7,7 @@ import { parseTechStack, parseRoles, splitHighlights, formatPeriod, safeGetProje
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import '@/styles/pages/result.scss';
 
 interface ResultDetailPageProps {
@@ -29,9 +30,13 @@ export async function generateMetadata({ params }: ResultDetailPageProps): Promi
   return {
     title: `${result.title} | 実績詳細 | ${siteName}`,
     description: result.summary,
+    alternates: {
+      canonical: `https://www.tomocan.site/result/${params.id}/`,
+    },
     openGraph: {
       title: `${result.title} | ${siteName}`,
       description: result.summary,
+      url: `https://www.tomocan.site/result/${params.id}/`,
       type: 'article',
       images: result.cover
         ? [
@@ -247,6 +252,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
           </nav>
         </div>
       </main>
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }
