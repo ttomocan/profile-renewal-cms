@@ -1,11 +1,19 @@
 import '@/styles/pages/top.scss';
 
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import DiaryList from '@/app/_components/DiaryList';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultCard from '@/components/ResultCard';
+
+// トップページ専用のmetadata（og:type = website）
+export const metadata: Metadata = {
+  openGraph: {
+    type: 'website',
+  },
+};
 
 export default async function Home() {
   // ブログデータと実績データを取得
