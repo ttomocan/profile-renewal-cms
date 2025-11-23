@@ -91,7 +91,7 @@ export default async function Home() {
           </div>
         </div>
 
-        <a href="#skill" className="p-top-hero__scroll">
+        <a href="#about" className="p-top-hero__scroll">
           <span className="p-top-hero__scroll-text">Scroll</span>
           <span className="p-top-hero__scroll-line">
             <span className="p-top-hero__scroll-circle"></span>
@@ -99,7 +99,7 @@ export default async function Home() {
         </a>
       </div>
       <main>
-        <section className="p-top-about inner">
+        <section id="about" className="p-top-about inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
