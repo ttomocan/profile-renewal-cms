@@ -10,7 +10,9 @@ import ResultCard from '@/components/ResultCard';
 import Pagination from '@/components/Pagination';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
-import '@/styles/pages/results.scss';
+import ItemListJsonLd from '@/app/_components/ItemListJsonLd';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
+import '@/styles/pages/result.scss';
 
 interface ResultsPageProps {
   searchParams: SimpleSearchParams;
@@ -18,14 +20,24 @@ interface ResultsPageProps {
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteName = 'ともきゃんスタイル';
+  const description = 'Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、Reactを使ったWebサイト制作、ブログカスタマイズ、デザイン制作など、ともきゃんの制作実績を一覧でご覧いただけます。';
 
   return {
     title: `実績紹介 | ${siteName}`,
-    description: 'ともきゃんの制作実績を一覧でご覧いただけます。Webサイト制作、ブログカスタマイズ、デザイン制作など多数の実績を紹介しています。',
+    description,
+    alternates: {
+      canonical: 'https://www.tomocan.site/result/',
+    },
     openGraph: {
       title: `実績紹介 | ${siteName}`,
-      description: 'ともきゃんの制作実績を一覧でご覧いただけます。',
+      description,
+      url: 'https://www.tomocan.site/result/',
       type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `実績紹介 | ${siteName}`,
+      description,
     },
   };
 }
@@ -119,16 +131,23 @@ async function ResultsContent({ searchParams }: ResultsPageProps) {
   );
 }
 
-export default function ResultsPage({ searchParams }: ResultsPageProps) {
+export default async function ResultsPage({ searchParams }: ResultsPageProps) {
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: '実績紹介', active: true },
   ];
+
+  // 実績データを取得（ItemListJsonLd用）
+  const resultsData = await getResults({
+    limit: 12,
+    offset: 0,
+    sort: 'new',
+  });
 
   return (
     <>
       {/* ページタイトル */}
-      <PageTitle title="Results" sub="実績紹介" />
+      <PageTitle title="Result" sub="実績紹介" />
 
       {/* パンくずリスト */}
       <Breadcrumb items={breadcrumbItems} />
@@ -141,6 +160,8 @@ export default function ResultsPage({ searchParams }: ResultsPageProps) {
           </Suspense>
         </div>
       </main>
+      <ItemListJsonLd items={resultsData.contents} listName="ともきゃんの制作実績一覧" />
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }

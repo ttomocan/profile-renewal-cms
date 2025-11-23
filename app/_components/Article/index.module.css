@@ -13,7 +13,7 @@
   color: #f36b0a;
   margin: 0 0 24px;
   padding: 16px 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   border-left: 4px solid #f36b0a;
   text-align: left;
   line-height: 1.6;
@@ -28,7 +28,7 @@
   margin-bottom: 32px;
   padding: 16px 20px;
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid #e9ecef;
 }
 
@@ -45,7 +45,7 @@
   width: 100%;
   height: auto;
   margin-bottom: 40px;
-  border-radius: 12px;
+  border-radius: 10px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
@@ -132,7 +132,7 @@
   display: block;
   overflow-x: auto;
   padding: 20px;
-  border-radius: 12px;
+  border-radius: 10px;
   font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
   font-size: 0.95rem;
   line-height: 1.6;
@@ -342,7 +342,7 @@
     padding: 15px 25px 15px 50px;
     margin: 2rem 0;
     font-size: 1rem;
-    border-radius: 12px;
+    border-radius: 10px;
   }
 
   .content > blockquote::before {

@@ -10,19 +10,21 @@ app.prepare().then(() => {
   const server = express();
 
   // 高度な圧縮設定
-  server.use(compression({
-    filter: (req, res) => {
-      // 圧縮すべきかどうかを判定
-      if (req.headers['x-no-compression']) {
-        return false;
-      }
-      // デフォルトのフィルターを使用
-      return compression.filter(req, res);
-    },
-    level: 6, // 圧縮レベル（1-9、6が推奨）
-    threshold: 1024, // 1KB以上のファイルを圧縮
-    memLevel: 8, // メモリ使用量レベル（1-9）
-  }));
+  server.use(
+    compression({
+      filter: (req, res) => {
+        // 圧縮すべきかどうかを判定
+        if (req.headers['x-no-compression']) {
+          return false;
+        }
+        // デフォルトのフィルターを使用
+        return compression.filter(req, res);
+      },
+      level: 6, // 圧縮レベル（1-9、6が推奨）
+      threshold: 1024, // 1KB以上のファイルを圧縮
+      memLevel: 8, // メモリ使用量レベル（1-9）
+    })
+  );
 
   // セキュリティヘッダーの設定
   server.use((req, res, next) => {

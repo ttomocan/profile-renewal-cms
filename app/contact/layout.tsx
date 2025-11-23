@@ -3,17 +3,24 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 const pageTitle = 'お問い合わせ';
+const description = 'Webサイト制作、ブログデザイン、UI/UX改善、SEO対策など、Webに関するご相談・ご依頼を承ります。9年以上のWeb制作経験を活かして、あなたのお悩みを解決するお手伝いをします。お気軽にお問い合わせください。';
+
 export const metadata = {
   title: {
     template: `%s | ${baseTitle}`,
     default: pageTitle,
   },
-
+  description,
+  alternates: {
+    canonical: 'https://www.tomocan.site/contact/',
+  },
   openGraph: {
     title: {
       template: `%s | ${baseTitle}`,
       default: pageTitle,
     },
+    description,
+    url: 'https://www.tomocan.site/contact/',
     images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
     siteName: baseTitle,
   },
@@ -24,6 +31,7 @@ export const metadata = {
       template: `%s | ${baseTitle}`,
       default: pageTitle,
     },
+    description,
     images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
   },
 };
@@ -34,7 +42,7 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'お問い合わせ', active: true },
   ];
 

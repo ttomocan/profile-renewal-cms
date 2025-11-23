@@ -51,7 +51,7 @@ export default function ResultCard({ result, priority = false, disableLink = fal
           </div>
         </div>
       ) : (
-        <Link href={`/results/${id}`} className="result-card__link">
+        <Link href={`/result/${id}`} className="result-card__link">
           <div className="result-card__image">
             <Image src={cover.url} alt={`${title}のカバー画像`} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="result-card__image-img" priority={priority} />
 

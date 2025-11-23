@@ -12,11 +12,11 @@ import DynamicBodyClass from './DynamicBodyClass';
 import WebsiteJsonLd from './_components/WebsiteJsonLd';
 import ClientSmoothScrollProvider from './_components/ClientSmoothScrollProvider';
 import ThemeColorProvider from './_components/ThemeColorProvider';
+import FontLoader from './_components/FontLoader';
 
-export async function generateMetadata({ pathname }: { pathname: string }): Promise<Metadata> {
-  const isHomePage = pathname === '/';
+export async function generateMetadata(): Promise<Metadata> {
   const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
-  const description = 'Webエンジニア兼ブロガーとして活動するともきゃんのプロフィールサイト。自己紹介やWeb制作やブログ運営、SEO対策など、私のスキルを紹介しています。ブログ運営やWeb制作のお悩みがあれば、ぜひご相談ください！';
+  const description = '名古屋のWebエンジニア兼ブロガー ともきゃんのプロフィールサイト。Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意。ブログ運営やWeb制作のお悩み解決をサポートします。';
 
   // タイムスタンプの生成をサーバーサイドに固定
   const timestamp = Date.now();
@@ -28,6 +28,9 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
       default: baseTitle,
     },
     description,
+    alternates: {
+      canonical: 'https://www.tomocan.site/',
+    },
     icons: {
       icon: '/favicon.ico',
       apple: '/apple-icon.png',
@@ -37,8 +40,9 @@ export async function generateMetadata({ pathname }: { pathname: string }): Prom
         template: `%s | ${baseTitle}`,
         default: baseTitle,
       },
-      type: isHomePage ? 'website' : 'article',
+      type: 'website',
       description,
+      url: 'https://www.tomocan.site/',
       images: [`/img/common/ogp.png?timestamp=${timestamp}`],
       siteName: 'ともきゃんスタイル',
       locale: 'ja_JP',
@@ -69,6 +73,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preload" href="/fonts/Roboto/Roboto-Bold.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
         <link rel="preload" href="/fonts/Caveat_Brush/CaveatBrush-Regular.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
 
+        {/* Preload hero image for LCP optimization (トップページ用) */}
+        <link
+          rel="preload"
+          as="image"
+          href="/img/pages/top/img_hero.webp"
+          // @ts-ignore - imagesrcset/imagesizes は HTML5 仕様の正しい属性名
+          imagesrcset="/_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=640&q=75 640w, /_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=1080&q=75 1080w, /_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=1920&q=75 1920w"
+          // @ts-ignore
+          imagesizes="100vw"
+          // @ts-ignore
+          fetchpriority="high"
+        />
+
         {/* Resource hints for performance */}
         <meta name="format-detection" content="telephone=no" />
       </head>
@@ -76,6 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ClientSmoothScrollProvider />
         <DynamicBodyClass />
         <ThemeColorProvider />
+        <FontLoader />
         <Loading />
         <Header />
         <div className="l-content">{children}</div>

@@ -3,10 +3,9 @@
   color: #ffffff;
   padding: 2px 10px;
   border-radius: 20px;
-	font-size: .8rem;
+  font-size: 0.8rem;
   font-weight: 500;
   white-space: nowrap;
-  box-shadow: 0 2px 4px rgba(243, 107, 10, 0.2);
   transition: all 0.3s ease;
 }
 

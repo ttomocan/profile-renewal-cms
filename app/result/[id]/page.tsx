@@ -7,7 +7,8 @@ import { parseTechStack, parseRoles, splitHighlights, formatPeriod, safeGetProje
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
-import '@/styles/pages/results.scss';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
+import '@/styles/pages/result.scss';
 
 interface ResultDetailPageProps {
   params: {
@@ -29,9 +30,13 @@ export async function generateMetadata({ params }: ResultDetailPageProps): Promi
   return {
     title: `${result.title} | 実績詳細 | ${siteName}`,
     description: result.summary,
+    alternates: {
+      canonical: `https://www.tomocan.site/result/${params.id}/`,
+    },
     openGraph: {
       title: `${result.title} | ${siteName}`,
       description: result.summary,
+      url: `https://www.tomocan.site/result/${params.id}/`,
       type: 'article',
       images: result.cover
         ? [
@@ -76,15 +81,15 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const formattedPeriod = formatPeriod(period);
 
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
-    { label: '実績紹介', href: '/results/' },
+    { label: 'トップ', href: '/' },
+    { label: '実績紹介', href: '/result/' },
     { label: title, active: true },
   ];
 
   return (
     <>
       {/* ページタイトル */}
-      <PageTitle title="Results" sub="実績紹介" />
+      <PageTitle title="Result" sub="実績紹介" />
 
       {/* パンくずリスト */}
       <Breadcrumb items={breadcrumbItems} />
@@ -237,7 +242,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
           {/* ナビゲーション */}
           <nav className="result-detail__navigation">
             <div className="result-detail__navigation-content">
-              <Link href="/results" className="result-detail__navigation-back">
+              <Link href="/result" className="result-detail__navigation-back">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>
@@ -247,6 +252,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
           </nav>
         </div>
       </main>
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }

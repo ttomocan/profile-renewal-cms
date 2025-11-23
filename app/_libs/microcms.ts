@@ -3,6 +3,12 @@ import type { MicroCMSQueries, MicroCMSImage, MicroCMSListContent } from 'microc
 import type { ResultItem, WorkType, ProjectType, Role, ResultsResponse } from '@/types/results';
 import { buildMicroCMSFilters } from '@/lib/parse';
 
+// キャッシュ時間の定数（秒単位）
+const BLOG_LIST_CACHE_TIME = 60; // ブログ一覧: 60秒
+const BLOG_DETAIL_CACHE_TIME = 300; // ブログ詳細: 300秒（5分）
+const RESULTS_LIST_CACHE_TIME = 60; // 実績一覧: 60秒
+const RESULTS_DETAIL_CACHE_TIME = 300; // 実績詳細: 300秒（5分）
+
 export type Category = {
   name: string;
 } & MicroCMSListContent;
@@ -34,7 +40,7 @@ export const getBlogList = async (queries?: MicroCMSQueries) => {
     queries,
     customRequestInit: {
       next: {
-        revalidate: 30,
+        revalidate: BLOG_LIST_CACHE_TIME,
       },
     },
   });
@@ -48,7 +54,7 @@ export const getBlogDetail = async (contentId: string, queries?: MicroCMSQueries
     queries,
     customRequestInit: {
       next: {
-        revalidate: queries?.draftKey === undefined ? 30 : 0,
+        revalidate: queries?.draftKey === undefined ? BLOG_DETAIL_CACHE_TIME : 0,
       },
     },
   });
@@ -71,7 +77,7 @@ export const getAllBlogList = async () => {
     endpoint: 'blog',
     customRequestInit: {
       next: {
-        revalidate: 30,
+        revalidate: BLOG_LIST_CACHE_TIME,
       },
     },
   });
@@ -84,7 +90,7 @@ export const getAllCategoryList = async () => {
     endpoint: 'categories',
     customRequestInit: {
       next: {
-        revalidate: 30,
+        revalidate: BLOG_LIST_CACHE_TIME,
       },
     },
   });
@@ -138,11 +144,11 @@ export const getResults = async (
     }
 
     const response = await client.getList<ResultItem>({
-      endpoint: 'results',
+      endpoint: 'result',
       queries,
       customRequestInit: {
         next: {
-          revalidate: 60, // 60秒キャッシュ
+          revalidate: RESULTS_LIST_CACHE_TIME,
         },
       },
     });
@@ -170,11 +176,11 @@ export const getResults = async (
 export const getResultDetail = async (id: string): Promise<ResultItem | null> => {
   try {
     const response = await client.getListDetail<ResultItem>({
-      endpoint: 'results',
+      endpoint: 'result',
       contentId: id,
       customRequestInit: {
         next: {
-          revalidate: 300, // 5分キャッシュ
+          revalidate: RESULTS_DETAIL_CACHE_TIME,
         },
       },
     });
@@ -217,11 +223,11 @@ export const getTotalCount = async (
     }
 
     const response = await client.getList<ResultItem>({
-      endpoint: 'results',
+      endpoint: 'result',
       queries,
       customRequestInit: {
         next: {
-          revalidate: 60,
+          revalidate: RESULTS_LIST_CACHE_TIME,
         },
       },
     });

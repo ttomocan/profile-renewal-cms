@@ -1,19 +1,24 @@
 import Image from 'next/image';
+import ServiceJsonLd from '@/app/_components/ServiceJsonLd';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 export default async function Page() {
+  const breadcrumbItems = [
+    { label: 'トップ', href: '/' },
+    { label: 'ともきゃんができること', active: true },
+  ];
+
   return (
     <>
       <section className="first inner">
         <p className="fadeUpTrigger">
           私が実務でよく使っているスキルやWeb制作ツールを紹介します。
           <br />
-          私の得意なスキルは、CSS設計（BEM・FLOCSS）に配慮した保守性の高いコーディングと、WordPressサイトの構築・カスタマイズです。自分の作ったものが、誰かの手で動く瞬間が好きなんです。
-          <br />
-          フロントエンドは、デザインとロジックの橋渡しとして、ユーザーの「使いやすい」「わかりやすい」を直接生み出せる場所。 コードで“体験”をつくる、その実感が僕をこの世界に夢中にさせています。
+          HTML/CSS/JavaScript、PHP、そしてWordPressのテーマ開発・カスタマイズをして、BEMやFLOCSSで“あとから直しやすい”設計を大切にしています。デザインの意図を汲み、コードで体験に落とし込む——その橋渡しが得意です。
           <br />
           最近は、Next.jsやReact、TypeScriptといったモダンなフロントエンド技術を使ったWebアプリ開発にもチャレンジしています。SEO対策もしっかり意識して、成果につながるWebサイト作りを実践しています。
           <br />
-          さらに、スキマ時間や休日には、ブログ運営で培ったノウハウを活かし、Webライティングやコンテンツマーケティングにも挑戦しています。「こんなことがやりたい！」というご要望をしっかりと受け止め、オリジナリティあふれるアイデアや戦略でWebサイトを形にすることを心がけています。
+          さらに、スキマ時間や休日には、実務で培った経験を活かし、ブログ運営を行いながら、WebデザインやSEOの知識を深めています。「こんなことがやりたい！」というご要望をしっかりと受け止め、オリジナリティあふれるアイデアや戦略でWebサイトを形にすることを心がけています。
         </p>
       </section>
       <section className="programming inner">
@@ -54,7 +59,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">PHP</h3>
-            <p className="programming__description">PHPを活用して、WordPressテーマやプラグインのカスタマイズを得意としています。お問い合わせフォームの作成や投稿機能の拡張、データベース連携など、お客様の要望に応じた機能開発が可能です。</p>
+            <p className="programming__description">PHPを活用してお問い合わせフォームの作成や、WordPressテーマのカスタマイズや新規テーマの開発、投稿機能の拡張、カスタムフィールドによる更新機能の実装など、お客様の要望に応じた機能開発が可能です。</p>
           </div>
         </div>
       </section>
@@ -143,8 +148,17 @@ export default async function Page() {
             <Image src="/img/pages/skill/img_cursor.svg" alt="Cursor" width="100" height="100" sizes="100vw" />
           </div>
           <div className="tool__detail">
-            <h3 className="programming__heading">Cursor・Visual Studio Code・Git</h3>
-            <p className="programming__description">サイト構築時のメインエディタとしてCursorを使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。また、GitHubを用いたバージョン管理も行っています。</p>
+            <h3 className="programming__heading">Cursor・Visual Studio Code</h3>
+            <p className="programming__description">サイト構築時のメインエディタとしてCursorを使用しています。AIアシスタントによるコード補完や、豊富な拡張機能を活用することで、開発環境を最適化し、より効率的なコーディングを実現しています。</p>
+          </div>
+        </div>
+        <div className="tool__item fadeUpTrigger">
+          <div className="tool__image">
+            <Image src="/img/pages/skill/img_git.svg" alt="Git" width="100" height="100" sizes="100vw" />
+          </div>
+          <div className="tool__detail">
+            <h3 className="programming__heading">Git</h3>
+            <p className="programming__description">Gitを使ったバージョン管理を実践しています。GitHubを活用してコードの変更履歴を管理し、ブランチを使った機能開発やバグ修正、コミット履歴による開発の可視化など、チーム開発にも対応できる体制を整えています。</p>
           </div>
         </div>
         <div className="tool__item fadeUpTrigger">
@@ -220,6 +234,22 @@ export default async function Page() {
         </div>
         <div className="ai-tool__item fadeUpTrigger">
           <div className="ai-tool__image">
+            <svg height="100" viewBox="0 0 24 24" width="100" xmlns="http://www.w3.org/2000/svg">
+              <title>Claude</title>
+              <path
+                d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z"
+                fill="#D97757"
+                fill-rule="nonzero"
+              ></path>
+            </svg>
+          </div>
+          <div className="ai-tool__detail">
+            <h3 className="programming__heading">Claude</h3>
+            <p className="programming__description">Anthropic社のClaudeを、サイト・サービス構築におけるコード生成やコードレビューの支援として活用しています。高度な推論能力を活かし、複雑なロジックの実装や品質の高いコードの作成、バグの発見と修正提案など、開発プロセス全体の効率化と品質向上に貢献しています。</p>
+          </div>
+        </div>
+        <div className="ai-tool__item fadeUpTrigger">
+          <div className="ai-tool__image">
             <svg fill="currentColor" fillRule="evenodd" height="100" viewBox="0 0 24 24" width="100" xmlns="http://www.w3.org/2000/svg">
               <title>NotebookLM</title>
               <path d="M11.999 3.14C5.372 3.14 0 8.588 0 15.312v5.828h2.212v-.58c0-2.728 2.178-4.938 4.866-4.938 2.688 0 4.866 2.21 4.866 4.937v.581h2.212v-.58c0-3.967-3.17-7.18-7.078-7.18a6.966 6.966 0 00-4.086 1.318C4.2 12.262 6.687 10.59 9.56 10.59c4.057 0 7.347 3.338 7.347 7.453v3.097h2.212v-3.097c0-5.355-4.28-9.698-9.56-9.698a9.438 9.438 0 00-6.217 2.332C4.984 7.528 8.244 5.383 12 5.383c5.406 0 9.788 4.446 9.788 9.93v5.827H24v-5.828C23.999 8.588 18.627 3.14 11.999 3.14z"></path>
@@ -265,6 +295,13 @@ export default async function Page() {
           <div className="other__card">Webライティング</div>
         </div>
       </section>
+      <ServiceJsonLd
+        name="Web制作・開発サービス"
+        description="HTML/CSS/JavaScript、PHP、WordPress、Next.js、React、TypeScriptを使ったWeb制作。Figma、Photoshop、Illustratorでのデザイン制作。ChatGPT、Claude、GeminiなどAIツールを活用した効率的なWeb開発サービスを提供しています。"
+        serviceType={['Webサイト制作', 'WordPress開発', 'Next.js開発', 'React開発', 'Webデザイン', 'SEO対策', 'ブログカスタマイズ', 'UI/UX改善']}
+        url="https://www.tomocan.site/skill/"
+      />
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }

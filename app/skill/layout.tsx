@@ -4,17 +4,24 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 const pageTitle = 'ともきゃんができること';
+const description = 'HTML/CSS/JavaScript、PHP、WordPress、Next.js、React、TypeScriptを使ったWeb制作スキル。Figma、Photoshop、Illustratorでのデザイン制作。ChatGPT、Claude、GeminiなどAIツールを活用した効率的なWeb開発が可能です。';
+
 export const metadata = {
   title: {
     template: `%s | ${baseTitle}`,
     default: pageTitle,
   },
-
+  description,
+  alternates: {
+    canonical: 'https://www.tomocan.site/skill/',
+  },
   openGraph: {
     title: {
       template: `%s | ${baseTitle}`,
       default: pageTitle,
     },
+    description,
+    url: 'https://www.tomocan.site/skill/',
     images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
     siteName: baseTitle,
   },
@@ -25,6 +32,7 @@ export const metadata = {
       template: `%s | ${baseTitle}`,
       default: pageTitle,
     },
+    description,
     images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
   },
 };
@@ -35,7 +43,7 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   const breadcrumbItems = [
-    { label: 'ホーム', href: '/' },
+    { label: 'トップ', href: '/' },
     { label: 'ともきゃんができること', active: true },
   ];
 

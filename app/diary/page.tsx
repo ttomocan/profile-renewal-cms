@@ -6,6 +6,7 @@ import DiaryListSkeleton from '@/app/_components/DiaryListSkeleton';
 import Pagination from '@/app/_components/Pagination';
 import SearchField from '@/app/_components/SearchField';
 import CategoryFilter from '@/app/_components/CategoryFilter';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 
 // データ取得用のコンポーネント
@@ -36,6 +37,11 @@ async function DiaryListContent({ searchParams }: { searchParams: { q?: string; 
 
 export default async function Page({ searchParams }: { searchParams: { q?: string; category?: string } }) {
   const categories = await getAllCategoryList();
+  const breadcrumbItems = [
+    { label: 'トップ', href: '/' },
+    { label: 'ともきゃん日記', active: true },
+  ];
+
   return (
     <>
       <section className="inner">
@@ -47,6 +53,7 @@ export default async function Page({ searchParams }: { searchParams: { q?: strin
           <DiaryListContent searchParams={searchParams} />
         </Suspense>
       </section>
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }

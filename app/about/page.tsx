@@ -1,7 +1,12 @@
 import Image from 'next/image';
 import PersonJsonLd from '@/app/_components/PersonJsonLd';
+import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 export default async function Page() {
+  const breadcrumbItems = [
+    { label: 'トップ', href: '/' },
+    { label: 'ともきゃんについて', active: true },
+  ];
   return (
     <>
       <section className="greeting inner inner-s">
@@ -11,7 +16,7 @@ export default async function Page() {
         </h2>
         <div className="greeting__cont">
           <div className="greeting__image fadeUpTrigger">
-            <Image src="/img/pages/about/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} sizes="100vw" />
+            <Image src="/img/pages/about/img_tomocan.jpg" alt="名古屋のWebエンジニア・ブロガー ともきゃんのプロフィール写真" width={200} height={200} sizes="100vw" priority />
           </div>
           <div className="greeting__detail fadeUpTrigger">
             <p>
@@ -19,18 +24,16 @@ export default async function Page() {
               <br />
               普段はWeb制作会社でWebエンジニアとして働きながら、個人でWebサイト制作やブログ運営を行っています。
               <br />
-              趣味で始めたブログが思いがけず月間1万PVまで成長し、個人サービスの販売もやってきました。
+              数年前にブログと出会い、「発信することで誰かの役に立てる」という喜びを知り、主体的に学び続けたい気持ちが芽生えました。
               <br />
-              実は数年前までは「毎日なんとなく過ごす」だけ日々でしたが、ボイトレと出会い、ブログを始めてから価値観が180度変わりました。
+              ブログが思いがけず月間1万PVまで成長し、個人サービスの販売も始めました。個人活動でも画面越しのあなたへ「価値」をお届けしたいと思っています。
               <br />
-              今ではブログを通じて、画面越しのあなたへ「やればできる！」って気持ちを届けたいと思っています。
-              <br />
-              休日は家族の時間を大切に過ごしながら、ブログ執筆や読書を楽しみ、時にはコメダ珈琲やコワーキングスペースで作業に集中しています。
+              休日の過ごし方は、本職のWebエンジニアとしての学習やブログ運用、読書を楽しみ、時には1歳の息子と遊ぶのも楽しいです。
               <br />
               Webサイトやブログで「何か始めてみたいな」と思ったら、気軽にお声がけください！
             </p>
             <p className="greeting__detail__sign">
-              <Image src="/img/pages/about/text_sign.svg" alt="ともきゃんのサイン" width={135} height={27} />
+              <Image src="/img/pages/about/text_sign.svg" alt="" width={135} height={27} aria-hidden="true" />
             </p>
           </div>
         </div>
@@ -47,7 +50,7 @@ export default async function Page() {
                 <th className="c-profile-table__th">名前</th>
                 <td className="c-profile-table__td">
                   ともきゃん
-                  <span className="u-text-note">本名＋英語の「can（できる）」を組み合わせた造語。「自分ならできる！」という意味を込めました。</span>
+                  <span className="u-text-note">本名＋英語のcan（できる）を組み合わせた造語。「自分ならできる！」という意味を込めました。</span>
                 </td>
               </tr>
               <tr className="c-profile-table__row">
@@ -73,10 +76,6 @@ export default async function Page() {
               <tr className="c-profile-table__row">
                 <th className="c-profile-table__th">座右の銘</th>
                 <td className="c-profile-table__td">遊ぶように生きる（人生というゲームを、ワクワクしながらプレイすること）</td>
-              </tr>
-              <tr className="c-profile-table__row">
-                <th className="c-profile-table__th">ロールモデル</th>
-                <td className="c-profile-table__td">前田裕二氏</td>
               </tr>
               <tr className="c-profile-table__row">
                 <th className="c-profile-table__th">人生のバイブル</th>
@@ -117,12 +116,14 @@ export default async function Page() {
           <div className="result__card">Webエンジニア経験9年</div>
           <div className="result__card">Web制作会社2社で実務経験あり</div>
           <div className="result__card">Webサイトの構築数200件以上</div>
-          <div className="result__card">ブログの広告収益累計150万円以上</div>
-          <div className="result__card">coconalaの売上累計120万円以上</div>
           <div className="result__card">ブログの月間平均PV数1万PV以上</div>
+          <div className="result__card">ブログの広告収益累計150万円以上</div>
+          <div className="result__card">coconalaの販売件数50件以上、平均評価満点</div>
+          <div className="result__card">coconalaの売上累計120万円以上</div>
         </div>
       </section>
       <PersonJsonLd />
+      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }

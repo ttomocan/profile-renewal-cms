@@ -9,8 +9,8 @@ Next.js 14（App Router）+ TypeScript + microCMS を使用した実績管理シ
 ### ✅ 実装完了項目
 
 - [x] **microCMS 統合** - 実績データの取得・表示
-- [x] **実績紹介ページ** (`/results`) - フィルタ・ソート・ページネーション対応
-- [x] **実績詳細ページ** (`/results/[id]`) - 構造化された詳細表示
+- [x] **実績紹介ページ** (`/result`) - フィルタ・ソート・ページネーション対応
+- [x] **実績詳細ページ** (`/result/[id]`) - 構造化された詳細表示
 - [x] **フィルタ機能** - 案件区分・カテゴリ・役割・フリーワード検索
 - [x] **レスポンシブデザイン** - モバイル・タブレット・デスクトップ対応
 - [x] **SEO 最適化** - メタデータ・OGP・sitemap 自動生成
@@ -24,7 +24,7 @@ Next.js 14（App Router）+ TypeScript + microCMS を使用した実績管理シ
 ```
 app/
 ├── _libs/microcms.ts                    # microCMS API拡張
-├── results/
+├── result/
 │   ├── page.tsx                         # 実績紹介ページ
 │   └── [id]/page.tsx                    # 実績詳細ページ
 ├── _components/MenuNav/index.tsx        # ナビゲーション更新
@@ -99,7 +99,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 ### 実績紹介ページ
 
-- URL: `/results`
+- URL: `/result`
 - 機能: フィルタ・ソート・検索・ページネーション
 - パラメータ:
   - `workType`: 案件区分（main/side/freelance/personal）
@@ -111,7 +111,7 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 
 ### 実績詳細ページ
 
-- URL: `/results/[id]`
+- URL: `/result/[id]`
 - 機能: 詳細情報表示・SEO メタデータ・OGP
 
 ### トップページ

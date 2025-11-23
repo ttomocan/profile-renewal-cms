@@ -584,7 +584,7 @@
   .p-top-hero {
     align-items: center;
     display: flex;
-    min-height: 100vh;
+    min-height: 400px;
     padding: 20px;
 
     &__wrap {
@@ -773,24 +773,126 @@
 
   &__list {
     margin-bottom: 50px;
+  }
+}
 
-    .results-grid {
-      display: grid;
-      grid-template-columns: 1fr;
+/* =============================== */
+/* 実績スライダー
+================================== */
+.results-slider-wrapper {
+  position: relative;
+
+  .results-grid {
+    // PC: 3列×2行のグリッド表示
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    @include mq('pcTab') {
+      gap: 25px;
+    }
+
+    @include mq('pc') {
       gap: 30px;
+    }
 
-      @include mq('pcTab') {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
+    // SP: スライダー表示（CSS Scroll Snap使用）
+    @include mq('sp') {
+      display: flex;
+      align-items: stretch; // 高さを揃える
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 20px;
+      padding: 0 20px;
+      margin: 0 -20px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none; // Firefox
+
+      &::-webkit-scrollbar {
+        display: none; // Chrome, Safari
       }
 
-      @include mq('pc') {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+      // 各カードの幅を設定
+      .result-card {
+        flex: 0 0 85%; // カードの幅を85%に設定（次のカードが少し見える）
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        height: auto; // 高さを自動調整
+        display: flex; // フレックスコンテナに
+        flex-direction: column; // 縦方向に配置
       }
     }
   }
+}
 
+/* スライダーナビゲーションボタン */
+.results-slider-nav {
+  display: none; // PC/タブレットでは非表示
+
+  @include mq('sp') {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(243, 107, 10, 0.3);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: $mainC;
+
+    &:hover,
+    &:active {
+      background: $mainC;
+      color: #ffffff;
+      border-color: $mainC;
+      box-shadow: 0 4px 12px rgba(243, 107, 10, 0.3);
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(243, 107, 10, 0.2);
+    }
+
+    // disabled状態
+    &.is-disabled,
+    &:disabled {
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+      &:hover,
+      &:active {
+        background: rgba(255, 255, 255, 0.6);
+        color: rgba(0, 0, 0, 0.3);
+        border-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &--prev {
+      left: 0;
+    }
+
+    &--next {
+      right: 0;
+    }
+  }
+}
+
+.p-top-results {
   &__button {
     text-align: center;
   }
@@ -802,10 +904,6 @@
 
     &__list {
       margin-bottom: 40px;
-
-      .results-grid {
-        gap: 24px;
-      }
     }
   }
 }
@@ -819,7 +917,7 @@
     background: #ffffff;
     box-shadow: 0 1px 2px 0 rgba(243, 107, 10, 0.05);
     border: 1px solid rgba(243, 107, 10, 0.2);
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
@@ -834,11 +932,6 @@
 
       .result-card__image-img {
         transform: scale(1.08);
-      }
-
-      .result-card__action-icon {
-        opacity: 1;
-        transform: translateX(0) scale(1.1);
       }
 
       .result-card__overlay {
@@ -885,11 +978,11 @@
     &__work-type {
       display: inline-block;
       padding: 4px 8px;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border-radius: 4px;
+      border-radius: 5px;
       background: rgba(255, 255, 255, 0.95);
       color: $mainC;
       border: 1px solid rgba(243, 107, 10, 0.3);
@@ -897,27 +990,7 @@
     }
 
     &__action-icon {
-      position: absolute;
-      top: 50%;
-      right: 16px;
-      transform: translateY(-50%) translateX(8px);
-      width: 32px;
-      height: 32px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      color: $mainC;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(243, 107, 10, 0.2);
-
-      svg {
-        width: 16px;
-        height: 16px;
-      }
+      display: none; // 矢印アイコンを非表示
     }
 
     &__content {
@@ -951,9 +1024,9 @@
     }
 
     &__title {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 700;
-      line-height: 1.4;
+      line-height: 1.5;
       color: $textC;
       margin-bottom: 8px;
       transition: color 0.3s ease;
@@ -1006,7 +1079,6 @@
 
       &__work-type {
         padding: 3px 6px;
-        font-size: 10px;
       }
 
       &__action-icon {
