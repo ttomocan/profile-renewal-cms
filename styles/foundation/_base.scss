@@ -1,5 +1,9 @@
 @use '../global' as *;
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   background-color: $baseC;

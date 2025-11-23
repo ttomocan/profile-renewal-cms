@@ -3,9 +3,9 @@ import Image from 'next/image';
 export default async function Page() {
   return (
     <>
-      <section className="first inner inner-s">
+      <section className="first inner">
         <p className="fadeUpTrigger">
-          私が実務でよく使っているスキルやウェブ制作ツールを紹介します。
+          私が実務でよく使っているスキルやWeb制作ツールを紹介します。
           <br />
           私の得意なスキルは、CSS設計（BEM・FLOCSS）に配慮した保守性の高いコーディングと、WordPressサイトの構築・カスタマイズです。自分の作ったものが、誰かの手で動く瞬間が好きなんです。
           <br />
@@ -16,7 +16,7 @@ export default async function Page() {
           さらに、スキマ時間や休日には、ブログ運営で培ったノウハウを活かし、Webライティングやコンテンツマーケティングにも挑戦しています。「こんなことがやりたい！」というご要望をしっかりと受け止め、オリジナリティあふれるアイデアや戦略でWebサイトを形にすることを心がけています。
         </p>
       </section>
-      <section className="programming inner inner-s">
+      <section className="programming inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Programming</span>
           <span className="c-heading-lv2-ja">プログラミング言語</span>
@@ -58,7 +58,7 @@ export default async function Page() {
           </div>
         </div>
       </section>
-      <section className="framework inner inner-s">
+      <section className="framework inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Modern Frontend</span>
           <span className="c-heading-lv2-ja">モダンフロントエンド</span>
@@ -133,10 +133,10 @@ export default async function Page() {
           </div>
         </div>
       </section>
-      <section className="tool inner inner-s">
+      <section className="tool inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Web Tool</span>
-          <span className="c-heading-lv2-ja">ウェブ制作ツール</span>
+          <span className="c-heading-lv2-ja">Web制作ツール</span>
         </h2>
         <div className="tool__item fadeUpTrigger">
           <div className="tool__image">
@@ -175,7 +175,7 @@ export default async function Page() {
           </div>
         </div>
       </section>
-      <section className="ai-tool inner inner-s">
+      <section className="ai-tool inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">AI Tool</span>
           <span className="c-heading-lv2-ja">AIツール</span>
@@ -247,7 +247,7 @@ export default async function Page() {
           </div>
         </div>
       </section>
-      <section className="other inner inner-s">
+      <section className="other inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Other</span>
           <span className="c-heading-lv2-ja">その他</span>
@@ -260,7 +260,7 @@ export default async function Page() {
           <div className="other__card">CMSサイトの構築（WP・MT）</div>
           <div className="other__card">ヘッドレスCMS（microCMS）</div>
           <div className="other__card">バナーやサムネイル画像の作成</div>
-          <div className="other__card">ウェブアクセシビリティ</div>
+          <div className="other__card">Webアクセシビリティ</div>
           <div className="other__card">画像編集・写真加工</div>
           <div className="other__card">Webライティング</div>
         </div>

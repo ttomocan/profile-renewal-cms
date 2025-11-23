@@ -6,6 +6,7 @@ import DiaryList from '@/app/_components/DiaryList';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultCard from '@/components/ResultCard';
+import BubblyBackground from '@/app/_components/BubblyBackground';
 
 export default async function Home() {
   // ブログデータと実績データを取得
@@ -30,78 +31,74 @@ export default async function Home() {
           </picture>
         </div>
 
-        <div className="p-top-hero__wrap inner">
-          <p className="p-top-hero__en">
-            <span className="p-top-hero__en__char char">T</span>
-            <span className="p-top-hero__en__char char">O</span>
-            <span className="p-top-hero__en__char char">M</span>
-            <span className="p-top-hero__en__char char">O</span>
-            <span className="p-top-hero__en__char char">C</span>
-            <span className="p-top-hero__en__char char">A</span>
-            <span className="p-top-hero__en__char char">N</span>
-            <span className="p-top-hero__en__char u-pc-only">&nbsp;</span>
-            <br className="u-sp-only" />
-            <span className="p-top-hero__en__char char">L</span>
-            <span className="p-top-hero__en__char char">I</span>
-            <span className="p-top-hero__en__char char">F</span>
-            <span className="p-top-hero__en__char char">E</span>
-            <span className="p-top-hero__en__char char">S</span>
-            <span className="p-top-hero__en__char char">T</span>
-            <span className="p-top-hero__en__char char">Y</span>
-            <span className="p-top-hero__en__char char">L</span>
-            <span className="p-top-hero__en__char char">E</span>
-          </p>
-          <p className="p-top-hero__ja">
-            <span className="p-top-hero__ja__char char">と</span>
-            <span className="p-top-hero__ja__char char">も</span>
-            <span className="p-top-hero__ja__char char">き</span>
-            <span className="p-top-hero__ja__char char">ゃ</span>
-            <span className="p-top-hero__ja__char char">ん</span>
-            <span className="p-top-hero__ja__char char">の</span>
-            <br className="u-sp-only" />
-            <span className="p-top-hero__ja__char char">プ</span>
-            <span className="p-top-hero__ja__char char">ロ</span>
-            <span className="p-top-hero__ja__char char">フ</span>
-            <span className="p-top-hero__ja__char char">ィ</span>
-            <span className="p-top-hero__ja__char char">ー</span>
-            <span className="p-top-hero__ja__char char">ル</span>
-            <span className="p-top-hero__ja__char char">サ</span>
-            <span className="p-top-hero__ja__char char">イ</span>
-            <span className="p-top-hero__ja__char char">ト</span>
-          </p>
+        <BubblyBackground />
+
+        <div className="p-top-hero__wrap">
+          <div className="p-top-hero__icon">
+            <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} />
+          </div>
+
+          <div className="p-top-hero__text-content">
+            <h1 className="p-top-hero__en">
+              <span className="p-top-hero__en__char char">T</span>
+              <span className="p-top-hero__en__char char">O</span>
+              <span className="p-top-hero__en__char char">M</span>
+              <span className="p-top-hero__en__char char">O</span>
+              <span className="p-top-hero__en__char char">C</span>
+              <span className="p-top-hero__en__char char">A</span>
+              <span className="p-top-hero__en__char char">N</span>
+            </h1>
+            <p className="p-top-hero__ja">
+              <span className="p-top-hero__ja__char char">W</span>
+              <span className="p-top-hero__ja__char char">e</span>
+              <span className="p-top-hero__ja__char char">b</span>
+              <span className="p-top-hero__ja__char char">&nbsp;</span>
+              <span className="p-top-hero__ja__char char">E</span>
+              <span className="p-top-hero__ja__char char">n</span>
+              <span className="p-top-hero__ja__char char">g</span>
+              <span className="p-top-hero__ja__char char">i</span>
+              <span className="p-top-hero__ja__char char">n</span>
+              <span className="p-top-hero__ja__char char">e</span>
+              <span className="p-top-hero__ja__char char">e</span>
+              <span className="p-top-hero__ja__char char">r</span>
+              <span className="p-top-hero__ja__char char">&nbsp;</span>
+              <span className="p-top-hero__ja__char char">&nbsp;</span>
+              <span className="p-top-hero__ja__char char">B</span>
+              <span className="p-top-hero__ja__char char">l</span>
+              <span className="p-top-hero__ja__char char">o</span>
+              <span className="p-top-hero__ja__char char">g</span>
+              <span className="p-top-hero__ja__char char">g</span>
+              <span className="p-top-hero__ja__char char">e</span>
+              <span className="p-top-hero__ja__char char">r</span>
+              <span className="p-top-hero__ja__char char">&nbsp;</span>
+              <span className="p-top-hero__ja__char char">&nbsp;</span>
+              <span className="p-top-hero__ja__char char">W</span>
+              <span className="p-top-hero__ja__char char">r</span>
+              <span className="p-top-hero__ja__char char">i</span>
+              <span className="p-top-hero__ja__char char">t</span>
+              <span className="p-top-hero__ja__char char">e</span>
+              <span className="p-top-hero__ja__char char">r</span>
+            </p>
+
+            <p className="p-top-hero__about-text">
+              名古屋を拠点に活動しているWebエンジニアの「ともきゃん」と言います。
+              <br />
+              Web制作会社で9年以上の実務経験があり、200サイト以上の制作実績があります。ユーザー視点に立った「使いやすさ」と、ビジネス成果につながる「価値提供」を重視したWebサイト制作に取り組んでいます。「あなたのWebサイトをもっと良くしたい」そんな想いで、お客様のお悩みに合わせた解決策を一緒に考えてカタチにしてきました。
+              <br />
+              あなたの「困った」をぜひ聞かせてください！まずは軽く話しましょう。
+            </p>
+          </div>
         </div>
+
+        <a href="#skill" className="p-top-hero__scroll">
+          <span className="p-top-hero__scroll-text">Scroll</span>
+          <span className="p-top-hero__scroll-line">
+            <span className="p-top-hero__scroll-circle"></span>
+          </span>
+        </a>
       </div>
       <main>
-        <section className="p-top-about inner inner-s">
-          <h2 className="c-heading-lv2 fadeUpTrigger">
-            <span className="c-heading-lv2-en">About</span>
-            <span className="c-heading-lv2-ja">ともきゃんについて</span>
-          </h2>
-          <div className="p-top-about__cont">
-            <div className="p-top-about__image fadeUpTrigger">
-              <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} />
-            </div>
-            <div className="p-top-about__text-area fadeUpTrigger">
-              <div className="p-top-about__speech-bubble">
-                <p>
-                  はじめまして！名古屋を拠点に活動するWebエンジニア・ブロガーの「ともきゃん」です。
-                  <br />
-                  Web制作会社で9年以上の経験を積み、現在は個人でもWebサイト制作やブログ運営を行っています。
-                  <br />
-                  「あなたのWebサイトをもっと良くしたい」そんな想いで、お客様のお悩みに合わせた解決策を一緒に考えてカタチにしてきました。
-                  <br />
-                  あなたの「困った！」ぜひ聞かせてください！一緒に解決策を考えましょう♪
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="p-top-about__button fadeUpTrigger">
-            <Link href="/about/" className="c-button__link">
-              ともきゃんについて知る
-            </Link>
-          </div>
-        </section>
-        <section className="p-top-skill inner">
+        <section id="skill" className="p-top-skill inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">Skill</span>
             <span className="c-heading-lv2-ja">ともきゃんができること</span>
@@ -113,8 +110,8 @@ export default async function Home() {
               <p>HTML、CSS、JavaScript、PHPを用いたWebサイト構築が得意です。特にWordPressのカスタマイズに強みを持ち、独自のテーマを作成します。お客様のご要望に合わせて、管理画面の更新機能やサイトのレイアウトを自在に調整し、ユーザビリティを向上させます。また、SEOに配慮したコーディングも行い、検索エンジンでの集客力アップをサポートします。</p>
             </div>
             <div className="p-top-skill__item col fadeUpTrigger">
-              <Image src="/img/pages/top/img_web-tool.jpg" alt="ウェブ制作ツールのイメージ写真" width={300} height={200} />
-              <h3 className="p-top-skill__item-heading c-heading-lv3">ウェブ制作ツール</h3>
+              <Image src="/img/pages/top/img_web-tool.jpg" alt="Webエンジニアが使う制作ツールのイメージ写真" width={300} height={200} />
+              <h3 className="p-top-skill__item-heading c-heading-lv3">Web制作ツール</h3>
               <p>Cursor、Figma、Photoshop、Illustratorを使いこなし、効率的かつ美しいデザインを実現します。さらに、CanvaやAdobe Expressといったオンラインツールも活用し、短時間で効果的なビジュアルを作成。プロジェクトの進行スピードを速めつつ、クオリティを保つことができます。各ツールの特性を活かして、ユーザーにとってわかりやすく魅力的なデザインを提供します。</p>
             </div>
             <div className="p-top-skill__item col fadeUpTrigger">

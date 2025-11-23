@@ -1,15 +1,24 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import MenuNav from '../MenuNav';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  // パスからページクラスを取得
+  const getPageClass = () => {
+    if (pathname === '/') return '--top';
+    const slug = pathname.split('/')[1];
+    return slug ? `--${slug}` : '';
   };
 
   // メニューが開いているときは背景スクロールを無効化
@@ -27,7 +36,7 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className="l-header">
+    <header className={`l-header ${getPageClass()}`}>
       <h1 className="l-header__logo">
         <Link href="/">
           <Image src="/img/common/h_logo.png" alt="ともきゃんスタイルのロゴ" width={400} height={33} sizes="(max-width: 767px) 60vw, 400px" />
