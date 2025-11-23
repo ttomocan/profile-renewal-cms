@@ -99,7 +99,7 @@ export default async function Home() {
         </a>
       </div>
       <main>
-        <section className="p-top-about inner inner-s">
+        <section className="p-top-about inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
