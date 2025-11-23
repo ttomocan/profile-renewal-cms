@@ -7,6 +7,7 @@ import DiaryList from '@/app/_components/DiaryList';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultCard from '@/components/ResultCard';
+import BubblyBackground from '@/app/_components/BubblyBackground';
 
 export default async function Home() {
   // ブログデータと実績データを取得
@@ -171,7 +172,11 @@ export default async function Home() {
           </div>
           {resultsData.contents.length > 0 && (
             <div className="p-top-results__list fadeUpTrigger">
-              <ResultsSlider results={resultsData.contents} />
+              <div className="results-grid">
+                {resultsData.contents.slice(0, 3).map((result, index) => (
+                  <ResultCard key={`${result.id}-${index}`} result={result} priority={index === 0} />
+                ))}
+              </div>
             </div>
           )}
           <div className="p-top-results__button fadeUpTrigger">
