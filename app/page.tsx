@@ -173,7 +173,7 @@ export default async function Home() {
           {resultsData.contents.length > 0 && (
             <div className="p-top-results__list fadeUpTrigger">
               <div className="results-grid">
-                {resultsData.contents.slice(0, 3).map((result, index) => (
+                {resultsData.contents.slice(0, 6).map((result, index) => (
                   <ResultCard key={`${result.id}-${index}`} result={result} priority={index === 0} />
                 ))}
               </div>
