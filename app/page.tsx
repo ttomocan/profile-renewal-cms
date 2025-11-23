@@ -6,7 +6,7 @@ import Link from 'next/link';
 import DiaryList from '@/app/_components/DiaryList';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
-import ResultCard from '@/components/ResultCard';
+import ResultsSlider from '@/app/_components/ResultsSlider';
 import BubblyBackground from '@/app/_components/BubblyBackground';
 
 export default async function Home() {
@@ -91,15 +91,15 @@ export default async function Home() {
           </div>
         </div>
 
-        <a href="#about" className="p-top-hero__scroll">
+        <a href="#main" className="p-top-hero__scroll">
           <span className="p-top-hero__scroll-text">Scroll</span>
           <span className="p-top-hero__scroll-line">
             <span className="p-top-hero__scroll-circle"></span>
           </span>
         </a>
       </div>
-      <main>
-        <section id="about" className="p-top-about inner">
+      <main id="main">
+        <section className="p-top-about inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
             <span className="c-heading-lv2-en">About</span>
             <span className="c-heading-lv2-ja">ともきゃんについて</span>
@@ -172,11 +172,7 @@ export default async function Home() {
           </div>
           {resultsData.contents.length > 0 && (
             <div className="p-top-results__list fadeUpTrigger">
-              <div className="results-grid">
-                {resultsData.contents.slice(0, 6).map((result, index) => (
-                  <ResultCard key={`${result.id}-${index}`} result={result} priority={index === 0} />
-                ))}
-              </div>
+              <ResultsSlider results={resultsData.contents} />
             </div>
           )}
           <div className="p-top-results__button fadeUpTrigger">

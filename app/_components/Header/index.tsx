@@ -8,6 +8,7 @@ import MenuNav from '../MenuNav';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
   const toggleMenu = () => {
@@ -20,6 +21,29 @@ export default function Header() {
     const slug = pathname.split('/')[1];
     return slug ? `--${slug}` : '';
   };
+
+  // スクロールイベントでヘッダーの固定表示を制御
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      // 100px以上スクロールしたらヘッダーを固定表示
+      if (scrollTop > 100) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    // 初回実行
+    handleScroll();
+
+    // スクロールイベントリスナーを追加
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   // メニューが開いているときは背景スクロールを無効化
   useEffect(() => {
@@ -36,7 +60,7 @@ export default function Header() {
   }, [isMenuOpen]);
 
   return (
-    <header className={`l-header ${getPageClass()}`}>
+    <header className={`l-header ${getPageClass()} ${isScrolled ? 'scroll' : ''}`}>
       <h1 className="l-header__logo">
         <Link href="/">
           <Image src="/img/common/h_logo.png" alt="ともきゃんスタイルのロゴ" width={400} height={33} sizes="(max-width: 767px) 60vw, 400px" />

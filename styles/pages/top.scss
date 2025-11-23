@@ -5,7 +5,7 @@
 /* =============================== */
 /* トップページ
 ================================== */
-.l-header.--top {
+.l-header.--top:not(.scroll) {
   position: absolute;
   top: 0;
   left: 0;
@@ -218,17 +218,6 @@
     flex-direction: column;
     gap: 20px;
     position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -20px;
-      left: 0;
-      width: 60px;
-      height: 4px;
-      background: linear-gradient(90deg, #f36b0a, transparent);
-      animation: line-grow 1s ease-out 0.5s both;
-    }
 
     @keyframes line-grow {
       from {
@@ -583,11 +572,9 @@
   .p-top-hero {
     align-items: center;
     display: flex;
-    min-height: 400px;
-    padding: 20px;
 
     &__wrap {
-      padding: 100px 0;
+      padding: 80px 20px;
       gap: 25px;
       align-items: center;
       flex-direction: column;
@@ -800,6 +787,8 @@
       align-items: stretch; // 高さを揃える
       overflow-x: auto;
       scroll-snap-type: x mandatory;
+      scroll-padding-left: 7.5%; // 最初のカードを中央に配置（(100% - 85%) / 2）
+      scroll-padding-right: 7.5%; // 最後のカードを中央に配置（(100% - 85%) / 2）
       gap: 20px;
       padding: 0 20px;
       margin: 0 -20px;
@@ -834,8 +823,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     background: rgba(255, 255, 255, 0.95);
     border: 1px solid rgba(243, 107, 10, 0.3);
     border-radius: 50%;
@@ -909,22 +898,6 @@
 
   &__list {
     margin-bottom: 50px;
-
-    .results-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 30px;
-
-      @include mq('pcTab') {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-      }
-
-      @include mq('pc') {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-      }
-    }
   }
 
   &__button {
@@ -1014,17 +987,19 @@
     }
 
     &__work-type {
-      display: inline-block;
-      padding: 4px 8px;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 12px;
+      border-radius: calc(infinity * 1px);
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
+      letter-spacing: 0.025em;
+      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgb(255, 255, 255);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border-radius: 5px;
-      background: rgba(255, 255, 255, 0.95);
-      color: $mainC;
-      border: 1px solid rgba(243, 107, 10, 0.3);
-      backdrop-filter: blur(8px);
     }
 
     &__action-icon {
@@ -1113,10 +1088,6 @@
       &__badge {
         top: 8px;
         left: 8px;
-      }
-
-      &__work-type {
-        padding: 3px 6px;
       }
 
       &__action-icon {
