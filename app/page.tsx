@@ -140,8 +140,8 @@ export default async function Home() {
               <p>HTML、CSS、JavaScript、PHPを用いたWebサイト構築が得意です。特にWordPressのカスタマイズに強みを持ち、独自のテーマを作成します。お客様のご要望に合わせて、管理画面の更新機能やサイトのレイアウトを自在に調整し、ユーザビリティを向上させます。また、SEOに配慮したコーディングも行い、検索エンジンでの集客力アップをサポートします。</p>
             </div>
             <div className="p-top-skill__item col fadeUpTrigger">
-              <Image src="/img/pages/top/img_web-tool.jpg" alt="ウェブ制作ツールのイメージ写真" width={300} height={200} />
-              <h3 className="p-top-skill__item-heading c-heading-lv3">ウェブ制作ツール</h3>
+              <Image src="/img/pages/top/img_web-tool.jpg" alt="Web制作ツールのイメージ写真" width={300} height={200} />
+              <h3 className="p-top-skill__item-heading c-heading-lv3">Web制作ツール</h3>
               <p>Cursor、Figma、Photoshop、Illustratorを使いこなし、効率的かつ美しいデザインを実現します。さらに、CanvaやAdobe Expressといったオンラインツールも活用し、短時間で効果的なビジュアルを作成。プロジェクトの進行スピードを速めつつ、クオリティを保つことができます。各ツールの特性を活かして、ユーザーにとってわかりやすく魅力的なデザインを提供します。</p>
             </div>
             <div className="p-top-skill__item col fadeUpTrigger">
