@@ -241,7 +241,7 @@
 
     &__char {
       @include font-properties('Caveat Brush', 400, clamp(64px, 8vw, 96px));
-      letter-spacing: 0.02em;
+      letter-spacing: 0.05em;
       position: relative;
     }
   }
@@ -336,7 +336,6 @@
     align-items: center;
     gap: 10px;
     z-index: 4;
-    animation: scroll-fade-in 1s ease-out 3s both;
     text-decoration: none;
     cursor: pointer;
     transition: opacity 0.3s ease;
@@ -378,17 +377,6 @@
     border-radius: 50%;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     animation: scroll-circle-move 2s ease-in-out infinite;
-  }
-
-  @keyframes scroll-fade-in {
-    from {
-      opacity: 0;
-      transform: translateX(-50%) translateY(-10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
   }
 
   @keyframes scroll-circle-move {
