@@ -63,20 +63,13 @@ export default async function Home() {
               <span className="p-top-hero__ja__char char">e</span>
               <span className="p-top-hero__ja__char char">r</span>
               <span className="p-top-hero__ja__char char">&nbsp;</span>
+              <span className="p-top-hero__ja__char char">/</span>
               <span className="p-top-hero__ja__char char">&nbsp;</span>
               <span className="p-top-hero__ja__char char">B</span>
               <span className="p-top-hero__ja__char char">l</span>
               <span className="p-top-hero__ja__char char">o</span>
               <span className="p-top-hero__ja__char char">g</span>
               <span className="p-top-hero__ja__char char">g</span>
-              <span className="p-top-hero__ja__char char">e</span>
-              <span className="p-top-hero__ja__char char">r</span>
-              <span className="p-top-hero__ja__char char">&nbsp;</span>
-              <span className="p-top-hero__ja__char char">&nbsp;</span>
-              <span className="p-top-hero__ja__char char">W</span>
-              <span className="p-top-hero__ja__char char">r</span>
-              <span className="p-top-hero__ja__char char">i</span>
-              <span className="p-top-hero__ja__char char">t</span>
               <span className="p-top-hero__ja__char char">e</span>
               <span className="p-top-hero__ja__char char">r</span>
             </p>
