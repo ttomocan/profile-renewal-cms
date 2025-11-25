@@ -16,6 +16,11 @@ export function useSmoothScroll() {
     }
   }, []);
 
+  // デバイスがPCかどうかを判定
+  const isPc = useCallback(() => {
+    return window.innerWidth > 768;
+  }, []);
+
   useEffect(() => {
     const handleClick = (event: Event) => {
       const anchor = (event.target as Element)?.closest('a[href^="#"]') as HTMLAnchorElement;
@@ -31,7 +36,12 @@ export function useSmoothScroll() {
 
       // ヘッダーの高さを動的に取得
       const header = document.querySelector('.l-header') as HTMLElement;
-      const headerHeight = header?.offsetHeight || 0;
+      let headerHeight = header?.offsetHeight || 0;
+
+      // PCの場合のみ、ヘッダーの高さから20pxを引く
+      if (isPc()) {
+        headerHeight = Math.max(0, headerHeight - 20);
+      }
 
       scrollToTarget(target, headerHeight);
     };
@@ -43,7 +53,13 @@ export function useSmoothScroll() {
         const target = document.querySelector(hash) as HTMLElement;
         if (target) {
           const header = document.querySelector('.l-header') as HTMLElement;
-          const headerHeight = header?.offsetHeight || 0;
+          let headerHeight = header?.offsetHeight || 0;
+
+          // PCの場合のみ、ヘッダーの高さから20pxを引く
+          if (isPc()) {
+            headerHeight = Math.max(0, headerHeight - 20);
+          }
+
           scrollToTarget(target, headerHeight);
         }
       }
@@ -57,5 +73,5 @@ export function useSmoothScroll() {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [scrollToTarget]);
+  }, [scrollToTarget, isPc]);
 }

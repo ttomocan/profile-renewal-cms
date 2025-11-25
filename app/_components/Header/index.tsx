@@ -26,8 +26,7 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
-      // 100px以上スクロールしたらヘッダーを固定表示
-      if (scrollTop > 100) {
+      if (scrollTop > 200) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
