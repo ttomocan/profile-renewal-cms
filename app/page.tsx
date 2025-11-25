@@ -179,7 +179,7 @@ export default async function Home() {
           </h2>
           <div className="p-top-diary__cont fadeUpTrigger">
             <p>
-              「スタバのジンジャーブレッドラテが美味しすぎて年中飲みたい！」そんな日常の<b>“なんで？”</b>や<b>“楽しい”</b>をシェアします。SEOに縛られない、気ままなエピソードやお気に入りの話題を更新していきます。
+              「スタバのジンジャーブレッドラテが美味しすぎて年中飲みたい！」そんな日常の<b>「なんで？」</b>や<b>「楽しい」</b>をシェアします。SEOに縛られない、気ままなエピソードやお気に入りの話題を更新していきます。
             </p>
           </div>
           <div className="p-top-diary__list fadeUpTrigger">
