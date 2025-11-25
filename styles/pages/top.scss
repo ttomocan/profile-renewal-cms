@@ -256,7 +256,6 @@
     &__char {
       @include font-properties('Roboto', 400, clamp(16px, 2vw, 28px));
       letter-spacing: 0.2em;
-      font-weight: 300;
     }
   }
 
