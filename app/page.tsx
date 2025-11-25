@@ -34,7 +34,7 @@ export default async function Home() {
 
         <BubblyBackground />
 
-        <div className="p-top-hero__wrap">
+        <div className="p-top-hero__wrap inner">
           <div className="p-top-hero__icon">
             <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} />
           </div>
