@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Loading() {
   const loadingRef = useRef<HTMLDivElement>(null);
+  const [isRemoved, setIsRemoved] = useState(false);
 
   useEffect(() => {
     const loadingElement = loadingRef.current;
@@ -19,9 +20,8 @@ export default function Loading() {
       }, 100);
 
       const handleTransitionEnd = () => {
-        if (loadingElement) {
-          loadingElement.style.display = 'none';
-        }
+        // トランジション完了後、DOMから要素を削除
+        setIsRemoved(true);
       };
 
       loadingElement.addEventListener('transitionend', handleTransitionEnd);
@@ -32,6 +32,11 @@ export default function Loading() {
       };
     }
   }, []);
+
+  // ロード完了後は何も表示しない（DOMから削除）
+  if (isRemoved) {
+    return null;
+  }
 
   return (
     <div className="loading" ref={loadingRef}>

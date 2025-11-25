@@ -124,6 +124,7 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 30% 50%, rgba(243, 107, 10, 0.15) 0%, transparent 50%);
+      backdrop-filter: blur(3px);
       z-index: 1;
       animation: pulse-glow 4s ease-in-out infinite;
     }
