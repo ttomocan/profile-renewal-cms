@@ -466,8 +466,8 @@
     }
 
     @include mq(sp) {
-      padding: 20px 25px;
-      border-radius: 15px;
+      padding: 15px 20px;
+      border-radius: 10px;
 
       // スマホでは吹き出しの三角形を上に配置
       &::before {
