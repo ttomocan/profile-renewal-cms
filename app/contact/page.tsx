@@ -27,7 +27,7 @@ export default async function Page() {
           お問い合わせ内容を確認したら、3日以内に返信します。あなたに合った最適な解決策を一緒に考えて、次のステップに進むサポートしますので、お気軽にご相談ください！
         </p>
         <p className="u-text-note fadeUpTrigger">ご返信には、必ずお名前とメールアドレスの記載をお願いします。記載がない場合やテンプレートの営業メールなど、返信できない場合がありますので、あらかじめご了承ください。</p>
-        <p className="u-text-note fadeUpTrigger u-mt20"><strong>※現在、サイト・アプリ開発の依頼は承っておりません。</strong></p>
+        <p className="u-text-note fadeUpTrigger u-mt20">現在、サイト・アプリ開発の依頼は承っておりません。</p>
         <ContactForm />
       </section>
       <ServiceJsonLd name="ブログ運営相談サービス" description="ブログ運営、SEO対策など、ブログに関するご相談を承ります。5年間のブログ運営経験を活かして、あなたのお悩みを解決するお手伝いをします。" serviceType={['ブログ運営相談', 'SEO対策']} url="https://www.tomocan.site/contact/" />
