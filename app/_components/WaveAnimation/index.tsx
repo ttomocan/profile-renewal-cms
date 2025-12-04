@@ -42,7 +42,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     t: 0,
     isRunning: false,
   });
-  const resizeTimeoutRef = useRef<NodeJS.Timeout>();
+  const resizeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   // Wave layers configuration - memoized for performance
   const waveLayers = useMemo<WaveLayer[]>(
