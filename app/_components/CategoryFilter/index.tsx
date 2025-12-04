@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import { Category } from '@/app/_libs/microcms';
 import styles from './index.module.css';
 
@@ -9,7 +10,7 @@ type CategoryFilterProps = {
   selectedCategoryId?: string;
 };
 
-export default function CategoryFilter({ categories, selectedCategoryId }: CategoryFilterProps) {
+function CategoryFilterComponent({ categories, selectedCategoryId }: CategoryFilterProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -50,5 +51,13 @@ export default function CategoryFilter({ categories, selectedCategoryId }: Categ
         </svg>
       </div>
     </div>
+  );
+}
+
+export default function CategoryFilter({ categories, selectedCategoryId }: CategoryFilterProps) {
+  return (
+    <Suspense>
+      <CategoryFilterComponent categories={categories} selectedCategoryId={selectedCategoryId} />
+    </Suspense>
   );
 }
