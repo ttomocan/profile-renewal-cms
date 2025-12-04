@@ -13,21 +13,30 @@ export default function Loading() {
       loadingElement.style.transition = 'opacity 0.3s ease';
 
       // わずかな遅延を入れることで、トランジションが正しく適用されるようにする
-      const timer = setTimeout(() => {
+      const fadeTimer = setTimeout(() => {
         if (loadingElement) {
           loadingElement.style.opacity = '0';
         }
       }, 100);
 
-      const handleTransitionEnd = () => {
-        // トランジション完了後、DOMから要素を削除
+      // transitionendイベントが発火しない場合のフォールバック
+      // トランジション時間(0.3s) + 開始遅延(100ms) + バッファ(100ms) = 500ms
+      const fallbackTimer = setTimeout(() => {
         setIsRemoved(true);
+      }, 500);
+
+      const handleTransitionEnd = (e: TransitionEvent) => {
+        // opacityのトランジション完了時のみ処理
+        if (e.propertyName === 'opacity') {
+          setIsRemoved(true);
+        }
       };
 
       loadingElement.addEventListener('transitionend', handleTransitionEnd);
 
       return () => {
-        clearTimeout(timer);
+        clearTimeout(fadeTimer);
+        clearTimeout(fallbackTimer);
         loadingElement?.removeEventListener('transitionend', handleTransitionEnd);
       };
     }

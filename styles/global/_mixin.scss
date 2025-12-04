@@ -1,3 +1,4 @@
+@use 'sass:map';
 @use 'variables' as *;
 
 // ==========================================================================
@@ -15,7 +16,7 @@ $breakpoint: (
 ) !default;
 
 @mixin mq($bp) {
-  @media #{map-get($breakpoint, $bp)} {
+  @media #{map.get($breakpoint, $bp)} {
     @content;
   }
 }
@@ -110,7 +111,7 @@ $layer: (
   default: 1,
 );
 @mixin z-index($key) {
-  z-index: map-get($layer, $key);
+  z-index: map.get($layer, $key);
 }
 
 // animationプロパティ

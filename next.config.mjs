@@ -13,7 +13,6 @@ const nextConfig = {
   compress: true, // Gzip圧縮を有効化
   poweredByHeader: true, // X-Powered-By ヘッダーを削除
   reactStrictMode: true, // React Strict Modeを有効化
-  swcMinify: true, // SWCによる最適化を有効化
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production', // 本番環境でconsole.logを削除
   },
