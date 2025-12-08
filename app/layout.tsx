@@ -32,7 +32,7 @@ export async function generateMetadata(): Promise<Metadata> {
       canonical: 'https://www.tomocan.site/',
     },
     icons: {
-      icon: '/favicon.ico',
+      icon: '/icon.png',
       apple: '/apple-icon.png',
     },
     openGraph: {
