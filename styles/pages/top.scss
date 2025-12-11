@@ -777,9 +777,9 @@
       scroll-snap-type: x mandatory;
       scroll-padding-left: 7.5%; // 最初のカードを中央に配置（(100% - 85%) / 2）
       scroll-padding-right: 7.5%; // 最後のカードを中央に配置（(100% - 85%) / 2）
-      gap: 20px;
-      padding: 0 20px;
-      margin: 0 -20px;
+      gap: 15px;
+      padding: 0 7.5%; // 最初と最後のカードが中央に来るように（(100% - 85%) / 2）
+      margin: 0 -20px; // 親の.innerのパディングを打ち消す
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none; // Firefox
 
@@ -789,7 +789,7 @@
 
       // 各カードの幅を設定
       .result-card {
-        flex: 0 0 85%; // カードの幅を85%に設定（次のカードが少し見える）
+        flex: 0 0 100%; // カードの幅を85%に設定（次のカードが少し見える）
         scroll-snap-align: center;
         scroll-snap-stop: always;
         height: auto; // 高さを自動調整
@@ -858,11 +858,11 @@
     }
 
     &--prev {
-      left: 0;
+      left: -10px;
     }
 
     &--next {
-      right: 0;
+      right: -10px;
     }
   }
 }
@@ -902,6 +902,7 @@
 
       .results-grid {
         gap: 24px;
+        padding: 0 10%;
       }
     }
   }
