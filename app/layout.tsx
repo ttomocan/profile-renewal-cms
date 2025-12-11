@@ -78,12 +78,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="preload"
           as="image"
           href="/img/pages/top/img_hero.webp"
-          // @ts-ignore - imagesrcset/imagesizes は HTML5 仕様の正しい属性名
-          imagesrcset="/_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=640&q=75 640w, /_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=1080&q=75 1080w, /_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=1920&q=75 1920w"
+          // @ts-ignore - ReactではキャメルケースだがHTMLでは小文字
+          imageSrcSet="/_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=640&q=75 640w, /_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=1080&q=75 1080w, /_next/image?url=%2Fimg%2Fpages%2Ftop%2Fimg_hero.webp&w=1920&q=75 1920w"
           // @ts-ignore
-          imagesizes="100vw"
+          imageSizes="100vw"
           // @ts-ignore
-          fetchpriority="high"
+          fetchPriority="high"
         />
 
         {/* Resource hints for performance */}
