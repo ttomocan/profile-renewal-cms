@@ -9,8 +9,10 @@ import CategoryFilter from '@/app/_components/CategoryFilter';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 
+type SearchParamsType = { q?: string; category?: string };
+
 // データ取得用のコンポーネント
-async function DiaryListContent({ searchParams }: { searchParams: { q?: string; category?: string } }) {
+async function DiaryListContent({ searchParams }: { searchParams: SearchParamsType }) {
   const queries: any = {
     limit: DIARY_LIST_LIMIT,
   };
@@ -35,7 +37,8 @@ async function DiaryListContent({ searchParams }: { searchParams: { q?: string; 
   );
 }
 
-export default async function Page({ searchParams }: { searchParams: { q?: string; category?: string } }) {
+export default async function Page({ searchParams }: { searchParams: Promise<SearchParamsType> }) {
+  const resolvedSearchParams = await searchParams;
   const categories = await getAllCategoryList();
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
@@ -46,11 +49,11 @@ export default async function Page({ searchParams }: { searchParams: { q?: strin
     <>
       <section className="inner">
         <div className={styles['diary-search-row']}>
-          <SearchField defaultValue={searchParams.q} />
-          <CategoryFilter categories={categories} selectedCategoryId={searchParams.category} />
+          <SearchField defaultValue={resolvedSearchParams.q} />
+          <CategoryFilter categories={categories} selectedCategoryId={resolvedSearchParams.category} />
         </div>
         <Suspense fallback={<DiaryListSkeleton />}>
-          <DiaryListContent searchParams={searchParams} />
+          <DiaryListContent searchParams={resolvedSearchParams} />
         </Suspense>
       </section>
       <BreadcrumbListJsonLd items={breadcrumbItems} />
