@@ -1,5 +1,6 @@
 @use '../global/variables' as *;
 @use '../global/mixin' as *;
+@use 'sass:color';
 
 // ===============================================
 // Results ページのスタイル（リニューアル版）
@@ -140,7 +141,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     // 案件区分別カラースキーム（メインカラーベース）
     &.work-type-work-type-main,
     &.work-type-main {
-      background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
+      background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
       color: $white;
     }
 
@@ -531,7 +532,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         transform: translateY(-50%);
         width: 6px;
         height: 70%;
-        background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 15%) 100%);
+        background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -15%) 100%);
         border-radius: 3px;
       }
 
@@ -834,7 +835,7 @@ cite {
   display: inline-flex;
   align-items: center;
   padding: 20px 32px;
-  background: linear-gradient(135deg, $primary-color 0%, darken($primary-color, 10%) 100%);
+  background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
   color: $white;
   text-decoration: none;
   border-radius: 16px;
@@ -847,7 +848,7 @@ cite {
   &:hover {
     transform: translateY(-4px);
     box-shadow: $shadow-xl;
-    background: linear-gradient(135deg, darken($primary-color, 5%) 0%, darken($primary-color, 15%) 100%);
+    background: linear-gradient(135deg, color.adjust($primary-color, $lightness: -5%) 0%, color.adjust($primary-color, $lightness: -15%) 100%);
   }
 
   svg {
