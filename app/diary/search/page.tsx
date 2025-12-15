@@ -10,13 +10,14 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 type Props = {
-  searchParams: {
+  searchParams: Promise<{
     q?: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const query = searchParams.q;
+  const resolvedSearchParams = await searchParams;
+  const query = resolvedSearchParams.q;
   const title = query ? `「${query}」の検索結果` : '記事検索';
   const description = query
     ? `「${query}」に関する記事の検索結果を表示しています。ともきゃん日記の記事を検索できます。`
@@ -63,8 +64,9 @@ async function SearchResults({ query }: { query: string | undefined }) {
   );
 }
 
-export default function Page({ searchParams }: Props) {
-  const query = searchParams.q;
+export default async function Page({ searchParams }: Props) {
+  const resolvedSearchParams = await searchParams;
+  const query = resolvedSearchParams.q;
 
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },

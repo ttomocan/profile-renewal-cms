@@ -8,17 +8,19 @@ import BlogPostJsonLd from '@/app/_components/BlogPostJsonLd';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     dk?: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
-  const data = await getBlogDetail(params.slug, {
-    draftKey: searchParams.dk,
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  const data = await getBlogDetail(resolvedParams.slug, {
+    draftKey: resolvedSearchParams.dk,
   });
   const baseImageUrl = data.thumbnail?.url ?? '/img/common/ogp.png';
 
@@ -29,12 +31,12 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     title: data.title,
     description: data.description,
     alternates: {
-      canonical: `https://www.tomocan.site/diary/${params.slug}/`,
+      canonical: `https://www.tomocan.site/diary/${resolvedParams.slug}/`,
     },
     openGraph: {
       title: data.title,
       description: data.description,
-      url: `https://www.tomocan.site/diary/${params.slug}/`,
+      url: `https://www.tomocan.site/diary/${resolvedParams.slug}/`,
       images: [imageUrl],
     },
     twitter: {
@@ -48,11 +50,13 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 }
 
 export default async function Page({ params, searchParams }: Props) {
-  const data = await getBlogDetail(params.slug, {
-    draftKey: searchParams.dk,
+  const resolvedParams = await params;
+  const resolvedSearchParams = await searchParams;
+  const data = await getBlogDetail(resolvedParams.slug, {
+    draftKey: resolvedSearchParams.dk,
   }).catch(notFound);
 
-  const pageUrl = `https://www.tomocan.site/diary/${params.slug}`;
+  const pageUrl = `https://www.tomocan.site/diary/${resolvedParams.slug}`;
 
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },

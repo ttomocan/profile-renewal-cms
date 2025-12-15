@@ -10,13 +10,14 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 type Props = {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const category = await getCategoryDetail(params.id).catch(() => null);
+  const resolvedParams = await params;
+  const category = await getCategoryDetail(resolvedParams.id).catch(() => null);
 
   if (!category) {
     return {
@@ -31,12 +32,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: `https://www.tomocan.site/diary/category/${params.id}/`,
+      canonical: `https://www.tomocan.site/diary/category/${resolvedParams.id}/`,
     },
     openGraph: {
       title,
       description,
-      url: `https://www.tomocan.site/diary/category/${params.id}/`,
+      url: `https://www.tomocan.site/diary/category/${resolvedParams.id}/`,
     },
     twitter: {
       title,
@@ -46,7 +47,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Page({ params }: Props) {
-  const category = await getCategoryDetail(params.id).catch(notFound);
+  const resolvedParams = await params;
+  const category = await getCategoryDetail(resolvedParams.id).catch(notFound);
 
   const { contents: blog, totalCount } = await getBlogList({
     limit: DIARY_LIST_LIMIT,

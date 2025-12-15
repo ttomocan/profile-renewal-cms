@@ -10,13 +10,14 @@ import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 
 type Props = {
-  params: {
+  params: Promise<{
     current: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const current = parseInt(params.current as string, 10);
+  const resolvedParams = await params;
+  const current = parseInt(resolvedParams.current as string, 10);
   const title = `ともきゃん日記 ${current}ページ目`;
   const description = `ともきゃん日記の記事一覧 ${current}ページ目。Webエンジニア・ブロガー ともきゃんの日常、Web制作の学び、ブログ運営のコツなどを発信しています。`;
 
@@ -61,8 +62,9 @@ async function DiaryListContent({ current }: { current: number }) {
   );
 }
 
-export default function Page({ params }: Props) {
-  const current = parseInt(params.current as string, 10);
+export default async function Page({ params }: Props) {
+  const resolvedParams = await params;
+  const current = parseInt(resolvedParams.current as string, 10);
 
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },

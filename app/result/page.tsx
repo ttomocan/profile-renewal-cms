@@ -15,7 +15,7 @@ import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import '@/styles/pages/result.scss';
 
 interface ResultsPageProps {
-  searchParams: SimpleSearchParams;
+  searchParams: Promise<SimpleSearchParams>;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -62,7 +62,7 @@ function ResultsLoading() {
 }
 
 // Results content component
-async function ResultsContent({ searchParams }: ResultsPageProps) {
+async function ResultsContent({ searchParams }: { searchParams: SimpleSearchParams }) {
   const page = normalizePage(searchParams.page || null);
   const limit = 12;
   const offset = (page - 1) * limit;
@@ -132,6 +132,7 @@ async function ResultsContent({ searchParams }: ResultsPageProps) {
 }
 
 export default async function ResultsPage({ searchParams }: ResultsPageProps) {
+  const resolvedSearchParams = await searchParams;
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
     { label: '実績紹介', active: true },
@@ -156,7 +157,7 @@ export default async function ResultsPage({ searchParams }: ResultsPageProps) {
         <div className="results-inner">
           {/* 実績コンテンツ（Suspense でラップ） */}
           <Suspense fallback={<ResultsLoading />}>
-            <ResultsContent searchParams={searchParams} />
+            <ResultsContent searchParams={resolvedSearchParams} />
           </Suspense>
         </div>
       </main>

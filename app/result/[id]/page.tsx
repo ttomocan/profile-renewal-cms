@@ -11,13 +11,14 @@ import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import '@/styles/pages/result.scss';
 
 interface ResultDetailPageProps {
-  params: {
+  params: Promise<{
     id: string;
-  };
+  }>;
 }
 
 export async function generateMetadata({ params }: ResultDetailPageProps): Promise<Metadata> {
-  const result = await getResultDetail(params.id);
+  const resolvedParams = await params;
+  const result = await getResultDetail(resolvedParams.id);
 
   if (!result) {
     return {
@@ -31,12 +32,12 @@ export async function generateMetadata({ params }: ResultDetailPageProps): Promi
     title: `${result.title} | 実績詳細 | ${siteName}`,
     description: result.summary,
     alternates: {
-      canonical: `https://www.tomocan.site/result/${params.id}/`,
+      canonical: `https://www.tomocan.site/result/${resolvedParams.id}/`,
     },
     openGraph: {
       title: `${result.title} | ${siteName}`,
       description: result.summary,
-      url: `https://www.tomocan.site/result/${params.id}/`,
+      url: `https://www.tomocan.site/result/${resolvedParams.id}/`,
       type: 'article',
       images: result.cover
         ? [
@@ -59,7 +60,8 @@ export async function generateMetadata({ params }: ResultDetailPageProps): Promi
 }
 
 export default async function ResultDetailPage({ params }: ResultDetailPageProps) {
-  const result = await getResultDetail(params.id);
+  const resolvedParams = await params;
+  const result = await getResultDetail(resolvedParams.id);
 
   if (!result) {
     notFound();
