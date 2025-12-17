@@ -14,7 +14,7 @@ export default async function Page() {
         <p className="fadeUpTrigger">
           私が実務でよく使っているスキルやWeb制作ツールを紹介します。
           <br />
-          HTML/CSS/JavaScript、PHP、そしてWordPressのテーマ開発・カスタマイズをして、BEMやFLOCSSで“あとから直しやすい”設計を大切にしています。デザインの意図を汲み、コードで体験に落とし込む——その橋渡しが得意です。
+          HTML/CSS/JavaScript、PHP、そしてWordPressのテーマ開発・カスタマイズをして、BEMやFLOCSSであとから直しやすい設計を大切にしています。デザインの意図を汲み、コードで体験に落とし込む——その橋渡しが得意です。
           <br />
           最近は、Next.jsやReact、TypeScriptといったモダンなフロントエンド技術を使ったWebアプリ開発にもチャレンジしています。SEO対策もしっかり意識して、成果につながるWebサイト作りを実践しています。
           <br />
@@ -295,12 +295,7 @@ export default async function Page() {
           <div className="other__card">Webライティング</div>
         </div>
       </section>
-      <ServiceJsonLd
-        name="Web制作・開発サービス"
-        description="HTML/CSS/JavaScript、PHP、WordPress、Next.js、React、TypeScriptを使ったWeb制作。Figma、Photoshop、Illustratorでのデザイン制作。ChatGPT、Claude、GeminiなどAIツールを活用した効率的なWeb開発サービスを提供しています。"
-        serviceType={['Webサイト制作', 'WordPress開発', 'Next.js開発', 'React開発', 'Webデザイン', 'SEO対策', 'ブログカスタマイズ', 'UI/UX改善']}
-        url="https://www.tomocan.site/skill/"
-      />
+      <ServiceJsonLd name="Web制作・開発サービス" description="HTML/CSS/JavaScript、PHP、WordPress、Next.js、React、TypeScriptを使ったWeb制作。Figma、Photoshop、Illustratorでのデザイン制作。ChatGPT、Claude、GeminiなどAIツールを活用した効率的なWeb開発サービスを提供しています。" serviceType={['Webサイト制作', 'WordPress開発', 'Next.js開発', 'React開発', 'Webデザイン', 'SEO対策', 'ブログカスタマイズ', 'UI/UX改善']} url="https://www.tomocan.site/skill/" />
       <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
