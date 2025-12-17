@@ -50,7 +50,7 @@ export default async function Page() {
           </div>
           <div className="programming__detail">
             <h3 className="programming__heading">JavaScript</h3>
-            <p className="programming__description">JavaScriptを活用し、インタラクティブな機能やアニメーションを実装します。ES6+の最新構文やモジュールシステムを活用した効率的なコード開発を行い、パフォーマンスとユーザビリティの高いWebサイトを構築します。</p>
+            <p className="programming__description">JavaScriptのフレームワークも活用し、インタラクティブな機能やアニメーションを実装します。ReactやVue.jsなどのフレームワークを活用した効率的なコード開発を行い、パフォーマンスとユーザビリティの高いWebサイトを構築します。</p>
           </div>
         </div>
         <div className="programming__item fadeUpTrigger">
