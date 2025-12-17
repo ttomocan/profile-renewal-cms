@@ -1,8 +1,16 @@
 'use client';
 
 import { useEffect, useCallback } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function useSmoothScroll() {
+  const pathname = usePathname();
+
+  // ページ遷移時にスクロール位置をトップに戻す
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
   const scrollToTarget = useCallback((target: HTMLElement, headerHeight: number = 0) => {
     const position = Math.max(0, target.offsetTop - headerHeight);
 

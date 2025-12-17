@@ -69,9 +69,31 @@
     }
     line-height: 1;
     letter-spacing: 0.1em;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
     position: relative;
     z-index: 2;
+    &::after {
+      background-color: #ffffff;
+      bottom: 0;
+      content: '';
+      height: 2px;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      width: 60px;
+      @include animation($name: line-appear, $duration: 0.4s, $timing-function: ease-out, $delay: 2s, $fill-mode: both);
+      @keyframes line-appear {
+        0% {
+          opacity: 0;
+          width: 0;
+        }
+        100% {
+          opacity: 1;
+          width: 60px;
+        }
+      }
+    }
   }
   &__ja {
     color: #ffffff;
