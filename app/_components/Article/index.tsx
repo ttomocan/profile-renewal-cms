@@ -11,7 +11,7 @@ type Props = {
 
 export default function Article({ data }: Props) {
   return (
-    <>
+    <div className={styles.article}>
       <h1 className={styles.title}>{data.title}</h1>
       <p className={styles.description}>{data.description}</p>
       <div className={styles.meta}>
@@ -20,13 +20,23 @@ export default function Article({ data }: Props) {
         </Link>
         <Date date={data.publishedAt ?? data.createdAt} />
       </div>
-      {data.thumbnail && <Image src={data.thumbnail.url} alt="" className={styles.thumbnail} width={data.thumbnail.width} height={data.thumbnail.height} />}
+      {data.thumbnail && (
+        <div className={styles.thumbnailWrapper}>
+          <Image
+            src={data.thumbnail.url}
+            alt=""
+            className={styles.thumbnail}
+            width={data.thumbnail.width}
+            height={data.thumbnail.height}
+          />
+        </div>
+      )}
       <div
         className={styles.content}
         dangerouslySetInnerHTML={{
           __html: data.content,
         }}
       />
-    </>
+    </div>
   );
 }
