@@ -1,42 +1,17 @@
-/* ポップなカテゴリータグ */
+/* シンプルなカテゴリータグ */
 
 .tag {
-  background: linear-gradient(135deg, #f36b0a 0%, #ff8c42 50%, #ffa502 100%);
+  display: inline-block;
+  background: #f36b0a;
   color: #ffffff;
-  padding: 6px 16px;
-  border-radius: 50px;
-  font-size: 0.85rem;
+  padding: 6px 14px;
+  border-radius: 4px;
+  font-size: 0.8rem;
   font-weight: 600;
-  white-space: nowrap;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
-    0 3px 0 rgba(227, 93, 4, 0.3),
-    0 4px 8px rgba(243, 107, 10, 0.2);
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.tag::before {
-  content: '';
-  width: 8px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  flex-shrink: 0;
+  letter-spacing: 0.02em;
+  transition: background 0.2s ease;
 }
 
 .tag:hover {
-  transform: translateY(-2px) rotate(-2deg);
-  box-shadow: 
-    0 5px 0 rgba(227, 93, 4, 0.3),
-    0 8px 16px rgba(243, 107, 10, 0.35);
-}
-
-.tag:active {
-  transform: translateY(-1px);
-  box-shadow: 
-    0 2px 0 rgba(227, 93, 4, 0.3),
-    0 3px 6px rgba(243, 107, 10, 0.2);
+  background: #e85d04;
 }

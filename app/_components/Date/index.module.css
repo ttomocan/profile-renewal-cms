@@ -1,41 +1,10 @@
-/* ポップな日付表示 */
+/* シンプルな日付表示 */
 
 .date {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: #6c757d;
-  font-weight: 500;
-  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-  padding: 6px 14px;
-  border-radius: 50px;
-  border: 2px solid rgba(108, 117, 125, 0.15);
-  transition: all 0.3s ease;
-}
-
-.date::before {
-  content: '';
-  width: 14px;
-  height: 14px;
-  background: linear-gradient(135deg, #6c757d, #868e96);
-  border-radius: 3px;
-  position: relative;
-  flex-shrink: 0;
-}
-
-.date::after {
-  content: '';
-  position: absolute;
-  left: 16px;
-  width: 8px;
-  height: 2px;
-  background: #fff;
-  border-radius: 1px;
-}
-
-.date:hover {
-  background: linear-gradient(135deg, #fff, #f8f9fa);
-  border-color: rgba(243, 107, 10, 0.3);
-  color: #495057;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: #888;
+  font-weight: 400;
 }
