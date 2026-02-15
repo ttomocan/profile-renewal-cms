@@ -229,23 +229,23 @@
 @media (max-width: 640px) {
   .title {
     font-size: 1.6rem;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
 
   .description {
     font-size: 0.95rem;
-    padding: 20px 24px;
-    margin-bottom: 36px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
   }
 
   .meta {
     gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
   }
 
   .thumbnailWrapper {
-    margin-bottom: 48px;
+    margin-bottom: 20px;
   }
 
   .content {
