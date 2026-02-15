@@ -73,7 +73,7 @@
   line-height: 1.5;
   margin: 80px 0 24px;
   color: #1a1a2e;
-  padding-bottom: 16px;
+  padding-bottom: 12px;
   border-bottom: 2px solid #f36b0a;
 }
 
@@ -82,14 +82,14 @@
   font-weight: 700;
   margin: 48px 0 20px;
   color: #1a1a2e;
-  padding-left: 16px;
+  padding-left: 15px;
   border-left: 3px solid #f36b0a;
 }
 
 .content > h4 {
   font-size: 1.1rem;
   font-weight: 700;
-  margin: 40px 0 16px;
+  margin: 40px 0 15px;
   color: #333;
 }
 
@@ -245,7 +245,7 @@
   }
 
   .thumbnailWrapper {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 
   .content {
@@ -259,7 +259,7 @@
 
   .content > h2 {
     font-size: 1.3rem;
-    margin: 60px 0 20px;
+    margin: 60px 0 15px;
   }
 
   .content > h3 {
