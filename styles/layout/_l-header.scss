@@ -385,7 +385,8 @@
 /* ======================================= */
 /* 　トップページ用（透過ヘッダー）
 /* ======================================= */
-.l-header.--top:not(.scroll) {
+.l-header.--top:not(.scroll),
+body:has(.p-top-hero) .l-header:not(.scroll) {
   position: absolute;
   top: 0;
   left: 0;
