@@ -17,7 +17,7 @@
   font-size: 1.05rem;
   color: #5a5a6e;
   margin: 0 0 20px;
-  padding: 28px 32px;
+  padding: 15px 20px;
   background: #fafafa;
   border-radius: 4px;
   line-height: 1.8;
@@ -146,12 +146,10 @@
 
 .content ul > li {
   list-style: disc;
-  margin-bottom: 12px;
 }
 
 .content ol > li {
   list-style: decimal;
-  margin-bottom: 12px;
 }
 
 .content a {
