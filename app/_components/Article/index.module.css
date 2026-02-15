@@ -129,7 +129,7 @@
   font-size: 0.75rem;
   padding: 6px 14px;
   border-radius: 4px 4px 0 0;
-  margin-top: 32px;
+  margin-top: 24px;
 }
 
 .content ul,
@@ -140,7 +140,7 @@
 
 .content > ul,
 .content > ol {
-  margin: 32px 0 32px 24px;
+  margin: 24px 0 24px 24px;
 }
 
 .content ul > li {
