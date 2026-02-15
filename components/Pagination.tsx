@@ -20,7 +20,7 @@ export default function Pagination({ currentPage, totalPages, searchParams }: Pa
       params.set('page', page.toString());
     }
     const queryString = params.toString();
-    return `/results${queryString ? `?${queryString}` : ''}`;
+    return `/result${queryString ? `?${queryString}` : ''}`;
   };
 
   // 表示するページ番号の範囲を計算
