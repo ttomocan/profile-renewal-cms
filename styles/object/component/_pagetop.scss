@@ -1,88 +1,118 @@
 @use '../../global' as *;
 
 /* =============================== */
-/* ページトップ
+/* Back to Top ボタン（スクロール進捗リング付き）
 ================================== */
 
-$color: #fff9f4;
+.c-backtotop {
+  --p: 0%;
 
-.c-pagetop {
-  $pagetop: &;
-  bottom: 20px;
-  display: flex;
-  mix-blend-mode: difference;
-  opacity: 0;
   position: fixed;
-  right: 30px;
-  transition: 0.2s;
-  visibility: hidden;
-  writing-mode: vertical-rl;
+  right: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   @include z-index(pagetop);
-  &__icon {
-    width: 1px;
-    height: 0;
-    background: $color;
-    display: block;
-    margin: auto;
-    position: relative;
-    transition: height 0.3s cubic-bezier(0.77, 0, 0.175, 1);
-    transform-origin: center top;
 
-    &::before,
-    &::after {
-      left: 50%;
-      position: absolute;
-      top: -10px;
-      content: '';
-      display: block;
-      width: 30px;
-      height: 30px;
-      border-top: 1px solid $color;
-      border-right: 1px solid $color;
-      transform: translateX(-50%) rotate(-45deg);
-    }
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 
-    &::after {
-      top: 4px;
-    }
-  }
+  /*
+   * 進捗リング:
+   *   1) radial-gradient で中央を白く塗り（輪の「中抜き」）
+   *   2) conic-gradient で外周リングを描画
+   *     - 進捗色（オレンジ）: 0% 〜 var(--p)
+   *     - トラック色（グレー）: var(--p) 〜 360deg
+   */
+  background:
+    radial-gradient(circle, #fff 64%, transparent 65%),
+    conic-gradient(from -90deg, $mainC var(--p), rgba(0, 0, 0, 0.1) var(--p));
 
-  &__link {
-    color: $color;
-    display: inline-block;
-    @include font-properties(Roboto, 400, 15px);
-    letter-spacing: 0.05em;
-    line-height: 1;
-    padding-top: 20px;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-  }
+  box-shadow:
+    0 2px 16px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.04);
 
-  &:hover {
-    #{$pagetop}__icon {
-      height: 60px;
-    }
-  }
+  /* 初期: 非表示 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.35s ease,
+    visibility 0.35s ease,
+    transform 0.35s ease,
+    box-shadow 0.3s ease;
 
+  /* フェードイン */
   &.show {
     opacity: 1;
     visibility: visible;
+    transform: translateY(0);
   }
 
-  &.on-footer {
-    mix-blend-mode: lighten;
-    #{$pagetop}__icon {
-      background: $color;
+  /* ---- 矢印（CSS擬似要素で描画） ---- */
 
-      &::before,
-      &::after {
-        border-top: 1px solid $color;
-        border-right: 1px solid $color;
-      }
+  /* 矢羽根（上向きV字: border-top + border-right を -45deg 回転） */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid $textC;
+    border-right: 2px solid $textC;
+    transform: translate(-50%, -20%) rotate(-45deg);
+  }
+
+  /* 棒（矢の軸） */
+  &::after {
+    content: '';
+    position: absolute;
+    top: calc(50% + 3px);
+    left: 50%;
+    width: 2px;
+    height: 12px;
+    background: $textC;
+    transform: translate(-50%, -50%);
+    border-radius: 1px;
+  }
+
+  /* ---- 状態変化 ---- */
+
+  /* hover: 軽く浮かせる（hover可能デバイスのみ） */
+  @include hover {
+    &.show:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
+  }
 
-    #{$pagetop}__link {
-      color: $color;
+  /* active: 少し沈む */
+  &:active {
+    transform: scale(0.98);
+  }
+
+  /* focus-visible: アウトライン表示 */
+  &:focus-visible {
+    outline: 2px solid $mainC;
+    outline-offset: 3px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* ---- モーション配慮 ---- */
+  @media (prefers-reduced-motion: reduce) {
+    transition:
+      opacity 0.01s,
+      visibility 0.01s;
+
+    &.show:hover,
+    &:active {
+      transform: none;
     }
   }
 }

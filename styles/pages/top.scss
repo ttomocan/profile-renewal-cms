@@ -208,7 +208,9 @@
       border-radius: 20px;
       padding: 1px;
       background: linear-gradient(135deg, rgba(243, 107, 10, 0.3), transparent);
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
@@ -857,7 +859,9 @@
     flex-direction: column;
 
     &:hover {
-      box-shadow: 0 20px 25px -5px rgba(243, 107, 10, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      box-shadow:
+        0 20px 25px -5px rgba(243, 107, 10, 0.12),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04);
       border-color: rgba(243, 107, 10, 0.5);
       transform: translateY(-2px);
 
@@ -914,7 +918,7 @@
       border-radius: calc(infinity * 1px);
       font-size: 12px;
       font-weight: 700;
-      letter-spacing: 0.025em;
+      letter-spacing: 0.001em;
       -webkit-backdrop-filter: blur(16px);
       backdrop-filter: blur(16px);
       border: 1px solid rgb(255, 255, 255);

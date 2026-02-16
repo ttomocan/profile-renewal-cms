@@ -29,9 +29,15 @@ $white: #ffffff;
 
 // シャドウ（温かみのある色合いに調整）
 $shadow-sm: 0 1px 2px 0 rgba(243, 107, 10, 0.05);
-$shadow-md: 0 4px 6px -1px rgba(243, 107, 10, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-$shadow-lg: 0 10px 15px -3px rgba(243, 107, 10, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-$shadow-xl: 0 20px 25px -5px rgba(243, 107, 10, 0.12), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+$shadow-md:
+  0 4px 6px -1px rgba(243, 107, 10, 0.08),
+  0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg:
+  0 10px 15px -3px rgba(243, 107, 10, 0.1),
+  0 4px 6px -2px rgba(0, 0, 0, 0.05);
+$shadow-xl:
+  0 20px 25px -5px rgba(243, 107, 10, 0.12),
+  0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
 // トランジション
 $transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -132,7 +138,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: calc(infinity * 1px);
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.001em;
     backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 1);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -219,7 +225,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
     border-radius: 10px;
     border: 1px solid rgba(243, 107, 10, 0.15);
-    letter-spacing: 0.025em;
+    letter-spacing: 0.001em;
   }
 
   &__period {
@@ -228,7 +234,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 600;
     display: flex;
     align-items: center;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.001em;
 
     &::before {
       content: '🕒';
@@ -270,7 +276,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     padding-top: 15px;
     border-top: 1px solid rgba(243, 107, 10, 0.3);
     margin-top: auto;
-    letter-spacing: 0.025em;
+    letter-spacing: 0.001em;
   }
 }
 
@@ -443,7 +449,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         border-radius: calc(infinity * 1px);
         font-size: 14px;
         font-weight: 700;
-        letter-spacing: 0.025em;
+        letter-spacing: 0.001em;
 
         &--work-type {
           background: rgba(243, 107, 10, 0.05);
@@ -598,7 +604,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           border-radius: calc(infinity * 1px);
           font-size: 14px;
           font-weight: 600;
-          letter-spacing: 0.025em;
+          letter-spacing: 0.001em;
           transition: $transition-fast;
           border: 1px solid transparent;
 
@@ -651,7 +657,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       color: $primary-color;
       text-decoration: none;
       transition: $transition-fast;
-      letter-spacing: 0.025em;
+      letter-spacing: 0.001em;
 
       &:hover {
         background: $primary-lighter;
@@ -842,7 +848,7 @@ cite {
   font-weight: 700;
   transition: $transition-fast;
   box-shadow: $shadow-md;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.001em;
   font-size: 16px;
 
   &:hover {
