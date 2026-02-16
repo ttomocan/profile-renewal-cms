@@ -15,9 +15,9 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // パスからページクラスを取得
+  // パスからページクラスを取得（/index, /index/ もトップページとして扱う）
   const getPageClass = () => {
-    if (pathname === '/') return '--top';
+    if (pathname === '/' || /^\/index\/?$/.test(pathname)) return '--top';
     const slug = pathname.split('/')[1];
     return slug ? `--${slug}` : '';
   };
