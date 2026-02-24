@@ -3,7 +3,7 @@ import '@/styles/pages/top.scss';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import DiaryList from '@/app/_components/DiaryList';
+import DiarySlider from '@/app/_components/DiarySlider';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultsSlider from '@/app/_components/ResultsSlider';
@@ -182,9 +182,11 @@ export default async function Home() {
               「スタバのジンジャーブレッドラテが美味しすぎて年中飲みたい！」そんな日常の<b>「なんで？」</b>や<b>「楽しい」</b>をシェアします。SEOに縛られない、気ままなエピソードやお気に入りの話題を更新していきます。
             </p>
           </div>
-          <div className="p-top-diary__list fadeUpTrigger">
-            <DiaryList blog={data.contents} />
-          </div>
+          {data.contents.length > 0 && (
+            <div className="p-top-diary__list fadeUpTrigger">
+              <DiarySlider blog={data.contents} />
+            </div>
+          )}
           <div className="p-top-diary__button fadeUpTrigger">
             <Link href="/diary/" className="c-button__link">
               ともきゃん日記を読む
