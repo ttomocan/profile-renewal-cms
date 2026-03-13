@@ -15,6 +15,7 @@ import ClientSmoothScrollProvider from './_components/ClientSmoothScrollProvider
 export async function generateMetadata(): Promise<Metadata> {
   const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
   const description = '名古屋のWebエンジニア兼ブロガー ともきゃんのプロフィールサイト。Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意。ブログ運営やWeb制作のお悩み解決をサポートします。';
+  const siteKeywords = ['名古屋 Web制作', 'Webエンジニア', 'WordPress', 'Next.js', 'React', 'TypeScript', 'SEO対策', 'ブログ運営'];
 
   return {
     metadataBase: new URL('https://www.tomocan.site'),
@@ -23,6 +24,11 @@ export async function generateMetadata(): Promise<Metadata> {
       default: baseTitle,
     },
     description,
+    keywords: siteKeywords,
+    category: 'technology',
+    authors: [{ name: 'ともきゃん', url: 'https://www.tomocan.site/about/' }],
+    creator: 'ともきゃん',
+    publisher: 'ともきゃんスタイル',
     alternates: {
       canonical: 'https://www.tomocan.site/',
     },
