@@ -5,6 +5,7 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 const pageTitle = 'ともきゃんができること';
 const description = 'HTML/CSS/JavaScript、PHP、WordPress、Next.js、React、TypeScriptを使ったWeb制作スキル。Figma、Photoshop、Illustratorでのデザイン制作。ChatGPT、Claude、GeminiなどAIツールを活用した効率的なWeb開発が可能です。';
+const keywords = ['Web制作スキル', 'WordPress開発', 'Next.js開発', 'React開発', 'SEO対策', 'UI/UX改善'];
 
 export const metadata = {
   title: {
@@ -12,6 +13,7 @@ export const metadata = {
     default: pageTitle,
   },
   description,
+  keywords,
   alternates: {
     canonical: 'https://www.tomocan.site/skill/',
   },
@@ -22,7 +24,7 @@ export const metadata = {
     },
     description,
     url: 'https://www.tomocan.site/skill/',
-    images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+    images: ['/img/common/ogp.png'],
     siteName: baseTitle,
   },
   twitter: {
@@ -33,7 +35,7 @@ export const metadata = {
       default: pageTitle,
     },
     description,
-    images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+    images: ['/img/common/ogp.png'],
   },
 };
 

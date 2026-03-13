@@ -21,10 +21,12 @@ interface ResultsPageProps {
 export async function generateMetadata(): Promise<Metadata> {
   const siteName = 'ともきゃんスタイル';
   const description = 'Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、Reactを使ったWebサイト制作、ブログカスタマイズ、デザイン制作など、ともきゃんの制作実績を一覧でご覧いただけます。';
+  const keywords = ['Web制作 実績', 'WordPress 制作実績', 'Next.js 制作実績', 'ブログカスタマイズ', '名古屋 Webエンジニア'];
 
   return {
     title: `実績紹介 | ${siteName}`,
     description,
+    keywords,
     alternates: {
       canonical: 'https://www.tomocan.site/result/',
     },
@@ -33,11 +35,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: 'https://www.tomocan.site/result/',
       type: 'website',
+      images: ['/img/common/ogp.png'],
     },
     twitter: {
       card: 'summary_large_image',
       title: `実績紹介 | ${siteName}`,
       description,
+      images: ['/img/common/ogp.png'],
     },
   };
 }

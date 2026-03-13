@@ -7,6 +7,7 @@ export default function WebsiteJsonLd({ url = 'https://www.tomocan.site', title 
     url,
     name: title,
     description,
+    inLanguage: 'ja-JP',
     potentialAction: {
       '@type': 'SearchAction',
       target: {
@@ -28,6 +29,7 @@ export default function WebsiteJsonLd({ url = 'https://www.tomocan.site', title 
         url: 'https://www.tomocan.site/img/common/h_logo.png',
       },
     },
+    keywords: ['名古屋 Web制作', 'SEO対策', 'WordPress', 'Next.js', 'React', 'ブログ運営'],
     image: {
       '@type': 'ImageObject',
       url: imageUrl,
