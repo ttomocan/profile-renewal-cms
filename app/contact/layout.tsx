@@ -4,6 +4,7 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 const pageTitle = 'お問い合わせ';
 const description = 'Webサイト制作、ブログデザイン、UI/UX改善、SEO対策など、Webに関するご相談・ご依頼を承ります。9年以上のWeb制作経験を活かして、あなたのお悩みを解決するお手伝いをします。お気軽にお問い合わせください。';
+const keywords = ['お問い合わせ', 'Web制作', 'サイト制作', 'ブログデザイン', 'SEO対策', 'UI/UX改善', '名古屋'];
 
 export const metadata = {
   title: {
