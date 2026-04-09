@@ -25,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `実績紹介 | ${siteName}`,
     description,
+    keywords,
     alternates: {
       canonical: 'https://www.tomocan.site/result/',
     },
@@ -33,11 +34,13 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       url: 'https://www.tomocan.site/result/',
       type: 'website',
+      images: ['/img/common/ogp.png'],
     },
     twitter: {
       card: 'summary_large_image',
       title: `実績紹介 | ${siteName}`,
       description,
+      images: ['/img/common/ogp.png'],
     },
   };
 }

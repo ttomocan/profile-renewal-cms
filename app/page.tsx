@@ -9,6 +9,33 @@ import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultsSlider from '@/app/_components/ResultsSlider';
 import BubblyBackground from '@/app/_components/BubblyBackground';
 
+
+export async function generateMetadata(): Promise<Metadata> {
+  const title = '名古屋のWeb制作・SEO対策なら ともきゃんスタイル';
+  const description = '名古屋を拠点にWebサイト制作・SEO対策・ブログ運営支援を提供する、ともきゃんのプロフィールサイト。WordPressやNext.js/Reactを活用したサイト制作から改善提案まで対応します。';
+
+  return {
+    title,
+    description,
+    keywords: ['名古屋 Web制作', 'SEO対策', 'WordPress', 'Next.js', 'React', 'ブログ運営'],
+    alternates: {
+      canonical: 'https://www.tomocan.site/',
+    },
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.tomocan.site/',
+      images: ['/img/common/ogp.png'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/img/common/ogp.png'],
+    },
+  };
+}
+
 export default async function Home() {
   // ブログデータと実績データを取得
   const [data, resultsData] = await Promise.all([

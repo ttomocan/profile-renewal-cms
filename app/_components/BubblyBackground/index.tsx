@@ -2,91 +2,100 @@
 
 import { useEffect, useRef } from 'react';
 
+type Bubble = {
+  x: number;
+  y: number;
+  r: number;
+  a: number;
+  v: number;
+  fill: string;
+  glowAlpha: number;
+};
+
 export default function BubblyBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    if (!canvasRef.current) return;
+    if (!canvasRef.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // キャンバスサイズを設定
-    const resizeCanvas = () => {
-      const parent = canvas.parentElement;
-      if (parent) {
-        canvas.width = parent.offsetWidth;
-        canvas.height = parent.offsetHeight;
-      }
-    };
+    const isVisibleRef = { current: true };
+    let bubbles: Bubble[] = [];
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // バブルの設定
-    const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.015);
-    const bubbles: Array<{
-      x: number;
-      y: number;
-      r: number;
-      a: number;
-      v: number;
-      fill: string;
-    }> = [];
-
-    // バブルを生成
-    for (let i = 0; i < bubbleCount; i++) {
-      bubbles.push({
+    const createBubbles = () => {
+      const bubbleCount = Math.floor((canvas.width + canvas.height) * 0.009);
+      bubbles = Array.from({ length: bubbleCount }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
         r: 3 + Math.random() * 15,
         a: Math.random() * Math.PI * 2,
-        v: 0.1 + Math.random() * 0.3,
-        fill: `hsla(25, 95%, 40%, ${0.75 + Math.random() * 0.2})`,
-      });
-    }
+        v: 0.08 + Math.random() * 0.2,
+        fill: `hsla(25, 95%, 40%, ${0.72 + Math.random() * 0.16})`,
+        glowAlpha: 0.45 + Math.random() * 0.15,
+      }));
+    };
 
-    // アニメーション
-    let animationFrameId: number;
+    const resizeCanvas = () => {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      canvas.width = parent.offsetWidth;
+      canvas.height = parent.offsetHeight;
+      createBubbles();
+    };
+
+    resizeCanvas();
+
+    const onVisibilityChange = () => {
+      isVisibleRef.current = !document.hidden;
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('resize', resizeCanvas);
+
+    let animationFrameId = 0;
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.globalCompositeOperation = 'source-over';
+      if (!isVisibleRef.current) {
+        animationFrameId = requestAnimationFrame(animate);
+        return;
+      }
 
-      bubbles.forEach((bubble) => {
-        // 位置を更新
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (const bubble of bubbles) {
         bubble.x += Math.cos(bubble.a) * bubble.v;
         bubble.y += Math.sin(bubble.a) * bubble.v;
 
-        // 画面外に出たら反対側から出現
         if (bubble.x < -bubble.r) bubble.x = canvas.width + bubble.r;
         if (bubble.x > canvas.width + bubble.r) bubble.x = -bubble.r;
         if (bubble.y < -bubble.r) bubble.y = canvas.height + bubble.r;
         if (bubble.y > canvas.height + bubble.r) bubble.y = -bubble.r;
 
-        // バブルを描画
         ctx.beginPath();
         ctx.arc(bubble.x, bubble.y, bubble.r, 0, Math.PI * 2);
         ctx.fillStyle = bubble.fill;
         ctx.fill();
 
-        // ほんのり光る効果
         const gradient = ctx.createRadialGradient(bubble.x, bubble.y, 0, bubble.x, bubble.y, bubble.r);
-        gradient.addColorStop(0, `hsla(25, 100%, 55%, ${0.5 + Math.random() * 0.15})`);
-        gradient.addColorStop(0.5, `hsla(25, 100%, 45%, ${0.3 + Math.random() * 0.1})`);
+        gradient.addColorStop(0, `hsla(25, 100%, 55%, ${bubble.glowAlpha})`);
+        gradient.addColorStop(0.5, 'hsla(25, 100%, 45%, 0.28)');
         gradient.addColorStop(1, 'hsla(25, 100%, 35%, 0)');
         ctx.fillStyle = gradient;
         ctx.fill();
-      });
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
     animate();
 
-    // クリーンアップ
     return () => {
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
     };

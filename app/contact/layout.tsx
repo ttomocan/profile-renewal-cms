@@ -3,7 +3,7 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 const pageTitle = 'お問い合わせ';
-const description = 'Webサイト制作、ブログデザイン、UI/UX改善、SEO対策など、Webに関するご相談・ご依頼を承ります。10年以上のWeb制作経験を活かして、あなたのお悩みを解決するお手伝いをします。お気軽にお問い合わせください。';
+const description = 'Webサイト制作、ブログデザイン、UI/UX改善、SEO対策など、Webに関するご相談・ご依頼を承ります。9年以上のWeb制作経験を活かして、あなたのお悩みを解決するお手伝いをします。お気軽にお問い合わせください。';
 
 export const metadata = {
   title: {
@@ -11,6 +11,7 @@ export const metadata = {
     default: pageTitle,
   },
   description,
+  keywords,
   alternates: {
     canonical: 'https://www.tomocan.site/contact/',
   },
@@ -21,7 +22,7 @@ export const metadata = {
     },
     description,
     url: 'https://www.tomocan.site/contact/',
-    images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+    images: ['/img/common/ogp.png'],
     siteName: baseTitle,
   },
   twitter: {
@@ -32,7 +33,7 @@ export const metadata = {
       default: pageTitle,
     },
     description,
-    images: [`/img/common/ogp.png?timestamp=${Date.now()}`],
+    images: ['/img/common/ogp.png'],
   },
 };
 

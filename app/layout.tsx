@@ -2,7 +2,7 @@ import '@/styles/common/style.scss';
 import '@/styles/common/animation.scss';
 
 //import { GoogleAnalytics } from '@next/third-parties/google';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Loading from './_components/Loading';
 import Header from './_components/Header';
 import Blog from './_components/Blog';
@@ -11,12 +11,10 @@ import PageTop from './_components/PageTop';
 import DynamicBodyClass from './DynamicBodyClass';
 import WebsiteJsonLd from './_components/WebsiteJsonLd';
 import ClientSmoothScrollProvider from './_components/ClientSmoothScrollProvider';
-import ThemeColorProvider from './_components/ThemeColorProvider';
-import FontLoader from './_components/FontLoader';
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
-  const description = '名古屋のWebエンジニア兼ブロガー ともきゃんのプロフィールサイト。Web制作経験10年、200サイト以上の構築実績。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意。ブログ運営やWeb制作のお悩み解決をサポートします。';
+  const description = '名古屋のWebエンジニア兼ブロガー ともきゃんのプロフィールサイト。Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意。ブログ運営やWeb制作のお悩み解決をサポートします。';
 
   // タイムスタンプの生成をサーバーサイドに固定
   const timestamp = Date.now();
@@ -28,6 +26,11 @@ export async function generateMetadata(): Promise<Metadata> {
       default: baseTitle,
     },
     description,
+    keywords: siteKeywords,
+    category: 'technology',
+    authors: [{ name: 'ともきゃん', url: 'https://www.tomocan.site/about/' }],
+    creator: 'ともきゃん',
+    publisher: 'ともきゃんスタイル',
     alternates: {
       canonical: 'https://www.tomocan.site/',
     },
@@ -43,7 +46,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       description,
       url: 'https://www.tomocan.site/',
-      images: [`/img/common/ogp.png?timestamp=${timestamp}`],
+      images: ['/img/common/ogp.png'],
       siteName: 'ともきゃんスタイル',
       locale: 'ja_JP',
     },
@@ -55,10 +58,15 @@ export async function generateMetadata(): Promise<Metadata> {
         default: baseTitle,
       },
       description,
-      images: [`/img/common/ogp.png?timestamp=${timestamp}`],
+      images: ['/img/common/ogp.png'],
     },
   };
 }
+
+
+export const viewport: Viewport = {
+  themeColor: '#fcf6f1',
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -92,8 +100,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body suppressHydrationWarning>
         <ClientSmoothScrollProvider />
         <DynamicBodyClass />
-        <ThemeColorProvider />
-        <FontLoader />
         <Loading />
         <Header />
         <div className="l-content">{children}</div>
