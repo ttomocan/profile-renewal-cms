@@ -16,7 +16,7 @@ import FontLoader from './_components/FontLoader';
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
-  const description = '名古屋のWebエンジニア兼ブロガー ともきゃんのプロフィールサイト。Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意。ブログ運営やWeb制作のお悩み解決をサポートします。';
+  const description = '名古屋のWebエンジニア兼ブロガー ともきゃんのプロフィールサイト。Web制作経験10年、200サイト以上の構築実績。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意。ブログ運営やWeb制作のお悩み解決をサポートします。';
 
   // タイムスタンプの生成をサーバーサイドに固定
   const timestamp = Date.now();

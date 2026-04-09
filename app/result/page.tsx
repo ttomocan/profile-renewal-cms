@@ -20,7 +20,7 @@ interface ResultsPageProps {
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteName = 'ともきゃんスタイル';
-  const description = 'Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、Reactを使ったWebサイト制作、ブログカスタマイズ、デザイン制作など、ともきゃんの制作実績を一覧でご覧いただけます。';
+  const description = 'Web制作経験10年、200サイト以上の構築実績。WordPress、Next.js、Reactを使ったWebサイト制作、ブログカスタマイズ、デザイン制作など、ともきゃんの制作実績を一覧でご覧いただけます。';
 
   return {
     title: `実績紹介 | ${siteName}`,

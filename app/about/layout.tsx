@@ -4,7 +4,7 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 
 const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
 const pageTitle = 'ともきゃんはこんな人';
-const description = '名古屋在住のWebエンジニア兼ブロガー「ともきゃん」のプロフィール。Web制作経験9年、サイト構築200件以上の実績。ウェブデザイン技能検定1級、色彩検定1級保有。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意です。';
+const description = '名古屋在住のWebエンジニア兼ブロガー「ともきゃん」のプロフィール。Web制作経験10年、サイト構築200件以上の実績。ウェブデザイン技能検定1級、色彩検定1級保有。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意です。';
 
 export const metadata = {
   title: {
