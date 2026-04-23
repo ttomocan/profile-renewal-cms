@@ -45,6 +45,11 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
             ブログデザインマニア
           </a>
         </li>
+        <li className="l-header__blog__item">
+          <a href="https://note.com/tomoweb_lab" target="_blank" className="c-link-external" rel="noopener noreferrer">
+            note
+          </a>
+        </li>
       </ul>
       <nav className="l-header__navigation" role="navigation" aria-label="グローバルナビゲーション">
         <ul className="l-navigation">
