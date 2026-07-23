@@ -43,13 +43,16 @@ function SearchFieldComponent({ defaultValue }: SearchFieldComponentProps) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-      <label className={styles.search}>
-        <Image src="/img/common/search.svg" alt="検索" width={16} height={16} loading="eager" />
-        <input type="text" name="q" defaultValue={initialValue} placeholder="キーワードを入力" className={styles.searchInput} aria-label="ブログ記事を検索" />
+      <div className={styles.search}>
+        <Image src="/img/common/search.svg" alt="" width={16} height={16} loading="eager" />
+        <label htmlFor="diary-search" className="u-visually-hidden">
+          ブログ記事を検索
+        </label>
+        <input id="diary-search" type="search" name="q" defaultValue={initialValue} placeholder="キーワードを入力" className={styles.searchInput} />
         <button type="submit" className={styles.submitButton}>
           検索
         </button>
-      </label>
+      </div>
     </form>
   );
 }

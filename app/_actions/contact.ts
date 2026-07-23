@@ -1,99 +1,66 @@
 'use server';
 
+export type ContactField = 'namae' | 'furigana' | 'email' | 'item' | 'message';
+
+export type ContactFormState = {
+  status: 'idle' | 'error' | 'success';
+  message: string;
+  field?: ContactField;
+};
+
+const contactTypes = ['採用に関するご連絡', '業務委託・協業のご相談', '制作実績に関するお問い合わせ', 'ブログ・メディアに関するお問い合わせ', 'その他'];
+
 function validateEmail(email: string) {
-  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return pattern.test(email);
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export async function createContactData(_prevState: any, formData: FormData) {
-  // formのname属性ごとにformData.get()で値を取り出すことができる
+function getText(formData: FormData, name: ContactField) {
+  const value = formData.get(name);
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+export async function createContactData(_prevState: ContactFormState, formData: FormData): Promise<ContactFormState> {
   const rawFormData = {
-    namae: formData.get('namae') as string,
-    furigana: formData.get('furigana') as string,
-    email: formData.get('email') as string,
-    item: formData.get('item') as string,
-    message: formData.get('message') as string,
+    namae: getText(formData, 'namae'),
+    furigana: getText(formData, 'furigana'),
+    email: getText(formData, 'email'),
+    item: getText(formData, 'item'),
+    message: getText(formData, 'message'),
   };
 
-  if (!rawFormData.namae) {
-    return {
-      status: 'error',
-      message: 'お名前を入力してください',
-    };
-  }
+  if (!rawFormData.namae) return { status: 'error', message: 'お名前を入力してください。', field: 'namae' };
+  if (!rawFormData.furigana) return { status: 'error', message: 'ふりがなを入力してください。', field: 'furigana' };
+  if (!rawFormData.email) return { status: 'error', message: 'メールアドレスを入力してください。', field: 'email' };
+  if (!validateEmail(rawFormData.email)) return { status: 'error', message: 'メールアドレスの形式を確認してください。', field: 'email' };
+  if (!rawFormData.item || !contactTypes.includes(rawFormData.item)) return { status: 'error', message: 'お問い合わせ項目を選択してください。', field: 'item' };
+  if (!rawFormData.message) return { status: 'error', message: 'お問い合わせ内容を入力してください。', field: 'message' };
 
-  if (!rawFormData.furigana) {
-    return {
-      status: 'error',
-      message: 'ふりがなを入力してください',
-    };
-  }
+  const portalId = process.env.HUBSPOT_PORTAL_ID;
+  const formId = process.env.HUBSPOT_FORM_ID;
 
-  if (!rawFormData.item) {
-    return {
-      status: 'error',
-      message: 'お問い合わせ項目を選択してください',
-    };
+  if (!portalId || !formId) {
+    return { status: 'error', message: '現在フォームを送信できません。時間をおいて再度お試しください。' };
   }
-
-  if (!rawFormData.email) {
-    return {
-      status: 'error',
-      message: 'メールアドレスを入力してください',
-    };
-  }
-  if (!validateEmail(rawFormData.email)) {
-    return {
-      status: 'error',
-      message: 'メールアドレスの形式が誤っています',
-    };
-  }
-
-  const result = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${process.env.HUBSPOT_PORTAL_ID}/${process.env.HUBSPOT_FORM_ID}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      fields: [
-        {
-          objectTypeId: '0-1',
-          name: 'namae',
-          value: rawFormData.namae,
-        },
-        {
-          objectTypeId: '0-1',
-          name: 'furigana',
-          value: rawFormData.furigana,
-        },
-        {
-          objectTypeId: '0-1',
-          name: 'email',
-          value: rawFormData.email,
-        },
-        {
-          objectTypeId: '0-1',
-          name: 'item',
-          value: rawFormData.item,
-        },
-        {
-          objectTypeId: '0-1',
-          name: 'message',
-          value: rawFormData.message,
-        },
-      ],
-    }),
-  });
 
   try {
-    await result.json();
-  } catch (e) {
-    console.log(e);
-    return {
-      status: 'error',
-      message: 'お問い合わせに失敗しました',
-    };
+    const result = await fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fields: Object.entries(rawFormData).map(([name, value]) => ({
+          objectTypeId: '0-1',
+          name,
+          value,
+        })),
+      }),
+    });
+
+    if (!result.ok) {
+      return { status: 'error', message: 'お問い合わせを送信できませんでした。入力内容を確認して、もう一度お試しください。' };
+    }
+  } catch {
+    return { status: 'error', message: '通信エラーが発生しました。時間をおいて再度お試しください。' };
   }
 
-  return { status: 'success', message: 'OK' };
+  return { status: 'success', message: 'お問い合わせを受け付けました。' };
 }

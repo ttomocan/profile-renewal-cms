@@ -11,6 +11,7 @@
   }
 
   .programming,
+  .framework,
   .tool,
   .ai-tool {
     padding-bottom: 80px;
@@ -27,12 +28,13 @@
       font-size: 14px;
     }
     &__item {
-      align-items: center;
+      align-items: flex-start;
+      background: #ffffff;
+      border: 1px solid rgba(243, 107, 10, 0.25);
+      border-radius: 14px;
       display: flex;
       gap: 20px 30px;
-      &:has(+ div) {
-        margin-bottom: 30px;
-      }
+      padding: 22px;
     }
     &__heading {
       font-size: 22px;
@@ -42,11 +44,68 @@
     &__image {
       flex: 0 0 100px;
       text-align: center;
+
+      img,
+      svg {
+        height: 80px;
+        object-fit: contain;
+        width: 80px;
+      }
     }
     &__occupation {
       font-size: 13px;
       white-space: nowrap;
     }
+  }
+
+  .skill-cards {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .programming {
+    &__detail {
+      min-width: 0;
+    }
+
+    &__description {
+      margin-top: 4px;
+    }
+
+    &__points {
+      margin-top: 12px;
+    }
+
+    &__related-link {
+      color: $mainC;
+      display: inline-block;
+      margin-top: 14px;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    &__text-icon {
+      align-items: center;
+      background: #fff6ed;
+      border: 1px solid $mainC;
+      border-radius: 50%;
+      color: $mainC;
+      display: inline-flex;
+      font-size: 18px;
+      font-weight: 700;
+      height: 80px;
+      justify-content: center;
+      width: 80px;
+    }
+  }
+
+  .skill-page-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 32px;
   }
 
   .license {
@@ -79,6 +138,7 @@
     }
 
     .programming,
+    .framework,
     .tool,
     .ai-tool {
       padding-bottom: 80px;
@@ -95,20 +155,46 @@
         font-size: 15px;
       }
       &__item {
-        align-items: center;
+        align-items: flex-start;
         display: grid;
-        grid-template-columns: 100px 1fr;
-        gap: 15px 20px;
+        gap: 15px;
+        grid-template-columns: 72px minmax(0, 1fr);
+        padding: 18px;
       }
       &__detail {
-        display: contents;
+        min-width: 0;
       }
       &__description {
-        grid-column: span 2;
+        grid-column: auto;
       }
       &__occupation {
         font-size: 13px;
         white-space: nowrap;
+      }
+    }
+
+    .skill-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .programming__image {
+      flex-basis: 72px;
+
+      img,
+      svg,
+      .programming__text-icon {
+        height: 64px;
+        width: 64px;
+      }
+    }
+
+    .skill-page-links {
+      align-items: stretch;
+      flex-direction: column;
+
+      .c-button__link {
+        min-width: 0;
+        width: 100%;
       }
     }
   }

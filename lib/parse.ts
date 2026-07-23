@@ -29,7 +29,7 @@ export function splitHighlights(str?: string): string[] {
 
   return str
     .split('\n')
-    .map((line) => line.trim())
+    .map((line) => line.trim().replace(/^[・▪●◼︎■-]\s*/, ''))
     .filter((line) => line.length > 0);
 }
 

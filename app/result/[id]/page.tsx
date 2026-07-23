@@ -2,12 +2,15 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getResultDetail } from '@/app/_libs/microcms';
+import { getResultDetail, getResults } from '@/app/_libs/microcms';
 import { parseTechStack, parseRoles, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
+import ResultJsonLd from '@/app/_components/ResultJsonLd';
+import ResultCard from '@/components/ResultCard';
+import { createMetaDescription } from '@/lib/seo';
 import '@/styles/pages/result.scss';
 
 interface ResultDetailPageProps {
@@ -26,35 +29,42 @@ export async function generateMetadata({ params }: ResultDetailPageProps): Promi
     };
   }
 
-  const siteName = 'ともきゃんスタイル';
+  const title = `${result.title}｜Web制作実績｜ともきゃん`;
+  const description = createMetaDescription(result.summary);
+  const image = result.cover
+    ? {
+        url: result.cover.url,
+        width: result.cover.width,
+        height: result.cover.height,
+        alt: `${result.title}のカバー画像`,
+      }
+    : {
+        url: '/img/common/ogp.png',
+        width: 1200,
+        height: 630,
+        alt: 'ともきゃんスタイル',
+      };
 
   return {
-    title: `${result.title} | 実績詳細 | ${siteName}`,
-    description: result.summary,
+    title,
+    description,
     alternates: {
       canonical: `https://www.tomocan.site/result/${resolvedParams.id}/`,
     },
     openGraph: {
-      title: `${result.title} | ${siteName}`,
-      description: result.summary,
+      title,
+      description,
       url: `https://www.tomocan.site/result/${resolvedParams.id}/`,
       type: 'article',
-      images: result.cover
-        ? [
-            {
-              url: result.cover.url,
-              width: result.cover.width,
-              height: result.cover.height,
-              alt: `${result.title}のカバー画像`,
-            },
-          ]
-        : undefined,
+      images: [image],
+      siteName: 'ともきゃんスタイル',
+      locale: 'ja_JP',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${result.title} | ${siteName}`,
-      description: result.summary,
-      images: result.cover ? [result.cover.url] : undefined,
+      title,
+      description,
+      images: [image.url],
     },
   };
 }
@@ -82,6 +92,21 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const highlightsArray = splitHighlights(highlights);
   const formattedPeriod = formatPeriod(period);
 
+  const relatedData = await getResults({ limit: 24, sort: 'new' });
+  const currentTechnologies = new Set(techStackArray.map((technology) => technology.toLowerCase()));
+  const relatedResults = relatedData.contents
+    .filter((item) => item.id !== result.id)
+    .map((item) => {
+      const sharedTechnologies = parseTechStack(item.techStack).filter((technology) => currentTechnologies.has(technology.toLowerCase())).length;
+      const sameProjectType = safeGetProjectType(item) === projectType && projectType !== '未分類' ? 3 : 0;
+      const sameWorkType = safeGetWorkType(item) === workType && workType !== '未分類' ? 1 : 0;
+      return { item, score: sharedTechnologies + sameProjectType + sameWorkType };
+    })
+    .filter(({ score }) => score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map(({ item }) => item);
+
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
     { label: '実績紹介', href: '/result/' },
@@ -91,7 +116,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   return (
     <>
       {/* ページタイトル */}
-      <PageTitle title="Result" sub="実績紹介" />
+      <PageTitle title="Result" sub="実績紹介" isHeading={false} />
 
       {/* パンくずリスト */}
       <Breadcrumb items={breadcrumbItems} />
@@ -109,46 +134,50 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
 
               <h1 className="result-detail__header-title">{title}</h1>
 
-              <div className="result-detail__header-meta">
-                <span>
+              <dl className="result-detail__header-meta">
+                <div>
                   <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  制作期間: {formattedPeriod}
-                </span>
+                  <dt>制作期間</dt>
+                  <dd>{formattedPeriod}</dd>
+                </div>
                 {safeScale && safeScale !== '未分類' && (
-                  <span>
+                  <div>
                     <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2M4 6v10a2 2 0 002 2h12a2 2 0 002-2V6M4 6h16M7 10h3m-3 4h8m-8 4h8" />
                     </svg>
-                    プロジェクト規模: {safeScale}
-                  </span>
+                    <dt>プロジェクト規模</dt>
+                    <dd>{safeScale}</dd>
+                  </div>
                 )}
                 {result.clientName && result.clientName.trim() && (
-                  <span>
+                  <div>
                     <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
-                    クライアント: {clientName}
-                  </span>
+                    <dt>クライアント</dt>
+                    <dd>{clientName}</dd>
+                  </div>
                 )}
-              </div>
+              </dl>
             </header>
 
             {/* カバー画像は非表示 */}
 
             {/* 概要 */}
             <section className="result-detail__section">
-              <h2 className="result-detail__section-title">概要</h2>
+              <h2 className="result-detail__section-title">案件概要</h2>
               <div className="result-detail__section-content result-detail__section-content--summary">
                 <p>{summary}</p>
               </div>
             </section>
 
+            {/* TODO: プロジェクト全体の課題・対応範囲をCMSへ追加する */}
             {/* 担当範囲 */}
             {rolesArray.length > 0 && (
               <section className="result-detail__section">
-                <h2 className="result-detail__section-title">担当範囲</h2>
+                <h2 className="result-detail__section-title">自分が担当した範囲</h2>
                 <div className="result-detail__section-content result-detail__section-content--tags">
                   <div className="tags-container" role="list" aria-label="担当範囲一覧">
                     {rolesArray.map((role, index) => (
@@ -177,18 +206,15 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               </section>
             )}
 
-            {/* 工夫したポイント */}
+            {/* 実装・判断したこと */}
             {highlightsArray.length > 0 && (
               <section className="result-detail__section">
-                <h2 className="result-detail__section-title">工夫したポイント</h2>
+                <h2 className="result-detail__section-title">実装・判断したこと</h2>
                 <div className="result-detail__section-content result-detail__section-content--summary">
                   <div className="result-detail__section-highlights">
                     <ul>
                       {highlightsArray.map((highlight, index) => (
-                        <li key={index}>
-                          <span style={{ marginRight: '8px', color: '#f36b0a', fontWeight: 'bold' }}>▪</span>
-                          {highlight}
-                        </li>
+                        <li key={index}>{highlight}</li>
                       ))}
                     </ul>
                   </div>
@@ -221,9 +247,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {siteUrl && siteUrl.trim() && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">サイトURL</h2>
-                <a href={siteUrl} target="_blank" rel="noopener noreferrer" className="site-link-card">
+                <a href={siteUrl} target="_blank" rel="noopener noreferrer" className="site-link-card" aria-label={`${title}の公開サイトを新しいタブで開く`}>
                   <div className="site-link-card__favicon">
-                    <Image src={getFaviconUrl(siteUrl)} alt={`${title}のファビコン`} width={64} height={64} unoptimized={true} />
+                    <Image src={getFaviconUrl(siteUrl)} alt="" width={64} height={64} unoptimized={true} />
                   </div>
                   <div className="site-link-card__content">
                     <div className="site-link-card__header">
@@ -239,6 +265,32 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 </a>
               </section>
             )}
+
+            {relatedResults.length > 0 && (
+              <section className="result-detail__section result-related">
+                <h2 className="result-detail__section-title">関連する制作実績</h2>
+                <div className="results-grid">
+                  {relatedResults.map((relatedResult) => (
+                    <ResultCard key={relatedResult.id} result={relatedResult} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            <section className="result-detail__section result-related-navigation">
+              <h2 className="result-detail__section-title">関連ページ</h2>
+              <ul className="result-related-links">
+                <li>
+                  <Link href="/result/">Web制作実績をすべて見る</Link>
+                </li>
+                <li>
+                  <Link href="/skill/">実務・個人開発の対応スキルを見る</Link>
+                </li>
+                <li>
+                  <Link href="/about/">プロフィール・経歴を見る</Link>
+                </li>
+              </ul>
+            </section>
           </article>
 
           {/* ナビゲーション */}
@@ -254,6 +306,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
           </nav>
         </div>
       </main>
+      <ResultJsonLd result={result} />
       <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );

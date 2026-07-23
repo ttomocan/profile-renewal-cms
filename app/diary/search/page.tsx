@@ -24,21 +24,29 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     : 'ともきゃん日記の記事を検索できます。Web制作、ブログ運営、日常の出来事など、気になるキーワードで記事を探してみてください。';
 
   return {
-    title,
+    title: `${title}｜ともきゃん日記`,
     description,
+    robots: {
+      index: false,
+      follow: true,
+    },
     alternates: {
-      canonical: query
-        ? `https://www.tomocan.site/diary/search/?q=${encodeURIComponent(query)}`
-        : 'https://www.tomocan.site/diary/search/',
+      canonical: 'https://www.tomocan.site/diary/search/',
     },
     openGraph: {
       title,
       description,
       url: 'https://www.tomocan.site/diary/search/',
+      type: 'website',
+      images: ['/img/common/ogp.png'],
+      siteName: 'ともきゃんスタイル',
+      locale: 'ja_JP',
     },
     twitter: {
       title,
       description,
+      card: 'summary_large_image',
+      images: ['/img/common/ogp.png'],
     },
   };
 }
@@ -78,6 +86,8 @@ export default async function Page({ searchParams }: Props) {
     <>
       <Breadcrumb items={breadcrumbItems} />
       <section className="inner">
+        <h1 className={styles.title}>{query ? `「${query}」の検索結果` : 'ともきゃん日記の記事検索'}</h1>
+        <h2 className="u-visually-hidden">検索結果の記事一覧</h2>
         <SearchField defaultValue={query} />
         <Suspense fallback={<DiaryListSkeleton />}>
           <SearchResults query={query} />

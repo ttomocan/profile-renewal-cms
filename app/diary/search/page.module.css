@@ -1,3 +1,10 @@
+.title {
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
 .search-info {
   margin: 20px 0;
   padding: 10px 15px;

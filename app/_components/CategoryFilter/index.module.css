@@ -39,9 +39,13 @@
 }
 
 .select:focus {
-  outline: none;
   border-color: #f36b0a;
   box-shadow: 0 4px 12px rgba(243, 107, 10, 0.15);
+}
+
+.select:focus-visible {
+  outline: 3px solid #f36b0a;
+  outline-offset: 3px;
 }
 
 .selectIcon {

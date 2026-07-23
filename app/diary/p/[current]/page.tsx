@@ -18,7 +18,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const current = parseInt(resolvedParams.current as string, 10);
-  const title = `ともきゃん日記 ${current}ページ目`;
+  const title = `活動記録 ${current}ページ目｜ともきゃん日記`;
   const description = `ともきゃん日記の記事一覧 ${current}ページ目。Webエンジニア・ブロガー ともきゃんの日常、Web制作の学び、ブログ運営のコツなどを発信しています。`;
 
   return {
@@ -31,10 +31,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: `https://www.tomocan.site/diary/p/${current}/`,
+      type: 'website',
+      images: ['/img/common/ogp.png'],
+      siteName: 'ともきゃんスタイル',
+      locale: 'ja_JP',
     },
     twitter: {
       title,
       description,
+      card: 'summary_large_image',
+      images: ['/img/common/ogp.png'],
     },
   };
 }
@@ -76,6 +82,8 @@ export default async function Page({ params }: Props) {
     <>
       <Breadcrumb items={breadcrumbItems} />
       <section className="inner">
+        <h1 className="diary-archive-title">活動記録の記事一覧（{current}ページ目）</h1>
+        <h2 className="u-visually-hidden">{current}ページ目の記事</h2>
         <Suspense fallback={<DiaryListSkeleton />}>
           <DiaryListContent current={current} />
         </Suspense>

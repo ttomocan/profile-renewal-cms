@@ -7,6 +7,7 @@ import Pagination from '@/app/_components/Pagination';
 import SearchField from '@/app/_components/SearchField';
 import CategoryFilter from '@/app/_components/CategoryFilter';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
+import Breadcrumb from '@/app/_components/Breadcrumb';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 
 type SearchParamsType = { q?: string; category?: string };
@@ -47,7 +48,13 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
 
   return (
     <>
+      <Breadcrumb items={breadcrumbItems} />
       <section className="inner">
+        <div className={styles.intro}>
+          <h1>Web開発・ブログ運営・個人開発の活動記録</h1>
+          <p>人柄や継続して取り組む姿勢が伝わるよう、Web制作、個人開発、ブログ運営、働き方について記録しています。</p>
+        </div>
+        <h2 className="u-visually-hidden">活動記録の記事一覧</h2>
         <div className={styles['diary-search-row']}>
           <SearchField defaultValue={resolvedSearchParams.q} />
           <CategoryFilter categories={categories} selectedCategoryId={resolvedSearchParams.category} />

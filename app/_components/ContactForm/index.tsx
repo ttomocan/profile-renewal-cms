@@ -1,149 +1,143 @@
 'use client';
 
-import Image from 'next/image';
-import { createContactData } from '@/app/_actions/contact';
-import { useFormState } from 'react-dom';
+import { useActionState, useEffect, useRef } from 'react';
+import { useFormStatus } from 'react-dom';
+import { createContactData, type ContactFormState } from '@/app/_actions/contact';
 import { sendGAEvent } from '@next/third-parties/google';
 
-const initialState = {
-  status: '',
+const initialState: ContactFormState = {
+  status: 'idle',
   message: '',
 };
 
+const contactTypes = ['採用に関するご連絡', '業務委託・協業のご相談', '制作実績に関するお問い合わせ', 'ブログ・メディアに関するお問い合わせ', 'その他'];
+
+function SubmitButton() {
+  const { pending } = useFormStatus();
+
+  return (
+    <button type="submit" className="c-button__link --main" disabled={pending} aria-disabled={pending}>
+      {pending ? '送信中…' : '送信する'}
+    </button>
+  );
+}
+
 export default function ContactForm() {
-  const [state, formAction] = useFormState(createContactData, initialState);
-  console.log(state);
-  const handleSubmit = () => {
-    sendGAEvent({ event: 'contact', value: 'submit' });
-  };
+  const [state, formAction] = useActionState(createContactData, initialState);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  useEffect(() => {
+    if (state.status !== 'error') return;
+
+    if (state.field) {
+      formRef.current?.querySelector<HTMLElement>(`[name="${state.field}"]`)?.focus();
+      return;
+    }
+
+    formRef.current?.querySelector<HTMLElement>('[type="submit"]')?.focus();
+  }, [state]);
+
   if (state.status === 'success') {
     return (
-      <p className="p-form__success">
+      <p className="p-form__success" role="status" aria-live="polite" tabIndex={-1}>
         お問い合わせいただき、ありがとうございます。
         <br />
-        お返事まで今しばらくお待ちください。
+        内容を確認のうえ返信します。
       </p>
     );
   }
+
+  const hasFieldError = (field: string) => state.status === 'error' && state.field === field;
+
   return (
-    <form className="p-form" action={formAction} onSubmit={handleSubmit}>
-      {/* お名前 */}
+    <form
+      ref={formRef}
+      className="p-form"
+      action={formAction}
+      onSubmit={() => sendGAEvent({ event: 'contact', value: 'submit' })}
+      noValidate
+    >
       <div className="p-form__item">
         <div className="p-form__heading">
           <label className="label" htmlFor="namae">
             お名前
           </label>
-          <span className="p-form__required">必須</span>
+          <span className="p-form__required" aria-hidden="true">
+            必須
+          </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="namae" id="namae" className="textfield" />
+          <input type="text" name="namae" id="namae" className="textfield" autoComplete="name" required aria-required="true" aria-invalid={hasFieldError('namae')} maxLength={100} />
         </div>
       </div>
 
-      {/* ふりがな */}
       <div className="p-form__item">
         <div className="p-form__heading">
           <label className="label" htmlFor="furigana">
             ふりがな
           </label>
-          <span className="p-form__required">必須</span>
+          <span className="p-form__required" aria-hidden="true">
+            必須
+          </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="furigana" id="furigana" className="textfield" />
+          <input type="text" name="furigana" id="furigana" className="textfield" autoComplete="off" required aria-required="true" aria-invalid={hasFieldError('furigana')} maxLength={100} />
         </div>
       </div>
 
-      {/* メールアドレス */}
       <div className="p-form__item">
         <div className="p-form__heading">
           <label className="label" htmlFor="email">
             メールアドレス
           </label>
-          <span className="p-form__required">必須</span>
+          <span className="p-form__required" aria-hidden="true">
+            必須
+          </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="email" id="email" className="textfield" />
+          <input type="email" name="email" id="email" className="textfield" autoComplete="email" inputMode="email" required aria-required="true" aria-invalid={hasFieldError('email')} maxLength={254} />
         </div>
       </div>
 
-      {/* お問い合わせ項目 */}
-      <div className="p-form__item">
-        <div className="p-form__heading">
-          <label className="label" htmlFor="item">
-            お問い合わせ項目
-          </label>
-          <span className="p-form__required">必須</span>
+      <fieldset className="p-form__item" aria-invalid={hasFieldError('item')}>
+        <legend className="p-form__heading">
+          <span className="label">お問い合わせ項目</span>
+          <span className="p-form__required" aria-hidden="true">
+            必須
+          </span>
+        </legend>
+        <div className="p-form__input" role="radiogroup" aria-required="true">
+          {contactTypes.map((type) => (
+            <label className="checkbox" key={type}>
+              <input type="radio" name="item" value={type} required />
+              <span className="checkbox-text">{type}</span>
+            </label>
+          ))}
         </div>
-        <div className="p-form__input">
-          <label className="checkbox">
-            <input type="radio" name="item" value="Webサイト制作の依頼" />
-            <span className="checkbox-text">Webサイト制作の依頼</span>
-          </label>
-          <label className="checkbox">
-            <input type="radio" name="item" value="Webデザインに関する相談" />
-            <span className="checkbox-text">Webデザインに関する相談</span>
-          </label>
-          <label className="checkbox">
-            <input type="radio" name="item" value="ブログに関する相談" />
-            <span className="checkbox-text">ブログに関する相談</span>
-          </label>
-          <label className="checkbox">
-            <input type="radio" name="item" value="その他" />
-            <span className="checkbox-text">その他</span>
-          </label>
-        </div>
-      </div>
+      </fieldset>
 
-      {/* ご住所 */}
-      {/* <FormItem label="ご住所">
-        <input type="text" name="state" />
-        <input type="text" name="city" />
-        <input type="text" name="address" />
-      </FormItem> */}
-
-      {/* お問い合わせ内容 */}
       <div className="p-form__item">
         <div className="p-form__heading">
           <label className="label" htmlFor="message">
             お問い合わせ内容
           </label>
-          <span className="p-form__required">必須</span>
+          <span className="p-form__required" aria-hidden="true">
+            必須
+          </span>
         </div>
         <div className="p-form__input">
-          <textarea className="textarea" id="message" name="message" />
+          <textarea className="textarea" id="message" name="message" required aria-required="true" aria-invalid={hasFieldError('message')} maxLength={5000} />
         </div>
       </div>
 
-      {/* 添付ファイル */}
-      <div className="p-form__item">
-        <div className="p-form__heading">
-          <label className="label" htmlFor="file">
-            添付ファイル
-          </label>
-        </div>
-        <div className="p-form__input">
-          <div className="attachment">
-            <label>
-              <input type="file" name="file" id="file" className="attachment-fileinput" />
-              ファイルを添付する
-              <Image src="/img/pages/contact/icon_file.svg" alt="" width={20} height={20} style={{ width: 'auto', height: '20px' }} />
-            </label>
-            <span className="attachment-filename">選択されていません</span>
-          </div>
-        </div>
-      </div>
+      {state.status === 'error' && (
+        <p id="contact-error" className="p-form__error" role="alert" aria-live="assertive">
+          {state.message}
+        </p>
+      )}
 
-      {/* エラー */}
-      {state.status === 'error' && <p className="p-form__error">{state.message}</p>}
-
-      {/* ボタン */}
       <div className="p-form__button">
-        {/* <button type="submit" className="c-button__link --return --gray">
-          戻る
-        </button> */}
-        <button type="submit" className="c-button__link --main">
-          送信する
-        </button>
+        <SubmitButton />
       </div>
     </form>
   );

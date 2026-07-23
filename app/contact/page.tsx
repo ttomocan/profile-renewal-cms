@@ -1,8 +1,7 @@
 import ContactForm from '@/app/_components/ContactForm';
-import ServiceJsonLd from '@/app/_components/ServiceJsonLd';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
-export default async function Page() {
+export default function Page() {
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
     { label: 'お問い合わせ', active: true },
@@ -10,27 +9,18 @@ export default async function Page() {
 
   return (
     <>
-      <section className="inner">
-        <p className="fadeUpTrigger">
-          ブログ運営に関するお悩みはありませんか？
-          <br />
-          5年間のブログ運営で培ったノウハウを活かして、あなたのお悩みを解決するお手伝いをします。
-        </p>
+      <section className="inner inner-s">
+        <p className="fadeUpTrigger">採用、業務委託・協業、制作実績、ブログ・メディア運営に関するお問い合わせを受け付けています。</p>
         <ul className="u-mt20 c-list fadeUpTrigger">
-          <li>広告を掲載してほしい</li>
-          <li>ブログ運用について相談したい</li>
-          <li>管理者に伝えたいことがある</li>
+          <li>採用に関するご連絡</li>
+          <li>業務委託・協業のご相談</li>
+          <li>制作実績に関するお問い合わせ</li>
+          <li>ブログ・メディアに関するお問い合わせ</li>
         </ul>
-        <p className="u-mt20 u-mb20 fadeUpTrigger">
-          など、あなたのお問い合わせ内容を、下記の入力フォームからお気軽にご入力ください。
-          <br />
-          お問い合わせ内容を確認したら、3日以内に返信します。あなたに合った最適な解決策を一緒に考えて、次のステップに進むサポートしますので、お気軽にご相談ください！
-        </p>
-        <p className="u-text-note fadeUpTrigger">ご返信には、必ずお名前とメールアドレスの記載をお願いします。記載がない場合やテンプレートの営業メールなど、返信できない場合がありますので、あらかじめご了承ください。</p>
-        <p className="u-text-note fadeUpTrigger u-mt20">現在、サイト・アプリ開発の依頼は承っておりません。</p>
+        <p className="u-mt20 u-mb20 fadeUpTrigger">内容を確認のうえ、原則3日以内に返信します。現在、サイト・アプリの新規制作依頼は受け付けていません。</p>
+        <p className="u-text-note fadeUpTrigger">テンプレートによる営業連絡や、返信先を確認できないお問い合わせには返信できない場合があります。添付ファイルは受け付けていないため、必要な資料がある場合は本文にその旨をご記載ください。</p>
         <ContactForm />
       </section>
-      <ServiceJsonLd name="ブログ運営相談サービス" description="ブログ運営、SEO対策など、ブログに関するご相談を承ります。5年間のブログ運営経験を活かして、あなたのお悩みを解決するお手伝いをします。" serviceType={['ブログ運営相談', 'SEO対策']} url="https://www.tomocan.site/contact/" />
       <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );

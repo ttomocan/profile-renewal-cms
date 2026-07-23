@@ -2,38 +2,30 @@ import '@/styles/pages/skill.scss';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 
-const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
-const pageTitle = 'ともきゃんができること';
-const description = 'HTML/CSS/JavaScript、PHP、WordPress、Next.js、React、TypeScriptを使ったWeb制作スキル。Figma、Photoshop、Illustratorでのデザイン制作。ChatGPT、Claude、GeminiなどAIツールを活用した効率的なWeb開発が可能です。';
+const pageTitle = '対応スキル・技術｜WordPress・JavaScript・Next.js';
+const description = 'WordPress、HTML、CSS、JavaScript、PHPを中心とした実務スキルと、Next.js、React、TypeScriptを使った個人開発、AIツールの活用範囲を経験区分ごとに紹介します。';
 const keywords = ['Web制作スキル', 'WordPress開発', 'Next.js開発', 'React開発', 'SEO対策', 'UI/UX改善'];
 
 export const metadata = {
-  title: {
-    template: `%s | ${baseTitle}`,
-    default: pageTitle,
-  },
+  title: pageTitle,
   description,
   keywords,
   alternates: {
     canonical: 'https://www.tomocan.site/skill/',
   },
   openGraph: {
-    title: {
-      template: `%s | ${baseTitle}`,
-      default: pageTitle,
-    },
+    title: pageTitle,
     description,
     url: 'https://www.tomocan.site/skill/',
+    type: 'website',
     images: ['/img/common/ogp.png'],
-    siteName: baseTitle,
+    siteName: 'ともきゃんスタイル',
+    locale: 'ja_JP',
   },
   twitter: {
     card: 'summary_large_image',
     site: '@t_tomocan',
-    title: {
-      template: `%s | ${baseTitle}`,
-      default: pageTitle,
-    },
+    title: pageTitle,
     description,
     images: ['/img/common/ogp.png'],
   },
@@ -46,12 +38,12 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
-    { label: 'ともきゃんができること', active: true },
+    { label: '対応スキル・技術', active: true },
   ];
 
   return (
     <>
-      <PageTitle title="Skill" sub="ともきゃんができること" />
+      <PageTitle title="Skill" sub="対応スキル・技術" />
       <Breadcrumb items={breadcrumbItems} />
       <main>{children}</main>
     </>

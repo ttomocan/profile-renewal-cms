@@ -83,7 +83,7 @@ export default function DiarySlider({ blog }: DiarySliderProps) {
                 ) : (
                   <Image
                     src="/img/common/ogp.png"
-                    alt="デフォルトのサムネイル画像"
+                    alt={`${article.title}のサムネイル画像`}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="diary-card__image-img"

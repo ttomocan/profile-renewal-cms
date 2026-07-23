@@ -1,7 +1,42 @@
 /* クリエイティブなArticleスタイル */
 
 .article {
+  margin-inline: auto;
+  max-width: 720px;
+}
+
+.tableOfContents {
+  background: #fff;
+  border: 1px solid rgba(243, 107, 10, 0.3);
+  border-radius: 8px;
+  margin: 0 0 48px;
   max-width: 100%;
+  padding: 20px 24px;
+}
+
+.tableOfContentsTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.tableOfContents ol {
+  display: grid;
+  gap: 8px;
+  list-style: decimal;
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.tableOfContents a {
+  color: #333;
+  text-decoration: underline;
+  text-decoration-color: rgba(243, 107, 10, 0.55);
+  text-underline-offset: 3px;
+}
+
+.tableOfContentsSubItem {
+  margin-left: 1.25em;
 }
 
 .title {
@@ -78,6 +113,11 @@
   background: linear-gradient(135deg, #fff7f0 0%, #fff 60%);
   border-radius: 6px;
   border-left: 4px solid #f36b0a;
+}
+
+.content > h2,
+.content > h3 {
+  scroll-margin-top: 100px;
 }
 
 .content > h2::after {
@@ -218,6 +258,9 @@
 }
 
 .content > table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
   width: 100%;
   margin: 32px 0;
   border-collapse: collapse;
@@ -265,6 +308,16 @@
 
   .content {
     font-size: 1rem;
+    line-height: 1.8;
+  }
+
+  .tableOfContents {
+    margin-bottom: 36px;
+    padding: 18px 20px;
+  }
+
+  .tableOfContentsSubItem {
+    margin-left: 0.75em;
   }
 
   .content > h1 {

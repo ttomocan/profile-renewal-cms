@@ -36,9 +36,11 @@ function CategoryFilterComponent({ categories, selectedCategoryId }: CategoryFil
 
   return (
     <div className={styles.categoryFilter}>
-      <label className={styles.label}>カテゴリー:</label>
+      <label className={styles.label} htmlFor="diary-category">
+        カテゴリー:
+      </label>
       <div className={styles.selectWrapper}>
-        <select value={selectedCategoryId || 'all'} onChange={(e) => handleCategoryChange(e.target.value)} className={styles.select} aria-label="カテゴリーで絞り込み">
+        <select id="diary-category" value={selectedCategoryId || 'all'} onChange={(e) => handleCategoryChange(e.target.value)} className={styles.select}>
           <option value="all">すべて</option>
           {categories.map((category) => (
             <option key={category.id} value={category.id}>

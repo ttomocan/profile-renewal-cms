@@ -33,10 +33,6 @@ a {
   transition: 0.1s;
   word-wrap: break-word;
 
-  &:focus {
-    outline: none;
-  }
-
   @include mq(pc) {
     &[href^='tel:'] {
       color: inherit;
@@ -50,6 +46,11 @@ a {
       text-decoration: none;
     }
   }
+}
+
+:is(a, button, input, textarea, select, summary):focus-visible {
+  outline: 3px solid $mainC;
+  outline-offset: 3px;
 }
 
 img {
@@ -92,6 +93,27 @@ input:is([type='reset'], [type='button'], [type='submit']) {
   }
   &::-webkit-search-decoration {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  [class$='Trigger'],
+  [class*='Trigger '] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

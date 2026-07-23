@@ -24,18 +24,12 @@ const siteKeywords = [
 ];
 
 export async function generateMetadata(): Promise<Metadata> {
-  const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
-  const description = '名古屋のWebエンジニア兼ブロガー ともきゃんのプロフィールサイト。Web制作経験9年、200サイト以上の構築実績。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意。ブログ運営やWeb制作のお悩み解決をサポートします。';
-
-  // タイムスタンプの生成をサーバーサイドに固定
-  const timestamp = Date.now();
+  const baseTitle = 'Webエンジニア ともきゃん｜Web制作・UI改善・SEOの実績';
+  const description = 'Web制作会社で10年以上、200サイト以上の制作に携わってきたWebエンジニア・ともきゃんのポートフォリオ。WordPress、フロントエンド、CMS構築、UI改善、SEO、個人開発の実績を紹介します。';
 
   return {
     metadataBase: new URL('https://www.tomocan.site'),
-    title: {
-      template: `%s | ${baseTitle}`,
-      default: baseTitle,
-    },
+    title: baseTitle,
     description,
     keywords: siteKeywords,
     category: 'technology',
@@ -50,10 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
       apple: '/apple-icon.png',
     },
     openGraph: {
-      title: {
-        template: `%s | ${baseTitle}`,
-        default: baseTitle,
-      },
+      title: baseTitle,
       type: 'website',
       description,
       url: 'https://www.tomocan.site/',
@@ -64,10 +55,7 @@ export async function generateMetadata(): Promise<Metadata> {
     twitter: {
       card: 'summary_large_image',
       site: '@t_tomocan',
-      title: {
-        template: `%s | ${baseTitle}`,
-        default: baseTitle,
-      },
+      title: baseTitle,
       description,
       images: ['/img/common/ogp.png'],
     },
@@ -83,6 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <head>
+        <noscript>
+          <style>{`.loading{display:none!important}.fadeInTrigger,.fadeUpTrigger,.fadeDownTrigger,.fadeLeftTrigger,.fadeRightTrigger,.flipDownTrigger,.flipLeftTrigger,.flipRightTrigger,.rotateXTrigger,.rotateYTrigger,.zoomInTrigger,.zoomOutTrigger,.blurTrigger,.smoothTrigger{opacity:1!important;transform:none!important}`}</style>
+        </noscript>
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="//images.microcms-assets.io" />
 

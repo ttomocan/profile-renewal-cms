@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import WaveAnimation from '@/app/_components/WaveAnimation';
 
 export default function Footer() {
   const pathname = usePathname();
-  // クライアントサイドでのみ年号を設定するため、初期値はnull
-  const [currentYear, setCurrentYear] = useState<number | null>(null);
+  const currentYear = new Date().getFullYear();
 
   const isCurrent = (path: string) => {
     if (path === '/') {
@@ -16,11 +14,6 @@ export default function Footer() {
     }
     return pathname.startsWith(path);
   };
-
-  // 年号をクライアントサイドでのみ設定
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
 
   return (
     <>
@@ -63,7 +56,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className="l-footer__copyright">
-          <small>&copy; {currentYear || '2024'} ともきゃんスタイル inc.</small>
+          <small>&copy; {currentYear} ともきゃんスタイル</small>
         </div>
       </footer>
     </>

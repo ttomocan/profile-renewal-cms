@@ -128,3 +128,12 @@
     }
   }
 }
+
+@include mq(sp) {
+  .pagetitle {
+    &__en,
+    &__ja {
+      letter-spacing: 0.08em;
+    }
+  }
+}

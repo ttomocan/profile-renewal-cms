@@ -156,7 +156,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
   /**
    * Animation loop
    */
-  const animate = useCallback(() => {
+  const animate = useCallback(function animateFrame() {
     const state = animationStateRef.current;
 
     if (!state.isRunning) return;
@@ -168,7 +168,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     state.t = state.seconds * Math.PI;
 
     // Schedule next frame
-    state.animationFrameId = requestAnimationFrame(animate);
+    state.animationFrameId = requestAnimationFrame(animateFrame);
   }, [draw, speed]);
 
   /**
@@ -235,7 +235,11 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     const context = setupCanvas(canvas);
     if (!context) return;
 
-    startAnimation();
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      draw();
+    } else {
+      startAnimation();
+    }
 
     // Setup resize observer
     let resizeObserver: ResizeObserver | undefined;
@@ -261,7 +265,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
         (window as Window).removeEventListener('resize', handleResize);
       }
     };
-  }, [setupCanvas, startAnimation, stopAnimation, handleResize]);
+  }, [setupCanvas, startAnimation, stopAnimation, handleResize, draw]);
 
   return (
     <canvas
@@ -273,7 +277,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
         height: `${height}px`,
         display: 'block',
       }}
-      aria-label="Wave animation background"
+      aria-hidden="true"
     />
   );
 }

@@ -4,8 +4,8 @@ import { getAllCategoryList, getAllBlogList, getResults } from './_libs/microcms
 const BASE_URL = 'https://www.tomocan.site';
 
 const buildUrl = (path: string = '/') => {
-  if (path === '/' || path === '') return `${BASE_URL}`;
-  return `${BASE_URL}/${path.replace(/^\/+/, '').replace(/\/+$/, '')}`;
+  if (path === '/' || path === '') return `${BASE_URL}/`;
+  return `${BASE_URL}/${path.replace(/^\/+/, '').replace(/\/+$/, '')}/`;
 };
 
 const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary', 'result'];
@@ -33,11 +33,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     const [blogContents, categoryContents, resultsData] = await Promise.all([getAllBlogList(), getAllCategoryList(), getAllResults()]);
 
-    const now = new Date();
-
     const staticUrls: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
       url: buildUrl(path),
-      lastModified: now,
       changeFrequency: 'weekly' as const,
       priority: path === '' ? 1.0 : 0.8,
     }));
@@ -67,10 +64,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch (error) {
     console.error('Error generating sitemap:', error);
     // エラーが発生した場合は最低限の静的ページのみを返す
-    const now = new Date();
     return STATIC_PATHS.map((path) => ({
       url: buildUrl(path),
-      lastModified: now,
       changeFrequency: 'weekly' as const,
       priority: path === '' ? 1.0 : 0.8,
     }));

@@ -54,4 +54,91 @@
       padding: 2px 15px;
     }
   }
+
+  .about-facts {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 30px;
+
+    &__item {
+      background: #ffffff;
+      border: 1px solid rgba(243, 107, 10, 0.3);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+
+      dt {
+        color: #666666;
+        font-size: 14px;
+      }
+
+      dd {
+        color: $mainC;
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .about-section-copy {
+    display: grid;
+    gap: 16px;
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  .about-link {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .about-cards {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    li {
+      background: #ffffff;
+      border: 1px solid rgba(243, 107, 10, 0.3);
+      border-radius: 14px;
+      display: grid;
+      gap: 8px;
+      padding: 20px;
+    }
+
+    strong {
+      color: $mainC;
+      font-size: 18px;
+    }
+  }
+
+  .about-achievements {
+    margin-top: 24px;
+    padding: 0;
+  }
+
+  .about-related-links {
+    display: grid;
+    gap: 10px;
+    margin-top: 24px;
+
+    a {
+      color: $mainC;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+
+  @include mq(sp) {
+    .about-facts,
+    .about-cards {
+      grid-template-columns: 1fr;
+    }
+
+    .about-link .c-button__link {
+      min-width: 0;
+      width: 100%;
+    }
+  }
 }

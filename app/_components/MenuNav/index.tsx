@@ -45,11 +45,6 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
             ブログデザインマニア
           </a>
         </li>
-        <li className="l-header__blog__item">
-          <a href="https://note.com/tomoweb_lab" target="_blank" className="c-link-external" rel="noopener noreferrer">
-            note
-          </a>
-        </li>
       </ul>
       <nav className="l-header__navigation" role="navigation" aria-label="グローバルナビゲーション">
         <ul className="l-navigation">
@@ -87,6 +82,9 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
         </ul>
       </nav>
       <div className="l-header__sns">
+        <MenuNavLink href="https://note.com/tomoweb_lab" className="l-header__sns__item --note" target="_blank" rel="noopener noreferrer" onLinkClick={onLinkClick}>
+          <Image src="/img/common/icon_note.svg" alt="note" width={80} height={30} style={{ height: '30px', width: 'auto' }} loading="eager" priority />
+        </MenuNavLink>
         <MenuNavLink href="https://x.com/t_tomocan" className="l-header__sns__item --x" target="_blank" rel="noopener noreferrer" onLinkClick={onLinkClick}>
           <Image src="/img/common/icon_x.svg" alt="X" width={30} height={30} loading="eager" priority />
         </MenuNavLink>

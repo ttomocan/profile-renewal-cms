@@ -2,9 +2,8 @@ import '@/styles/pages/about.scss';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 
-const baseTitle = 'ともきゃんスタイル - プロフィールサイト';
-const pageTitle = 'ともきゃんはこんな人';
-const description = '名古屋在住のWebエンジニア兼ブロガー「ともきゃん」のプロフィール。Web制作経験9年、サイト構築200件以上の実績。ウェブデザイン技能検定1級、色彩検定1級保有。WordPress、Next.js、React、TypeScriptを使ったWeb制作が得意です。';
+const pageTitle = 'ともきゃんのプロフィール・経歴｜Webエンジニア';
+const description = 'Web制作会社で10年以上、200サイト以上の制作に携わってきたWebエンジニア・ともきゃんのプロフィール。担当領域、仕事で大切にしていること、資格、個人開発やブログ運営の活動を紹介します。';
 const keywords = [
   'プロフィール',
   'Webエンジニア',
@@ -17,32 +16,25 @@ const keywords = [
 ];
 
 export const metadata = {
-  title: {
-    template: `%s | ${baseTitle}`,
-    default: pageTitle,
-  },
+  title: pageTitle,
   description,
   keywords,
   alternates: {
     canonical: 'https://www.tomocan.site/about/',
   },
   openGraph: {
-    title: {
-      template: `%s | ${baseTitle}`,
-      default: pageTitle,
-    },
+    title: pageTitle,
     description,
     url: 'https://www.tomocan.site/about/',
+    type: 'website',
     images: ['/img/common/ogp.png'],
-    siteName: baseTitle,
+    siteName: 'ともきゃんスタイル',
+    locale: 'ja_JP',
   },
   twitter: {
     card: 'summary_large_image',
     site: '@t_tomocan',
-    title: {
-      template: `%s | ${baseTitle}`,
-      default: pageTitle,
-    },
+    title: pageTitle,
     description,
     images: ['/img/common/ogp.png'],
   },
@@ -55,12 +47,12 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
-    { label: 'ともきゃんについて', active: true },
+    { label: 'プロフィール・経歴', active: true },
   ];
 
   return (
     <>
-      <PageTitle title="About" sub="ともきゃんはこんな人" />
+      <PageTitle title="About" sub="プロフィール・経歴" />
       <Breadcrumb items={breadcrumbItems} />
       <main>{children}</main>
     </>

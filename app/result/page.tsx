@@ -19,27 +19,29 @@ interface ResultsPageProps {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
-  const siteName = 'ともきゃんスタイル';
-  const description = 'Web制作経験10年、200サイト以上の構築実績。WordPress、Next.js、Reactを使ったWebサイト制作、ブログカスタマイズ、デザイン制作など、ともきゃんの制作実績を一覧でご覧いただけます。';
+  const title = 'Web制作実績・担当領域｜ともきゃん';
+  const description = 'コーポレートサイト、ブランドサイト、オウンドメディアなどのWeb制作実績を紹介。案件の種類、本人の担当範囲、使用技術、制作期間、実装時に工夫したポイントを掲載しています。';
   const keywords = ['制作実績', 'Web制作', 'WordPress', 'Next.js', 'React', 'サイト制作', 'ポートフォリオ'];
 
   return {
-    title: `実績紹介 | ${siteName}`,
+    title,
     description,
     keywords,
     alternates: {
       canonical: 'https://www.tomocan.site/result/',
     },
     openGraph: {
-      title: `実績紹介 | ${siteName}`,
+      title,
       description,
       url: 'https://www.tomocan.site/result/',
       type: 'website',
       images: ['/img/common/ogp.png'],
+      siteName: 'ともきゃんスタイル',
+      locale: 'ja_JP',
     },
     twitter: {
       card: 'summary_large_image',
-      title: `実績紹介 | ${siteName}`,
+      title,
       description,
       images: ['/img/common/ogp.png'],
     },
@@ -152,13 +154,19 @@ export default async function ResultsPage({ searchParams }: ResultsPageProps) {
   return (
     <>
       {/* ページタイトル */}
-      <PageTitle title="Result" sub="実績紹介" />
+      <PageTitle title="Result" sub="Web制作実績" />
 
       {/* パンくずリスト */}
       <Breadcrumb items={breadcrumbItems} />
 
       <main className="results-main">
         <div className="results-inner">
+          <section className="results-intro" aria-labelledby="results-list-heading">
+            <h2 id="results-list-heading" className="u-visually-hidden">
+              Web制作実績一覧
+            </h2>
+            <p>制作したサイトの種類、本人が担当した範囲、使用技術、制作期間を一覧で確認できます。実装時の判断や工夫は各詳細ページに掲載しています。</p>
+          </section>
           {/* 実績コンテンツ（Suspense でラップ） */}
           <Suspense fallback={<ResultsLoading />}>
             <ResultsContent searchParams={resolvedSearchParams} />

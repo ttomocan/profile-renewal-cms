@@ -178,6 +178,7 @@
   //チェックボックス
   .checkbox {
     display: inline-block;
+    min-height: 44px;
     input[type='radio'],
     input[type='checkbox'] {
       opacity: 0;
@@ -187,8 +188,10 @@
     input[type='radio'],
     input[type='checkbox'] {
       + .checkbox-text {
+        align-items: center;
         cursor: pointer;
-        display: inline-block;
+        display: inline-flex;
+        min-height: 44px;
         line-height: 20px;
         position: relative;
         &::before {
@@ -224,7 +227,17 @@
           opacity: 1;
         }
       }
+
+      &:focus-visible + .checkbox-text::before {
+        outline: 3px solid $mainC;
+        outline-offset: 3px;
+      }
     }
+  }
+
+  button:disabled {
+    cursor: wait;
+    opacity: 0.65;
   }
 }
 

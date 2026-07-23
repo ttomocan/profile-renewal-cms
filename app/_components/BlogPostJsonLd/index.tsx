@@ -1,6 +1,5 @@
 import JsonLd from '../JsonLd';
 import { Blog } from '@/app/_libs/microcms';
-import { formatDate } from '@/app/_libs/utils';
 
 type Props = {
   blog: Blog;
@@ -28,10 +27,7 @@ export default function BlogPostJsonLd({ blog, url }: Props) {
     publisher: {
       '@type': 'Person',
       name: 'ともきゃん',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.tomocan.site/img/common/h_logo.png',
-      },
+      url: 'https://www.tomocan.site/about/',
     },
   };
 

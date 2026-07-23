@@ -90,6 +90,13 @@
         height: 50px;
         justify-content: center;
         width: 50px;
+        &.--note {
+          aspect-ratio: auto;
+          background-color: #fff;
+          border-radius: 25px;
+          padding: 0 10px;
+          width: auto;
+        }
         &.--x {
           background-color: rgba(0, 0, 0, 0.15);
         }
@@ -100,6 +107,9 @@
           align-self: center;
         }
         &:hover {
+          &.--note {
+            background-color: #fff;
+          }
           &.--x {
             background-color: rgba(0, 0, 0, 0.4);
           }
@@ -218,6 +228,13 @@
         height: 50px;
         justify-content: center;
         width: 50px;
+        &.--note {
+          aspect-ratio: auto;
+          background-color: #fff;
+          border-radius: 25px;
+          padding: 0 10px;
+          width: auto;
+        }
         &.--x {
           background-color: #fef6f0;
         }
@@ -228,6 +245,9 @@
           align-self: center;
         }
         &:hover {
+          &.--note {
+            background-color: #fff;
+          }
           &.--x {
             background-color: #fef6f0;
           }
@@ -439,11 +459,19 @@
 
   // SNSアイコンの背景を白に
   .l-header__sns__item {
-    &.--x {
-      background-color: rgba(255, 255, 255, 0.2) !important;
+    &.--note {
+      background-color: #fff !important;
 
       &:hover {
-        background-color: rgba(255, 255, 255, 0.3) !important;
+        background-color: #fff !important;
+      }
+    }
+
+    &.--x {
+      background-color: rgba(245, 245, 245, 0.2) !important;
+
+      &:hover {
+        background-color: rgba(245, 245, 245, 0.3) !important;
       }
     }
 

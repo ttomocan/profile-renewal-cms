@@ -57,6 +57,12 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
+.results-intro {
+  font-size: 16px;
+  line-height: 1.9;
+  margin-bottom: 36px;
+}
+
 // ===============================================
 // 実績カード
 // ===============================================
@@ -267,6 +273,39 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     -webkit-box-orient: vertical;
     overflow: hidden;
     flex: 1;
+  }
+
+  &__responsibility {
+    color: $text-color;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  &__technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+
+    li {
+      background: $gray-100;
+      border-radius: 8px;
+      color: $gray-600;
+      font-size: 11px;
+      line-height: 1.4;
+      padding: 3px 7px;
+    }
+  }
+
+  &__detail-text {
+    color: $primary-color;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 14px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   &__date {
@@ -501,12 +540,15 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       padding-top: 20px;
       border-top: 1px solid rgba(243, 107, 10, 0.4);
 
-      time,
-      span {
+      > div {
         display: flex;
         align-items: center;
         font-weight: 600;
         gap: 8px;
+      }
+
+      dt::after {
+        content: ':';
       }
 
       .meta-icon {
@@ -581,6 +623,19 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           font-size: 16px;
           line-height: 1.7;
           color: $text-color;
+          padding-left: 18px;
+          position: relative;
+
+          &::before {
+            background: $primary-color;
+            border-radius: 50%;
+            content: '';
+            height: 6px;
+            left: 0;
+            position: absolute;
+            top: 0.75em;
+            width: 6px;
+          }
 
           &:not(:last-child) {
             margin-bottom: 10px;
@@ -671,6 +726,24 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         height: 18px;
       }
     }
+  }
+}
+
+.result-related {
+  .results-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 0;
+  }
+}
+
+.result-related-links {
+  display: grid;
+  gap: 10px;
+
+  a {
+    color: $primary-color;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 
@@ -881,6 +954,9 @@ cite {
 // レスポンシブ調整
 // ===============================================
 @include mq('sp') {
+  .result-related .results-grid {
+    grid-template-columns: 1fr;
+  }
   .result-card {
     &__action-icon {
       width: 30px;

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = `${category.name}の記事一覧`;
+  const title = `${category.name}の記事一覧｜ともきゃん日記`;
   const description = `「${category.name}」カテゴリーの記事一覧。ともきゃん日記から${category.name}に関する記事をご覧いただけます。`;
 
   return {
@@ -38,10 +38,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       url: `https://www.tomocan.site/diary/category/${resolvedParams.id}/`,
+      type: 'website',
+      images: ['/img/common/ogp.png'],
+      siteName: 'ともきゃんスタイル',
+      locale: 'ja_JP',
     },
     twitter: {
       title,
       description,
+      card: 'summary_large_image',
+      images: ['/img/common/ogp.png'],
     },
   };
 }
@@ -65,9 +71,10 @@ export default async function Page({ params }: Props) {
     <>
       <Breadcrumb items={breadcrumbItems} />
       <section className="inner">
-        <h2 className={styles.category_title}>
+        <h1 className={styles.category_title}>
           <Category category={category} /> の一覧
-        </h2>
+        </h1>
+        <h2 className="u-visually-hidden">{category.name}カテゴリーの記事</h2>
         <DiaryList blog={blog} />
         <Pagination totalCount={totalCount} basePath={`/diary/category/${category.id}`} />
       </section>

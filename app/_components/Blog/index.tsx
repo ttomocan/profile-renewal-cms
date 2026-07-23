@@ -6,7 +6,7 @@ export default function Blog() {
           <source srcSet="/img/common/bg_blog_sp.webp" type="image/webp" media="(max-width: 767px)" />
           <source srcSet="/img/common/bg_blog_sp.jpg" media="(max-width: 767px)" />
           <source srcSet="/img/common/bg_blog.webp" type="image/webp" />
-          <img src="/img/common/bg_blog.jpg" alt="ブログエリアの背景画像" width={1366} height={400} sizes="100vw" />
+          <img src="/img/common/bg_blog.jpg" alt="" width={1366} height={400} sizes="100vw" />
         </picture>
       </div>
       <div className="l-blog-area__wrap inner">
@@ -15,26 +15,22 @@ export default function Blog() {
           <span className="c-heading-lv2-ja">ブログ</span>
         </h2>
         <p className="fadeUpTrigger">
-          声に自信がない、ブログで稼げない…そんな悩みを解決する2つのブログを運営しています。
+          個人活動として、ボイストレーニングとブログデザインをテーマにした2つのブログを継続して運営しています。
           <br className="u-pc-only" />
-          「ともきゃんのボイトレ生活」では、人前で話すのが苦手だった私が実践した
+          「ともきゃんのボイトレ生活」では、自分で試した発声・会話の方法を記録し、
           <br className="u-pc-only" />
-          今すぐ使える発声テクニックや会話テクニックが満載です。
+          読者が実践しやすい形に整理して発信しています。
           <br />
-          「ブログデザインマニア」では、月収6桁を達成したブログ運営の裏側を大公開。
+          「ブログデザインマニア」では、Web制作者としての視点から、
           <br className="u-pc-only" />
-          デザインのコツから収益化まで、現役Web制作者だからこそ知る秘訣をお伝えします。
-          <br />
-          どちらも知りたいことが詰まった内容ばかりなので、
-          <br className="u-pc-only" />
-          気になる記事からぜひチェックしてみてください！
+          UI、記事の読みやすさ、WordPressのカスタマイズ、運営改善について紹介しています。
         </p>
         <div className="l-blog-area__button fadeUpTrigger">
           <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
-            ともきゃんのボイトレ生活
+            ともきゃんのボイトレ生活（外部サイト）
           </a>
           <a href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
-            ブログデザインマニア
+            ブログデザインマニア（外部サイト）
           </a>
         </div>
       </div>

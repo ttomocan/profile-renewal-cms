@@ -1,5 +1,5 @@
 .category_title {
-  font-size: 1.25rem;
+  font-size: clamp(1.4rem, 4vw, 1.9rem);
   font-weight: 700;
   letter-spacing: 0.1em;
   margin-bottom: 20px;
