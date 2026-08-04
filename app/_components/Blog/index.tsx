@@ -31,10 +31,10 @@ export default function Blog({ variant = 'home' }: Props) {
         <p className="fadeUpTrigger">{copyByVariant[variant]}</p>
         <div className="l-blog-area__button fadeUpTrigger">
           <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
-            ともきゃんのボイトレ生活（外部サイト）
+            ともきゃんのボイトレ生活
           </a>
           <a href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
-            ブログデザインマニア（外部サイト）
+            ブログデザインマニア
           </a>
         </div>
       </div>

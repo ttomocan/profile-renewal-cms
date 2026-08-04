@@ -2245,7 +2245,17 @@ section * ~ section:not(:last-of-type) {
   }
   .p-form .checkbox {
     display: block;
+    min-height: 36px;
     width: 100%;
+  }
+  .p-form .checkbox input[type=radio] + .checkbox-text,
+  .p-form .checkbox input[type=checkbox] + .checkbox-text {
+    line-height: 1.4;
+    min-height: 36px;
+  }
+  .p-form__input[role=radiogroup] {
+    flex-direction: column;
+    gap: 2px;
   }
 }
 .u-align-center {

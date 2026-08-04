@@ -298,7 +298,21 @@
 
     .checkbox {
       display: block;
+      min-height: 36px;
       width: 100%;
+
+      input[type='radio'],
+      input[type='checkbox'] {
+        + .checkbox-text {
+          line-height: 1.4;
+          min-height: 36px;
+        }
+      }
+    }
+
+    &__input[role='radiogroup'] {
+      flex-direction: column;
+      gap: 2px;
     }
   }
 }
