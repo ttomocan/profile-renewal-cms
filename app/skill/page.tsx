@@ -14,11 +14,11 @@ type SkillCardProps = {
   };
 };
 
-function SkillCard({ title, image, imageAlt = '', summary, points, link }: SkillCardProps) {
+function SkillCard({ title, image, summary, points, link }: SkillCardProps) {
   return (
     <article className="programming__item fadeUpTrigger">
       <div className="programming__image" aria-hidden={image ? undefined : true}>
-        {image ? <Image src={image} alt={imageAlt} width={100} height={100} /> : <span className="programming__text-icon">{title.slice(0, 2)}</span>}
+        {image ? <Image src={image} alt="" width={100} height={100} /> : <span className="programming__text-icon">{title.slice(0, 2)}</span>}
       </div>
       <div className="programming__detail">
         <h3 className="programming__heading">{title}</h3>
@@ -111,6 +111,19 @@ export default function Page() {
           </Link>
           <Link href="/about/" className="c-button__link">
             プロフィール・経歴を見る
+          </Link>
+        </div>
+      </section>
+
+      <section className="other inner" aria-labelledby="skill-contact-heading">
+        <h2 id="skill-contact-heading" className="c-heading-lv2 fadeUpTrigger">
+          <span className="c-heading-lv2-en">Contact</span>
+          <span className="c-heading-lv2-ja">技術領域について相談する</span>
+        </h2>
+        <p className="programming__note fadeUpTrigger">WordPress、CMS構築、フロントエンド実装、UI改善、SEOに関する採用・業務委託・協業のご相談を受け付けています。</p>
+        <div className="skill-page-links fadeUpTrigger">
+          <Link href="/contact/" className="c-button__link">
+            対応スキルについて問い合わせる
           </Link>
         </div>
       </section>

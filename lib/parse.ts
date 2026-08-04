@@ -99,6 +99,14 @@ export function normalizePage(page: string | null): number {
   return pageNum > 0 ? pageNum : 1;
 }
 
+/** URLパスで受け取るページ番号を厳密に検証する */
+export function parseStrictPageNumber(value: string): number | null {
+  if (!/^[1-9]\d*$/.test(value)) return null;
+
+  const page = Number(value);
+  return Number.isSafeInteger(page) ? page : null;
+}
+
 /**
  * URLSearchParamsを安全に更新
  */

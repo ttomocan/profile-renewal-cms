@@ -23,7 +23,7 @@
     a {
       color: #ffffff;
       font: {
-        family: 'Roboto', sans-serif;
+        family: var(--font-roboto), sans-serif;
         size: 1.4rem;
         weight: 400;
       }
@@ -64,7 +64,7 @@
       a {
         color: #ffffff;
         font: {
-          family: 'Roboto', sans-serif;
+          family: var(--font-roboto), sans-serif;
           size: 1.25rem;
           weight: 400;
         }

@@ -69,7 +69,6 @@ export default function ResultsSlider({ results }: ResultsSliderProps) {
           <ResultCard
             key={`${result.id}-${index}`}
             result={result}
-            priority={index === 0}
           />
         ))}
       </div>

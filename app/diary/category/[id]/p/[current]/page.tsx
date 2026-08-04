@@ -1,4 +1,4 @@
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getCategoryDetail, getBlogList } from '@/app/_libs/microcms';
 import DiaryList from '@/app/_components/DiaryList';
@@ -6,6 +6,8 @@ import Pagination from '@/app/_components/Pagination';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
+import { createMetadata } from '@/lib/seo';
+import { parseStrictPageNumber } from '@/lib/parse';
 
 type Props = {
   params: Promise<{
@@ -16,49 +18,33 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
-  const current = parseInt(resolvedParams.current, 10);
-  const category = await getCategoryDetail(resolvedParams.id).catch(() => null);
+  const current = parseStrictPageNumber(resolvedParams.current);
+  const [category, categoryPosts] = await Promise.all([
+    getCategoryDetail(resolvedParams.id).catch(() => null),
+    getBlogList({ limit: 1, filters: `category[equals]${resolvedParams.id}` }).catch(() => null),
+  ]);
 
-  if (!category) {
-    return {
-      title: 'カテゴリーが見つかりません',
-    };
+  if (!current || current === 1 || !category || !categoryPosts) {
+    return createMetadata({ title: 'カテゴリーページが見つかりません', description: '指定されたカテゴリーの一覧ページは存在しません。', path: `/diary/category/${resolvedParams.id}/p/${resolvedParams.current}/`, noindex: true });
   }
 
   const title = `${category.name}の記事 ${current}ページ目｜ともきゃん日記`;
   const description = `「${category.name}」カテゴリーの記事一覧 ${current}ページ目。ともきゃん日記から${category.name}に関する記事をご覧いただけます。`;
 
-  return {
+  return createMetadata({
     title,
     description,
-    alternates: {
-      canonical: `https://www.tomocan.site/diary/category/${resolvedParams.id}/p/${current}/`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `https://www.tomocan.site/diary/category/${resolvedParams.id}/p/${current}/`,
-      type: 'website',
-      images: ['/img/common/ogp.png'],
-      siteName: 'ともきゃんスタイル',
-      locale: 'ja_JP',
-    },
-    twitter: {
-      title,
-      description,
-      card: 'summary_large_image',
-      images: ['/img/common/ogp.png'],
-    },
-  };
+    path: `/diary/category/${resolvedParams.id}/p/${current}/`,
+    noindex: categoryPosts.totalCount < 3,
+  });
 }
 
 export default async function Page({ params }: Props) {
   const resolvedParams = await params;
-  const current = parseInt(resolvedParams.current, 10);
+  const current = parseStrictPageNumber(resolvedParams.current);
 
-  if (Number.isNaN(current) || current < 1) {
-    notFound();
-  }
+  if (!current) notFound();
+  if (current === 1) permanentRedirect(`/diary/category/${resolvedParams.id}/`);
 
   const category = await getCategoryDetail(resolvedParams.id).catch(notFound);
 

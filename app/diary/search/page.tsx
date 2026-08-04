@@ -8,6 +8,7 @@ import SearchField from '@/app/_components/SearchField';
 import styles from './page.module.css';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
+import { createMetadata } from '@/lib/seo';
 
 type Props = {
   searchParams: Promise<{
@@ -23,32 +24,12 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
     ? `「${query}」に関する記事の検索結果を表示しています。ともきゃん日記の記事を検索できます。`
     : 'ともきゃん日記の記事を検索できます。Web制作、ブログ運営、日常の出来事など、気になるキーワードで記事を探してみてください。';
 
-  return {
-    title: `${title}｜ともきゃん日記`,
+  return createMetadata({
+    title: `${title}｜ともきゃん`,
     description,
-    robots: {
-      index: false,
-      follow: true,
-    },
-    alternates: {
-      canonical: 'https://www.tomocan.site/diary/search/',
-    },
-    openGraph: {
-      title,
-      description,
-      url: 'https://www.tomocan.site/diary/search/',
-      type: 'website',
-      images: ['/img/common/ogp.png'],
-      siteName: 'ともきゃんスタイル',
-      locale: 'ja_JP',
-    },
-    twitter: {
-      title,
-      description,
-      card: 'summary_large_image',
-      images: ['/img/common/ogp.png'],
-    },
-  };
+    path: '/diary/search/',
+    noindex: true,
+  });
 }
 
 // 検索結果を表示するコンポーネント

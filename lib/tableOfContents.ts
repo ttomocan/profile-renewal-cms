@@ -27,7 +27,15 @@ function decodeHtmlEntities(value: string) {
 
 export function addHeadingIds(content: string): { content: string; items: TableOfContentsItem[] } {
   const items: TableOfContentsItem[] = [];
-  const normalizedHeadings = content.replace(/<h1\b([^>]*)>/gi, '<h2$1>').replace(/<\/h1>/gi, '</h2>');
+  const normalizedImages = content.replace(/<img\b([^>]*)>/gi, (tag, attributes: string) => {
+    const altMatch = attributes.match(/\salt=(['"])(.*?)\1/i);
+    if (!altMatch) return `<img${attributes} alt="">`;
+
+    const alt = altMatch[2].trim();
+    const isUnhelpful = /^(image|画像|img[_-]?\d*|[^/\\]+\.(?:jpe?g|png|webp|gif|svg))$/i.test(alt);
+    return isUnhelpful ? tag.replace(altMatch[0], ' alt=""') : tag;
+  });
+  const normalizedHeadings = normalizedImages.replace(/<h1\b([^>]*)>/gi, '<h2$1>').replace(/<\/h1>/gi, '</h2>');
 
   const contentWithIds = normalizedHeadings.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, levelText: string, attributes: string, innerHtml: string) => {
     const title = decodeHtmlEntities(innerHtml);

@@ -1,42 +1,14 @@
 import '@/styles/pages/top.scss';
 
-import type { Metadata } from 'next';
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
 import Link from 'next/link';
 import DiarySlider from '@/app/_components/DiarySlider';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultsSlider from '@/app/_components/ResultsSlider';
 import BubblyBackground from '@/app/_components/BubblyBackground';
-
-const title = 'Webエンジニア ともきゃん｜Web制作・UI改善・SEOの実績';
-const description = 'Web制作会社で10年以上、200サイト以上の制作に携わってきたWebエンジニア・ともきゃんのポートフォリオ。WordPress、フロントエンド、CMS構築、UI改善、SEO、個人開発の実績を紹介します。';
-
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title,
-    description,
-    keywords: ['Webエンジニア', 'Web制作実績', 'WordPress', 'フロントエンド', 'CMS構築', 'UI改善', 'SEO', '個人開発'],
-    alternates: {
-      canonical: 'https://www.tomocan.site/',
-    },
-    openGraph: {
-      title,
-      description,
-      url: 'https://www.tomocan.site/',
-      type: 'website',
-      images: ['/img/common/ogp.png'],
-      siteName: 'ともきゃんスタイル',
-      locale: 'ja_JP',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: ['/img/common/ogp.png'],
-    },
-  };
-}
+import Blog from '@/app/_components/Blog';
+import { caveatBrush } from '@/app/fonts';
 
 const heroName = 'TOMOCAN'.split('');
 const heroRole = 'Web Engineer / Blogger'.split('');
@@ -46,16 +18,21 @@ export default async function Home() {
     getBlogList({ limit: TOP_DIARY_LIMIT }),
     getResults({ limit: 6 }),
   ]);
+  const {
+    props: { srcSet: desktopHeroSrcSet, ...desktopHeroProps },
+  } = getImageProps({ src: '/img/pages/top/img_hero.webp', alt: '', width: 2732, height: 1000, sizes: '100vw', loading: 'eager', fetchPriority: 'high' });
+  const {
+    props: { srcSet: mobileHeroSrcSet },
+  } = getImageProps({ src: '/img/pages/top/img_hero_sp.webp', alt: '', width: 750, height: 1000, sizes: '100vw', loading: 'eager', fetchPriority: 'high' });
 
   return (
     <>
-      <div className="p-top-hero">
+      <div className={`p-top-hero ${caveatBrush.variable}`}>
         <div className="p-top-hero__image">
           <picture>
-            <source srcSet="/img/pages/top/img_hero_sp.webp" type="image/webp" media="(max-width: 767px)" />
-            <source srcSet="/img/pages/top/img_hero_sp.jpg" type="image/jpeg" media="(max-width: 767px)" />
-            <source srcSet="/img/pages/top/img_hero.webp" type="image/webp" />
-            <Image src="/img/pages/top/img_hero.webp" alt="" width={2732} height={1000} sizes="100vw" placeholder="blur" blurDataURL="/img/pages/top/img_hero-placeholder.jpg" priority />
+            <source srcSet={mobileHeroSrcSet} media="(max-width: 767px)" />
+            <source srcSet={desktopHeroSrcSet} media="(min-width: 768px)" />
+            <img {...desktopHeroProps} alt="" />
           </picture>
         </div>
 
@@ -63,7 +40,7 @@ export default async function Home() {
 
         <div className="p-top-hero__wrap inner">
           <div className="p-top-hero__icon">
-            <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} priority />
+            <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} sizes="200px" />
           </div>
 
           <div className="p-top-hero__text-content">
@@ -257,6 +234,7 @@ export default async function Home() {
           </div>
         </section>
       </main>
+      <Blog variant="home" />
     </>
   );
 }

@@ -5,7 +5,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/diary/search/', '/api/'],
+      disallow: ['/api/'],
     },
     sitemap: 'https://www.tomocan.site/sitemap.xml',
     host: 'https://www.tomocan.site',

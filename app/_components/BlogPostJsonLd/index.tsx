@@ -1,5 +1,7 @@
 import JsonLd from '../JsonLd';
-import { Blog } from '@/app/_libs/microcms';
+import type { Blog } from '@/app/_libs/microcms';
+import { getBlogSeoDescription } from '@/lib/contentSeo';
+import { ORGANIZATION_ID, PERSON_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 
 type Props = {
   blog: Blog;
@@ -10,24 +12,28 @@ export default function BlogPostJsonLd({ blog, url }: Props) {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
+    '@id': `${url}#article`,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': url,
     },
+    isPartOf: {
+      '@id': WEBSITE_ID,
+    },
     headline: blog.title,
-    description: blog.description,
-    image: blog.thumbnail?.url || 'https://www.tomocan.site/img/common/ogp.png',
+    description: getBlogSeoDescription(blog),
+    image: blog.thumbnail?.url || `${SITE_URL}/img/common/ogp.png`,
     datePublished: blog.publishedAt,
-    dateModified: blog.revisedAt || blog.publishedAt,
+    dateModified: blog.revisedAt || blog.updatedAt || blog.publishedAt,
+    inLanguage: 'ja-JP',
     author: {
       '@type': 'Person',
+      '@id': PERSON_ID,
       name: 'ともきゃん',
-      url: 'https://www.tomocan.site/about/',
+      url: `${SITE_URL}/about/`,
     },
     publisher: {
-      '@type': 'Person',
-      name: 'ともきゃん',
-      url: 'https://www.tomocan.site/about/',
+      '@id': ORGANIZATION_ID,
     },
   };
 

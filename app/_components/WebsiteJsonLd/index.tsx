@@ -1,39 +1,44 @@
 import JsonLd from '../JsonLd';
+import { ORGANIZATION_ID, PERSON_ID, SITE_NAME, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 
-export default function WebsiteJsonLd({ url = 'https://www.tomocan.site/', title = 'ともきゃんスタイル', description = 'Web制作会社で10年以上、200サイト以上の制作に携わってきたWebエンジニア・ともきゃんのポートフォリオ。WordPress、フロントエンド、CMS構築、UI改善、SEO、個人開発の実績を紹介します。', imageUrl = 'https://www.tomocan.site/img/common/ogp.png' }) {
+export default function WebsiteJsonLd() {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    url,
-    name: title,
-    description,
-    inLanguage: 'ja-JP',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://www.tomocan.site/diary/search/?q={search_term_string}',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        '@id': WEBSITE_ID,
+        url: `${SITE_URL}/`,
+        name: SITE_NAME,
+        inLanguage: 'ja-JP',
+        publisher: {
+          '@id': ORGANIZATION_ID,
+        },
       },
-      'query-input': 'required name=search_term_string',
-    },
-    author: {
-      '@type': 'Person',
-      name: 'ともきゃん',
-      url: 'https://www.tomocan.site/about/',
-    },
-    publisher: {
-      '@type': 'Person',
-      name: 'ともきゃん',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://www.tomocan.site/img/common/h_logo.png',
+      {
+        '@type': 'Organization',
+        '@id': ORGANIZATION_ID,
+        name: SITE_NAME,
+        url: `${SITE_URL}/`,
+        founder: {
+          '@id': PERSON_ID,
+        },
+        logo: {
+          '@type': 'ImageObject',
+          url: `${SITE_URL}/img/common/h_logo.png`,
+        },
       },
-    },
-    keywords: ['Webエンジニア', 'Web制作', 'UI改善', 'SEO', 'WordPress', 'Next.js', 'ブログ運営'],
-    image: {
-      '@type': 'ImageObject',
-      url: imageUrl,
-    },
+      {
+        '@type': 'Person',
+        '@id': PERSON_ID,
+        name: 'ともきゃん',
+        alternateName: 'tomocan',
+        url: `${SITE_URL}/about/`,
+        image: `${SITE_URL}/img/pages/about/img_tomocan.jpg`,
+        jobTitle: 'Webエンジニア',
+        sameAs: ['https://x.com/t_tomocan', 'https://coconala.com/users/1531202', 'https://www.newagevoice.com/', 'https://www.blogdesign-mania.com/'],
+      },
+    ],
   };
 
   return <JsonLd jsonLd={jsonLd} />;

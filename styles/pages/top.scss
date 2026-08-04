@@ -171,7 +171,7 @@
     position: relative;
 
     &__char {
-      @include font-properties('Caveat Brush', 400, clamp(64px, 8vw, 96px));
+      @include font-properties(var(--font-caveat-brush), 400, clamp(64px, 8vw, 96px));
       letter-spacing: 0.05em;
       position: relative;
     }
@@ -186,7 +186,7 @@
     padding-left: 2px;
 
     &__char {
-      @include font-properties('Roboto', 400, clamp(16px, 2vw, 28px));
+      @include font-properties(var(--font-roboto), 400, clamp(16px, 2vw, 28px));
       letter-spacing: 0.2em;
     }
   }
@@ -318,7 +318,7 @@
     font-weight: 300;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    font-family: 'Roboto', sans-serif;
+    font-family: var(--font-roboto), sans-serif;
   }
 
   &__scroll-line {
@@ -393,7 +393,7 @@
 
     strong {
       color: $mainC;
-      font-family: 'Roboto', sans-serif;
+      font-family: var(--font-roboto), sans-serif;
       font-size: clamp(32px, 4vw, 44px);
       line-height: 1;
       margin-right: 3px;
@@ -573,13 +573,13 @@
 
     &__en {
       &__char {
-        @include font-properties('Caveat Brush', 400, clamp(64px, 7vw, 80px));
+        @include font-properties(var(--font-caveat-brush), 400, clamp(64px, 7vw, 80px));
       }
     }
 
     &__ja {
       &__char {
-        @include font-properties('Roboto', 400, clamp(18px, 2.2vw, 24px));
+        @include font-properties(var(--font-roboto), 400, clamp(18px, 2.2vw, 24px));
       }
     }
   }
@@ -641,7 +641,7 @@
       line-height: 1.2;
 
       &__char {
-        @include font-properties('Caveat Brush', 400, clamp(52px, 13vw, 80px));
+        @include font-properties(var(--font-caveat-brush), 400, clamp(52px, 13vw, 80px));
       }
     }
 
@@ -650,7 +650,7 @@
       padding-left: 0;
 
       &__char {
-        @include font-properties('Roboto', 400, clamp(16px, 5vw, 24px));
+        @include font-properties(var(--font-roboto), 400, clamp(16px, 5vw, 24px));
         font-weight: 300;
         letter-spacing: 0.15em;
       }

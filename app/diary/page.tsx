@@ -9,8 +9,23 @@ import CategoryFilter from '@/app/_components/CategoryFilter';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
+import type { Metadata } from 'next';
+import { createMetadata } from '@/lib/seo';
 
 type SearchParamsType = { q?: string; category?: string };
+
+const title = 'Web開発・個人開発・ブログ運営の活動記録｜ともきゃん';
+const description = 'Webエンジニア・ともきゃんの活動記録です。Web制作、Next.jsやAIを使った個人開発、ブログ運営、キャリア、育児と働き方で得た学びを発信しています。';
+
+export async function generateMetadata({ searchParams }: { searchParams: Promise<SearchParamsType> }): Promise<Metadata> {
+  const params = await searchParams;
+  return createMetadata({
+    title,
+    description,
+    path: '/diary/',
+    noindex: Boolean(params.q || params.category),
+  });
+}
 
 // データ取得用のコンポーネント
 async function DiaryListContent({ searchParams }: { searchParams: SearchParamsType }) {

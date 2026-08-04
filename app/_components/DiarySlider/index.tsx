@@ -74,7 +74,7 @@ export default function DiarySlider({ blog }: DiarySliderProps) {
                 {article.thumbnail ? (
                   <Image
                     src={article.thumbnail.url}
-                    alt={`${article.title}のサムネイル画像`}
+                    alt=""
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="diary-card__image-img"
@@ -83,7 +83,7 @@ export default function DiarySlider({ blog }: DiarySliderProps) {
                 ) : (
                   <Image
                     src="/img/common/ogp.png"
-                    alt={`${article.title}のサムネイル画像`}
+                    alt=""
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="diary-card__image-img"

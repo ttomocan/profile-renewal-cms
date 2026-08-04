@@ -8,6 +8,7 @@ import { DIARY_LIST_LIMIT } from '@/app/_constants';
 import styles from './page.module.css';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
+import { createMetadata } from '@/lib/seo';
 
 type Props = {
   params: Promise<{
@@ -17,39 +18,24 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
-  const category = await getCategoryDetail(resolvedParams.id).catch(() => null);
+  const [category, categoryPosts] = await Promise.all([
+    getCategoryDetail(resolvedParams.id).catch(() => null),
+    getBlogList({ limit: 1, filters: `category[equals]${resolvedParams.id}` }).catch(() => null),
+  ]);
 
-  if (!category) {
-    return {
-      title: 'カテゴリーが見つかりません',
-    };
+  if (!category || !categoryPosts) {
+    return createMetadata({ title: 'カテゴリーが見つかりません', description: '指定された活動記録のカテゴリーは存在しません。', path: `/diary/category/${resolvedParams.id}/`, noindex: true });
   }
 
   const title = `${category.name}の記事一覧｜ともきゃん日記`;
   const description = `「${category.name}」カテゴリーの記事一覧。ともきゃん日記から${category.name}に関する記事をご覧いただけます。`;
 
-  return {
+  return createMetadata({
     title,
     description,
-    alternates: {
-      canonical: `https://www.tomocan.site/diary/category/${resolvedParams.id}/`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `https://www.tomocan.site/diary/category/${resolvedParams.id}/`,
-      type: 'website',
-      images: ['/img/common/ogp.png'],
-      siteName: 'ともきゃんスタイル',
-      locale: 'ja_JP',
-    },
-    twitter: {
-      title,
-      description,
-      card: 'summary_large_image',
-      images: ['/img/common/ogp.png'],
-    },
-  };
+    path: `/diary/category/${resolvedParams.id}/`,
+    noindex: categoryPosts.totalCount < 3,
+  });
 }
 
 export default async function Page({ params }: Props) {

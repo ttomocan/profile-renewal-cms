@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
 import { Category } from '@/app/_libs/microcms';
 import styles from './index.module.css';
@@ -12,26 +12,8 @@ type CategoryFilterProps = {
 
 function CategoryFilterComponent({ categories, selectedCategoryId }: CategoryFilterProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-
   const handleCategoryChange = (categoryId: string) => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    if (categoryId === 'all') {
-      params.delete('category');
-    } else {
-      params.set('category', categoryId);
-    }
-
-    // 検索クエリがある場合は保持
-    const query = searchParams.get('q');
-    if (query) {
-      params.set('q', query);
-    }
-
-    const queryString = params.toString();
-    const url = queryString ? `/diary/?${queryString}` : '/diary/';
-    router.push(url);
+    router.push(categoryId === 'all' ? '/diary/' : `/diary/category/${categoryId}/`);
   };
 
   return (

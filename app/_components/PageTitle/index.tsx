@@ -20,11 +20,7 @@ export default function PageTitle({ title, sub, isHeading = true }: Props) {
   return (
     <div className="pagetitle">
       <div className="pagetitle__image">
-        <picture>
-          <source srcSet={`/img/pages/${lowerCaseTitle}/img_hero.webp`} type="image/webp" />
-          <source srcSet={`/img/pages/${lowerCaseTitle}/img_hero.jpg`} type="image/jpg" />
-          <Image src={`/img/pages/${lowerCaseTitle}/img_hero.webp`} alt="" width={1366} height={400} sizes="100vw" loading="eager" />
-        </picture>
+        <Image src={`/img/pages/${lowerCaseTitle}/img_hero.webp`} alt="" width={1366} height={400} sizes="100vw" priority />
       </div>
       <div className="inner">
         <p className="pagetitle__en" aria-hidden="true">

@@ -18,6 +18,9 @@ export type Blog = {
   description: string;
   content: string;
   thumbnail?: MicroCMSImage;
+  thumbnailAlt?: string;
+  seoTitle?: string;
+  seoDescription?: string;
   category: Category;
 } & MicroCMSListContent;
 
@@ -96,6 +99,17 @@ export const getAllCategoryList = async () => {
   });
 
   return listData;
+};
+
+export const getAllResultList = async () => {
+  return client.getAllContents<ResultItem>({
+    endpoint: 'result',
+    customRequestInit: {
+      next: {
+        revalidate: RESULTS_LIST_CACHE_TIME,
+      },
+    },
+  });
 };
 
 // ===== Results API関数 =====

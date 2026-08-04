@@ -26,7 +26,7 @@ export default function Article({ data }: Props) {
       <p className={styles.description}>{data.description}</p>
       {data.thumbnail && (
         <div className={styles.thumbnailWrapper}>
-          <Image src={data.thumbnail.url} alt={`${data.title}のアイキャッチ画像`} className={styles.thumbnail} width={data.thumbnail.width} height={data.thumbnail.height} />
+          <Image src={data.thumbnail.url} alt={data.thumbnailAlt?.trim() || `${data.title}のアイキャッチ画像`} className={styles.thumbnail} width={data.thumbnail.width} height={data.thumbnail.height} sizes="(max-width: 767px) calc(100vw - 40px), 900px" />
         </div>
       )}
       {showTableOfContents && (

@@ -18,7 +18,7 @@ export default function Page() {
         </h2>
         <div className="greeting__cont">
           <div className="greeting__image fadeUpTrigger">
-            <Image src="/img/pages/about/img_tomocan.jpg" alt="Webエンジニア ともきゃんのプロフィール写真" width={200} height={200} sizes="200px" priority />
+            <Image src="/img/pages/about/img_tomocan.jpg" alt="Webエンジニア ともきゃんのプロフィール写真" width={200} height={200} sizes="200px" />
           </div>
           <div className="greeting__detail fadeUpTrigger">
             <p>
@@ -179,6 +179,21 @@ export default function Page() {
               </tr>
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section className="work-style inner inner-s" aria-labelledby="about-contact-heading">
+        <h2 id="about-contact-heading" className="c-heading-lv2 fadeUpTrigger">
+          <span className="c-heading-lv2-en">Contact</span>
+          <span className="c-heading-lv2-ja">採用・協業のご相談</span>
+        </h2>
+        <div className="about-section-copy fadeUpTrigger">
+          <p>プロフィールや経歴をご覧いただき、採用、業務委託、協業について確認したいことがありましたら、お問い合わせ内容を添えてご連絡ください。</p>
+        </div>
+        <div className="about-link fadeUpTrigger">
+          <Link href="/contact/" className="c-button__link">
+            採用・協業について問い合わせる
+          </Link>
         </div>
       </section>
 

@@ -6,11 +6,10 @@ import type { ResultItem } from '@/types/results';
 
 interface ResultCardProps {
   result: ResultItem;
-  priority?: boolean;
   disableLink?: boolean; // リンクを無効化するオプション
 }
 
-export default function ResultCard({ result, priority = false, disableLink = false }: ResultCardProps) {
+export default function ResultCard({ result, disableLink = false }: ResultCardProps) {
   const { id, title, summary, period } = result;
 
   const workType = safeGetWorkType(result);
@@ -23,7 +22,7 @@ export default function ResultCard({ result, priority = false, disableLink = fal
   const cardContent = (
     <>
       <div className="result-card__image">
-        <Image src={cover.url} alt={`${title}のカバー画像`} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="result-card__image-img" priority={priority} />
+        <Image src={cover.url} alt="" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1200px) 50vw, 33vw" className="result-card__image-img" />
         <div className="result-card__overlay"></div>
         <div className="result-card__badge">
           <span className={`result-card__work-type work-type-${workType}`}>{workType}</span>

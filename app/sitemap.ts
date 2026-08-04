@@ -1,73 +1,89 @@
-import { MetadataRoute } from 'next';
-import { getAllCategoryList, getAllBlogList, getResults } from './_libs/microcms';
+import type { MetadataRoute } from 'next';
+import { DIARY_LIST_LIMIT, RESULTS_LIST_LIMIT } from './_constants';
+import { getAllBlogList, getAllCategoryList, getAllResultList } from './_libs/microcms';
+import { createCanonicalUrl } from '@/lib/seo';
 
-const BASE_URL = 'https://www.tomocan.site';
+const STATIC_PATHS = ['/', '/about/', '/contact/', '/skill/', '/diary/', '/result/'];
 
-const buildUrl = (path: string = '/') => {
-  if (path === '/' || path === '') return `${BASE_URL}/`;
-  return `${BASE_URL}/${path.replace(/^\/+/, '').replace(/\/+$/, '')}/`;
-};
-
-const STATIC_PATHS = ['', 'about', 'contact', 'skill', 'diary', 'result'];
+function latestDate(values: Array<string | undefined>): string | undefined {
+  const timestamps = values
+    .filter((value): value is string => Boolean(value))
+    .map((value) => Date.parse(value))
+    .filter(Number.isFinite);
+  if (timestamps.length === 0) return undefined;
+  return new Date(Math.max(...timestamps)).toISOString();
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  try {
-    // 実績を全件取得するための関数
-    const getAllResults = async () => {
-      let allResults: any[] = [];
-      let offset = 0;
-      const limit = 100;
+  // CMS取得に失敗した場合は例外を伝播し、動的URLが消えた空の成功レスポンスを返さない。
+  const [blogContents, categoryContents, resultContents] = await Promise.all([getAllBlogList(), getAllCategoryList(), getAllResultList()]);
 
-      while (true) {
-        const data = await getResults({ limit, offset });
-        allResults = [...allResults, ...data.contents];
+  const staticUrls: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
+    url: createCanonicalUrl(path),
+    changeFrequency: 'weekly',
+    priority: path === '/' ? 1 : 0.8,
+  }));
 
-        if (data.contents.length < limit) {
-          break; // 最後のページに到達
-        }
-        offset += limit;
-      }
+  const sortedBlogs = [...blogContents].sort((a, b) => Date.parse(b.publishedAt || b.createdAt) - Date.parse(a.publishedAt || a.createdAt));
+  const blogUrls: MetadataRoute.Sitemap = sortedBlogs.map((blog) => ({
+    url: createCanonicalUrl(`/diary/${blog.id}/`),
+    lastModified: blog.revisedAt || blog.updatedAt || blog.publishedAt,
+    changeFrequency: 'weekly',
+    priority: 0.7,
+  }));
 
-      return { contents: allResults };
+  const diaryPaginationUrls: MetadataRoute.Sitemap = Array.from({ length: Math.max(0, Math.ceil(sortedBlogs.length / DIARY_LIST_LIMIT) - 1) }, (_, index) => {
+    const page = index + 2;
+    const pageItems = sortedBlogs.slice((page - 1) * DIARY_LIST_LIMIT, page * DIARY_LIST_LIMIT);
+    return {
+      url: createCanonicalUrl(`/diary/p/${page}/`),
+      lastModified: latestDate(pageItems.map((item) => item.revisedAt || item.updatedAt || item.publishedAt)),
+      changeFrequency: 'weekly' as const,
+      priority: 0.5,
     };
+  });
 
-    const [blogContents, categoryContents, resultsData] = await Promise.all([getAllBlogList(), getAllCategoryList(), getAllResults()]);
+  const categoryUrls: MetadataRoute.Sitemap = [];
+  for (const category of categoryContents) {
+    const categoryBlogs = sortedBlogs.filter((blog) => blog.category?.id === category.id);
+    if (categoryBlogs.length < 3) continue;
 
-    const staticUrls: MetadataRoute.Sitemap = STATIC_PATHS.map((path) => ({
-      url: buildUrl(path),
-      changeFrequency: 'weekly' as const,
-      priority: path === '' ? 1.0 : 0.8,
-    }));
-
-    const blogUrls: MetadataRoute.Sitemap = blogContents.map(({ id, revisedAt }) => ({
-      url: buildUrl(`diary/${id}`),
-      lastModified: revisedAt,
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }));
-
-    const categoryUrls: MetadataRoute.Sitemap = categoryContents.map(({ id, revisedAt }) => ({
-      url: buildUrl(`diary/category/${id}`),
-      lastModified: revisedAt,
-      changeFrequency: 'weekly' as const,
+    categoryUrls.push({
+      url: createCanonicalUrl(`/diary/category/${category.id}/`),
+      lastModified: latestDate(categoryBlogs.map((item) => item.revisedAt || item.updatedAt || item.publishedAt)),
+      changeFrequency: 'weekly',
       priority: 0.6,
-    }));
+    });
 
-    const resultUrls: MetadataRoute.Sitemap = resultsData.contents.map(({ id, updatedAt }) => ({
-      url: buildUrl(`result/${id}`),
-      lastModified: updatedAt,
-      changeFrequency: 'monthly' as const,
-      priority: 0.7,
-    }));
-
-    return [...staticUrls, ...blogUrls, ...categoryUrls, ...resultUrls];
-  } catch (error) {
-    console.error('Error generating sitemap:', error);
-    // エラーが発生した場合は最低限の静的ページのみを返す
-    return STATIC_PATHS.map((path) => ({
-      url: buildUrl(path),
-      changeFrequency: 'weekly' as const,
-      priority: path === '' ? 1.0 : 0.8,
-    }));
+    for (let page = 2; page <= Math.ceil(categoryBlogs.length / DIARY_LIST_LIMIT); page += 1) {
+      const pageItems = categoryBlogs.slice((page - 1) * DIARY_LIST_LIMIT, page * DIARY_LIST_LIMIT);
+      categoryUrls.push({
+        url: createCanonicalUrl(`/diary/category/${category.id}/p/${page}/`),
+        lastModified: latestDate(pageItems.map((item) => item.revisedAt || item.updatedAt || item.publishedAt)),
+        changeFrequency: 'weekly',
+        priority: 0.5,
+      });
+    }
   }
+
+  const sortedResults = [...resultContents].sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+  const resultUrls: MetadataRoute.Sitemap = sortedResults.map((result) => ({
+    url: createCanonicalUrl(`/result/${result.id}/`),
+    lastModified: result.revisedAt || result.updatedAt,
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
+
+  const resultPaginationUrls: MetadataRoute.Sitemap = Array.from({ length: Math.max(0, Math.ceil(sortedResults.length / RESULTS_LIST_LIMIT) - 1) }, (_, index) => {
+    const page = index + 2;
+    const pageItems = sortedResults.slice((page - 1) * RESULTS_LIST_LIMIT, page * RESULTS_LIST_LIMIT);
+    return {
+      url: createCanonicalUrl(`/result/p/${page}/`),
+      lastModified: latestDate(pageItems.map((item) => item.revisedAt || item.updatedAt)),
+      changeFrequency: 'monthly' as const,
+      priority: 0.6,
+    };
+  });
+
+  return [...staticUrls, ...blogUrls, ...diaryPaginationUrls, ...categoryUrls, ...resultUrls, ...resultPaginationUrls];
 }

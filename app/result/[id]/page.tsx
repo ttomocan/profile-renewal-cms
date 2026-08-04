@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getResultDetail, getResults } from '@/app/_libs/microcms';
+import { getBlogList, getResultDetail, getResults } from '@/app/_libs/microcms';
 import { parseTechStack, parseRoles, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
@@ -10,7 +10,8 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import ResultJsonLd from '@/app/_components/ResultJsonLd';
 import ResultCard from '@/components/ResultCard';
-import { createMetaDescription } from '@/lib/seo';
+import { createMetadata } from '@/lib/seo';
+import { getResultSeoDescription, getResultSeoTitle } from '@/lib/contentSeo';
 import '@/styles/pages/result.scss';
 
 interface ResultDetailPageProps {
@@ -29,44 +30,36 @@ export async function generateMetadata({ params }: ResultDetailPageProps): Promi
     };
   }
 
-  const title = `${result.title}｜Web制作実績｜ともきゃん`;
-  const description = createMetaDescription(result.summary);
-  const image = result.cover
-    ? {
-        url: result.cover.url,
-        width: result.cover.width,
-        height: result.cover.height,
-        alt: `${result.title}のカバー画像`,
-      }
-    : {
-        url: '/img/common/ogp.png',
-        width: 1200,
-        height: 630,
-        alt: 'ともきゃんスタイル',
-      };
+  const title = getResultSeoTitle(result);
+  const description = getResultSeoDescription(result);
 
-  return {
+  return createMetadata({
     title,
     description,
-    alternates: {
-      canonical: `https://www.tomocan.site/result/${resolvedParams.id}/`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `https://www.tomocan.site/result/${resolvedParams.id}/`,
-      type: 'article',
-      images: [image],
-      siteName: 'ともきゃんスタイル',
-      locale: 'ja_JP',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [image.url],
-    },
-  };
+    path: `/result/${resolvedParams.id}/`,
+    type: 'article',
+    image: result.cover?.url,
+    imageAlt: result.coverAlt?.trim() || `${result.title}の制作実績`,
+  });
+}
+
+function TextSection({ title, value }: { title: string; value?: string }) {
+  if (!value?.trim()) return null;
+
+  return (
+    <section className="result-detail__section">
+      <h2 className="result-detail__section-title">{title}</h2>
+      <div className="result-detail__section-content result-detail__section-content--summary">
+        {value
+          .split(/\n{2,}/)
+          .map((paragraph) => paragraph.trim())
+          .filter(Boolean)
+          .map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+      </div>
+    </section>
+  );
 }
 
 export default async function ResultDetailPage({ params }: ResultDetailPageProps) {
@@ -77,7 +70,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     notFound();
   }
 
-  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, scale } = result;
+  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, challenge, constraints, responsibility, decisions, results: projectResults, outOfScope } = result;
 
   // 安全な取得関数を使用
   const workType = safeGetWorkType(result);
@@ -92,7 +85,11 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const highlightsArray = splitHighlights(highlights);
   const formattedPeriod = formatPeriod(period);
 
-  const relatedData = await getResults({ limit: 24, sort: 'new' });
+  const relatedArticleKeyword = ['WordPress', 'SEO', 'CMS', 'JavaScript', 'CSS'].find((keyword) => `${techStack ?? ''} ${highlights ?? ''}`.toLowerCase().includes(keyword.toLowerCase()));
+  const [relatedData, relatedBlogData] = await Promise.all([
+    getResults({ limit: 24, sort: 'new' }),
+    relatedArticleKeyword ? getBlogList({ limit: 4, q: relatedArticleKeyword }) : Promise.resolve({ contents: [] }),
+  ]);
   const currentTechnologies = new Set(techStackArray.map((technology) => technology.toLowerCase()));
   const relatedResults = relatedData.contents
     .filter((item) => item.id !== result.id)
@@ -106,6 +103,8 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
     .map(({ item }) => item);
+  const relatedArticles = relatedBlogData.contents.slice(0, 3);
+  const contactTopics = [...rolesArray, ...techStackArray].slice(0, 4).join('、');
 
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
@@ -173,19 +172,24 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               </div>
             </section>
 
-            {/* TODO: プロジェクト全体の課題・対応範囲をCMSへ追加する */}
+            <TextSection title="課題・背景" value={challenge} />
+            <TextSection title="制約条件" value={constraints} />
+
             {/* 担当範囲 */}
-            {rolesArray.length > 0 && (
+            {(responsibility?.trim() || rolesArray.length > 0) && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">自分が担当した範囲</h2>
-                <div className="result-detail__section-content result-detail__section-content--tags">
-                  <div className="tags-container" role="list" aria-label="担当範囲一覧">
-                    {rolesArray.map((role, index) => (
-                      <span key={index} className="tag tag--role" role="listitem" aria-label={`担当範囲: ${role}`}>
-                        {role}
-                      </span>
-                    ))}
-                  </div>
+                <div className="result-detail__section-content">
+                  {responsibility?.trim() && <p>{responsibility}</p>}
+                  {rolesArray.length > 0 && (
+                    <div className="tags-container" role="list" aria-label="担当範囲一覧">
+                      {rolesArray.map((role) => (
+                        <span key={role} className="tag tag--role" role="listitem">
+                          {role}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </section>
             )}
@@ -207,30 +211,27 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             )}
 
             {/* 実装・判断したこと */}
-            {highlightsArray.length > 0 && (
+            {(decisions?.trim() || highlightsArray.length > 0) && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">実装・判断したこと</h2>
                 <div className="result-detail__section-content result-detail__section-content--summary">
-                  <div className="result-detail__section-highlights">
-                    <ul>
-                      {highlightsArray.map((highlight, index) => (
-                        <li key={index}>{highlight}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  {decisions?.trim() ? (
+                    <p>{decisions}</p>
+                  ) : (
+                    <div className="result-detail__section-highlights">
+                      <ul>
+                        {highlightsArray.map((highlight) => (
+                          <li key={highlight}>{highlight}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
               </section>
             )}
 
-            {/* 成果・KPI */}
-            {kpi && kpi.trim() && (
-              <section className="result-detail__section">
-                <h2 className="result-detail__section-title">成果・効果</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
-                  <p>{kpi}</p>
-                </div>
-              </section>
-            )}
+            <TextSection title="改善結果・成果" value={projectResults?.trim() || kpi} />
+            <TextSection title="担当外の範囲" value={outOfScope} />
 
             {/* お客様の声 */}
             {testimonial && testimonial.trim() && (
@@ -277,6 +278,19 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               </section>
             )}
 
+            {relatedArticles.length > 0 && (
+              <section className="result-detail__section result-related-navigation">
+                <h2 className="result-detail__section-title">関連する技術記事</h2>
+                <ul className="result-related-links">
+                  {relatedArticles.map((article) => (
+                    <li key={article.id}>
+                      <Link href={`/diary/${article.id}/`}>{article.title}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
             <section className="result-detail__section result-related-navigation">
               <h2 className="result-detail__section-title">関連ページ</h2>
               <ul className="result-related-links">
@@ -291,12 +305,26 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 </li>
               </ul>
             </section>
+
+            <section className="result-detail__section result-contact" aria-labelledby="project-contact-heading">
+              <h2 id="project-contact-heading" className="result-detail__section-title">
+                採用・協業について相談する
+              </h2>
+              <div className="result-detail__section-content result-detail__section-content--summary">
+                <p>{contactTopics ? `${contactTopics}に関する` : 'Web制作に関する'}採用・業務委託・協業のご相談を受け付けています。この制作実績について確認したい点がある場合も、内容を添えてご連絡ください。</p>
+                <p className="result-contact__button">
+                  <Link href="/contact/" className="c-button__link">
+                    採用・協業について問い合わせる
+                  </Link>
+                </p>
+              </div>
+            </section>
           </article>
 
           {/* ナビゲーション */}
           <nav className="result-detail__navigation">
             <div className="result-detail__navigation-content">
-              <Link href="/result" className="result-detail__navigation-back">
+              <Link href="/result/" className="result-detail__navigation-back">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                 </svg>

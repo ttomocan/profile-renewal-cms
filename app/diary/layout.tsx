@@ -1,39 +1,23 @@
 import './globals.css';
 import PageTitle from '@/app/_components/PageTitle';
 import type { Metadata } from 'next';
+import Blog from '@/app/_components/Blog';
+import { createMetadata } from '@/lib/seo';
 
 // メタデータの定数
-const META_TITLE = '活動記録｜Web開発・ブログ運営・個人開発';
-const DEFAULT_OGP_IMAGE = '/img/common/ogp.png';
+const META_TITLE = 'Web開発・個人開発・ブログ運営の活動記録｜ともきゃん';
 
 /**
  * メタデータを生成する
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const description = 'Webエンジニア・ともきゃんの活動記録。Web制作、個人開発、ブログ運営、働き方やキャリアについて、継続して取り組んだことと学びを発信しています。';
+  const description = 'Webエンジニア・ともきゃんの活動記録です。Web制作、Next.jsやAIを使った個人開発、ブログ運営、キャリア、育児と働き方で得た学びを発信しています。';
 
-  return {
+  return createMetadata({
     title: META_TITLE,
     description,
-    alternates: {
-      canonical: 'https://www.tomocan.site/diary/',
-    },
-    openGraph: {
-      title: META_TITLE,
-      description,
-      url: 'https://www.tomocan.site/diary/',
-      type: 'website',
-      images: [DEFAULT_OGP_IMAGE],
-      siteName: 'ともきゃんスタイル',
-      locale: 'ja_JP',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: META_TITLE,
-      description,
-      images: [DEFAULT_OGP_IMAGE],
-    },
-  };
+    path: '/diary/',
+  });
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -41,6 +25,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <>
       <PageTitle title="Diary" sub="ともきゃん日記" isHeading={false} />
       <main>{children}</main>
+      <Blog variant="diary" />
     </>
   );
 }

@@ -48,13 +48,19 @@ export default function ContactForm() {
   }
 
   const hasFieldError = (field: string) => state.status === 'error' && state.field === field;
+  const handleSubmit = () => {
+    const analyticsWindow = window as Window & { dataLayer?: unknown[] };
+    if (Array.isArray(analyticsWindow.dataLayer)) {
+      sendGAEvent({ event: 'contact', value: 'submit' });
+    }
+  };
 
   return (
     <form
       ref={formRef}
       className="p-form"
       action={formAction}
-      onSubmit={() => sendGAEvent({ event: 'contact', value: 'submit' })}
+      onSubmit={handleSubmit}
       noValidate
     >
       <div className="p-form__item">

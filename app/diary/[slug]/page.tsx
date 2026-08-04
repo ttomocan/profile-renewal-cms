@@ -1,12 +1,14 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { getBlogDetail, getBlogList } from '@/app/_libs/microcms';
+import { getBlogDetail, getBlogList, getResults } from '@/app/_libs/microcms';
 import Article from '@/app/_components/Article';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import BlogPostJsonLd from '@/app/_components/BlogPostJsonLd';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
-import { createMetaDescription } from '@/lib/seo';
+import { createMetadata } from '@/lib/seo';
+import { getBlogSeoDescription, getBlogSeoTitle } from '@/lib/contentSeo';
+import { parseTechStack } from '@/lib/parse';
 import styles from './page.module.css';
 
 type Props = {
@@ -18,55 +20,39 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
   const data = await getBlogDetail(resolvedParams.slug, { draftKey: resolvedSearchParams.dk });
-  const title = `${data.title}｜ともきゃん日記`;
-  const description = createMetaDescription(data.description);
-  const image = data.thumbnail
-    ? {
-        url: data.thumbnail.url,
-        width: data.thumbnail.width,
-        height: data.thumbnail.height,
-        alt: `${data.title}のアイキャッチ画像`,
-      }
-    : {
-        url: '/img/common/ogp.png',
-        width: 1200,
-        height: 630,
-        alt: 'ともきゃんスタイル',
-      };
+  const title = getBlogSeoTitle(data);
+  const description = getBlogSeoDescription(data);
 
-  return {
+  return createMetadata({
     title,
     description,
-    alternates: {
-      canonical: `https://www.tomocan.site/diary/${resolvedParams.slug}/`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `https://www.tomocan.site/diary/${resolvedParams.slug}/`,
-      type: 'article',
-      images: [image],
-      siteName: 'ともきゃんスタイル',
-      locale: 'ja_JP',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      site: '@t_tomocan',
-      title,
-      description,
-      images: [image.url],
-    },
-  };
+    path: `/diary/${resolvedParams.slug}/`,
+    type: 'article',
+    image: data.thumbnail?.url,
+    imageAlt: data.thumbnailAlt?.trim() || `${data.title}のアイキャッチ画像`,
+    noindex: Boolean(resolvedSearchParams.dk),
+  });
 }
 
 export default async function Page({ params, searchParams }: Props) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
   const data = await getBlogDetail(resolvedParams.slug, { draftKey: resolvedSearchParams.dk }).catch(notFound);
-  const relatedData = await getBlogList({ limit: 4, filters: `category[equals]${data.category.id}` });
+  const technicalSource = `${data.title} ${data.description}`;
+  const technicalArticle = /(Web|WordPress|Next\.js|React|TypeScript|JavaScript|CSS|CMS|SEO|UI|アプリ|開発|制作)/i.test(technicalSource);
+  const [relatedData, resultData] = await Promise.all([
+    getBlogList({ limit: 4, filters: `category[equals]${data.category.id}` }),
+    technicalArticle ? getResults({ limit: 24, sort: 'new' }) : Promise.resolve({ contents: [] }),
+  ]);
   const relatedArticles = relatedData.contents.filter((article) => article.id !== data.id).slice(0, 3);
   const pageUrl = `https://www.tomocan.site/diary/${resolvedParams.slug}/`;
-  const technicalArticle = /(Web|WordPress|Next\.js|React|TypeScript|JavaScript|CSS|CMS|SEO|アプリ|開発|制作)/i.test(`${data.title} ${data.description} ${data.content}`);
+  const articleKeywords = ['WordPress', 'Next.js', 'React', 'TypeScript', 'JavaScript', 'CSS', 'CMS', 'SEO', 'UI'].filter((keyword) => technicalSource.toLowerCase().includes(keyword.toLowerCase()));
+  const relatedResults = resultData.contents
+    .filter((result) => {
+      const resultText = `${result.title} ${result.summary} ${parseTechStack(result.techStack).join(' ')}`.toLowerCase();
+      return articleKeywords.some((keyword) => resultText.includes(keyword.toLowerCase()));
+    })
+    .slice(0, 3);
 
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
@@ -96,6 +82,11 @@ export default async function Page({ params, searchParams }: Props) {
         <section className={styles.related} aria-labelledby="related-pages-heading">
           <h2 id="related-pages-heading">関連ページ</h2>
           <ul>
+            {relatedResults.map((result) => (
+              <li key={result.id}>
+                <Link href={`/result/${result.id}/`}>{result.title}の制作実績を見る</Link>
+              </li>
+            ))}
             {technicalArticle && (
               <>
                 <li>

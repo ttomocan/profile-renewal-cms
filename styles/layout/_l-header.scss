@@ -131,7 +131,7 @@
           color: $textC;
           display: inline-block;
           font: {
-            family: 'Roboto', sans-serif;
+            family: var(--font-roboto), sans-serif;
             size: 1.4rem;
             weight: 400;
           }
@@ -268,7 +268,7 @@
         a {
           color: #ffffff;
           display: inline-block;
-          @include font-properties(Roboto, 400, 20px);
+          @include font-properties(var(--font-roboto), 400, 20px);
           letter-spacing: 0.1em;
           position: relative;
           text-decoration: none;

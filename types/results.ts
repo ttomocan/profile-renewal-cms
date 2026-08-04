@@ -20,8 +20,10 @@ export interface MicroCMSImage {
 // 実績アイテムの型定義
 export interface ResultItem {
   id: string;
+  createdAt?: string;
   publishedAt: string;
   updatedAt: string;
+  revisedAt?: string;
   title: string;
   workType?: WorkType; // 案件区分（セレクトフィールドの文字列値）
   'project-type'?: ProjectType; // 案件種別（セレクトフィールドの文字列値）
@@ -36,6 +38,15 @@ export interface ResultItem {
   kpi?: string;
   siteUrl?: string;
   scale?: Scale; // プロジェクト規模（セレクトフィールドの文字列値）
+  seoTitle?: string;
+  seoDescription?: string;
+  coverAlt?: string;
+  challenge?: string;
+  constraints?: string;
+  responsibility?: string;
+  decisions?: string;
+  results?: string;
+  outOfScope?: string;
 }
 
 // 検索・フィルタ用の型

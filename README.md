@@ -34,3 +34,24 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## SEO・Core Web Vitalsの検証
+
+本番相当の確認は、開発サーバーではなくビルド後のサーバーで行います。
+
+```bash
+npm run lint
+npm run typecheck
+npm run build
+npm run start
+```
+
+Chrome DevToolsのLighthouseで、トップ、`/result/`、実績詳細、`/diary/`、記事詳細、`/contact/`をPC・モバイルの両方で確認してください。CLIを使う場合は、別ターミナルで次のように実行できます。
+
+```bash
+npx lighthouse@12 http://localhost:3000/ --only-categories=performance,seo,accessibility --output=html --output-path=./lighthouse-home.html
+```
+
+目標値はLCP 2.5秒以内、INP 200ms以内、CLS 0.1以下です。Lighthouseはラボ値のため、公開後はPageSpeed InsightsまたはSearch Consoleのフィールドデータも併せて確認してください。
+
+microCMSのSEO・ケーススタディ項目と運用上の注意は [`docs/seo-cms-operations.md`](docs/seo-cms-operations.md) にまとめています。

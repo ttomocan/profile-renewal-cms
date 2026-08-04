@@ -83,13 +83,13 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
       </nav>
       <div className="l-header__sns">
         <MenuNavLink href="https://note.com/tomoweb_lab" className="l-header__sns__item --note" target="_blank" rel="noopener noreferrer" onLinkClick={onLinkClick}>
-          <Image src="/img/common/icon_note.svg" alt="note" width={80} height={30} style={{ height: '30px', width: 'auto' }} loading="eager" priority />
+          <Image src="/img/common/icon_note.svg" alt="note" width={80} height={30} style={{ height: '30px', width: 'auto' }} />
         </MenuNavLink>
         <MenuNavLink href="https://x.com/t_tomocan" className="l-header__sns__item --x" target="_blank" rel="noopener noreferrer" onLinkClick={onLinkClick}>
-          <Image src="/img/common/icon_x.svg" alt="X" width={30} height={30} loading="eager" priority />
+          <Image src="/img/common/icon_x.svg" alt="X" width={30} height={30} />
         </MenuNavLink>
         <MenuNavLink href="https://coconala.com/users/1531202" className="l-header__sns__item --coconala" target="_blank" rel="noopener noreferrer" onLinkClick={onLinkClick}>
-          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} style={{ height: 'auto' }} loading="eager" priority />
+          <Image src="/img/common/icon_coconala.svg" alt="coconala" width={40} height={40} style={{ height: 'auto' }} />
         </MenuNavLink>
       </div>
     </>
