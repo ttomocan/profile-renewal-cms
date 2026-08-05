@@ -133,11 +133,7 @@
   .pagetitle {
     &__en,
     &__ja {
-      letter-spacing: 0.05em;
-    }
-    &__ja {
-      font-size: clamp(12px, 3.4vw, 20px);
-      white-space: nowrap;
+      letter-spacing: 0.08em;
     }
   }
 }
