@@ -40,3 +40,7 @@ _backup
 next.config.mjs
 
 .cursorrules
+
+# Codex isolated implementation workspaces
+/.worktrees/
+/.superpowers/
