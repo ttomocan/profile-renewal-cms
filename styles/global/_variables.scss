@@ -1,9 +1,60 @@
-// 横幅
-$inner: 840px;
-$innerSmall: 640px;
-
-// サイトカラー
+$brandAccent: #f36b0a;
+$brandStrong: #b54708;
+$brandStrongHover: #8f3500;
 $textC: #282828;
-$mainC: #f36b0a;
-$baseC: #f2edea;
-$linkC: #282828;
+$textSecondaryC: #666666;
+$baseC: #fcf6f1;
+$subtleC: #f5ede7;
+$surfaceC: #ffffff;
+$borderC: #d8cec7;
+$focusC: #0066cc;
+$errorC: #b3261e;
+$mainC: $brandAccent;
+$linkC: $brandStrong;
+
+$inner: 1120px;
+$innerSmall: 760px;
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 12px;
+$space-4: 16px;
+$space-6: 24px;
+$space-8: 32px;
+$space-12: 48px;
+$space-16: 64px;
+$space-20: 80px;
+$space-24: 96px;
+$sectionSpacePc: 96px;
+$sectionSpaceSp: 64px;
+$radiusSmall: 6px;
+$radiusStandard: 10px;
+$radiusLarge: 16px;
+
+:root {
+  --brand-accent: #{$brandAccent};
+  --brand-strong: #{$brandStrong};
+  --brand-strong-hover: #{$brandStrongHover};
+  --text: #{$textC};
+  --text-secondary: #{$textSecondaryC};
+  --base: #{$baseC};
+  --subtle: #{$subtleC};
+  --surface: #{$surfaceC};
+  --border: #{$borderC};
+  --focus: #{$focusC};
+  --error: #{$errorC};
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+  --radius-small: #{$radiusSmall};
+  --radius-standard: #{$radiusStandard};
+  --radius-large: #{$radiusLarge};
+  --content-width: #{$inner};
+  --reading-width: #{$innerSmall};
+}
