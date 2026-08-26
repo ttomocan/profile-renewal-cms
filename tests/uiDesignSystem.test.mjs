@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { compile } from 'sass';
+import ts from 'typescript';
 
 const css = compile('styles/common/style.scss', { style: 'expanded' }).css;
 
@@ -48,4 +50,52 @@ test('layout regressions must not change responsive container gutters or section
   assert.match(css, /\.inner-s \{[\s\S]*max-width: calc\(760px \+ 48px\);/);
   assert.match(css, /section:not\(:is\(\.pagetitle, :last-of-type\)\) \{[\s\S]*padding-bottom: 96px;/);
   assert.match(css, /@media \(max-width: 767px\)[\s\S]*\.inner \{[\s\S]*max-width: calc\(1120px \+ 32px\);[\s\S]*padding-left: 16px;[\s\S]*padding-right: 16px;[\s\S]*\.inner-s \{[\s\S]*max-width: calc\(760px \+ 32px\);[\s\S]*section:not\(:is\(\.pagetitle, :last-of-type\)\) \{[\s\S]*padding-bottom: 64px;/);
+});
+
+test('navigation path matching distinguishes roots, sections, nested routes, and false prefixes', async () => {
+  let source;
+  try {
+    source = await readFile('lib/navigation.ts', 'utf8');
+  } catch {
+    assert.fail('lib/navigation.ts must expose the shared navigation path matcher');
+  }
+
+  const javascript = ts.transpileModule(source, {
+    compilerOptions: {
+      module: ts.ModuleKind.ESNext,
+      target: ts.ScriptTarget.ES2022,
+    },
+  }).outputText;
+  const moduleUrl = `data:text/javascript;base64,${Buffer.from(javascript).toString('base64')}`;
+  const { isCurrentPath } = await import(moduleUrl);
+
+  for (const [pathname, targetPath, expected] of [
+    ['/', '/', true],
+    ['/about', '/about', true],
+    ['/about/', '/about/', true],
+    ['/about/team', '/about', true],
+    ['/aboutness', '/about', false],
+    ['/diary', '/', false],
+  ]) {
+    assert.equal(isCurrentPath(pathname, targetPath), expected, `${pathname} against ${targetPath}`);
+  }
+});
+
+test('compiled navigation and shared controls preserve accessible dimensions and visual states', () => {
+  assert.match(css, /\.l-header \{[\s\S]*?height: 88px;[\s\S]*?min-height: 88px;/);
+  assert.match(css, /@media \(max-width: 1040px\) \{[\s\S]*?\.l-header \{[\s\S]*?height: 64px;[\s\S]*?min-height: 64px;/);
+  assert.match(css, /\.l-header__menuBtn-button \{[\s\S]*?min-height: 44px;[\s\S]*?min-width: 44px;/);
+  assert.match(css, /\.c-navigation-link\[aria-current=page\] \{[\s\S]*?color: #b54708;[\s\S]*?font-weight: 700;[\s\S]*?text-decoration: underline;[\s\S]*?text-underline-offset: 0\.35em;/);
+
+  assert.match(css, /\.c-button__link \{[\s\S]*?min-width: 280px;[\s\S]*?min-height: 48px;[\s\S]*?border: 1px solid #b54708;[\s\S]*?border-radius: 10px;[\s\S]*?background: #b54708;/);
+  assert.match(css, /\.c-button__link:focus-visible[\s\S]*?outline: 3px solid #0066cc;/);
+  assert.match(css, /\.c-pagenation \.prev a,[\s\S]*?\.c-pagenation \.next a \{[\s\S]*?min-width: 44px;[\s\S]*?min-height: 44px;/);
+  assert.match(css, /\.c-backtotop \{[\s\S]*?min-width: 44px;[\s\S]*?min-height: 44px;/);
+});
+
+test('compiled headings and body links preserve the shared type and link hierarchy', () => {
+  assert.match(css, /h1 \{[\s\S]*?font-size: clamp\(2rem, 5vw, 3rem\);/);
+  assert.match(css, /h2 \{[\s\S]*?font-size: clamp\(1\.75rem, 4vw, 2\.25rem\);/);
+  assert.match(css, /h3 \{[\s\S]*?font-size: clamp\(1\.25rem, 3vw, 1\.5rem\);/);
+  assert.match(css, /a:not\(\.c-navigation-link\):not\(\.c-button__link\):not\(\.c-button__link-external\) \{[\s\S]*?color: #b54708;[\s\S]*?text-decoration: underline;/);
 });

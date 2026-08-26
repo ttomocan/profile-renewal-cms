@@ -1,19 +1,31 @@
 @use '../../global' as *;
 
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+}
+
 .c-heading {
   &-lv2 {
     $heading-lv2: &;
     color: $textC;
     display: flex;
     flex-flow: column;
-    font-size: 32px;
-    margin-bottom: 40px;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    margin-bottom: $space-12;
     text-align: center;
     &-en {
       font: {
         family: var(--font-roboto), sans-serif;
         weight: 400;
-        size: clamp(34px, 4vw, 44px);
+        size: inherit;
       }
       line-height: 1;
       letter-spacing: 0.1em;
@@ -21,7 +33,7 @@
         border-bottom: 1px solid $mainC;
         content: '';
         display: block;
-        margin: 15px auto;
+        margin: $space-4 auto;
         width: 60px;
       }
     }
@@ -49,7 +61,7 @@
     }
   }
   &-lv3 {
-    font-size: 22px;
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
     font-weight: 600;
     line-height: 1.5;
   }
