@@ -23,7 +23,6 @@ export default function ResultCard({ result, disableLink = false }: ResultCardPr
     <>
       <div className="result-card__image">
         <Image src={cover.url} alt="" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1200px) 50vw, 33vw" className="result-card__image-img" />
-        <div className="result-card__overlay"></div>
         <div className="result-card__badge">
           <span className={`result-card__work-type work-type-${workType}`}>{workType}</span>
         </div>

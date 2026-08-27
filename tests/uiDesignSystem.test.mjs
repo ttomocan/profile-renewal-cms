@@ -9,6 +9,7 @@ const animationCss = compile('styles/common/animation.scss', { style: 'expanded'
 const topCss = compile('styles/pages/top.scss', { style: 'expanded' }).css;
 const aboutCss = compile('styles/pages/about.scss', { style: 'expanded' }).css;
 const skillCss = compile('styles/pages/skill.scss', { style: 'expanded' }).css;
+const resultCss = compile('styles/pages/result.scss', { style: 'expanded' }).css;
 
 function hoverTranslateDistances(pageCss) {
   return [...pageCss.matchAll(/[^{}]*:hover[^{}]*\{([^{}]*)\}/g)]
@@ -160,4 +161,21 @@ test('top about and skill pages use shared spacing and surface tokens', () => {
   ]) {
     assert.ok(hoverTranslateDistances(pageCss).every((distance) => distance <= 2), `${page} hover movement must not exceed 2px`);
   }
+});
+
+test('result cards and pagination expose restrained surfaces and 44px targets', () => {
+  assert.match(resultCss, /\.result-card \{[\s\S]*?background: #ffffff;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?box-shadow: 0 2px 8px rgba\(40, 40, 40, 0\.08\);/);
+  assert.match(resultCss, /\.result-card:hover \{[\s\S]*?transform: translateY\(-2px\);[\s\S]*?box-shadow: 0 4px 12px rgba\(40, 40, 40, 0\.1\);/);
+  assert.match(resultCss, /\.result-card__content \{[\s\S]*?display: grid;[\s\S]*?gap: 16px;[\s\S]*?padding: 24px;/);
+  assert.match(resultCss, /\.result-card__action-icon \{[\s\S]*?width: 30px;[\s\S]*?height: 30px;[\s\S]*?background: #ffffff;[\s\S]*?color: #b54708;/);
+
+  assert.match(resultCss, /\.results-pagination__item \{[\s\S]*?min-width: 44px;[\s\S]*?min-height: 44px;/);
+  assert.match(resultCss, /\.results-pagination__item--current \{[\s\S]*?border: 1px solid #b54708;[\s\S]*?color: #b54708;[\s\S]*?font-weight: 700;[\s\S]*?text-decoration: underline;/);
+
+  assert.match(resultCss, /\.result-detail__section \{[\s\S]*?max-width: 760px;[\s\S]*?margin-inline: auto;[\s\S]*?font-size: 17px;[\s\S]*?line-height: 1\.9;/);
+  assert.match(resultCss, /\.result-detail > \.result-detail__section:first-of-type \.result-detail__section-content--summary \{[\s\S]*?background: #f5ede7;[\s\S]*?border-left: 4px solid #b54708;/);
+  assert.doesNotMatch(resultCss, /[🕒📝]/u);
+  assert.doesNotMatch(resultCss, /result-card__overlay/);
+  assert.doesNotMatch(resultCss, /\.result-card:hover \.result-card__image-img/);
+  assert.ok(hoverTranslateDistances(resultCss).every((distance) => distance <= 2), 'result interactions must not move more than 2px');
 });

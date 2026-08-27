@@ -38,7 +38,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
           前の実績ページ
         </Link>
       ) : (
-        <span className="results-pagination__item results-pagination__item--disabled" aria-hidden="true">
+        <span className="results-pagination__item results-pagination__item--disabled" aria-disabled="true">
           前へ
         </span>
       )}
@@ -67,7 +67,7 @@ export default function Pagination({ currentPage, totalPages }: PaginationProps)
           </svg>
         </Link>
       ) : (
-        <span className="results-pagination__item results-pagination__item--disabled" aria-hidden="true">
+        <span className="results-pagination__item results-pagination__item--disabled" aria-disabled="true">
           次へ
         </span>
       )}

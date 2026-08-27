@@ -67,33 +67,22 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 // 実績カード
 // ===============================================
 .result-card {
-  background: $white;
-  box-shadow: $shadow-sm;
-  border: 1px solid rgba(243, 107, 10, 0.2);
-  border-radius: 10px;
+  background: $surfaceC;
+  border: 1px solid $borderC;
+  border-radius: $radiusStandard;
+  box-shadow: 0 2px 8px rgb(40 40 40 / 8%);
   overflow: hidden;
-  transition: $transition-base;
+  transition:
+    box-shadow 150ms ease,
+    transform 150ms ease;
   position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
 
   &:hover {
-    box-shadow: $shadow-xl;
-    border-color: rgba(243, 107, 10, 0.5);
-
-    .result-card__image-img {
-      transform: scale(1.08);
-    }
-
-    .result-card__action-icon {
-      opacity: 1;
-      transform: translateX(0) scale(1.1);
-    }
-
-    .result-card__overlay {
-      opacity: 1;
-    }
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(40 40 40 / 10%);
   }
 
   &__link {
@@ -114,19 +103,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
-  }
-
-  &__overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(243, 107, 10, 0.15) 0%, rgba(243, 107, 10, 0.05) 100%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
   }
 
   &__badge {
@@ -186,38 +163,34 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     right: 15px;
     width: 30px;
     height: 30px;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(16px);
+    background: $surfaceC;
+    color: $brandStrong;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0;
-    transform: translateX(12px) scale(0.9);
-    transition: $transition-base;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 1px solid $borderC;
     z-index: 10;
 
     svg {
       width: 20px;
       height: 20px;
-      color: $primary-color;
+      color: inherit;
     }
   }
 
   &__content {
-    padding: 15px;
+    display: grid;
+    gap: $space-4;
+    padding: $space-6;
+    background: $surfaceC;
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: #ffffff;
   }
 
   &__meta {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+    gap: $space-2;
     flex-wrap: wrap;
   }
 
@@ -226,11 +199,11 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     align-items: center;
     padding: 2px 10px;
     background: $primary-lighter;
-    color: $primary-color;
+    color: $brandStrong;
     font-size: 12px;
     font-weight: 600;
     border-radius: 10px;
-    border: 1px solid rgba(243, 107, 10, 0.15);
+    border: 1px solid $borderC;
     letter-spacing: 0.001em;
   }
 
@@ -241,12 +214,6 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     letter-spacing: 0.001em;
-
-    &::before {
-      content: '🕒';
-      margin-right: 6px;
-      font-size: 14px;
-    }
   }
 
   &__title {
@@ -254,7 +221,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 700;
     line-height: 1.5;
     color: $text-color;
-    margin-bottom: 10px;
+    margin: 0;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -272,7 +239,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    flex: 1;
+    margin: 0;
   }
 
   &__responsibility {
@@ -280,14 +247,14 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 13px;
     font-weight: 600;
     line-height: 1.6;
-    margin-bottom: 10px;
+    margin: 0;
   }
 
   &__technologies {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-bottom: 12px;
+    margin: 0;
 
     li {
       background: $gray-100;
@@ -300,10 +267,10 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__detail-text {
-    color: $primary-color;
+    color: $brandStrong;
     font-size: 13px;
     font-weight: 700;
-    margin-top: 14px;
+    margin-top: auto;
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -330,31 +297,87 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // ===============================================
+// ページネーション
+// ===============================================
+.results-pagination {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  justify-content: center;
+  margin-inline: auto;
+  max-width: $innerSmall;
+
+  &__item {
+    align-items: center;
+    background: $surfaceC;
+    border: 1px solid $borderC;
+    border-radius: $radiusSmall;
+    color: $textC;
+    display: inline-flex;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: $space-3;
+    text-decoration: none;
+
+    &:is(a):hover {
+      border-color: $brandStrong;
+      color: $brandStrong;
+    }
+
+    &--current {
+      border: 1px solid $brandStrong;
+      color: $brandStrong;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 0.3em;
+    }
+
+    &--disabled {
+      background: $subtleC;
+      color: $textSecondaryC;
+    }
+
+    &--prev,
+    &--next {
+      gap: $space-2;
+    }
+  }
+
+  &__info {
+    flex-basis: 100%;
+    margin-top: $space-2;
+    text-align: center;
+  }
+}
+
+// ===============================================
 // 空の状態
 // ===============================================
 .results-empty {
   text-align: center;
-  padding: 80px 32px;
-  background: linear-gradient(135deg, $base-color 0%, $white 100%);
-  border: 2px dashed rgba(243, 107, 10, 0.2);
-
-  &__icon {
-    font-size: 72px;
-    margin-bottom: 32px;
-    opacity: 0.7;
-  }
+  padding: $space-20 $space-8;
+  background: $surfaceC;
+  border: 1px solid $borderC;
+  border-radius: $radiusStandard;
 
   &__title {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     color: $text-color;
-    margin-bottom: 16px;
+    margin-bottom: $space-6;
   }
 
-  &__description {
-    font-size: 18px;
-    color: $gray-600;
-    line-height: 1.7;
+  &__back {
+    align-items: center;
+    color: $brandStrong;
+    display: inline-flex;
+    justify-content: center;
+    min-height: 44px;
+    padding-inline: $space-4;
+    text-decoration: underline;
+    text-underline-offset: 0.3em;
   }
 }
 
@@ -465,10 +488,12 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__header {
     margin-bottom: 50px;
-    background: linear-gradient(135deg, $white 0%, $base-color 100%);
-    border-radius: 20px;
-    padding: 25px;
-    border: 1px solid rgba(243, 107, 10, 0.3);
+    margin-inline: auto;
+    max-width: $innerSmall;
+    background: $surfaceC;
+    border-radius: $radiusStandard;
+    padding: $space-6;
+    border: 1px solid $borderC;
 
     @include mq('sp') {
       padding: 15px;
@@ -491,9 +516,9 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         letter-spacing: 0.001em;
 
         &--work-type {
-          background: rgba(243, 107, 10, 0.05);
-          border: 1px solid rgba(243, 107, 10, 0.15);
-          color: #f36b0a;
+          background: $subtleC;
+          border: 1px solid $borderC;
+          color: $brandStrong;
           font-weight: 600;
         }
 
@@ -509,12 +534,6 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           background: transparent;
           padding: 0;
           font-weight: 600;
-
-          &::before {
-            content: '🕒';
-            margin-right: 8px;
-            font-size: 16px;
-          }
         }
       }
     }
@@ -561,16 +580,22 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__section {
+    max-width: $innerSmall;
+    margin-inline: auto;
+    font-size: 17px;
+    line-height: 1.9;
+
     &:not(:is(.pagetitle, :last-of-type)) {
-      padding-bottom: 80px;
+      padding-bottom: $space-16;
     }
+
     &-title {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 700;
       color: $text-color;
-      margin-bottom: 20px;
+      margin-bottom: $space-6;
       position: relative;
-      padding-left: 20px;
+      padding-left: $space-4;
 
       &::before {
         content: '';
@@ -580,7 +605,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         transform: translateY(-50%);
         width: 6px;
         height: 70%;
-        background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -15%) 100%);
+        background: $brandStrong;
         border-radius: 3px;
       }
 
@@ -590,23 +615,23 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-content {
-      // 通常のテキストコンテンツ（タグ以外）
+      p {
+        margin: 0;
+        white-space: pre-line;
+
+        + p {
+          margin-top: $space-4;
+        }
+      }
+
       &--summary {
-        background: $white;
-        border: 1px solid rgba(243, 107, 10, 0.3);
-        border-radius: 20px;
-        padding: 20px 25px;
+        background: transparent;
+        border: 0;
+        padding: 0;
 
         p {
-          font-size: 16px;
-          line-height: 1.8;
+          font: inherit;
           color: $text-color;
-          margin: 0;
-          white-space: pre-line;
-        }
-
-        @include mq('sp') {
-          padding: 15px 20px;
         }
       }
     }
@@ -620,8 +645,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         li {
           display: flex;
           align-items: flex-start;
-          font-size: 16px;
-          line-height: 1.7;
+          font-size: inherit;
+          line-height: inherit;
           color: $text-color;
           padding-left: 18px;
           position: relative;
@@ -665,8 +690,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
           &--role {
             background: $primary-lighter;
-            color: $primary-color;
-            border-color: rgba(243, 107, 10, 0.25);
+            color: $brandStrong;
+            border-color: $borderC;
 
             &:hover {
               background: rgba(243, 107, 10, 0.12);
@@ -677,8 +702,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
           &--tech {
             background: $primary-lighter;
-            color: $primary-color;
-            border-color: rgba(243, 107, 10, 0.25);
+            color: $brandStrong;
+            border-color: $borderC;
 
             &:hover {
               background: rgba(243, 107, 10, 0.12);
@@ -727,6 +752,12 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       }
     }
   }
+}
+
+.result-detail > .result-detail__section:first-of-type .result-detail__section-content--summary {
+  background: $subtleC;
+  border-left: 4px solid $brandStrong;
+  padding: $space-6;
 }
 
 .result-related {
@@ -937,7 +968,7 @@ cite {
   font-size: 16px;
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     box-shadow: $shadow-xl;
     background: linear-gradient(135deg, color.adjust($primary-color, $lightness: -5%) 0%, color.adjust($primary-color, $lightness: -15%) 100%);
   }
