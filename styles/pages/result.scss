@@ -91,6 +91,11 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
     text-decoration: none;
     color: inherit;
+
+    &:focus-visible {
+      outline: 3px solid $focusC;
+      outline-offset: -3px;
+    }
   }
 
   &__image {
@@ -130,29 +135,29 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     // 案件区分別カラースキーム（メインカラーベース）
     &.work-type-work-type-main,
     &.work-type-main {
-      background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
+      background: $brandStrong;
       color: $white;
     }
 
     &.work-type-work-type-side,
     &.work-type-side {
-      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      background: #047857;
       color: $white;
     }
 
     &.work-type-work-type-freelance,
     &.work-type-freelance {
-      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+      background: #b91c1c;
       color: $white;
     }
 
     &.work-type-personal {
-      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+      background: #6d28d9;
       color: $white;
     }
 
     &.work-type-未分類 {
-      background: linear-gradient(135deg, $gray-600 0%, $gray-700 100%);
+      background: #4b5563;
       color: $white;
     }
   }

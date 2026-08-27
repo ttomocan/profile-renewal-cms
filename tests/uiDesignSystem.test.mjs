@@ -166,8 +166,18 @@ test('top about and skill pages use shared spacing and surface tokens', () => {
 test('result cards and pagination expose restrained surfaces and 44px targets', () => {
   assert.match(resultCss, /\.result-card \{[\s\S]*?background: #ffffff;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?box-shadow: 0 2px 8px rgba\(40, 40, 40, 0\.08\);/);
   assert.match(resultCss, /\.result-card:hover \{[\s\S]*?transform: translateY\(-2px\);[\s\S]*?box-shadow: 0 4px 12px rgba\(40, 40, 40, 0\.1\);/);
+  assert.match(resultCss, /\.result-card__link:focus-visible \{[\s\S]*?outline: 3px solid #0066cc;[\s\S]*?outline-offset: -3px;/);
   assert.match(resultCss, /\.result-card__content \{[\s\S]*?display: grid;[\s\S]*?gap: 16px;[\s\S]*?padding: 24px;/);
   assert.match(resultCss, /\.result-card__action-icon \{[\s\S]*?width: 30px;[\s\S]*?height: 30px;[\s\S]*?background: #ffffff;[\s\S]*?color: #b54708;/);
+  assert.match(resultCss, /\.result-card__work-type\.work-type-work-type-main,[\s\S]*?\.result-card__work-type\.work-type-main \{\s*background: #b54708;/);
+  assert.match(resultCss, /\.result-card__work-type\.work-type-work-type-side,[\s\S]*?\.result-card__work-type\.work-type-side \{\s*background: #047857;/);
+  assert.match(resultCss, /\.result-card__work-type\.work-type-work-type-freelance,[\s\S]*?\.result-card__work-type\.work-type-freelance \{\s*background: #b91c1c;/);
+  assert.match(resultCss, /\.result-card__work-type\.work-type-personal \{\s*background: #6d28d9;/);
+  assert.match(resultCss, /\.result-card__work-type\.work-type-未分類 \{\s*background: #4b5563;/u);
+
+  for (const [, declarations] of resultCss.matchAll(/\.result-card__work-type[^{}]*\{([^{}]*)\}/g)) {
+    assert.doesNotMatch(declarations, /linear-gradient/);
+  }
 
   assert.match(resultCss, /\.results-pagination__item \{[\s\S]*?min-width: 44px;[\s\S]*?min-height: 44px;/);
   assert.match(resultCss, /\.results-pagination__item--current \{[\s\S]*?border: 1px solid #b54708;[\s\S]*?color: #b54708;[\s\S]*?font-weight: 700;[\s\S]*?text-decoration: underline;/);
