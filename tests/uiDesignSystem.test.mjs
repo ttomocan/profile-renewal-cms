@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import postcss from 'postcss';
 import { compile } from 'sass';
 import ts from 'typescript';
 
@@ -15,6 +16,22 @@ function hoverTranslateDistances(pageCss) {
   return [...pageCss.matchAll(/[^{}]*:hover[^{}]*\{([^{}]*)\}/g)]
     .flatMap(([, declarations]) => [...declarations.matchAll(/translateY\(-?(\d+)px\)/g)])
     .map(([, distance]) => Number(distance));
+}
+
+async function parseCssModule(path) {
+  return postcss.parse(await readFile(path, 'utf8'), { from: path });
+}
+
+function declarationsFor(root, selector) {
+  const declarations = new Map();
+
+  root.walkRules((rule) => {
+    if (rule.selectors.includes(selector)) {
+      rule.walkDecls((declaration) => declarations.set(declaration.prop, declaration.value));
+    }
+  });
+
+  return declarations;
 }
 
 test('semantic token regressions must not remove the shared :root color, spacing, radius, and content-width contract', () => {
@@ -188,4 +205,103 @@ test('result cards and pagination expose restrained surfaces and 44px targets', 
   assert.doesNotMatch(resultCss, /result-card__overlay/);
   assert.doesNotMatch(resultCss, /\.result-card:hover \.result-card__image-img/);
   assert.ok(hoverTranslateDistances(resultCss).every((distance) => distance <= 2), 'result interactions must not move more than 2px');
+});
+
+test('diary uses readable article width and accessible discovery controls', async () => {
+  const [article, cards, pagination, search, categoryFilter, category, breadcrumb, skeleton] = await Promise.all([
+    parseCssModule('app/_components/Article/index.module.css'),
+    parseCssModule('app/_components/DiaryList/index.module.css'),
+    parseCssModule('app/_components/Pagination/index.module.css'),
+    parseCssModule('app/_components/SearchField/index.module.css'),
+    parseCssModule('app/_components/CategoryFilter/index.module.css'),
+    parseCssModule('app/_components/Category/index.module.css'),
+    parseCssModule('app/_components/Breadcrumb/index.module.css'),
+    parseCssModule('app/_components/DiaryListSkeleton/index.module.css'),
+  ]);
+
+  const articleShell = declarationsFor(article, '.article');
+  const articleContent = declarationsFor(article, '.content');
+  assert.equal(articleShell.get('max-width'), 'var(--reading-width)');
+  assert.equal(articleContent.get('font-size'), '17px');
+  assert.equal(articleContent.get('line-height'), '1.9');
+  assert.equal(articleContent.get('color'), 'var(--text)');
+
+  const articleLink = declarationsFor(article, '.content a');
+  assert.equal(articleLink.get('color'), 'var(--brand-strong)');
+  assert.equal(articleLink.get('text-decoration'), 'underline');
+
+  const articleHeading = declarationsFor(article, '.content > h2');
+  assert.equal(articleHeading.get('border-bottom'), '2px solid var(--brand-strong)');
+  assert.equal(articleHeading.get('background'), 'transparent');
+  assert.equal(articleHeading.get('border-radius'), '0');
+  assert.equal(declarationsFor(article, '.content > h3').get('border-left'), '3px solid var(--brand-strong)');
+
+  const articleQuote = declarationsFor(article, '.content > blockquote');
+  assert.equal(articleQuote.get('background'), 'var(--subtle)');
+  assert.equal(articleQuote.get('border-left'), '4px solid var(--brand-strong)');
+  assert.equal(declarationsFor(article, '.content > figure > figcaption').get('color'), 'var(--text-secondary)');
+  assert.equal(declarationsFor(article, '.content > table th').get('background'), 'var(--subtle)');
+
+  const card = declarationsFor(cards, '.list');
+  assert.equal(card.get('background'), 'var(--surface)');
+  assert.equal(card.get('border'), '1px solid var(--border)');
+  assert.equal(card.get('border-radius'), 'var(--radius-standard)');
+  assert.equal(card.get('box-shadow'), 'none');
+
+  const cardHover = declarationsFor(cards, '.list:hover');
+  assert.equal(cardHover.get('transform'), 'translateY(-2px)');
+  assert.doesNotMatch(cardHover.get('background') ?? '', /gradient/);
+  assert.equal(declarationsFor(cards, '.link:focus-visible').get('outline'), '3px solid var(--focus)');
+
+  const paginationItem = declarationsFor(pagination, '.item');
+  assert.equal(paginationItem.get('min-width'), '44px');
+  assert.equal(paginationItem.get('min-height'), '44px');
+  assert.equal(declarationsFor(pagination, '.item:focus-visible').get('outline'), '3px solid var(--focus)');
+  pagination.walkRules('.item', (rule) => {
+    if (rule.selector !== '.item') return;
+    rule.walkDecls(/^(?:min-)?(?:width|height)$/, (declaration) => {
+      const pixels = Number.parseFloat(declaration.value);
+      assert.ok(!Number.isFinite(pixels) || pixels >= 44, `${declaration.prop} must stay at least 44px in every breakpoint`);
+    });
+  });
+
+  for (const selector of ['.searchInput', '.submitButton']) {
+    const control = declarationsFor(search, selector);
+    assert.equal(control.get('min-height'), '48px');
+    assert.equal(control.get('border'), '1px solid var(--border)');
+    assert.equal(control.get('border-radius'), 'var(--radius-standard)');
+  }
+  assert.equal(declarationsFor(search, '.submitButton').get('background'), 'var(--brand-strong)');
+  assert.equal(declarationsFor(search, '.submitButton:hover').get('background'), 'var(--brand-strong-hover)');
+  assert.equal(declarationsFor(search, '.searchInput:focus-visible').get('outline'), '3px solid var(--focus)');
+
+  const select = declarationsFor(categoryFilter, '.select');
+  assert.equal(select.get('min-height'), '48px');
+  assert.equal(select.get('border'), '1px solid var(--border)');
+  assert.equal(declarationsFor(categoryFilter, '.select:focus-visible').get('outline'), '3px solid var(--focus)');
+
+  const categoryTag = declarationsFor(category, '.tag');
+  assert.equal(categoryTag.get('border'), '1px solid var(--border)');
+  assert.equal(categoryTag.get('color'), 'var(--brand-strong)');
+  assert.equal(categoryTag.get('background'), 'var(--subtle)');
+
+  assert.equal(declarationsFor(breadcrumb, '.list').get('overflow-x'), 'auto');
+  assert.equal(declarationsFor(breadcrumb, '.link:focus-visible').get('outline'), '3px solid var(--focus)');
+  breadcrumb.walkDecls(/^animation(?:-delay)?$/, (declaration) => {
+    assert.fail(`breadcrumb entrance choreography must be removed: ${declaration.toString()}`);
+  });
+
+  let reducedMotionStopsPulse = false;
+  skeleton.walkAtRules('media', (media) => {
+    if (!media.params.includes('prefers-reduced-motion: reduce')) return;
+    media.walkDecls('animation', (declaration) => {
+      if (declaration.value === 'none') reducedMotionStopsPulse = true;
+    });
+  });
+  assert.ok(reducedMotionStopsPulse, 'skeleton pulse must stop under reduced motion');
+
+  const skeletonItem = declarationsFor(skeleton, '.item');
+  assert.equal(skeletonItem.get('background'), 'var(--surface)');
+  assert.equal(skeletonItem.get('border'), '1px solid var(--border)');
+  assert.equal(skeletonItem.get('border-radius'), 'var(--radius-standard)');
 });
