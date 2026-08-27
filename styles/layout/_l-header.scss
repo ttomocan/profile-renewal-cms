@@ -132,6 +132,7 @@
         a {
           color: $textC;
           display: inline-block;
+          min-height: 44px;
           font: {
             family: var(--font-roboto), sans-serif;
             size: 1.4rem;
@@ -220,6 +221,7 @@
         display: block;
         padding: 10px 15px;
         text-align: center;
+        text-decoration: none;
       }
     }
 
@@ -276,6 +278,7 @@
         a {
           color: #ffffff;
           display: inline-block;
+          min-height: 44px;
           @include font-properties(var(--font-roboto), 400, 20px);
           letter-spacing: 0.1em;
           position: relative;

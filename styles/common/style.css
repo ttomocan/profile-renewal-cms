@@ -725,6 +725,7 @@ small {
   .l-header .l-navigation__item a {
     color: #282828;
     display: inline-block;
+    min-height: 44px;
     font-family: var(--font-roboto), sans-serif;
     font-size: 1.4rem;
     font-weight: 400;
@@ -801,6 +802,7 @@ small {
     display: block;
     padding: 10px 15px;
     text-align: center;
+    text-decoration: none;
   }
   .l-header__sns {
     align-items: center;
@@ -854,6 +856,7 @@ small {
   .l-header .l-navigation__item a {
     color: #ffffff;
     display: inline-block;
+    min-height: 44px;
     font-family: var(--font-roboto), sans-serif;
     font-weight: 400;
     font-size: 20px;
@@ -1657,7 +1660,7 @@ h3 {
   transform: translateY(-50%) rotate(225deg);
 }
 
-a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external) {
+a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not(.c-link-external) {
   color: #b54708;
   text-decoration: underline;
   text-underline-offset: 0.2em;

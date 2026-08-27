@@ -97,5 +97,18 @@ test('compiled headings and body links preserve the shared type and link hierarc
   assert.match(css, /h1 \{[\s\S]*?font-size: clamp\(2rem, 5vw, 3rem\);/);
   assert.match(css, /h2 \{[\s\S]*?font-size: clamp\(1\.75rem, 4vw, 2\.25rem\);/);
   assert.match(css, /h3 \{[\s\S]*?font-size: clamp\(1\.25rem, 3vw, 1\.5rem\);/);
-  assert.match(css, /a:not\(\.c-navigation-link\):not\(\.c-button__link\):not\(\.c-button__link-external\) \{[\s\S]*?color: #b54708;[\s\S]*?text-decoration: underline;/);
+});
+
+test('compiled compact header keeps external blog links white and undecorated', () => {
+  assert.match(css, /a:not\(\.c-navigation-link\):not\(\.c-button__link\):not\(\.c-button__link-external\):not\(\.c-link-external\) \{[\s\S]*?color: #b54708;[\s\S]*?text-decoration: underline;/);
+  assert.match(css, /@media \(max-width: 1040px\) \{[\s\S]*?\.l-header__blog a \{[\s\S]*?color: #ffffff;[\s\S]*?text-decoration: none;/);
+});
+
+test('compiled desktop and compact header navigation links keep 44px target heights', () => {
+  const navigationLinkRules = [...css.matchAll(/\.l-header \.l-navigation__item a \{([^}]*)\}/g)].map((match) => match[1]);
+
+  assert.equal(navigationLinkRules.length, 2, 'expected desktop and compact navigation link rules');
+  for (const declarations of navigationLinkRules) {
+    assert.match(declarations, /min-height: 44px;/);
+  }
 });

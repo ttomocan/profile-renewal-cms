@@ -1,6 +1,6 @@
 @use '../../global' as *;
 
-a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external) {
+a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not(.c-link-external) {
   color: $brandStrong;
   text-decoration: underline;
   text-underline-offset: 0.2em;
