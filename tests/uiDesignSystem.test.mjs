@@ -6,6 +6,15 @@ import ts from 'typescript';
 
 const css = compile('styles/common/style.scss', { style: 'expanded' }).css;
 const animationCss = compile('styles/common/animation.scss', { style: 'expanded' }).css;
+const topCss = compile('styles/pages/top.scss', { style: 'expanded' }).css;
+const aboutCss = compile('styles/pages/about.scss', { style: 'expanded' }).css;
+const skillCss = compile('styles/pages/skill.scss', { style: 'expanded' }).css;
+
+function hoverTranslateDistances(pageCss) {
+  return [...pageCss.matchAll(/[^{}]*:hover[^{}]*\{([^{}]*)\}/g)]
+    .flatMap(([, declarations]) => [...declarations.matchAll(/translateY\(-?(\d+)px\)/g)])
+    .map(([, distance]) => Number(distance));
+}
 
 test('semantic token regressions must not remove the shared :root color, spacing, radius, and content-width contract', () => {
   for (const declaration of [
@@ -125,4 +134,30 @@ test('scroll reveal has one motion pattern and respects reduced motion', () => {
   assert.match(css, /\.pagetitle__en,\s*\.pagetitle__ja \{\s*animation: page-title-reveal 300ms ease-out both;[\s\S]*?\}/);
   assert.match(css, /@keyframes page-title-reveal \{\s*from \{\s*opacity: 0;\s*transform: translateY\(16px\);\s*\}\s*to \{\s*opacity: 1;\s*transform: translateY\(0\);\s*\}\s*\}/);
   assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.pagetitle__en,\s*\.pagetitle__ja \{\s*animation: none;\s*opacity: 1;\s*transform: none;\s*\}/);
+});
+
+test('top about and skill pages use shared spacing and surface tokens', () => {
+  assert.match(topCss, /\.p-top-facts,[\s\S]*?\.p-top-contact \{\s*padding-block: 96px;/);
+  assert.match(topCss, /@media \(max-width: 767px\) \{[\s\S]*?\.p-top-facts,[\s\S]*?\.p-top-contact \{\s*padding-block: 64px;/);
+  assert.match(topCss, /\.p-top-hero__text-content \{[\s\S]*?max-width: 760px;[\s\S]*?color: #666666;[\s\S]*?font-size: 1rem;[\s\S]*?line-height: 1\.8;/);
+  assert.match(topCss, /\.p-top-hero__actions \{[\s\S]*?gap: 16px;[\s\S]*?margin-top: 32px;/);
+  assert.match(topCss, /\.p-top-facts__item \{[\s\S]*?background: #ffffff;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?box-shadow: none;/);
+  assert.match(topCss, /\.p-top-results \.result-card \{[\s\S]*?background: #ffffff;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?box-shadow: none;/);
+  assert.match(topCss, /\.p-top-diary \.diary-card \{[\s\S]*?background: #ffffff;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?box-shadow: none;/);
+
+  assert.match(aboutCss, /\.about \.about-section-copy \{[\s\S]*?max-width: 760px;[\s\S]*?margin-inline: auto;[\s\S]*?gap: 24px;/);
+  assert.match(aboutCss, /\.about \.about-facts__item \{[\s\S]*?background: #ffffff;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?box-shadow: none;/);
+  assert.match(aboutCss, /\.about \.about-cards li \{[\s\S]*?background: #ffffff;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?box-shadow: none;/);
+
+  assert.match(skillCss, /\.skill \.programming__item,[\s\S]*?\.skill \.ai-tool__item \{[\s\S]*?padding: 24px;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?background: #ffffff;[\s\S]*?box-shadow: none;/);
+  assert.match(skillCss, /\.skill \.skill-cards \{[\s\S]*?gap: 24px;[\s\S]*?grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);/);
+  assert.match(skillCss, /@media \(max-width: 767px\) \{[\s\S]*?\.skill \.skill-cards \{\s*grid-template-columns: 1fr;/);
+
+  for (const [page, pageCss] of [
+    ['top', topCss],
+    ['about', aboutCss],
+    ['skill', skillCss],
+  ]) {
+    assert.ok(hoverTranslateDistances(pageCss).every((distance) => distance <= 2), `${page} hover movement must not exceed 2px`);
+  }
 });
