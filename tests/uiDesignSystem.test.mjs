@@ -5,6 +5,7 @@ import { compile } from 'sass';
 import ts from 'typescript';
 
 const css = compile('styles/common/style.scss', { style: 'expanded' }).css;
+const animationCss = compile('styles/common/animation.scss', { style: 'expanded' }).css;
 
 test('semantic token regressions must not remove the shared :root color, spacing, radius, and content-width contract', () => {
   for (const declaration of [
@@ -111,4 +112,17 @@ test('compiled desktop and compact header navigation links keep 44px target heig
   for (const declarations of navigationLinkRules) {
     assert.match(declarations, /min-height: 44px;/);
   }
+});
+
+test('scroll reveal has one motion pattern and respects reduced motion', () => {
+  const revealTriggers = [...new Set(animationCss.match(/\.[A-Za-z0-9_-]+Trigger\b/g))];
+
+  assert.deepEqual(revealTriggers, ['.fadeUpTrigger']);
+  assert.match(animationCss, /\.fadeUpTrigger \{\s*opacity: 0;\s*transform: translateY\(24px\);\s*\}/);
+  assert.match(animationCss, /\.fadeUp \{\s*animation: fade-up 320ms ease-out forwards;\s*\}/);
+  assert.match(animationCss, /@media \(prefers-reduced-motion: reduce\) \{\s*\.fadeUpTrigger,\s*\.fadeUp \{\s*opacity: 1;\s*transform: none;\s*animation: none;\s*\}/);
+
+  assert.match(css, /\.pagetitle__en,\s*\.pagetitle__ja \{\s*animation: page-title-reveal 300ms ease-out both;[\s\S]*?\}/);
+  assert.match(css, /@keyframes page-title-reveal \{\s*from \{\s*opacity: 0;\s*transform: translateY\(16px\);\s*\}\s*to \{\s*opacity: 1;\s*transform: translateY\(0\);\s*\}\s*\}/);
+  assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.pagetitle__en,\s*\.pagetitle__ja \{\s*animation: none;\s*opacity: 1;\s*transform: none;\s*\}/);
 });

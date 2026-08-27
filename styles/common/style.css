@@ -1178,53 +1178,12 @@ section * ~ section:not(:last-of-type) {
   position: relative;
   text-align: center;
 }
-.pagetitle::before, .pagetitle::after {
+.pagetitle::before {
   background-color: rgba(0, 0, 0, 0.5);
   content: "";
+  inset: 0;
   position: absolute;
-  top: 0;
-  left: -20vw;
-  width: 140vw;
-  height: 100%;
   z-index: 1;
-}
-.pagetitle::before {
-  animation-name: hero-before;
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-delay: 0.3s;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-fill-mode: both;
-  rotate: 45deg;
-  transform-origin: center;
-}
-@keyframes hero-before {
-  0% {
-    translate: -150vw -150vw;
-  }
-  100% {
-    translate: 0 0;
-  }
-}
-.pagetitle::after {
-  animation-name: hero-after;
-  animation-duration: 0.5s;
-  animation-timing-function: ease;
-  animation-delay: 0.8s;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-fill-mode: both;
-  rotate: -45deg;
-  transform-origin: center;
-}
-@keyframes hero-after {
-  0% {
-    translate: 150vw -150vw;
-  }
-  100% {
-    translate: 0 0;
-  }
 }
 .pagetitle__image {
   inset: 0;
@@ -1236,8 +1195,13 @@ section * ~ section:not(:last-of-type) {
   object-position: center;
   width: 100%;
 }
-.pagetitle__en {
+.pagetitle__en, .pagetitle__ja {
+  animation: page-title-reveal 300ms ease-out both;
   color: #ffffff;
+  position: relative;
+  z-index: 2;
+}
+.pagetitle__en {
   font-family: var(--font-roboto), sans-serif;
   font-weight: 400;
   font-size: clamp(40px, 5vw, 60px);
@@ -1245,8 +1209,6 @@ section * ~ section:not(:last-of-type) {
   letter-spacing: 0.1em;
   margin-bottom: 10px;
   padding-bottom: 15px;
-  position: relative;
-  z-index: 2;
 }
 .pagetitle__en::after {
   background-color: #ffffff;
@@ -1257,108 +1219,35 @@ section * ~ section:not(:last-of-type) {
   position: absolute;
   transform: translateX(-50%);
   width: 60px;
-  animation-name: line-appear;
-  animation-duration: 0.4s;
-  animation-timing-function: ease-out;
-  animation-delay: 2s;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-fill-mode: both;
-}
-@keyframes line-appear {
-  0% {
-    opacity: 0;
-    width: 0;
-  }
-  100% {
-    opacity: 1;
-    width: 60px;
-  }
 }
 .pagetitle__ja {
-  color: #ffffff;
   font-family: var(--font-roboto), sans-serif;
   font-weight: 700;
   font-size: clamp(20px, 5vw, 25px);
   letter-spacing: 0.1em;
-  position: relative;
-  z-index: 2;
 }
 .pagetitle span {
   display: inline-block;
-  animation-name: kf-animate-chars;
-  animation-duration: 0.5s;
-  animation-timing-function: cubic-bezier(0.39, 1.57, 0.58, 1);
-  animation-delay: 0s;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-fill-mode: both;
 }
-.pagetitle span:nth-child(1) {
-  animation-delay: 1.18s;
-}
-.pagetitle span:nth-child(2) {
-  animation-delay: 1.26s;
-}
-.pagetitle span:nth-child(3) {
-  animation-delay: 1.34s;
-}
-.pagetitle span:nth-child(4) {
-  animation-delay: 1.42s;
-}
-.pagetitle span:nth-child(5) {
-  animation-delay: 1.5s;
-}
-.pagetitle span:nth-child(6) {
-  animation-delay: 1.58s;
-}
-.pagetitle span:nth-child(7) {
-  animation-delay: 1.66s;
-}
-.pagetitle span:nth-child(8) {
-  animation-delay: 1.74s;
-}
-.pagetitle span:nth-child(9) {
-  animation-delay: 1.82s;
-}
-.pagetitle span:nth-child(10) {
-  animation-delay: 1.9s;
-}
-.pagetitle span:nth-child(11) {
-  animation-delay: 1.98s;
-}
-.pagetitle span:nth-child(12) {
-  animation-delay: 2.06s;
-}
-.pagetitle span:nth-child(13) {
-  animation-delay: 2.14s;
-}
-.pagetitle span:nth-child(14) {
-  animation-delay: 2.22s;
-}
-.pagetitle span:nth-child(15) {
-  animation-delay: 2.3s;
-}
-.pagetitle span:nth-child(16) {
-  animation-delay: 2.38s;
-}
-.pagetitle span:nth-child(17) {
-  animation-delay: 2.46s;
-}
-.pagetitle span:nth-child(18) {
-  animation-delay: 2.54s;
-}
-@keyframes kf-animate-chars {
-  0% {
+
+@keyframes page-title-reveal {
+  from {
     opacity: 0;
-    transform: translateY(-50%);
+    transform: translateY(16px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
+@media (prefers-reduced-motion: reduce) {
+  .pagetitle__en,
+  .pagetitle__ja {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
 @media (max-width: 767px) {
   .pagetitle__en, .pagetitle__ja {
     letter-spacing: 0.08em;
