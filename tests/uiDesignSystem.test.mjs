@@ -208,7 +208,7 @@ test('result cards and pagination expose restrained surfaces and 44px targets', 
 });
 
 test('diary uses readable article width and accessible discovery controls', async () => {
-  const [article, cards, pagination, search, categoryFilter, category, breadcrumb, skeleton] = await Promise.all([
+  const [article, cards, pagination, search, categoryFilter, category, breadcrumb, skeleton, diaryGlobals] = await Promise.all([
     parseCssModule('app/_components/Article/index.module.css'),
     parseCssModule('app/_components/DiaryList/index.module.css'),
     parseCssModule('app/_components/Pagination/index.module.css'),
@@ -217,6 +217,7 @@ test('diary uses readable article width and accessible discovery controls', asyn
     parseCssModule('app/_components/Category/index.module.css'),
     parseCssModule('app/_components/Breadcrumb/index.module.css'),
     parseCssModule('app/_components/DiaryListSkeleton/index.module.css'),
+    parseCssModule('app/diary/globals.css'),
   ]);
 
   const articleShell = declarationsFor(article, '.article');
@@ -254,6 +255,7 @@ test('diary uses readable article width and accessible discovery controls', asyn
   assert.equal(declarationsFor(cards, '.link:focus-visible').get('outline'), '3px solid var(--focus)');
 
   const paginationItem = declarationsFor(pagination, '.item');
+  assert.equal(declarationsFor(pagination, '.list').get('list-style'), 'none');
   assert.equal(paginationItem.get('min-width'), '44px');
   assert.equal(paginationItem.get('min-height'), '44px');
   assert.equal(declarationsFor(pagination, '.item:focus-visible').get('outline'), '3px solid var(--focus)');
@@ -304,4 +306,8 @@ test('diary uses readable article width and accessible discovery controls', asyn
   assert.equal(skeletonItem.get('background'), 'var(--surface)');
   assert.equal(skeletonItem.get('border'), '1px solid var(--border)');
   assert.equal(skeletonItem.get('border-radius'), 'var(--radius-standard)');
+
+  const largeDiaryText = declarationsFor(diaryGlobals, '.diary p > span.text-large');
+  assert.equal(largeDiaryText.get('font-size'), '1.4rem');
+  assert.equal(largeDiaryText.get('font-weight'), '700');
 });

@@ -12,6 +12,10 @@
   padding: var(--space-24);
 }
 
+.list {
+  list-style: none;
+}
+
 .item {
   display: flex;
   align-items: center;

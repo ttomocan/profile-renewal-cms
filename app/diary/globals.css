@@ -1,5 +1,5 @@
 @layer components {
-  .blog p > span.text-large {
+  .diary p > span.text-large {
     color: var(--text);
     font-size: 1.4rem;
     font-weight: 700;
