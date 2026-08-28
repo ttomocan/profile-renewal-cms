@@ -1,14 +1,14 @@
 @use '../global' as *;
 
 .l-footer {
-  background-color: $brandStrong;
+  background-color: $mainC;
   display: flex;
   flex-wrap: wrap;
-  padding: $space-16 $space-6 $space-8;
+  padding: 60px 20px 30px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: $space-8;
+  gap: 30px;
   * {
     color: #ffffff;
     text-decoration: none;
@@ -18,21 +18,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: $space-8;
+    gap: 30px;
     align-self: stretch;
     a {
-      align-items: center;
       color: #ffffff;
-      display: inline-flex;
       font: {
         family: var(--font-roboto), sans-serif;
         size: 1.4rem;
         weight: 400;
       }
-      justify-content: center;
       letter-spacing: 0.1em;
-      min-height: 44px;
-      min-width: 44px;
       padding-bottom: 10px;
       position: relative;
 
@@ -47,12 +42,7 @@
         transition: width 0.4s ease, left 0.4s ease;
         width: 0;
       }
-      &:hover,
-      &[aria-current='page'] {
-        color: $surfaceC;
-        font-weight: 700;
-        text-decoration: underline;
-        text-underline-offset: 0.35em;
+      &:is(:hover, .current) {
         &::after {
           width: 100%;
           left: 0;
@@ -62,19 +52,15 @@
   }
 
   &__copyright {
-    border-top: 1px solid rgba($surfaceC, 0.45);
-    max-width: $inner;
-    padding-top: $space-6;
     text-align: center;
-    width: 100%;
   }
 
   @include mq(sp) {
-    padding: $space-12 $space-4 $space-6;
+    padding: 40px 0 20px;
     .l-navigation {
       flex-wrap: wrap;
-      gap: $space-4 $space-6;
-      padding: 0;
+      gap: 20px 30px;
+      padding: 0 20px;
       a {
         color: #ffffff;
         font: {
@@ -97,12 +83,7 @@
           transition: width 0.4s ease, left 0.4s ease;
           width: 0;
         }
-        &:hover,
-        &[aria-current='page'] {
-          color: $surfaceC;
-          font-weight: 700;
-          text-decoration: underline;
-          text-underline-offset: 0.35em;
+        &:is(:hover, .current) {
           &::after {
             width: 100%;
             left: 0;

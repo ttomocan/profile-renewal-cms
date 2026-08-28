@@ -1,18 +1,14 @@
 .title {
-  margin-bottom: var(--space-24);
-  color: var(--text);
   font-size: clamp(1.4rem, 4vw, 1.9rem);
   font-weight: 700;
   line-height: 1.5;
-  text-wrap: balance;
+  margin-bottom: 24px;
 }
 
 .search-info {
-  margin: var(--space-24) 0;
-  padding: var(--space-12) var(--space-16);
-  color: var(--text-secondary);
+  margin: 20px 0;
+  padding: 10px 15px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
   font-size: 0.95rem;
-  line-height: 1.7;
-  background: var(--subtle);
-  border-left: 3px solid var(--brand-strong);
 }

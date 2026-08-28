@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
@@ -50,10 +49,11 @@ export default function ResultArchive({ currentPage, resultsData }: Props) {
             </>
           ) : (
             <div className="results-empty">
-              <h2 className="results-empty__title">制作実績は準備中です</h2>
-              <Link href="/" className="results-empty__back">
-                トップページに戻る
-              </Link>
+              <div className="results-empty__icon" aria-hidden="true">
+                📝
+              </div>
+              <h2 className="results-empty__title">実績がまだ登録されていません</h2>
+              <p className="results-empty__description">近日中に実績を公開予定です</p>
             </div>
           )}
         </div>

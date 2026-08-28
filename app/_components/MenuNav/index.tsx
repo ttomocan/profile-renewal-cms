@@ -3,19 +3,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { isCurrentPath } from '@/lib/navigation';
 
 type MenuNavLinkProps = React.ComponentProps<typeof Link> & {
-  current?: boolean;
   onLinkClick?: () => void;
 };
 
-function MenuNavLink({ className, current = false, onLinkClick, ...props }: MenuNavLinkProps) {
+function MenuNavLink({ onLinkClick, ...props }: MenuNavLinkProps) {
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     if (onLinkClick) onLinkClick();
     if (props.onClick) props.onClick(e);
   };
-  return <Link {...props} aria-current={current ? 'page' : undefined} className={`${className ?? ''}${current ? ' current' : ''}`.trim()} onClick={handleClick} />;
+  return <Link {...props} onClick={handleClick} />;
 }
 
 type MenuNavProps = {
@@ -25,7 +23,14 @@ type MenuNavProps = {
 export default function MenuNav({ onLinkClick }: MenuNavProps) {
   const pathname = usePathname();
 
-  const isCurrent = (path: string) => isCurrentPath(pathname, path);
+  const isCurrent = (path: string) => {
+    // パスの末尾に'/'がなければ付与
+    const normalize = (p: string) => (p.endsWith('/') ? p : p + '/');
+    if (path === '/') {
+      return pathname === '/';
+    }
+    return normalize(pathname).startsWith(normalize(path));
+  };
 
   return (
     <>
@@ -44,33 +49,33 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
       <nav className="l-header__navigation" role="navigation" aria-label="グローバルナビゲーション">
         <ul className="l-navigation">
           <li className="l-navigation__item">
-            <MenuNavLink href="/" className="c-navigation-link" current={isCurrent('/')} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/" className={`c-navigation-link${isCurrent('/') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Top
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/about/" className="c-navigation-link" current={isCurrent('/about')} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/about/" className={`c-navigation-link${isCurrent('/about') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               About
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/skill/" className="c-navigation-link" current={isCurrent('/skill')} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/skill/" className={`c-navigation-link${isCurrent('/skill') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Skill
             </MenuNavLink>
           </li>
           {/* 実績ページは本番動作チェックのため一時的に非表示 */}
           <li className="l-navigation__item">
-            <MenuNavLink href="/result/" className="c-navigation-link" current={isCurrent('/result')} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/result/" className={`c-navigation-link${isCurrent('/result') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Result
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/diary/" className="c-navigation-link" current={isCurrent('/diary')} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/diary/" className={`c-navigation-link${isCurrent('/diary') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Diary
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/contact/" className="c-navigation-link" current={isCurrent('/contact')} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/contact/" className={`c-navigation-link${isCurrent('/contact') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Contact
             </MenuNavLink>
           </li>

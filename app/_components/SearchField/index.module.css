@@ -1,77 +1,51 @@
-.form {
-  width: 100%;
-  max-width: 640px;
-}
-
 .search {
-  display: flex;
-  align-items: stretch;
-  gap: var(--space-12);
-  width: 100%;
-  max-width: 100%;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 10px;
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
   font-size: 16px;
+  display: flex;
+  gap: 12px;
+  max-width: 100%;
+  padding: 10px 14px;
+  width: 100%;
+  border: 1px solid #e9ecef;
+  transition: all 0.3s ease;
 }
 
-.searchInput,
-.submitButton {
-  min-height: 48px;
-  font: inherit;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-standard);
+.search:focus-within {
+  border-color: #f36b0a;
+  box-shadow: 0 4px 12px rgba(243, 107, 10, 0.15);
+  transform: translateY(-1px);
 }
 
 .searchInput {
-  display: block;
-  width: 100%;
-  padding: var(--space-12) var(--space-16);
-  color: var(--text);
   cursor: text;
-  appearance: none;
-  background: var(--surface);
+  display: block;
   box-sizing: border-box;
+  padding: 0;
+  width: 100%;
+  appearance: none;
   -webkit-tap-highlight-color: transparent;
-}
-
-.searchInput::placeholder {
-  color: var(--text-secondary);
-  opacity: 1;
-}
-
-.searchInput:hover {
-  border-color: var(--brand-strong);
-}
-
-.searchInput:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
+  outline: none;
+  background-color: transparent;
+  border: 1px solid transparent;
 }
 
 .submitButton {
   flex-shrink: 0;
-  box-sizing: border-box;
-  padding: var(--space-12) var(--space-24);
-  color: #fff;
-  font-weight: 700;
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'BIZ UDPGothic', Meiryo, sans-serif;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  background: var(--brand-strong);
-  transition: background-color 180ms ease;
+  transition: all 0.3s ease;
+  background: #f36b0a;
+  color: white;
+  padding: 2px 12px;
 }
 
 .submitButton:hover {
-  background: var(--brand-strong-hover);
-}
-
-.submitButton:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
-@media (max-width: 480px) {
-  .search {
-    flex-direction: column;
-  }
-
-  .submitButton {
-    width: 100%;
-  }
+  background: #e55a0a;
+  transform: scale(1.05);
 }

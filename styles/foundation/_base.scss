@@ -4,18 +4,17 @@ html {
   scroll-behavior: smooth;
 }
 
-html {
-  background-color: $baseC;
-}
-
+html,
 body {
   background-color: $baseC;
   color: $textC;
+}
+body {
   display: flex;
   flex-flow: column;
   font-family: -apple-system, Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, BlinkMacSystemFont, sans-serif;
   font-optical-sizing: auto;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   min-height: 100vh;
   letter-spacing: 0.01em;
@@ -49,30 +48,9 @@ a {
   }
 }
 
-:where(a, button, input, textarea, select, summary):focus-visible {
-  outline: 3px solid $focusC;
+:is(a, button, input, textarea, select, summary):focus-visible {
+  outline: 3px solid $mainC;
   outline-offset: 3px;
-}
-
-.c-skip-link {
-  position: fixed;
-  top: 8px;
-  left: 8px;
-  z-index: 10000;
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  padding: 0 16px;
-  color: $brandStrong;
-  font-weight: 700;
-  background: $surfaceC;
-  border: 2px solid $brandStrong;
-  border-radius: $radiusSmall;
-  transform: translateY(calc(-100% - 12px));
-
-  &:focus-visible {
-    transform: translateY(0);
-  }
 }
 
 img {
@@ -156,21 +134,8 @@ small {
 .inner {
   $block: &;
   @extend %inner;
-  max-width: calc(#{$inner} + 48px);
-  padding-left: 24px;
-  padding-right: 24px;
-  &-s {
-    max-width: calc(#{$innerSmall} + 48px);
-  }
-}
-
-@include mq(sp) {
-  .inner {
-    max-width: calc(#{$inner} + 32px);
-    padding-left: 16px;
-    padding-right: 16px;
-    &-s {
-      max-width: calc(#{$innerSmall} + 32px);
-    }
+  max-width: calc(#{$inner} + 40px);
+  &#{$block}-s {
+    max-width: calc(#{$innerSmall} + 40px);
   }
 }

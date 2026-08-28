@@ -1,32 +1,19 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import MenuNav from '../MenuNav';
 
 export default function Header() {
-  const pathname = usePathname();
-
-  return <HeaderContent key={pathname} pathname={pathname} />;
-}
-
-function HeaderContent({ pathname }: { pathname: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
   const toggleMenu = () => {
-    setIsMenuOpen((isOpen) => !isOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
-
-  const closeMenu = useCallback((restoreFocus = false) => {
-    setIsMenuOpen(false);
-    if (restoreFocus) {
-      requestAnimationFrame(() => menuButtonRef.current?.focus());
-    }
-  }, []);
 
   // パスからページクラスを取得（/index, /index/ もトップページとして扱う）
   const getPageClass = () => {
@@ -76,13 +63,13 @@ function HeaderContent({ pathname }: { pathname: string }) {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        closeMenu(true);
+        setIsMenuOpen(false);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [closeMenu, isMenuOpen]);
+  }, [isMenuOpen]);
 
   const pageClass = getPageClass();
   const isTopPage = pageClass === '--top';
@@ -96,14 +83,14 @@ function HeaderContent({ pathname }: { pathname: string }) {
           </Link>
         </div>
         <div className={`l-header__menuBtn ${isMenuOpen ? 'is-open' : 'is-close'}`}>
-          <button ref={menuButtonRef} className="l-header__menuBtn-button" aria-label={isMenuOpen ? 'メニューを閉じる' : 'メニューを開く'} onClick={toggleMenu} aria-expanded={isMenuOpen} aria-controls="global-menu">
+          <button className="l-header__menuBtn-button" aria-label={isMenuOpen ? 'メニューを閉じる' : 'メニューを開く'} onClick={toggleMenu} aria-expanded={isMenuOpen} aria-controls="global-menu">
             <span className="top"></span>
             <span className="middle"></span>
             <span className="bottom"></span>
           </button>
         </div>
         <div id="global-menu" className={`l-header__link ${isMenuOpen ? 'menu-open' : ''}`}>
-          <MenuNav onLinkClick={() => closeMenu(false)} />
+          <MenuNav onLinkClick={() => setIsMenuOpen(false)} />
         </div>
       </header>
       {isScrolled && !isTopPage && <div className="l-header-spacer" />}

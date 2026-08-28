@@ -11,19 +11,48 @@
   place-content: center;
   position: relative;
   text-align: center;
-
-  &::before {
+  &::before,
+  &::after {
     background-color: rgba(0, 0, 0, 0.5);
     content: '';
-    inset: 0;
     position: absolute;
+    top: 0;
+    left: -20vw;
+    width: 140vw;
+    height: 100%;
     z-index: 1;
   }
+  &::before {
+    @include animation($name: hero-before, $duration: 0.5s, $timing-function: ease, $delay: 0.3s, $fill-mode: both);
+    rotate: 45deg;
+    transform-origin: center;
+    @keyframes hero-before {
+      0% {
+        translate: -150vw -150vw;
+      }
 
+      100% {
+        translate: 0 0;
+      }
+    }
+  }
+  &::after {
+    @include animation($name: hero-after, $duration: 0.5s, $timing-function: ease, $delay: 0.8s, $fill-mode: both);
+    rotate: -45deg;
+    transform-origin: center;
+    @keyframes hero-after {
+      0% {
+        translate: 150vw -150vw;
+      }
+
+      100% {
+        translate: 0 0;
+      }
+    }
+  }
   &__image {
     inset: 0;
     position: absolute;
-
     img {
       height: 100%;
       object-fit: cover;
@@ -31,16 +60,8 @@
       width: 100%;
     }
   }
-
-  &__en,
-  &__ja {
-    animation: page-title-reveal 300ms ease-out both;
-    color: #ffffff;
-    position: relative;
-    z-index: 2;
-  }
-
   &__en {
+    color: #ffffff;
     font: {
       family: var(--font-roboto), sans-serif;
       weight: 400;
@@ -50,7 +71,8 @@
     letter-spacing: 0.1em;
     margin-bottom: 10px;
     padding-bottom: 15px;
-
+    position: relative;
+    z-index: 2;
     &::after {
       background-color: #ffffff;
       bottom: 0;
@@ -60,41 +82,50 @@
       position: absolute;
       transform: translateX(-50%);
       width: 60px;
+      @include animation($name: line-appear, $duration: 0.4s, $timing-function: ease-out, $delay: 2s, $fill-mode: both);
+      @keyframes line-appear {
+        0% {
+          opacity: 0;
+          width: 0;
+        }
+        100% {
+          opacity: 1;
+          width: 60px;
+        }
+      }
     }
   }
-
   &__ja {
+    color: #ffffff;
     font: {
       family: var(--font-roboto), sans-serif;
       weight: 700;
       size: clamp(20px, 5vw, 25px);
     }
     letter-spacing: 0.1em;
+    position: relative;
+    z-index: 2;
   }
-
   span {
     display: inline-block;
-  }
-}
+    @include animation($name: kf-animate-chars, $duration: 0.5s, $timing-function: cubic-bezier(0.39, 1.57, 0.58, 1), $fill-mode: both);
+    @for $i from 1 through 18 {
+      &:nth-child(#{$i}) {
+        animation-delay: ($i * 0.08s) + 1.1s;
+      }
+    }
 
-@keyframes page-title-reveal {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
+    @keyframes kf-animate-chars {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%);
+      }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pagetitle__en,
-  .pagetitle__ja {
-    animation: none;
-    opacity: 1;
-    transform: none;
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   }
 }
 

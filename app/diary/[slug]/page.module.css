@@ -1,92 +1,64 @@
+/* クリエイティブなフッター */
+
 .footer {
   display: flex;
   justify-content: center;
-  margin-top: var(--space-80);
+  margin-top: 80px;
 }
 
 .related {
-  max-width: var(--reading-width);
-  margin: var(--space-64) auto 0;
+  margin: 64px auto 0;
+  max-width: 720px;
 }
 
 .related h2 {
-  margin-bottom: var(--space-24);
-  padding-left: var(--space-16);
-  color: var(--text);
+  border-left: 4px solid #f36b0a;
   font-size: 1.35rem;
   font-weight: 700;
-  line-height: 1.5;
-  border-left: 4px solid var(--brand-strong);
+  margin-bottom: 20px;
+  padding-left: 14px;
 }
 
 .related ul {
   display: grid;
-  gap: var(--space-12);
-}
-
-.related li {
-  padding-bottom: var(--space-12);
-  border-bottom: 1px solid var(--border);
+  gap: 10px;
 }
 
 .related a {
-  color: var(--brand-strong);
+  color: #f36b0a;
   text-decoration: underline;
-  text-underline-offset: 0.2em;
+  text-underline-offset: 3px;
 }
 
-.related a:hover {
-  color: var(--brand-strong-hover);
-}
-
-.related a:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
-.footer :global(.c-button__link) {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: var(--space-12) var(--space-48);
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+.footer .c-button__link {
+  display: inline-block;
+  background: #f36b0a;
+  color: white;
+  padding: 16px 40px;
+  border-radius: 4px;
   text-decoration: none;
-  background: var(--brand-strong);
-  border: 1px solid var(--brand-strong);
-  border-radius: var(--radius-standard);
-  transition: background-color 180ms ease, transform 180ms ease;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: all 0.2s ease;
 }
 
-.footer :global(.c-button__link:hover) {
-  background: var(--brand-strong-hover);
+.footer .c-button__link:hover {
+  background: #e85d04;
   transform: translateY(-2px);
 }
 
-.footer :global(.c-button__link:focus-visible) {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
-.footer :global(.c-button__link:active) {
+.footer .c-button__link:active {
   transform: translateY(0);
 }
 
 @media (max-width: 640px) {
   .footer {
-    margin-top: var(--space-48);
+    margin-top: 56px;
   }
 
-  .related {
-    margin-top: var(--space-48);
-  }
-
-  .footer :global(.c-button__link) {
-    width: 100%;
-    padding: var(--space-12) var(--space-32);
+  .footer .c-button__link {
+    padding: 14px 32px;
     font-size: 0.9rem;
   }
 }

@@ -4,7 +4,7 @@
 /* ======================================= */
 .c-list {
   li {
-    padding-left: $space-6;
+    padding-left: 15px;
     position: relative;
     &::before {
       @include listStyle();
@@ -14,7 +14,7 @@
   &-ol {
     counter-reset: my-counter;
     li {
-      padding-left: $space-8;
+      padding-left: 25px;
       position: relative;
       &::before {
         @include olListStyle();

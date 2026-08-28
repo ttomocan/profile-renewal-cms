@@ -1,41 +1,34 @@
 .intro {
-  max-width: var(--reading-width);
-  margin-bottom: var(--space-48);
+  margin-bottom: 36px;
 }
 
 .intro h1 {
-  margin-bottom: var(--space-12);
-  color: var(--text);
   font-size: clamp(1.5rem, 4vw, 2rem);
   font-weight: 700;
   line-height: 1.5;
+  margin-bottom: 12px;
   text-wrap: balance;
 }
 
 .intro p {
-  color: var(--text-secondary);
   font-size: 1rem;
   line-height: 1.8;
 }
 
 .diary-search-row {
   display: flex;
+  gap: 24px;
   align-items: flex-end;
-  justify-content: space-between;
+  margin-bottom: 32px;
   flex-wrap: wrap;
-  gap: var(--space-24);
-  margin-bottom: var(--space-32);
+  justify-content: space-between;
 }
 
 @media (max-width: 768px) {
-  .intro {
-    margin-bottom: var(--space-32);
-  }
-
   .diary-search-row {
     flex-direction: column;
+    gap: 16px;
     align-items: stretch;
-    gap: var(--space-16);
-    margin-bottom: var(--space-24);
+    margin-bottom: 24px;
   }
 }

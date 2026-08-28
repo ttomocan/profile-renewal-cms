@@ -8,16 +8,14 @@
   }
   background-color: $baseC;
   display: flex;
-  gap: $space-8;
-  height: 88px;
-  min-height: 88px;
+  gap: 30px;
+  height: 100px;
   width: 100%;
   @include z-index(header);
 
   &.scroll {
     box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-    height: 72px;
-    min-height: 72px;
+    height: 80px;
     left: 0;
     position: fixed;
     top: 0;
@@ -34,7 +32,7 @@
 }
 
 .l-header-spacer {
-  height: 88px;
+  height: 100px;
 }
 
 /* ======================================= */
@@ -42,7 +40,7 @@
 /* ======================================= */
 @include mq(pcHeader) {
   .l-header {
-    padding: $space-4 $space-6;
+    padding: 20px;
     transition: 0.3s;
 
     &__logo {
@@ -132,7 +130,6 @@
         a {
           color: $textC;
           display: inline-block;
-          min-height: 44px;
           font: {
             family: var(--font-roboto), sans-serif;
             size: 1.4rem;
@@ -155,12 +152,8 @@
               left 0.4s ease;
             width: 0;
           }
-          &:hover,
-          &[aria-current='page'] {
-            color: $brandStrong;
-            font-weight: 700;
-            text-decoration: underline;
-            text-underline-offset: 0.35em;
+          &:is(:hover, .current) {
+            color: $mainC;
             &::after {
               width: 100%;
               left: 0;
@@ -177,16 +170,14 @@
 /* ======================================= */
 @include mq(spHeader) {
   .l-header-spacer {
-    height: 64px;
+    height: 70px;
   }
 
   .l-header {
-    height: 64px;
-    min-height: 64px;
-    gap: $space-4;
+    height: 70px;
+    gap: 20px;
     &.scroll {
-      height: 64px;
-      min-height: 64px;
+      height: 60px;
     }
 
     &__logo {
@@ -221,7 +212,6 @@
         display: block;
         padding: 10px 15px;
         text-align: center;
-        text-decoration: none;
       }
     }
 
@@ -278,7 +268,6 @@
         a {
           color: #ffffff;
           display: inline-block;
-          min-height: 44px;
           @include font-properties(var(--font-roboto), 400, 20px);
           letter-spacing: 0.1em;
           position: relative;
@@ -297,11 +286,7 @@
               left 0.4s ease;
             width: 0;
           }
-          &:hover,
-          &[aria-current='page'] {
-            font-weight: 700;
-            text-decoration: underline;
-            text-underline-offset: 0.35em;
+          &:is(:hover, .current) {
             &::after {
               width: 100%;
               left: 0;
@@ -346,8 +331,6 @@
         display: block;
         height: 100%;
         margin: 0;
-        min-height: 44px;
-        min-width: 44px;
         width: 100%;
         span {
           background: $mainC;
@@ -454,8 +437,7 @@
       background: #ffffff;
     }
 
-    &:hover,
-    &[aria-current='page'] {
+    &:is(:hover, .current) {
       color: rgba(255, 255, 255, 0.8) !important;
     }
   }

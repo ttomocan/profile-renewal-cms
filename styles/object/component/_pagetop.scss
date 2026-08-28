@@ -14,8 +14,6 @@
 
   width: 56px;
   height: 56px;
-  min-width: 44px;
-  min-height: 44px;
   padding: 0;
   border: none;
   border-radius: 50%;
@@ -29,8 +27,8 @@
    *     - トラック色（グレー）: var(--p) 〜 360deg
    */
   background:
-    radial-gradient(circle, $surfaceC 64%, transparent 65%),
-    conic-gradient(from -90deg, $brandStrong var(--p), $borderC var(--p));
+    radial-gradient(circle, #fff 64%, transparent 65%),
+    conic-gradient(from -90deg, $mainC var(--p), rgba(0, 0, 0, 0.1) var(--p));
 
   box-shadow:
     0 2px 16px rgba(0, 0, 0, 0.1),
@@ -98,7 +96,7 @@
 
   /* focus-visible: アウトライン表示 */
   &:focus-visible {
-    outline: 3px solid $focusC;
+    outline: 2px solid $mainC;
     outline-offset: 3px;
   }
 

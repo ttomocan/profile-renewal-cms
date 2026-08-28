@@ -67,22 +67,33 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 // 実績カード
 // ===============================================
 .result-card {
-  background: $surfaceC;
-  border: 1px solid $borderC;
-  border-radius: $radiusStandard;
-  box-shadow: 0 2px 8px rgb(40 40 40 / 8%);
+  background: $white;
+  box-shadow: $shadow-sm;
+  border: 1px solid rgba(243, 107, 10, 0.2);
+  border-radius: 10px;
   overflow: hidden;
-  transition:
-    box-shadow 150ms ease,
-    transform 150ms ease;
+  transition: $transition-base;
   position: relative;
   height: 100%;
   display: flex;
   flex-direction: column;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgb(40 40 40 / 10%);
+    box-shadow: $shadow-xl;
+    border-color: rgba(243, 107, 10, 0.5);
+
+    .result-card__image-img {
+      transform: scale(1.08);
+    }
+
+    .result-card__action-icon {
+      opacity: 1;
+      transform: translateX(0) scale(1.1);
+    }
+
+    .result-card__overlay {
+      opacity: 1;
+    }
   }
 
   &__link {
@@ -91,11 +102,6 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     height: 100%;
     text-decoration: none;
     color: inherit;
-
-    &:focus-visible {
-      outline: 3px solid $focusC;
-      outline-offset: -3px;
-    }
   }
 
   &__image {
@@ -108,7 +114,19 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     }
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(243, 107, 10, 0.15) 0%, rgba(243, 107, 10, 0.05) 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
   }
 
   &__badge {
@@ -135,29 +153,29 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     // 案件区分別カラースキーム（メインカラーベース）
     &.work-type-work-type-main,
     &.work-type-main {
-      background: $brandStrong;
+      background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
       color: $white;
     }
 
     &.work-type-work-type-side,
     &.work-type-side {
-      background: #047857;
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
       color: $white;
     }
 
     &.work-type-work-type-freelance,
     &.work-type-freelance {
-      background: #b91c1c;
+      background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
       color: $white;
     }
 
     &.work-type-personal {
-      background: #6d28d9;
+      background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
       color: $white;
     }
 
     &.work-type-未分類 {
-      background: #4b5563;
+      background: linear-gradient(135deg, $gray-600 0%, $gray-700 100%);
       color: $white;
     }
   }
@@ -168,34 +186,38 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     right: 15px;
     width: 30px;
     height: 30px;
-    background: $surfaceC;
-    color: $brandStrong;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid $borderC;
+    opacity: 0;
+    transform: translateX(12px) scale(0.9);
+    transition: $transition-base;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     z-index: 10;
 
     svg {
       width: 20px;
       height: 20px;
-      color: inherit;
+      color: $primary-color;
     }
   }
 
   &__content {
-    display: grid;
-    gap: $space-4;
-    padding: $space-6;
-    background: $surfaceC;
+    padding: 15px;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
   }
 
   &__meta {
     display: flex;
     align-items: center;
-    gap: $space-2;
+    gap: 10px;
+    margin-bottom: 15px;
     flex-wrap: wrap;
   }
 
@@ -204,11 +226,11 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     align-items: center;
     padding: 2px 10px;
     background: $primary-lighter;
-    color: $brandStrong;
+    color: $primary-color;
     font-size: 12px;
     font-weight: 600;
     border-radius: 10px;
-    border: 1px solid $borderC;
+    border: 1px solid rgba(243, 107, 10, 0.15);
     letter-spacing: 0.001em;
   }
 
@@ -219,6 +241,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     letter-spacing: 0.001em;
+
     &::before {
       content: '';
       display: inline-block;
@@ -240,7 +263,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 700;
     line-height: 1.5;
     color: $text-color;
-    margin: 0;
+    margin-bottom: 10px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     line-clamp: 2;
@@ -258,7 +281,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    margin: 0;
+    flex: 1;
   }
 
   &__responsibility {
@@ -266,14 +289,14 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 13px;
     font-weight: 600;
     line-height: 1.6;
-    margin: 0;
+    margin-bottom: 10px;
   }
 
   &__technologies {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin: 0;
+    margin-bottom: 12px;
 
     li {
       background: $gray-100;
@@ -286,10 +309,10 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__detail-text {
-    color: $brandStrong;
+    color: $primary-color;
     font-size: 13px;
     font-weight: 700;
-    margin-top: auto;
+    margin-top: 14px;
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -316,87 +339,31 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // ===============================================
-// ページネーション
-// ===============================================
-.results-pagination {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-2;
-  justify-content: center;
-  margin-inline: auto;
-  max-width: $innerSmall;
-
-  &__item {
-    align-items: center;
-    background: $surfaceC;
-    border: 1px solid $borderC;
-    border-radius: $radiusSmall;
-    color: $textC;
-    display: inline-flex;
-    justify-content: center;
-    min-width: 44px;
-    min-height: 44px;
-    padding-inline: $space-3;
-    text-decoration: none;
-
-    &:is(a):hover {
-      border-color: $brandStrong;
-      color: $brandStrong;
-    }
-
-    &--current {
-      border: 1px solid $brandStrong;
-      color: $brandStrong;
-      font-weight: 700;
-      text-decoration: underline;
-      text-underline-offset: 0.3em;
-    }
-
-    &--disabled {
-      background: $subtleC;
-      color: $textSecondaryC;
-    }
-
-    &--prev,
-    &--next {
-      gap: $space-2;
-    }
-  }
-
-  &__info {
-    flex-basis: 100%;
-    margin-top: $space-2;
-    text-align: center;
-  }
-}
-
-// ===============================================
 // 空の状態
 // ===============================================
 .results-empty {
   text-align: center;
-  padding: $space-20 $space-8;
-  background: $surfaceC;
-  border: 1px solid $borderC;
-  border-radius: $radiusStandard;
+  padding: 80px 32px;
+  background: linear-gradient(135deg, $base-color 0%, $white 100%);
+  border: 2px dashed rgba(243, 107, 10, 0.2);
 
-  &__title {
-    font-size: 24px;
-    font-weight: 700;
-    color: $text-color;
-    margin-bottom: $space-6;
+  &__icon {
+    font-size: 72px;
+    margin-bottom: 32px;
+    opacity: 0.7;
   }
 
-  &__back {
-    align-items: center;
-    color: $brandStrong;
-    display: inline-flex;
-    justify-content: center;
-    min-height: 44px;
-    padding-inline: $space-4;
-    text-decoration: underline;
-    text-underline-offset: 0.3em;
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: $text-color;
+    margin-bottom: 16px;
+  }
+
+  &__description {
+    font-size: 18px;
+    color: $gray-600;
+    line-height: 1.7;
   }
 }
 
@@ -482,7 +449,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         &:not(:last-child)::after {
           content: '>';
           margin: 0 12px;
-          color: $brandStrong;
+          color: $primary-color;
           font-weight: 600;
         }
 
@@ -493,7 +460,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           font-weight: 500;
 
           &:hover {
-            color: $brandStrongHover;
+            color: $primary-color;
           }
         }
 
@@ -507,12 +474,10 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__header {
     margin-bottom: 50px;
-    margin-inline: auto;
-    max-width: $innerSmall;
-    background: $surfaceC;
-    border-radius: $radiusStandard;
-    padding: $space-6;
-    border: 1px solid $borderC;
+    background: linear-gradient(135deg, $white 0%, $base-color 100%);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid rgba(243, 107, 10, 0.3);
 
     @include mq('sp') {
       padding: 15px;
@@ -535,9 +500,9 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         letter-spacing: 0.001em;
 
         &--work-type {
-          background: $subtleC;
-          border: 1px solid $borderC;
-          color: $brandStrong;
+          background: rgba(243, 107, 10, 0.05);
+          border: 1px solid rgba(243, 107, 10, 0.15);
+          color: #f36b0a;
           font-weight: 600;
         }
 
@@ -553,6 +518,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           background: transparent;
           padding: 0;
           font-weight: 600;
+
           &::before {
             content: '';
             display: inline-block;
@@ -606,29 +572,23 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       .meta-icon {
         width: 18px;
         height: 18px;
-        color: $brandStrong;
+        color: $primary-color;
         flex-shrink: 0;
       }
     }
   }
 
   &__section {
-    max-width: $innerSmall;
-    margin-inline: auto;
-    font-size: 17px;
-    line-height: 1.9;
-
     &:not(:is(.pagetitle, :last-of-type)) {
-      padding-bottom: $space-16;
+      padding-bottom: 80px;
     }
-
     &-title {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 700;
       color: $text-color;
-      margin-bottom: $space-6;
+      margin-bottom: 20px;
       position: relative;
-      padding-left: $space-4;
+      padding-left: 20px;
 
       &::before {
         content: '';
@@ -638,7 +598,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         transform: translateY(-50%);
         width: 6px;
         height: 70%;
-        background: $brandStrong;
+        background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -15%) 100%);
         border-radius: 3px;
       }
 
@@ -648,23 +608,23 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-content {
-      p {
-        margin: 0;
-        white-space: pre-line;
-
-        + p {
-          margin-top: $space-4;
-        }
-      }
-
+      // 通常のテキストコンテンツ（タグ以外）
       &--summary {
-        background: transparent;
-        border: 0;
-        padding: 0;
+        background: $white;
+        border: 1px solid rgba(243, 107, 10, 0.3);
+        border-radius: 20px;
+        padding: 20px 25px;
 
         p {
-          font: inherit;
+          font-size: 16px;
+          line-height: 1.8;
           color: $text-color;
+          margin: 0;
+          white-space: pre-line;
+        }
+
+        @include mq('sp') {
+          padding: 15px 20px;
         }
       }
     }
@@ -678,8 +638,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         li {
           display: flex;
           align-items: flex-start;
-          font-size: inherit;
-          line-height: inherit;
+          font-size: 16px;
+          line-height: 1.7;
           color: $text-color;
           padding-left: 18px;
           position: relative;
@@ -723,8 +683,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
           &--role {
             background: $primary-lighter;
-            color: $brandStrong;
-            border-color: $borderC;
+            color: $primary-color;
+            border-color: rgba(243, 107, 10, 0.25);
 
             &:hover {
               background: rgba(243, 107, 10, 0.12);
@@ -735,8 +695,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
           &--tech {
             background: $primary-lighter;
-            color: $brandStrong;
-            border-color: $borderC;
+            color: $primary-color;
+            border-color: rgba(243, 107, 10, 0.25);
 
             &:hover {
               background: rgba(243, 107, 10, 0.12);
@@ -767,7 +727,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       background: $white;
       border: 1px solid rgba(243, 107, 10, 0.3);
       border-radius: 16px;
-      color: $brandStrong;
+      color: $primary-color;
       text-decoration: none;
       transition: $transition-fast;
       letter-spacing: 0.001em;
@@ -787,12 +747,6 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
 
-.result-detail > .result-detail__section:first-of-type .result-detail__section-content--summary {
-  background: $subtleC;
-  border-left: 4px solid $brandStrong;
-  padding: $space-6;
-}
-
 .result-related {
   .results-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -805,7 +759,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   gap: 10px;
 
   a {
-    color: $brandStrong;
+    color: $primary-color;
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -873,7 +827,7 @@ cite {
     .site-link-card__title,
     .site-link-card__description,
     .site-link-card__url {
-      color: $brandStrongHover;
+      color: $primary-color;
     }
   }
 
@@ -937,7 +891,7 @@ cite {
     padding: 10px;
     border-radius: 5px;
     background: rgba(243, 107, 10, 0.1);
-    color: $brandStrong;
+    color: $primary-color;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1001,7 +955,7 @@ cite {
   font-size: 16px;
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
     box-shadow: $shadow-xl;
     background: linear-gradient(135deg, color.adjust($primary-color, $lightness: -5%) 0%, color.adjust($primary-color, $lightness: -15%) 100%);
   }

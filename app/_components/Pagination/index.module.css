@@ -1,61 +1,40 @@
 .pagination {
-  margin: var(--space-32) 0;
+  margin: 2rem 0;
 }
 
 .container {
   display: flex;
-  align-items: center;
+  gap: 10px;
   justify-content: center;
+  align-items: center;
+  padding: 24px;
+  margin-top: 24px;
   flex-wrap: wrap;
-  gap: var(--space-8);
-  margin-top: var(--space-24);
-  padding: var(--space-24);
-}
-
-.list {
-  list-style: none;
 }
 
 .item {
+  color: #383838;
+  background-color: #dbd1c9;
   display: flex;
-  align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  color: var(--text);
-  font-weight: 600;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-weight: 500;
   text-decoration: none;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-standard);
-  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  transition: background-color 0.3s, color 0.3s;
   user-select: none;
 }
 
-.item:hover {
-  color: var(--brand-strong);
-  background: var(--subtle);
-  border-color: var(--brand-strong);
-}
-
-.item:focus-visible {
-  outline: 3px solid var(--focus);
-  outline-offset: 3px;
-}
-
+.item:hover,
 .current {
-  color: #fff;
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 0.2em;
-  background: var(--brand-strong);
-  border-color: var(--brand-strong);
+  color: #ffffff;
+  background-color: #f36b0a;
 }
 
 .arrow {
-  font-weight: 700;
+  font-weight: bold;
 }
 
 .ellipsis {
@@ -65,28 +44,41 @@
 }
 
 .ellipsisItem {
+  color: #383838;
   display: flex;
-  align-items: center;
   justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
-  color: var(--text-secondary);
+  align-items: center;
+  width: 36px;
   letter-spacing: 2px;
   user-select: none;
 }
 
+/* タッチデバイス向けの調整 */
+@media (hover: none) {
+  .item {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
 @media (max-width: 767px) {
   .container {
-    gap: var(--space-4);
-    margin-top: var(--space-16);
-    padding: var(--space-16) 0;
+    gap: 5px;
+    padding: 16px;
+    margin-top: 16px;
   }
 
   .item {
-    width: 44px;
-    height: 44px;
-    min-width: 44px;
-    min-height: 44px;
+    width: 32px;
+    height: 32px;
     font-size: 14px;
+  }
+
+  /* タッチデバイス向けの調整（モバイル） */
+  @media (hover: none) {
+    .item {
+      min-width: 40px;
+      min-height: 40px;
+    }
   }
 }

@@ -32,7 +32,7 @@ export function useSmoothScroll() {
   useEffect(() => {
     const handleClick = (event: Event) => {
       const anchor = (event.target as Element)?.closest('a[href^="#"]') as HTMLAnchorElement;
-      if (!anchor || anchor.matches('.l-header__link a') || anchor.matches('.c-skip-link')) return;
+      if (!anchor || anchor.matches('.l-header__link a')) return;
 
       event.preventDefault();
 

@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
-import { createContactData, type ContactField, type ContactFormState } from '@/app/_actions/contact';
+import { createContactData, type ContactFormState } from '@/app/_actions/contact';
 import { sendGAEvent } from '@next/third-parties/google';
 
 const initialState: ContactFormState = {
@@ -47,9 +47,7 @@ export default function ContactForm() {
     );
   }
 
-  const hasFieldError = (field: ContactField) => state.status === 'error' && state.field === field;
-  const getErrorDescription = (field: ContactField) =>
-    hasFieldError(field) ? 'contact-error' : undefined;
+  const hasFieldError = (field: string) => state.status === 'error' && state.field === field;
   const handleSubmit = () => {
     const analyticsWindow = window as Window & { dataLayer?: unknown[] };
     if (Array.isArray(analyticsWindow.dataLayer)) {
@@ -75,7 +73,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="namae" id="namae" className="textfield" autoComplete="name" required aria-required="true" aria-invalid={hasFieldError('namae')} aria-describedby={getErrorDescription('namae')} maxLength={100} />
+          <input type="text" name="namae" id="namae" className="textfield" autoComplete="name" required aria-required="true" aria-invalid={hasFieldError('namae')} maxLength={100} />
         </div>
       </div>
 
@@ -89,7 +87,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="furigana" id="furigana" className="textfield" autoComplete="off" required aria-required="true" aria-invalid={hasFieldError('furigana')} aria-describedby={getErrorDescription('furigana')} maxLength={100} />
+          <input type="text" name="furigana" id="furigana" className="textfield" autoComplete="off" required aria-required="true" aria-invalid={hasFieldError('furigana')} maxLength={100} />
         </div>
       </div>
 
@@ -103,11 +101,11 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="email" name="email" id="email" className="textfield" autoComplete="email" inputMode="email" required aria-required="true" aria-invalid={hasFieldError('email')} aria-describedby={getErrorDescription('email')} maxLength={254} />
+          <input type="email" name="email" id="email" className="textfield" autoComplete="email" inputMode="email" required aria-required="true" aria-invalid={hasFieldError('email')} maxLength={254} />
         </div>
       </div>
 
-      <fieldset className="p-form__item" aria-invalid={hasFieldError('item')} aria-describedby={getErrorDescription('item')}>
+      <fieldset className="p-form__item" aria-invalid={hasFieldError('item')}>
         <legend className="p-form__heading">
           <span className="label">お問い合わせ項目</span>
           <span className="p-form__required" aria-hidden="true">
@@ -134,7 +132,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <textarea className="textarea" id="message" name="message" required aria-required="true" aria-invalid={hasFieldError('message')} aria-describedby={getErrorDescription('message')} maxLength={5000} />
+          <textarea className="textarea" id="message" name="message" required aria-required="true" aria-invalid={hasFieldError('message')} maxLength={5000} />
         </div>
       </div>
 

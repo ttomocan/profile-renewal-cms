@@ -1,174 +1,139 @@
 @use '../global/variables' as *;
 @use '../global/mixin' as *;
+@use '../global/extend' as *;
 
 /* =============================== */
-/* プロフィール・経歴
+/* ともきゃんはこんな人
 ================================== */
 .about {
-  .greeting,
-  .experience,
-  .strength,
-  .work-style,
-  .license,
-  .activity,
-  .profile {
-    padding-bottom: $sectionSpacePc;
-  }
-
   .greeting {
+    padding-bottom: 80px;
     &__cont {
       display: flex;
       flex-direction: column;
-      gap: $space-6;
       justify-content: center;
+      gap: 30px;
+      @include mq('sp') {
+        flex-direction: column;
+      }
     }
-
     &__image {
-      flex: 0 0 200px;
+      flex: 0 0 150px;
       text-align: center;
-
       img {
-        border: 1px solid $borderC;
+        border: 1px solid #6a6a6a;
         border-radius: 50%;
       }
     }
-
     &__occupation {
-      font-size: 0.8125rem;
+      font-size: 13px;
       white-space: nowrap;
     }
-
     &__detail {
-      color: $textSecondaryC;
-      line-height: 1.9;
-
       &__sign {
-        margin-top: $space-6;
+        margin-top: 20px;
         text-align: right;
       }
-    }
-  }
-
-  .about-facts {
-    display: grid;
-    gap: $space-6;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    margin-bottom: $space-8;
-
-    &__item {
-      background: $surfaceC;
-      border: 1px solid $borderC;
-      border-radius: $radiusStandard;
-      box-shadow: none;
-      padding: $space-6;
-      text-align: center;
-
-      dt {
-        color: $textSecondaryC;
-        font-size: 0.875rem;
-      }
-
-      dd {
-        color: $brandStrong;
-        font-size: 1.375rem;
-        font-weight: 700;
-        margin-top: $space-2;
-      }
-    }
-  }
-
-  .about-section-copy {
-    max-width: $innerSmall;
-    margin-inline: auto;
-    display: grid;
-    gap: $space-6;
-    color: $textSecondaryC;
-    font-size: 1rem;
-    line-height: 1.9;
-  }
-
-  .about-link {
-    margin-top: $space-8;
-    text-align: center;
-  }
-
-  .about-cards {
-    display: grid;
-    gap: $space-6;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    li {
-      background: $surfaceC;
-      border: 1px solid $borderC;
-      border-radius: $radiusStandard;
-      box-shadow: none;
-      display: grid;
-      gap: $space-3;
-      padding: $space-6;
-    }
-
-    strong {
-      color: $brandStrong;
-      font-size: 1.125rem;
-    }
-
-    span {
-      color: $textSecondaryC;
-      line-height: 1.8;
     }
   }
 
   .license,
   .result {
     &__cont {
-      align-items: center;
       display: flex;
       flex-wrap: wrap;
-      gap: $space-3;
+      align-items: center;
       justify-content: center;
+      gap: 10px;
     }
 
     &__card {
-      background: $surfaceC;
-      border: 1px solid $borderC;
-      border-radius: $radiusSmall;
-      color: $textC;
-      padding: $space-2 $space-4;
+      border: 1px solid #282828;
+      border-radius: 10px;
+      color: #282828;
+      padding: 2px 15px;
+    }
+  }
+
+  .about-facts {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 30px;
+
+    &__item {
+      background: #ffffff;
+      border: 1px solid rgba(243, 107, 10, 0.3);
+      border-radius: 14px;
+      padding: 18px;
+      text-align: center;
+
+      dt {
+        color: #666666;
+        font-size: 14px;
+      }
+
+      dd {
+        color: $mainC;
+        font-size: 22px;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .about-section-copy {
+    display: grid;
+    gap: 16px;
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  .about-link {
+    margin-top: 30px;
+    text-align: center;
+  }
+
+  .about-cards {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    li {
+      background: #ffffff;
+      border: 1px solid rgba(243, 107, 10, 0.3);
+      border-radius: 14px;
+      display: grid;
+      gap: 8px;
+      padding: 20px;
+    }
+
+    strong {
+      color: $mainC;
+      font-size: 18px;
     }
   }
 
   .about-achievements {
-    margin-top: $space-6;
+    margin-top: 24px;
     padding: 0;
   }
 
   .about-related-links {
     display: grid;
-    gap: $space-3;
-    margin-top: $space-6;
+    gap: 10px;
+    margin-top: 24px;
 
     a {
-      color: $brandStrong;
+      color: $mainC;
       text-decoration: underline;
-      text-underline-offset: 0.2em;
+      text-underline-offset: 3px;
     }
   }
 
   @include mq(sp) {
-    .greeting,
-    .experience,
-    .strength,
-    .work-style,
-    .license,
-    .activity,
-    .profile {
-      padding-bottom: $sectionSpaceSp;
-    }
-
     .about-facts,
     .about-cards {
       grid-template-columns: 1fr;
-      gap: $space-4;
     }
 
     .about-link .c-button__link {

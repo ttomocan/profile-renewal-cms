@@ -8,22 +8,14 @@
   .prev,
   .next {
     a {
-      align-items: center;
-      background: $subtleC;
-      border: 1px solid $borderC;
-      border-radius: $radiusSmall;
-      color: $brandStrong;
-      display: inline-flex;
-      justify-content: center;
+      background: #edf1f5;
+      display: inline-block;
       line-height: 1;
-      min-width: 44px;
-      min-height: 44px;
       text-align: center;
-      padding: $space-2;
-      text-decoration: none;
+      padding: 10px;
       transition: 0.2s all;
       &:hover {
-        @include colorScheme($brandStrong, #ffffff);
+        @include colorScheme($mainC, #ffffff);
       }
     }
   }
@@ -32,26 +24,26 @@
     gap: 20px;
     justify-content: center;
     li {
-      border-bottom: 1px solid $borderC;
-      min-height: 48px;
+      border-bottom: 1px solid #808080;
+      height: 60px;
       overflow: hidden;
       :is(a, span) {
         color: #ffffff;
-        background: $textSecondaryC;
+        background: #808080;
         border-radius: 50%;
         display: grid;
         font-weight: 600;
         letter-spacing: 0.1em;
         line-height: 1;
-        min-height: 48px;
-        min-width: 48px;
+        height: 70px;
+        width: 70px;
         place-content: center;
         transition: 0.2s all;
       }
       .--current,
       a:hover {
-        @include colorScheme($brandStrong, #ffffff);
-        border-bottom: 1px solid $brandStrong;
+        @include colorScheme($mainC, #ffffff);
+        border-bottom: 1px solid $mainC;
         opacity: 1;
       }
     }

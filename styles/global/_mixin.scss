@@ -30,7 +30,7 @@ $breakpoint: (
 
 // リスト
 @mixin listStyle() {
-  background: $brandStrong;
+  background: $mainC;
   border-radius: 50%;
   content: '';
   display: inline-block;
@@ -51,29 +51,23 @@ $breakpoint: (
 }
 
 // ボタン
-@mixin btn($bg, $color, $width, $border: $bg, $hoverBg: $brandStrongHover, $hoverColor: $color) {
-  display: inline-flex;
-  min-width: $width;
-  min-height: 48px;
-  align-items: center;
-  justify-content: center;
-  padding: $space-3 $space-6;
-  border: 1px solid $border;
-  border-radius: $radiusStandard;
+@mixin btn($bg, $color, $width) {
+  background-color: $bg;
+  border: 1px solid $color;
+  border-radius: calc(infinity * 1px);
   box-sizing: border-box;
   color: $color;
-  background: $bg;
-  line-height: 1.4;
+  display: inline-block;
+  line-height: 1.5;
+  padding: 15px 40px;
   position: relative;
   text-decoration: none;
   text-align: center;
-  transition:
-    background-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+  transition: 0.2s;
+  min-width: $width;
   &:not([target='_blank'])::before {
     border: 1px solid {
-      color: currentColor currentColor transparent transparent;
+      color: $color $color transparent transparent;
     }
     content: '';
     display: block;
@@ -84,11 +78,12 @@ $breakpoint: (
     transform: translateY(-50%) rotate(45deg);
     width: 10px;
   }
-  &:hover {
-    background: $hoverBg;
-    color: $hoverColor;
+  &:hover,
+  &:focus {
+    background-color: $color;
+    border-color: $bg;
+    color: $bg;
     opacity: 1;
-    transform: translateY(-2px);
     &::before {
       border: 1px solid {
         color: currentColor currentColor transparent transparent;
