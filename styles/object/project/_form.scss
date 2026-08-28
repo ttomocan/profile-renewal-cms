@@ -26,6 +26,13 @@
     box-shadow: none;
   }
 
+  .textfield:focus-visible,
+  .textarea:focus-visible,
+  select:focus-visible {
+    outline: 3px solid $focusC;
+    outline-offset: 3px;
+  }
+
   .textfield[aria-invalid='true'],
   .textarea[aria-invalid='true'] {
     border-color: $errorC;

@@ -71,6 +71,28 @@ function isDescriptionForField(expression, field) {
     && expression.arguments[0].text === field;
 }
 
+function declarationsInRule(rule) {
+  const declarations = new Map();
+  rule.walkDecls((declaration) => declarations.set(declaration.prop, declaration.value));
+  return declarations;
+}
+
+function enclosingMedia(rule) {
+  let parent = rule.parent;
+  while (parent) {
+    if (parent.type === 'atrule' && parent.name === 'media') return parent.params;
+    parent = parent.parent;
+  }
+  return undefined;
+}
+
+function isStateProperty(node, property) {
+  return ts.isPropertyAccessExpression(node)
+    && ts.isIdentifier(node.expression)
+    && node.expression.text === 'state'
+    && node.name.text === property;
+}
+
 test('semantic token regressions must not remove the shared :root color, spacing, radius, and content-width contract', () => {
   for (const declaration of [
     '--brand-accent: #f36b0a;',
@@ -390,8 +412,47 @@ test('contact errors describe only their active field while form and 404 states 
   assert.ok(ts.isConditionalExpression(helper.body));
   assert.ok(ts.isCallExpression(helper.body.condition));
   assert.equal(helper.body.condition.expression.getText(formSource), 'hasFieldError');
+  assert.ok(ts.isIdentifier(helper.parameters[0].name));
+  assert.equal(helper.body.condition.arguments.length, 1);
+  assert.ok(ts.isIdentifier(helper.body.condition.arguments[0]));
+  assert.equal(helper.body.condition.arguments[0].text, helper.parameters[0].name.text);
   assert.equal(helper.body.whenTrue.getText(formSource), "'contact-error'");
   assert.equal(helper.body.whenFalse.getText(formSource), 'undefined');
+
+  let fieldErrorHelper;
+  const visitFieldErrorHelper = (node) => {
+    if (
+      ts.isVariableDeclaration(node)
+      && ts.isIdentifier(node.name)
+      && node.name.text === 'hasFieldError'
+    ) {
+      fieldErrorHelper = node;
+    }
+    ts.forEachChild(node, visitFieldErrorHelper);
+  };
+  visitFieldErrorHelper(formSource);
+  assert.ok(fieldErrorHelper && ts.isVariableDeclaration(fieldErrorHelper));
+  assert.ok(fieldErrorHelper.initializer && ts.isArrowFunction(fieldErrorHelper.initializer));
+  assert.ok(ts.isIdentifier(fieldErrorHelper.initializer.parameters[0].name));
+  assert.ok(ts.isBinaryExpression(fieldErrorHelper.initializer.body));
+  const fieldErrorConditions = [
+    fieldErrorHelper.initializer.body.left,
+    fieldErrorHelper.initializer.body.right,
+  ];
+  assert.ok(fieldErrorConditions.some(
+    (condition) => ts.isBinaryExpression(condition)
+      && condition.operatorToken.kind === ts.SyntaxKind.EqualsEqualsEqualsToken
+      && isStateProperty(condition.left, 'status')
+      && ts.isStringLiteral(condition.right)
+      && condition.right.text === 'error',
+  ));
+  assert.ok(fieldErrorConditions.some(
+    (condition) => ts.isBinaryExpression(condition)
+      && condition.operatorToken.kind === ts.SyntaxKind.EqualsEqualsEqualsToken
+      && isStateProperty(condition.left, 'field')
+      && ts.isIdentifier(condition.right)
+      && condition.right.text === fieldErrorHelper.initializer.parameters[0].name.text,
+  ));
 
   for (const field of ['namae', 'furigana', 'email', 'message']) {
     const control = formElements.find(
@@ -446,7 +507,30 @@ test('contact errors describe only their active field while form and 404 states 
     assert.equal(control.get('border-radius'), '6px');
     assert.equal(control.get('background'), '#ffffff');
   }
-  assert.equal(declarationsFor(formCss, '.p-form .checkbox input[type=radio] + .checkbox-text').get('min-height'), '44px');
+  for (const selector of [
+    '.p-form .textfield:focus-visible',
+    '.p-form .textarea:focus-visible',
+    '.p-form select:focus-visible',
+  ]) {
+    const focus = declarationsFor(formCss, selector);
+    assert.equal(focus.get('outline'), '3px solid #0066cc');
+    assert.equal(focus.get('outline-offset'), '3px');
+  }
+  assert.equal(declarationsFor(formCss, '.p-form input:focus-visible:is([type=text], [type=tel], [type=email])').get('outline'), '3px solid #0066cc');
+  assert.equal(declarationsFor(formCss, '.p-form textarea:focus-visible').get('outline'), '3px solid #0066cc');
+
+  const radioLabelRules = [];
+  formCss.walkRules((rule) => {
+    if (rule.selectors.includes('.p-form .checkbox input[type=radio] + .checkbox-text')) {
+      radioLabelRules.push({ media: enclosingMedia(rule), declarations: declarationsInRule(rule) });
+    }
+  });
+  const baseRadioLabel = radioLabelRules.find(({ media }) => media === undefined);
+  const mobileRadioLabel = radioLabelRules.find(({ media }) => media === '(max-width: 767px)');
+  assert.ok(baseRadioLabel, 'expected a base radio-label rule');
+  assert.ok(mobileRadioLabel, 'expected a max-width:767px radio-label rule');
+  assert.equal(baseRadioLabel.declarations.get('min-height'), '44px');
+  assert.equal(mobileRadioLabel.declarations.get('min-height'), '44px');
   assert.equal(declarationsFor(formCss, '.p-form .checkbox input[type=radio]:focus-visible + .checkbox-text::before').get('outline'), '3px solid #0066cc');
   for (const selector of [
     '.p-form .textfield[aria-invalid=true]',

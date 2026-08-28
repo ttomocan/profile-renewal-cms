@@ -420,8 +420,9 @@ th {
   padding: 10px;
   width: 100%;
 }
-.p-form input:focus:is([type=text], [type=tel], [type=email]), .p-form textarea:focus {
-  outline: 1px solid #f36b0a;
+.p-form input:focus-visible:is([type=text], [type=tel], [type=email]), .p-form textarea:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 3px;
 }
 
 html {
@@ -2038,6 +2039,12 @@ a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not
   border-radius: 6px;
   background: #ffffff;
   box-shadow: none;
+}
+.p-form .textfield:focus-visible,
+.p-form .textarea:focus-visible,
+.p-form select:focus-visible {
+  outline: 3px solid #0066cc;
+  outline-offset: 3px;
 }
 .p-form .textfield[aria-invalid=true],
 .p-form .textarea[aria-invalid=true] {
