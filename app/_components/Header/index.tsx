@@ -7,10 +7,15 @@ import Link from 'next/link';
 import MenuNav from '../MenuNav';
 
 export default function Header() {
+  const pathname = usePathname();
+
+  return <HeaderContent key={pathname} pathname={pathname} />;
+}
+
+function HeaderContent({ pathname }: { pathname: string }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const pathname = usePathname();
 
   const toggleMenu = () => {
     setIsMenuOpen((isOpen) => !isOpen);
@@ -65,10 +70,6 @@ export default function Header() {
       document.body.classList.remove('header-no-scroll');
     };
   }, [isMenuOpen]);
-
-  useEffect(() => {
-    closeMenu(false);
-  }, [closeMenu, pathname]);
 
   useEffect(() => {
     if (!isMenuOpen) return;
