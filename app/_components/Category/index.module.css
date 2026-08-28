@@ -1,15 +1,24 @@
-/* シンプルなカテゴリータグ */
-
 .tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
   background: #f36b0a;
   color: #ffffff;
-  padding: 6px 14px;
+  padding: 4px 10px;
   border-radius: var(--radius-small);
   font-size: 0.8rem;
   font-weight: 600;
+  line-height: 1;
   letter-spacing: 0.02em;
+  white-space: nowrap;
   transition: background 0.2s ease;
+}
+
+.icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
 }
 
 .tag:hover {
