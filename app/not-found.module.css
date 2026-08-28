@@ -1,3 +1,13 @@
+.container {
+  width: min(100% - 32px, var(--reading-width));
+  margin-inline: auto;
+  margin-block: var(--space-64);
+  padding: var(--space-32);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-standard);
+  background: var(--surface);
+}
+
 .title {
   font-size: 2rem;
   text-align: center;
@@ -13,6 +23,10 @@
 
 .container > p:last-child {
   text-align: center;
+}
+
+.container :global(.c-button__link) {
+  background: var(--brand-strong);
 }
 
 @media (max-width: 640px) {

@@ -19,7 +19,20 @@ $btn-colors: (
 
 .c-button {
   &__link {
-    @include btn($mainC, #ffffff, 280px);
+    @include btn($brandStrong, #ffffff, 280px);
+    font-weight: 700;
+    line-height: 1.4;
+    text-decoration: none;
+
+    &:focus-visible {
+      outline: 3px solid $focusC;
+      outline-offset: 3px;
+    }
+
+    &.--secondary,
+    &.--hero-secondary {
+      @include btn($surfaceC, $brandStrong, 280px, $brandStrong, $subtleC, $brandStrong);
+    }
     @each $site_name, $color in $btn-colors {
       &.--#{$site_name} {
         background-color: map.get($color, bg-color);
@@ -43,11 +56,9 @@ $btn-colors: (
     }
 
     &-external {
-      @include btn(transparent, #ffffff, 280px);
-      &:hover,
-      &:focus {
-        background-color: #ffffff;
-        color: $textC;
+      @include btn($surfaceC, $brandStrong, 280px, $brandStrong, $subtleC, $brandStrong);
+      font-weight: 700;
+      &:hover {
         &::after {
           filter: brightness(0);
         }

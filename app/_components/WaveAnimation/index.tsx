@@ -219,10 +219,14 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
         animationStateRef.current.seconds = 0;
         animationStateRef.current.t = 0;
 
-        startAnimation();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          draw();
+        } else {
+          startAnimation();
+        }
       }
     }, CONSTANTS.DEBOUNCE_MS);
-  }, [setupCanvas, startAnimation, stopAnimation]);
+  }, [draw, setupCanvas, startAnimation, stopAnimation]);
 
   /**
    * Initialize and cleanup

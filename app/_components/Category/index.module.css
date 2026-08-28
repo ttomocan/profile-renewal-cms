@@ -1,17 +1,19 @@
-/* シンプルなカテゴリータグ */
-
 .tag {
   display: inline-block;
-  background: #f36b0a;
-  color: #ffffff;
-  padding: 6px 14px;
-  border-radius: 4px;
+  padding: 6px var(--space-12);
+  color: var(--brand-strong);
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 1.5;
   letter-spacing: 0.02em;
-  transition: background 0.2s ease;
+  background: var(--subtle);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-small);
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease;
 }
 
 .tag:hover {
-  background: #e85d04;
+  color: var(--brand-strong-hover);
+  background: var(--surface);
+  border-color: var(--brand-strong);
 }

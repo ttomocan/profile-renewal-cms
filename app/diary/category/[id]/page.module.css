@@ -1,6 +1,9 @@
 .category_title {
+  margin-bottom: var(--space-24);
+  color: var(--text);
   font-size: clamp(1.4rem, 4vw, 1.9rem);
   font-weight: 700;
-  letter-spacing: 0.1em;
-  margin-bottom: 20px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  text-wrap: balance;
 }

@@ -4,19 +4,23 @@
 /* ======================================= */
 .c-table {
   &-01 {
+    border: 1px solid $borderC;
     border-collapse: separate;
-    border-spacing: 0 1px;
+    border-radius: $radiusSmall;
+    border-spacing: 0;
+    overflow: hidden;
     width: 100%;
     th {
-      background: $mainC;
+      background: $brandStrong;
       color: #ffffff;
-      padding: 10px 15px;
+      padding: $space-3 $space-4;
       text-align: center;
       width: 150px;
     }
     td {
-      background-color: #ffffff;
-      padding: 10px 15px;
+      background-color: $surfaceC;
+      border-bottom: 1px solid $borderC;
+      padding: $space-3 $space-4;
     }
   }
 

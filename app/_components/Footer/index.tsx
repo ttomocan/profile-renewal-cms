@@ -3,17 +3,13 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import WaveAnimation from '@/app/_components/WaveAnimation';
+import { isCurrentPath } from '@/lib/navigation';
 
 export default function Footer() {
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
 
-  const isCurrent = (path: string) => {
-    if (path === '/') {
-      return pathname === '/';
-    }
-    return pathname.startsWith(path);
-  };
+  const isCurrent = (path: string) => isCurrentPath(pathname, path);
 
   return (
     <>
@@ -24,32 +20,32 @@ export default function Footer() {
         <div className="l-footer__navigation" role="navigation" aria-label="グローバルナビゲーション">
           <ul className="l-navigation">
             <li className="l-navigation__item">
-              <Link href="/" className={`c-navigation-link ${isCurrent('/') ? 'current' : ''}`}>
+              <Link href="/" aria-current={isCurrent('/') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/') ? ' current' : ''}`}>
                 Top
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/about/" className={`c-navigation-link ${isCurrent('/about') ? 'current' : ''}`}>
+              <Link href="/about/" aria-current={isCurrent('/about') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/about') ? ' current' : ''}`}>
                 About
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/skill/" className={`c-navigation-link ${isCurrent('/skill') ? 'current' : ''}`}>
+              <Link href="/skill/" aria-current={isCurrent('/skill') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/skill') ? ' current' : ''}`}>
                 Skill
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/result/" className={`c-navigation-link ${isCurrent('/result') ? 'current' : ''}`}>
+              <Link href="/result/" aria-current={isCurrent('/result') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/result') ? ' current' : ''}`}>
                 Result
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/diary/" className={`c-navigation-link ${isCurrent('/diary') ? 'current' : ''}`}>
+              <Link href="/diary/" aria-current={isCurrent('/diary') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/diary') ? ' current' : ''}`}>
                 Diary
               </Link>
             </li>
             <li className="l-navigation__item">
-              <Link href="/contact/" className={`c-navigation-link ${isCurrent('/contact') ? 'current' : ''}`}>
+              <Link href="/contact/" aria-current={isCurrent('/contact') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/contact') ? ' current' : ''}`}>
                 Contact
               </Link>
             </li>

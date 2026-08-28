@@ -1,13 +1,17 @@
 @layer components {
-  .blog p > span.text-large {
+  .diary p > span.text-large {
+    color: var(--text);
     font-size: 1.4rem;
-    font-weight: bold;
+    font-weight: 700;
+    line-height: 1.7;
   }
 }
 
 .diary-archive-title {
+  margin-bottom: var(--space-24);
+  color: var(--text);
   font-size: clamp(1.4rem, 4vw, 1.9rem);
   font-weight: 700;
   line-height: 1.5;
-  margin-bottom: 24px;
+  text-wrap: balance;
 }

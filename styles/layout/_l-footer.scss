@@ -1,14 +1,14 @@
 @use '../global' as *;
 
 .l-footer {
-  background-color: $mainC;
+  background-color: $brandStrong;
   display: flex;
   flex-wrap: wrap;
-  padding: 60px 20px 30px;
+  padding: $space-16 $space-6 $space-8;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: $space-8;
   * {
     color: #ffffff;
     text-decoration: none;
@@ -18,16 +18,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: $space-8;
     align-self: stretch;
     a {
+      align-items: center;
       color: #ffffff;
+      display: inline-flex;
       font: {
         family: var(--font-roboto), sans-serif;
         size: 1.4rem;
         weight: 400;
       }
+      justify-content: center;
       letter-spacing: 0.1em;
+      min-height: 44px;
+      min-width: 44px;
       padding-bottom: 10px;
       position: relative;
 
@@ -42,7 +47,12 @@
         transition: width 0.4s ease, left 0.4s ease;
         width: 0;
       }
-      &:is(:hover, .current) {
+      &:hover,
+      &[aria-current='page'] {
+        color: $surfaceC;
+        font-weight: 700;
+        text-decoration: underline;
+        text-underline-offset: 0.35em;
         &::after {
           width: 100%;
           left: 0;
@@ -52,15 +62,19 @@
   }
 
   &__copyright {
+    border-top: 1px solid rgba($surfaceC, 0.45);
+    max-width: $inner;
+    padding-top: $space-6;
     text-align: center;
+    width: 100%;
   }
 
   @include mq(sp) {
-    padding: 40px 0 20px;
+    padding: $space-12 $space-4 $space-6;
     .l-navigation {
       flex-wrap: wrap;
-      gap: 20px 30px;
-      padding: 0 20px;
+      gap: $space-4 $space-6;
+      padding: 0;
       a {
         color: #ffffff;
         font: {
@@ -83,7 +97,12 @@
           transition: width 0.4s ease, left 0.4s ease;
           width: 0;
         }
-        &:is(:hover, .current) {
+        &:hover,
+        &[aria-current='page'] {
+          color: $surfaceC;
+          font-weight: 700;
+          text-decoration: underline;
+          text-underline-offset: 0.35em;
           &::after {
             width: 100%;
             left: 0;

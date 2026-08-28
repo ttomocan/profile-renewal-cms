@@ -9,11 +9,11 @@ main {
 
 section {
   &:not(:is(.pagetitle, :last-of-type)) {
-    padding-bottom: 100px;
+    padding-bottom: $sectionSpacePc;
   }
   * ~ section:not(:last-of-type) {
     padding: {
-      bottom: 50px;
+      bottom: $space-12;
       top: 0;
     }
   }
@@ -32,7 +32,7 @@ section {
   }
   section {
     &:not(:is(.pagetitle, :last-of-type)) {
-      padding-bottom: 80px;
+      padding-bottom: $sectionSpaceSp;
     }
   }
 }

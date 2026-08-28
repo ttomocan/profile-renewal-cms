@@ -1,46 +1,40 @@
 @use '../global/variables' as *;
 @use '../global/mixin' as *;
-@use '../global/extend' as *;
 
 /* =============================== */
-/* ともきゃんができること
+/* 対応スキル・技術
 ================================== */
 .skill {
   .first {
-    font-size: 16px;
+    max-width: $innerSmall;
+    font-size: 1rem;
+    line-height: 1.9;
   }
 
   .programming,
   .framework,
   .tool,
   .ai-tool {
-    padding-bottom: 80px;
+    padding-bottom: $sectionSpacePc;
+
     &__note {
-      padding-bottom: 30px;
-      text-align: center;
-      background: #fff6ed;
-      border: 1px solid #f36b0a;
-      border-radius: 8px;
-      color: #f36b0a;
-      font-weight: bold;
-      padding: 16px 24px 16px 24px;
-      margin-bottom: 24px;
-      font-size: 14px;
+      margin-bottom: $space-6;
+      padding: $space-4 $space-6;
+      border-left: 4px solid $brandStrong;
+      background: $subtleC;
+      color: $textSecondaryC;
+      font-size: 0.9375rem;
+      line-height: 1.8;
+      text-align: left;
     }
-    &__item {
-      align-items: flex-start;
-      background: #ffffff;
-      border: 1px solid rgba(243, 107, 10, 0.25);
-      border-radius: 14px;
-      display: flex;
-      gap: 20px 30px;
-      padding: 22px;
-    }
+
     &__heading {
-      font-size: 22px;
-      font-weight: 600;
-      line-height: 1.7;
+      color: $textC;
+      font-size: 1.375rem;
+      font-weight: 700;
+      line-height: 1.5;
     }
+
     &__image {
       flex: 0 0 100px;
       text-align: center;
@@ -52,15 +46,30 @@
         width: 80px;
       }
     }
+
     &__occupation {
-      font-size: 13px;
+      font-size: 0.8125rem;
       white-space: nowrap;
     }
   }
 
+  .programming__item,
+  .framework__item,
+  .tool__item,
+  .ai-tool__item {
+    padding: $space-6;
+    border: 1px solid $borderC;
+    border-radius: $radiusStandard;
+    background: $surfaceC;
+    box-shadow: none;
+    align-items: flex-start;
+    display: flex;
+    gap: $space-6;
+  }
+
   .skill-cards {
     display: grid;
-    gap: 20px;
+    gap: $space-6;
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -70,29 +79,31 @@
     }
 
     &__description {
-      margin-top: 4px;
+      margin-top: $space-2;
+      color: $textSecondaryC;
+      line-height: 1.8;
     }
 
     &__points {
-      margin-top: 12px;
+      margin-top: $space-4;
     }
 
     &__related-link {
-      color: $mainC;
+      color: $brandStrong;
       display: inline-block;
-      margin-top: 14px;
+      margin-top: $space-4;
       text-decoration: underline;
-      text-underline-offset: 3px;
+      text-underline-offset: 0.2em;
     }
 
     &__text-icon {
       align-items: center;
-      background: #fff6ed;
-      border: 1px solid $mainC;
+      background: $subtleC;
+      border: 1px solid $borderC;
       border-radius: 50%;
-      color: $mainC;
+      color: $brandStrong;
       display: inline-flex;
-      font-size: 18px;
+      font-size: 1.125rem;
       font-weight: 700;
       height: 80px;
       justify-content: center;
@@ -103,9 +114,9 @@
   .skill-page-links {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: $space-4;
     justify-content: center;
-    margin-top: 32px;
+    margin-top: $space-8;
   }
 
   .license {
@@ -116,19 +127,22 @@
   }
 
   .other {
+    padding-bottom: $sectionSpacePc;
+
     &__cont {
+      align-items: center;
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
+      gap: $space-3;
       justify-content: center;
-      gap: 10px;
     }
 
     &__card {
-      border: 1px solid #282828;
-      border-radius: 10px;
-      color: #282828;
-      padding: 2px 10px;
+      background: $surfaceC;
+      border: 1px solid $borderC;
+      border-radius: $radiusSmall;
+      color: $textC;
+      padding: $space-2 $space-4;
     }
   }
 
@@ -140,37 +154,19 @@
     .programming,
     .framework,
     .tool,
-    .ai-tool {
-      padding-bottom: 80px;
-      &__note {
-        padding-bottom: 30px;
-        text-align: center;
-        background: #fff6ed;
-        border: 1px solid #f36b0a;
-        border-radius: 8px;
-        color: #f36b0a;
-        font-weight: bold;
-        padding: 16px 24px 16px 24px;
-        margin-bottom: 24px;
-        font-size: 15px;
-      }
-      &__item {
-        align-items: flex-start;
-        display: grid;
-        gap: 15px;
-        grid-template-columns: 72px minmax(0, 1fr);
-        padding: 18px;
-      }
-      &__detail {
-        min-width: 0;
-      }
-      &__description {
-        grid-column: auto;
-      }
-      &__occupation {
-        font-size: 13px;
-        white-space: nowrap;
-      }
+    .ai-tool,
+    .other {
+      padding-bottom: $sectionSpaceSp;
+    }
+
+    .programming__item,
+    .framework__item,
+    .tool__item,
+    .ai-tool__item {
+      display: grid;
+      gap: $space-4;
+      grid-template-columns: 72px minmax(0, 1fr);
+      padding: $space-4;
     }
 
     .skill-cards {

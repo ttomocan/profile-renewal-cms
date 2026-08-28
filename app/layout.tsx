@@ -8,6 +8,7 @@ import Header from './_components/Header';
 import Footer from './_components/Footer';
 import PageTop from './_components/PageTop';
 import DynamicBodyClass from './DynamicBodyClass';
+import ScrollRevealProvider from './_components/ScrollRevealProvider';
 import WebsiteJsonLd from './_components/WebsiteJsonLd';
 import ClientSmoothScrollProvider from './_components/ClientSmoothScrollProvider';
 import { createMetadata, SITE_NAME, SITE_URL } from '@/lib/seo';
@@ -55,7 +56,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ja" className={roboto.variable}>
       <head>
         <noscript>
-          <style>{`.loading{display:none!important}.fadeInTrigger,.fadeUpTrigger,.fadeDownTrigger,.fadeLeftTrigger,.fadeRightTrigger,.flipDownTrigger,.flipLeftTrigger,.flipRightTrigger,.rotateXTrigger,.rotateYTrigger,.zoomInTrigger,.zoomOutTrigger,.blurTrigger,.smoothTrigger{opacity:1!important;transform:none!important}`}</style>
+          <style>{`.loading{display:none!important}.fadeUpTrigger{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         {/* DNS prefetch for external resources */}
         <link rel="dns-prefetch" href="//images.microcms-assets.io" />
@@ -66,9 +67,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body suppressHydrationWarning>
         <ClientSmoothScrollProvider />
         <DynamicBodyClass />
+        <ScrollRevealProvider />
         <Loading />
+        <a className="c-skip-link" href="#main-content">本文へスキップ</a>
         <Header />
-        <div className="l-content">{children}</div>
+        <div id="main-content" tabIndex={-1} className="l-content">{children}</div>
         <Footer />
         <PageTop />
         <WebsiteJsonLd />
