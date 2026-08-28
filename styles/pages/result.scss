@@ -243,9 +243,18 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     letter-spacing: 0.001em;
 
     &::before {
-      content: '🕒';
+      content: '';
+      display: inline-block;
+      width: 14px;
+      height: 14px;
       margin-right: 6px;
-      font-size: 14px;
+      background-color: currentColor;
+      mask-image: url('/img/common/clock.svg');
+      mask-repeat: no-repeat;
+      mask-size: contain;
+      -webkit-mask-image: url('/img/common/clock.svg');
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-size: contain;
     }
   }
 
@@ -511,9 +520,18 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           font-weight: 600;
 
           &::before {
-            content: '🕒';
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
             margin-right: 8px;
-            font-size: 16px;
+            background-color: currentColor;
+            mask-image: url('/img/common/clock.svg');
+            mask-repeat: no-repeat;
+            mask-size: contain;
+            -webkit-mask-image: url('/img/common/clock.svg');
+            -webkit-mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
           }
         }
       }
