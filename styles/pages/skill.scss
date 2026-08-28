@@ -31,7 +31,7 @@
       align-items: flex-start;
       background: #ffffff;
       border: 1px solid rgba(243, 107, 10, 0.25);
-      border-radius: 14px;
+      border-radius: $radiusStandard;
       display: flex;
       gap: 20px 30px;
       padding: 22px;
@@ -126,7 +126,7 @@
 
     &__card {
       border: 1px solid #282828;
-      border-radius: 10px;
+      border-radius: $radiusSmall;
       color: #282828;
       padding: 2px 10px;
     }

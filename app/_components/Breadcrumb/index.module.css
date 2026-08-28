@@ -42,7 +42,7 @@
 
   .list::-webkit-scrollbar-thumb {
     background: rgba(243, 107, 10, 0.4);
-    border-radius: 8px;
+    border-radius: var(--radius-small);
   }
 
   .list::-webkit-scrollbar-thumb:hover {
@@ -141,7 +141,7 @@
   .link {
     padding: 3px 5px;
     margin: -3px -5px;
-    border-radius: 4px;
+    border-radius: var(--radius-small);
   }
 }
 

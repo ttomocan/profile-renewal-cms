@@ -7,3 +7,14 @@ $textC: #282828;
 $mainC: #f36b0a;
 $baseC: #f2edea;
 $linkC: #282828;
+
+// 角丸
+$radiusSmall: 6px;
+$radiusStandard: 10px;
+$radiusLarge: 16px;
+
+:root {
+  --radius-small: #{$radiusSmall};
+  --radius-standard: #{$radiusStandard};
+  --radius-large: #{$radiusLarge};
+}

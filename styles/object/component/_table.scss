@@ -5,7 +5,9 @@
 .c-table {
   &-01 {
     border-collapse: separate;
+    border-radius: $radiusSmall;
     border-spacing: 0 1px;
+    overflow: hidden;
     width: 100%;
     th {
       background: $mainC;

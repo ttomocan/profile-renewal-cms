@@ -346,6 +346,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 80px 32px;
   background: linear-gradient(135deg, $base-color 0%, $white 100%);
   border: 2px dashed rgba(243, 107, 10, 0.2);
+  border-radius: $radiusStandard;
 
   &__icon {
     font-size: 72px;
@@ -475,7 +476,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   &__header {
     margin-bottom: 50px;
     background: linear-gradient(135deg, $white 0%, $base-color 100%);
-    border-radius: 20px;
+    border-radius: $radiusStandard;
     padding: 25px;
     border: 1px solid rgba(243, 107, 10, 0.3);
 

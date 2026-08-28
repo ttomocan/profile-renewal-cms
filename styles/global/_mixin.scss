@@ -54,7 +54,7 @@ $breakpoint: (
 @mixin btn($bg, $color, $width) {
   background-color: $bg;
   border: 1px solid $color;
-  border-radius: calc(infinity * 1px);
+  border-radius: $radiusStandard;
   box-sizing: border-box;
   color: $color;
   display: inline-block;

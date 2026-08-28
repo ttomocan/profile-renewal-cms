@@ -49,7 +49,7 @@
 
     &__card {
       border: 1px solid #282828;
-      border-radius: 10px;
+      border-radius: $radiusSmall;
       color: #282828;
       padding: 2px 15px;
     }
@@ -64,7 +64,7 @@
     &__item {
       background: #ffffff;
       border: 1px solid rgba(243, 107, 10, 0.3);
-      border-radius: 14px;
+      border-radius: $radiusStandard;
       padding: 18px;
       text-align: center;
 
@@ -101,7 +101,7 @@
     li {
       background: #ffffff;
       border: 1px solid rgba(243, 107, 10, 0.3);
-      border-radius: 14px;
+      border-radius: $radiusStandard;
       display: grid;
       gap: 8px;
       padding: 20px;
