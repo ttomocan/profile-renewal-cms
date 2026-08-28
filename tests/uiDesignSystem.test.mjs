@@ -333,6 +333,7 @@ test('diary uses readable article width and accessible discovery controls', asyn
     assert.equal(control.get('border-radius'), 'var(--radius-standard)');
   }
   assert.equal(declarationsFor(search, '.submitButton').get('background'), 'var(--brand-strong)');
+  assert.equal(declarationsFor(search, '.submitButton').get('box-sizing'), 'border-box');
   assert.equal(declarationsFor(search, '.submitButton:hover').get('background'), 'var(--brand-strong-hover)');
   assert.equal(declarationsFor(search, '.searchInput:focus-visible').get('outline'), '3px solid var(--focus)');
 

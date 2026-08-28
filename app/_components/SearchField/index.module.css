@@ -48,6 +48,7 @@
 
 .submitButton {
   flex-shrink: 0;
+  box-sizing: border-box;
   padding: var(--space-12) var(--space-24);
   color: #fff;
   font-weight: 700;
