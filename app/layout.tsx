@@ -69,8 +69,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <DynamicBodyClass />
         <ScrollRevealProvider />
         <Loading />
+        <a className="c-skip-link" href="#main-content">本文へスキップ</a>
         <Header />
-        <div className="l-content">{children}</div>
+        <div id="main-content" tabIndex={-1} className="l-content">{children}</div>
         <Footer />
         <PageTop />
         <WebsiteJsonLd />

@@ -477,6 +477,26 @@ a {
   outline-offset: 3px;
 }
 
+.c-skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 10000;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  color: #b54708;
+  font-weight: 700;
+  background: #ffffff;
+  border: 2px solid #b54708;
+  border-radius: 6px;
+  transform: translateY(calc(-100% - 12px));
+}
+.c-skip-link:focus-visible {
+  transform: translateY(0);
+}
+
 img {
   max-width: 100%;
   vertical-align: bottom;

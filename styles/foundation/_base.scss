@@ -54,6 +54,27 @@ a {
   outline-offset: 3px;
 }
 
+.c-skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 10000;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  color: $brandStrong;
+  font-weight: 700;
+  background: $surfaceC;
+  border: 2px solid $brandStrong;
+  border-radius: $radiusSmall;
+  transform: translateY(calc(-100% - 12px));
+
+  &:focus-visible {
+    transform: translateY(0);
+  }
+}
+
 img {
   $height: true;
   max-width: 100%;

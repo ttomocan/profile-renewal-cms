@@ -132,6 +132,53 @@ test('foundation regressions must not change the accessible 16px body, blue focu
   assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*scroll-behavior: auto;[\s\S]*animation-duration: 0\.01ms !important;[\s\S]*transition-duration: 0\.01ms !important;[\s\S]*\[class\$=Trigger\][\s\S]*opacity: 1 !important;[\s\S]*transform: none !important;/);
 });
 
+test('keyboard users can skip the shared header to the unique content target', async () => {
+  const layoutSource = ts.createSourceFile(
+    'app/layout.tsx',
+    await readFile('app/layout.tsx', 'utf8'),
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
+  const elements = openingElements(layoutSource);
+  const skipLink = elements.find((element) => stringAttribute(element, 'className') === 'c-skip-link');
+  assert.ok(skipLink, 'root layout must render the shared skip link before page content');
+  assert.equal(stringAttribute(skipLink, 'href'), '#main-content');
+
+  const target = elements.find((element) => stringAttribute(element, 'id') === 'main-content');
+  assert.ok(target, 'root layout must expose one shared content target');
+  const tabIndex = jsxExpressionAttribute(target, 'tabIndex');
+  assert.ok(ts.isPrefixUnaryExpression(tabIndex));
+  assert.equal(tabIndex.operator, ts.SyntaxKind.MinusToken);
+  assert.equal(tabIndex.operand.text, '1');
+
+  const compiled = postcss.parse(css);
+  assert.equal(declarationsFor(compiled, '.c-skip-link').get('min-height'), '44px');
+  assert.equal(declarationsFor(compiled, '.c-skip-link:focus-visible').get('transform'), 'translateY(0)');
+
+  const smoothScrollSource = ts.createSourceFile(
+    'app/_hooks/useSmoothScroll.ts',
+    await readFile('app/_hooks/useSmoothScroll.ts', 'utf8'),
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TS,
+  );
+  let preservesNativeSkipLink = false;
+  const visit = (node) => {
+    if (
+      ts.isCallExpression(node)
+      && ts.isPropertyAccessExpression(node.expression)
+      && node.expression.name.text === 'matches'
+      && node.arguments.some((argument) => ts.isStringLiteral(argument) && argument.text === '.c-skip-link')
+    ) {
+      preservesNativeSkipLink = true;
+    }
+    ts.forEachChild(node, visit);
+  };
+  visit(smoothScrollSource);
+  assert.ok(preservesNativeSkipLink, 'smooth scrolling must preserve native skip-link focus transfer');
+});
+
 test('layout regressions must not change responsive container gutters or section rhythm tokens', () => {
   assert.match(css, /\.inner \{[\s\S]*max-width: calc\(1120px \+ 48px\);[\s\S]*padding-left: 24px;[\s\S]*padding-right: 24px;/);
   assert.match(css, /\.inner-s \{[\s\S]*max-width: calc\(760px \+ 48px\);/);
