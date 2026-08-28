@@ -216,10 +216,18 @@ test('navigation path matching distinguishes roots, sections, nested routes, and
 });
 
 test('compiled navigation and shared controls preserve accessible dimensions and visual states', () => {
+  const compiled = postcss.parse(css);
   assert.match(css, /\.l-header \{[\s\S]*?height: 88px;[\s\S]*?min-height: 88px;/);
   assert.match(css, /@media \(max-width: 1040px\) \{[\s\S]*?\.l-header \{[\s\S]*?height: 64px;[\s\S]*?min-height: 64px;/);
   assert.match(css, /\.l-header__menuBtn-button \{[\s\S]*?min-height: 44px;[\s\S]*?min-width: 44px;/);
   assert.match(css, /\.c-navigation-link\[aria-current=page\] \{[\s\S]*?color: #b54708;[\s\S]*?font-weight: 700;[\s\S]*?text-decoration: underline;[\s\S]*?text-underline-offset: 0\.35em;/);
+
+  const footerLink = declarationsFor(compiled, '.l-footer .l-navigation a');
+  assert.equal(footerLink.get('display'), 'inline-flex');
+  assert.equal(footerLink.get('align-items'), 'center');
+  assert.equal(footerLink.get('justify-content'), 'center');
+  assert.equal(footerLink.get('min-width'), '44px');
+  assert.equal(footerLink.get('min-height'), '44px');
 
   assert.match(css, /\.c-button__link \{[\s\S]*?min-width: 280px;[\s\S]*?min-height: 48px;[\s\S]*?border: 1px solid #b54708;[\s\S]*?border-radius: 10px;[\s\S]*?background: #b54708;/);
   assert.match(css, /\.c-button__link:focus-visible[\s\S]*?outline: 3px solid #0066cc;/);
@@ -260,6 +268,71 @@ test('scroll reveal has one motion pattern and respects reduced motion', () => {
   assert.match(css, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*?\.pagetitle__en,\s*\.pagetitle__ja \{\s*animation: none;\s*opacity: 1;\s*transform: none;\s*\}/);
 });
 
+test('WaveAnimation resize draws once for reduced motion and restarts otherwise', async () => {
+  const source = ts.createSourceFile(
+    'WaveAnimation.tsx',
+    await readFile('app/_components/WaveAnimation/index.tsx', 'utf8'),
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX,
+  );
+  let handleResize;
+  const findHandleResize = (node) => {
+    if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name) && node.name.text === 'handleResize') {
+      handleResize = node;
+    }
+    ts.forEachChild(node, findHandleResize);
+  };
+  findHandleResize(source);
+  assert.ok(handleResize?.initializer && ts.isCallExpression(handleResize.initializer));
+  const resizeCallback = handleResize.initializer.arguments[0];
+  assert.ok(resizeCallback && ts.isArrowFunction(resizeCallback));
+
+  let debounceCallback;
+  const findDebounce = (node) => {
+    if (
+      ts.isCallExpression(node)
+      && ts.isIdentifier(node.expression)
+      && node.expression.text === 'setTimeout'
+      && node.arguments[0]
+      && ts.isArrowFunction(node.arguments[0])
+    ) {
+      debounceCallback = node.arguments[0];
+    }
+    ts.forEachChild(node, findDebounce);
+  };
+  findDebounce(resizeCallback);
+  assert.ok(debounceCallback && ts.isArrowFunction(debounceCallback));
+
+  let preferenceBranch;
+  const findPreferenceBranch = (node) => {
+    if (
+      ts.isIfStatement(node)
+      && ts.isPropertyAccessExpression(node.expression)
+      && node.expression.name.text === 'matches'
+      && ts.isCallExpression(node.expression.expression)
+      && node.expression.expression.expression.getText(source) === 'window.matchMedia'
+      && ts.isStringLiteral(node.expression.expression.arguments[0])
+      && node.expression.expression.arguments[0].text === '(prefers-reduced-motion: reduce)'
+    ) {
+      preferenceBranch = node;
+    }
+    ts.forEachChild(node, findPreferenceBranch);
+  };
+  findPreferenceBranch(debounceCallback);
+  assert.ok(preferenceBranch, 'the debounced resize path must re-check the current motion preference');
+
+  const callName = (statement) => {
+    if (!ts.isBlock(statement) || statement.statements.length !== 1) return undefined;
+    const [onlyStatement] = statement.statements;
+    if (!ts.isExpressionStatement(onlyStatement) || !ts.isCallExpression(onlyStatement.expression)) return undefined;
+    return onlyStatement.expression.expression.getText(source);
+  };
+  assert.equal(callName(preferenceBranch.thenStatement), 'draw');
+  assert.ok(preferenceBranch.elseStatement, 'non-reduced motion needs an explicit restart branch');
+  assert.equal(callName(preferenceBranch.elseStatement), 'startAnimation');
+});
+
 test('top about and skill pages use shared spacing and surface tokens', () => {
   assert.match(topCss, /\.p-top-facts,[\s\S]*?\.p-top-contact \{\s*padding-block: 96px;/);
   assert.match(topCss, /@media \(max-width: 767px\) \{[\s\S]*?\.p-top-facts,[\s\S]*?\.p-top-contact \{\s*padding-block: 64px;/);
@@ -287,6 +360,7 @@ test('top about and skill pages use shared spacing and surface tokens', () => {
 });
 
 test('result cards and pagination expose restrained surfaces and 44px targets', () => {
+  const compiled = postcss.parse(resultCss);
   assert.match(resultCss, /\.result-card \{[\s\S]*?background: #ffffff;[\s\S]*?border: 1px solid #d8cec7;[\s\S]*?border-radius: 10px;[\s\S]*?box-shadow: 0 2px 8px rgba\(40, 40, 40, 0\.08\);/);
   assert.match(resultCss, /\.result-card:hover \{[\s\S]*?transform: translateY\(-2px\);[\s\S]*?box-shadow: 0 4px 12px rgba\(40, 40, 40, 0\.1\);/);
   assert.match(resultCss, /\.result-card__link:focus-visible \{[\s\S]*?outline: 3px solid #0066cc;[\s\S]*?outline-offset: -3px;/);
@@ -307,6 +381,25 @@ test('result cards and pagination expose restrained surfaces and 44px targets', 
 
   assert.match(resultCss, /\.result-detail__section \{[\s\S]*?max-width: 760px;[\s\S]*?margin-inline: auto;[\s\S]*?font-size: 17px;[\s\S]*?line-height: 1\.9;/);
   assert.match(resultCss, /\.result-detail > \.result-detail__section:first-of-type \.result-detail__section-content--summary \{[\s\S]*?background: #f5ede7;[\s\S]*?border-left: 4px solid #b54708;/);
+
+  const resultForegrounds = new Map([
+    ['.result-card__action-icon', '#b54708'],
+    ['.result-detail__breadcrumb ol li:not(:last-child)::after', '#b54708'],
+    ['.result-detail__breadcrumb ol li a:hover', '#8f3500'],
+    ['.result-detail__header-meta .meta-icon', '#b54708'],
+    ['.result-detail__navigation-back', '#b54708'],
+    ['.result-related-links a', '#b54708'],
+    ['.site-link-card:hover .site-link-card__title', '#8f3500'],
+    ['.site-link-card:hover .site-link-card__description', '#8f3500'],
+    ['.site-link-card:hover .site-link-card__url', '#8f3500'],
+    ['.site-link-card__action', '#b54708'],
+  ]);
+  for (const [selector, expectedColor] of resultForegrounds) {
+    const actualColor = declarationsFor(compiled, selector).get('color');
+    assert.equal(actualColor, expectedColor, `${selector} must use an accessible foreground orange`);
+    assert.notEqual(actualColor, '#f36b0a', `${selector} must not use the accent orange as a foreground`);
+  }
+
   assert.doesNotMatch(resultCss, /[🕒📝]/u);
   assert.doesNotMatch(resultCss, /result-card__overlay/);
   assert.doesNotMatch(resultCss, /\.result-card:hover \.result-card__image-img/);

@@ -1084,11 +1084,16 @@ small {
   align-self: stretch;
 }
 .l-footer .l-navigation a {
+  align-items: center;
   color: #ffffff;
+  display: inline-flex;
   font-family: var(--font-roboto), sans-serif;
   font-size: 1.4rem;
   font-weight: 400;
+  justify-content: center;
   letter-spacing: 0.1em;
+  min-height: 44px;
+  min-width: 44px;
   padding-bottom: 10px;
   position: relative;
   /*ホバーエフェクト*/

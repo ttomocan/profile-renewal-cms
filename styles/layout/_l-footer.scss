@@ -21,13 +21,18 @@
     gap: $space-8;
     align-self: stretch;
     a {
+      align-items: center;
       color: #ffffff;
+      display: inline-flex;
       font: {
         family: var(--font-roboto), sans-serif;
         size: 1.4rem;
         weight: 400;
       }
+      justify-content: center;
       letter-spacing: 0.1em;
+      min-height: 44px;
+      min-width: 44px;
       padding-bottom: 10px;
       position: relative;
 

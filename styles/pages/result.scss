@@ -468,7 +468,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         &:not(:last-child)::after {
           content: '>';
           margin: 0 12px;
-          color: $primary-color;
+          color: $brandStrong;
           font-weight: 600;
         }
 
@@ -479,7 +479,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           font-weight: 500;
 
           &:hover {
-            color: $primary-color;
+            color: $brandStrongHover;
           }
         }
 
@@ -578,7 +578,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       .meta-icon {
         width: 18px;
         height: 18px;
-        color: $primary-color;
+        color: $brandStrong;
         flex-shrink: 0;
       }
     }
@@ -739,7 +739,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       background: $white;
       border: 1px solid rgba(243, 107, 10, 0.3);
       border-radius: 16px;
-      color: $primary-color;
+      color: $brandStrong;
       text-decoration: none;
       transition: $transition-fast;
       letter-spacing: 0.001em;
@@ -777,7 +777,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   gap: 10px;
 
   a {
-    color: $primary-color;
+    color: $brandStrong;
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -845,7 +845,7 @@ cite {
     .site-link-card__title,
     .site-link-card__description,
     .site-link-card__url {
-      color: $primary-color;
+      color: $brandStrongHover;
     }
   }
 
@@ -909,7 +909,7 @@ cite {
     padding: 10px;
     border-radius: 5px;
     background: rgba(243, 107, 10, 0.1);
-    color: $primary-color;
+    color: $brandStrong;
     display: flex;
     align-items: center;
     justify-content: center;
