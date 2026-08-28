@@ -34,6 +34,43 @@ function declarationsFor(root, selector) {
   return declarations;
 }
 
+function jsxAttribute(openingElement, name) {
+  return openingElement.attributes.properties.find(
+    (property) => ts.isJsxAttribute(property) && property.name.text === name,
+  );
+}
+
+function stringAttribute(openingElement, name) {
+  const attribute = jsxAttribute(openingElement, name);
+  if (!attribute?.initializer || !ts.isStringLiteral(attribute.initializer)) return undefined;
+  return attribute.initializer.text;
+}
+
+function jsxExpressionAttribute(openingElement, name) {
+  const attribute = jsxAttribute(openingElement, name);
+  if (!attribute?.initializer || !ts.isJsxExpression(attribute.initializer)) return undefined;
+  return attribute.initializer.expression;
+}
+
+function openingElements(sourceFile) {
+  const elements = [];
+  const visit = (node) => {
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) elements.push(node);
+    ts.forEachChild(node, visit);
+  };
+  visit(sourceFile);
+  return elements;
+}
+
+function isDescriptionForField(expression, field) {
+  return ts.isCallExpression(expression)
+    && ts.isIdentifier(expression.expression)
+    && expression.expression.text === 'getErrorDescription'
+    && expression.arguments.length === 1
+    && ts.isStringLiteral(expression.arguments[0])
+    && expression.arguments[0].text === field;
+}
+
 test('semantic token regressions must not remove the shared :root color, spacing, radius, and content-width contract', () => {
   for (const declaration of [
     '--brand-accent: #f36b0a;',
@@ -310,4 +347,149 @@ test('diary uses readable article width and accessible discovery controls', asyn
   const largeDiaryText = declarationsFor(diaryGlobals, '.diary p > span.text-large');
   assert.equal(largeDiaryText.get('font-size'), '1.4rem');
   assert.equal(largeDiaryText.get('font-weight'), '700');
+});
+
+test('contact errors describe only their active field while form and 404 states keep the shared accessible contract', async () => {
+  const [formSourceText, notFoundSourceText, notFoundCss] = await Promise.all([
+    readFile('app/_components/ContactForm/index.tsx', 'utf8'),
+    readFile('app/not-found.tsx', 'utf8'),
+    parseCssModule('app/not-found.module.css'),
+  ]);
+  const formSource = ts.createSourceFile('ContactForm.tsx', formSourceText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const notFoundSource = ts.createSourceFile('not-found.tsx', notFoundSourceText, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
+  const formElements = openingElements(formSource);
+
+  const contactImport = formSource.statements.find(
+    (statement) => ts.isImportDeclaration(statement)
+      && ts.isStringLiteral(statement.moduleSpecifier)
+      && statement.moduleSpecifier.text === '@/app/_actions/contact',
+  );
+  assert.ok(contactImport && ts.isImportDeclaration(contactImport));
+  const contactImports = contactImport.importClause?.namedBindings;
+  assert.ok(contactImports && ts.isNamedImports(contactImports));
+  assert.ok(contactImports.elements.some((element) => element.name.text === 'ContactField' && element.isTypeOnly));
+
+  let descriptionHelper;
+  const visitForm = (node) => {
+    if (
+      ts.isVariableDeclaration(node)
+      && ts.isIdentifier(node.name)
+      && node.name.text === 'getErrorDescription'
+    ) {
+      descriptionHelper = node;
+    }
+    ts.forEachChild(node, visitForm);
+  };
+  visitForm(formSource);
+  assert.ok(descriptionHelper && ts.isVariableDeclaration(descriptionHelper));
+  assert.ok(descriptionHelper.initializer && ts.isArrowFunction(descriptionHelper.initializer));
+  const helper = descriptionHelper.initializer;
+  assert.equal(helper.parameters.length, 1);
+  assert.ok(helper.parameters[0].type && ts.isTypeReferenceNode(helper.parameters[0].type));
+  assert.equal(helper.parameters[0].type.typeName.getText(formSource), 'ContactField');
+  assert.ok(ts.isConditionalExpression(helper.body));
+  assert.ok(ts.isCallExpression(helper.body.condition));
+  assert.equal(helper.body.condition.expression.getText(formSource), 'hasFieldError');
+  assert.equal(helper.body.whenTrue.getText(formSource), "'contact-error'");
+  assert.equal(helper.body.whenFalse.getText(formSource), 'undefined');
+
+  for (const field of ['namae', 'furigana', 'email', 'message']) {
+    const control = formElements.find(
+      (element) => stringAttribute(element, 'name') === field,
+    );
+    assert.ok(control, `expected ${field} control`);
+    assert.ok(isDescriptionForField(jsxExpressionAttribute(control, 'aria-describedby'), field));
+  }
+  const itemFieldset = formElements.find(
+    (element) => element.tagName.getText(formSource) === 'fieldset',
+  );
+  assert.ok(itemFieldset, 'expected item fieldset');
+  assert.ok(isDescriptionForField(jsxExpressionAttribute(itemFieldset, 'aria-describedby'), 'item'));
+
+  const errorAlerts = formElements.filter(
+    (element) => stringAttribute(element, 'id') === 'contact-error',
+  );
+  assert.equal(errorAlerts.length, 1, 'only the live validation summary may use contact-error');
+  assert.equal(stringAttribute(errorAlerts[0], 'role'), 'alert');
+
+  let retainsAction = false;
+  let retainsAnalyticsGuard = false;
+  const visitBehavior = (node) => {
+    if (
+      ts.isCallExpression(node)
+      && node.expression.getText(formSource) === 'useActionState'
+      && node.arguments[0]?.getText(formSource) === 'createContactData'
+    ) {
+      retainsAction = true;
+    }
+    if (
+      ts.isIfStatement(node)
+      && node.expression.getText(formSource).includes('Array.isArray')
+      && node.thenStatement.getText(formSource).includes('sendGAEvent')
+    ) {
+      retainsAnalyticsGuard = true;
+    }
+    ts.forEachChild(node, visitBehavior);
+  };
+  visitBehavior(formSource);
+  assert.ok(retainsAction, 'the existing contact Server Action must remain connected');
+  assert.ok(retainsAnalyticsGuard, 'contact analytics must remain guarded by dataLayer availability');
+  const formCopy = formElements.map((element) => element.parent.getText(formSource)).join('');
+  assert.ok(formCopy.includes('お問い合わせいただき、ありがとうございます。'));
+  assert.ok(formCopy.includes('内容を確認のうえ返信します。'));
+
+  const formCss = postcss.parse(css);
+  for (const selector of ['.p-form .textfield', '.p-form .textarea', '.p-form select']) {
+    const control = declarationsFor(formCss, selector);
+    assert.equal(control.get('min-height'), '48px', `${selector} must remain a 48px target`);
+    assert.equal(control.get('border'), '1px solid #d8cec7');
+    assert.equal(control.get('border-radius'), '6px');
+    assert.equal(control.get('background'), '#ffffff');
+  }
+  assert.equal(declarationsFor(formCss, '.p-form .checkbox input[type=radio] + .checkbox-text').get('min-height'), '44px');
+  assert.equal(declarationsFor(formCss, '.p-form .checkbox input[type=radio]:focus-visible + .checkbox-text::before').get('outline'), '3px solid #0066cc');
+  for (const selector of [
+    '.p-form .textfield[aria-invalid=true]',
+    '.p-form .textarea[aria-invalid=true]',
+    '.p-form fieldset[aria-invalid=true]',
+  ]) {
+    assert.equal(declarationsFor(formCss, selector).get('border-color'), '#b3261e');
+  }
+  const errorStyle = declarationsFor(formCss, '.p-form__error');
+  assert.equal(errorStyle.get('color'), '#b3261e');
+  assert.equal(errorStyle.get('border-left'), '4px solid #b3261e');
+  assert.match(errorStyle.get('background') ?? '', /color-mix/);
+
+  const notFoundContainer = declarationsFor(notFoundCss, '.container');
+  assert.equal(notFoundContainer.get('width'), 'min(100% - 32px, var(--reading-width))');
+  assert.equal(notFoundContainer.get('margin-inline'), 'auto');
+  assert.equal(declarationsFor(notFoundCss, '.container :global(.c-button__link)').get('background'), 'var(--brand-strong)');
+
+  const metadataStatement = notFoundSource.statements.find(
+    (statement) => ts.isVariableStatement(statement)
+      && statement.declarationList.declarations.some(
+        (declaration) => ts.isIdentifier(declaration.name) && declaration.name.text === 'metadata',
+      ),
+  );
+  assert.ok(metadataStatement && ts.isVariableStatement(metadataStatement));
+  const metadata = metadataStatement.declarationList.declarations.find(
+    (declaration) => ts.isIdentifier(declaration.name) && declaration.name.text === 'metadata',
+  );
+  assert.ok(metadata?.initializer && ts.isObjectLiteralExpression(metadata.initializer));
+  const metadataProperty = (name) => metadata.initializer.properties.find(
+    (property) => ts.isPropertyAssignment(property) && property.name.getText(notFoundSource) === name,
+  );
+  const title = metadataProperty('title');
+  const description = metadataProperty('description');
+  assert.ok(title && ts.isPropertyAssignment(title) && ts.isStringLiteral(title.initializer));
+  assert.ok(description && ts.isPropertyAssignment(description) && ts.isStringLiteral(description.initializer));
+  assert.equal(title.initializer.text, 'ページが見つかりません｜ともきゃんスタイル');
+  assert.equal(description.initializer.text, '指定されたページは見つかりませんでした。URLをご確認いただくか、トップページまたは制作実績一覧から目的のページをお探しください。');
+
+  const notFoundElements = openingElements(notFoundSource);
+  const returnLink = notFoundElements.find(
+    (element) => element.tagName.getText(notFoundSource) === 'Link' && stringAttribute(element, 'href') === '/',
+  );
+  assert.ok(returnLink, '404 must continue returning visitors to the top page');
+  assert.ok(returnLink.parent.getText(notFoundSource).includes('トップページへ戻る'));
 });

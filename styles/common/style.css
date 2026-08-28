@@ -2030,6 +2030,25 @@ a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not
 .p-form textarea {
   height: 150px;
 }
+.p-form .textfield,
+.p-form .textarea,
+.p-form select {
+  min-height: 48px;
+  border: 1px solid #d8cec7;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: none;
+}
+.p-form .textfield[aria-invalid=true],
+.p-form .textarea[aria-invalid=true] {
+  border-color: #b3261e;
+}
+.p-form fieldset[aria-invalid=true] {
+  border: 2px solid #b3261e;
+  border-color: #b3261e;
+  border-radius: 6px;
+  padding: 12px;
+}
 .p-form .select:has(select) {
   position: relative;
   width: 230px;
@@ -2047,7 +2066,9 @@ a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not
   transform: rotate(45deg) translateY(-50%);
 }
 .p-form .select select {
-  background: linear-gradient(-90deg, #f36b0a 0%, #f36b0a 44px, #ffffff 44px, #ffffff 100%);
+  background: #ffffff;
+  border: 1px solid #d8cec7;
+  border-radius: 6px;
   display: block;
   padding: 10px 50px 10px 10px;
   width: 100%;
@@ -2059,8 +2080,9 @@ a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not
   padding: 20px;
 }
 .p-form__error {
-  background-color: rgba(255, 0, 0, 0.05);
-  color: #ff0000;
+  background: color-mix(in srgb, #b3261e 8%, #fff);
+  border-left: 4px solid #b3261e;
+  color: #b3261e;
   margin-top: 30px;
   padding: 20px;
 }
@@ -2204,7 +2226,7 @@ a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not
 }
 .p-form .checkbox input[type=radio] + .checkbox-text::after,
 .p-form .checkbox input[type=checkbox] + .checkbox-text::after {
-  background-color: #f36b0a;
+  background-color: #b54708;
   border-radius: 50%;
   position: absolute;
   top: calc(50% + 1px);
@@ -2222,7 +2244,7 @@ a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not
 }
 .p-form .checkbox input[type=radio]:focus-visible + .checkbox-text::before,
 .p-form .checkbox input[type=checkbox]:focus-visible + .checkbox-text::before {
-  outline: 3px solid #f36b0a;
+  outline: 3px solid #0066cc;
   outline-offset: 3px;
 }
 .p-form button:disabled {
@@ -2276,13 +2298,13 @@ a:not(.c-navigation-link):not(.c-button__link):not(.c-button__link-external):not
   }
   .p-form .checkbox {
     display: block;
-    min-height: 36px;
+    min-height: 44px;
     width: 100%;
   }
   .p-form .checkbox input[type=radio] + .checkbox-text,
   .p-form .checkbox input[type=checkbox] + .checkbox-text {
     line-height: 1.4;
-    min-height: 36px;
+    min-height: 44px;
   }
   .p-form__input[role=radiogroup] {
     flex-direction: column;

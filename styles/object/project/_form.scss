@@ -16,6 +16,28 @@
     height: 150px;
   }
 
+  .textfield,
+  .textarea,
+  select {
+    min-height: 48px;
+    border: 1px solid $borderC;
+    border-radius: $radiusSmall;
+    background: $surfaceC;
+    box-shadow: none;
+  }
+
+  .textfield[aria-invalid='true'],
+  .textarea[aria-invalid='true'] {
+    border-color: $errorC;
+  }
+
+  fieldset[aria-invalid='true'] {
+    border: 2px solid $errorC;
+    border-color: $errorC;
+    border-radius: $radiusSmall;
+    padding: $space-3;
+  }
+
   .select {
     &:has(select) {
       position: relative;
@@ -35,7 +57,9 @@
     }
 
     select {
-      background: linear-gradient(-90deg, $mainC 0%, $mainC 44px, #ffffff 44px, #ffffff 100%);
+      background: $surfaceC;
+      border: 1px solid $borderC;
+      border-radius: $radiusSmall;
       display: block;
       padding: 10px 50px 10px 10px;
       width: 100%;
@@ -50,8 +74,9 @@
   }
 
   &__error {
-    background-color: rgba(255, 0, 0, 0.05);
-    color: #ff0000;
+    background: color-mix(in srgb, $errorC 8%, #fff);
+    border-left: 4px solid $errorC;
+    color: $errorC;
     margin-top: 30px;
     padding: 20px;
   }
@@ -208,7 +233,7 @@
         }
 
         &::after {
-          background-color: $mainC;
+          background-color: $brandStrong;
           border-radius: 50%;
           position: absolute;
           top: calc(50% + 1px);
@@ -229,7 +254,7 @@
       }
 
       &:focus-visible + .checkbox-text::before {
-        outline: 3px solid $mainC;
+        outline: 3px solid $focusC;
         outline-offset: 3px;
       }
     }
@@ -298,14 +323,14 @@
 
     .checkbox {
       display: block;
-      min-height: 36px;
+      min-height: 44px;
       width: 100%;
 
       input[type='radio'],
       input[type='checkbox'] {
         + .checkbox-text {
           line-height: 1.4;
-          min-height: 36px;
+          min-height: 44px;
         }
       }
     }
