@@ -1276,7 +1276,11 @@ section * ~ section:not(:last-of-type) {
 }
 @media (max-width: 767px) {
   .pagetitle__en, .pagetitle__ja {
-    letter-spacing: 0.08em;
+    letter-spacing: 0.05em;
+  }
+  .pagetitle__ja {
+    font-size: clamp(12px, 3.4vw, 20px);
+    white-space: nowrap;
   }
 }
 /* ======================================= */
