@@ -4,7 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Blog } from '@/app/_libs/microcms';
-import { formatDate, formatDateISO } from '@/app/_libs/utils';
+import Category from '../Category';
+import Date from '../Date';
 
 interface DiarySliderProps {
   blog: Blog[];
@@ -95,17 +96,8 @@ export default function DiarySlider({ blog }: DiarySliderProps) {
 
               <div className="diary-card__content">
                 <div className="diary-card__meta">
-                  <span className="diary-card__category">
-                    {article.category.name}
-                  </span>
-                  <time
-                    dateTime={formatDateISO(
-                      article.publishedAt ?? article.createdAt
-                    )}
-                    className="diary-card__date"
-                  >
-                    {formatDate(article.publishedAt ?? article.createdAt)}
-                  </time>
+                  <Category category={article.category} />
+                  <Date date={article.publishedAt ?? article.createdAt} />
                 </div>
 
                 <h3 className="diary-card__title">{article.title}</h3>
