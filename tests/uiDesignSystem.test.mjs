@@ -435,6 +435,11 @@ test('contact errors describe only their active field while form and 404 states 
   assert.ok(fieldErrorHelper.initializer && ts.isArrowFunction(fieldErrorHelper.initializer));
   assert.ok(ts.isIdentifier(fieldErrorHelper.initializer.parameters[0].name));
   assert.ok(ts.isBinaryExpression(fieldErrorHelper.initializer.body));
+  assert.equal(
+    fieldErrorHelper.initializer.body.operatorToken.kind,
+    ts.SyntaxKind.AmpersandAmpersandToken,
+    'field errors must require both error status and a matching field',
+  );
   const fieldErrorConditions = [
     fieldErrorHelper.initializer.body.left,
     fieldErrorHelper.initializer.body.right,
