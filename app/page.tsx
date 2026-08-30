@@ -218,7 +218,13 @@ export default async function Home() {
           </h2>
           <div className="p-top-contact__cont c-row fadeUpTrigger">
             <div className="p-top-contact__img col-img">
-              <Image src="/img/pages/top/img_contact.jpg" alt="連絡内容を確認するイメージ" width={310} height={200} />
+              <Image
+                src="/img/pages/top/img_contact-v2.webp"
+                alt="ノートパソコンとオレンジ色の封筒を描いたお問い合わせのイメージ"
+                width={620}
+                height={400}
+                sizes="(max-width: 767px) 100vw, 310px"
+              />
             </div>
             <div className="p-top-contact__detail col-text">
               <p>採用、業務委託・協業、制作実績、ブログ・メディア運営に関するご連絡を受け付けています。現在、サイト・アプリの新規制作依頼は受け付けていません。</p>
