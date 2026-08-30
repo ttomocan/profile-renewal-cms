@@ -37,6 +37,9 @@
     text-align: center;
     z-index: 1;
   }
+  &__lead {
+    line-height: 2;
+  }
   &__button {
     display: flex;
     justify-content: center;

@@ -1354,6 +1354,9 @@ section * ~ section:not(:last-of-type) {
   text-align: center;
   z-index: 1;
 }
+.l-blog-area__lead {
+  line-height: 2;
+}
 .l-blog-area__button {
   display: flex;
   justify-content: center;
