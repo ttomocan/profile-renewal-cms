@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "node server.js",
+    "test": "node --test tests",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "build:css": "sass styles/common/style.scss styles/common/style.css && sass styles/common/animation.scss styles/common/animation.css",

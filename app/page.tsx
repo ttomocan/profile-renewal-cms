@@ -6,7 +6,6 @@ import DiarySlider from '@/app/_components/DiarySlider';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultsSlider from '@/app/_components/ResultsSlider';
-import BubblyBackground from '@/app/_components/BubblyBackground';
 import Blog from '@/app/_components/Blog';
 import { caveatBrush } from '@/app/fonts';
 
@@ -35,8 +34,6 @@ export default async function Home() {
             <img {...desktopHeroProps} alt="" />
           </picture>
         </div>
-
-        <BubblyBackground />
 
         <div className="p-top-hero__wrap inner">
           <div className="p-top-hero__icon">
