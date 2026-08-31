@@ -9,9 +9,6 @@ import ResultsSlider from '@/app/_components/ResultsSlider';
 import Blog from '@/app/_components/Blog';
 import { caveatBrush } from '@/app/fonts';
 
-const heroName = 'TOMOCAN'.split('');
-const heroRole = 'Web Engineer / Blogger'.split('');
-
 export default async function Home() {
   const [data, resultsData] = await Promise.all([
     getBlogList({ limit: TOP_DIARY_LIMIT }),
@@ -35,48 +32,30 @@ export default async function Home() {
           </picture>
         </div>
 
-        <div className="p-top-hero__wrap inner">
-          <div className="p-top-hero__icon">
-            <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={200} height={200} sizes="200px" />
-          </div>
-
+        <div className="p-top-hero__wrap">
           <div className="p-top-hero__text-content">
-            <p className="p-top-hero__en" aria-hidden="true">
-              {heroName.map((char, index) => (
-                <span className="p-top-hero__en__char char" key={`${char}-${index}`}>
-                  {char}
-                </span>
-              ))}
-            </p>
-            <p className="p-top-hero__ja" aria-hidden="true">
-              {heroRole.map((char, index) => (
-                <span className="p-top-hero__ja__char char" key={`${char}-${index}`}>
-                  {char === ' ' ? '\u00a0' : char}
-                </span>
-              ))}
-            </p>
+            <div className="p-top-hero__identity">
+              <div className="p-top-hero__icon">
+                <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={80} height={80} sizes="(max-width: 767px) 56px, 80px" />
+              </div>
+              <p className="p-top-hero__name">TOMOCAN</p>
+            </div>
 
             <h1 className="p-top-hero__title">設計・実装・改善まで担うWebエンジニア</h1>
             <p className="p-top-hero__about-text">
-              Web制作会社で10年以上、200サイト以上の制作に携わってきました。WordPressを中心に、フロントエンド実装、CMS構築、UI改善、SEO、運用まで一貫して対応しています。
+              Web制作会社で<strong>10年以上</strong>、<strong>200サイト以上</strong>の制作に携わってきました。
             </p>
+            <p className="p-top-hero__expertise">WordPress / フロントエンド実装 / UI改善 / SEO</p>
             <div className="p-top-hero__actions" aria-label="主要ページ">
               <Link href="/result/" className="c-button__link">
                 制作実績を見る
               </Link>
-              <Link href="/about/" className="c-button__link --hero-secondary">
+              <Link href="/about/" className="p-top-hero__profile-link">
                 プロフィール・経歴を見る
               </Link>
             </div>
           </div>
         </div>
-
-        <a href="#main" className="p-top-hero__scroll" aria-label="主な実績へ移動">
-          <span className="p-top-hero__scroll-text">Scroll</span>
-          <span className="p-top-hero__scroll-line" aria-hidden="true">
-            <span className="p-top-hero__scroll-circle"></span>
-          </span>
-        </a>
       </div>
 
       <main id="main">
