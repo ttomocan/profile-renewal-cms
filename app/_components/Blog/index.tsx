@@ -34,7 +34,7 @@ const copyByVariant: Record<BlogVariant, ReactNode> = {
   contact: (
     <>
       運営しているブログやメディアに関するお問い合わせは、
-      <br />
+      <br className="u-pc-only" />
       上記フォームから受け付けています。
     </>
   ),
