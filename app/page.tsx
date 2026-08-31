@@ -10,10 +10,7 @@ import Blog from '@/app/_components/Blog';
 import { caveatBrush } from '@/app/fonts';
 
 export default async function Home() {
-  const [data, resultsData] = await Promise.all([
-    getBlogList({ limit: TOP_DIARY_LIMIT }),
-    getResults({ limit: 6 }),
-  ]);
+  const [data, resultsData] = await Promise.all([getBlogList({ limit: TOP_DIARY_LIMIT }), getResults({ limit: 6 })]);
   const {
     props: { srcSet: desktopHeroSrcSet, ...desktopHeroProps },
   } = getImageProps({ src: '/img/pages/top/img_hero.webp', alt: '', width: 2732, height: 1000, sizes: '100vw', loading: 'eager', fetchPriority: 'high' });
@@ -197,13 +194,7 @@ export default async function Home() {
           </h2>
           <div className="p-top-contact__cont c-row fadeUpTrigger">
             <div className="p-top-contact__img col-img">
-              <Image
-                src="/img/pages/top/img_contact-v2.webp"
-                alt="ノートパソコンとオレンジ色の封筒を描いたお問い合わせのイメージ"
-                width={620}
-                height={400}
-                sizes="(max-width: 767px) 100vw, 310px"
-              />
+              <Image src="/img/pages/top/img_contact-v2.webp" alt="ノートパソコンとオレンジ色の封筒を描いたお問い合わせのイメージ" width={320} height={207} sizes="(max-width: 767px) 100vw, 310px" />
             </div>
             <div className="p-top-contact__detail col-text">
               <p>採用、業務委託・協業、制作実績、ブログ・メディア運営に関するご連絡を受け付けています。現在、サイト・アプリの新規制作依頼は受け付けていません。</p>
