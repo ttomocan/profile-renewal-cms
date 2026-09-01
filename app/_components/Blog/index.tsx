@@ -20,14 +20,14 @@ const copyByVariant: Record<BlogVariant, ReactNode> = {
   skill: (
     <>
       WordPressのカスタマイズ、記事UI、ブログ運営の改善事例は
-      <br />
+      <br className="u-pc-only" />
       「ブログデザインマニア」で発信しています。
     </>
   ),
   diary: (
     <>
       活動記録とは別に、
-      <br />
+      <br className="u-pc-only" />
       ボイストレーニングとブログデザインの専門ブログも継続して運営しています。
     </>
   ),
