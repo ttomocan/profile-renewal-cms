@@ -20,42 +20,42 @@ export default async function Home() {
 
   return (
     <>
-      <div className={`p-top-hero ${caveatBrush.variable}`}>
-        <div className="p-top-hero__image">
-          <picture>
-            <source srcSet={mobileHeroSrcSet} media="(max-width: 767px)" />
-            <source srcSet={desktopHeroSrcSet} media="(min-width: 768px)" />
-            <img {...desktopHeroProps} alt="" />
-          </picture>
-        </div>
+      <main id="main" className="p-top-main" tabIndex={-1}>
+        <div className={`p-top-hero ${caveatBrush.variable}`}>
+          <div className="p-top-hero__image">
+            <picture>
+              <source srcSet={mobileHeroSrcSet} media="(max-width: 767px)" />
+              <source srcSet={desktopHeroSrcSet} media="(min-width: 768px)" />
+              <img {...desktopHeroProps} alt="" />
+            </picture>
+          </div>
 
-        <div className="p-top-hero__wrap">
-          <div className="p-top-hero__text-content">
-            <div className="p-top-hero__identity">
-              <div className="p-top-hero__icon">
-                <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={80} height={80} sizes="(max-width: 767px) 56px, 80px" />
+          <div className="p-top-hero__wrap">
+            <div className="p-top-hero__text-content">
+              <div className="p-top-hero__identity">
+                <div className="p-top-hero__icon">
+                  <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={80} height={80} sizes="(max-width: 767px) 56px, 80px" />
+                </div>
+                <p className="p-top-hero__name">TOMOCAN</p>
               </div>
-              <p className="p-top-hero__name">TOMOCAN</p>
-            </div>
 
-            <h1 className="p-top-hero__title">設計・実装・改善まで担うWebエンジニア</h1>
-            <p className="p-top-hero__about-text">
-              Web制作会社で<strong>10年以上</strong>、<strong>200サイト以上</strong>の制作に携わってきました。
-            </p>
-            <p className="p-top-hero__expertise">WordPress / フロントエンド実装 / UI改善 / SEO</p>
-            <div className="p-top-hero__actions" aria-label="主要ページ">
-              <Link href="/result/" className="c-button__link">
-                制作実績を見る
-              </Link>
-              <Link href="/about/" className="p-top-hero__profile-link">
-                プロフィール・経歴を見る
-              </Link>
+              <h1 className="p-top-hero__title">設計・実装・改善まで担うWebエンジニア</h1>
+              <p className="p-top-hero__about-text">
+                Web制作会社で<strong>10年以上</strong>、<strong>200サイト以上</strong>の制作に携わってきました。
+              </p>
+              <p className="p-top-hero__expertise">WordPress / フロントエンド実装 / UI改善 / SEO</p>
+              <nav className="p-top-hero__actions" aria-label="主要ページ">
+                <Link href="/result/" className="c-button__link">
+                  制作実績を見る
+                </Link>
+                <Link href="/about/" className="p-top-hero__profile-link">
+                  プロフィール・経歴を見る
+                </Link>
+              </nav>
             </div>
           </div>
         </div>
-      </div>
 
-      <main id="main">
         <section className="p-top-facts inner" aria-labelledby="facts-heading">
           <h2 id="facts-heading" className="u-visually-hidden">
             主な実績と資格

@@ -5,6 +5,18 @@
 /* =============================== */
 /* トップページ
 ================================== */
+.p-top-main {
+  padding-top: 0;
+
+  .p-top-facts {
+    padding-top: 50px;
+
+    @include mq(sp) {
+      padding-top: 40px;
+    }
+  }
+}
+
 .p-top-hero {
   align-items: center;
   background-color: #18110d;

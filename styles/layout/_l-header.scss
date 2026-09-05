@@ -1,5 +1,27 @@
 @use '../global' as *;
 
+.skip-link {
+  background: #ffffff;
+  border: 2px solid #b54708;
+  color: #282828;
+  left: 12px;
+  padding: 10px 16px;
+  position: fixed;
+  top: 12px;
+  transform: translateY(calc(-100% - 20px));
+  transition: none;
+  z-index: 101;
+
+  &:focus {
+    transform: none;
+  }
+}
+
+.header-no-scroll .l-header :is(a, button):focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
 .l-header {
   align-items: center;
   animation: {

@@ -49,7 +49,7 @@ test('トップの背景画像には常時動く装飾やぼかしを重ねな�
 // Execute the real server component, isolating only CMS I/O and Next's build-time font import.
 // Below-the-fold components are not rendered by this KV test.
 const require = createRequire(import.meta.url);
-async function renderHero() {
+async function loadHome() {
   const componentModule = { exports: {} };
   const code = ts.transpileModule(readSource('app/page.tsx'), {
     compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.CommonJS, esModuleInterop: true },
@@ -66,9 +66,27 @@ async function renderHero() {
     return require(id);
   };
   runInNewContext(code, { module: componentModule, exports: componentModule.exports, require: localRequire });
-  const page = await componentModule.exports.default();
-  return renderToStaticMarkup(page.props.children[0]);
+  return componentModule.exports.default();
 }
+
+const findElement = (node, predicate) => {
+  if (!node || typeof node !== 'object') return undefined;
+  if (predicate(node)) return node;
+  const children = [node.props?.children].flat();
+  return children.map((child) => findElement(child, predicate)).find(Boolean);
+};
+async function renderHero() {
+  return renderToStaticMarkup(findElement(await loadHome(), (node) => node.props?.className?.split(' ').includes('p-top-hero')));
+}
+
+test('メイン領域からKVの見出しと主要ナビゲーションに到達できる', async () => {
+  const main = findElement(await loadHome(), (node) => node.type === 'main');
+  assert.ok(findElement(main, (node) => node.type === 'h1'), 'main contains the page heading');
+  const nav = findElement(main, (node) => node.type === 'nav' && node.props['aria-label'] === '主要ページ');
+  assert.ok(nav, 'primary links are exposed as navigation');
+  assert.equal(main.props.id, 'main');
+  assert.equal(main.props.tabIndex, -1, 'skip link can move focus to main');
+});
 
 const heroCss = postcss.parse(compile('styles/pages/top.scss'));
 const commonCss = postcss.parse(compile('styles/object/component/_button.scss'));
@@ -106,7 +124,7 @@ test('KVの画像はPCとSPで切り替え、背景を優先読み込みする',
   assert.match(html, /<img(?=[^>]*fetchPriority="high")(?=[^>]*loading="eager")[^>]*>/);
 });
 
-test('KV主要CTAは通常・hoverとも白文字4.5:1以上で共通ボタンに影響しない', () => {
+test('KV主要CTAは通常・hoverとも白文字4.5:1以上を確保する', () => {
   for (const [selector, color] of [
     ['.p-top-hero__actions .c-button__link', '#b54708'],
     ['.p-top-hero__actions .c-button__link:hover', '#8f3500'],
@@ -116,10 +134,17 @@ test('KV主要CTAは通常・hoverとも白文字4.5:1以上で共通ボタン�
     assert.ok(1.05 / (luminance(style['background-color']) + 0.05) >= 4.5);
     assert.equal(style.color, '#ffffff');
   }
-  assert.equal(declarations(commonCss, '.c-button__link')['background-color'], '#f36b0a');
   assert.ok(Number.parseFloat(declarations(heroCss, '.p-top-hero__actions .c-button__link')['min-height']) >= 54);
   assert.ok(Number.parseFloat(declarations(heroCss, '.p-top-hero__profile-link')['min-height']) >= 44);
   assert.equal(declarations(heroCss, '.p-top-hero__actions a:focus-visible').outline, '3px solid #ffffff');
+});
+
+test('共通ボタンは通常・hover・focusすべてで文字コントラスト4.5:1以上を確保する', () => {
+  for (const state of ['', ':hover', ':focus']) {
+    const style = { ...declarations(commonCss, '.c-button__link'), ...declarations(commonCss, `.c-button__link${state}`) };
+    const values = [luminance(style.color), luminance(style['background-color'])].sort((a, b) => b - a);
+    assert.ok((values[0] + 0.05) / (values[1] + 0.05) >= 4.5, `button ${state || 'default'}`);
+  }
 });
 
 test('短いSPでは余白を縮めても本文サイズと自然な縦スクロールを維持する', () => {

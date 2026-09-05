@@ -570,6 +570,27 @@ small {
     transform: translateY(-10px) rotate(45deg);
   }
 }
+.skip-link {
+  background: #ffffff;
+  border: 2px solid #b54708;
+  color: #282828;
+  left: 12px;
+  padding: 10px 16px;
+  position: fixed;
+  top: 12px;
+  transform: translateY(calc(-100% - 20px));
+  transition: none;
+  z-index: 101;
+}
+.skip-link:focus {
+  transform: none;
+}
+
+.header-no-scroll .l-header :is(a, button):focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
 .l-header {
   align-items: center;
   animation-duration: 0.4s;
@@ -1433,7 +1454,7 @@ section * ~ section:not(:last-of-type) {
 @include btn(backgorund-color, color);
 */
 .c-button__link {
-  background-color: #f36b0a;
+  background-color: #b54708;
   border: 1px solid #ffffff;
   border-radius: 10px;
   box-sizing: border-box;
@@ -1461,8 +1482,8 @@ section * ~ section:not(:last-of-type) {
 }
 .c-button__link:hover, .c-button__link:focus {
   background-color: #ffffff;
-  border-color: #f36b0a;
-  color: #f36b0a;
+  border-color: #b54708;
+  color: #b54708;
   opacity: 1;
 }
 .c-button__link:hover::before, .c-button__link:focus::before {
