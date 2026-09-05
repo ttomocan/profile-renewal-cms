@@ -2,6 +2,9 @@
 $inner: 840px;
 $innerSmall: 640px;
 
+// 日本語本文とページタイトルで共通の書体を使う
+$fontText: -apple-system, Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, BlinkMacSystemFont, sans-serif;
+
 // サイトカラー
 $textC: #282828;
 $mainC: #f36b0a;

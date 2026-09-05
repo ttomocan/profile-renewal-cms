@@ -1,8 +1,9 @@
 import Image from 'next/image';
+import type { ReactNode } from 'react';
 
 type Props = {
   title: string;
-  sub: string;
+  sub: ReactNode;
   /** 詳細ページなど、本文側に主見出しがある場合は false */
   isHeading?: boolean;
 };

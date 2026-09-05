@@ -25,7 +25,10 @@ export default function RootLayout({ children }: Props) {
 
   return (
     <>
-      <PageTitle title="About" sub="ともきゃんのプロフィール・経歴" />
+      <PageTitle
+        title="About"
+        sub={<><span className="pagetitle__phrase">ともきゃんの</span><wbr /><span className="pagetitle__phrase">プロフィール・経歴</span></>}
+      />
       <Breadcrumb items={breadcrumbItems} />
       <main>{children}</main>
       <Blog variant="about" />
