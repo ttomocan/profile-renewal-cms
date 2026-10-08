@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { formatPeriod, parseRoles, parseTechStack, safeGetProjectType, safeGetCover, safeGetWorkType } from '@/lib/parse';
+import { parseRoles, safeGetProjectType, safeGetCover, safeGetWorkType } from '@/lib/parse';
+import { groupProjectTechnologies } from '@/lib/resultPresentation';
 import { createMetaDescription } from '@/lib/seo';
 import type { ResultItem } from '@/types/results';
 
@@ -10,13 +11,13 @@ interface ResultCardProps {
 }
 
 export default function ResultCard({ result, disableLink = false }: ResultCardProps) {
-  const { id, title, summary, period } = result;
+  const { id, title, summary } = result;
 
   const workType = safeGetWorkType(result);
   const projectType = safeGetProjectType(result);
   const cover = safeGetCover(result, true); // 一覧ページではOGP画像を使用
-  const roles = parseRoles(result).slice(0, 2);
-  const technologies = parseTechStack(result.techStack).slice(0, 4);
+  const roles = parseRoles(result);
+  const technologies = groupProjectTechnologies(result.techStack).technologies;
   const cardSummary = createMetaDescription(summary, 90);
 
   const cardContent = (
@@ -38,7 +39,6 @@ export default function ResultCard({ result, disableLink = false }: ResultCardPr
       <div className="result-card__content">
         <div className="result-card__meta">
           <span className="result-card__category">{projectType}</span>
-          <span className="result-card__period">{formatPeriod(period)}</span>
         </div>
         <h3 className="result-card__title">{title}</h3>
         {roles.length > 0 && <p className="result-card__responsibility">担当：{roles.join(' / ')}</p>}

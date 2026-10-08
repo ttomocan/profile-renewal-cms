@@ -1,5 +1,5 @@
 import type { ResultItem } from '@/types/results';
-import { formatPeriod, parseRoles, parseTechStack, safeGetProjectType, safeGetWorkType } from '@/lib/parse';
+import { parseRoles, parseTechStack, safeGetProjectType, safeGetWorkType } from '@/lib/parse';
 import { getResultSeoDescription } from '@/lib/contentSeo';
 import { PERSON_ID, SITE_URL, WEBSITE_ID } from '@/lib/seo';
 import JsonLd from '../JsonLd';
@@ -33,7 +33,7 @@ export default function ResultJsonLd({ result }: Props) {
     inLanguage: 'ja-JP',
     genre: safeGetProjectType(result),
     keywords: parseTechStack(result.techStack),
-    temporalCoverage: formatPeriod(result.period),
+
     about: [safeGetWorkType(result), ...parseRoles(result)].filter((value) => value !== '未分類'),
   };
 

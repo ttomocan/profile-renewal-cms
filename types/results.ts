@@ -47,6 +47,9 @@ export interface ResultItem {
   decisions?: string;
   results?: string;
   outOfScope?: string;
+  verification?: string; // 動作・更新手順の確認方法
+  handover?: string; // 公開後の運用・引き継ぎ
+  technologyUsage?: string; // 案件内での技術の用途
 }
 
 // 検索・フィルタ用の型

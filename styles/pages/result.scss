@@ -63,6 +63,33 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   margin-bottom: 36px;
 }
 
+.result-detail__scope-note {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 16px;
+}
+
+.result-detail__prose {
+  line-height: 1.8;
+  white-space: pre-line;
+  margin-bottom: 20px;
+}
+
+.result-detail__tools-label {
+  margin: 20px 0 10px;
+  font-size: 14px;
+}
+
+.result-detail__section-content--summary p + p {
+  margin-top: 16px;
+}
+
+.result-card__content,
+.result-detail__header-title,
+.result-detail__section-content {
+  overflow-wrap: anywhere;
+}
+
 // ===============================================
 // 実績カード
 // ===============================================
@@ -1010,6 +1037,18 @@ cite {
 
     &__summary {
       font-size: 14px;
+    }
+  }
+}
+
+.result-detail__header-meta > div {
+  @include mq("sp") {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    align-items: start;
+
+    dt, dd {
+      grid-column: 2;
     }
   }
 }

@@ -3,12 +3,15 @@
 import { useRef, useState, useEffect } from 'react';
 import ResultCard from '@/components/ResultCard';
 import type { ResultItem } from '@/types/results';
+import type { Blog } from '@/app/_libs/microcms';
+import PersonalProjectCard from '@/components/PersonalProjectCard';
 
 interface ResultsSliderProps {
   results: ResultItem[];
+  personalArticle?: Blog;
 }
 
-export default function ResultsSlider({ results }: ResultsSliderProps) {
+export default function ResultsSlider({ results, personalArticle }: ResultsSliderProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
@@ -71,6 +74,7 @@ export default function ResultsSlider({ results }: ResultsSliderProps) {
             result={result}
           />
         ))}
+        {personalArticle && <PersonalProjectCard article={personalArticle} />}
       </div>
 
       {/* スライダーナビゲーションボタン（SP表示のみ） */}

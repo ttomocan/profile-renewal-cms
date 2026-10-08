@@ -8,9 +8,14 @@ import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultsSlider from '@/app/_components/ResultsSlider';
 import Blog from '@/app/_components/Blog';
 import { caveatBrush } from '@/app/fonts';
+import { selectFeaturedResults } from '@/lib/resultPresentation';
 
 export default async function Home() {
-  const [data, resultsData] = await Promise.all([getBlogList({ limit: TOP_DIARY_LIMIT }), getResults({ limit: 6 })]);
+  const [data, resultsData, personalData] = await Promise.all([
+    getBlogList({ limit: TOP_DIARY_LIMIT }),
+    getResults({ limit: 100 }),
+    getBlogList({ ids: 'iropon-release', limit: 1, fields: 'id,title,description,thumbnail' }).catch(() => ({ contents: [] })),
+  ]);
   const {
     props: { srcSet: desktopHeroSrcSet, ...desktopHeroProps },
   } = getImageProps({ src: '/img/pages/top/img_hero.webp', alt: '', width: 2732, height: 1000, sizes: '100vw', loading: 'eager', fetchPriority: 'high' });
@@ -44,6 +49,7 @@ export default async function Home() {
                 Web制作会社で<strong>10年以上</strong>、<strong>200サイト以上</strong>の制作に携わってきました。
               </p>
               <p className="p-top-hero__expertise">WordPress / フロントエンド実装 / UI改善 / SEO</p>
+              <p className="p-top-hero__about-text">更新する人と制作チームを考えた、CMSの実装・改修・運用に取り組んできました。</p>
               <nav className="p-top-hero__actions" aria-label="主要ページ">
                 <Link href="/result/" className="c-button__link">
                   制作実績を見る
@@ -86,11 +92,11 @@ export default async function Home() {
             <span className="c-heading-lv2-ja">代表的な制作実績</span>
           </h2>
           <div className="p-top-results__cont fadeUpTrigger">
-            <p>コーポレートサイト、ブランドサイト、オウンドメディアなどの実績から、担当範囲・使用技術・制作期間を確認できます。</p>
+            <p>本業のCMS構築、副業のサイト制作、個人開発を紹介します。各案件の担当範囲と実装内容は、詳細ページで確認できます。</p>
           </div>
-          {resultsData.contents.length > 0 && (
+          {(resultsData.contents.length > 0 || personalData.contents.length > 0) && (
             <div className="p-top-results__list fadeUpTrigger">
-              <ResultsSlider results={resultsData.contents} />
+              <ResultsSlider results={selectFeaturedResults(resultsData.contents)} personalArticle={personalData.contents[0]} />
             </div>
           )}
           <div className="p-top-results__button fadeUpTrigger">

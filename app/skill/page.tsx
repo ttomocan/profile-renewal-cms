@@ -47,7 +47,7 @@ export default function Page() {
   return (
     <>
       <section className="first inner inner-s">
-        <p className="fadeUpTrigger">実務で継続して使ってきた技術と、個人開発・学習で扱っている技術を分けて紹介します。実装だけでなく、CMSの更新性、レスポンシブ表示、アクセシビリティ、SEO、公開前の品質確認までを担当範囲として考えています。</p>
+        <p className="fadeUpTrigger">実務で使用してきた技術と、個人開発・学習で扱っている技術を分けて紹介します。WordPressの実装・改修では、画面表示とともに更新する人の作業や保守性を考えます。案件ごとの担当範囲は制作実績に掲載しています。</p>
       </section>
 
       <section className="programming inner">
@@ -61,7 +61,7 @@ export default function Page() {
           <SkillCard title="JavaScript" image="/img/pages/skill/img_javascript.svg" imageAlt="JavaScript" summary="UIの操作やアニメーションを、既存処理への影響を確認しながら実装します。" points={['メニュー、モーダル、スライダーなどのUI実装', 'フォームや表示切り替えの制御', 'ブラウザ間の表示・操作確認']} link={{ href: '/result/', label: 'JavaScriptを使用した制作実績を見る' }} />
           <SkillCard title="PHP / WordPress" image="/img/pages/skill/img_php.svg" imageAlt="PHP" summary="更新する人が迷わない管理画面と、運用しやすいテンプレートを構築します。" points={['オリジナルテーマ・既存テーマの改修', '投稿タイプ、投稿機能、カスタムフィールド設計', 'お問い合わせフォーム、表示速度、運用時の改修']} link={{ href: '/result/', label: 'WordPressを含む制作実績を見る' }} />
           <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、チームで確認しやすい単位を意識してバージョン管理します。" points={['ブランチを使った機能開発・修正', '差分確認とレビューを前提にしたコミット', 'GitHubを使ったコード管理']} />
-          <SkillCard title="Figma / Adobe" image="/img/pages/skill/img_figma.svg" imageAlt="Figma" summary="デザインの意図やコンポーネント構造を読み取り、実装へ落とし込みます。" points={['Figmaのデザインデータ確認・制作', 'Photoshopでの画像編集・書き出し', 'Illustratorでの素材調整']} />
+
         </div>
       </section>
 
@@ -70,7 +70,7 @@ export default function Page() {
           <span className="c-heading-lv2-en">Personal Development</span>
           <span className="c-heading-lv2-ja">個人開発で使用</span>
         </h2>
-        <p className="programming__note fadeUpTrigger">個人開発やこのポートフォリオの改善を通じて使用し、継続してキャッチアップしています。</p>
+        <p className="programming__note fadeUpTrigger">個人開発やこのポートフォリオの改善を通じて使用しています。本業の商用案件での経験とは分けて紹介します。</p>
         <div className="skill-cards">
           <SkillCard title="Next.js / React" summary="コンポーネント単位でUIを組み立て、App Routerを使ったWebサイト・アプリ開発に取り組んでいます。" points={['Server Componentsを含む画面構成', '状態や責務を分けたコンポーネント設計', 'メタデータ、画像、表示速度の最適化']} />
           <SkillCard title="TypeScript" summary="PropsやCMSデータに型を定義し、変更時の見落としを減らすために使用しています。" points={['コンポーネントのProps定義', 'API・CMSレスポンスの型定義', '型チェックによる実装ミスの早期発見']} />
@@ -81,19 +81,29 @@ export default function Page() {
       <section className="ai-tool inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Learning &amp; Support</span>
-          <span className="c-heading-lv2-ja">学習・補助的に使用</span>
+          <span className="c-heading-lv2-ja">学習中の技術・AI活用</span>
         </h2>
         <div className="skill-cards">
           <SkillCard title="Tailwind CSS" image="/img/pages/skill/img_css3.svg" imageAlt="CSS" summary="ユーティリティクラスによるスタイリングを学習し、基本的なレイアウトやレスポンシブ指定を試しています。" points={['個人学習で使用', '基本的なレイアウト・余白指定', '既存案件での実務経験とは区別']} />
           <SkillCard title="ChatGPT / Claude / Gemini" image="/img/pages/skill/img_chatgpt.svg" imageAlt="AIツール" summary="要件整理、コードレビュー、テスト観点の洗い出し、ドキュメント作成の補助に活用しています。" points={['生成コードをそのまま採用せず差分と影響を確認', 'アクセシビリティとレスポンシブ表示を確認', 'ブラウザ間の差異と既存処理への影響を確認']} />
+
+        </div>
+      </section>
+
+      <section className="programming inner">
+        <h2 className="c-heading-lv2 fadeUpTrigger"><span className="c-heading-lv2-en">Tools</span><span className="c-heading-lv2-ja">制作・開発のツール</span></h2>
+        <p className="programming__note fadeUpTrigger">使用技術とは分けて、デザイン確認・画像編集・コード編集のツールを紹介します。</p>
+        <div className="skill-cards">
+          <SkillCard title="Figma / Adobe" image="/img/pages/skill/img_figma.svg" imageAlt="Figma" summary="デザインの意図やコンポーネント構造を読み取り、実装へ落とし込みます。" points={['Figmaのデザインデータ確認・制作', 'Photoshopでの画像編集・書き出し', 'Illustratorでの素材調整']} />
           <SkillCard title="その他の補助ツール" image="/img/pages/skill/img_vscode.svg" imageAlt="開発ツール" summary="Cursor、Visual Studio Code、NotebookLM、Canva、Adobe Express、Fireflyを目的に応じて使い分けています。" points={['コード編集・調査の補助', '資料整理とドキュメント作成', 'ブログ用画像や素材の作成']} />
         </div>
+        <p className="programming__note fadeUpTrigger"><Link href="/diary/iropon-release/">「いろポン！」でのCursor・Claudeの利用と開発経緯を読む</Link></p>
       </section>
 
       <section className="other inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Quality</span>
-          <span className="c-heading-lv2-ja">実装時に確認すること</span>
+          <span className="c-heading-lv2-ja">実装時に重視する観点</span>
         </h2>
         <ul className="other__cont fadeUpTrigger">
           <li className="other__card">情報設計・見出し構造</li>

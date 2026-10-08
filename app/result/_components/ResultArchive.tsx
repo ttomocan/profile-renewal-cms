@@ -4,14 +4,17 @@ import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import ItemListJsonLd from '@/app/_components/ItemListJsonLd';
 import Pagination from '@/components/Pagination';
 import ResultCard from '@/components/ResultCard';
+import PersonalProjectCard from '@/components/PersonalProjectCard';
+import type { Blog } from '@/app/_libs/microcms';
 import type { ResultsResponse } from '@/types/results';
 
 type Props = {
   currentPage: number;
   resultsData: ResultsResponse;
+  personalArticle?: Blog;
 };
 
-export default function ResultArchive({ currentPage, resultsData }: Props) {
+export default function ResultArchive({ currentPage, resultsData, personalArticle }: Props) {
   const { contents: results, totalCount, limit } = resultsData;
   const totalPages = Math.ceil(totalCount / limit);
   const pagePath = currentPage === 1 ? '/result/' : `/result/p/${currentPage}/`;
@@ -33,7 +36,7 @@ export default function ResultArchive({ currentPage, resultsData }: Props) {
               {pageLabel}の一覧
             </h2>
             <p>
-              制作したサイトの種類、本人が担当した範囲、使用技術、制作期間を一覧で確認できます。実装時の判断や工夫は各詳細ページに掲載しています。
+              本業・副業の区分、サイトの種類、本人の担当領域を一覧で紹介します。案件固有の実装内容や、案件全体の制作期間・規模は各詳細ページで確認できます。
               {currentPage > 1 && ` 現在は${currentPage}ページ目です。`}
             </p>
           </section>
@@ -55,6 +58,13 @@ export default function ResultArchive({ currentPage, resultsData }: Props) {
               <h2 className="results-empty__title">実績がまだ登録されていません</h2>
               <p className="results-empty__description">近日中に実績を公開予定です</p>
             </div>
+          )}
+          {personalArticle && (
+            <section className="result-detail__section" aria-labelledby="personal-project-heading">
+              <h2 id="personal-project-heading" className="result-detail__section-title">個人開発</h2>
+              <p className="results-intro">自分の学習経験を出発点に作ったWebアプリです。開発日記で目的と開発経緯を紹介しています。</p>
+              <div className="results-grid"><PersonalProjectCard article={personalArticle} /></div>
+            </section>
           )}
         </div>
       </main>

@@ -13,8 +13,8 @@ export default function Page() {
     <>
       <section className="greeting inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
-          <span className="c-heading-lv2-en">Current Work</span>
-          <span className="c-heading-lv2-ja">現在の仕事</span>
+          <span className="c-heading-lv2-en">Profile</span>
+          <span className="c-heading-lv2-ja">Web制作での経験</span>
         </h2>
         <div className="greeting__cont">
           <div className="greeting__image fadeUpTrigger">
@@ -22,7 +22,7 @@ export default function Page() {
           </div>
           <div className="greeting__detail fadeUpTrigger">
             <p>
-              名古屋在住のWebエンジニア「ともきゃん」です。Web制作会社で、WordPressを中心としたフロントエンド実装、CMS構築、UI改善、SEO、公開後の運用に携わっています。
+              名古屋在住のWebエンジニア「ともきゃん」です。Web制作会社で、WordPressを中心としたフロントエンド実装、CMS構築、UI改善、SEO、公開後の運用に携わってきました。
               <br />
               デザインデータを再現するだけでなく、コンテンツを更新する人の作業や、公開前の品質確認まで考えて実装することを大切にしています。
             </p>
@@ -97,14 +97,14 @@ export default function Page() {
         </h2>
         <div className="about-section-copy fadeUpTrigger">
           <p>要件やデザインの背景を理解し、実装上の制約や運用時の注意点を早めに共有します。チームでは、デザイナーやディレクターの意図と、実装・CMSの仕様をつなぐ役割を担います。</p>
-          <p>公開前には、レスポンシブ表示、キーボード操作、更新内容の反映、既存処理への影響を確認し、公開後も修正しやすい構成を意識しています。</p>
+          <p>コンテンツを更新する人の作業と、制作チームが改修する際の扱いやすさを考え、公開後も修正しやすい構成を意識しています。</p>
         </div>
       </section>
 
       <section className="license inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">License &amp; Result</span>
-          <span className="c-heading-lv2-ja">資格・実績</span>
+          <span className="c-heading-lv2-ja">資格・個人活動の実績</span>
         </h2>
         <div className="license__cont c-list fadeUpTrigger" aria-label="保有資格">
           <div className="license__card">1級ウェブデザイン技能士</div>
@@ -130,8 +130,10 @@ export default function Page() {
         <div className="about-section-copy fadeUpTrigger">
           <p>個人では、Next.js、React、TypeScript、microCMSを使ったWeb開発に取り組んでいます。ブログ運営では、企画、記事作成、デザイン、SEO、改善まで継続して行っています。</p>
           <p>発信や個人開発を通じて、実務とは異なる技術や、利用者としての視点を学び続けています。</p>
+          <p>「いろポン！」は、色彩検定の学習中に感じた色名の覚えにくさをきっかけに作った、色をクイズで覚える個人開発のWebアプリです。</p>
         </div>
         <div className="about-related-links fadeUpTrigger">
+          <Link href="/diary/iropon-release/">「いろポン！」の目的・開発経緯を読む</Link>
           <Link href="/diary/">個人開発・ブログの活動記録を読む</Link>
           <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer">
             「ともきゃんのボイトレ生活」を見る（外部サイト）

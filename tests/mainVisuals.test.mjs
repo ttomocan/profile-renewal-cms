@@ -60,6 +60,12 @@ async function loadHome() {
       const empty = async () => ({ contents: [], totalCount: 0, offset: 0, limit: 6 });
       return { getBlogList: empty, getResults: empty };
     }
+    if (id === '@/lib/resultPresentation') {
+      const utility = { exports: {} };
+      const output = ts.transpileModule(readSource('lib/resultPresentation.ts'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+      runInNewContext(output, { module: utility, exports: utility.exports, require });
+      return utility.exports;
+    }
     if (id === '@/app/_constants') return { TOP_DIARY_LIMIT: 6 };
     if (id === '@/app/fonts') return { caveatBrush: { variable: 'test-caveat' } };
     if (id.startsWith('@/app/_components/')) return () => { throw new Error('Only the KV should be rendered'); };

@@ -12,6 +12,7 @@ import ResultJsonLd from '@/app/_components/ResultJsonLd';
 import ResultCard from '@/components/ResultCard';
 import { createMetadata } from '@/lib/seo';
 import { getResultSeoDescription, getResultSeoTitle } from '@/lib/contentSeo';
+import { groupProjectTechnologies } from '@/lib/resultPresentation';
 import '@/styles/pages/result.scss';
 
 interface ResultDetailPageProps {
@@ -70,7 +71,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     notFound();
   }
 
-  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, challenge, constraints, responsibility, decisions, results: projectResults, outOfScope } = result;
+  const { title, summary, period, techStack, highlights, testimonial, kpi, siteUrl, challenge, constraints, responsibility, decisions, results: projectResults, outOfScope, verification, handover, technologyUsage } = result;
 
   // 安全な取得関数を使用
   const workType = safeGetWorkType(result);
@@ -81,6 +82,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const safeScale = safeGetScale(result);
 
   const techStackArray = parseTechStack(techStack);
+  const technologyGroups = groupProjectTechnologies(techStack);
   const rolesArray = parseRoles(result);
   const highlightsArray = splitHighlights(highlights);
   const formattedPeriod = formatPeriod(period);
@@ -134,25 +136,25 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <h1 className="result-detail__header-title">{title}</h1>
 
               <dl className="result-detail__header-meta">
-                <div>
-                  <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {period != null && period !== 0 && <div>
+                  <svg aria-hidden="true" className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  <dt>制作期間</dt>
+                  <dt>案件全体の制作期間</dt>
                   <dd>{formattedPeriod}</dd>
-                </div>
+                </div>}
                 {safeScale && safeScale !== '未分類' && (
                   <div>
-                    <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg aria-hidden="true" className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2M4 6v10a2 2 0 002 2h12a2 2 0 002-2V6M4 6h16M7 10h3m-3 4h8m-8 4h8" />
                     </svg>
-                    <dt>プロジェクト規模</dt>
+                    <dt>案件全体のページ規模</dt>
                     <dd>{safeScale}</dd>
                   </div>
                 )}
                 {result.clientName && result.clientName.trim() && (
                   <div>
-                    <svg className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg aria-hidden="true" className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                     </svg>
                     <dt>クライアント</dt>
@@ -160,6 +162,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                   </div>
                 )}
               </dl>
+              {(period || (safeScale && safeScale !== '未分類')) ? <p className="result-detail__scope-note">期間・ページ規模は案件全体の情報です。本人の担当範囲は以下に記載しています。</p> : null}
             </header>
 
             {/* カバー画像は非表示 */}
@@ -172,7 +175,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               </div>
             </section>
 
-            <TextSection title="課題・背景" value={challenge} />
+            <TextSection title="目的・課題" value={challenge} />
             <TextSection title="制約条件" value={constraints} />
 
             {/* 担当範囲 */}
@@ -180,7 +183,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">自分が担当した範囲</h2>
                 <div className="result-detail__section-content">
-                  {responsibility?.trim() && <p>{responsibility}</p>}
+                  {responsibility?.trim() && <div className="result-detail__prose"><p>{responsibility}</p></div>}
                   {rolesArray.length > 0 && (
                     <div className="tags-container" role="list" aria-label="担当範囲一覧">
                       {rolesArray.map((role) => (
@@ -194,30 +197,12 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               </section>
             )}
 
-            {/* 使用技術 */}
-            {techStackArray.length > 0 && (
-              <section className="result-detail__section">
-                <h2 className="result-detail__section-title">使用技術</h2>
-                <div className="result-detail__section-content result-detail__section-content--tags">
-                  <div className="tags-container" role="list" aria-label="使用技術一覧">
-                    {techStackArray.map((tech, index) => (
-                      <span key={index} className="tag tag--tech" role="listitem" aria-label={`使用技術: ${tech}`}>
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </section>
-            )}
-
             {/* 実装・判断したこと */}
-            {(decisions?.trim() || highlightsArray.length > 0) && (
+            {highlightsArray.length > 0 && (
               <section className="result-detail__section">
-                <h2 className="result-detail__section-title">実装・判断したこと</h2>
+                <h2 className="result-detail__section-title">実装内容・工夫</h2>
                 <div className="result-detail__section-content result-detail__section-content--summary">
-                  {decisions?.trim() ? (
-                    <p>{decisions}</p>
-                  ) : (
+                  {highlightsArray.length > 0 && (
                     <div className="result-detail__section-highlights">
                       <ul>
                         {highlightsArray.map((highlight) => (
@@ -230,8 +215,34 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               </section>
             )}
 
-            <TextSection title="改善結果・成果" value={projectResults?.trim() || kpi} />
+            <TextSection title="実装時の判断と理由" value={decisions} />
+            <TextSection title="結果" value={projectResults?.trim() || kpi} />
+            <TextSection title="動作・更新手順の確認" value={verification} />
+            <TextSection title="公開後の運用・引き継ぎ" value={handover} />
             <TextSection title="担当外の範囲" value={outOfScope} />
+
+            {/* 使用技術 */}
+            {(technologyGroups.technologies.length > 0 || technologyGroups.tools.length > 0 || technologyUsage?.trim()) && (
+              <section className="result-detail__section">
+                <h2 className="result-detail__section-title">使用技術・制作ツール</h2>
+                <div className="result-detail__section-content result-detail__section-content--tags">
+                  {technologyUsage?.trim() && <div className="result-detail__prose"><p>{technologyUsage}</p></div>}
+                  {technologyGroups.technologies.length > 0 && <div className="tags-container" role="list" aria-label="使用技術一覧">
+                    {technologyGroups.technologies.map((tech, index) => (
+                      <span key={index} className="tag tag--tech" role="listitem" aria-label={`使用技術: ${tech}`}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>}
+                  {technologyGroups.tools.length > 0 && <>
+                    <p className="result-detail__tools-label">エディタ・デザインツール</p>
+                    <div className="tags-container" role="list" aria-label="制作ツール一覧">
+                      {technologyGroups.tools.map(tool => <span key={tool} className="tag" role="listitem">{tool}</span>)}
+                    </div>
+                  </>}
+                </div>
+              </section>
+            )}
 
             {/* お客様の声 */}
             {testimonial && testimonial.trim() && (

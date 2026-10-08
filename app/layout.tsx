@@ -24,8 +24,8 @@ const siteKeywords = [
   'TypeScript',
 ];
 
-const homeTitle = 'Webエンジニア ともきゃん｜WordPress・UI改善・SEOの実績';
-const homeDescription = 'Web制作会社で10年以上、200サイト以上の制作に携わってきたWebエンジニア・ともきゃんのポートフォリオです。WordPress、CMS構築、フロントエンド、UI改善、SEO、Next.js、個人開発の実績を紹介します。';
+const homeTitle = 'Webエンジニア ともきゃん｜WordPress・CMSの実装・改修・運用';
+const homeDescription = 'Web制作会社で10年以上、200サイト以上の制作に携わってきたWebエンジニア・ともきゃんのポートフォリオです。WordPress・CMSの実装、改修、運用を中心に、本業・副業の担当範囲と個人開発「いろポン！」を紹介します。';
 
 export const metadata: Metadata = {
   ...createMetadata({
