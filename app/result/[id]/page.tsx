@@ -182,7 +182,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {(responsibility?.trim() || rolesArray.length > 0) && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">自分が担当した範囲</h2>
-                <div className="result-detail__section-content">
+                <div className="result-detail__section-content result-detail__section-content--tags">
                   {responsibility?.trim() && <div className="result-detail__prose"><p>{responsibility}</p></div>}
                   {rolesArray.length > 0 && (
                     <div className="tags-container" role="list" aria-label="担当範囲一覧">
