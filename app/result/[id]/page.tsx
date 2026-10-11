@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getBlogList, getResultDetail, getResults } from '@/app/_libs/microcms';
+import { getResultDetail, getResults } from '@/app/_libs/microcms';
 import { parseTechStack, parseRoles, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
@@ -87,11 +87,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const highlightsArray = splitHighlights(highlights);
   const formattedPeriod = formatPeriod(period);
 
-  const relatedArticleKeyword = ['WordPress', 'SEO', 'CMS', 'JavaScript', 'CSS'].find((keyword) => `${techStack ?? ''} ${highlights ?? ''}`.toLowerCase().includes(keyword.toLowerCase()));
-  const [relatedData, relatedBlogData] = await Promise.all([
-    getResults({ limit: 24, sort: 'new' }),
-    relatedArticleKeyword ? getBlogList({ limit: 4, q: relatedArticleKeyword }) : Promise.resolve({ contents: [] }),
-  ]);
+  const relatedData = await getResults({ limit: 24, sort: 'new' });
   const currentTechnologies = new Set(techStackArray.map((technology) => technology.toLowerCase()));
   const relatedResults = relatedData.contents
     .filter((item) => item.id !== result.id)
@@ -105,7 +101,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     .sort((a, b) => b.score - a.score)
     .slice(0, 3)
     .map(({ item }) => item);
-  const relatedArticles = relatedBlogData.contents.slice(0, 3);
   const contactTopics = [...rolesArray, ...techStackArray].slice(0, 4).join('、');
 
   const breadcrumbItems = [
@@ -288,34 +283,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 </div>
               </section>
             )}
-
-            {relatedArticles.length > 0 && (
-              <section className="result-detail__section result-related-navigation">
-                <h2 className="result-detail__section-title">関連する技術記事</h2>
-                <ul className="result-related-links">
-                  {relatedArticles.map((article) => (
-                    <li key={article.id}>
-                      <Link href={`/diary/${article.id}/`}>{article.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            <section className="result-detail__section result-related-navigation">
-              <h2 className="result-detail__section-title">関連ページ</h2>
-              <ul className="result-related-links">
-                <li>
-                  <Link href="/result/">Web制作実績をすべて見る</Link>
-                </li>
-                <li>
-                  <Link href="/skill/">実務・個人開発の対応スキルを見る</Link>
-                </li>
-                <li>
-                  <Link href="/about/">プロフィール・経歴を見る</Link>
-                </li>
-              </ul>
-            </section>
 
             <section className="result-detail__section result-contact" aria-labelledby="project-contact-heading">
               <h2 id="project-contact-heading" className="result-detail__section-title">
