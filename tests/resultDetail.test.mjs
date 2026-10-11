@@ -6,6 +6,48 @@ import { loadDetail, loadPage } from './helpers/resultPageHarness.mjs';
 const oldData = { id: 'corporate-handball-team-01', title: '既存案件', summary: '掲載概要', publishedAt: '2025-01-01', updatedAt: '2025-01-01' };
 const params = { params: Promise.resolve({ id: oldData.id }) };
 
+for (const id of ['corporate-handball-team-01', 'another-project']) {
+  for (const articles of [[], [{ id: 'related-article', title: '関連技術記事のテスト' }]]) {
+    test(`${id}: 関連記事${articles.length ? 'あり' : 'なし'}でも不要な2セクションを表示せず、既存導線を保持する`, async () => {
+      const result = { ...oldData, id, techStack: 'WordPress,CSS' };
+      const relatedResult = { ...oldData, id: 'related-project', title: '関連案件のテスト', techStack: 'WordPress' };
+      let blogCalls = 0;
+      const page = loadPage('app/result/[id]/page.tsx', {
+        getResultDetail: async (requestedId) => {
+          assert.equal(requestedId, id);
+          return result;
+        },
+        getResults: async () => ({ contents: [result, relatedResult], totalCount: 2, offset: 0, limit: 24 }),
+        getBlogList: async () => {
+          blogCalls += 1;
+          return { contents: articles };
+        },
+      });
+      const html = renderToStaticMarkup(await page.default({ params: Promise.resolve({ id }) }));
+
+      assert.doesNotMatch(html, /関連する技術記事|関連ページ|result-related-navigation|result-related-links/);
+      assert.match(html, /関連する制作実績/);
+      assert.match(html, /href="\/result\/related-project\/?"/);
+      assert.match(html, /関連案件のテスト/);
+      assert.doesNotMatch(html, new RegExp(`href="/result/${id}/?"`));
+      assert.match(html, /採用・協業について相談する/);
+      assert.match(html, /<a\b[^>]*href="\/contact\/?"[^>]*>採用・協業について問い合わせる<\/a>/);
+      assert.match(html, /<a\b(?=[^>]*href="\/result\/?")(?=[^>]*class="result-detail__navigation-back")/);
+      assert.match(html, /実績紹介に戻る/);
+      assert.equal(blogCalls, 0, '削除したセクション用の記事取得を行わない');
+    });
+  }
+}
+
+test('関連制作実績がない詳細でも問い合わせと一覧に戻る導線を保持する', async () => {
+  const page = loadDetail(oldData);
+  const html = renderToStaticMarkup(await page.default(params));
+  assert.doesNotMatch(html, /関連する技術記事|関連ページ|関連する制作実績/);
+  assert.match(html, /href="\/contact\/?"/);
+  assert.match(html, /<a\b(?=[^>]*href="\/result\/?")(?=[^>]*class="result-detail__navigation-back")/);
+  assert.match(html, /実績紹介に戻る/);
+});
+
 test('旧データ・未入力の任意項目では空の見出しと不明な期間を出さない', async () => {
   const page = loadDetail({ ...oldData, decisions: '  ', verification: '', handover: '\n' });
   const html = renderToStaticMarkup(await page.default(params));
