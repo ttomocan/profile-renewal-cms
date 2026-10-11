@@ -11,7 +11,7 @@ const BLOG_SEO_TITLES: Record<string, string> = {
   'line-stamp02_release': '子どもモチーフのLINEスタンプ第2弾｜制作・販売のお知らせ',
   'line-stamp_release': '子どもモチーフのLINEスタンプを制作｜元気120％りちゅくん',
   'stacknagoya3-report': 'Stack Nagoya Fes Vol.3参加レポート｜CMS・HTMX・AIの学び',
-  'site-renewal': 'WordPressからNext.js・microCMSへ移行した手順と改善点',
+  'site-renewal': 'WordPressからNext.js＋microCMSへリニューアルした記録',
 };
 
 type BlogSeoSource = {
