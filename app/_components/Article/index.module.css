@@ -207,14 +207,19 @@
 }
 
 .content a {
-  color: #f36b0a;
+  color: #b54708;
   text-decoration: underline;
   text-underline-offset: 3px;
   transition: opacity 0.2s ease;
 }
 
 .content a:hover {
-  opacity: 0.7;
+  color: #8f3500;
+}
+
+.content a:focus-visible {
+  outline: 3px solid #69300b;
+  outline-offset: 3px;
 }
 
 .content > figure {

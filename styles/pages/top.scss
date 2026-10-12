@@ -602,46 +602,18 @@
   position: relative;
 
   .results-grid {
-    // PC: 3列×2行のグリッド表示
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
-
-    @include mq('pcTab') {
-      gap: 25px;
-    }
-
-    @include mq('pc') {
-      gap: 30px;
-    }
-
-    // SP: スライダー表示（CSS Scroll Snap使用）
+    @include mq('pcTab') { gap: 25px; }
+    @include mq('pc') { gap: 30px; }
     @include mq('sp') {
       display: flex;
-      align-items: stretch; // 高さを揃える
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-padding-left: 7.5%; // 最初のカードを中央に配置（(100% - 85%) / 2）
-      scroll-padding-right: 7.5%; // 最後のカードを中央に配置（(100% - 85%) / 2）
-      gap: 15px;
-      padding: 0 7.5%; // 最初と最後のカードが中央に来るように（(100% - 85%) / 2）
-      margin: 0 -20px; // 親の.innerのパディングを打ち消す
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none; // Firefox
-
-      &::-webkit-scrollbar {
-        display: none; // Chrome, Safari
-      }
-
-      // 各カードの幅を設定
-      .result-card {
-        flex: 0 0 100%; // カードの幅を85%に設定（次のカードが少し見える）
-        scroll-snap-align: center;
-        scroll-snap-stop: always;
-        height: auto; // 高さを自動調整
-        display: flex; // フレックスコンテナに
-        flex-direction: column; // 縦方向に配置
-      }
+      gap: 24px;
+      padding: 0 10%;
+      margin: 0 -20px;
+      > li { flex: 0 0 100%; }
     }
   }
 }
@@ -666,19 +638,19 @@
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
-    color: $mainC;
+    color: #b54708;
 
     &:hover,
     &:active {
-      background: $mainC;
+      background: #b54708;
       color: #ffffff;
-      border-color: $mainC;
+      border-color: #b54708;
       box-shadow: 0 4px 12px rgba(243, 107, 10, 0.3);
     }
 
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(243, 107, 10, 0.2);
+    &:focus-visible {
+      outline: 3px solid #69300b;
+      outline-offset: 3px;
     }
 
     // disabled状態
@@ -979,42 +951,17 @@
 
   .diary-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
-
-    @include mq('pcTab') {
-      gap: 25px;
-    }
-
-    @include mq('pc') {
-      gap: 30px;
-    }
-
+    @include mq('pcTab') { gap: 25px; }
+    @include mq('pc') { gap: 30px; }
     @include mq('sp') {
       display: flex;
-      align-items: stretch;
       overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-padding-left: 7.5%;
-      scroll-padding-right: 7.5%;
-      gap: 15px;
-      padding: 0 7.5%;
+      gap: 24px;
+      padding: 0 10%;
       margin: 0 -20px;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      .diary-card {
-        flex: 0 0 100%;
-        scroll-snap-align: center;
-        scroll-snap-stop: always;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-      }
+      > li { flex: 0 0 100%; }
     }
   }
 }
@@ -1039,19 +986,19 @@
     cursor: pointer;
     transition: all 0.3s ease;
     z-index: 10;
-    color: $mainC;
+    color: #b54708;
 
     &:hover,
     &:active {
-      background: $mainC;
+      background: #b54708;
       color: #ffffff;
-      border-color: $mainC;
+      border-color: #b54708;
       box-shadow: 0 4px 12px rgba(243, 107, 10, 0.3);
     }
 
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(243, 107, 10, 0.2);
+    &:focus-visible {
+      outline: 3px solid #69300b;
+      outline-offset: 3px;
     }
 
     &.is-disabled,
@@ -1203,5 +1150,48 @@
         -webkit-line-clamp: 2;
       }
     }
+  }
+}
+
+/* Splide enhances only the existing mobile sliders. Keep SSR/no-JS cards visible. */
+.card-slider.splide {
+  visibility: visible;
+  @include mq('pcTab') {
+    &.is-initialized:not(.is-active) .splide__list { display: grid; }
+  }
+  .splide__track { overflow: visible; }
+  .splide__list { list-style: none; }
+  .splide__slide { min-width: 0; }
+  .splide__slide > article { height: 100%; }
+  .splide__slide > article:focus-within {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .splide__arrows { display: none; }
+
+  @include mq('sp') {
+    .splide__list { padding: 0 10% !important; }
+    &.is-initialized {
+      margin: 0 -20px;
+      .splide__track { overflow: hidden; }
+      .splide__list {
+        display: flex;
+        overflow: visible;
+        gap: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+        > li { flex: 0 0 auto; }
+      }
+      .splide__arrows { display: block; }
+      .splide__arrow--prev { left: 10px; }
+      .splide__arrow--next { right: 10px; }
+    }
+  }
+
+  /* Keep card focus inside the clipped track and clear of overlaid arrows. */
+  :is(.result-card__link, .diary-card__link):focus-visible {
+    outline: 3px solid #69300b;
+    outline-offset: -4px;
   }
 }

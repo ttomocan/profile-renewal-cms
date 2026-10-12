@@ -8,7 +8,7 @@ export function useSmoothScroll() {
 
   // ページ遷移時にスクロール位置をトップに戻す
   useEffect(() => {
-    window.scrollTo(0, 0);
+    if (!window.location.hash) window.scrollTo(0, 0);
   }, [pathname]);
 
   const scrollToTarget = useCallback((target: HTMLElement, headerHeight: number = 0) => {
@@ -33,6 +33,10 @@ export function useSmoothScroll() {
     const handleClick = (event: Event) => {
       const anchor = (event.target as Element)?.closest('a[href^="#"]') as HTMLAnchorElement;
       if (!anchor || anchor.matches('.l-header__link a')) return;
+
+      // Native fragment navigation preserves history and moves keyboard focus
+      // to the article headings, which are rendered with tabindex="-1".
+      if (anchor.closest('nav[aria-labelledby="table-of-contents-title"]')) return;
 
       event.preventDefault();
 
@@ -60,6 +64,7 @@ export function useSmoothScroll() {
       if (hash) {
         const target = document.querySelector(hash) as HTMLElement;
         if (target) {
+          if (target.matches('h2[id^="section-"], h3[id^="section-"]') && target.tabIndex === -1) return;
           const header = document.querySelector('.l-header') as HTMLElement;
           let headerHeight = header?.offsetHeight || 0;
 
@@ -76,10 +81,11 @@ export function useSmoothScroll() {
     document.addEventListener('click', handleClick);
 
     // ページ読み込み後に初期ハッシュ処理
-    setTimeout(handleInitialHash, 100);
+    const timer = setTimeout(handleInitialHash, 100);
 
     return () => {
       document.removeEventListener('click', handleClick);
+      clearTimeout(timer);
     };
   }, [scrollToTarget, isPc]);
 }

@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@next/third-parties": "^16.0.7",
+    "@splidejs/splide": "4.1.4",
     "bubbly-bg": "^1.0.0",
     "classnames": "^2.5.1",
     "compression": "^1.7.5",

@@ -10,7 +10,7 @@
   align-items: center;
   gap: 30px;
   * {
-    color: #ffffff;
+    color: $textC;
     text-decoration: none;
   }
 
@@ -21,7 +21,7 @@
     gap: 30px;
     align-self: stretch;
     a {
-      color: #ffffff;
+      color: $textC;
       font: {
         family: var(--font-roboto), sans-serif;
         size: 1.4rem;
@@ -33,7 +33,7 @@
 
       /*ホバーエフェクト*/
       &::after {
-        background: #ffffff;
+        background: $textC;
         content: '';
         bottom: 0;
         left: 50%;
@@ -55,6 +55,11 @@
     text-align: center;
   }
 
+  :is(a, button):focus-visible {
+    outline: 3px solid $textC;
+    outline-offset: 3px;
+  }
+
   @include mq(sp) {
     padding: 40px 0 20px;
     .l-navigation {
@@ -62,7 +67,7 @@
       gap: 20px 30px;
       padding: 0 20px;
       a {
-        color: #ffffff;
+        color: $textC;
         font: {
           family: var(--font-roboto), sans-serif;
           size: 1.25rem;
@@ -74,7 +79,7 @@
 
         /*ホバーエフェクト*/
         &::after {
-          background: #ffffff;
+          background: $textC;
           content: '';
           bottom: 0;
           left: 50%;
