@@ -1,8 +1,13 @@
 @use '../../global' as *;
 
 .c-wave {
+  margin-top: 48px;
   overflow-x: clip;
   position: relative;
+
+  @include mq(sp) {
+    margin-top: 64px;
+  }
 
   canvas {
     position: absolute;
