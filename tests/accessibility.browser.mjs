@@ -12,7 +12,7 @@ await symlink(path.join(root,'public'),path.join(fixture,'public'));
 await symlink(path.join(root,'app','icon.png'),path.join(fixture,'app','icon.png'));
 await writeFile(path.join(fixture,'package.json'),JSON.stringify({name:'slider-qa-fixture',private:true,scripts:{},dependencies:{next:'16.0.7',react:'19.2.1','react-dom':'19.2.1'}}));
 await writeFile(path.join(fixture,'tsconfig.json'),JSON.stringify({compilerOptions:{target:'ES2022',jsx:'preserve',module:'esnext',moduleResolution:'bundler',esModuleInterop:true,paths:{'@/*':[root+'/*']}},include:['**/*.ts','**/*.tsx']}));
-await writeFile(path.join(fixture,'next.config.mjs'),`export default { experimental: { externalDir: true }, webpack(c) { c.resolve.alias['@'] = ${JSON.stringify(root)}; return c; }, images: { unoptimized: true }, devIndicators: false };`);
+await writeFile(path.join(fixture,'next.config.mjs'),`export default { experimental: { externalDir: true }, webpack(c) { c.resolve.alias = { '@/app/_libs/microcms$': ${JSON.stringify(fixture+'/cms-fixture.ts')}, ...c.resolve.alias, '@': ${JSON.stringify(root)} }; return c; }, images: { unoptimized: true }, devIndicators: false };`);
 await writeFile(path.join(fixture,'app','layout.tsx'),`import ${JSON.stringify(root+'/styles/common/style.scss')}; import ${JSON.stringify(root+'/styles/pages/top.scss')}; export default function Layout({children}) {return <html lang="ja"><head><noscript><style>{'.fadeUpTrigger{opacity:1!important;transform:none!important}'}</style></noscript></head><body className="top">{children}</body></html>}`);
 await writeFile(path.join(fixture,'app','page.tsx'),`import ResultsSlider from ${JSON.stringify(root+'/app/_components/ResultsSlider')}; import DiarySlider from ${JSON.stringify(root+'/app/_components/DiarySlider')}; import DynamicBodyClass from ${JSON.stringify(root+'/app/DynamicBodyClass')}; import Link from 'next/link'; const blog=Array.from({length:6},(_,i)=>({id:'article-'+i,title:'CMSの長い記事タイトル '+i+'：キーボードで全カードへ進むための制作記録',category:{id:'activity',name:'活動記録'},createdAt:'2025-10-21',description:'記事の説明を変更せずに表示します。'}));const results=Array.from({length:6},(_,i)=>({id:'result-'+i,title:'制作実績 '+i+' 複数端末に対応したコーポレートサイト',summary:'実績概要を変更せずに表示します。'})); export default function Page(){return <><DynamicBodyClass/><main id="main"><h1>スライダー検証用fixture</h1><section className="p-top-results inner"><h2>制作実績</h2><ResultsSlider results={results} personalArticle={{...blog[0],id:'iropon-release'}}/></section><section className="p-top-diary inner"><h2>日記</h2><DiarySlider blog={blog}/></section><Link href="/away">別ページへ</Link></main></>}`);
 await writeFile(path.join(fixture,'app','away','page.tsx'),`import Link from 'next/link';export default function Page(){return <main><h1>遷移先</h1><Link href="/">一覧へ戻る</Link></main>}`);
@@ -22,6 +22,9 @@ await writeFile(path.join(fixture,'app','contact','page.tsx'),`import Form from 
 await writeFile(path.join(fixture,'app','diary','sample','page.tsx'),`import Article from ${JSON.stringify(root+'/app/_components/Article')};const data={id:'sample',title:'目次fixture',category:{id:'activity',name:'活動記録'},createdAt:'2025-10-21',description:'検証用の本文',content:'<p style="height:1200px">導入</p><h2>見出し1</h2><p><a href="/away">本文のリンク1</a></p><p style="height:600px">本文</p><h2>見出し2</h2><p><a href="/away">本文のリンク2</a></p>'};export default function Page(){return <main className="inner"><Article data={data}/></main>}`);
 await mkdir(path.join(fixture,'app','lists'),{recursive:true});
 await writeFile(path.join(fixture,'app','lists','page.tsx'),`import DiaryList from ${JSON.stringify(root+'/app/_components/DiaryList')};import ResultCard from ${JSON.stringify(root+'/components/ResultCard')};import SearchField from ${JSON.stringify(root+'/app/_components/SearchField')};import ${JSON.stringify(root+'/styles/pages/result.scss')};const blog=[{id:'fixture-article',title:'fixture記事',category:{id:'activity',name:'活動記録'},createdAt:'2025-10-21',description:'一覧の説明'}];export default function Page(){return <main className="inner"><h1>一覧fixture</h1><SearchField/><DiaryList blog={blog}/><section className="results-grid"><h2>実績fixture</h2><ResultCard result={{id:'fixture-result',title:'fixture実績',summary:'実績の説明'}}/></section></main>}`);
+await mkdir(path.join(fixture,'app','diary','iropon-release'),{recursive:true});
+await writeFile(path.join(fixture,'cms-fixture.ts'),`const blog={id:'iropon-release',title:'Next.jsアプリfixture',category:{id:'activity',name:'活動記録'},createdAt:'2025-10-21T00:00:00Z',publishedAt:'2025-10-21T00:00:00Z',updatedAt:'2025-10-21T00:00:00Z',description:'実データ取得のみfixtureへ置換',content:'<h2>見出し1</h2><p><a href="/away">本文リンク</a></p><h2>見出し2</h2>'};export async function getBlogDetail(){return blog;}export async function getBlogList(){return {contents:[blog,...['related-a','related-b','related-c'].map(id=>({...blog,id,title:id}))]};}export async function getResults(){return {contents:[{id:'fixture-result',title:'Next.js制作実績',summary:'概要',techStack:'Next.js'}]};}`);
+await writeFile(path.join(fixture,'app','diary','iropon-release','page.tsx'),`import Detail from ${JSON.stringify(root+'/app/diary/[slug]/page')};export default function Page(){return <main><Detail params={Promise.resolve({slug:'iropon-release'})} searchParams={Promise.resolve({})}/></main>}`);
 const log=[];const server=spawn(process.execPath,[root+'/node_modules/next/dist/bin/next','dev','--webpack','--hostname','127.0.0.1','--port','3134'],{cwd:fixture,env:{...process.env,NEXT_TELEMETRY_DISABLED:'1'},stdio:['ignore','pipe','pipe']});
 server.stdout.on('data',b=>log.push(b.toString()));server.stderr.on('data',b=>log.push(b.toString()));
 let browser;const checks=[];
@@ -76,6 +79,26 @@ try {
   await page.goto('http://127.0.0.1:3134/diary/sample/');const contentLink=page.getByRole('link',{name:'本文のリンク1'});await page.mouse.move(0,0);const articleNormal=await measureContrast(contentLink,'rgb(242, 237, 234)');assert.ok(articleNormal.ratio>=4.5);assert.ok(articleNormal.decoration.includes('underline'));await contentLink.hover();await page.waitForTimeout(250);const articleHover=await measureContrast(contentLink,'rgb(242, 237, 234)');assert.ok(articleHover.ratio>=4.5);assert.ok(articleHover.decoration.includes('underline'));assert.equal(articleHover.opacity,'1');
   checks.push({remainingFixesWidth:width,cardChecks,searchNormal,searchHover,articleNormal,articleHover,footerTextAndKeyboardFocus:true});
   assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);
+ }
+ for(const width of [1440,390,320]){
+  await page.setViewportSize({width,height:900});await page.goto('http://127.0.0.1:3134/diary/iropon-release/');
+  const articles=page.locator('section[aria-labelledby="related-articles-heading"] a');const pages=page.locator('section[aria-labelledby="related-pages-heading"] a');
+  assert.equal(await articles.count(),3);assert.equal(await pages.count(),4);
+  assert.deepEqual(await articles.evaluateAll(es=>es.map(e=>e.getAttribute('href').replace(/\/$/,''))),['/diary/related-a','/diary/related-b','/diary/related-c']);
+  const states=[];
+  for(const [kind,links] of [['articles',articles],['pages',pages]]){
+   for(let i=0;i<await links.count();i++){
+    const link=links.nth(i);await page.mouse.move(0,0);const normal=await measureContrast(link,'rgb(242, 237, 234)');assert.ok(normal.ratio>=4.5&&normal.decoration.includes('underline'));
+    await link.hover();await page.waitForTimeout(250);const hover=await measureContrast(link,'rgb(242, 237, 234)');assert.ok(hover.ratio>=4.5&&hover.decoration.includes('underline'));
+    await page.mouse.move(0,0);await link.focus();await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');await page.waitForTimeout(250);assert.equal(await link.evaluate(e=>e===document.activeElement),true);
+    const focus=await measureContrast(link,'rgb(242, 237, 234)');assert.ok(focus.ratio>=4.5&&focus.decoration.includes('underline'));assert.ok(focus.outline.includes('3px')&&focus.outline.includes('rgb(105, 48, 11)'));
+    states.push({kind,href:await link.getAttribute('href'),normal,hover,focus});
+   }
+  }
+  await articles.first().focus();await page.keyboard.press('Tab');await page.keyboard.press('Shift+Tab');await page.waitForTimeout(250);
+  await page.locator('section[aria-labelledby="related-articles-heading"]').screenshot({path:`/tmp/a11y-evidence/related-focus-${width}.png`});
+  const back=page.getByRole('link',{name:'活動記録の一覧へ'});assert.ok((await measureContrast(back)).ratio>=4.5);assert.equal((await back.getAttribute('href')).replace(/\/$/,''),'/diary');
+  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),true);checks.push({relatedDetailWidth:width,actualDetailComponent:true,relatedStates:states,backLinkPreserved:true});
  }
  assert.deepEqual(errors,[]);console.log(JSON.stringify(checks,null,2));await writeFile('/tmp/a11y-evidence/five-checks.json',JSON.stringify(checks,null,2));
 } finally {await browser?.close();server.kill('SIGTERM');await writeFile('/tmp/a11y-next-server.log',log.join(''));console.log('Fixture:',fixture);}

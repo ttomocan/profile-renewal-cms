@@ -101,3 +101,16 @@ test('記事本文リンクは通常とhoverで下線を保ち、合成後の文
     assert.ok(contrast(effective, '#f2edea') >= 4.5);
   }
 });
+
+test('記事詳細の関連記事・関連ページは同じ下線付き濃色リンクで通常hover focusとも4.5:1以上', () => {
+  const file = 'app/diary/[slug]/page.module.css';
+  const normal = style(file, '.related a');
+  assert.equal(normal['text-decoration'], 'underline');
+  for (const selector of ['.related a', '.related a:hover', '.related a:focus-visible']) {
+    const values = { ...normal, ...style(file, selector) };
+    assert.ok(contrast(values.color, '#f2edea') >= 4.5, selector);
+  }
+  const focus = style(file, '.related a:focus-visible');
+  assert.ok(Number.parseFloat(focus.outline) >= 3);
+  assert.ok(contrast(focus.outline.match(/#[a-f0-9]{6}/i)[0], '#f2edea') >= 3);
+});

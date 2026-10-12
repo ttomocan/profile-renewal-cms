@@ -48,9 +48,27 @@ WaveAnimationは初期のreduce判定後、resizeで無条件にアニメーシ�
 
 名前付きgroup、前後の日本語名、カード番号の日本語化、Splide標準live、hiddenカードのtabindex制御、reducedMotionのspeed=0を利用します。カードと矢印のfocus枠を見える色へ、カード枠はクリッピングを避け内側へ配置。自動再生なしのため停止／再開ボタンは不要で、focusoutによる自動再開もありません。画像・CMS取得・本文・記事タイトル・リンク先は変更していません。
 
+## 日記詳細のリンクスタイルの取り残し確認
+
+新Previewの実CMS再QAを親側で行い、日記／実績のfocus、Footer／Search／本文リンク、メニュー／目次／Splideの既存修正が通過しました。追加で `/diary/iropon-release/` の「同じカテゴリーの関連記事」3リンクに旧配色が残っていることを確認し、同種の記事リンク修正として対応しました。
+
+| 詳細内の箇所 | 確認した実スタイル／今回の対応 |
+| --- | --- |
+| Article本文 `.content a` | 既存修正を保持。通常／focus #b54708、hover #8f3500、下線。サイト背景上約4.67:1／6.75:1 |
+| 詳細の関連記事／関連ページ `.related a` | `app/diary/[slug]/page.module.css` の1つの共通ルール。旧#f36b0a（約2.61:1）を#b54708、hover #8f3500へ。3px #69300bのfocus枠追加、下線・内容・リンク先・件数・表示条件を保持 |
+| Article目次 `.tableOfContents a` | #333＋下線。今回変更なし。ネイティブhash／見出しfocus修正を保持 |
+| 「活動記録の一覧へ」 | 実DOMは共通 `c-button__link` の濃色背景を使用。実Nextで白字4.5:1以上とURL `/diary/` を確認。詳細CSS内の同名ローカルクラスはglobalの実クラスへ適用されないため、未使用ルールの整理は行わない |
+| カテゴリーへのリンク | 共通Categoryの白文字／橙色バッジ＋hover opacity。関連記事の通常テキストとは別の共有スタイル。静的候補として報告済み、今回変更しない |
+| 共通パンくずへのリンク | 通常#282828、hoverは旧橙色＋淡橙背景。hoverの文字コントラスト改善候補は共有Breadcrumbの別範囲として記録し、今回変更しない |
+| Header/Footer／運営ブログ | 既存の修正・スタイルを保持。グローバルブランド色や外部ブログ機能は変更しない |
+
+同じ `.related a` が2セクションをカバーし、対象の記事詳細専用ルールに旧橙色のリンク文字は残っていません。見出しの装飾線、コードファイル名・表のラベル色など、リンク以外の配色は今回の対象に含めていません。
+
+実Nextのfixtureに本体の `app/diary/[slug]/page.tsx` をimportし、CMS I/Oだけ一時アプリのwebpack aliasへ置換。関連記事3＋関連ページ4を1440／390／320pxで通常・hover・実Tab focus測定し、下線・3px枠、自己記事除外、URL・一覧に戻る導線を確認。実CMSの最終再QAは新SHA Previewを親側で確認します。`related-focus-{1440,390,320}.png` と検証JSONへ記録しています。
+
 ## 検証記録と限界
 
-単体／回帰テスト34/34、typecheck、lint、git diff --check成功。既存Baselineデータ更新警告のみ残ります。ソースのSSRテストはCMSへの通信なしで実コンポーネントをrenderToStaticMarkupします。独立レビューで発見したSplideのイベント消失・hidden初回focus・tabindex復元・label消失の4件を修正し、実ブラウザの幅変更／再マウントで確認しました。
+単体／回帰テスト35/35、typecheck、lint、git diff --check成功。既存Baselineデータ更新警告のみ残ります。ソースのSSRテストはCMSへの通信なしで実コンポーネントをrenderToStaticMarkupします。独立レビューで発見したSplideのイベント消失・hidden初回focus・tabindex復元・label消失の4件を修正し、実ブラウザの幅変更／再マウントで確認しました。
 
 ブラウザ回帰の再実行方法（リポジトリルートから、2つを順に実行。ローカルport3134を使用）:
 

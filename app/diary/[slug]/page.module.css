@@ -25,9 +25,18 @@
 }
 
 .related a {
-  color: #f36b0a;
+  color: #b54708;
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.related a:hover {
+  color: #8f3500;
+}
+
+.related a:focus-visible {
+  outline: 3px solid #69300b;
+  outline-offset: 3px;
 }
 
 .footer .c-button__link {
