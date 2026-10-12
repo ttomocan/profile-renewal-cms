@@ -32,6 +32,12 @@
   opacity: 1;
 }
 
+.link:focus-visible {
+  border-radius: inherit;
+  outline: 3px solid #69300b;
+  outline-offset: -4px;
+}
+
 .imageWrapper {
   flex-shrink: 0;
   width: 200px;

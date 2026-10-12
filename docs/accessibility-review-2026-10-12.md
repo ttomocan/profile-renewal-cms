@@ -13,15 +13,15 @@
 
 ## 優先順位付きの監査所見と対応
 
-P1は操作・現在位置の把握に大きく影響するため優先、P2は次の改善候補です。後から追加承認された5点は下記で「修正済み」と示します。他の全体課題は報告のみです。コードだけの所見には再現確認の条件を付けています。
+P1は操作・現在位置の把握に大きく影響するため優先、P2は次の改善候補です。後から追加承認された5点と、公開再確認で確定した一覧focus・フッターfocus／文字・検索ボタン・同種の本文リンクは「修正済み」と示します。他の全体課題は報告のみです。コードだけの所見には再現確認の条件を付けています。
 
 | 優先度／根拠 | 影響と確認方法 | 改善案／関連基準 |
 | --- | --- | --- |
 | **P1・修正済み／公開＋ローカル再現** `styles/layout/_l-header.scss:321`付近 | Contactを200%拡大、CSS viewport 590×378でメニューを開く→Tabでブログ2リンク→Top。Topのフォーカス位置がy=-44.55〜-8.55で画面外、scrollTop=0から上へ戻れない。中央寄せのメニューで内容が上側へはみ出す。Escape復帰・Tabtrap・背景inertは正常 | safe centerで収まり切らないときは上寄せ、96px上余白と縮小しない項目で到達可能に。590×378のローカル再現でTopのy=-44.8→96。320×400／390×320でも全Tab、trap、Escape、inertを回帰確認。表示切替中のhiddenリンクをfocus候補から除外し、開いた直後の素早いTabもメニュー内へ保持。1.4.10、2.4.11関連 |
-| **P1・コード所見** `styles/pages/result.scss:101`、`app/_components/DiaryList/index.module.css:12`、`styles/foundation/_base.scss:51` | 一覧のカード全体リンクの外側outlineが親のoverflow:hiddenで切れる可能性。ブラウザTabで一覧側の枠を確認する必要あり。トップ2スライダーのリンクには今回内側focus枠を追加 | 一覧側もoutline-offsetを内側にするか親focus-within枠。2.4.7 |
-| **P1・コード所見** `styles/layout/_l-footer.scss:4`、`styles/foundation/_base.scss:52` | フッター背景と共通focus枠が同じ#f36b0a。枠による現在位置の区別ができない。下線等を含む全focus表示の実機確認が必要 | フッター専用の高コントラストfocus枠。2.4.7 |
+| **P1・修正済み／日記は公開確認、実績は同じ構造** `styles/pages/result.scss:101`、`app/_components/DiaryList/index.module.css:12`、`styles/foundation/_base.scss:51` | 日記一覧カードの外側outlineが全クリップすることを親側公開再試験で確認。実績一覧も同じoverflow:hidden＋全面リンク構造のため対応。トップ2スライダーのfocus修正も保持 | 両一覧リンクを3px #69300b・outline-offset:-4px・角丸継承へ。親のclipと見た目は保持し、ローカル実Nextの1440/390/320pxで枠・画像・リンクを確認。2.4.7 |
+| **P1・修正済み／公開確認** `styles/layout/_l-footer.scss:4`、`styles/foundation/_base.scss:52` | 従来はフッター背景と共通focus枠が同じ#f36b0aで見えないことを親側公開再試験で確認 | ブランド背景#f36b0aを維持し、footer専用3px #282828・offset:3pxの枠へ。全6リンクをTabで確認。2.4.7 |
 | **P2・修正済み／公開確認＋色計算** `styles/layout/_l-header.scss`、`styles/global/_variables.scss` | currentナビ文字#f36b0a／背景#f2edeaは約2.61:1。公開計測22.4px・weight400で通常文字4.5:1未達 | desktop current/hoverを#b54708へ（背景#f2edeaで実測約4.67:1）。既存下線を保持。1.4.3 |
-| **P2・色計算** Category/SearchField/Pagination/Article各CSS、`styles/layout/_l-footer.scss`、result/about/skill各SCSS | #f36b0aと白は約3.04:1、小さいタグ、検索ボタン、現在ページ番号、本文リンク、フッター白文字、実績／プロフィール／スキルのリンクに不足。サイト背景とは2.61:1 | 通常文字4.5:1以上を確保しhover/focusも測定。1.4.3 |
+| **P2・一部修正済み／公開確認＋色計算** Category/SearchField/Pagination/Article各CSS、`styles/layout/_l-footer.scss`、result/about/skill各SCSS | #f36b0aと白は約3.04:1、小さいタグ、検索ボタン、現在ページ番号、本文リンク、フッター白文字、実績／プロフィール／スキルのリンクに不足。サイト背景とは2.61:1 | SearchFieldは#b54708／hover #8f3500へ、Article本文リンクは同色＋下線保持、hoverのopacity低下を廃止。Footerは背景を変えず文字・下線を#282828へ。通常／hover・PC/SP実CSSで4.5:1以上を確認。Category/Paginationと他のタグ・リンクは未対応。1.4.3 |
 | **P2・必須表示は修正済み／公開確認＋色計算** `styles/object/project/_form.scss:53`、`:78` | Contact必須ラベルの白14px太字／赤#f3350aは3.94:1。エラー文字と淡い背景も約3.17:1。入力枠の薄い影について背景との境界を確認する必要あり | 必須表示を#cf2b08へ、白文字の実測約5.25:1。エラー文字・入力境界は今回未修正。文字1.4.3、入力境界は1.4.11を実機判定 |
 | **P2・修正済み／公開＋ローカル確認** `app/_hooks/useSmoothScroll.ts:37`、`:54`、Article目次 | `/diary/work-childcare-balance/`で目次Enter後、見出しへスクロールするがactiveElementは画面外の目次リンク(y約-1995)、次Tabで次の目次へ戻る。hashも更新されない | CMS本文レンダラの生成h2/h3へtabindex=-1、目次はネイティブanchor/hash/historyへ戻し、既存scroll-marginを保持。実ブラウザで見出しfocus→次Tab本文リンク、hash戻る・直接URLを確認。2.4.3関連 |
 | **P2・コード所見** `app/_components/CategoryFilter/index.tsx:15`、`:25` | select変更で事前説明なく別URLへ移動。キーボードで候補確認中にコンテキストが変わる | 「表示」ボタン、または選択すると遷移する事前説明。3.2.2 |
@@ -50,7 +50,7 @@ WaveAnimationは初期のreduce判定後、resizeで無条件にアニメーシ�
 
 ## 検証記録と限界
 
-単体／回帰テスト30/30、typecheck、lint、git diff --check成功。既存Baselineデータ更新警告のみ残ります。ソースのSSRテストはCMSへの通信なしで実コンポーネントをrenderToStaticMarkupします。独立レビューで発見したSplideのイベント消失・hidden初回focus・tabindex復元・label消失の4件を修正し、実ブラウザの幅変更／再マウントで確認しました。
+単体／回帰テスト34/34、typecheck、lint、git diff --check成功。既存Baselineデータ更新警告のみ残ります。ソースのSSRテストはCMSへの通信なしで実コンポーネントをrenderToStaticMarkupします。独立レビューで発見したSplideのイベント消失・hidden初回focus・tabindex復元・label消失の4件を修正し、実ブラウザの幅変更／再マウントで確認しました。
 
 ブラウザ回帰の再実行方法（リポジトリルートから、2つを順に実行。ローカルport3134を使用）:
 
@@ -61,9 +61,11 @@ PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs BROWSER_EXECUTABLE=/path/to/chro
 
 Playwrightは実行環境の既存ツールを利用し、製品依存へ追加していません。ヘルパーは一時ディレクトリのNextアプリから実コンポーネントをimportし、実next/link・next/image・React effectを動かします。Next設定・publicの参照はfixture側のみで、本体へのバックドアやCMSモック設定は追加していません。fixture画像は既存のローカルOGP、文章・CMSデータはfixtureです。
 
-`/tmp/a11y-evidence/checks.json`、`five-checks.json`、`sliders-{1440,768,767,390,320}.png`に検証記録とレイアウト画像を保存しています。幅変更時のfocus退避、desktopで全リンクのTab復元、無JS時全13リンク、Nextクライアント遷移後の再mount、cloneなし、日本語操作名、hiddenリンクtabindex=-1、標準live、reduced-motion、全カードへの前後操作を確認します。通常motionでも自動送りがないことを確認し、スクリーンリーダーの実音声確認とは区別しています。
+`/tmp/a11y-evidence/checks.json`、`five-checks.json`、`sliders-{1440,768,767,390,320}.png`に検証記録とレイアウト画像を保存しています。一覧card・Footerのfocus画像を focus-diary／focus-result／footer-focus-{1440,390,320}.png に保存しました。実Nextの一覧fixtureに実DiaryList・ResultCard・Footerを使い、親overflowと枠の内側配置、Footer全リンクのTab、実computed color、検索／本文リンクの通常・hover・下線と不透明度を確認しました。フッターの文字／focus枠はブランド背景に対して約4.86:1、検索ボタンは通常約5.43:1、本文リンクは通常約4.67:1です。
 
-追加承認5点の修正はHeader SCSS、ContactForm、フォームSCSS、tableOfContentsとuseSmoothScrollに限定しました。スキップ導線の全ページ拡張、aria-current、入力枠、画像alt等の他の提案は実装していません。
+幅変更時のfocus退避、desktopで全リンクのTab復元、無JS時全13リンク、Nextクライアント遷移後の再mount、cloneなし、日本語操作名、hiddenリンクtabindex=-1、標準live、reduced-motion、全カードへの前後操作を確認します。通常motionでも自動送りがないことを確認し、スクリーンリーダーの実音声確認とは区別しています。
+
+追加承認5点の修正はHeader SCSS、ContactForm、フォームSCSS、tableOfContentsとuseSmoothScrollに限定しました。公開再試験後の追加承認により、DiaryList／Result一覧のfocus、SearchField／Article本文リンク／Footerの配色・focusを最小CSS差分で追加修正しました。スキップ導線の全ページ拡張、aria-current、入力枠、画像alt等の他の提案は実装していません。
 
 本体buildはcompileとTypeScript成功後、`MICROCMS_SERVICE_DOMAIN is required` によりCMSを使うルートのデータ収集が停止しました。CMS認証／環境設定の追加・変更はしていません。ローカルfixtureの成功は本体のCMSを含む本番ビルド成功と同義ではありません。
 

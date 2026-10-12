@@ -40,12 +40,12 @@
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: #f36b0a;
+  background: #b54708;
   color: white;
   padding: 2px 12px;
 }
 
 .submitButton:hover {
-  background: #e55a0a;
+  background: #8f3500;
   transform: scale(1.05);
 }
