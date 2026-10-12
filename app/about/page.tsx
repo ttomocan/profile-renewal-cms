@@ -119,8 +119,8 @@ export default function Page() {
 
       <section className="profile inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
-          <span className="c-heading-lv2-en">Personal</span>
-          <span className="c-heading-lv2-ja">人柄・趣味</span>
+          <span className="c-heading-lv2-en">Background</span>
+          <span className="c-heading-lv2-ja">プロフィール・保有資格</span>
         </h2>
         <div className="profile__cont fadeUpTrigger">
           <table className="c-table-01">
