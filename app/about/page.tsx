@@ -45,7 +45,7 @@ export default function Page() {
           </div>
           <div className="about-facts__item">
             <dt>Web制作会社</dt>
-            <dd>2社で実務経験</dd>
+            <dd>3社で実務経験</dd>
           </div>
           <div className="about-facts__item">
             <dt>サイト構築</dt>
@@ -68,7 +68,7 @@ export default function Page() {
         <ul className="about-cards fadeUpTrigger">
           <li>
             <strong>WordPress・CMS構築</strong>
-            <span>テーマ開発、投稿機能、カスタムフィールド、既存テーマの改修に対応します。</span>
+            <span>テーマ開発、投稿機能、カスタムブロック、カスタムフィールド、既存テーマの改修に対応します。</span>
           </li>
           <li>
             <strong>フロントエンド実装</strong>
