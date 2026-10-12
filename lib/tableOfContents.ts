@@ -43,10 +43,10 @@ export function addHeadingIds(content: string): { content: string; items: TableO
 
     const level = Number(levelText) as 2 | 3;
     const id = `section-${items.length + 1}`;
-    const cleanAttributes = attributes.replace(/\s+id=(['"]).*?\1/i, '');
+    const cleanAttributes = attributes.replace(/\s+id=(['"]).*?\1/i, '').replace(/\s+tabindex=(['"]).*?\1/i, '');
     items.push({ id, title, level });
 
-    return `<h${level}${cleanAttributes} id="${id}">${innerHtml}</h${level}>`;
+    return `<h${level}${cleanAttributes} id="${id}" tabindex="-1">${innerHtml}</h${level}>`;
   });
 
   return { content: contentWithIds, items };

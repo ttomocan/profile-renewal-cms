@@ -1,0 +1,81 @@
+# アクセシビリティレビューとSplide置換（ローカル・未公開）
+
+対象: `ttomocan/profile-renewal-cms`（repository ID 886054756）、https://www.tomocan.site/ 。2026-10-12、WCAG 2.2 AAを目安にレビューしました。適合判定・適合保証ではありません。
+
+## 対象と確認方法
+
+本番Vercel `dpl_cFsGYqpX5dAKnZiymtctd9RMc6fM` と最新mainはいずれも `8212bfef01807e2156dccc295d2bc1938507b159`。`feat/a11y-splide` はこのmainから分離しました。PR #12の変更・マージは含めていません。
+
+- 本体コード: 全ルートと共通Header/Footer、フォーム、CMS記事レンダラ、カード、CSS、モーション処理を調査し、独立レビューも実施。
+- 親側の公開ブラウザ: Home、About、Skill、Result一覧／代表詳細、Diary一覧／本文、Contactの主要導線を確認。通常幅1180pxとブラウザ200%拡大での所見を受領。ここでは「公開確認」と記載。
+- 実装側: 実Next.js 16.0.7／React 19.2.1／Splide 4.1.4、最終コンポーネントとCSSを使用する別のローカルNextアプリでCMS fixtureを表示。CMS API、サイト全体の本番データ取得・ヘッダー／フッター統合とは分離した検証です。
+- スライダーについてPC/SP境界、320pxのリフロー、キーボード、reduced-motion、SSR/hydration、Nextクライアント遷移、再マウントを検証。読み上げはDOM/ARIA属性の確認であり、スクリーンリーダーの音声出力確認ではありません。
+
+## 優先順位付きの監査所見と対応
+
+P1は操作・現在位置の把握に大きく影響するため優先、P2は次の改善候補です。後から追加承認された5点は下記で「修正済み」と示します。他の全体課題は報告のみです。コードだけの所見には再現確認の条件を付けています。
+
+| 優先度／根拠 | 影響と確認方法 | 改善案／関連基準 |
+| --- | --- | --- |
+| **P1・修正済み／公開＋ローカル再現** `styles/layout/_l-header.scss:321`付近 | Contactを200%拡大、CSS viewport 590×378でメニューを開く→Tabでブログ2リンク→Top。Topのフォーカス位置がy=-44.55〜-8.55で画面外、scrollTop=0から上へ戻れない。中央寄せのメニューで内容が上側へはみ出す。Escape復帰・Tabtrap・背景inertは正常 | safe centerで収まり切らないときは上寄せ、96px上余白と縮小しない項目で到達可能に。590×378のローカル再現でTopのy=-44.8→96。320×400／390×320でも全Tab、trap、Escape、inertを回帰確認。表示切替中のhiddenリンクをfocus候補から除外し、開いた直後の素早いTabもメニュー内へ保持。1.4.10、2.4.11関連 |
+| **P1・コード所見** `styles/pages/result.scss:101`、`app/_components/DiaryList/index.module.css:12`、`styles/foundation/_base.scss:51` | 一覧のカード全体リンクの外側outlineが親のoverflow:hiddenで切れる可能性。ブラウザTabで一覧側の枠を確認する必要あり。トップ2スライダーのリンクには今回内側focus枠を追加 | 一覧側もoutline-offsetを内側にするか親focus-within枠。2.4.7 |
+| **P1・コード所見** `styles/layout/_l-footer.scss:4`、`styles/foundation/_base.scss:52` | フッター背景と共通focus枠が同じ#f36b0a。枠による現在位置の区別ができない。下線等を含む全focus表示の実機確認が必要 | フッター専用の高コントラストfocus枠。2.4.7 |
+| **P2・修正済み／公開確認＋色計算** `styles/layout/_l-header.scss`、`styles/global/_variables.scss` | currentナビ文字#f36b0a／背景#f2edeaは約2.61:1。公開計測22.4px・weight400で通常文字4.5:1未達 | desktop current/hoverを#b54708へ（背景#f2edeaで実測約4.67:1）。既存下線を保持。1.4.3 |
+| **P2・色計算** Category/SearchField/Pagination/Article各CSS、`styles/layout/_l-footer.scss`、result/about/skill各SCSS | #f36b0aと白は約3.04:1、小さいタグ、検索ボタン、現在ページ番号、本文リンク、フッター白文字、実績／プロフィール／スキルのリンクに不足。サイト背景とは2.61:1 | 通常文字4.5:1以上を確保しhover/focusも測定。1.4.3 |
+| **P2・必須表示は修正済み／公開確認＋色計算** `styles/object/project/_form.scss:53`、`:78` | Contact必須ラベルの白14px太字／赤#f3350aは3.94:1。エラー文字と淡い背景も約3.17:1。入力枠の薄い影について背景との境界を確認する必要あり | 必須表示を#cf2b08へ、白文字の実測約5.25:1。エラー文字・入力境界は今回未修正。文字1.4.3、入力境界は1.4.11を実機判定 |
+| **P2・修正済み／公開＋ローカル確認** `app/_hooks/useSmoothScroll.ts:37`、`:54`、Article目次 | `/diary/work-childcare-balance/`で目次Enter後、見出しへスクロールするがactiveElementは画面外の目次リンク(y約-1995)、次Tabで次の目次へ戻る。hashも更新されない | CMS本文レンダラの生成h2/h3へtabindex=-1、目次はネイティブanchor/hash/historyへ戻し、既存scroll-marginを保持。実ブラウザで見出しfocus→次Tab本文リンク、hash戻る・直接URLを確認。2.4.3関連 |
+| **P2・コード所見** `app/_components/CategoryFilter/index.tsx:15`、`:25` | select変更で事前説明なく別URLへ移動。キーボードで候補確認中にコンテキストが変わる | 「表示」ボタン、または選択すると遷移する事前説明。3.2.2 |
+| **P2・無名グループは修正済み** `app/_components/ContactForm/index.tsx:108`、`:115`、`:140` | 外側fieldsetにlegendがあるが内側role=radiogroupは無名。エラー文と入力欄のaria-describedby関連なし。エラー時のfocus移動・alertは実装済み | 内側radiogroupを削除しlegendで名付けたnative fieldsetを維持。実ブラウザAXで1つの名前付きgroup・5radioを確認。エラー欄との関連付けは未修正。4.1.2、3.3.1関連 |
+| **P2・要確認** ContactForm成功時 | 成功時にfocus中フォームが削除される。role=statusはあるがsuccessメッセージにfocusを移す処理なし | 実送信を伴わないfixtureでsuccess時のfocus／読み上げを確認 |
+| **P2・要確認** `styles/common/animation.scss:109`、`app/DynamicBodyClass.tsx:74` | fadeUpTriggerが透明の初期状態。表示判定に追加150pxを要求し、Tabで移動した低い位置のCTAが透明のままになる可能性 | focus-withinでは必ず表示する。今回スライダーカードのみ対応。2.4.7関連 |
+| **P2・CMS個別確認** `lib/tableOfContents.ts:30`、Article本文 | 汎用alt／alt未設定を一律空altにする。装飾なら適切だが画面説明／図表なら情報を失う。全CMS画像・表・iframe・動画字幕は未確認 | 画像の意味に応じたCMS代替文、表見出し・埋め込みの名前・字幕の確認。1.1.1等 |
+
+## 追加提案と既にできている点
+
+下層にはmainランドマークがありますが、スキップリンクはHomeだけです。全ページへのスキップ導線拡張を推奨します。mainがあるためこれだけで2.4.1不適合と断定しません。
+
+WaveAnimationは初期のreduce判定後、resizeで無条件にアニメーションを再開します。useSmoothScrollの目次以外は無条件smoothのままです。今回の目次はブラウザ標準処理＋既存reduce CSSを利用します。reduce尊重を提案しますが、2.3.3はAAAであり、この点をそのままAA違反と扱いません。常時動く波について2.2.2の適用・停止手段も個別確認が必要です。
+
+パンくずのnowrap／縮小禁止による長いタイトルのリフローは320pxで追加確認が必要です。画像altの有無だけでは意味の適切さを判定できません。
+
+公開確認でHomeスキップのTab→Enter→main→次Tab本文CTAは正常。検索／カテゴリのラベル、Contactラベル・required・autocomplete・ラジオ矢印操作、メニューEscape・focus制限・inertは正常。About表のth scope=row、主要ページh1各1・見出し飛びなし、lang=ja、装飾／カードと重複する画像の空altを確認しました。
+
+## 今回のSplide変更
+
+既存スライダーはHomeのResultsSlider（制作実績最大6＋個人開発）とDiarySlider（CMS日記）の自前横スクロールのみでした。旧スライダー依存はないため削除なし。追加はcore `@splidejs/splide@4.1.4`だけです（2026-10-12 registryでlatest確認）。React wrapper 0.7.12は使用していません。
+
+共通CardSliderはuseEffectでmount／cleanupでdestroy、React useIdでSSRとclientのIDを合わせます。Splide部分destroyで子リンクのtabindexとイベントが復元されない点を補うため、extensionで再登録し元の値を復元します。初回mounted時にもfocusを退避し、labelをoptionsで明示してStrict Mode／再effectで維持します。PC768px以上は既存3列grid、767px以下だけslideを有効化。loop・rewind・autoplay・paginationはfalse、cloneを生成せず、ドラッグ以外に50px前後ボタンを提供します。paginationは元々ないため追加していません。
+
+名前付きgroup、前後の日本語名、カード番号の日本語化、Splide標準live、hiddenカードのtabindex制御、reducedMotionのspeed=0を利用します。カードと矢印のfocus枠を見える色へ、カード枠はクリッピングを避け内側へ配置。自動再生なしのため停止／再開ボタンは不要で、focusoutによる自動再開もありません。画像・CMS取得・本文・記事タイトル・リンク先は変更していません。
+
+## 検証記録と限界
+
+単体／回帰テスト30/30、typecheck、lint、git diff --check成功。既存Baselineデータ更新警告のみ残ります。ソースのSSRテストはCMSへの通信なしで実コンポーネントをrenderToStaticMarkupします。独立レビューで発見したSplideのイベント消失・hidden初回focus・tabindex復元・label消失の4件を修正し、実ブラウザの幅変更／再マウントで確認しました。
+
+ブラウザ回帰の再実行方法（リポジトリルートから、2つを順に実行。ローカルport3134を使用）:
+
+```sh
+PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs BROWSER_EXECUTABLE=/path/to/chromium node tests/sliders.browser.mjs
+PLAYWRIGHT_MODULE=/path/to/playwright/index.mjs BROWSER_EXECUTABLE=/path/to/chromium node tests/accessibility.browser.mjs
+```
+
+Playwrightは実行環境の既存ツールを利用し、製品依存へ追加していません。ヘルパーは一時ディレクトリのNextアプリから実コンポーネントをimportし、実next/link・next/image・React effectを動かします。Next設定・publicの参照はfixture側のみで、本体へのバックドアやCMSモック設定は追加していません。fixture画像は既存のローカルOGP、文章・CMSデータはfixtureです。
+
+`/tmp/a11y-evidence/checks.json`、`five-checks.json`、`sliders-{1440,768,767,390,320}.png`に検証記録とレイアウト画像を保存しています。幅変更時のfocus退避、desktopで全リンクのTab復元、無JS時全13リンク、Nextクライアント遷移後の再mount、cloneなし、日本語操作名、hiddenリンクtabindex=-1、標準live、reduced-motion、全カードへの前後操作を確認します。通常motionでも自動送りがないことを確認し、スクリーンリーダーの実音声確認とは区別しています。
+
+追加承認5点の修正はHeader SCSS、ContactForm、フォームSCSS、tableOfContentsとuseSmoothScrollに限定しました。スキップ導線の全ページ拡張、aria-current、入力枠、画像alt等の他の提案は実装していません。
+
+本体buildはcompileとTypeScript成功後、`MICROCMS_SERVICE_DOMAIN is required` によりCMSを使うルートのデータ収集が停止しました。CMS認証／環境設定の追加・変更はしていません。ローカルfixtureの成功は本体のCMSを含む本番ビルド成功と同義ではありません。
+
+公開CMS全記事・全端末・全状態、Safari/Firefox、NVDA/VoiceOver等の実読み上げ、実フォーム送信成功、400%ズーム／200%文字拡大／文字間隔変更の全ページは未確認です。公開QAからの所見とコード静的所見を区別しています。自動／静的検査だけでは意味の適切さや全操作を証明できず、WCAG 2.2 AA適合を保証しません。
+
+GitHubの専用ブランチへのpush、Draft PR、確認用Previewの作成は承認を受けたため進めます。mainへのマージ、本番公開、CMSコンテンツ変更、認証・セキュリティ・共有設定変更は今回実施しません。
+
+## 判断資料
+
+- [W3C WCAG 2.2](https://www.w3.org/TR/WCAG22/)
+- [W3C APG Carousel](https://www.w3.org/WAI/ARIA/apg/patterns/carousel/)
+- [Splide Accessibility](https://splidejs.com/guides/accessibility/)
+- [Splide Options](https://splidejs.com/guides/options/)
+- [Splide i18n](https://splidejs.com/guides/i18n/)
+- [React Splide lifecycle資料（wrapperは不採用）](https://splidejs.com/integration/react-splide/)

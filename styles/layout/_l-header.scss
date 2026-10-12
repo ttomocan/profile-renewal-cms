@@ -175,7 +175,7 @@
             width: 0;
           }
           &:is(:hover, .current) {
-            color: $mainC;
+            color: #b54708;
             &::after {
               width: 100%;
               left: 0;
@@ -325,7 +325,10 @@
       flex-direction: column;
       gap: 20px;
       height: 100dvh;
-      justify-content: center;
+      box-sizing: border-box;
+      padding: 96px 20px 32px;
+      justify-content: flex-start;
+      justify-content: safe center;
       opacity: 0;
       overflow: hidden;
       right: 0;
@@ -335,6 +338,7 @@
       visibility: hidden;
       width: 100%;
       z-index: 98;
+      > * { flex-shrink: 0; }
     }
 
     /* メニューボタン */

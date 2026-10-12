@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import CardSlider from '../CardSlider';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Blog } from '@/app/_libs/microcms';
@@ -12,60 +12,13 @@ interface DiarySliderProps {
 }
 
 export default function DiarySlider({ blog }: DiarySliderProps) {
-  const sliderRef = useRef<HTMLDivElement>(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-
-  const checkScrollPosition = () => {
-    if (!sliderRef.current) return;
-
-    const { scrollLeft, scrollWidth, clientWidth } = sliderRef.current;
-    setCanScrollLeft(scrollLeft > 5);
-    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
-  };
-
-  useEffect(() => {
-    checkScrollPosition();
-
-    const handleResize = () => {
-      checkScrollPosition();
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
-
-    slider.addEventListener('scroll', checkScrollPosition);
-    return () => slider.removeEventListener('scroll', checkScrollPosition);
-  }, []);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (!sliderRef.current) return;
-
-    const scrollAmount = sliderRef.current.offsetWidth * 0.85;
-    const currentScroll = sliderRef.current.scrollLeft;
-    const targetScroll =
-      direction === 'left'
-        ? currentScroll - scrollAmount
-        : currentScroll + scrollAmount;
-
-    sliderRef.current.scrollTo({
-      left: targetScroll,
-      behavior: 'smooth',
-    });
-  };
-
   if (blog.length === 0) return null;
 
   return (
-    <div className="diary-slider-wrapper">
-      <div className="diary-grid" ref={sliderRef}>
+    <CardSlider kind="diary" label="活動記録の記事" previous="前の記事を表示" next="次の記事を表示">
         {blog.map((article) => (
-          <article key={article.id} className="diary-card">
+          <li key={article.id} className="splide__slide">
+          <article className="diary-card">
             <Link
               href={`/diary/${article.id}/`}
               className="diary-card__link"
@@ -110,48 +63,8 @@ export default function DiarySlider({ blog }: DiarySliderProps) {
               </div>
             </Link>
           </article>
+          </li>
         ))}
-      </div>
-
-      <button
-        className={`diary-slider-nav diary-slider-nav--prev ${!canScrollLeft ? 'is-disabled' : ''}`}
-        onClick={() => scroll('left')}
-        disabled={!canScrollLeft}
-        aria-label="前の記事を表示"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-
-      <button
-        className={`diary-slider-nav diary-slider-nav--next ${!canScrollRight ? 'is-disabled' : ''}`}
-        onClick={() => scroll('right')}
-        disabled={!canScrollRight}
-        aria-label="次の記事を表示"
-      >
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
-    </div>
+    </CardSlider>
   );
 }

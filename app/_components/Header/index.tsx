@@ -74,7 +74,7 @@ export default function Header() {
     button.focus();
 
     const getControls = () => [button, ...Array.from(menu.querySelectorAll<HTMLElement>('a[href], button:not([disabled]), [tabindex="0"]'))
-      .filter((element) => element.getClientRects().length > 0)];
+      .filter((element) => element.getClientRects().length > 0 && window.getComputedStyle(element).visibility === 'visible')];
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {

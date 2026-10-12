@@ -112,7 +112,7 @@ export default function ContactForm() {
             必須
           </span>
         </legend>
-        <div className="p-form__input" role="radiogroup" aria-required="true">
+        <div className="p-form__input">
           {contactTypes.map((type) => (
             <label className="checkbox" key={type}>
               <input type="radio" name="item" value={type} required />
