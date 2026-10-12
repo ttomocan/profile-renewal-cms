@@ -1,7 +1,6 @@
 import '@/styles/pages/about.scss';
 import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
-import Blog from '@/app/_components/Blog';
 import { createMetadata } from '@/lib/seo';
 
 const pageTitle = 'Webエンジニア ともきゃんのプロフィール・経歴';
@@ -31,7 +30,6 @@ export default function RootLayout({ children }: Props) {
       />
       <Breadcrumb items={breadcrumbItems} />
       <main>{children}</main>
-      <Blog variant="about" />
     </>
   );
 }

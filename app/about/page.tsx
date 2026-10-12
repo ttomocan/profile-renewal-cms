@@ -101,46 +101,19 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="license inner">
-        <h2 className="c-heading-lv2 fadeUpTrigger">
-          <span className="c-heading-lv2-en">License &amp; Result</span>
-          <span className="c-heading-lv2-ja">資格・個人活動の実績</span>
-        </h2>
-        <div className="license__cont c-list fadeUpTrigger" aria-label="保有資格">
-          <div className="license__card">1級ウェブデザイン技能士</div>
-          <div className="license__card">色彩検定1級</div>
-          <div className="license__card">Webクリエイター能力認定 エキスパート</div>
-          <div className="license__card">マルチメディア検定 エキスパート</div>
-          <div className="license__card">Webデザイナー検定 エキスパート</div>
-          <div className="license__card">ITパスポート</div>
-        </div>
-        <ul className="result__cont about-achievements fadeUpTrigger">
-          <li className="result__card">ブログの月間平均PV数1万PV以上</li>
-          <li className="result__card">ブログの広告収益累計150万円以上</li>
-          <li className="result__card">coconalaの販売件数50件以上・平均評価満点</li>
-          <li className="result__card">coconalaの売上累計120万円以上</li>
-        </ul>
-      </section>
-
       <section className="activity inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Personal Work</span>
-          <span className="c-heading-lv2-ja">個人開発・ブログ活動</span>
+          <span className="c-heading-lv2-ja">個人開発・発信活動</span>
         </h2>
         <div className="about-section-copy fadeUpTrigger">
-          <p>個人では、Next.js、React、TypeScript、microCMSを使ったWeb開発に取り組んでいます。ブログ運営では、企画、記事作成、デザイン、SEO、改善まで継続して行っています。</p>
-          <p>発信や個人開発を通じて、実務とは異なる技術や、利用者としての視点を学び続けています。</p>
+          <p>個人では、Next.js、React、TypeScript、microCMSを使ったWeb開発に取り組んでいます。</p>
           <p>「いろポン！」は、色彩検定の学習中に感じた色名の覚えにくさをきっかけに作った、色をクイズで覚える個人開発のWebアプリです。</p>
         </div>
         <div className="about-related-links fadeUpTrigger">
           <Link href="/diary/iropon-release/">「いろポン！」の目的・開発経緯を読む</Link>
           <Link href="/diary/">個人開発・ブログの活動記録を読む</Link>
-          <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer">
-            「ともきゃんのボイトレ生活」を見る（外部サイト）
-          </a>
-          <a href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer">
-            「ブログデザインマニア」を見る（外部サイト）
-          </a>
+          <Link href="/#wordpress-blog">自主運営のWordPress実績を見る</Link>
         </div>
       </section>
 
@@ -181,6 +154,17 @@ export default function Page() {
               </tr>
             </tbody>
           </table>
+          <div className="about-qualifications" aria-labelledby="qualifications-heading">
+            <h3 id="qualifications-heading">保有資格</h3>
+            <ul>
+              <li>1級ウェブデザイン技能士</li>
+              <li>Webクリエイター能力認定 エキスパート</li>
+              <li>Webデザイナー検定 エキスパート</li>
+              <li>色彩検定1級</li>
+              <li>マルチメディア検定 エキスパート</li>
+              <li>ITパスポート</li>
+            </ul>
+          </div>
         </div>
       </section>
 

@@ -6,7 +6,7 @@ import DiarySlider from '@/app/_components/DiarySlider';
 import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultsSlider from '@/app/_components/ResultsSlider';
-import Blog from '@/app/_components/Blog';
+import WordPressWork from '@/app/_components/WordPressWork';
 import { caveatBrush } from '@/app/fonts';
 import { selectFeaturedResults } from '@/lib/resultPresentation';
 
@@ -105,6 +105,8 @@ export default async function Home() {
             </Link>
           </div>
         </section>
+
+        <WordPressWork />
 
         <section className="p-top-skill inner">
           <h2 className="c-heading-lv2 fadeUpTrigger">
@@ -213,7 +215,6 @@ export default async function Home() {
           </div>
         </section>
       </main>
-      <Blog variant="home" />
     </>
   );
 }
