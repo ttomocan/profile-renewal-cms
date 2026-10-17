@@ -32,6 +32,12 @@ export default function Article({ data }: Props) {
       {showTableOfContents && (
         <nav className={styles.tableOfContents} aria-labelledby="table-of-contents-title">
           <h2 id="table-of-contents-title" className={styles.tableOfContentsTitle}>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true" focusable="false">
+              <path d="M9 6h11M9 12h11M9 18h11" />
+              <circle cx="4" cy="6" r="1" fill="currentColor" stroke="none" />
+              <circle cx="4" cy="12" r="1" fill="currentColor" stroke="none" />
+              <circle cx="4" cy="18" r="1" fill="currentColor" stroke="none" />
+            </svg>
             目次
           </h2>
           <ol>
