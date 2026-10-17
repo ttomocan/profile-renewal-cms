@@ -187,3 +187,9 @@ test('KVコンテンツはアニメーションや遅延・透明化なしで初
     });
   });
 });
+
+test('代表実績の説明は最初の句点の後で明示的に改行する', async () => {
+  const description = findElement(await loadHome(), node => node.props?.className === 'p-top-results__cont fadeUpTrigger');
+  const html = renderToStaticMarkup(description);
+  assert.match(html, /個人開発を紹介します。<br\s*\/>各案件の担当範囲/);
+});

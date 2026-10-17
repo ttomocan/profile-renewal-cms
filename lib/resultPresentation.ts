@@ -17,5 +17,12 @@ export function selectFeaturedResults(results: ResultItem[]): ResultItem[] {
     const item = results.find(result => result.id === id);
     return item ? [item] : [];
   });
-  return selected.length > 0 ? selected : results.slice(0, 6);
+  const seen = new Set(selected.map(item => item.id));
+  for (const item of results) {
+    if (!seen.has(item.id)) {
+      selected.push(item);
+      seen.add(item.id);
+    }
+  }
+  return selected.slice(0, 6);
 }
