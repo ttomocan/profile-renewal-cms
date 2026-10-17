@@ -207,7 +207,11 @@ export default async function Home() {
               <Image src="/img/pages/top/img_contact-v2.webp" alt="ノートパソコンとオレンジ色の封筒を描いたお問い合わせのイメージ" width={320} height={207} sizes="(max-width: 767px) 100vw, 310px" />
             </div>
             <div className="p-top-contact__detail col-text">
-              <p>採用、業務委託・協業、制作実績、ブログ・メディア運営に関するご連絡を受け付けています。現在、サイト・アプリの新規制作依頼は受け付けていません。</p>
+              <p>採用、業務委託・協業、制作実績、ブログ・メディア運営に関するご連絡を受け付けています。</p>
+              <div className="p-top-contact__availability">
+                <h3>現在の受付状況</h3>
+                <p>現在、サイト・アプリの新規制作依頼は受け付けていません。</p>
+              </div>
               <div className="p-top-contact__button">
                 <Link href="/contact/" className="c-button__link">
                   お問い合わせ内容を確認する

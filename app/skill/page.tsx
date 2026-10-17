@@ -97,7 +97,6 @@ export default function Page() {
           <SkillCard title="Figma / Adobe" image="/img/pages/skill/img_figma.svg" imageAlt="Figma" summary="デザインの意図やコンポーネント構造を読み取り、実装へ落とし込みます。" points={['Figmaのデザインデータ確認・制作', 'Photoshopでの画像編集・書き出し', 'Illustratorでの素材調整']} />
           <SkillCard title="その他の補助ツール" image="/img/pages/skill/img_vscode.svg" imageAlt="開発ツール" summary="Cursor、Visual Studio Code、NotebookLM、Canva、Adobe Express、Fireflyを目的に応じて使い分けています。" points={['コード編集・調査の補助', '資料整理とドキュメント作成', 'ブログ用画像や素材の作成']} />
         </div>
-        <p className="programming__note fadeUpTrigger"><Link href="/diary/iropon-release/">「いろポン！」でのCursor・Claudeの利用と開発経緯を読む</Link></p>
       </section>
 
       <section className="other inner">

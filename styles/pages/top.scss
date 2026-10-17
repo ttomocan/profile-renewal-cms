@@ -397,6 +397,16 @@
 }
 
 .p-top-contact {
+  &__availability {
+    border-left: 3px solid $mainC;
+    margin-top: 24px;
+    padding-left: 16px;
+    font-size: 16px;
+    line-height: 1.8;
+
+    h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  }
+
   &__button {
     margin-top: 30px;
   }

@@ -23,6 +23,11 @@
 .details dt { font-weight: 700; }
 .links { display: grid; gap: 12px; margin-top: 24px; font-size: 14px; }
 .links a { color: #783609; text-decoration: underline; text-underline-offset: 4px; }
+.links a::after {
+  background: currentColor;
+  -webkit-mask: url('/img/common/icon_link-external.svg') no-repeat center / contain;
+  mask: url('/img/common/icon_link-external.svg') no-repeat center / contain;
+}
 .links a:hover { text-decoration-thickness: 2px; }
 .links a:focus-visible { outline: 3px solid #69300b; outline-offset: 4px; border-radius: 2px; }
 
