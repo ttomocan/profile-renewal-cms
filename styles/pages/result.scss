@@ -1047,14 +1047,12 @@ cite {
   }
 }
 
-.result-detail__header-meta > div {
-  @include mq("sp") {
-    display: grid;
-    grid-template-columns: 18px minmax(0, 1fr);
-    align-items: start;
+.result-detail__header-meta {
+  dt {
+    flex-shrink: 0;
+  }
 
-    dt, dd {
-      grid-column: 2;
-    }
+  dd {
+    min-width: 0;
   }
 }
