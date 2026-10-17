@@ -50,7 +50,7 @@ function TextSection({ title, value }: { title: string; value?: string }) {
   return (
     <section className="result-detail__section">
       <h2 className="result-detail__section-title">{title}</h2>
-      <div className="result-detail__section-content result-detail__section-content--summary">
+      <div className="result-detail__section-content result-detail__section-content--prose">
         {value
           .split(/\n{2,}/)
           .map((paragraph) => paragraph.trim())
@@ -80,6 +80,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const clientName = safeGetClientName(result.clientName);
   const cover = safeGetCover(result); // サイトカードで使用
   const safeScale = safeGetScale(result);
+  const hasPeriod = period != null && period !== 0;
+  const hasScale = Boolean(safeScale && safeScale !== '未分類');
+  const projectScopeLabel = [hasPeriod ? '期間' : '', hasScale ? 'ページ規模' : ''].filter(Boolean).join('・');
 
   const techStackArray = parseTechStack(techStack);
   const technologyGroups = groupProjectTechnologies(techStack);
@@ -131,14 +134,14 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <h1 className="result-detail__header-title">{title}</h1>
 
               <dl className="result-detail__header-meta">
-                {period != null && period !== 0 && <div>
+                {hasPeriod && <div>
                   <svg aria-hidden="true" className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <dt>案件全体の制作期間</dt>
                   <dd>{formattedPeriod}</dd>
                 </div>}
-                {safeScale && safeScale !== '未分類' && (
+                {hasScale && (
                   <div>
                     <svg aria-hidden="true" className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2M4 6v10a2 2 0 002 2h12a2 2 0 002-2V6M4 6h16M7 10h3m-3 4h8m-8 4h8" />
@@ -157,7 +160,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                   </div>
                 )}
               </dl>
-              {(period || (safeScale && safeScale !== '未分類')) ? <p className="result-detail__scope-note">期間・ページ規模は案件全体の情報です。本人の担当範囲は以下に記載しています。</p> : null}
+              {projectScopeLabel ? <p className="result-detail__scope-note">{projectScopeLabel}は案件全体の情報です。本人の担当範囲は以下に記載しています。</p> : null}
             </header>
 
             {/* カバー画像は非表示 */}
@@ -165,7 +168,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {/* 概要 */}
             <section className="result-detail__section">
               <h2 className="result-detail__section-title">案件概要</h2>
-              <div className="result-detail__section-content result-detail__section-content--summary">
+              <div className="result-detail__section-content result-detail__section-content--prose">
                 <p>{summary}</p>
               </div>
             </section>
@@ -180,13 +183,13 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 <div className="result-detail__section-content result-detail__section-content--tags">
                   {responsibility?.trim() && <div className="result-detail__prose"><p>{responsibility}</p></div>}
                   {rolesArray.length > 0 && (
-                    <div className="tags-container" role="list" aria-label="担当範囲一覧">
+                    <ul className="result-detail__roles" aria-label="担当範囲一覧">
                       {rolesArray.map((role) => (
-                        <span key={role} className="tag tag--role" role="listitem">
+                        <li key={role}>
                           {role}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   )}
                 </div>
               </section>
@@ -196,7 +199,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {highlightsArray.length > 0 && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">実装内容・工夫</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
+                <div className="result-detail__section-content result-detail__section-content--prose">
                   {highlightsArray.length > 0 && (
                     <div className="result-detail__section-highlights">
                       <ul>
@@ -243,7 +246,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {testimonial && testimonial.trim() && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">お客様の声</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
+                <div className="result-detail__section-content result-detail__section-content--prose">
                   <blockquote>&ldquo;{testimonial}&rdquo;</blockquote>
                   {result.clientName && result.clientName.trim() && <cite>― {clientName} 様</cite>}
                 </div>

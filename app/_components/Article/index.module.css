@@ -1,4 +1,4 @@
-/* クリエイティブなArticleスタイル */
+/* 日記本文：サイト共通のアイボリー・オレンジ配色 */
 
 .article {
   margin-inline: auto;
@@ -6,8 +6,8 @@
 }
 
 .tableOfContents {
-  background: #fff;
-  border: 1px solid rgba(243, 107, 10, 0.3);
+  background: #fffaf5;
+  border: 1px solid #decabd;
   border-radius: var(--radius-standard);
   margin: 0 0 48px;
   max-width: 100%;
@@ -30,9 +30,20 @@
 
 .tableOfContents a {
   color: #333;
-  text-decoration: underline;
-  text-decoration-color: rgba(243, 107, 10, 0.55);
-  text-underline-offset: 3px;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 3px 6px;
+  text-decoration: none;
+}
+
+.tableOfContents a:hover {
+  background: #fff0e3;
+  color: #69300b;
+}
+
+.tableOfContents a:focus-visible {
+  outline: 3px solid #69300b;
+  outline-offset: 2px;
 }
 
 .tableOfContentsSubItem {
@@ -43,16 +54,16 @@
   font-size: 2rem;
   font-weight: 700;
   line-height: 1.4;
-  color: #1a1a2e;
+  color: #282828;
   margin-bottom: 20px;
 }
 
 .description {
   font-size: 1.05rem;
-  color: #5a5a6e;
+  color: #555;
   margin: 0 0 20px;
   padding: 15px 20px;
-  background: #fafafa;
+  background: #fffaf5;
   border-radius: 4px;
   line-height: 1.8;
   border-left: 3px solid #f36b0a;
@@ -91,7 +102,7 @@
   color: #333;
 }
 
-.content *:first-child {
+.content > :first-child {
   margin-top: 0;
 }
 
@@ -99,7 +110,7 @@
   font-size: 1.8rem;
   font-weight: 700;
   margin: 72px 0 24px;
-  color: #1a1a2e;
+  color: #282828;
   letter-spacing: -0.02em;
 }
 
@@ -108,10 +119,10 @@
   font-weight: 700;
   line-height: 1.5;
   margin: 80px 0 24px;
-  color: #1a1a2e;
+  color: #282828;
   padding: 16px 20px;
   position: relative;
-  background: linear-gradient(135deg, #fff7f0 0%, #fff 60%);
+  background: #fffaf5;
   border-radius: 6px;
   border-left: 4px solid #f36b0a;
 }
@@ -121,22 +132,11 @@
   scroll-margin-top: 100px;
 }
 
-.content > h2::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, #f36b0a 0%, transparent 70%);
-  border-radius: 0 0 6px 6px;
-}
-
 .content > h3 {
   font-size: 1.25rem;
   font-weight: 700;
   margin: 48px 0 20px;
-  color: #1a1a2e;
+  color: #282828;
   padding-left: 15px;
   border-left: 3px solid #f36b0a;
 }
@@ -164,8 +164,8 @@
 }
 
 .content pre > code {
-  background: #1e1e2e;
-  color: #cdd6f4;
+  background: #282828;
+  color: #fffaf5;
   display: block;
   padding: 24px 28px;
   border-radius: 8px;
@@ -177,7 +177,7 @@
 
 .content div[data-filename]::before {
   display: inline-block;
-  background: #f36b0a;
+  background: #b54708;
   color: white;
   content: attr(data-filename);
   font-family: 'JetBrains Mono', monospace;
@@ -189,13 +189,18 @@
 
 .content ul,
 .content ol {
-  margin: 0 0 0 24px;
+  margin: 24px 0;
+  padding-left: 1.5em;
   line-height: 1.8;
 }
 
-.content > ul,
-.content > ol {
-  margin: 24px 0 24px 24px;
+.content li + li {
+  margin-top: 8px;
+}
+
+.content li > ul,
+.content li > ol {
+  margin: 8px 0;
 }
 
 .content ul > li {
@@ -204,6 +209,10 @@
 
 .content ol > li {
   list-style: decimal;
+}
+
+.content li::marker {
+  color: #b54708;
 }
 
 .content a {
@@ -240,7 +249,7 @@
 .content > blockquote {
   margin: 40px 0;
   padding: 24px 32px;
-  background: linear-gradient(135deg, #fff9f5, #fff5ee);
+  background: #fffaf5;
   border-radius: 8px;
   border-left: 4px solid #f36b0a;
   font-size: 1.05rem;
@@ -260,7 +269,7 @@
   margin: 56px 0;
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #ddd 20%, #ddd 80%, transparent);
+  background: #decabd;
 }
 
 .content > table {
@@ -273,7 +282,7 @@
 }
 
 .content > table th {
-  background: #f36b0a;
+  background: #b54708;
   color: white;
   text-align: left;
   padding: 14px 20px;
@@ -286,7 +295,7 @@
 }
 
 .content > table tr:hover td {
-  background: #fafafa;
+  background: #fffaf5;
 }
 
 /* レスポンシブ */
@@ -335,12 +344,6 @@
     font-size: 1.3rem;
     margin: 60px 0 15px;
     padding: 14px 16px;
-  }
-
-  .content > h2::before {
-    left: 16px;
-    width: 17px;
-    height: 17px;
   }
 
   .content > h3 {

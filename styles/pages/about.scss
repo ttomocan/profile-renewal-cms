@@ -37,6 +37,32 @@
     }
   }
 
+  .about-section--compact {
+    &:not(:is(.pagetitle, :last-of-type)) { padding-bottom: 56px; }
+
+    .c-heading-lv2 {
+      text-align: left;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+
+    .c-heading-lv2-en {
+      color: #666666;
+      font-size: 14px;
+      &::after { display: none; }
+    }
+
+    .c-heading-lv2-ja {
+      font-size: clamp(20px, 2vw, 24px);
+      text-wrap: wrap;
+    }
+
+    @include mq(sp) {
+      &:not(:is(.pagetitle, :last-of-type)) { padding-bottom: 40px; }
+      .c-heading-lv2 { margin-bottom: 20px; }
+    }
+  }
+
   .about-facts {
     display: grid;
     gap: 20px;
@@ -61,6 +87,12 @@
         font-weight: 700;
       }
     }
+  }
+
+  .about-count-note {
+    color: #666666;
+    font-size: 14px;
+    margin: -12px 0 24px;
   }
 
   .about-section-copy {
@@ -95,6 +127,30 @@
     }
   }
 
+  .about-career {
+    margin-top: 32px;
+    text-align: left;
+
+    h3 { font-size: 18px; }
+
+    &__note {
+      color: #666666;
+      font-size: 14px;
+      margin: 4px 0 16px;
+    }
+
+    &__list > div {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 8px 24px;
+      border-top: 1px solid #d8c8bc;
+      padding: 16px 0;
+
+      dt { font-size: 15px; }
+      dd { font-weight: 700; }
+    }
+  }
+
   .about-qualifications {
     border-top: 1px solid #d8c8bc;
     margin-top: 28px;
@@ -125,6 +181,7 @@
   }
 
   @include mq(sp) {
+    .about-career__list > div,
     .about-qualifications ul,
     .about-facts,
     .about-cards {

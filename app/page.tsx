@@ -46,7 +46,8 @@ export default async function Home() {
 
               <h1 className="p-top-hero__title">設計・実装・改善まで担うWebエンジニア</h1>
               <p className="p-top-hero__about-text">
-                Web制作会社で<strong>10年以上</strong>、<strong>200サイト以上</strong>の制作に携わってきました。
+                Web制作会社で<strong>10年以上</strong>の経験があり、Web制作<strong className="p-top-hero__count">200件以上<sup>※</sup></strong>に参画してきました。
+                <span className="p-top-hero__count-note">※新規サイト・LP、副業を含む。改修を除く。</span>
               </p>
               <p className="p-top-hero__expertise">WordPress / フロントエンド実装 / UI改善 / SEO</p>
               <p className="p-top-hero__about-text">更新する人と制作チームを考えた、CMSの実装・改修・運用に取り組んできました。</p>
@@ -74,9 +75,9 @@ export default async function Home() {
               </dd>
             </div>
             <div className="p-top-facts__item fadeUpTrigger">
-              <dt>制作実績</dt>
+              <dt>Web制作への参画</dt>
               <dd>
-                <strong>200</strong>サイト以上
+                <strong>200</strong>件以上
               </dd>
             </div>
             <div className="p-top-facts__item fadeUpTrigger">
@@ -84,6 +85,7 @@ export default async function Home() {
               <dd>1級ウェブデザイン技能士</dd>
             </div>
           </dl>
+          <p className="p-top-facts__note">参画件数は新規サイト・LP、副業を含み、改修を除きます。</p>
         </section>
 
         <section className="p-top-results inner">
@@ -92,7 +94,7 @@ export default async function Home() {
             <span className="c-heading-lv2-ja">代表的な制作実績</span>
           </h2>
           <div className="p-top-results__cont fadeUpTrigger">
-            <p>本業のCMS構築、副業のサイト制作、個人開発を紹介します。各案件の担当範囲と実装内容は、詳細ページで確認できます。</p>
+            <p>本業のCMS構築、副業のサイト制作、個人開発を紹介します。<br />各案件の担当範囲と実装内容は、詳細ページで確認できます。</p>
           </div>
           {(resultsData.contents.length > 0 || personalData.contents.length > 0) && (
             <div className="p-top-results__list fadeUpTrigger">
@@ -205,7 +207,11 @@ export default async function Home() {
               <Image src="/img/pages/top/img_contact-v2.webp" alt="ノートパソコンとオレンジ色の封筒を描いたお問い合わせのイメージ" width={320} height={207} sizes="(max-width: 767px) 100vw, 310px" />
             </div>
             <div className="p-top-contact__detail col-text">
-              <p>採用、業務委託・協業、制作実績、ブログ・メディア運営に関するご連絡を受け付けています。現在、サイト・アプリの新規制作依頼は受け付けていません。</p>
+              <p>採用、業務委託・協業、制作実績、ブログ・メディア運営に関するご連絡を受け付けています。</p>
+              <div className="p-top-contact__availability">
+                <h3>現在の受付状況</h3>
+                <p>現在、サイト・アプリの新規制作依頼は受け付けていません。</p>
+              </div>
               <div className="p-top-contact__button">
                 <Link href="/contact/" className="c-button__link">
                   お問い合わせ内容を確認する

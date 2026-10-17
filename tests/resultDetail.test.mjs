@@ -80,3 +80,30 @@ test('個人開発記事を取得できなくても既存実績一覧を表示�
   assert.match(html, /既存案件/);
   assert.doesNotMatch(html, /personal-project-heading/);
 });
+
+test('担当範囲は通常リストで元の順序を保ち、技術と本文を欠落させない', async () => {
+  const page = loadDetail({ ...oldData, 'project-roles': ['CMS構築', 'SEO', '運用 / 保守'], techStack: 'HTML,PHP,WordPress', highlights: '実装項目1\n実装項目2' });
+  const html = renderToStaticMarkup(await page.default(params));
+  assert.match(html, /<ul class="result-detail__roles" aria-label="担当範囲一覧"><li>CMS構築<\/li><li>SEO<\/li><li>運用 \/ 保守<\/li><\/ul>/);
+  assert.doesNotMatch(html, /tag--role/);
+  assert.match(html, /aria-label="使用技術: HTML"[\s\S]*aria-label="使用技術: PHP"[\s\S]*aria-label="使用技術: WordPress"/);
+  assert.match(html, /案件概要<\/h2><div class="result-detail__section-content result-detail__section-content--prose"><p>掲載概要<\/p>/);
+  assert.match(html, /<li>実装項目1<\/li><li>実装項目2<\/li>/);
+});
+
+for (const [label, fields, expected] of [
+  ['期間のみ', { period: 6 }, '期間'],
+  ['ページ規模のみ', { id: 'beverage-campaign-lp-01', scale: ['1ページ'] }, 'ページ規模'],
+  ['両方', { period: 6, scale: ['1ページ'] }, '期間・ページ規模'],
+  ['どちらもなし', {}, null],
+  ['期間0・規模未分類', { period: 0, scale: ['未分類'] }, null],
+]) {
+  test(`案件全体の注記は表示項目と一致する：${label}`, async () => {
+    const page = loadDetail({ ...oldData, ...fields });
+    const html = renderToStaticMarkup(await page.default(params));
+    const note = html.match(/<p class="result-detail__scope-note">(.*?)<\/p>/)?.[1].replace(/<!-- -->/g, '');
+    assert.equal(note, expected ? `${expected}は案件全体の情報です。本人の担当範囲は以下に記載しています。` : undefined);
+    assert.equal(html.includes('<dt>案件全体の制作期間</dt>'), Boolean(fields.period));
+    assert.equal(html.includes('<dt>案件全体のページ規模</dt>'), Boolean(fields.scale && fields.scale[0] !== '未分類'));
+  });
+}

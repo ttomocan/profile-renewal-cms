@@ -115,7 +115,9 @@ test('KVは専門性と実績を先に伝え、実績とプロフィールの2�
   const html = await renderHero();
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
   assert.match(html, /p-top-hero__identity[\s\S]*ともきゃんの似顔絵[\s\S]*TOMOCAN/);
-  assert.match(html, /<h1[^>]*>設計・実装・改善まで担うWebエンジニア<\/h1>[\s\S]*<strong>10年以上<\/strong>[\s\S]*<strong>200サイト以上<\/strong>/);
+  assert.match(html, /<h1[^>]*>設計・実装・改善まで担うWebエンジニア<\/h1>[\s\S]*<strong>10年以上<\/strong>[\s\S]*<strong class="p-top-hero__count">200件以上<sup>※<\/sup><\/strong>に参画/);
+  assert.match(html, /class="p-top-hero__count-note">※新規サイト・LP、副業を含む。改修を除く。/);
+  assert.doesNotMatch(html, /200サイト/);
   assert.match(html, /WordPress \/ フロントエンド実装 \/ UI改善 \/ SEO/);
   assert.deepEqual([...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((m) => m[1].replace(/\/$/, '')), ['/result', '/about']);
   assert.equal((html.match(/class="c-button__link"/g) ?? []).length, 1);
@@ -184,4 +186,31 @@ test('KVコンテンツはアニメーションや遅延・透明化なしで初
       assert.notEqual(decl.prop, 'backdrop-filter');
     });
   });
+});
+
+test('代表実績の説明は最初の句点の後で明示的に改行する', async () => {
+  const description = findElement(await loadHome(), node => node.props?.className === 'p-top-results__cont fadeUpTrigger');
+  const html = renderToStaticMarkup(description);
+  assert.match(html, /個人開発を紹介します。<br\s*\/>各案件の担当範囲/);
+});
+
+test('Contactの受付条件は独立した見出しと段落で伝える', async () => {
+  const contact = findElement(await loadHome(), node => node.props?.className === 'p-top-contact__detail col-text');
+  const html = renderToStaticMarkup(contact);
+  assert.match(html, /ご連絡を受け付けています。<\/p>/);
+  assert.match(html, /<h3>現在の受付状況<\/h3><p>現在、サイト・アプリの新規制作依頼は受け付けていません。<\/p>/);
+  assert.match(html, /お問い合わせ内容を確認する/);
+});
+
+test('自主運営の外部リンクは既存アイコンと別タブの読み上げ案内を持つ', async () => {
+  const { createDiaryHarness } = await import('./helpers/diaryPageHarness.mjs');
+  const { createElement } = await import('react');
+  const harness = createDiaryHarness({});
+  const component = harness.load('app/_components/WordPressWork/index.tsx').default;
+  const html = await harness.render(createElement(component));
+  for (const host of ['www.newagevoice.com', 'www.blogdesign-mania.com']) {
+    assert.ok(html.includes(`href="https://${host}/" target="_blank" rel="noopener noreferrer" class="c-link-external"`));
+  }
+  assert.equal((html.match(/class="u-visually-hidden">（新しいタブで開く）/g) || []).length, 2);
+  assert.doesNotMatch(html, /（外部）/);
 });

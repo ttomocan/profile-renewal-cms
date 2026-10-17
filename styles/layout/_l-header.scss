@@ -225,6 +225,11 @@
       }
       .c-link-external::after {
         background: url(/img/common/icon_link-external-w.svg) no-repeat center / contain;
+        margin-left: 0;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
       }
       a {
         border-radius: 10px;
@@ -232,7 +237,8 @@
         background: rgba(255, 255, 255, 0.1);
         color: #ffffff;
         display: block;
-        padding: 10px 15px;
+        padding: 10px 38px;
+        position: relative;
         text-align: center;
       }
     }

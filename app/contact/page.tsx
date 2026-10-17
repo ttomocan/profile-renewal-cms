@@ -18,7 +18,7 @@ export default function Page() {
           <li>ブログ・メディアに関するお問い合わせ</li>
         </ul>
         <p className="u-mt20 u-mb20 fadeUpTrigger">内容を確認のうえ、原則3日以内に返信します。現在、サイト・アプリの新規制作依頼は受け付けていません。</p>
-        <p className="u-text-note fadeUpTrigger">テンプレートによる営業連絡や、返信先を確認できないお問い合わせには返信できない場合があります。添付ファイルは受け付けていないため、必要な資料がある場合は本文にその旨をご記載ください。</p>
+        <p className="u-text-note fadeUpTrigger">テンプレートによる営業連絡や、返信先を確認できないお問い合わせには返信できない場合があります。</p>
         <ContactForm />
       </section>
       <BreadcrumbListJsonLd items={breadcrumbItems} />

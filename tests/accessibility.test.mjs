@@ -102,15 +102,32 @@ test('記事本文リンクは通常とhoverで下線を保ち、合成後の文
   }
 });
 
-test('記事詳細の関連記事・関連ページは同じ下線付き濃色リンクで通常hover focusとも4.5:1以上', () => {
-  const file = 'app/diary/[slug]/page.module.css';
-  const normal = style(file, '.related a');
-  assert.equal(normal['text-decoration'], 'underline');
-  for (const selector of ['.related a', '.related a:hover', '.related a:focus-visible']) {
+test('目次リンクは下線なしでも通常hoverの文字とキーボードfocusを識別できる', () => {
+  const file = 'app/_components/Article/index.module.css';
+  const normal = style(file, '.tableOfContents a');
+  const background = style(file, '.tableOfContents').background;
+  assert.equal(normal['text-decoration'], 'none');
+  for (const selector of ['.tableOfContents a', '.tableOfContents a:hover']) {
     const values = { ...normal, ...style(file, selector) };
-    assert.ok(contrast(values.color, '#f2edea') >= 4.5, selector);
+    assert.ok(contrast(values.color === '#333' ? '#333333' : values.color, values.background || background) >= 4.5, selector);
   }
-  const focus = style(file, '.related a:focus-visible');
+  const focus = style(file, '.tableOfContents a:focus-visible');
   assert.ok(Number.parseFloat(focus.outline) >= 3);
-  assert.ok(contrast(focus.outline.match(/#[a-f0-9]{6}/i)[0], '#f2edea') >= 3);
+  assert.ok(contrast(focus.outline.match(/#[a-f0-9]{6}/i)[0], background) >= 3);
+});
+
+test('お問い合わせ入力とラジオの境界・focusは背景に対して3:1以上', () => {
+  const file = 'styles/object/project/_form.scss';
+  const ring = style(file, '.p-form .checkbox:has(input[type=radio]) input[type=radio] + .checkbox-text::before');
+  const input = style(file, ".p-form :is(input[type=text], input[type=email], textarea)");
+  const focus = style(file, '.p-form button:focus-visible');
+  for (const border of [ring.border, input.border]) {
+    assert.ok(border, '境界線が定義されている');
+    const color = border.match(/#[a-f0-9]{6}/i)?.[0];
+    assert.ok(contrast(color, '#f2edea') >= 3);
+    assert.ok(contrast(color, '#ffffff') >= 3);
+  }
+  const color = focus.outline.match(/#[a-f0-9]{6}/i)?.[0];
+  assert.ok(contrast(color, '#f2edea') >= 3);
+  assert.ok(contrast(color, '#ffffff') >= 3);
 });

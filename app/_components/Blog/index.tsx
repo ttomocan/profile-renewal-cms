@@ -19,9 +19,9 @@ const copyByVariant: Record<BlogVariant, ReactNode> = {
   ),
   skill: (
     <>
-      WordPressのカスタマイズ、記事UI、ブログ運営の改善事例は
-      <br className="u-pc-only" />
-      「ブログデザインマニア」で発信しています。
+      ボイトレや話し方に関する情報を「ともきゃんのボイトレ生活」で、
+      <br />
+      WebデザインやWordPressの学習に役立つ情報、資格・参考書の紹介を「ブログデザインマニア」で発信しています。
     </>
   ),
   diary: (

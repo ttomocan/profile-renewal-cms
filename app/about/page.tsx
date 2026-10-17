@@ -48,11 +48,34 @@ export default function Page() {
             <dd>3社で実務経験</dd>
           </div>
           <div className="about-facts__item">
-            <dt>サイト構築</dt>
+            <dt>Web制作への参画</dt>
             <dd>200件以上</dd>
           </div>
         </dl>
+        <p className="about-count-note">参画件数は新規サイト・LP、副業を含み、改修を除きます。</p>
         <p className="about-section-copy fadeUpTrigger">コーポレートサイト、ブランドサイト、オウンドメディアなどの制作に携わり、実装からCMS構築、レスポンシブ調整、SEO、運用・保守まで担当してきました。</p>
+        <div className="about-career fadeUpTrigger" aria-labelledby="career-heading">
+          <h3 id="career-heading">学歴・職歴</h3>
+          <p className="about-career__note">勤務先は匿名で記載しています。</p>
+          <dl className="about-career__list">
+            <div>
+              <dt><time dateTime="2012-04">2012年4月</time>〜<time dateTime="2016-03">2016年3月</time></dt>
+              <dd>専門学校（入学〜卒業）</dd>
+            </div>
+            <div>
+              <dt><time dateTime="2016-04">2016年4月</time>〜<time dateTime="2022-06">2022年6月</time></dt>
+              <dd>制作会社A</dd>
+            </div>
+            <div>
+              <dt><time dateTime="2022-07">2022年7月</time>〜<time dateTime="2025-11">2025年11月</time></dt>
+              <dd>制作会社B</dd>
+            </div>
+            <div>
+              <dt><time dateTime="2026-01">2026年1月</time>〜現在</dt>
+              <dd>制作会社C</dd>
+            </div>
+          </dl>
+        </div>
         <div className="about-link fadeUpTrigger">
           <Link href="/result/" className="c-button__link">
             担当範囲が分かる制作実績を見る
@@ -60,7 +83,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="strength inner">
+      <section className="strength about-section--compact inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Strength</span>
           <span className="c-heading-lv2-ja">得意な領域</span>
@@ -90,7 +113,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="work-style inner inner-s">
+      <section className="work-style about-section--compact inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Work Style</span>
           <span className="c-heading-lv2-ja">仕事で大切にしていること</span>
@@ -101,7 +124,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="activity inner inner-s">
+      <section className="activity about-section--compact inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Personal Work</span>
           <span className="c-heading-lv2-ja">個人開発・発信活動</span>

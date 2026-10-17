@@ -28,8 +28,14 @@ test('代表枠は存在する実績だけを選び、元の一覧を変更し�
   const { selectFeaturedResults } = load('../lib/resultPresentation.ts');
   const items = [{ id: 'other' }, { id: 'career-media-01' }, { id: 'corporate-handball-team-01' }];
   const selected = selectFeaturedResults(items);
-  assert.deepEqual(Array.from(selected, item => item.id), ['corporate-handball-team-01', 'career-media-01']);
+  assert.deepEqual(Array.from(selected, item => item.id), ['corporate-handball-team-01', 'career-media-01', 'other']);
   assert.deepEqual(items.map(item => item.id), ['other', 'career-media-01', 'corporate-handball-team-01']);
   assert.equal(selectFeaturedResults([]).length, 0);
   assert.deepEqual(Array.from(selectFeaturedResults([{ id: 'new' }]), item => item.id), ['new']);
+});
+
+test('代表枠は優先順を維持し、取得順で重複なく6件まで補う', () => {
+  const { selectFeaturedResults } = load('../lib/resultPresentation.ts');
+  const items = ['extra-1', 'career-media-01', 'corporate-handball-team-01', 'extra-1', 'social-entrepreneurship-program-01', 'risk-management-corporate-01', 'extra-2', 'extra-3'].map(id => ({ id }));
+  assert.deepEqual(Array.from(selectFeaturedResults(items), item => item.id), ['corporate-handball-team-01', 'risk-management-corporate-01', 'social-entrepreneurship-program-01', 'career-media-01', 'extra-1', 'extra-2']);
 });

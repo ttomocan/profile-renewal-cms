@@ -23,12 +23,12 @@ export default function WordPressWork() {
             </div>
             <div>
               <dt>運営実績</dt>
-              <dd>ブログの月間平均PV数1万PV以上</dd>
+              <dd>ともきゃんのボイトレ生活：月平均1万PV（2025年までの運営実績）</dd>
             </div>
           </dl>
           <div className={styles.links}>
-            <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer">ともきゃんのボイトレ生活を見る（外部）</a>
-            <a href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer">ブログデザインマニアで改善事例を読む（外部）</a>
+            <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-link-external">ともきゃんのボイトレ生活を見る<span className="u-visually-hidden">（新しいタブで開く）</span></a>
+            <a href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer" className="c-link-external">ブログデザインマニアで改善事例を読む<span className="u-visually-hidden">（新しいタブで開く）</span></a>
           </div>
         </div>
       </div>
