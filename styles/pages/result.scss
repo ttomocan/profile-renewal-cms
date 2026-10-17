@@ -10,6 +10,10 @@
 $primary-color: $mainC; // #f36b0a
 $primary-light: rgba(243, 107, 10, 0.1);
 $primary-lighter: rgba(243, 107, 10, 0.05);
+$primary-muted: rgba(243, 107, 10, 0.15);
+$primary-soft: rgba(243, 107, 10, 0.3);
+$primary-strong: rgba(243, 107, 10, 0.6);
+$radius-pill: calc(infinity * 1px);
 $base-color: $baseC; // #fcf6f1
 $text-color: $textC; // #282828
 
@@ -100,7 +104,9 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .result-detail__prose {
+  font-size: 16px;
   line-height: 1.8;
+  color: $text-color;
   white-space: pre-line;
   margin-bottom: 20px;
 }
@@ -127,8 +133,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 .result-card {
   background: $white;
   box-shadow: $shadow-sm;
-  border: 1px solid rgba(243, 107, 10, 0.2);
-  border-radius: 10px;
+  border: 1px solid $primary-soft;
+  border-radius: $radiusStandard;
   overflow: hidden;
   transition: $transition-base;
   position: relative;
@@ -138,7 +144,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     box-shadow: $shadow-xl;
-    border-color: rgba(243, 107, 10, 0.5);
+    border-color: $primary-strong;
 
     .result-card__image-img {
       transform: scale(1.08);
@@ -188,7 +194,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(243, 107, 10, 0.15) 0%, rgba(243, 107, 10, 0.05) 100%);
+    background: linear-gradient(135deg, $primary-muted 0%, $primary-lighter 100%);
     opacity: 0;
     transition: opacity 0.4s ease;
   }
@@ -201,12 +207,12 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__work-type {
-    color: #ffffff;
+    color: $white;
     background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
     display: inline-flex;
     align-items: center;
     padding: 3px 12px;
-    border-radius: calc(infinity * 1px);
+    border-radius: $radius-pill;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 0.001em;
@@ -275,7 +281,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     flex: 1;
     display: flex;
     flex-direction: column;
-    background: #ffffff;
+    background: $white;
   }
 
   &__meta {
@@ -294,8 +300,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     color: $primary-color;
     font-size: 12px;
     font-weight: 600;
-    border-radius: 10px;
-    border: 1px solid rgba(243, 107, 10, 0.15);
+    border-radius: $radius-pill;
+    border: 1px solid $primary-muted;
     letter-spacing: 0.001em;
   }
 
@@ -365,7 +371,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
     li {
       background: $gray-100;
-      border-radius: 8px;
+      border-radius: $radiusSmall;
       color: $gray-600;
       font-size: 11px;
       line-height: 1.4;
@@ -387,7 +393,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     color: $gray-400;
     font-weight: 600;
     padding-top: 15px;
-    border-top: 1px solid rgba(243, 107, 10, 0.3);
+    border-top: 1px solid $primary-soft;
     margin-top: auto;
     letter-spacing: 0.001em;
   }
@@ -410,7 +416,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: center;
   padding: 80px 32px;
   background: linear-gradient(135deg, $base-color 0%, $white 100%);
-  border: 2px dashed rgba(243, 107, 10, 0.2);
+  border: 2px dashed $primary-soft;
   border-radius: $radiusStandard;
 
   &__icon {
@@ -456,7 +462,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   background: $white;
   overflow: hidden;
   box-shadow: $shadow-sm;
-  border: 1px solid rgba(243, 107, 10, 0.08);
+  border: 1px solid $primary-muted;
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
   &__image {
@@ -470,8 +476,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__line {
     height: 14px;
-    background: linear-gradient(135deg, rgba(243, 107, 10, 0.1) 0%, $gray-200 100%);
-    border-radius: 8px;
+    background: linear-gradient(135deg, $primary-light 0%, $gray-200 100%);
+    border-radius: $radiusSmall;
     margin-bottom: 16px;
 
     &:last-child {
@@ -543,7 +549,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     background: linear-gradient(135deg, $white 0%, $base-color 100%);
     border-radius: $radiusStandard;
     padding: 25px;
-    border: 1px solid rgba(243, 107, 10, 0.3);
+    border: 1px solid $primary-soft;
 
     @include mq('sp') {
       padding: 15px;
@@ -560,14 +566,14 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         display: inline-flex;
         align-items: center;
         padding: 2px 12px;
-        border-radius: calc(infinity * 1px);
+        border-radius: $radius-pill;
         font-size: 14px;
         font-weight: 700;
         letter-spacing: 0.001em;
 
         &--work-type {
-          background: rgba(243, 107, 10, 0.05);
-          border: 1px solid rgba(243, 107, 10, 0.15);
+          background: $primary-lighter;
+          border: 1px solid $primary-muted;
           color: $primary-color;
           font-weight: 600;
         }
@@ -622,7 +628,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       font-size: 15px;
       color: $gray-600;
       padding-top: 20px;
-      border-top: 1px solid rgba(243, 107, 10, 0.4);
+      border-top: 1px solid $primary-soft;
 
       > div {
         display: flex;
@@ -689,8 +695,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       // CTAの囲みは維持する
       &--summary {
         background: $white;
-        border: 1px solid rgba(243, 107, 10, 0.3);
-        border-radius: 20px;
+        border: 1px solid $primary-soft;
+        border-radius: $radiusStandard;
         padding: 20px 25px;
 
         p {
@@ -725,7 +731,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           display: inline-flex;
           align-items: center;
           padding: 2px 12px;
-          border-radius: 4px;
+          border-radius: $radiusSmall;
           font-size: 13px;
           font-weight: 400;
           letter-spacing: 0.001em;
@@ -740,7 +746,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   &__navigation {
     margin-top: 80px;
     padding-top: 40px;
-    border-top: 2px solid rgba(243, 107, 10, 0.1);
+    border-top: 1px solid $primary-soft;
 
     &-content {
       display: flex;
@@ -753,8 +759,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       align-items: center;
       padding: 16px 28px;
       background: $white;
-      border: 1px solid rgba(243, 107, 10, 0.3);
-      border-radius: 16px;
+      border: 1px solid $primary-soft;
+      border-radius: $radiusStandard;
       color: $primary-color;
       text-decoration: none;
       transition: $transition-fast;
@@ -818,7 +824,7 @@ blockquote {
   &::before {
     content: '"';
     font-size: 48px;
-    color: rgba(243, 107, 10, 0.3);
+    color: $primary-soft;
     position: absolute;
     top: -12px;
     left: -8px;
@@ -840,8 +846,8 @@ cite {
   align-items: center;
   display: flex;
   background: $white;
-  border: 1px solid rgba(243, 107, 10, 0.3);
-  border-radius: 10px;
+  border: 1px solid $primary-soft;
+  border-radius: $radiusStandard;
   overflow: hidden;
   transition: $transition-base;
   box-shadow: $shadow-sm;
@@ -850,7 +856,7 @@ cite {
 
   &:hover {
     box-shadow: $shadow-lg;
-    border-color: rgba(243, 107, 10, 0.6);
+    border-color: $primary-strong;
 
     .site-link-card__title,
     .site-link-card__description,
@@ -872,7 +878,7 @@ cite {
       height: 64px;
       object-fit: contain;
       transition: transform 0.3s ease;
-      border-radius: 8px;
+      border-radius: $radiusSmall;
     }
 
     @include mq('sp') {
@@ -917,8 +923,8 @@ cite {
   &__action {
     flex-shrink: 0;
     padding: 10px;
-    border-radius: 5px;
-    background: rgba(243, 107, 10, 0.1);
+    border-radius: $radiusSmall;
+    background: $primary-light;
     color: $primary-color;
     display: flex;
     align-items: center;
@@ -975,7 +981,7 @@ cite {
   background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
   color: $white;
   text-decoration: none;
-  border-radius: 16px;
+  border-radius: $radiusStandard;
   font-weight: 700;
   transition: $transition-fast;
   box-shadow: $shadow-md;
