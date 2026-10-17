@@ -1,4 +1,4 @@
-/* クリエイティブなフッター */
+/* 日記詳細の関連記事と一覧への導線 */
 
 .footer {
   display: flex;
@@ -19,55 +19,8 @@
   padding-left: 14px;
 }
 
-.related ul {
-  display: grid;
-  gap: 10px;
-}
-
-.related a {
-  color: #b54708;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.related a:hover {
-  color: #8f3500;
-}
-
-.related a:focus-visible {
-  outline: 3px solid #69300b;
-  outline-offset: 3px;
-}
-
-.footer .c-button__link {
-  display: inline-block;
-  background: #f36b0a;
-  color: white;
-  padding: 16px 40px;
-  border-radius: 4px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  transition: all 0.2s ease;
-}
-
-.footer .c-button__link:hover {
-  background: #e85d04;
-  transform: translateY(-2px);
-}
-
-.footer .c-button__link:active {
-  transform: translateY(0);
-}
-
 @media (max-width: 640px) {
   .footer {
     margin-top: 56px;
-  }
-
-  .footer .c-button__link {
-    padding: 14px 32px;
-    font-size: 0.9rem;
   }
 }
