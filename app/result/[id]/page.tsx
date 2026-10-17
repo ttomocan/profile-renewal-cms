@@ -50,7 +50,7 @@ function TextSection({ title, value }: { title: string; value?: string }) {
   return (
     <section className="result-detail__section">
       <h2 className="result-detail__section-title">{title}</h2>
-      <div className="result-detail__section-content result-detail__section-content--summary">
+      <div className="result-detail__section-content result-detail__section-content--prose">
         {value
           .split(/\n{2,}/)
           .map((paragraph) => paragraph.trim())
@@ -165,7 +165,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {/* 概要 */}
             <section className="result-detail__section">
               <h2 className="result-detail__section-title">案件概要</h2>
-              <div className="result-detail__section-content result-detail__section-content--summary">
+              <div className="result-detail__section-content result-detail__section-content--prose">
                 <p>{summary}</p>
               </div>
             </section>
@@ -180,13 +180,13 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 <div className="result-detail__section-content result-detail__section-content--tags">
                   {responsibility?.trim() && <div className="result-detail__prose"><p>{responsibility}</p></div>}
                   {rolesArray.length > 0 && (
-                    <div className="tags-container" role="list" aria-label="担当範囲一覧">
+                    <ul className="result-detail__roles" aria-label="担当範囲一覧">
                       {rolesArray.map((role) => (
-                        <span key={role} className="tag tag--role" role="listitem">
+                        <li key={role}>
                           {role}
-                        </span>
+                        </li>
                       ))}
-                    </div>
+                    </ul>
                   )}
                 </div>
               </section>
@@ -196,7 +196,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {highlightsArray.length > 0 && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">実装内容・工夫</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
+                <div className="result-detail__section-content result-detail__section-content--prose">
                   {highlightsArray.length > 0 && (
                     <div className="result-detail__section-highlights">
                       <ul>
@@ -243,7 +243,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {testimonial && testimonial.trim() && (
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">お客様の声</h2>
-                <div className="result-detail__section-content result-detail__section-content--summary">
+                <div className="result-detail__section-content result-detail__section-content--prose">
                   <blockquote>&ldquo;{testimonial}&rdquo;</blockquote>
                   {result.clientName && result.clientName.trim() && <cite>― {clientName} 様</cite>}
                 </div>

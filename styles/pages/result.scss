@@ -80,7 +80,8 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 14px;
 }
 
-.result-detail__section-content--summary p + p {
+.result-detail__section-content--summary p + p,
+.result-detail__section-content--prose p + p {
   margin-top: 16px;
 }
 
@@ -612,6 +613,16 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
 
+  &__roles {
+    display: grid;
+    gap: 8px;
+    list-style: disc;
+    padding-left: 1.25em;
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
   &__section {
     &:not(:is(.pagetitle, :last-of-type)) {
       padding-bottom: 80px;
@@ -642,7 +653,15 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     &-content {
-      // 通常のテキストコンテンツ（タグ以外）
+      &--prose {
+        font-size: 16px;
+        line-height: 1.8;
+        color: $text-color;
+
+        p { margin: 0; white-space: pre-line; }
+      }
+
+      // CTAの囲みは維持する
       &--summary {
         background: $white;
         border: 1px solid rgba(243, 107, 10, 0.3);
@@ -708,36 +727,12 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
           display: inline-flex;
           align-items: center;
           padding: 2px 12px;
-          border-radius: calc(infinity * 1px);
-          font-size: 14px;
-          font-weight: 600;
+          border-radius: 4px;
+          font-size: 13px;
+          font-weight: 400;
           letter-spacing: 0.001em;
-          transition: $transition-fast;
-          border: 1px solid transparent;
-
-          &--role {
-            background: $primary-lighter;
-            color: $primary-color;
-            border-color: rgba(243, 107, 10, 0.25);
-
-            &:hover {
-              background: rgba(243, 107, 10, 0.12);
-              border-color: rgba(243, 107, 10, 0.4);
-              transform: translateY(-1px);
-            }
-          }
-
-          &--tech {
-            background: $primary-lighter;
-            color: $primary-color;
-            border-color: rgba(243, 107, 10, 0.25);
-
-            &:hover {
-              background: rgba(243, 107, 10, 0.12);
-              border-color: rgba(243, 107, 10, 0.4);
-              transform: translateY(-1px);
-            }
-          }
+          background: $gray-100;
+          color: $gray-600;
         }
       }
     }
