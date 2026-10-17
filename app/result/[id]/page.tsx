@@ -247,7 +247,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <section className="result-detail__section">
                 <h2 className="result-detail__section-title">お客様の声</h2>
                 <div className="result-detail__section-content result-detail__section-content--prose">
-                  <blockquote>&ldquo;{testimonial}&rdquo;</blockquote>
+                  <blockquote>{testimonial}</blockquote>
                   {result.clientName && result.clientName.trim() && <cite>― {clientName} 様</cite>}
                 </div>
               </section>
