@@ -63,6 +63,36 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   margin-bottom: 36px;
 }
 
+%result-detail-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    font-size: 16px;
+    line-height: 1.8;
+    color: $text-color;
+    padding-left: 18px;
+    position: relative;
+
+    &::before {
+      background: $primary-color;
+      border-radius: 50%;
+      content: '';
+      height: 6px;
+      left: 0;
+      position: absolute;
+      top: 0.9em;
+      transform: translateY(-50%);
+      width: 6px;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
 .result-detail__scope-note {
   font-size: 14px;
   line-height: 1.8;
@@ -538,7 +568,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
         &--work-type {
           background: rgba(243, 107, 10, 0.05);
           border: 1px solid rgba(243, 107, 10, 0.15);
-          color: #f36b0a;
+          color: $primary-color;
           font-weight: 600;
         }
 
@@ -615,13 +645,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__roles {
-    display: grid;
-    gap: 8px;
-    list-style: disc;
-    padding-left: 1.25em;
-    margin: 0;
-    font-size: 16px;
-    line-height: 1.8;
+    @extend %result-detail-bullet-list;
   }
 
   &__section {
@@ -685,34 +709,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
     &-highlights {
       ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-
-        li {
-          display: flex;
-          align-items: flex-start;
-          font-size: 16px;
-          line-height: 1.7;
-          color: $text-color;
-          padding-left: 18px;
-          position: relative;
-
-          &::before {
-            background: $primary-color;
-            border-radius: 50%;
-            content: '';
-            height: 6px;
-            left: 0;
-            position: absolute;
-            top: 0.75em;
-            width: 6px;
-          }
-
-          &:not(:last-child) {
-            margin-bottom: 10px;
-          }
-        }
+        @extend %result-detail-bullet-list;
       }
     }
 
