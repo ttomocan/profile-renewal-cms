@@ -18,6 +18,12 @@
 }
 
 .p-top-hero {
+  &__count-note {
+    display: block;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
   align-items: center;
   background-color: #18110d;
   color: #ffffff;
@@ -180,6 +186,12 @@
 }
 
 .p-top-facts {
+  &__note {
+    color: #666666;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
   &__list {
     display: grid;
     gap: 15px;

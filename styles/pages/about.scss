@@ -63,6 +63,12 @@
     }
   }
 
+  .about-count-note {
+    color: #666666;
+    font-size: 14px;
+    margin: -12px 0 24px;
+  }
+
   .about-section-copy {
     display: grid;
     gap: 16px;
@@ -92,6 +98,30 @@
     strong {
       color: $mainC;
       font-size: 18px;
+    }
+  }
+
+  .about-career {
+    margin-top: 32px;
+    text-align: left;
+
+    h3 { font-size: 18px; }
+
+    &__note {
+      color: #666666;
+      font-size: 14px;
+      margin: 4px 0 16px;
+    }
+
+    &__list > div {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 8px 24px;
+      border-top: 1px solid #d8c8bc;
+      padding: 16px 0;
+
+      dt { font-size: 15px; }
+      dd { font-weight: 700; }
     }
   }
 
@@ -125,6 +155,7 @@
   }
 
   @include mq(sp) {
+    .about-career__list > div,
     .about-qualifications ul,
     .about-facts,
     .about-cards {

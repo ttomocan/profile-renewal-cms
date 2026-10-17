@@ -23,7 +23,7 @@ export default function WordPressWork() {
             </div>
             <div>
               <dt>運営実績</dt>
-              <dd>ブログの月間平均PV数1万PV以上</dd>
+              <dd>ともきゃんのボイトレ生活：月平均1万PV（2025年までの運営実績）</dd>
             </div>
           </dl>
           <div className={styles.links}>
