@@ -83,7 +83,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="strength inner">
+      <section className="strength about-section--compact inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Strength</span>
           <span className="c-heading-lv2-ja">得意な領域</span>
@@ -113,7 +113,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="work-style inner inner-s">
+      <section className="work-style about-section--compact inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Work Style</span>
           <span className="c-heading-lv2-ja">仕事で大切にしていること</span>
@@ -124,7 +124,7 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="activity inner inner-s">
+      <section className="activity about-section--compact inner inner-s">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Personal Work</span>
           <span className="c-heading-lv2-ja">個人開発・発信活動</span>

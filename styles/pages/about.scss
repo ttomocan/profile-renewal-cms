@@ -37,6 +37,32 @@
     }
   }
 
+  .about-section--compact {
+    &:not(:is(.pagetitle, :last-of-type)) { padding-bottom: 56px; }
+
+    .c-heading-lv2 {
+      text-align: left;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+
+    .c-heading-lv2-en {
+      color: #666666;
+      font-size: 14px;
+      &::after { display: none; }
+    }
+
+    .c-heading-lv2-ja {
+      font-size: clamp(20px, 2vw, 24px);
+      text-wrap: wrap;
+    }
+
+    @include mq(sp) {
+      &:not(:is(.pagetitle, :last-of-type)) { padding-bottom: 40px; }
+      .c-heading-lv2 { margin-bottom: 20px; }
+    }
+  }
+
   .about-facts {
     display: grid;
     gap: 20px;
