@@ -193,3 +193,24 @@ test('代表実績の説明は最初の句点の後で明示的に改行する',
   const html = renderToStaticMarkup(description);
   assert.match(html, /個人開発を紹介します。<br\s*\/>各案件の担当範囲/);
 });
+
+test('Contactの受付条件は独立した見出しと段落で伝える', async () => {
+  const contact = findElement(await loadHome(), node => node.props?.className === 'p-top-contact__detail col-text');
+  const html = renderToStaticMarkup(contact);
+  assert.match(html, /ご連絡を受け付けています。<\/p>/);
+  assert.match(html, /<h3>現在の受付状況<\/h3><p>現在、サイト・アプリの新規制作依頼は受け付けていません。<\/p>/);
+  assert.match(html, /お問い合わせ内容を確認する/);
+});
+
+test('自主運営の外部リンクは既存アイコンと別タブの読み上げ案内を持つ', async () => {
+  const { createDiaryHarness } = await import('./helpers/diaryPageHarness.mjs');
+  const { createElement } = await import('react');
+  const harness = createDiaryHarness({});
+  const component = harness.load('app/_components/WordPressWork/index.tsx').default;
+  const html = await harness.render(createElement(component));
+  for (const host of ['www.newagevoice.com', 'www.blogdesign-mania.com']) {
+    assert.ok(html.includes(`href="https://${host}/" target="_blank" rel="noopener noreferrer" class="c-link-external"`));
+  }
+  assert.equal((html.match(/class="u-visually-hidden">（新しいタブで開く）/g) || []).length, 2);
+  assert.doesNotMatch(html, /（外部）/);
+});

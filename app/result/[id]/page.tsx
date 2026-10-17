@@ -80,6 +80,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const clientName = safeGetClientName(result.clientName);
   const cover = safeGetCover(result); // サイトカードで使用
   const safeScale = safeGetScale(result);
+  const hasPeriod = period != null && period !== 0;
+  const hasScale = Boolean(safeScale && safeScale !== '未分類');
+  const projectScopeLabel = [hasPeriod ? '期間' : '', hasScale ? 'ページ規模' : ''].filter(Boolean).join('・');
 
   const techStackArray = parseTechStack(techStack);
   const technologyGroups = groupProjectTechnologies(techStack);
@@ -131,14 +134,14 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
               <h1 className="result-detail__header-title">{title}</h1>
 
               <dl className="result-detail__header-meta">
-                {period != null && period !== 0 && <div>
+                {hasPeriod && <div>
                   <svg aria-hidden="true" className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <dt>案件全体の制作期間</dt>
                   <dd>{formattedPeriod}</dd>
                 </div>}
-                {safeScale && safeScale !== '未分類' && (
+                {hasScale && (
                   <div>
                     <svg aria-hidden="true" className="meta-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h12a2 2 0 012 2v2M4 6v10a2 2 0 002 2h12a2 2 0 002-2V6M4 6h16M7 10h3m-3 4h8m-8 4h8" />
@@ -157,7 +160,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                   </div>
                 )}
               </dl>
-              {(period || (safeScale && safeScale !== '未分類')) ? <p className="result-detail__scope-note">期間・ページ規模は案件全体の情報です。本人の担当範囲は以下に記載しています。</p> : null}
+              {projectScopeLabel ? <p className="result-detail__scope-note">{projectScopeLabel}は案件全体の情報です。本人の担当範囲は以下に記載しています。</p> : null}
             </header>
 
             {/* カバー画像は非表示 */}
