@@ -115,8 +115,8 @@ test('KVは専門性と実績を先に伝え、実績とプロフィールの2�
   const html = await renderHero();
   assert.equal((html.match(/<h1\b/g) ?? []).length, 1);
   assert.match(html, /p-top-hero__identity[\s\S]*ともきゃんの似顔絵[\s\S]*TOMOCAN/);
-  assert.match(html, /<h1[^>]*>設計・実装・改善まで担うWebエンジニア<\/h1>[\s\S]*<strong>10年以上<\/strong>[\s\S]*<strong>200件以上<\/strong>に参画/);
-  assert.match(html, /新規サイト・LP、副業を含む。改修を除く。/);
+  assert.match(html, /<h1[^>]*>設計・実装・改善まで担うWebエンジニア<\/h1>[\s\S]*<strong>10年以上<\/strong>[\s\S]*<strong class="p-top-hero__count">200件以上<sup>※<\/sup><\/strong>に参画/);
+  assert.match(html, /class="p-top-hero__count-note">※新規サイト・LP、副業を含む。改修を除く。/);
   assert.doesNotMatch(html, /200サイト/);
   assert.match(html, /WordPress \/ フロントエンド実装 \/ UI改善 \/ SEO/);
   assert.deepEqual([...html.matchAll(/<a\b[^>]*href="([^"]+)"/g)].map((m) => m[1].replace(/\/$/, '')), ['/result', '/about']);

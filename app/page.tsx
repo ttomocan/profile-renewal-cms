@@ -46,8 +46,8 @@ export default async function Home() {
 
               <h1 className="p-top-hero__title">設計・実装・改善まで担うWebエンジニア</h1>
               <p className="p-top-hero__about-text">
-                Web制作会社で<strong>10年以上</strong>の経験があり、Web制作<strong>200件以上</strong>に参画してきました。
-                <span className="p-top-hero__count-note">新規サイト・LP、副業を含む。改修を除く。</span>
+                Web制作会社で<strong>10年以上</strong>の経験があり、Web制作<strong className="p-top-hero__count">200件以上<sup>※</sup></strong>に参画してきました。
+                <span className="p-top-hero__count-note">※新規サイト・LP、副業を含む。改修を除く。</span>
               </p>
               <p className="p-top-hero__expertise">WordPress / フロントエンド実装 / UI改善 / SEO</p>
               <p className="p-top-hero__about-text">更新する人と制作チームを考えた、CMSの実装・改修・運用に取り組んできました。</p>
