@@ -40,17 +40,25 @@ test('日記はSSRでも全カードとリンクを残し、名前付きのス�
   assert.match(html, /aria-label="前の記事を表示"/);
   assert.match(html, /aria-label="次の記事を表示"/);
 });
-test('実績カード上限6件と個人開発カードの内容・導線を保つ', () => {
+test('個人開発を含めて上限6件とし、内容・導線を保つ', () => {
   const results = Array.from({ length: 7 }, (_, i) => ({ id: `result-${i}`, title: `制作実績 ${i}`, summary: '実績概要' }));
   const html = renderToStaticMarkup(createElement(load('app/_components/ResultsSlider/index.tsx').default, { results, personalArticle: blog('iropon-release') }));
   assert.match(html, /aria-label="制作実績と個人開発"/);
-  assert.equal((html.match(/class="splide__slide"/g) || []).length, 7);
-  assert.match(html, /href="\/result\/result-5\/?"/);
-  assert.doesNotMatch(html, /href="\/result\/result-6\/?"/);
+  assert.equal((html.match(/class="splide__slide"/g) || []).length, 6);
+  assert.match(html, /href="\/result\/result-4\/?"/);
+  assert.doesNotMatch(html, /href="\/result\/result-5\/?"/);
   assert.match(html, /href="\/diary\/iropon-release\/?"/);
 });
 test('空のスライダーは操作ボタンも含めて非表示', () => {
   for (const [file, props] of [['DiarySlider', { blog: [] }], ['ResultsSlider', { results: [] }]]) {
     assert.equal(renderToStaticMarkup(createElement(load(`app/_components/${file}/index.tsx`).default, props)), '');
   }
+});
+
+test('個人開発がない場合は実績6件を表示する', () => {
+  const results = Array.from({ length: 7 }, (_, i) => ({ id: `result-${i}`, title: `制作実績 ${i}`, summary: '実績概要' }));
+  const html = renderToStaticMarkup(createElement(load('app/_components/ResultsSlider/index.tsx').default, { results }));
+  assert.equal((html.match(/class="splide__slide"/g) || []).length, 6);
+  assert.match(html, /href="\/result\/result-5\/?"/);
+  assert.doesNotMatch(html, /href="\/result\/result-6\/?"/);
 });

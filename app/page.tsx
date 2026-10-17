@@ -94,7 +94,7 @@ export default async function Home() {
             <span className="c-heading-lv2-ja">代表的な制作実績</span>
           </h2>
           <div className="p-top-results__cont fadeUpTrigger">
-            <p>本業のCMS構築、副業のサイト制作、個人開発を紹介します。各案件の担当範囲と実装内容は、詳細ページで確認できます。</p>
+            <p>本業のCMS構築、副業のサイト制作、個人開発を紹介します。<br />各案件の担当範囲と実装内容は、詳細ページで確認できます。</p>
           </div>
           {(resultsData.contents.length > 0 || personalData.contents.length > 0) && (
             <div className="p-top-results__list fadeUpTrigger">
