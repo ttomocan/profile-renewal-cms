@@ -12,21 +12,31 @@ const initialState: ContactFormState = {
 
 const contactTypes = ['採用に関するご連絡', '業務委託・協業のご相談', '制作実績に関するお問い合わせ', 'ブログ・メディアに関するお問い合わせ', 'その他'];
 
-function SubmitButton() {
+function SubmitButton({ errorId }: { errorId?: string }) {
   const { pending } = useFormStatus();
 
   return (
-    <button type="submit" className="c-button__link --main" disabled={pending} aria-disabled={pending}>
-      {pending ? '送信中…' : '送信する'}
-    </button>
+    <>
+      <button type="submit" className="c-button__link --main" disabled={pending} aria-disabled={pending} aria-describedby={errorId}>
+        {pending ? '送信中…' : '送信する'}
+      </button>
+      <span className="u-visually-hidden" role="status" aria-live="polite" aria-atomic="true">
+        {pending ? 'お問い合わせを送信しています。しばらくお待ちください。' : ''}
+      </span>
+    </>
   );
 }
 
 export default function ContactForm() {
   const [state, formAction] = useActionState(createContactData, initialState);
   const formRef = useRef<HTMLFormElement>(null);
+  const successRef = useRef<HTMLParagraphElement>(null);
 
   useEffect(() => {
+    if (state.status === 'success') {
+      successRef.current?.focus();
+      return;
+    }
     if (state.status !== 'error') return;
 
     if (state.field) {
@@ -39,7 +49,7 @@ export default function ContactForm() {
 
   if (state.status === 'success') {
     return (
-      <p className="p-form__success" role="status" aria-live="polite" tabIndex={-1}>
+      <p ref={successRef} className="p-form__success" role="status" aria-live="polite" tabIndex={-1}>
         お問い合わせいただき、ありがとうございます。
         <br />
         内容を確認のうえ返信します。
@@ -73,7 +83,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="namae" id="namae" className="textfield" autoComplete="name" required aria-required="true" aria-invalid={hasFieldError('namae')} maxLength={100} />
+          <input type="text" name="namae" id="namae" className="textfield" autoComplete="name" required aria-required="true" aria-invalid={hasFieldError('namae')} aria-describedby={hasFieldError('namae') ? 'contact-error' : undefined} maxLength={100} />
         </div>
       </div>
 
@@ -87,7 +97,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="furigana" id="furigana" className="textfield" autoComplete="off" required aria-required="true" aria-invalid={hasFieldError('furigana')} maxLength={100} />
+          <input type="text" name="furigana" id="furigana" className="textfield" autoComplete="off" required aria-required="true" aria-invalid={hasFieldError('furigana')} aria-describedby={hasFieldError('furigana') ? 'contact-error' : undefined} maxLength={100} />
         </div>
       </div>
 
@@ -101,7 +111,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="email" name="email" id="email" className="textfield" autoComplete="email" inputMode="email" required aria-required="true" aria-invalid={hasFieldError('email')} maxLength={254} />
+          <input type="email" name="email" id="email" className="textfield" autoComplete="email" inputMode="email" required aria-required="true" aria-invalid={hasFieldError('email')} aria-describedby={hasFieldError('email') ? 'contact-error' : undefined} maxLength={254} />
         </div>
       </div>
 
@@ -115,7 +125,7 @@ export default function ContactForm() {
         <div className="p-form__input">
           {contactTypes.map((type) => (
             <label className="checkbox" key={type}>
-              <input type="radio" name="item" value={type} required />
+              <input type="radio" name="item" value={type} required aria-describedby={hasFieldError('item') ? 'contact-error' : undefined} />
               <span className="checkbox-text">{type}</span>
             </label>
           ))}
@@ -132,7 +142,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <textarea className="textarea" id="message" name="message" required aria-required="true" aria-invalid={hasFieldError('message')} maxLength={5000} />
+          <textarea className="textarea" id="message" name="message" required aria-required="true" aria-invalid={hasFieldError('message')} aria-describedby={hasFieldError('message') ? 'contact-error' : undefined} maxLength={5000} />
         </div>
       </div>
 
@@ -143,7 +153,7 @@ export default function ContactForm() {
       )}
 
       <div className="p-form__button">
-        <SubmitButton />
+        <SubmitButton errorId={state.status === 'error' && !state.field ? 'contact-error' : undefined} />
       </div>
     </form>
   );

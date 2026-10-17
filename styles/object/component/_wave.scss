@@ -17,3 +17,17 @@
     z-index: 1;
   }
 }
+
+// ブログ末尾の下余白に波を重ね、背景とフッターを連続させる。
+.l-content:has(> .l-blog-area:last-child) {
+  display: flex;
+  flex-direction: column;
+
+  > .l-blog-area {
+    margin-top: auto;
+  }
+}
+
+.l-content:has(> .l-blog-area:last-child) + .c-wave {
+  margin-top: 0;
+}

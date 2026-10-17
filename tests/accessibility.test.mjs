@@ -114,3 +114,19 @@ test('記事詳細の関連記事・関連ページは同じ下線付き濃色�
   assert.ok(Number.parseFloat(focus.outline) >= 3);
   assert.ok(contrast(focus.outline.match(/#[a-f0-9]{6}/i)[0], '#f2edea') >= 3);
 });
+
+test('お問い合わせ入力とラジオの境界・focusは背景に対して3:1以上', () => {
+  const file = 'styles/object/project/_form.scss';
+  const ring = style(file, '.p-form .checkbox:has(input[type=radio]) input[type=radio] + .checkbox-text::before');
+  const input = style(file, ".p-form :is(input[type=text], input[type=email], textarea)");
+  const focus = style(file, '.p-form button:focus-visible');
+  for (const border of [ring.border, input.border]) {
+    assert.ok(border, '境界線が定義されている');
+    const color = border.match(/#[a-f0-9]{6}/i)?.[0];
+    assert.ok(contrast(color, '#f2edea') >= 3);
+    assert.ok(contrast(color, '#ffffff') >= 3);
+  }
+  const color = focus.outline.match(/#[a-f0-9]{6}/i)?.[0];
+  assert.ok(contrast(color, '#f2edea') >= 3);
+  assert.ok(contrast(color, '#ffffff') >= 3);
+});
