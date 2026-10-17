@@ -76,7 +76,6 @@ export default function Page() {
           <SkillCard title="TypeScript" image="/img/pages/skill/img_typescript.svg" imageAlt="TypeScript" summary="PropsやCMSデータに型を定義し、変更時の見落としを減らすために使用しています。" points={['コンポーネントのProps定義', 'API・CMSレスポンスの型定義', '型チェックによる実装ミスの早期発見']} />
           <SkillCard title="microCMS" image="/img/pages/skill/img_microcms.svg" imageAlt="microCMS" summary="個人サイトで記事や制作実績を管理するヘッドレスCMSとして使用しています。" points={['一覧・詳細データの取得', '下書き表示とキャッシュ設計', 'CMSデータを使ったメタ情報生成']} link={{ href: '/diary/', label: '個人開発・サイト改善の活動記録を読む' }} />
         </div>
-        <p className="skill-logo-credit">Reactロゴ：<a href="https://github.com/react/react/blob/main/fixtures/dom/public/react-logo.svg">React公式リポジトリ</a> ／ <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>。素材の変更なし。</p>
       </section>
 
       <section className="ai-tool inner">
