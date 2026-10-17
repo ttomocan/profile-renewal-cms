@@ -18,6 +18,16 @@
 }
 
 .p-top-hero {
+  &__count {
+    white-space: nowrap;
+
+    sup {
+      font-size: 0.65em;
+      line-height: 0;
+      vertical-align: super;
+    }
+  }
+
   &__count-note {
     display: block;
     font-size: 14px;
