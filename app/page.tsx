@@ -48,7 +48,7 @@ export default async function Home() {
               <p className="p-top-hero__about-text">
                 Web制作会社で<strong>10年以上</strong>、<strong>200サイト以上</strong>の制作に携わってきました。
               </p>
-              <p className="p-top-hero__expertise">WordPress / フロントエンド実装 / UI改善 / SEO</p>
+              <p className="p-top-hero__expertise">WordPress構築 / フロントエンド実装 / UI改善 / SEO対策</p>
               <p className="p-top-hero__about-text">更新する人と制作チームを考えた、CMSの実装・改修・運用に取り組んできました。</p>
               <nav className="p-top-hero__actions" aria-label="主要ページ">
                 <Link href="/result/" className="c-button__link">
