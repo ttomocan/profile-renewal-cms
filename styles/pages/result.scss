@@ -172,6 +172,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &__work-type {
     color: #ffffff;
+    background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
     display: inline-flex;
     align-items: center;
     padding: 3px 12px;
