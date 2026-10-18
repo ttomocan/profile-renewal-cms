@@ -1,7 +1,6 @@
 import '@/styles/common/style.scss';
 import '@/styles/common/animation.scss';
 
-//import { GoogleAnalytics } from '@next/third-parties/google';
 import type { Metadata, Viewport } from 'next';
 import Loading from './_components/Loading';
 import Header from './_components/Header';
@@ -73,7 +72,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <PageTop />
         <WebsiteJsonLd />
       </body>
-      {/* <GoogleAnalytics gaId="G-XXXXX" /> */}
     </html>
   );
 }

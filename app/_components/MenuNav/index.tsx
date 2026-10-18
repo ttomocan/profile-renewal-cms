@@ -63,7 +63,6 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
               Skill
             </MenuNavLink>
           </li>
-          {/* 実績ページは本番動作チェックのため一時的に非表示 */}
           <li className="l-navigation__item">
             <MenuNavLink href="/result/" className={`c-navigation-link${isCurrent('/result') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Result
