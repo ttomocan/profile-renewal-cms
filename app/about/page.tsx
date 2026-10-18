@@ -64,15 +64,15 @@ export default function Page() {
             </div>
             <div>
               <dt><time dateTime="2016-04">2016年4月</time>〜<time dateTime="2022-06">2022年6月</time></dt>
-              <dd>制作会社A</dd>
+              <dd>Web制作会社A</dd>
             </div>
             <div>
               <dt><time dateTime="2022-07">2022年7月</time>〜<time dateTime="2025-11">2025年11月</time></dt>
-              <dd>制作会社B</dd>
+              <dd>Web制作会社B</dd>
             </div>
             <div>
               <dt><time dateTime="2026-01">2026年1月</time>〜現在</dt>
-              <dd>制作会社C</dd>
+              <dd>Web制作会社C</dd>
             </div>
           </dl>
         </div>
