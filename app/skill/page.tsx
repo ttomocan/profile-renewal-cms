@@ -85,7 +85,7 @@ export default function Page() {
         </h2>
         <div className="skill-cards">
           <SkillCard title="Tailwind CSS" image="/img/pages/skill/img_css3.svg" imageAlt="CSS" summary="ユーティリティクラスによるスタイリングを学習し、基本的なレイアウトやレスポンシブ指定を試しています。" points={['個人学習で使用', '基本的なレイアウト・余白指定', '既存案件での実務経験とは区別']} />
-          <SkillCard title="ChatGPT / Claude / Gemini" image="/img/pages/skill/img_chatgpt.svg" imageAlt="AIツール" summary="要件整理、コードレビュー、テスト観点の洗い出し、ドキュメント作成の補助に活用しています。" points={['生成コードをそのまま採用せず差分と影響を確認', 'アクセシビリティとレスポンシブ表示を確認', 'ブラウザ間の差異と既存処理への影響を確認']} />
+          <SkillCard title="ChatGPT / Claude / Gemini / Codex / NotebookLM" image="/img/pages/skill/img_chatgpt.svg" imageAlt="AIツール" summary="要件整理、コードレビュー、テスト観点の洗い出しなど、開発の補助に活用しています。Gemini・NotebookLMでは、仕様や資料の作成・整理も行っています。" points={['生成コードをそのまま採用せず差分と影響を確認', 'アクセシビリティとレスポンシブ表示を確認', 'ブラウザ間の差異と既存処理への影響を確認']} />
 
         </div>
       </section>
