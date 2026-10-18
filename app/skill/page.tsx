@@ -94,7 +94,7 @@ export default function Page() {
         <h2 className="c-heading-lv2 fadeUpTrigger"><span className="c-heading-lv2-en">Tools</span><span className="c-heading-lv2-ja">制作・開発のツール</span></h2>
         <p className="programming__note fadeUpTrigger">使用技術とは分けて、デザイン確認・画像編集・コード編集のツールを紹介します。</p>
         <div className="skill-cards">
-          <SkillCard title="Figma / Adobe" image="/img/pages/skill/img_figma.svg" imageAlt="Figma" summary="デザインの意図やコンポーネント構造を読み取り、実装へ落とし込みます。" points={['Figmaのデザインデータ確認・制作', 'Adobe XD・Illustrator・Photoshopのデザインデータにも対応経験あり', 'Photoshopでの画像編集・書き出し', 'Illustratorでの素材調整']} />
+          <SkillCard title="Figma / Adobe" image="/img/pages/skill/img_figma.svg" imageAlt="Figma" summary="デザインの意図やコンポーネント構造を読み取り、実装へ落とし込みます。" points={['Figmaのデザインデータ確認・制作', 'Adobe XD・Illustrator・Photoshopのデザインデータにも対応可能', 'Photoshopでの画像編集・書き出し', 'Illustratorでの素材調整']} />
           <SkillCard title="その他の補助ツール" image="/img/pages/skill/img_cursor.svg" imageAlt="開発ツール" summary="Cursor、Visual Studio Code、NotebookLM、Canva、Adobe Express、Fireflyを目的に応じて使い分けています。" points={['コード編集・調査の補助', '資料整理とドキュメント作成', 'ブログ用画像や素材の作成']} />
         </div>
       </section>
