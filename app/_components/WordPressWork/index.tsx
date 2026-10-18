@@ -5,8 +5,19 @@ export default function WordPressWork() {
   return (
     <section id="wordpress-blog" className={`inner ${styles.section}`} aria-labelledby="wordpress-blog-heading">
       <div className={styles.card}>
-        <div className={styles.image}>
-          <Image src="/img/common/bg_blog.webp" alt="" width={1366} height={426} sizes="(max-width: 767px) 100vw, 280px" />
+        <div className={styles.screens}>
+          <figure className={styles.screen}>
+            <figcaption className={styles.browserBar}>newagevoice.com</figcaption>
+            <div className={styles.viewport}>
+              <Image src="/img/works/newagevoice-home-desktop.jpg" alt="ともきゃんのボイトレ生活のトップページ" width={1150} height={738} sizes="(max-width: 767px) 100vw, 50vw" />
+            </div>
+          </figure>
+          <figure className={styles.screen}>
+            <figcaption className={styles.browserBar}>blogdesign-mania.com</figcaption>
+            <div className={styles.viewport}>
+              <Image src="/img/works/blogdesign-mania-home-desktop.jpg" alt="ブログデザインマニアのトップページ" width={1150} height={738} sizes="(max-width: 767px) 100vw, 50vw" />
+            </div>
+          </figure>
         </div>
         <div className={styles.body}>
           <p className={styles.eyebrow}>WordPress / 自主運営</p>
