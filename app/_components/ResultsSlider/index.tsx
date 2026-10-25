@@ -1,5 +1,3 @@
-'use client';
-
 import CardSlider from '../CardSlider';
 import ResultCard from '@/components/ResultCard';
 import type { ResultItem } from '@/types/results';
