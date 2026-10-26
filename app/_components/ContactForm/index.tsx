@@ -31,6 +31,7 @@ export default function ContactForm() {
   const [state, formAction] = useActionState(createContactData, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLParagraphElement>(null);
+  const hasTrackedSuccess = useRef(false);
 
   useEffect(() => {
     if (state.status === 'success') {
@@ -47,6 +48,21 @@ export default function ContactForm() {
     formRef.current?.querySelector<HTMLElement>('[type="submit"]')?.focus();
   }, [state]);
 
+  useEffect(() => {
+    if (state.status !== 'success' || hasTrackedSuccess.current) return;
+
+    const analyticsWindow = window as Window & { dataLayer?: unknown[] };
+    if (!Array.isArray(analyticsWindow.dataLayer)) return;
+
+    // effectの再実行でも、同じ送信成功を重複して計測しない。
+    hasTrackedSuccess.current = true;
+    try {
+      sendGAEvent('event', 'generate_lead', { form_name: 'contact' });
+    } catch {
+      // 計測の失敗で、問い合わせの成功表示やフォーカス移動を妨げない。
+    }
+  }, [state.status]);
+
   if (state.status === 'success') {
     return (
       <p ref={successRef} className="p-form__success" role="status" aria-live="polite" tabIndex={-1}>
@@ -58,19 +74,12 @@ export default function ContactForm() {
   }
 
   const hasFieldError = (field: string) => state.status === 'error' && state.field === field;
-  const handleSubmit = () => {
-    const analyticsWindow = window as Window & { dataLayer?: unknown[] };
-    if (Array.isArray(analyticsWindow.dataLayer)) {
-      sendGAEvent({ event: 'contact', value: 'submit' });
-    }
-  };
 
   return (
     <form
       ref={formRef}
       className="p-form"
       action={formAction}
-      onSubmit={handleSubmit}
       noValidate
     >
       <div className="p-form__item">

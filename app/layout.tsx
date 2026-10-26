@@ -2,6 +2,7 @@ import '@/styles/common/style.scss';
 import '@/styles/common/animation.scss';
 
 import type { Metadata, Viewport } from 'next';
+import { GoogleAnalytics } from '@next/third-parties/google';
 import Loading from './_components/Loading';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
@@ -50,6 +51,8 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const gaId = process.env.NEXT_PUBLIC_GA_ID?.trim();
+
   return (
     <html lang="ja" className={roboto.variable}>
       <head>
@@ -71,6 +74,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <PageTop />
         <WebsiteJsonLd />
+        {gaId && /^G-[A-Z0-9]+$/.test(gaId) ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>
     </html>
   );
