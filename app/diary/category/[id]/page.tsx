@@ -9,6 +9,7 @@ import styles from './page.module.css';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import { createMetadata } from '@/lib/seo';
+import { returnNullOnMicroCMSNotFound } from '@/lib/microcmsErrors';
 
 type Props = {
   params: Promise<{
@@ -19,13 +20,11 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const [category, categoryPosts] = await Promise.all([
-    getCategoryDetail(resolvedParams.id).catch(() => null),
-    getBlogList({ limit: 1, filters: `category[equals]${resolvedParams.id}` }).catch(() => null),
+    getCategoryDetail(resolvedParams.id).catch(returnNullOnMicroCMSNotFound),
+    getBlogList({ limit: 1, filters: `category[equals]${resolvedParams.id}` }),
   ]);
 
-  if (!category || !categoryPosts) {
-    return createMetadata({ title: 'カテゴリーが見つかりません', description: '指定された活動記録のカテゴリーは存在しません。', path: `/diary/category/${resolvedParams.id}/`, noindex: true });
-  }
+  if (!category) notFound();
 
   const title = `${category.name}の記事一覧｜ともきゃん日記`;
   const description = `「${category.name}」カテゴリーの記事一覧。ともきゃん日記から${category.name}に関する記事をご覧いただけます。`;
@@ -40,7 +39,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const resolvedParams = await params;
-  const category = await getCategoryDetail(resolvedParams.id).catch(notFound);
+  const category = await getCategoryDetail(resolvedParams.id).catch(returnNullOnMicroCMSNotFound);
+  if (!category) notFound();
 
   const { contents: blog, totalCount } = await getBlogList({
     limit: DIARY_LIST_LIMIT,

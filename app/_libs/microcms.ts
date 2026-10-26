@@ -2,6 +2,7 @@ import { createClient } from 'microcms-js-sdk';
 import type { MicroCMSQueries, MicroCMSImage, MicroCMSListContent } from 'microcms-js-sdk';
 import type { ResultItem, WorkType, ProjectType, Role, ResultsResponse } from '@/types/results';
 import { buildMicroCMSFilters } from '@/lib/parse';
+import { returnNullOnMicroCMSNotFound } from '@/lib/microcmsErrors';
 
 // キャッシュ時間の定数（秒単位）
 const BLOG_LIST_CACHE_TIME = 60; // ブログ一覧: 60秒
@@ -175,12 +176,7 @@ export const getResults = async (
     };
   } catch (error) {
     console.error('Error fetching results:', error);
-    return {
-      contents: [],
-      totalCount: 0,
-      offset: 0,
-      limit: 12,
-    };
+    throw error;
   }
 };
 
@@ -201,8 +197,7 @@ export const getResultDetail = async (id: string): Promise<ResultItem | null> =>
 
     return response;
   } catch (error) {
-    console.error('Error fetching result detail:', error);
-    return null;
+    return returnNullOnMicroCMSNotFound(error);
   }
 };
 
@@ -249,7 +244,7 @@ export const getTotalCount = async (
     return response.totalCount;
   } catch (error) {
     console.error('Error fetching total count:', error);
-    return 0;
+    throw error;
   }
 };
 

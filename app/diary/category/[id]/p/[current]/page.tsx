@@ -7,6 +7,7 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import { DIARY_LIST_LIMIT } from '@/app/_constants';
 import { createMetadata } from '@/lib/seo';
+import { returnNullOnMicroCMSNotFound } from '@/lib/microcmsErrors';
 import { parseStrictPageNumber } from '@/lib/parse';
 
 type Props = {
@@ -20,11 +21,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const current = parseStrictPageNumber(resolvedParams.current);
   const [category, categoryPosts] = await Promise.all([
-    getCategoryDetail(resolvedParams.id).catch(() => null),
-    getBlogList({ limit: 1, filters: `category[equals]${resolvedParams.id}` }).catch(() => null),
+    getCategoryDetail(resolvedParams.id).catch(returnNullOnMicroCMSNotFound),
+    getBlogList({ limit: 1, filters: `category[equals]${resolvedParams.id}` }),
   ]);
 
-  if (!current || current === 1 || !category || !categoryPosts) {
+  if (!category) notFound();
+
+  if (!current || current === 1) {
     return createMetadata({ title: 'カテゴリーページが見つかりません', description: '指定されたカテゴリーの一覧ページは存在しません。', path: `/diary/category/${resolvedParams.id}/p/${resolvedParams.current}/`, noindex: true });
   }
 
@@ -46,7 +49,8 @@ export default async function Page({ params }: Props) {
   if (!current) notFound();
   if (current === 1) permanentRedirect(`/diary/category/${resolvedParams.id}/`);
 
-  const category = await getCategoryDetail(resolvedParams.id).catch(notFound);
+  const category = await getCategoryDetail(resolvedParams.id).catch(returnNullOnMicroCMSNotFound);
+  if (!category) notFound();
 
   const { contents: blog, totalCount } = await getBlogList({
     filters: `category[equals]${category.id}`,

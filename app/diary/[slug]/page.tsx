@@ -7,6 +7,7 @@ import Breadcrumb from '@/app/_components/Breadcrumb';
 import BlogPostJsonLd from '@/app/_components/BlogPostJsonLd';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import { createMetadata } from '@/lib/seo';
+import { returnNullOnMicroCMSNotFound } from '@/lib/microcmsErrors';
 import { getBlogSeoDescription, getBlogSeoTitle } from '@/lib/contentSeo';
 import DiaryList from '@/app/_components/DiaryList';
 import styles from './page.module.css';
@@ -19,7 +20,8 @@ type Props = {
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-  const data = await getBlogDetail(resolvedParams.slug, { draftKey: resolvedSearchParams.dk });
+  const data = await getBlogDetail(resolvedParams.slug, { draftKey: resolvedSearchParams.dk }).catch(returnNullOnMicroCMSNotFound);
+  if (!data) notFound();
   const title = getBlogSeoTitle(data);
   const description = getBlogSeoDescription(data);
 
@@ -37,7 +39,8 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 export default async function Page({ params, searchParams }: Props) {
   const resolvedParams = await params;
   const resolvedSearchParams = await searchParams;
-  const data = await getBlogDetail(resolvedParams.slug, { draftKey: resolvedSearchParams.dk }).catch(notFound);
+  const data = await getBlogDetail(resolvedParams.slug, { draftKey: resolvedSearchParams.dk }).catch(returnNullOnMicroCMSNotFound);
+  if (!data) notFound();
   const relatedData = await getBlogList({ limit: 4, filters: `category[equals]${data.category.id}` });
   const relatedArticles = relatedData.contents.filter((article) => article.id !== data.id).slice(0, 3);
   const pageUrl = `https://www.tomocan.site/diary/${resolvedParams.slug}/`;
