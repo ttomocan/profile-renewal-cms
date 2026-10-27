@@ -62,9 +62,11 @@ export function useSmoothScroll() {
     const handleInitialHash = () => {
       const hash = window.location.hash;
       if (hash) {
-        const target = document.querySelector(hash) as HTMLElement;
+        let targetId = hash.slice(1);
+        try { targetId = decodeURIComponent(targetId); } catch { /* 不完全なエスケープは元のIDとして扱う。 */ }
+        const target = document.getElementById(targetId);
         if (target) {
-          if (target.matches('h2[id^="section-"], h3[id^="section-"]') && target.tabIndex === -1) return;
+          if (target.matches('h2, h3') && target.tabIndex === -1) return;
           const header = document.querySelector('.l-header') as HTMLElement;
           let headerHeight = header?.offsetHeight || 0;
 

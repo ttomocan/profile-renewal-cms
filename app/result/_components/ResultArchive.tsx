@@ -29,7 +29,7 @@ export default function ResultArchive({ currentPage, resultsData, personalArticl
     <>
       <PageTitle title="Result" sub={pageLabel} />
       <Breadcrumb items={breadcrumbItems} />
-      <main className="results-main">
+      <main id="main" className="results-main" tabIndex={-1}>
         <div className="results-inner">
           <section className="results-intro" aria-labelledby="results-list-heading">
             <h2 id="results-list-heading" className="u-visually-hidden">

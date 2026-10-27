@@ -74,18 +74,19 @@ test('検索専用ルートはqと検索結果・件数を保持する', async (
   assert.doesNotMatch(html, /開発・学習のおすすめ記事/);
 });
 
-test('カテゴリ専用ルートと選択操作は既存URLとフィルタを保持する', async () => {
+test('カテゴリ専用ルートと表示フォームは既存URLとフィルタを保持する', async () => {
   const h = fixture();
   const html = await h.render(await h.load('app/diary/category/[id]/page.tsx').default({ params: Promise.resolve({ id: 'activity' }) }));
   assert.deepEqual(h.calls, [{ limit: 10, filters: 'category[equals]activity' }]);
   assert.match(html, /育児と暮らしの記事/);
   assert.doesNotMatch(html, /開発・学習のおすすめ記事/);
-  const filter = h.load('app/_components/CategoryFilter/index.tsx').default({ categories: [category] });
-  const component = filter.props.children;
-  const select = component.type(component.props).props.children[1].props.children[0];
-  select.props.onChange({ target: { value: 'activity' } });
-  select.props.onChange({ target: { value: 'all' } });
-  assert.deepEqual(h.navigation, ['/diary/category/activity/', '/diary/']);
+  const Filter = h.load('app/_components/CategoryFilter/index.tsx').default;
+  const { createElement } = await import('react');
+  const formHtml = await h.render(createElement(Filter, { categories: [category], selectedCategoryId: 'activity' }));
+  assert.match(formHtml, /<form[^>]*action="\/diary\/"[^>]*method="get"/);
+  assert.match(formHtml, /<select[^>]*name="category"/);
+  assert.match(formHtml, /value="activity" selected=""/);
+  assert.match(formHtml, /<button[^>]*type="submit"/);
 });
 
 test('site-renewalのSEOタイトルは本文にない手順・改善点をうたわずCMS優先を保持する', () => {

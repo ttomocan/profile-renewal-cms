@@ -27,7 +27,7 @@ export default function RootLayout({ children }: Props) {
     <>
       <PageTitle title="Skill" sub="Web制作の対応スキル" />
       <Breadcrumb items={breadcrumbItems} />
-      <main>{children}</main>
+      <main id="main" tabIndex={-1}>{children}</main>
       <Blog variant="skill" />
     </>
   );

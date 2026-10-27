@@ -10,7 +10,7 @@
   align-items: center;
   gap: 30px;
   * {
-    color: #fff;
+    color: #282828;
     text-decoration: none;
   }
 
@@ -21,7 +21,7 @@
     gap: 30px;
     align-self: stretch;
     a {
-      color: #fff;
+      color: #282828;
       font: {
         family: var(--font-roboto), sans-serif;
         size: 1.4rem;
@@ -33,7 +33,7 @@
 
       /*ホバーエフェクト*/
       &::after {
-        background: #fff;
+        background: #282828;
         content: '';
         bottom: 0;
         left: 50%;
@@ -56,7 +56,7 @@
   }
 
   :is(a, button):focus-visible {
-    outline: 3px solid #fff;
+    outline: 3px solid #282828;
     outline-offset: 3px;
   }
 
@@ -67,7 +67,7 @@
       gap: 20px 30px;
       padding: 0 20px;
       a {
-        color: #fff;
+        color: #282828;
         font: {
           family: var(--font-roboto), sans-serif;
           size: 1.25rem;
@@ -79,7 +79,7 @@
 
         /*ホバーエフェクト*/
         &::after {
-          background: #fff;
+          background: #282828;
           content: '';
           bottom: 0;
           left: 50%;

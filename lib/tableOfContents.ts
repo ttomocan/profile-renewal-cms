@@ -14,15 +14,19 @@ function decodeHtmlEntities(value: string) {
     quot: '"',
   };
 
-  return value
-    .replace(/<[^>]+>/g, '')
-    .replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (_, entity: string) => {
-      if (entity.startsWith('#x')) return String.fromCodePoint(Number.parseInt(entity.slice(2), 16));
-      if (entity.startsWith('#')) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10));
-      return namedEntities[entity.toLowerCase()] ?? `&${entity};`;
-    })
-    .replace(/\s+/g, ' ')
-    .trim();
+  return value.replace(/&(#x?[0-9a-f]+|[a-z]+);/gi, (_, entity: string) => {
+    if (entity.startsWith('#x')) return String.fromCodePoint(Number.parseInt(entity.slice(2), 16));
+    if (entity.startsWith('#')) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10));
+    return namedEntities[entity.toLowerCase()] ?? `&${entity};`;
+  });
+}
+
+const idAttribute = /\s+id\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>`]+))/i;
+const tabIndexAttribute = /\s+tabindex\s*=\s*(?:"[^"]*"|'[^']*'|[^\s"'=<>`]+)/gi;
+
+function getExistingId(attributes: string) {
+  const match = attributes.match(idAttribute);
+  return match ? decodeHtmlEntities(match[1] ?? match[2] ?? match[3]) : undefined;
 }
 
 export function addHeadingIds(content: string): { content: string; items: TableOfContentsItem[] } {
@@ -36,17 +40,26 @@ export function addHeadingIds(content: string): { content: string; items: TableO
     return isUnhelpful ? tag.replace(altMatch[0], ' alt=""') : tag;
   });
   const normalizedHeadings = normalizedImages.replace(/<h1\b([^>]*)>/gi, '<h2$1>').replace(/<\/h1>/gi, '</h2>');
+  // 後方の見出しや本文要素のIDも予約し、既存のアンカーを生成IDで奪わない。
+  const usedIds = new Set(Array.from(normalizedHeadings.matchAll(/<[a-z][^>]*>/gi), ([tag]) => getExistingId(tag)).filter(Boolean));
 
   const contentWithIds = normalizedHeadings.replace(/<h([23])([^>]*)>([\s\S]*?)<\/h\1>/gi, (match, levelText: string, attributes: string, innerHtml: string) => {
-    const title = decodeHtmlEntities(innerHtml);
+    const title = decodeHtmlEntities(innerHtml.replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim();
     if (!title) return match;
 
     const level = Number(levelText) as 2 | 3;
-    const id = `section-${items.length + 1}`;
-    const cleanAttributes = attributes.replace(/\s+id=(['"]).*?\1/i, '').replace(/\s+tabindex=(['"]).*?\1/i, '');
+    const existingId = getExistingId(attributes);
+    let id = existingId;
+    if (!id) {
+      let number = items.length + 1;
+      do { id = `section-${number++}`; } while (usedIds.has(id));
+      usedIds.add(id);
+    }
+    const cleanAttributes = attributes.replace(tabIndexAttribute, '');
+    const attributesWithId = existingId ? cleanAttributes : `${cleanAttributes.replace(idAttribute, '')} id="${id}"`;
     items.push({ id, title, level });
 
-    return `<h${level}${cleanAttributes} id="${id}" tabindex="-1">${innerHtml}</h${level}>`;
+    return `<h${level}${attributesWithId} tabindex="-1">${innerHtml}</h${level}>`;
   });
 
   return { content: contentWithIds, items };

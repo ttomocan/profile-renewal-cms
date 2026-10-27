@@ -34,7 +34,9 @@ export default function ResultJsonLd({ result }: Props) {
     genre: safeGetProjectType(result),
     keywords: parseTechStack(result.techStack),
 
-    about: [safeGetWorkType(result), ...parseRoles(result)].filter((value) => value !== '未分類'),
+    about: [safeGetWorkType(result), ...parseRoles(result)]
+      .filter((value) => value.trim() && value !== '未分類')
+      .map((name) => ({ '@type': 'Thing', name })),
   };
 
   return <JsonLd jsonLd={jsonLd} />;

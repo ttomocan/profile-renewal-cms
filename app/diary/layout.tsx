@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <>
       <PageTitle title="Diary" sub="ともきゃん日記" isHeading={false} />
-      <main>{children}</main>
+      <main id="main" tabIndex={-1}>{children}</main>
       <Blog variant="diary" />
     </>
   );
