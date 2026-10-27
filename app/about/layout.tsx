@@ -29,7 +29,7 @@ export default function RootLayout({ children }: Props) {
         sub={<><span className="pagetitle__phrase">ともきゃんの</span><wbr /><span className="pagetitle__phrase">プロフィール・経歴</span></>}
       />
       <Breadcrumb items={breadcrumbItems} />
-      <main>{children}</main>
+      <main id="main" tabIndex={-1}>{children}</main>
     </>
   );
 }

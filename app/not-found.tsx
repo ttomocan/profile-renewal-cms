@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <main>
+    <main id="main" tabIndex={-1}>
       <div className={`${styles.container} inner`}>
         <h1 className={styles.title}>ページが見つかりませんでした</h1>
         <p className={styles.text}>アクセスしようとしたページは存在しないか、移動した可能性があります。URLを再度ご確認ください。</p>

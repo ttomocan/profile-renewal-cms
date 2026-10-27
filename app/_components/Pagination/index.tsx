@@ -17,6 +17,8 @@ type PageItem = number | string;
 export default function Pagination({ totalCount, current = 1, basePath = '/diary/' }: Props) {
   const [isMobile, setIsMobile] = useState(false);
   const totalPages = Math.ceil(totalCount / DIARY_LIST_LIMIT);
+  const normalizedBasePath = basePath.replace(/\/+$/, '');
+  const pageHref = (page: number) => page === 1 ? `${normalizedBasePath}/` : `${normalizedBasePath}/p/${page}/`;
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   // 画面幅に応じてモバイル判定を行う
@@ -85,7 +87,7 @@ export default function Pagination({ totalCount, current = 1, basePath = '/diary
         {/* 前のページへのリンク */}
         {current > 1 && (
           <li className={styles.list}>
-            <Link href={`${basePath}${current === 2 ? '' : `/p/${current - 1}`}`} className={`${styles.item} ${styles.arrow}`} aria-label="前のページへ">
+            <Link href={pageHref(current - 1)} className={`${styles.item} ${styles.arrow}`} aria-label="前のページへ">
               &lt;
             </Link>
           </li>
@@ -105,7 +107,7 @@ export default function Pagination({ totalCount, current = 1, basePath = '/diary
           return (
             <li className={styles.list} key={p}>
               {current !== p ? (
-                <Link href={p === 1 ? basePath : `${basePath}/p/${p}`} className={styles.item} aria-label={`${p}ページ目へ`}>
+                <Link href={pageHref(Number(p))} className={styles.item} aria-label={`${p}ページ目へ`}>
                   {p}
                 </Link>
               ) : (
@@ -120,7 +122,7 @@ export default function Pagination({ totalCount, current = 1, basePath = '/diary
         {/* 次のページへのリンク */}
         {current < totalPages && (
           <li className={styles.list}>
-            <Link href={`${basePath}/p/${current + 1}`} className={`${styles.item} ${styles.arrow}`} aria-label="次のページへ">
+            <Link href={pageHref(current + 1)} className={`${styles.item} ${styles.arrow}`} aria-label="次のページへ">
               &gt;
             </Link>
           </li>

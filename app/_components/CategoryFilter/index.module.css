@@ -1,6 +1,7 @@
 .categoryFilter {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 1rem;
   border-radius: 4px;
 }
@@ -55,6 +56,26 @@
   transform: translateY(-50%);
   pointer-events: none;
   color: #666;
+}
+
+.submitButton {
+  background: #b54708;
+  border: 1px solid #b54708;
+  border-radius: var(--radius-standard);
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px 20px;
+  white-space: nowrap;
+}
+
+.submitButton:hover {
+  background: #8f3500;
+}
+
+.submitButton:focus-visible {
+  outline: 3px solid #69300b;
+  outline-offset: 3px;
 }
 
 @media (max-width: 768px) {

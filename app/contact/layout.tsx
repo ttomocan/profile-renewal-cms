@@ -26,7 +26,7 @@ export default function RootLayout({ children }: Props) {
     <>
       <PageTitle title="Contact" sub="お問い合わせ" />
       <Breadcrumb items={breadcrumbItems} />
-      <main>{children}</main>
+      <main id="main" tabIndex={-1}>{children}</main>
       <Blog variant="contact" />
     </>
   );

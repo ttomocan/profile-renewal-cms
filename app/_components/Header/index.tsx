@@ -122,18 +122,17 @@ export default function Header() {
 
   return (
     <>
-      {isTopPage && (
-        <a className="skip-link" href="#main" onClick={(event) => {
-          const main = document.getElementById('main');
-          if (!main) return;
-          event.preventDefault();
-          event.stopPropagation();
-          main.focus({ preventScroll: true });
-          window.scrollTo({ top: 0, behavior: 'instant' });
-        }}>
-          本文へ移動
-        </a>
-      )}
+      <a className="skip-link" href="#main" onClick={(event) => {
+        const main = document.getElementById('main');
+        if (!main) return;
+        event.preventDefault();
+        event.stopPropagation();
+        main.focus({ preventScroll: true });
+        if (isTopPage) window.scrollTo({ top: 0, behavior: 'instant' });
+        else main.scrollIntoView({ block: 'start', behavior: 'instant' });
+      }}>
+        本文へ移動
+      </a>
       <header ref={headerRef} className={`l-header ${pageClass} ${isScrolled ? 'scroll' : ''}`}>
         <div className="l-header__logo" inert={isMenuOpen}>
           <Link href="/">

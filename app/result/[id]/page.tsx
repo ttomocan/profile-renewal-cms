@@ -120,7 +120,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
       {/* パンくずリスト */}
       <Breadcrumb items={breadcrumbItems} />
 
-      <main className="results-main">
+      <main id="main" className="results-main" tabIndex={-1}>
         <div className="results-inner">
           {/* メインコンテンツ */}
           <article className="result-detail">
