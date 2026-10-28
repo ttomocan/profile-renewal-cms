@@ -46,7 +46,7 @@ export default async function Home() {
 
               <h1 className="p-top-hero__title">設計・実装・改善まで担うWebエンジニア</h1>
               <p className="p-top-hero__about-text">
-                Web制作会社で<strong>10年以上</strong>の経験があり、Web制作<strong className="p-top-hero__count">200件以上<sup>※</sup></strong>に参画してきました。
+                Web制作会社で<strong>10年以上</strong>の経験があり、Web制作<strong className="p-top-hero__count">250件<sup>※</sup></strong>に参画してきました。
                 <span className="p-top-hero__count-note">※新規サイト・LP、副業を含む。改修を除く。</span>
               </p>
               <p className="p-top-hero__expertise">WordPress構築 / フロントエンド実装 / UI改善 / SEO対策</p>
@@ -77,7 +77,7 @@ export default async function Home() {
             <div className="p-top-facts__item fadeUpTrigger">
               <dt>Web制作への参画</dt>
               <dd>
-                <strong>200</strong>件以上
+                <strong>250</strong>件
               </dd>
             </div>
             <div className="p-top-facts__item fadeUpTrigger">

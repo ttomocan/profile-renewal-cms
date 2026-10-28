@@ -1,7 +1,7 @@
 @use '../global' as *;
 
 .l-footer {
-  background-color: $mainC;
+  background-color: #c45508;
   display: flex;
   flex-wrap: wrap;
   padding: 60px 20px 30px;
@@ -10,7 +10,7 @@
   align-items: center;
   gap: 30px;
   * {
-    color: #282828;
+    color: #ffffff;
     text-decoration: none;
   }
 
@@ -21,7 +21,7 @@
     gap: 30px;
     align-self: stretch;
     a {
-      color: #282828;
+      color: #ffffff;
       font: {
         family: var(--font-roboto), sans-serif;
         size: 1.4rem;
@@ -33,7 +33,7 @@
 
       /*ホバーエフェクト*/
       &::after {
-        background: #282828;
+        background: #ffffff;
         content: '';
         bottom: 0;
         left: 50%;
@@ -67,7 +67,7 @@
       gap: 20px 30px;
       padding: 0 20px;
       a {
-        color: #282828;
+        color: #ffffff;
         font: {
           family: var(--font-roboto), sans-serif;
           size: 1.25rem;
@@ -79,7 +79,7 @@
 
         /*ホバーエフェクト*/
         &::after {
-          background: #282828;
+          background: #ffffff;
           content: '';
           bottom: 0;
           left: 50%;
