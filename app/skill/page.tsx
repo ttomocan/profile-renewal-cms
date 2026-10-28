@@ -58,8 +58,8 @@ export default function Page() {
         <p className="programming__note fadeUpTrigger">Web制作会社でのサイト制作・運用で使用してきた技術です。</p>
         <div className="skill-cards">
           <SkillCard title="HTML / CSS / SCSS" image="/img/pages/skill/img_html5.svg" imageAlt="HTML" summary="文書構造と更新後の保守性を考えてマークアップ・スタイリングします。" points={['セマンティックHTMLと見出し設計', 'BEM・FLOCSSを用いたCSS設計', '各画面幅に合わせたレスポンシブ実装']} />
-          <SkillCard title="JavaScript" image="/img/pages/skill/img_javascript.svg" imageAlt="JavaScript" summary="UIの操作やアニメーションを、既存処理への影響を確認しながら実装します。" points={['メニュー、モーダル、スライダーなどのUI実装', 'フォームや表示切り替えの制御', 'ブラウザ間の表示・操作確認']} link={{ href: '/result/', label: 'JavaScriptを使用した制作実績を見る' }} />
-          <SkillCard title="PHP / WordPress" image="/img/pages/skill/img_php.svg" imageAlt="PHP" summary="更新する人が迷わない管理画面と、運用しやすいテンプレートを構築します。" points={['オリジナルテーマ・既存テーマの改修', '投稿タイプ、投稿機能、カスタムフィールド設計', 'お問い合わせフォーム、表示速度、運用時の改修']} link={{ href: '/result/', label: 'WordPressを含む制作実績を見る' }} />
+          <SkillCard title="JavaScript" image="/img/pages/skill/img_javascript.svg" imageAlt="JavaScript" summary="UIの操作やアニメーションを、既存処理への影響を確認しながら実装します。" points={['メニュー、モーダル、スライダーなどのUI実装', 'フォームや表示切り替えの制御', 'ブラウザ間の表示・操作確認']} />
+          <SkillCard title="PHP / WordPress" image="/img/pages/skill/img_php.svg" imageAlt="PHP" summary="更新する人が迷わない管理画面と、運用しやすいテンプレートを構築します。" points={['オリジナルテーマ・既存テーマの改修', '投稿タイプ、投稿機能、カスタムフィールド設計', 'お問い合わせフォーム、表示速度、運用時の改修']} />
           <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、チームで確認しやすい単位を意識してバージョン管理します。" points={['ブランチを使った機能開発・修正', '差分確認とレビューを前提にしたコミット', 'GitHubを使ったコード管理']} />
 
         </div>
@@ -74,7 +74,7 @@ export default function Page() {
         <div className="skill-cards">
           <SkillCard title="Next.js / React" image="/img/pages/skill/react-official.svg" summary="コンポーネント単位でUIを組み立て、App Routerを使ったWebサイト・アプリ開発に取り組んでいます。" points={['Server Componentsを含む画面構成', '状態や責務を分けたコンポーネント設計', 'メタデータ、画像、表示速度の最適化']} />
           <SkillCard title="TypeScript" image="/img/pages/skill/img_typescript.svg" imageAlt="TypeScript" summary="PropsやCMSデータに型を定義し、変更時の見落としを減らすために使用しています。" points={['コンポーネントのProps定義', 'API・CMSレスポンスの型定義', '型チェックによる実装ミスの早期発見']} />
-          <SkillCard title="microCMS" image="/img/pages/skill/img_microcms.svg" imageAlt="microCMS" summary="個人サイトで記事や制作実績を管理するヘッドレスCMSとして使用しています。" points={['一覧・詳細データの取得', '下書き表示とキャッシュ設計', 'CMSデータを使ったメタ情報生成']} link={{ href: '/diary/', label: '個人開発・サイト改善の活動記録を読む' }} />
+          <SkillCard title="microCMS" image="/img/pages/skill/img_microcms.svg" imageAlt="microCMS" summary="個人サイトで記事や制作実績を管理するヘッドレスCMSとして使用しています。" points={['一覧・詳細データの取得', '下書き表示とキャッシュ設計', 'CMSデータを使ったメタ情報生成']} />
         </div>
       </section>
 

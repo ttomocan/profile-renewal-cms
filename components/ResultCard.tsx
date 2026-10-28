@@ -8,9 +8,10 @@ import type { ResultItem } from '@/types/results';
 interface ResultCardProps {
   result: ResultItem;
   disableLink?: boolean; // リンクを無効化するオプション
+  showTechnologies?: boolean;
 }
 
-export default function ResultCard({ result, disableLink = false }: ResultCardProps) {
+export default function ResultCard({ result, disableLink = false, showTechnologies = true }: ResultCardProps) {
   const { id, title, summary } = result;
 
   const workType = safeGetWorkType(result);
@@ -42,7 +43,7 @@ export default function ResultCard({ result, disableLink = false }: ResultCardPr
         </div>
         <h3 className="result-card__title">{title}</h3>
         {roles.length > 0 && <p className="result-card__responsibility">担当：{roles.join(' / ')}</p>}
-        {technologies.length > 0 && (
+        {showTechnologies && technologies.length > 0 && (
           <ul className="result-card__technologies" aria-label="使用技術">
             {technologies.map((technology) => (
               <li key={technology}>{technology}</li>

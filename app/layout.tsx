@@ -51,7 +51,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ja" className={roboto.variable}>
+    <html lang="ja" className={roboto.variable} data-scroll-behavior="smooth">
       <head>
         <noscript>
           <style>{`.loading{display:none!important}.fadeInTrigger,.fadeUpTrigger,.fadeDownTrigger,.fadeLeftTrigger,.fadeRightTrigger,.flipDownTrigger,.flipLeftTrigger,.flipRightTrigger,.rotateXTrigger,.rotateYTrigger,.zoomInTrigger,.zoomOutTrigger,.blurTrigger,.smoothTrigger{opacity:1!important;transform:none!important}`}</style>
