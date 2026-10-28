@@ -49,7 +49,7 @@ export default function Page() {
           </div>
           <div className="about-facts__item">
             <dt>Web制作への参画</dt>
-            <dd>200件以上</dd>
+            <dd>250件</dd>
           </div>
         </dl>
         <p className="about-count-note">参画件数は新規サイト・LP、副業を含み、改修を除きます。</p>

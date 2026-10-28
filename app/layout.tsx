@@ -24,7 +24,7 @@ const siteKeywords = [
 ];
 
 const homeTitle = 'Webエンジニア ともきゃん｜WordPress・CMSの実装・改修・運用';
-const homeDescription = 'Web制作会社で10年以上の経験があり、Web制作200件以上に参画してきたWebエンジニア・ともきゃんのポートフォリオです。件数は新規サイト・LP、副業を含み、改修を除きます。WordPress・CMSの実装、改修、運用の担当範囲と個人開発を紹介します。';
+const homeDescription = 'Web制作会社で10年以上の経験があり、Web制作250件に参画してきたWebエンジニア・ともきゃんのポートフォリオです。件数は新規サイト・LP、副業を含み、改修を除きます。WordPress・CMSの実装、改修、運用の担当範囲と個人開発を紹介します。';
 
 export const metadata: Metadata = {
   ...createMetadata({
