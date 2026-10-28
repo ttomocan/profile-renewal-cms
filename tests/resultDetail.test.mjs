@@ -29,6 +29,8 @@ for (const id of ['corporate-handball-team-01', 'another-project']) {
       assert.match(html, /関連する制作実績/);
       assert.match(html, /href="\/result\/related-project\/?"/);
       assert.match(html, /関連案件のテスト/);
+      assert.match(html, /class="result-card__technologies"[^>]*><li>WordPress<\/li>/);
+      assert.match(html, /aria-label="使用技術: WordPress"/);
       assert.doesNotMatch(html, new RegExp(`href="/result/${id}/?"`));
       assert.match(html, /採用・協業について相談する/);
       assert.match(html, /<a\b[^>]*href="\/contact\/?"[^>]*>採用・協業について問い合わせる<\/a>/);
@@ -73,11 +75,12 @@ test('案件IDによる古いSEO文で本文と担当範囲を上書きしない
 
 test('個人開発記事を取得できなくても既存実績一覧を表示する', async () => {
   const page = loadPage('app/result/page.tsx', {
-    getResults: async () => ({ contents: [oldData], totalCount: 1, offset: 0, limit: 9 }),
+    getResults: async () => ({ contents: [{ ...oldData, techStack: 'PHP,WordPress' }], totalCount: 1, offset: 0, limit: 9 }),
     getBlogList: async () => { throw new Error('記事取得失敗'); },
   });
   const html = renderToStaticMarkup(await page.default({ searchParams: Promise.resolve({}) }));
   assert.match(html, /既存案件/);
+  assert.doesNotMatch(html, /result-card__technologies/);
   assert.doesNotMatch(html, /personal-project-heading/);
 });
 

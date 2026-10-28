@@ -28,6 +28,11 @@
   }
 }
 
-.l-content:has(> .l-blog-area:last-child) + .c-wave {
-  margin-top: 0;
+// 共有フッターの高さは固定し、ブログ側で接続位置を揃えて履歴復元を保つ。
+.l-content > .l-blog-area {
+  margin-bottom: -48px;
+
+  @include mq(sp) {
+    margin-bottom: -64px;
+  }
 }

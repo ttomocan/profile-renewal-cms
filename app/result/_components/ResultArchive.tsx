@@ -45,7 +45,7 @@ export default function ResultArchive({ currentPage, resultsData, personalArticl
             <>
               <div className="results-grid">
                 {results.map((result) => (
-                  <ResultCard key={result.id} result={result} />
+                  <ResultCard key={result.id} result={result} showTechnologies={false} />
                 ))}
               </div>
               <Pagination currentPage={currentPage} totalPages={totalPages} />
