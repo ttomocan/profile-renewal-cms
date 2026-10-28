@@ -81,11 +81,10 @@
 
   /* ---- 状態変化 ---- */
 
-  /* hover: 軽く浮かせる（hover可能デバイスのみ） */
+  /* hover: 不透明度と影を変更（hover可能デバイスのみ） */
   @include hover {
     &.show:hover {
       opacity: 0.7;
-      transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     }
   }
