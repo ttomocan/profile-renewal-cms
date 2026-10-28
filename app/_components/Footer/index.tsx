@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import WaveAnimation from '@/app/_components/WaveAnimation';
 
+const footerWaveColors = ['#c45508', '#c45508', '#c45508'];
+
 export default function Footer() {
   const pathname = usePathname();
   const currentYear = new Date().getFullYear();
@@ -18,7 +20,7 @@ export default function Footer() {
   return (
     <>
       <div className="c-wave">
-        <WaveAnimation height={100} />
+        <WaveAnimation height={100} colors={footerWaveColors} />
       </div>
       <footer className="l-footer">
         <div className="l-footer__navigation" role="navigation" aria-label="グローバルナビゲーション">

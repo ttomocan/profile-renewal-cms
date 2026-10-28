@@ -73,10 +73,10 @@ test('日記と実績の一覧カードは親のクリッピング内に高コ�
     assert.ok(contrast(values.outline.match(/#[a-f0-9]{6}/i)[0], '#ffffff') >= 3);
   }
 });
-test('フッターはブランド背景を保持し、通常文字4.5:1とfocus枠3:1以上を確保する', () => {
+test('フッターは白文字4.5:1とfocus枠3:1以上を確保する', () => {
   const file = 'styles/layout/_l-footer.scss';
   const background = style(file, '.l-footer')['background-color'];
-  assert.equal(background, '#f36b0a');
+  assert.equal(background, '#c45508');
   for (const selector of ['.l-footer *', '.l-footer .l-navigation a']) {
     assert.ok(contrast(style(file, selector).color, background) >= 4.5);
   }
