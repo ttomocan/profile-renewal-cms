@@ -85,7 +85,7 @@ export default function Page() {
         </h2>
         <div className="skill-cards">
           <SkillCard title="Tailwind CSS" image="/img/pages/skill/img_css3.svg" imageAlt="CSS" summary="ユーティリティクラスによるスタイリングを学習し、基本的なレイアウトやレスポンシブ指定を試しています。" points={['個人学習で使用', '基本的なレイアウト・余白指定', '既存案件での実務経験とは区別']} />
-          <SkillCard title="ChatGPT / Claude / Gemini / Codex / NotebookLM" image="/img/pages/skill/img_chatgpt.svg" imageAlt="AIツール" summary="要件整理、コードレビュー、テスト観点の洗い出しなど、開発の補助に活用しています。Gemini・NotebookLMでは、仕様や資料の作成・整理も行っています。" points={['生成コードをそのまま採用せず差分と影響を確認', 'アクセシビリティとレスポンシブ表示を確認', 'ブラウザ間の差異と既存処理への影響を確認']} />
+          <SkillCard title="ChatGPT / Claude / Gemini / Codex / gemini Notebook" image="/img/pages/skill/img_chatgpt.svg" imageAlt="AIツール" summary="要件整理、コードレビュー、テスト観点の洗い出しなど、開発の補助に活用しています。Gemini・gemini Notebookでは、仕様や資料の作成・整理も行っています。" points={['生成コードをそのまま採用せず差分と影響を確認', 'アクセシビリティとレスポンシブ表示を確認', 'ブラウザ間の差異と既存処理への影響を確認']} />
 
         </div>
       </section>
@@ -95,7 +95,7 @@ export default function Page() {
         <p className="programming__note fadeUpTrigger">使用技術とは分けて、デザイン確認・画像編集・コード編集のツールを紹介します。</p>
         <div className="skill-cards">
           <SkillCard title="Figma / Adobe" image="/img/pages/skill/img_figma.svg" imageAlt="Figma" summary="デザインの意図やコンポーネント構造を読み取り、実装へ落とし込みます。" points={['Figmaのデザインデータ確認・制作', 'Adobe XD・Illustrator・Photoshopのデザインデータにも対応可能', 'Photoshopでの画像編集・書き出し', 'Illustratorでの素材調整']} />
-          <SkillCard title="その他の補助ツール" image="/img/pages/skill/img_cursor.svg" imageAlt="開発ツール" summary="Cursor、Visual Studio Code、NotebookLM、Canva、Adobe Express、Fireflyを目的に応じて使い分けています。" points={['コード編集・調査の補助', '資料整理とドキュメント作成', 'ブログ用画像や素材の作成']} />
+          <SkillCard title="その他の補助ツール" image="/img/pages/skill/img_cursor.svg" imageAlt="開発ツール" summary="Cursor、Visual Studio Code、gemini Notebook、Canva、Adobe Express、Fireflyを目的に応じて使い分けています。" points={['コード編集・調査の補助', '資料整理とドキュメント作成', 'ブログ用画像や素材の作成']} />
         </div>
       </section>
 
