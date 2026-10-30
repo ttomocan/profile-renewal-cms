@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 type SkillCardProps = {
   title: string;
   image?: string;
   imageAlt?: string;
-  iconText?: string;
+  icon?: ReactNode;
   summary: string;
   points: string[];
   link?: {
@@ -15,11 +16,11 @@ type SkillCardProps = {
   };
 };
 
-function SkillCard({ title, image, iconText, summary, points, link }: SkillCardProps) {
+function SkillCard({ title, image, icon, summary, points, link }: SkillCardProps) {
   return (
     <article className="programming__item fadeUpTrigger">
       <div className="programming__image" aria-hidden={image ? undefined : true}>
-        {image ? <Image src={image} alt="" width={100} height={100} /> : <span className="programming__text-icon">{iconText ?? title.slice(0, 2)}</span>}
+        {image ? <Image src={image} alt="" width={100} height={100} /> : icon ?? <span className="programming__text-icon">{title.slice(0, 2)}</span>}
       </div>
       <div className="programming__detail">
         <h3 className="programming__heading">{title}</h3>
@@ -64,7 +65,13 @@ export default function Page() {
           <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、チームで確認しやすい単位を意識してバージョン管理します。" points={['ブランチを使った機能開発・修正', '差分確認とレビューを前提にしたコミット', 'GitHubを使ったコード管理']} />
           <SkillCard
             title="Webディレクション・進行管理"
-            iconText="進行"
+            icon={
+              <svg viewBox="0 0 64 64" width={80} height={80} fill="#f36b0a" aria-hidden="true" focusable="false">
+                <rect x={3} y={6} width={38} height={14} rx={2} />
+                <rect x={15} y={25} width={44} height={14} rx={2} />
+                <rect x={27} y={44} width={34} height={14} rx={2} />
+              </svg>
+            }
             summary="実装経験を活かし、お客様との仕様確認や制作チームとの調整を行い、制作から公開まで進めます。"
             points={['お客様との調整、要件・仕様の確認', '制作チームへの作業指示、進捗確認・スケジュール調整', 'テスト環境への反映、品質確認・公開対応']}
           />
