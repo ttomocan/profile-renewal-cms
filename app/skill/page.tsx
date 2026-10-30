@@ -6,6 +6,7 @@ type SkillCardProps = {
   title: string;
   image?: string;
   imageAlt?: string;
+  iconText?: string;
   summary: string;
   points: string[];
   link?: {
@@ -14,11 +15,11 @@ type SkillCardProps = {
   };
 };
 
-function SkillCard({ title, image, summary, points, link }: SkillCardProps) {
+function SkillCard({ title, image, iconText, summary, points, link }: SkillCardProps) {
   return (
     <article className="programming__item fadeUpTrigger">
       <div className="programming__image" aria-hidden={image ? undefined : true}>
-        {image ? <Image src={image} alt="" width={100} height={100} /> : <span className="programming__text-icon">{title.slice(0, 2)}</span>}
+        {image ? <Image src={image} alt="" width={100} height={100} /> : <span className="programming__text-icon">{iconText ?? title.slice(0, 2)}</span>}
       </div>
       <div className="programming__detail">
         <h3 className="programming__heading">{title}</h3>
@@ -47,21 +48,26 @@ export default function Page() {
   return (
     <>
       <section className="first inner inner-s">
-        <p className="fadeUpTrigger">実務で使用してきた技術と、個人開発・学習で扱っている技術を分けて紹介します。WordPressの実装・改修では、画面表示とともに更新する人の作業や保守性を考えます。案件ごとの担当範囲は制作実績に掲載しています。</p>
+        <p className="fadeUpTrigger">実務での対応領域と、個人開発・学習で扱っている技術を分けて紹介します。実装に加え、仕様確認や制作進行、公開対応も行っています。WordPressの実装・改修では、画面表示とともに更新する人の作業や保守性を考えます。案件ごとの担当範囲は制作実績に掲載しています。</p>
       </section>
 
       <section className="programming inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Professional</span>
-          <span className="c-heading-lv2-ja">実務で使用</span>
+          <span className="c-heading-lv2-ja">実務での対応領域</span>
         </h2>
-        <p className="programming__note fadeUpTrigger">Web制作会社でのサイト制作・運用で使用してきた技術です。</p>
+        <p className="programming__note fadeUpTrigger">Web制作会社でのサイト制作・運用で対応してきた技術と制作進行を紹介します。</p>
         <div className="skill-cards">
           <SkillCard title="HTML / CSS / SCSS" image="/img/pages/skill/img_html5.svg" imageAlt="HTML" summary="文書構造と更新後の保守性を考えてマークアップ・スタイリングします。" points={['セマンティックHTMLと見出し設計', 'BEM・FLOCSSを用いたCSS設計', '各画面幅に合わせたレスポンシブ実装']} />
           <SkillCard title="JavaScript" image="/img/pages/skill/img_javascript.svg" imageAlt="JavaScript" summary="UIの操作やアニメーションを、既存処理への影響を確認しながら実装します。" points={['メニュー、モーダル、スライダーなどのUI実装', 'フォームや表示切り替えの制御', 'ブラウザ間の表示・操作確認']} />
           <SkillCard title="PHP / WordPress" image="/img/pages/skill/img_php.svg" imageAlt="PHP" summary="更新する人が迷わない管理画面と、運用しやすいテンプレートを構築します。" points={['オリジナルテーマ・既存テーマの改修', '投稿タイプ、投稿機能、カスタムフィールド設計', 'お問い合わせフォーム、表示速度、運用時の改修']} />
           <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、チームで確認しやすい単位を意識してバージョン管理します。" points={['ブランチを使った機能開発・修正', '差分確認とレビューを前提にしたコミット', 'GitHubを使ったコード管理']} />
-
+          <SkillCard
+            title="Webディレクション・進行管理"
+            iconText="進行"
+            summary="実装経験を活かし、お客様との仕様確認や制作チームとの調整を行い、制作から公開まで進めます。"
+            points={['お客様との調整、要件・仕様の確認', '制作チームへの作業指示、進捗確認・スケジュール調整', 'テスト環境への反映、品質確認・公開対応']}
+          />
         </div>
       </section>
 
