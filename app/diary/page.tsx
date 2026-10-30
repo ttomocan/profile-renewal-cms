@@ -1,6 +1,5 @@
 import styles from './page.module.css';
 import { Suspense } from 'react';
-import Link from 'next/link';
 import { getBlogList, getAllCategoryList } from '@/app/_libs/microcms';
 import DiaryList from '@/app/_components/DiaryList';
 import DiaryListSkeleton from '@/app/_components/DiaryListSkeleton';
@@ -17,36 +16,6 @@ type SearchParamsType = { q?: string; category?: string };
 
 const title = 'Web開発・個人開発・ブログ運営の活動記録｜ともきゃん';
 const description = 'Webエンジニア・ともきゃんの活動記録です。Web制作、Next.jsやAIを使った個人開発、ブログ運営、キャリア、育児と働き方で得た学びを発信しています。';
-
-const recommendedArticleIds = ['iropon-release', 'commu-type-check', 'site-renewal'];
-
-async function RecommendedArticles() {
-  const { contents } = await getBlogList({
-    ids: recommendedArticleIds.join(','),
-    limit: 3,
-    fields: 'id,title,description',
-  }).catch(() => ({ contents: [] }));
-  const articles = recommendedArticleIds.flatMap(id => contents.filter(article => article.id === id));
-
-  if (articles.length === 0) return null;
-
-  return (
-    <section className={styles.recommended} aria-labelledby="recommended-articles-heading">
-      <h2 id="recommended-articles-heading">開発・学習のおすすめ記事</h2>
-      <ul className={styles.recommendedList}>
-        {articles.map(article => (
-          <li key={article.id}>
-            <Link href={`/diary/${article.id}/`} className={styles.recommendedLink}>
-              <h3>{article.title}</h3>
-              {article.description && <p>{article.description}</p>}
-              <span className={styles.recommendedAction}>記事を読む <span aria-hidden="true">→</span></span>
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<SearchParamsType> }): Promise<Metadata> {
   const params = await searchParams;
@@ -100,11 +69,6 @@ export default async function Page({ searchParams }: { searchParams: Promise<Sea
           <h1>Web開発・ブログ運営・個人開発の活動記録</h1>
           <p>人柄や継続して取り組む姿勢が伝わるよう、Web制作、個人開発、ブログ運営、働き方について記録しています。</p>
         </div>
-        {!resolvedSearchParams.q && !resolvedSearchParams.category && (
-          <Suspense fallback={null}>
-            <RecommendedArticles />
-          </Suspense>
-        )}
         <h2 className="u-visually-hidden">活動記録の記事一覧</h2>
         <div className={styles['diary-search-row']}>
           <SearchField defaultValue={resolvedSearchParams.q} />
