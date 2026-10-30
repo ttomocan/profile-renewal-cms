@@ -71,7 +71,7 @@ export default async function Page({ params }: Props) {
       <section className="inner">
         <h1 className="diary-archive-title">{category.name}の記事（{current}ページ目）</h1>
         <h2 className="u-visually-hidden">{category.name}カテゴリーの記事一覧</h2>
-        <DiaryList blog={blog} />
+        <DiaryList blog={blog} eagerFirstImage />
         <Pagination totalCount={totalCount} current={current} basePath={`/diary/category/${category.id}`} />
       </section>
       <BreadcrumbListJsonLd items={breadcrumbItems} />

@@ -17,8 +17,8 @@ export default function Page() {
           <span className="c-heading-lv2-ja">Web制作での経験</span>
         </h2>
         <div className="greeting__cont">
-          <div className="greeting__image fadeUpTrigger">
-            <Image src="/img/pages/about/img_tomocan.jpg" alt="Webエンジニア ともきゃんのプロフィール写真" width={200} height={200} sizes="200px" />
+          <div className="greeting__image">
+            <Image src="/img/pages/about/img_tomocan.jpg" alt="Webエンジニア ともきゃんのプロフィール写真" width={200} height={200} sizes="200px" loading="eager" />
           </div>
           <div className="greeting__detail fadeUpTrigger">
             <p>

@@ -78,7 +78,7 @@ async function DiaryListContent({ searchParams }: { searchParams: SearchParamsTy
 
   return (
     <>
-      <DiaryList blog={blog} />
+      <DiaryList blog={blog} eagerFirstImage={Boolean(searchParams.q || searchParams.category)} />
       <Pagination totalCount={totalCount} />
     </>
   );

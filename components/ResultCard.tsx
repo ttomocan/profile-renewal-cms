@@ -9,9 +9,10 @@ interface ResultCardProps {
   result: ResultItem;
   disableLink?: boolean; // リンクを無効化するオプション
   showTechnologies?: boolean;
+  eagerImage?: boolean;
 }
 
-export default function ResultCard({ result, disableLink = false, showTechnologies = true }: ResultCardProps) {
+export default function ResultCard({ result, disableLink = false, showTechnologies = true, eagerImage = false }: ResultCardProps) {
   const { id, title, summary } = result;
 
   const workType = safeGetWorkType(result);
@@ -24,7 +25,7 @@ export default function ResultCard({ result, disableLink = false, showTechnologi
   const cardContent = (
     <>
       <div className="result-card__image">
-        <Image src={cover.url} alt="" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1200px) 50vw, 33vw" className="result-card__image-img" />
+        <Image src={cover.url} alt="" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1200px) 50vw, 33vw" className="result-card__image-img" loading={eagerImage ? 'eager' : 'lazy'} />
         <div className="result-card__overlay"></div>
         <div className="result-card__badge">
           <span className={`result-card__work-type work-type-${workType}`}>{workType}</span>
@@ -57,7 +58,7 @@ export default function ResultCard({ result, disableLink = false, showTechnologi
   );
 
   return (
-    <article className="result-card fadeUpTrigger">
+    <article className={`result-card${eagerImage ? '' : ' fadeUpTrigger'}`}>
       {disableLink ? (
         <div className="result-card__link">{cardContent}</div>
       ) : (

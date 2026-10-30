@@ -61,7 +61,7 @@ export default async function Page({ params }: Props) {
           <Category category={category} /> の一覧
         </h1>
         <h2 className="u-visually-hidden">{category.name}カテゴリーの記事</h2>
-        <DiaryList blog={blog} />
+        <DiaryList blog={blog} eagerFirstImage />
         <Pagination totalCount={totalCount} basePath={`/diary/category/${category.id}`} />
       </section>
       <BreadcrumbListJsonLd items={breadcrumbItems} />

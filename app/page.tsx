@@ -39,7 +39,7 @@ export default async function Home() {
             <div className="p-top-hero__text-content">
               <div className="p-top-hero__identity">
                 <div className="p-top-hero__icon">
-                  <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={80} height={80} sizes="(max-width: 767px) 56px, 80px" />
+                  <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={80} height={80} sizes="(max-width: 767px) 56px, 80px" loading="eager" />
                 </div>
                 <p className="p-top-hero__name">TOMOCAN</p>
               </div>

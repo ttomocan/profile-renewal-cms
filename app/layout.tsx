@@ -2,7 +2,6 @@ import '@/styles/common/style.scss';
 import '@/styles/common/animation.scss';
 
 import type { Metadata, Viewport } from 'next';
-import Loading from './_components/Loading';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
 import PageTop from './_components/PageTop';
@@ -65,7 +64,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body suppressHydrationWarning>
         <ClientSmoothScrollProvider />
         <DynamicBodyClass />
-        <Loading />
         <Header />
         <div className="l-content">{children}</div>
         <Footer />
