@@ -22,8 +22,8 @@ function SkillCard({ title, image, icon, summary, points, link }: SkillCardProps
       <div className="programming__image" aria-hidden={image ? undefined : true}>
         {image ? <Image src={image} alt="" width={100} height={100} /> : icon ?? <span className="programming__text-icon">{title.slice(0, 2)}</span>}
       </div>
+      <h3 className="programming__heading">{title}</h3>
       <div className="programming__detail">
-        <h3 className="programming__heading">{title}</h3>
         <p className="programming__description">{summary}</p>
         <ul className="programming__points c-list">
           {points.map((point) => (
