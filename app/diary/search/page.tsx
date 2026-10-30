@@ -48,7 +48,7 @@ async function SearchResults({ query }: { query: string | undefined }) {
           </p>
         </div>
       )}
-      <DiaryList blog={blog} />
+      <DiaryList blog={blog} eagerFirstImage />
     </>
   );
 }

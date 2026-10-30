@@ -50,7 +50,7 @@ async function DiaryListContent({ current }: { current: number }) {
 
   return (
     <>
-      <DiaryList blog={blog} />
+      <DiaryList blog={blog} eagerFirstImage />
       <Pagination totalCount={totalCount} current={current} />
     </>
   );

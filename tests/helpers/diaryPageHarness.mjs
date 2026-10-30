@@ -29,6 +29,8 @@ export function createDiaryHarness(cms) {
     : existsSync(filename + '.tsx') ? filename + '.tsx'
       : existsSync(path.join(filename, 'index.ts')) ? path.join(filename, 'index.ts') : path.join(filename, 'index.tsx');
   const load = filename => {
+    // Nextのビルド時フォント処理だけを、実行環境に依存しない変数名へ置き換える。
+    if (filename === path.join(root, 'app/fonts.ts')) return { roboto: { variable: 'test-roboto' }, caveatBrush: { variable: 'test-caveat' } };
     if (cache.has(filename)) return cache.get(filename);
     const componentModule = { exports: {} };
     cache.set(filename, componentModule.exports);
@@ -44,8 +46,10 @@ export function createDiaryHarness(cms) {
         cssModules.set(file, classes);
         return { __esModule: true, default: classes };
       }
+      if (id.endsWith('.css') || id.startsWith('@splidejs/splide/css/')) return {};
       if (id === '@/app/_libs/microcms') return cms;
       if (id === 'next/navigation') return {
+        usePathname: () => '/',
         useRouter: () => ({ push: url => navigation.push(url) }),
         notFound: () => { throw new Error('NEXT_NOT_FOUND'); },
         permanentRedirect: url => { throw new Error(`NEXT_REDIRECT:${url}`); },

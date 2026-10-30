@@ -44,8 +44,8 @@ export default function ResultArchive({ currentPage, resultsData, personalArticl
           {results.length > 0 ? (
             <>
               <div className="results-grid">
-                {results.map((result) => (
-                  <ResultCard key={result.id} result={result} showTechnologies={false} />
+                {results.map((result, index) => (
+                  <ResultCard key={result.id} result={result} showTechnologies={false} eagerImage={index === 0} />
                 ))}
               </div>
               <Pagination currentPage={currentPage} totalPages={totalPages} />

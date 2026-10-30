@@ -34,6 +34,10 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
 
   return (
     <>
+      {/* PCで常時表示する画像だけ先行取得し、SPの閉じたメニューはlazyを保つ。 */}
+      <link rel="preload" as="image" href="/img/common/icon_note.svg" media="(min-width: 1041px)" />
+      <link rel="preload" as="image" href="/img/common/icon_x.svg" media="(min-width: 1041px)" />
+      <link rel="preload" as="image" href="/img/common/icon_coconala.svg" media="(min-width: 1041px)" />
       <ul className="l-header__blog">
         <li className="l-header__blog__item">
           <a href="https://www.newagevoice.com/" target="_blank" className="c-link-external" rel="noopener noreferrer">

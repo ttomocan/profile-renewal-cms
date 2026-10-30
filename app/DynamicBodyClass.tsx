@@ -82,7 +82,7 @@ export default function DynamicBodyClass() {
 
         const animationTypes = [
           { selector: '.fadeInTrigger', classToAdd: 'fadeIn', offset: -100 },
-          { selector: '.fadeUpTrigger', classToAdd: 'fadeUp', offset: 150 },
+          { selector: '.fadeUpTrigger', classToAdd: 'fadeUp', offset: 0 },
           { selector: '.fadeDownTrigger', classToAdd: 'fadeDown', offset: 100 },
           { selector: '.fadeLeftTrigger', classToAdd: 'fadeLeft', offset: 100 },
           { selector: '.fadeRightTrigger', classToAdd: 'fadeRight', offset: 40 },
