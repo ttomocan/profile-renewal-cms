@@ -11,6 +11,16 @@
 - SVGバイト列は変更なし。元の色・縦横比を保持して表示サイズのみ調整。画像altは隣接見出しとの重複を避け空。
 - 著作権ライセンスと商標権は別。Reactの使用技術紹介として掲載し、公式の承認・提携を示さない。
 
+## WordPress（CMSカード）
+- 配布元: https://github.com/WordPress/dashicons
+- 取得元: https://github.com/WordPress/dashicons/blob/628951563b9c0f0d293af8e40c9b0b3da5e2880d/svg-min/wordpress.svg
+- 保存先: public/img/pages/skill/wordpress-official.svg
+- SVGのblob SHA: `77437b9d07c6bc0a61c1a770ed5f176427efc5ab`
+- ライセンス: 配布元READMEはGPLv2以降（フォント例外あり）と記載。同梱LICENSEはGPLv3。
+- 配布元LICENSEを変更せず public/img/pages/skill/wordpress-license.txt に保存。
+- 取得日: 2026-10-31。SVGはバイト列・色・縦横比を変更せず、既存カードのCSSで表示サイズのみ指定。
+- WordPressを中心とするCMS経験の紹介に使用。公式の承認・提携を示すものではない。
+
 ## 未取得（公開素材を作らない）
 - Next.js: https://vercel.com/geist/brands の公式ZIP。通常HTTPS取得がCONNECT 403で拒否。
 - TypeScript: https://www.typescriptlang.org/branding/ の公式ZIP。同上。
