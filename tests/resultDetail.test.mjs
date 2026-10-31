@@ -87,16 +87,53 @@ test('案件IDによる古いSEO文で本文と担当範囲を上書きしない
   assert.doesNotMatch(metadata.title, /UI設計|速度改善|CMS構築/);
 });
 
-test('個人開発記事を取得できなくても既存実績一覧を表示する', async () => {
+test('個人開発の実績を取得できなくても既存実績一覧を表示する', async () => {
   const page = loadPage('app/result/page.tsx', {
     getResults: async () => ({ contents: [{ ...oldData, techStack: 'PHP,WordPress' }], totalCount: 1, offset: 0, limit: 9 }),
-    getBlogList: async () => { throw new Error('記事取得失敗'); },
+    getResultDetail: async () => { throw new Error('実績取得失敗'); },
   });
   const html = renderToStaticMarkup(await page.default({ searchParams: Promise.resolve({}) }));
   assert.match(html, /既存案件/);
   assert.doesNotMatch(html, /result-card__technologies/);
   assert.doesNotMatch(html, /personal-project-heading/);
 });
+
+test('個人開発は共通の実績カードで詳細へリンクし、同じ画面内に重複表示しない', async () => {
+  const personalResult = { ...oldData, id: 'iropon-app', title: '色彩検定の慣用色名学習アプリ「いろポン！」', summary: '既存CMSの概要文です。本アプリは、AIによるコード補完を活用して構築しています。', workType: ['個人開発'], 'project-type': ['Webアプリ'], cover: { url: '/img/iropon-app.jpg', width: 1200, height: 630 }, siteUrl: 'https://www.iropon.com/' };
+  let blogCalls = 0;
+  const page = loadPage('app/result/page.tsx', {
+    getResults: async () => ({ contents: [personalResult, oldData], totalCount: 2, offset: 0, limit: 12 }),
+    getResultDetail: async id => { assert.equal(id, 'iropon-app'); return personalResult; },
+    getBlogList: async () => { blogCalls++; throw new Error('開発日記を実績カードに使わない'); },
+  });
+  const html = renderToStaticMarkup(await page.default({ searchParams: Promise.resolve({}) }));
+  const personalSection = html.match(/<section[^>]*aria-labelledby="personal-project-heading"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(personalSection);
+  assert.match(personalSection, /href="\/result\/iropon-app\/?"/);
+  assert.match(personalSection, /本アプリは、AIによるコード補完を活用して構築しています。/);
+  assert.ok(personalSection.includes(personalResult.title));
+  assert.match(personalSection, />Webアプリ</);
+  assert.match(personalSection, /iropon-app\.jpg/);
+  assert.match(personalSection, /この制作実績を見る/);
+  assert.equal((html.match(/class="result-card__link"[^>]*href="\/result\/iropon-app\/?"/g) || []).length, 1);
+  assert.match(html, /既存案件/);
+  assert.doesNotMatch(html, /href="\/diary\/iropon-release\/?"/);
+  assert.equal(blogCalls, 0);
+  const detail = await loadDetail(personalResult).default({ params: Promise.resolve({ id: 'iropon-app' }) });
+  assert.ok(renderToStaticMarkup(detail).includes(personalResult.summary));
+});
+
+for (const personalResult of [null, { ...oldData, id: 'iropon-app', publishedAt: '' }]) {
+  test(`個人開発の実績が${personalResult ? '未公開' : '存在しない'}場合はリンクを作らない`, async () => {
+    const page = loadPage('app/result/page.tsx', {
+      getResults: async () => ({ contents: [oldData], totalCount: 1, offset: 0, limit: 12 }),
+      getResultDetail: async () => personalResult,
+    });
+    const html = renderToStaticMarkup(await page.default({ searchParams: Promise.resolve({}) }));
+    assert.match(html, /既存案件/);
+    assert.doesNotMatch(html, /personal-project-heading|href="\/result\/iropon-app\/?"/);
+  });
+}
 
 test('担当範囲は通常リストで元の順序を保ち、技術と本文を欠落させない', async () => {
   const page = loadDetail({ ...oldData, 'project-roles': ['CMS構築', 'SEO', '運用 / 保守'], techStack: 'HTML,PHP,WordPress', highlights: '実装項目1\n実装項目2' });

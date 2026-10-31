@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound, permanentRedirect } from 'next/navigation';
-import { getBlogList, getResults } from '@/app/_libs/microcms';
+import { getResultDetail, getResults } from '@/app/_libs/microcms';
 import { RESULTS_LIST_LIMIT } from '@/app/_constants';
 import ResultArchive from './_components/ResultArchive';
 import { createMetadata } from '@/lib/seo';
@@ -32,7 +32,8 @@ export default async function ResultsPage({ searchParams }: Props) {
 
   const [resultsData, personalData] = await Promise.all([
     getResults({ limit: RESULTS_LIST_LIMIT, offset: 0, sort: 'new' }),
-    getBlogList({ ids: 'iropon-release', limit: 1, fields: 'id,title,description,thumbnail' }).catch(() => ({ contents: [] })),
+    getResultDetail('iropon-app').catch(() => null),
   ]);
-  return <ResultArchive currentPage={1} resultsData={resultsData} personalArticle={personalData.contents[0]} />;
+  const personalResult = personalData?.publishedAt ? personalData : undefined;
+  return <ResultArchive currentPage={1} resultsData={resultsData} personalResult={personalResult} />;
 }

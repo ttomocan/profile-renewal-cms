@@ -4,18 +4,17 @@ import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import ItemListJsonLd from '@/app/_components/ItemListJsonLd';
 import Pagination from '@/components/Pagination';
 import ResultCard from '@/components/ResultCard';
-import PersonalProjectCard from '@/components/PersonalProjectCard';
-import type { Blog } from '@/app/_libs/microcms';
-import type { ResultsResponse } from '@/types/results';
+import type { ResultItem, ResultsResponse } from '@/types/results';
 
 type Props = {
   currentPage: number;
   resultsData: ResultsResponse;
-  personalArticle?: Blog;
+  personalResult?: ResultItem;
 };
 
-export default function ResultArchive({ currentPage, resultsData, personalArticle }: Props) {
+export default function ResultArchive({ currentPage, resultsData, personalResult }: Props) {
   const { contents: results, totalCount, limit } = resultsData;
+  const listedResults = personalResult ? results.filter(result => result.id !== personalResult.id) : results;
   const totalPages = Math.ceil(totalCount / limit);
   const pagePath = currentPage === 1 ? '/result/' : `/result/p/${currentPage}/`;
   const pageLabel = currentPage === 1 ? 'Web制作実績' : `Web制作実績（${currentPage}ページ目）`;
@@ -43,14 +42,14 @@ export default function ResultArchive({ currentPage, resultsData, personalArticl
 
           {results.length > 0 ? (
             <>
-              <div className="results-grid">
-                {results.map((result, index) => (
+              {listedResults.length > 0 && <div className="results-grid">
+                {listedResults.map((result, index) => (
                   <ResultCard key={result.id} result={result} showTechnologies={false} eagerImage={index === 0} />
                 ))}
-              </div>
+              </div>}
               <Pagination currentPage={currentPage} totalPages={totalPages} />
             </>
-          ) : (
+          ) : !personalResult && (
             <div className="results-empty">
               <div className="results-empty__icon" aria-hidden="true">
                 📝
@@ -59,11 +58,11 @@ export default function ResultArchive({ currentPage, resultsData, personalArticl
               <p className="results-empty__description">近日中に実績を公開予定です</p>
             </div>
           )}
-          {personalArticle && (
+          {personalResult && (
             <section className="result-detail__section" aria-labelledby="personal-project-heading">
               <h2 id="personal-project-heading" className="result-detail__section-title">個人開発</h2>
-              <p className="results-intro">自分の学習経験を出発点に作ったWebアプリです。開発日記で目的と開発経緯を紹介しています。</p>
-              <div className="results-grid"><PersonalProjectCard article={personalArticle} /></div>
+              <p className="results-intro">色彩検定の学習を支援するWebアプリです。実績詳細で担当範囲と実装内容を紹介しています。</p>
+              <div className="results-grid"><ResultCard result={personalResult} showTechnologies={false} /></div>
             </section>
           )}
         </div>
