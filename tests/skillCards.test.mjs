@@ -15,8 +15,8 @@ test('PHPと隣接するCMSカードを分け、既存12カードを保持して
   const cards = await renderCards();
   assert.deepEqual(cards.map(card => card.title), ['HTML / CSS / SCSS', 'JavaScript', 'PHP', 'CMS', 'Git', 'Webディレクション・進行管理', 'Next.js / React', 'TypeScript', 'microCMS', 'Tailwind CSS', 'ChatGPT / Claude / Gemini / Codex / gemini Notebook', 'Figma / Adobe', 'その他の補助ツール']);
   const php = cards.find(card => card.title === 'PHP').markup;
-  assert.match(php, /PHPを使ったテンプレートの実装や既存コードの改修/);
-  assert.match(php, /WordPressのテーマ開発でも使用しています。/);
+  assert.match(php, /PHPを用いたお問い合わせフォームやログイン機能の実装に対応しています。/);
+  assert.match(php, /WordPressのカスタマイズにも活用しています。/);
   assert.doesNotMatch(php, /Movable Type|RCMS|カスタムブロック|カスタムフィールド/);
 });
 
