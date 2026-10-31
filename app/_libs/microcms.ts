@@ -2,6 +2,7 @@ import { createClient } from 'microcms-js-sdk';
 import type { MicroCMSQueries, MicroCMSImage, MicroCMSListContent } from 'microcms-js-sdk';
 import type { ResultItem, WorkType, ProjectType, Role, ResultsResponse } from '@/types/results';
 import { buildMicroCMSFilters } from '@/lib/parse';
+import { compareContentNewest, NEWEST_CONTENT_ORDER } from '@/lib/contentOrder';
 
 // キャッシュ時間の定数（秒単位）
 const BLOG_LIST_CACHE_TIME = 60; // ブログ一覧: 60秒
@@ -37,18 +38,39 @@ const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY,
 });
 
-export const getBlogList = async (queries?: MicroCMSQueries) => {
-  const listData = await client.getList<Blog>({
-    endpoint: 'blog',
-    queries,
-    customRequestInit: {
-      next: {
-        revalidate: BLOG_LIST_CACHE_TIME,
-      },
-    },
-  });
-  return listData;
-};
+const BLOG_LIST_FIELDS = 'id,createdAt,publishedAt,updatedAt,revisedAt,title,description,thumbnail,thumbnailAlt,category';
+export const RESULT_LIST_FIELDS = 'id,createdAt,publishedAt,updatedAt,revisedAt,title,workType,project-type,project-roles,cover,clientName,summary,period,techStack,highlights,testimonial,kpi,siteUrl,scale';
+
+async function getOrderedList<T extends { id: string; publishedAt?: string; createdAt?: string }>(
+  endpoint: string,
+  queries: MicroCMSQueries,
+  revalidate: number,
+  compare: (a: T, b: T) => number = compareContentNewest,
+) {
+  const { limit = 10, offset = 0, fields, ...filters } = queries;
+  const orderFields = typeof fields === 'string' ? fields.split(',') : fields ?? [];
+  const fetchQueries = {
+    ...filters,
+    fields: [...new Set([...orderFields, 'id', 'publishedAt', 'createdAt'])].join(','),
+    orders: filters.orders ?? NEWEST_CONTENT_ORDER,
+    limit: 100,
+  };
+  const first = await client.getList<T>({ endpoint, queries: { ...fetchQueries, offset: 0 }, customRequestInit: { next: { revalidate } } });
+  const contents = [...first.contents];
+  // CMSのordersはID指定に非対応。全候補を取得し、同日時・欠損日も含めてページ分割前に確定する。
+  for (let nextOffset = contents.length; nextOffset < first.totalCount;) {
+    const page = await client.getList<T>({ endpoint, queries: { ...fetchQueries, offset: nextOffset }, customRequestInit: { next: { revalidate } } });
+    if (page.contents.length === 0) throw new Error('コンテンツ一覧の取得が途中で終了しました');
+    contents.push(...page.contents);
+    nextOffset += page.contents.length;
+  }
+  const ordered = contents.sort(compare);
+  return { contents: ordered.slice(offset, offset + limit), totalCount: first.totalCount, offset, limit };
+}
+
+export const getBlogList = async (queries?: MicroCMSQueries) => getOrderedList<Blog>(
+  'blog', { ...queries, fields: queries?.fields ?? BLOG_LIST_FIELDS }, BLOG_LIST_CACHE_TIME,
+);
 
 export const getBlogDetail = async (contentId: string, queries?: MicroCMSQueries) => {
   const detailData = await client.getListDetail<Blog>({
@@ -78,6 +100,7 @@ export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQue
 export const getAllBlogList = async () => {
   const listData = await client.getAllContents<Blog>({
     endpoint: 'blog',
+    queries: { orders: NEWEST_CONTENT_ORDER },
     customRequestInit: {
       next: {
         revalidate: BLOG_LIST_CACHE_TIME,
@@ -85,7 +108,7 @@ export const getAllBlogList = async () => {
     },
   });
 
-  return listData;
+  return listData.sort(compareContentNewest);
 };
 
 export const getAllCategoryList = async () => {
@@ -101,15 +124,17 @@ export const getAllCategoryList = async () => {
   return listData;
 };
 
-export const getAllResultList = async () => {
-  return client.getAllContents<ResultItem>({
+export const getAllResultList = async (queries?: Pick<MicroCMSQueries, 'fields'>) => {
+  const contents = await client.getAllContents<ResultItem>({
     endpoint: 'result',
+    queries: { ...queries, orders: NEWEST_CONTENT_ORDER },
     customRequestInit: {
       next: {
         revalidate: RESULTS_LIST_CACHE_TIME,
       },
     },
   });
+  return contents.sort(compareContentNewest);
 };
 
 // ===== Results API関数 =====
@@ -140,9 +165,9 @@ export const getResults = async (
     });
 
     // ソート条件を設定
-    let orders = '-publishedAt'; // デフォルトは新着順
+    let orders = NEWEST_CONTENT_ORDER;
     if (sort === 'periodDesc') {
-      orders = '-period,-publishedAt'; // 制作期間降順、同じ期間なら公開日降順
+      orders = `-period,${NEWEST_CONTENT_ORDER}`;
     }
 
     // クエリパラメータを構築
@@ -150,21 +175,20 @@ export const getResults = async (
       limit,
       offset,
       orders,
-      fields: 'id,publishedAt,updatedAt,title,workType,project-type,project-roles,cover,clientName,summary,period,techStack,highlights,testimonial,kpi,siteUrl,scale',
+      fields: RESULT_LIST_FIELDS,
     };
 
     if (filters.length > 0) {
       queries.filters = filters.join('[and]');
     }
 
-    const response = await client.getList<ResultItem>({
-      endpoint: 'result',
-      queries,
-      customRequestInit: {
-        next: {
-          revalidate: RESULTS_LIST_CACHE_TIME,
-        },
-      },
+    const response = await getOrderedList<ResultItem>('result', queries, RESULTS_LIST_CACHE_TIME, (a, b) => {
+      if (sort === 'periodDesc') {
+        const aPeriod = a.period ?? Number.NEGATIVE_INFINITY;
+        const bPeriod = b.period ?? Number.NEGATIVE_INFINITY;
+        if (aPeriod !== bPeriod) return aPeriod > bPeriod ? -1 : 1;
+      }
+      return compareContentNewest(a, b);
     });
 
     return {

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getResultDetail, getResults } from '@/app/_libs/microcms';
+import { getResultDetail, getAllResultList, RESULT_LIST_FIELDS } from '@/app/_libs/microcms';
 import { parseTechStack, parseRoles, splitHighlights, formatPeriod, safeGetProjectType, safeGetRoles, safeGetClientName, safeGetWorkType, safeGetCover, safeGetScale } from '@/lib/parse';
 import { getFaviconUrl } from '@/lib/favicon';
 import PageTitle from '@/app/_components/PageTitle';
@@ -13,6 +13,7 @@ import ResultCard from '@/components/ResultCard';
 import { createMetadata } from '@/lib/seo';
 import { getResultSeoDescription, getResultSeoTitle } from '@/lib/contentSeo';
 import { groupProjectTechnologies } from '@/lib/resultPresentation';
+import { compareContentNewest } from '@/lib/contentOrder';
 import '@/styles/pages/result.scss';
 
 interface ResultDetailPageProps {
@@ -90,9 +91,9 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
   const highlightsArray = splitHighlights(highlights);
   const formattedPeriod = formatPeriod(period);
 
-  const relatedData = await getResults({ limit: 24, sort: 'new' });
+  const relatedData = await getAllResultList({ fields: RESULT_LIST_FIELDS }).catch(() => []);
   const currentTechnologies = new Set(techStackArray.map((technology) => technology.toLowerCase()));
-  const relatedResults = relatedData.contents
+  const relatedResults = relatedData
     .filter((item) => item.id !== result.id)
     .map((item) => {
       const sharedTechnologies = parseTechStack(item.techStack).filter((technology) => currentTechnologies.has(technology.toLowerCase())).length;
@@ -101,7 +102,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
       return { item, score: sharedTechnologies + sameProjectType + sameWorkType };
     })
     .filter(({ score }) => score > 0)
-    .sort((a, b) => b.score - a.score)
+    .sort((a, b) => compareContentNewest(a.item, b.item))
     .slice(0, 3)
     .map(({ item }) => item);
   const contactTopics = [...rolesArray, ...techStackArray].slice(0, 4).join('、');

@@ -1,4 +1,5 @@
 import type { ResultItem } from '@/types/results';
+import { compareContentNewest } from '@/lib/contentOrder';
 
 export function groupProjectTechnologies(value?: string): { technologies: string[]; tools: string[] } {
   const tools = new Set(['vscode', 'visual studio code', 'photoshop', 'illustrator', 'figma', 'xd', 'canva', 'cursor']);
@@ -11,14 +12,9 @@ export function groupProjectTechnologies(value?: string): { technologies: string
 }
 
 export function selectFeaturedResults(results: ResultItem[]): ResultItem[] {
-  // 代表枠の選定だけを行い、本文・担当タグ・一覧データは変更しない。
-  const ids = ['corporate-handball-team-01', 'risk-management-corporate-01', 'social-entrepreneurship-program-01', 'career-media-01'];
-  const selected = ids.flatMap(id => {
-    const item = results.find(result => result.id === id);
-    return item ? [item] : [];
-  });
-  const seen = new Set(selected.map(item => item.id));
-  for (const item of results) {
+  const selected: ResultItem[] = [];
+  const seen = new Set<string>();
+  for (const item of [...results].sort(compareContentNewest)) {
     if (!seen.has(item.id)) {
       selected.push(item);
       seen.add(item.id);

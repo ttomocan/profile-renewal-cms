@@ -11,7 +11,8 @@ function load(relativePath) {
   const code = ts.transpileModule(readFileSync(new URL(relativePath, import.meta.url), 'utf8'), {
     compilerOptions: { module: ts.ModuleKind.CommonJS, esModuleInterop: true },
   }).outputText;
-  runInNewContext(code, { module: componentModule, exports: componentModule.exports, require });
+  const localRequire = id => id === '@/lib/contentOrder' ? load('../lib/contentOrder.ts') : require(id);
+  runInNewContext(code, { module: componentModule, exports: componentModule.exports, require: localRequire });
   return componentModule.exports;
 }
 
@@ -26,16 +27,16 @@ test('使用技術と制作ツールを分け、空欄と旧データでも表�
 
 test('代表枠は存在する実績だけを選び、元の一覧を変更しない', () => {
   const { selectFeaturedResults } = load('../lib/resultPresentation.ts');
-  const items = [{ id: 'other' }, { id: 'career-media-01' }, { id: 'corporate-handball-team-01' }];
+  const items = [{ id: 'other', publishedAt: '2026-02-01' }, { id: 'career-media-01', publishedAt: '2025-01-01' }, { id: 'corporate-handball-team-01', publishedAt: '2025-02-01' }];
   const selected = selectFeaturedResults(items);
-  assert.deepEqual(Array.from(selected, item => item.id), ['corporate-handball-team-01', 'career-media-01', 'other']);
+  assert.deepEqual(Array.from(selected, item => item.id), ['other', 'corporate-handball-team-01', 'career-media-01']);
   assert.deepEqual(items.map(item => item.id), ['other', 'career-media-01', 'corporate-handball-team-01']);
   assert.equal(selectFeaturedResults([]).length, 0);
   assert.deepEqual(Array.from(selectFeaturedResults([{ id: 'new' }]), item => item.id), ['new']);
 });
 
-test('代表枠は優先順を維持し、取得順で重複なく6件まで補う', () => {
+test('代表枠は固定案件を優先せず、公開日の新しい6件を重複なく選ぶ', () => {
   const { selectFeaturedResults } = load('../lib/resultPresentation.ts');
-  const items = ['extra-1', 'career-media-01', 'corporate-handball-team-01', 'extra-1', 'social-entrepreneurship-program-01', 'risk-management-corporate-01', 'extra-2', 'extra-3'].map(id => ({ id }));
-  assert.deepEqual(Array.from(selectFeaturedResults(items), item => item.id), ['corporate-handball-team-01', 'risk-management-corporate-01', 'social-entrepreneurship-program-01', 'career-media-01', 'extra-1', 'extra-2']);
+  const items = ['corporate-handball-team-01', 'extra-1', 'extra-2', 'extra-3', 'extra-4', 'extra-5', 'extra-6', 'extra-6'].map((id, i) => ({ id, publishedAt: `2026-01-${String(i + 1).padStart(2, '0')}` }));
+  assert.deepEqual(Array.from(selectFeaturedResults(items), item => item.id), ['extra-6', 'extra-5', 'extra-4', 'extra-3', 'extra-2', 'extra-1']);
 });

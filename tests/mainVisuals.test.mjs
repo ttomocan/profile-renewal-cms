@@ -60,10 +60,10 @@ async function loadHome() {
       const empty = async () => ({ contents: [], totalCount: 0, offset: 0, limit: 6 });
       return { getBlogList: empty, getResults: empty };
     }
-    if (id === '@/lib/resultPresentation') {
+    if (id === '@/lib/resultPresentation' || id === '@/lib/contentOrder') {
       const utility = { exports: {} };
-      const output = ts.transpileModule(readSource('lib/resultPresentation.ts'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
-      runInNewContext(output, { module: utility, exports: utility.exports, require });
+      const output = ts.transpileModule(readSource(id.slice(2) + '.ts'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+      runInNewContext(output, { module: utility, exports: utility.exports, require: localRequire });
       return utility.exports;
     }
     if (id === '@/app/_constants') return { TOP_DIARY_LIMIT: 6 };

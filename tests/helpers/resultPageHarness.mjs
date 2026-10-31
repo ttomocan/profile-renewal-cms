@@ -39,7 +39,7 @@ export function loadPage(relativePath, cms) {
 export function loadDetail(result) {
   return loadPage('app/result/[id]/page.tsx', {
     getResultDetail: async () => result,
-    getResults: async () => ({ contents: [], totalCount: 0, offset: 0, limit: 24 }),
+    getAllResultList: async () => [],
     getBlogList: async () => ({ contents: [] }),
   });
 }
