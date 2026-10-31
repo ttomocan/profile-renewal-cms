@@ -135,8 +135,6 @@ export default function Page() {
         </div>
         <div className="about-related-links fadeUpTrigger">
           <Link href="/diary/iropon-release/">「いろポン！」の目的・開発経緯を読む</Link>
-          <Link href="/diary/">個人開発・ブログの活動記録を読む</Link>
-          <Link href="/#wordpress-blog">自主運営のWordPress実績を見る</Link>
         </div>
       </section>
 

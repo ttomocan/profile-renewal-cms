@@ -6,21 +6,21 @@ const copyByVariant: Record<BlogVariant, ReactNode> = {
   home: (
     <>
       個人活動として、ボイストレーニングとブログデザインの2つのブログを運営しています。
-      <br />
+      <br className="u-pc-only" />
       実体験とWeb制作者の視点から、読者が実践しやすい情報を発信しています。
     </>
   ),
   about: (
     <>
       個人で2つのブログを企画・制作・運営しています。
-      <br />
+      <br className="u-pc-only" />
       継続的な発信を通して、記事設計、UI改善、SEO、運用の知見を深めています。
     </>
   ),
   skill: (
     <>
       ボイトレや話し方に関する情報を「ともきゃんのボイトレ生活」で、
-      <br />
+      <br className="u-pc-only" />
       WebデザインやWordPressの学習に役立つ情報、資格・参考書の紹介を「ブログデザインマニア」で発信しています。
     </>
   ),
@@ -63,10 +63,10 @@ export default function Blog({ variant = 'home' }: Props) {
         <p className="l-blog-area__lead fadeUpTrigger">{copyByVariant[variant]}</p>
         <div className="l-blog-area__button fadeUpTrigger">
           <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
-            ともきゃんのボイトレ生活
+            ともきゃんのボイトレ生活を見る
           </a>
           <a href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer" className="c-button__link-external c-link-external --w">
-            ブログデザインマニア
+            ブログデザインマニアを見る
           </a>
         </div>
       </div>
