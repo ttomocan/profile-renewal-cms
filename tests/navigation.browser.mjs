@@ -164,18 +164,13 @@ try {
     }), true);
 
     await visit('/about/');
-    await page.getByRole('link', { name: '自主運営のWordPress実績を見る' }).click();
-    await page.waitForURL(origin + '/#wordpress-blog');
-    await page.waitForFunction(() => {
-      const rect = document.getElementById('wordpress-blog').getBoundingClientRect();
-      return rect.top < innerHeight && rect.bottom > 0;
-    });
+    assert.equal(await page.getByRole('link', { name: '個人開発・ブログの活動記録を読む', exact: true }).count(), 0);
+    assert.equal(await page.getByRole('link', { name: '自主運営のWordPress実績を見る', exact: true }).count(), 0);
+    await page.getByRole('link', { name: '「いろポン！」の目的・開発経緯を読む', exact: true }).click();
+    await page.waitForURL(origin + '/diary/iropon-release/');
     await settled();
-    assert.equal(await page.locator('#wordpress-blog').evaluate(e => {
-      const top = e.getBoundingClientRect().top;
-      return top >= document.querySelector('.l-header').offsetHeight - 1 && top < innerHeight;
-    }), true);
-    current.nextLinkHash = true;
+    current.retainedPersonalWorkLink = true;
+    current.removedSupplementalLinks = true;
 
     await visit('/about/'); await scroll(900); await clear();
     await page.locator('.c-backtotop.show').click();
