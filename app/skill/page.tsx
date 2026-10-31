@@ -61,7 +61,7 @@ export default function Page() {
         <div className="skill-cards">
           <SkillCard title="HTML / CSS / SCSS" image="/img/pages/skill/img_html5.svg" imageAlt="HTML" summary="文書構造と更新後の保守性を考えてマークアップ・スタイリングします。" points={['セマンティックHTMLと見出し設計', 'BEM・FLOCSSを用いたCSS設計', '各画面幅に合わせたレスポンシブ実装']} />
           <SkillCard title="JavaScript" image="/img/pages/skill/img_javascript.svg" imageAlt="JavaScript" summary="UIの操作やアニメーションを、既存処理への影響を確認しながら実装します。" points={['メニュー、モーダル、スライダーなどのUI実装', 'フォームや表示切り替えの制御', 'ブラウザ間の表示・操作確認']} />
-          <SkillCard title="PHP" image="/img/pages/skill/img_php.svg" imageAlt="PHP" summary="PHPを使ったテンプレートの実装や既存コードの改修に対応します。WordPressのテーマ開発でも使用しています。" points={['テンプレート内の表示処理の実装', '既存コードの改修・保守']} />
+          <SkillCard title="PHP" image="/img/pages/skill/img_php.svg" imageAlt="PHP" summary="PHPを用いたお問い合わせフォームやログイン機能の実装に対応しています。WordPressのカスタマイズにも活用しています。" points={['テンプレート内の表示処理の実装', '既存コードの改修・保守']} />
           <SkillCard title="CMS" image="/img/pages/skill/wordpress-official.svg" imageAlt="WordPress" summary="WordPressを中心にCMSを使用しています。Movable Type・RCMSの使用経験があり、microCMSは個人開発で使用しています。" points={['WordPressのオリジナルテーマ開発・既存テーマの改修', '投稿タイプ・投稿機能、カスタムブロック、カスタムフィールドの設計', 'お問い合わせフォーム、表示速度、運用時の改修']} />
           <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、チームで確認しやすい単位を意識してバージョン管理します。" points={['ブランチを使った機能開発・修正', '差分確認とレビューを前提にしたコミット', 'GitHubを使ったコード管理']} />
           <SkillCard
