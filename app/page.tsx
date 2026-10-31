@@ -11,10 +11,9 @@ import { caveatBrush } from '@/app/fonts';
 import { selectFeaturedResults } from '@/lib/resultPresentation';
 
 export default async function Home() {
-  const [data, resultsData, personalData] = await Promise.all([
+  const [data, resultsData] = await Promise.all([
     getBlogList({ limit: TOP_DIARY_LIMIT }),
-    getResults({ limit: 100 }),
-    getBlogList({ ids: 'iropon-release', limit: 1, fields: 'id,title,description,thumbnail' }).catch(() => ({ contents: [] })),
+    getResults({ limit: 6, sort: 'new' }),
   ]);
   const {
     props: { srcSet: desktopHeroSrcSet, ...desktopHeroProps },
@@ -96,9 +95,9 @@ export default async function Home() {
           <div className="p-top-results__cont fadeUpTrigger">
             <p>本業のCMS構築、副業のサイト制作、個人開発を紹介します。<br />各案件の担当範囲と実装内容は、詳細ページで確認できます。</p>
           </div>
-          {(resultsData.contents.length > 0 || personalData.contents.length > 0) && (
+          {resultsData.contents.length > 0 && (
             <div className="p-top-results__list fadeUpTrigger">
-              <ResultsSlider results={selectFeaturedResults(resultsData.contents)} personalArticle={personalData.contents[0]} />
+              <ResultsSlider results={selectFeaturedResults(resultsData.contents)} />
             </div>
           )}
           <div className="p-top-results__button fadeUpTrigger">

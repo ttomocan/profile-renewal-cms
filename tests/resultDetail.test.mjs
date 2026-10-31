@@ -17,7 +17,7 @@ for (const id of ['corporate-handball-team-01', 'another-project']) {
           assert.equal(requestedId, id);
           return result;
         },
-        getResults: async () => ({ contents: [result, relatedResult], totalCount: 2, offset: 0, limit: 24 }),
+        getAllResultList: async () => [result, relatedResult],
         getBlogList: async () => {
           blogCalls += 1;
           return { contents: articles };
@@ -48,6 +48,20 @@ test('関連制作実績がない詳細でも問い合わせと一覧に戻る�
   assert.match(html, /href="\/contact\/?"/);
   assert.match(html, /<a\b(?=[^>]*href="\/result\/?")(?=[^>]*class="result-detail__navigation-back")/);
   assert.match(html, /実績紹介に戻る/);
+});
+
+test('関連実績は24件の先取りをせず、関連する範囲から新着3件を選ぶ', async () => {
+  const current = { ...oldData, techStack: 'PHP' };
+  const related = Array.from({ length: 30 }, (_, i) => ({ ...oldData, id: `related-${i + 1}`, title: `関連案件${i + 1}`, techStack: 'PHP', publishedAt: `2026-01-${String(i + 1).padStart(2, '0')}` }));
+  const page = loadPage('app/result/[id]/page.tsx', {
+    getResultDetail: async () => current,
+    getAllResultList: async () => [current, { ...oldData, id: 'unrelated', title: '無関係の最新案件', techStack: 'Rust', publishedAt: '2030-01-01' }, ...related],
+  });
+  const html = renderToStaticMarkup(await page.default(params));
+  const section = html.match(/<section[^>]*class="result-detail__section result-related"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(section);
+  assert.deepEqual([...section.matchAll(/href="\/result\/([^/"?]+)\/?"/g)].map(([, id]) => id), ['related-30', 'related-29', 'related-28']);
+  assert.doesNotMatch(section, /無関係の最新案件|related-1\//);
 });
 
 test('旧データ・未入力の任意項目では空の見出しと不明な期間を出さない', async () => {

@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { DIARY_LIST_LIMIT, RESULTS_LIST_LIMIT } from './_constants';
 import { getAllBlogList, getAllCategoryList, getAllResultList } from './_libs/microcms';
 import { createCanonicalUrl } from '@/lib/seo';
+import { compareContentNewest } from '@/lib/contentOrder';
 
 const STATIC_PATHS = ['/', '/about/', '/contact/', '/skill/', '/diary/', '/result/'];
 
@@ -24,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: path === '/' ? 1 : 0.8,
   }));
 
-  const sortedBlogs = [...blogContents].sort((a, b) => Date.parse(b.publishedAt || b.createdAt) - Date.parse(a.publishedAt || a.createdAt));
+  const sortedBlogs = [...blogContents].sort(compareContentNewest);
   const blogUrls: MetadataRoute.Sitemap = sortedBlogs.map((blog) => ({
     url: createCanonicalUrl(`/diary/${blog.id}/`),
     lastModified: blog.revisedAt || blog.updatedAt || blog.publishedAt,
@@ -66,7 +67,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  const sortedResults = [...resultContents].sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+  const sortedResults = [...resultContents].sort(compareContentNewest);
   const resultUrls: MetadataRoute.Sitemap = sortedResults.map((result) => ({
     url: createCanonicalUrl(`/result/${result.id}/`),
     lastModified: result.revisedAt || result.updatedAt,
