@@ -133,7 +133,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 .result-card {
   background: $white;
   box-shadow: $shadow-sm;
-  border: 1px solid $primary-soft;
+  border: 1px solid var(--color-border);
   border-radius: $radiusStandard;
   overflow: hidden;
   transition: $transition-base;
@@ -144,7 +144,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
     box-shadow: $shadow-xl;
-    border-color: $primary-strong;
+    border-color: var(--color-border);
 
     .result-card__image-img {
       transform: scale(1.08);
@@ -549,7 +549,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     background: linear-gradient(135deg, $white 0%, $base-color 100%);
     border-radius: $radiusStandard;
     padding: 25px;
-    border: 1px solid $primary-soft;
+    border: 1px solid var(--color-border);
 
     @include mq('sp') {
       padding: 15px;
@@ -695,7 +695,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       // CTAの囲みは維持する
       &--summary {
         background: $white;
-        border: 1px solid $primary-soft;
+        border: 1px solid var(--color-border);
         border-radius: $radiusStandard;
         padding: 20px 25px;
 
@@ -759,7 +759,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       align-items: center;
       padding: 16px 28px;
       background: $white;
-      border: 1px solid $primary-soft;
+      border: 1px solid var(--color-border);
       border-radius: $radiusStandard;
       color: $primary-color;
       text-decoration: none;
@@ -846,7 +846,7 @@ cite {
   align-items: center;
   display: flex;
   background: $white;
-  border: 1px solid $primary-soft;
+  border: 1px solid var(--color-border);
   border-radius: $radiusStandard;
   overflow: hidden;
   transition: $transition-base;
@@ -856,7 +856,7 @@ cite {
 
   &:hover {
     box-shadow: $shadow-lg;
-    border-color: $primary-strong;
+    border-color: var(--color-border);
 
     .site-link-card__title,
     .site-link-card__description,
