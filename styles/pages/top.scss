@@ -210,7 +210,7 @@
 
   &__item {
     background: #ffffff;
-    border: 1px solid rgba(243, 107, 10, 0.3);
+    border: 1px solid var(--color-border);
     border-radius: $radiusStandard;
     display: flex;
     flex-direction: column;
@@ -261,10 +261,14 @@
   }
 
   &__image {
-    border: 1px solid 1px solid rgba(243, 107, 10, 0.3);
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
+
+    img {
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+    }
   }
 
   &__text-area {
@@ -277,7 +281,7 @@
   &__speech-bubble {
     position: relative;
     background: #ffffff;
-    border: 1px solid #f36b0a;
+    border: 1px solid var(--color-border);
     border-radius: 20px;
     padding: 20px 25px;
 
@@ -291,7 +295,7 @@
       height: 0;
       border-top: 11px solid transparent;
       border-bottom: 11px solid transparent;
-      border-right: 11px solid #f36b0a;
+      border-right: 11px solid var(--color-border);
     }
 
     &::after {
@@ -549,7 +553,7 @@
       &::before {
         border-right: none;
         border-left: 12px solid transparent;
-        border-bottom: 12px solid #f36b0a;
+        border-bottom: 12px solid var(--color-border);
       }
 
       &::after {
@@ -664,7 +668,7 @@
     width: 50px;
     height: 50px;
     background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(243, 107, 10, 0.3);
+    border: 1px solid var(--color-border);
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -766,7 +770,7 @@
   .result-card {
     background: #ffffff;
     box-shadow: 0 1px 2px 0 rgba(243, 107, 10, 0.05);
-    border: 1px solid rgba(243, 107, 10, 0.2);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -779,7 +783,7 @@
       box-shadow:
         0 20px 25px -5px rgba(243, 107, 10, 0.12),
         0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      border-color: rgba(243, 107, 10, 0.5);
+      border-color: var(--color-border);
       transform: translateY(-2px);
 
       .result-card__image-img {
@@ -1013,7 +1017,7 @@
     width: 50px;
     height: 50px;
     background: rgba(255, 255, 255, 0.95);
-    border: 1px solid rgba(243, 107, 10, 0.3);
+    border: 1px solid var(--color-border);
     border-radius: 50%;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     cursor: pointer;
@@ -1072,7 +1076,7 @@
   .diary-card {
     background: #ffffff;
     box-shadow: 0 1px 2px 0 rgba(243, 107, 10, 0.05);
-    border: 1px solid rgba(243, 107, 10, 0.2);
+    border: 1px solid var(--color-border);
     border-radius: 10px;
     overflow: hidden;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1085,7 +1089,7 @@
       box-shadow:
         0 20px 25px -5px rgba(243, 107, 10, 0.12),
         0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      border-color: rgba(243, 107, 10, 0.5);
+      border-color: var(--color-border);
       transform: translateY(-2px);
 
       .diary-card__image-img {

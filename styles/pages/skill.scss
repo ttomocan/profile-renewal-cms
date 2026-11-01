@@ -31,7 +31,7 @@
       align-content: start;
       align-items: center;
       background: #ffffff;
-      border: 1px solid rgba(243, 107, 10, 0.25);
+      border: 1px solid var(--color-border);
       border-radius: $radiusStandard;
       display: grid;
       gap: 20px 30px;
