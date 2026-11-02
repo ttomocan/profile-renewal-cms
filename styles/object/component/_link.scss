@@ -1,5 +1,31 @@
 @use '../../global' as *;
 
+.c-text-link,
+.c-text-links a {
+  color: #b54708;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: color 0.2s ease;
+
+  @include hover {
+    &:hover {
+      color: #8f3500;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+    }
+  }
+
+  &:focus-visible {
+    color: #8f3500;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    outline: 3px solid #69300b;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
 .c-link {
   &-external {
     &::after {

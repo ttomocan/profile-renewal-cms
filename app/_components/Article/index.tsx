@@ -50,7 +50,7 @@ export default function Article({ data }: Props) {
         </nav>
       )}
       <div
-        className={styles.content}
+        className={`${styles.content} c-text-links`}
         dangerouslySetInnerHTML={{
           __html: article.content,
         }}

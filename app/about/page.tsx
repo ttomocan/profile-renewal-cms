@@ -134,7 +134,7 @@ export default function Page() {
           <p>「いろポン！」は、色彩検定の学習中に感じた色名の覚えにくさをきっかけに作った、色をクイズで覚える個人開発のWebアプリです。</p>
         </div>
         <div className="about-related-links fadeUpTrigger">
-          <Link href="/diary/iropon-release/">「いろポン！」の目的・開発経緯を読む</Link>
+          <Link href="/diary/iropon-release/" className="c-text-link">「いろポン！」の目的・開発経緯を読む</Link>
         </div>
       </section>
 
