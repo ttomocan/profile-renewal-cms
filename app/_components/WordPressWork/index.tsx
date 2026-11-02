@@ -37,7 +37,7 @@ export default function WordPressWork() {
               <dd>ともきゃんのボイトレ生活：月平均1万PV（2025年までの運営実績）</dd>
             </div>
           </dl>
-          <div className={styles.links}>
+          <div className={`${styles.links} c-text-links`}>
             <a href="https://www.newagevoice.com/" target="_blank" rel="noopener noreferrer" className="c-link-external">ともきゃんのボイトレ生活を見る<span className="u-visually-hidden">（新しいタブで開く）</span></a>
             <a href="https://www.blogdesign-mania.com/" target="_blank" rel="noopener noreferrer" className="c-link-external">ブログデザインマニアを見る<span className="u-visually-hidden">（新しいタブで開く）</span></a>
           </div>

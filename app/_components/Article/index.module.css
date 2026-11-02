@@ -242,22 +242,6 @@
   color: #b54708;
 }
 
-.content a {
-  color: #b54708;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: opacity 0.2s ease;
-}
-
-.content a:hover {
-  color: #8f3500;
-}
-
-.content a:focus-visible {
-  outline: 3px solid #69300b;
-  outline-offset: 3px;
-}
-
 .content > figure {
   margin: 40px 0;
 	text-align: center;

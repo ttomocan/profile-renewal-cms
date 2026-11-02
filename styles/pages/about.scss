@@ -173,12 +173,6 @@
     display: grid;
     gap: 10px;
     margin-top: 24px;
-
-    a {
-      color: $mainC;
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
   }
 
   @include mq(sp) {
