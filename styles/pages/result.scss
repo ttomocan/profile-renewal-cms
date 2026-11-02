@@ -407,6 +407,12 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   margin-bottom: 50px;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: clamp(20px, 2vw, 30px);
+
+  @include mq('pcTab') {
+    &--personal {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
 }
 
 // ===============================================

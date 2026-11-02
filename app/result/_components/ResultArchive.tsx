@@ -62,7 +62,7 @@ export default function ResultArchive({ currentPage, resultsData, personalResult
             <section className="result-detail__section" aria-labelledby="personal-project-heading">
               <h2 id="personal-project-heading" className="result-detail__section-title">個人開発</h2>
               <p className="results-intro">色彩検定の学習を支援するWebアプリです。実績詳細で担当範囲と実装内容を紹介しています。</p>
-              <div className="results-grid"><ResultCard result={personalResult} showTechnologies={false} /></div>
+              <div className="results-grid results-grid--personal"><ResultCard result={personalResult} showTechnologies={false} /></div>
             </section>
           )}
         </div>
