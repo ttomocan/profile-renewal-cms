@@ -19,9 +19,9 @@ const copyByVariant: Record<BlogVariant, ReactNode> = {
   ),
   skill: (
     <>
-      ボイトレや話し方に関する情報を「ともきゃんのボイトレ生活」で、
+      ボイトレや話し方に関する情報を『ともきゃんのボイトレ生活』で、
       <br className="u-pc-only" />
-      WebデザインやWordPressの学習に役立つ情報、資格・参考書の紹介を「ブログデザインマニア」で発信しています。
+      ブログのデザインやWordPressの活用に関する記事を『ブログデザインマニア』で公開しています。
     </>
   ),
   diary: (
