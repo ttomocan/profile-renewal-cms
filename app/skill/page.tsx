@@ -48,7 +48,7 @@ export default function Page() {
 
   return (
     <>
-      <section className="first inner inner-s">
+      <section className="first inner">
         <p className="fadeUpTrigger">実務での対応領域と、個人開発・学習で扱っている技術を分けて紹介します。実装に加え、仕様確認や制作進行、公開対応も行っています。WordPressの実装・改修では、画面表示とともに更新する人の作業や保守性を考えます。案件ごとの担当範囲は制作実績に掲載しています。</p>
       </section>
 
