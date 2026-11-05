@@ -17,10 +17,10 @@ export default async function Home() {
   ]);
   const {
     props: { srcSet: desktopHeroSrcSet, ...desktopHeroProps },
-  } = getImageProps({ src: '/img/pages/top/img_hero.webp', alt: '', width: 2732, height: 1000, sizes: '100vw', loading: 'eager', fetchPriority: 'high' });
+  } = getImageProps({ src: '/img/pages/top/img_hero.webp?v=61a7efdf12f4', alt: '', width: 2732, height: 1000, sizes: '100vw', loading: 'eager', fetchPriority: 'high' });
   const {
     props: { srcSet: mobileHeroSrcSet },
-  } = getImageProps({ src: '/img/pages/top/img_hero_sp.webp', alt: '', width: 750, height: 1000, sizes: '100vw', loading: 'eager', fetchPriority: 'high' });
+  } = getImageProps({ src: '/img/pages/top/img_hero_sp.webp?v=725817182b45', alt: '', width: 750, height: 1000, sizes: '100vw', loading: 'eager', fetchPriority: 'high' });
 
   return (
     <>
