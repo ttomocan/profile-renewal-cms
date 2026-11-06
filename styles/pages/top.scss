@@ -524,19 +524,13 @@
     &__item {
       align-items: center;
       display: flex;
-      flex-direction: row;
-      gap: 16px;
-      padding: 14px 16px;
-      text-align: left;
+      flex-direction: column;
+      gap: 6px;
+      padding: 18px;
+      text-align: center;
 
       dt {
-        flex: 0 1 38%;
         margin-bottom: 0;
-      }
-
-      dd {
-        flex: 1 1 62%;
-        min-width: 0;
       }
     }
   }
@@ -873,7 +867,7 @@
       border-radius: $radiusSmall;
       padding: 2px 10px;
       font-weight: 600;
-      color: $mainC;
+      color: $brandStrong;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -971,7 +965,7 @@
   }
 
   .result-card__detail-text {
-    color: $mainC;
+    color: $brandStrong;
     font-size: 13px;
     font-weight: 700;
     margin-top: 14px;
