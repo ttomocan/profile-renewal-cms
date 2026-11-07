@@ -90,10 +90,10 @@ test('日記検索ボタンは通常とhoverで文字4.5:1以上', () => {
     assert.ok(contrast(values.background, values.color === 'white' ? '#ffffff' : values.color) >= 4.5);
   }
 });
-test('本文系テキストリンクは通常とhoverで下線を保ち、文字4.5:1以上', () => {
+test('本文系テキストリンクは通常時とfocusの下線、通常・hoverの文字4.5:1以上を保つ', () => {
   const file = 'styles/object/component/_link.scss';
   const normal = style(file, '.c-text-links a');
-  assert.equal(normal['text-decoration'], 'underline');
+  assert.equal(normal['text-decoration-line'], 'underline');
   for (const values of [normal, { ...normal, ...style(file, '.c-text-links a:hover') }]) {
     const opacity = Number(values.opacity ?? 1);
     const effective = values.color.match(/[a-f0-9]{2}/gi).map((c, i) =>
@@ -101,7 +101,7 @@ test('本文系テキストリンクは通常とhoverで下線を保ち、文字
     for (const background of ['#f2edea', '#ffffff', '#fffaf5']) assert.ok(contrast(effective, background) >= 4.5);
   }
   const focus = style(file, '.c-text-links a:focus-visible');
-  assert.equal(focus['text-decoration'], 'underline');
+  assert.equal(focus['text-decoration-line'], 'underline');
   assert.ok(Number.parseFloat(focus.outline) >= 3);
   assert.ok(contrast(focus.outline.match(/#[a-f0-9]{6}/i)[0], '#f2edea') >= 3);
 });
