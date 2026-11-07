@@ -120,6 +120,17 @@ test('目次リンクは下線なしでも通常hoverの文字とキーボード
   assert.ok(contrast(focus.outline.match(/#[a-f0-9]{6}/i)[0], background) >= 3);
 });
 
+test('目次の項目間の余白を抑えても44pxのタップ領域と複数行の読みやすさを保つ', () => {
+  const file = 'app/_components/Article/index.module.css';
+  const gap = Number.parseFloat(style(file, '.tableOfContents ol').gap);
+  const headingMargin = Number.parseFloat(style(file, '.tableOfContents li + li:not(.tableOfContentsSubItem)')['margin-top']);
+  const link = style(file, '.tableOfContents a');
+  assert.ok(gap + headingMargin <= 6, '見出し項目の間に余分な空白を重ねない');
+  assert.ok(Number.parseFloat(link.padding) * 2 <= 12, '折り返す項目の上下余白を抑える');
+  assert.ok(Number.parseFloat(link['min-height']) >= 44, 'スマートフォンのタップ領域を維持する');
+  assert.ok(Number.parseFloat(link['line-height']) >= 1.5, '折り返す文字の行間を詰めすぎない');
+});
+
 test('お問い合わせ入力とラジオの境界・focusは背景に対して3:1以上', () => {
   const file = 'styles/object/project/_form.scss';
   const ring = style(file, '.p-form .checkbox:has(input[type=radio]) input[type=radio] + .checkbox-text::before');
