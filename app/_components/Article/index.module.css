@@ -32,7 +32,7 @@
 
 .tableOfContents ol {
   display: grid;
-  gap: 4px;
+  gap: 2px;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -44,7 +44,7 @@
 }
 
 .tableOfContents li + li:not(.tableOfContentsSubItem) {
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .tableOfContents a {
@@ -53,7 +53,7 @@
   align-items: center;
   min-height: 44px;
   border-radius: 4px;
-  padding: 8px 10px;
+  padding: 6px 10px;
   font-size: 0.95rem;
   line-height: 1.75;
   overflow-wrap: anywhere;
