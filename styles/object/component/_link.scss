@@ -3,22 +3,20 @@
 .c-text-link,
 .c-text-links a {
   color: #b54708;
-  text-decoration: underline;
+  text-decoration-line: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 
   @include hover {
     &:hover {
       color: #8f3500;
-      text-decoration: underline;
-      text-decoration-thickness: 2px;
     }
   }
 
   &:focus-visible {
     color: #8f3500;
-    text-decoration: underline;
+    text-decoration-line: underline;
     text-decoration-thickness: 2px;
     outline: 3px solid #69300b;
     outline-offset: 3px;
@@ -42,5 +40,16 @@
         background: url(/img/common/icon_link-external-w.svg) no-repeat center/contain;
       }
     }
+  }
+}
+
+// カード内のテキスト下線も、通常のテキストリンクと同じ速さで切り替える。
+.result-card__detail-text {
+  transition: text-decoration-color 0.2s ease;
+}
+
+@include hover {
+  .result-card__link:hover:not(:focus-visible) .result-card__detail-text {
+    text-decoration-color: transparent;
   }
 }

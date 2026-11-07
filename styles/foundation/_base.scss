@@ -30,7 +30,7 @@ a {
   cursor: pointer;
   outline: none;
   text-decoration: none;
-  transition: 0.1s;
+  transition: 0.1s, text-decoration-color 0.2s ease;
   word-wrap: break-word;
 
   @include mq(pc) {
@@ -42,8 +42,8 @@ a {
 
   /* ホバー可能なデバイスでのみ適用される */
   @include hover {
-    &:is(:hover, :focus) {
-      text-decoration: none;
+    &:hover:not(:focus-visible) {
+      text-decoration-color: transparent;
     }
   }
 }
