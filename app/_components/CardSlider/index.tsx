@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useId, useRef, type ReactNode } from 'react';
+import { Children, useEffect, useId, useRef, type ReactNode } from 'react';
 import Splide from '@splidejs/splide';
 import '@splidejs/splide/css/core';
+import './style.scss';
 
 type Props = {
   children: ReactNode;
@@ -15,11 +16,12 @@ type Props = {
 // SSR exposes all cards. Splide enhances only the existing mobile carousel;
 // its partial destruction restores the desktop grid on breakpoint changes.
 export default function CardSlider({ children, kind, label, previous, next }: Props) {
+  const cardCount = Children.count(children);
   const root = useRef<HTMLDivElement>(null);
   const id = `card-slider-${useId().replace(/:/g, '')}`;
 
   useEffect(() => {
-    if (!root.current) return;
+    if (cardCount <= 1 || !root.current) return;
     const element = root.current;
     const focusableNodes = 'a, button, textarea, input, select, iframe, [tabindex], [contenteditable]';
     // Splide 4.1.4 restores slide attributes on destroy, but not the tabindex
@@ -77,7 +79,16 @@ export default function CardSlider({ children, kind, label, previous, next }: Pr
       }),
     });
     return () => { slider.destroy(true); restore(); };
-  }, [children, label, previous, next]);
+  }, [cardCount, children, label, previous, next]);
+
+  if (cardCount === 0) return null;
+  if (cardCount === 1) {
+    return (
+      <div className={`card-slider--static ${kind}-slider-wrapper`}>
+        <ul className={`${kind}-grid`} aria-label={label}>{children}</ul>
+      </div>
+    );
+  }
 
   return (
     <div ref={root} id={id} className={`splide card-slider ${kind}-slider-wrapper`} role="group" aria-label={label} tabIndex={-1}>
