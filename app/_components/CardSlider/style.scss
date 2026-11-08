@@ -1,0 +1,236 @@
+@use '../../../styles/global' as *;
+
+.results-slider-wrapper {
+  position: relative;
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    @include mq('pcTab') { gap: 25px; }
+    @include mq('pc') { gap: 30px; }
+    @include mq('sp') {
+      display: flex;
+      overflow-x: auto;
+      gap: 24px;
+      padding: 0 10%;
+      margin: 0 calc(-1 * var(--card-slider-edge-space, 20px));
+      > li { flex: 0 0 100%; }
+    }
+  }
+}
+
+/* スライダーナビゲーションボタン */
+.results-slider-nav {
+  display: none; // PC/タブレットでは非表示
+
+  @include mq('sp') {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: #b54708;
+
+    &:hover,
+    &:active {
+      background: #b54708;
+      color: #ffffff;
+      border-color: #b54708;
+      box-shadow: 0 4px 12px rgba(243, 107, 10, 0.3);
+    }
+
+    &:focus-visible {
+      outline: 3px solid #69300b;
+      outline-offset: 3px;
+    }
+
+    // disabled状態
+    &.is-disabled,
+    &:disabled {
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+      &:hover,
+      &:active {
+        background: rgba(255, 255, 255, 0.6);
+        color: rgba(0, 0, 0, 0.3);
+        border-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &--prev {
+      left: -10px;
+    }
+
+    &--next {
+      right: -10px;
+    }
+  }
+}
+
+.diary-slider-wrapper {
+  position: relative;
+
+  .diary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    @include mq('pcTab') { gap: 25px; }
+    @include mq('pc') { gap: 30px; }
+    @include mq('sp') {
+      display: flex;
+      overflow-x: auto;
+      gap: 24px;
+      padding: 0 10%;
+      margin: 0 calc(-1 * var(--card-slider-edge-space, 20px));
+      > li { flex: 0 0 100%; }
+    }
+  }
+}
+
+/* 日記スライダーナビゲーションボタン */
+.diary-slider-nav {
+  display: none;
+
+  @include mq('sp') {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: #b54708;
+
+    &:hover,
+    &:active {
+      background: #b54708;
+      color: #ffffff;
+      border-color: #b54708;
+      box-shadow: 0 4px 12px rgba(243, 107, 10, 0.3);
+    }
+
+    &:focus-visible {
+      outline: 3px solid #69300b;
+      outline-offset: 3px;
+    }
+
+    &.is-disabled,
+    &:disabled {
+      background: rgba(255, 255, 255, 0.6);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: rgba(0, 0, 0, 0.3);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+      &:hover,
+      &:active {
+        background: rgba(255, 255, 255, 0.6);
+        color: rgba(0, 0, 0, 0.3);
+        border-color: rgba(0, 0, 0, 0.1);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &--prev {
+      left: -10px;
+    }
+
+    &--next {
+      right: -10px;
+    }
+  }
+}
+
+/* Splide enhances only the existing mobile sliders. Keep SSR/no-JS cards visible. */
+.card-slider.splide {
+  visibility: visible;
+  @include mq('pcTab') {
+    &.is-initialized:not(.is-active) .splide__list { display: grid; }
+  }
+  .splide__track { overflow: visible; }
+  .splide__list { list-style: none; }
+  .splide__slide { min-width: 0; }
+  .splide__slide > article { height: 100%; }
+  .splide__slide > article:focus-within {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  .splide__arrows { display: none; }
+
+  @include mq('sp') {
+    .splide__list { padding: 0 10% !important; }
+    &.is-initialized {
+      margin: 0 calc(-1 * var(--card-slider-edge-space, 20px));
+      .splide__track { overflow: hidden; }
+      .splide__list {
+        display: flex;
+        overflow: visible;
+        gap: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+        > li { flex: 0 0 auto; }
+      }
+      .splide__arrows { display: block; }
+      .splide__arrow--prev { left: 10px; }
+      .splide__arrow--next { right: 10px; }
+    }
+  }
+
+  /* Keep card focus inside the clipped track and clear of overlaid arrows. */
+  :is(.result-card__link, .diary-card__link):focus-visible {
+    outline: 3px solid #69300b;
+    outline-offset: -4px;
+  }
+}
+
+/* One card is a normal list: no controls, clipping or horizontal scroll. */
+.card-slider--static:is(.results-slider-wrapper, .diary-slider-wrapper) {
+  :is(.results-grid, .diary-grid) {
+    list-style: none;
+    @include mq('sp') {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      overflow: visible;
+      margin: 0;
+      padding: 0;
+    }
+  }
+  .splide__slide { min-width: 0; }
+  :is(.result-card__link, .diary-card__link):focus-visible {
+    outline: 3px solid #69300b;
+    outline-offset: -4px;
+  }
+}

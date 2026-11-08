@@ -63,3 +63,26 @@ test('個人開発がない場合は実績6件を表示する', () => {
   assert.match(html, /href="\/result\/result-5\/?"/);
   assert.doesNotMatch(html, /href="\/result\/result-6\/?"/);
 });
+
+for (const [component, props, href] of [
+  ['DiarySlider', { blog: [blog('only')], label: '同じカテゴリーの関連記事' }, '/diary/only/'],
+  ['ResultsSlider', { results: [{ id: 'only', title: '唯一の実績', summary: '概要', techStack: 'HTML' }], label: '関連する制作実績', showTechnologies: true }, '/result/only/'],
+]) {
+  test(`${component}: 1枚はスライダー・矢印なしの通常リスト`, () => {
+    const html = renderToStaticMarkup(createElement(load(`app/_components/${component}/index.tsx`).default, props));
+    assert.match(html, /class="card-slider--static /);
+    assert.match(html, new RegExp(`aria-label="${props.label}"`));
+    assert.match(html, new RegExp(`href="${href.replace(/\/$/, '')}/?"`));
+    assert.doesNotMatch(html, /<button|splide__track|splide__arrows|role="group"|aria-roledescription/);
+    assert.equal((html.match(/class="splide__slide"/g) || []).length, 1);
+    if (component === 'ResultsSlider') assert.match(html, /result-card__technologies/);
+  });
+}
+
+test('制作実績は詳細用ラベルと技術タグを保って共通スライダーを使う', () => {
+  const results = ['a', 'b', 'c'].map(id => ({ id, title: id, summary: '概要', techStack: 'HTML,CSS' }));
+  const html = renderToStaticMarkup(createElement(load('app/_components/ResultsSlider/index.tsx').default, { results, label: '関連する制作実績', showTechnologies: true }));
+  assert.match(html, /aria-label="関連する制作実績"/);
+  assert.equal((html.match(/class="splide__slide"/g) || []).length, 3);
+  assert.equal((html.match(/class="result-card__technologies"/g) || []).length, 3);
+});

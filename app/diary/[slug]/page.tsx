@@ -8,7 +8,7 @@ import BlogPostJsonLd from '@/app/_components/BlogPostJsonLd';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import { createMetadata } from '@/lib/seo';
 import { getBlogSeoDescription, getBlogSeoTitle } from '@/lib/contentSeo';
-import DiaryList from '@/app/_components/DiaryList';
+import DiarySlider from '@/app/_components/DiarySlider';
 import styles from './page.module.css';
 
 type Props = {
@@ -57,7 +57,7 @@ export default async function Page({ params, searchParams }: Props) {
         {relatedArticles.length > 0 && (
           <section className={styles.related} aria-labelledby="related-articles-heading">
             <h2 id="related-articles-heading">同じカテゴリーの関連記事</h2>
-            <DiaryList blog={relatedArticles} />
+            <DiarySlider blog={relatedArticles} label="同じカテゴリーの関連記事" />
           </section>
         )}
 

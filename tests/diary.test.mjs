@@ -88,7 +88,8 @@ for (const technical of [false, true]) {
     const html = await h.render(await h.load('app/diary/[slug]/page.tsx').default({ params: Promise.resolve({ slug: 'current' }), searchParams: Promise.resolve({}) }));
     assert.deepEqual(calls, [{ limit: 4, filters: 'category[equals]activity' }]);
     assert.match(html, /同じカテゴリーの関連記事/);
-    assert.match(html, /aria-label="記事一覧"/);
+    assert.match(html, /aria-label="同じカテゴリーの関連記事"/);
+    assert.match(html, /class="splide card-slider diary-slider-wrapper"/);
     assert.doesNotMatch(html, /related-pages-heading/);
     assert.match(html, /CMSの本文/);
     for (const item of relatedArticles) assert.ok(hrefs(html).includes(`/diary/${item.id}`));
@@ -102,4 +103,16 @@ test('日記詳細は同カテゴリの他記事がない場合に空カード�
   const html = await h.render(await h.load('app/diary/[slug]/page.tsx').default({ params: Promise.resolve({ slug: 'only' }), searchParams: Promise.resolve({}) }));
   assert.doesNotMatch(html, /related-articles-heading|related-pages-heading|記事がありません/);
   assert.match(html, /活動記録の一覧へ/);
+});
+
+test('関連記事が1件だけなら本文・カテゴリ条件と通常カードを保持する', async () => {
+  const current = article('current', '現在の記事');
+  const related = article('only-related', '唯一の関連記事');
+  const h = createDiaryHarness({ getBlogDetail: async () => current, getBlogList: async () => ({ contents: [current, related] }) });
+  const html = await h.render(await h.load('app/diary/[slug]/page.tsx').default({ params: Promise.resolve({ slug: current.id }), searchParams: Promise.resolve({}) }));
+  assert.match(html, /同じカテゴリーの関連記事/);
+  assert.match(html, /class="card-slider--static diary-slider-wrapper"/);
+  assert.doesNotMatch(html, /splide__arrows|splide__track/);
+  assert.ok(hrefs(html).includes('/diary/only-related'));
+  assert.match(html, /CMSの本文/);
 });

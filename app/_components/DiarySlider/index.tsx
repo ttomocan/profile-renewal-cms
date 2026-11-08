@@ -1,4 +1,5 @@
 import CardSlider from '../CardSlider';
+import './style.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Blog } from '@/app/_libs/microcms';
@@ -7,13 +8,14 @@ import Date from '../Date';
 
 interface DiarySliderProps {
   blog: Blog[];
+  label?: string;
 }
 
-export default function DiarySlider({ blog }: DiarySliderProps) {
+export default function DiarySlider({ blog, label = "活動記録の記事" }: DiarySliderProps) {
   if (blog.length === 0) return null;
 
   return (
-    <CardSlider kind="diary" label="活動記録の記事" previous="前の記事を表示" next="次の記事を表示">
+    <CardSlider kind="diary" label={label} previous="前の記事を表示" next="次の記事を表示">
         {blog.map((article) => (
           <li key={article.id} className="splide__slide">
           <article className="diary-card">

@@ -15,17 +15,17 @@ export function loadPage(relativePath, cms) {
       compilerOptions: { jsx: ts.JsxEmit.ReactJSX, module: ts.ModuleKind.CommonJS, esModuleInterop: true },
     }).outputText;
     const localRequire = id => {
-      if (id.endsWith('.scss')) return {};
+      if (id.endsWith('.scss') || id.startsWith('@splidejs/splide/css/')) return {};
       if (id === '@/app/_libs/microcms') return cms;
       // このテストでは実績本文とメタ情報を確認し、共通ナビゲーションは対象外。
-      if (id.startsWith('@/app/_components/')) return () => null;
+      if (id.startsWith('@/app/_components/') && id !== '@/app/_components/ResultsSlider') return () => null;
       if (id.startsWith('@/')) {
         const relative = path.join(root, id.slice(2));
-        return load(existsSync(relative + '.ts') ? relative + '.ts' : existsSync(relative + '.tsx') ? relative + '.tsx' : path.join(relative, 'index.ts'));
+        return load(existsSync(relative + '.ts') ? relative + '.ts' : existsSync(relative + '.tsx') ? relative + '.tsx' : existsSync(path.join(relative, 'index.ts')) ? path.join(relative, 'index.ts') : path.join(relative, 'index.tsx'));
       }
       if (id.startsWith('.')) {
         const relative = path.resolve(path.dirname(filename), id);
-        return load(existsSync(relative + '.ts') ? relative + '.ts' : existsSync(relative + '.tsx') ? relative + '.tsx' : path.join(relative, 'index.ts'));
+        return load(existsSync(relative + '.ts') ? relative + '.ts' : existsSync(relative + '.tsx') ? relative + '.tsx' : existsSync(path.join(relative, 'index.ts')) ? path.join(relative, 'index.ts') : path.join(relative, 'index.tsx'));
       }
       return require(id);
     };

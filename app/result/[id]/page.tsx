@@ -9,7 +9,7 @@ import PageTitle from '@/app/_components/PageTitle';
 import Breadcrumb from '@/app/_components/Breadcrumb';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 import ResultJsonLd from '@/app/_components/ResultJsonLd';
-import ResultCard from '@/components/ResultCard';
+import ResultsSlider from '@/app/_components/ResultsSlider';
 import { createMetadata } from '@/lib/seo';
 import { getResultSeoDescription, getResultSeoTitle } from '@/lib/contentSeo';
 import { groupProjectTechnologies } from '@/lib/resultPresentation';
@@ -280,11 +280,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
             {relatedResults.length > 0 && (
               <section className="result-detail__section result-related">
                 <h2 className="result-detail__section-title">関連する制作実績</h2>
-                <div className="results-grid">
-                  {relatedResults.map((relatedResult) => (
-                    <ResultCard key={relatedResult.id} result={relatedResult} />
-                  ))}
-                </div>
+                <ResultsSlider results={relatedResults} label="関連する制作実績" showTechnologies />
               </section>
             )}
 
