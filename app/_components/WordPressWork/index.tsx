@@ -9,13 +9,13 @@ export default function WordPressWork() {
           <figure className={styles.screen}>
             <figcaption className={styles.browserBar}>newagevoice.com</figcaption>
             <div className={styles.viewport}>
-              <Image src="/img/works/newagevoice-home-desktop.jpg" alt="ともきゃんのボイトレ生活のトップページ" width={1150} height={738} sizes="(max-width: 767px) 100vw, 50vw" />
+              <Image src="/img/works/newagevoice-home-desktop.jpg" alt="ともきゃんのボイトレ生活のトップページ" width={1150} height={738} sizes="(max-width: 767px) calc(100vw - 84px), (max-width: 879px) calc(50vw - 61px), 379px" />
             </div>
           </figure>
           <figure className={styles.screen}>
             <figcaption className={styles.browserBar}>blogdesign-mania.com</figcaption>
             <div className={styles.viewport}>
-              <Image src="/img/works/blogdesign-mania-home-desktop.jpg" alt="ブログデザインマニアのトップページ" width={1150} height={738} sizes="(max-width: 767px) 100vw, 50vw" />
+              <Image src="/img/works/blogdesign-mania-home-desktop.jpg" alt="ブログデザインマニアのトップページ" width={1150} height={738} sizes="(max-width: 767px) calc(100vw - 84px), (max-width: 879px) calc(50vw - 61px), 379px" />
             </div>
           </figure>
         </div>

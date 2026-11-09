@@ -28,7 +28,13 @@ export default function CardSlider({ children, kind, label, previous, next }: Pr
     // it applied to child links. Remember the author's values before mounting.
     const focusTargets = Array.from(element.querySelector('.splide__list')?.querySelectorAll<HTMLElement>(focusableNodes) ?? [])
       .map(node => ({ node, tabIndex: node.getAttribute('tabindex') }));
+    // Splideのgroup指定をネイティブなul/liに戻し、名前・非表示・live通知は維持する。
+    const restoreListSemantics = () => {
+      element.querySelector('.splide__list')?.setAttribute('role', 'list');
+      element.querySelectorAll('.splide__slide').forEach(slide => slide.removeAttribute('role'));
+    };
     const restore = () => {
+      restoreListSemantics();
       for (const { node, tabIndex } of focusTargets) {
         if (tabIndex === null) node.removeAttribute('tabindex');
         else node.setAttribute('tabindex', tabIndex);
@@ -74,8 +80,12 @@ export default function CardSlider({ children, kind, label, previous, next }: Pr
     // hidden slides do not emit 'hidden', so check focus on 'mounted' too.
     slider.mount({
       FocusSafety: instance => ({
-        mount: () => { instance.on('mounted moved updated resized hidden', protectFocus); },
-        destroy: restore,
+        mount: () => {
+          instance.on('mounted updated refresh', restoreListSemantics);
+          instance.on('mounted moved updated resized hidden', protectFocus);
+          // 全コンポーネントの属性除去が終わってから、PC用の一覧とフォーカスを復元する。
+          instance.on('destroy', restore);
+        },
       }),
     });
     return () => { slider.destroy(true); restore(); };
@@ -85,7 +95,7 @@ export default function CardSlider({ children, kind, label, previous, next }: Pr
   if (cardCount === 1) {
     return (
       <div className={`card-slider--static ${kind}-slider-wrapper`}>
-        <ul className={`${kind}-grid`} aria-label={label}>{children}</ul>
+        <ul className={`${kind}-grid`} role="list" aria-label={label}>{children}</ul>
       </div>
     );
   }
@@ -101,7 +111,7 @@ export default function CardSlider({ children, kind, label, previous, next }: Pr
         </button>
       </div>
       <div className="splide__track">
-        <ul className={`splide__list ${kind}-grid`}>{children}</ul>
+        <ul className={`splide__list ${kind}-grid`} role="list">{children}</ul>
       </div>
     </div>
   );
