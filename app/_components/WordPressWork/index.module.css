@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   overflow: hidden;
-  background: #fffaf5;
+  background: #fff;
   border-radius: 16px;
   border: 1px solid #decabd;
   text-align: left;
