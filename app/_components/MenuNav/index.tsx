@@ -38,18 +38,6 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
       <link rel="preload" as="image" href="/img/common/icon_note.svg" media="(min-width: 1041px)" />
       <link rel="preload" as="image" href="/img/common/icon_x.svg" media="(min-width: 1041px)" />
       <link rel="preload" as="image" href="/img/common/icon_coconala.svg" media="(min-width: 1041px)" />
-      <ul className="l-header__blog">
-        <li className="l-header__blog__item">
-          <a href="https://www.newagevoice.com/" target="_blank" className="c-link-external" rel="noopener noreferrer">
-            ともきゃんのボイトレ生活
-          </a>
-        </li>
-        <li className="l-header__blog__item">
-          <a href="https://www.blogdesign-mania.com/" target="_blank" className="c-link-external" rel="noopener noreferrer">
-            ブログデザインマニア
-          </a>
-        </li>
-      </ul>
       <nav className="l-header__navigation" role="navigation" aria-label="グローバルナビゲーション">
         <ul className="l-navigation">
           <li className="l-navigation__item">

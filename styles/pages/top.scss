@@ -202,6 +202,10 @@
     color: #666666;
     font-size: 14px;
     margin-top: 16px;
+
+    @include mq(pc) {
+      text-align: center;
+    }
   }
 
   &__list {
@@ -365,6 +369,10 @@
 
 // Diary Section
 .p-top-diary {
+  .diary-slider-wrapper .diary-card:hover {
+    transform: none;
+  }
+
   &__cont {
     text-align: center;
     margin-bottom: 40px;
