@@ -27,6 +27,7 @@
   background: #fff;
 }
 .browserBar {
+  margin-top: 0;
   padding: 8px 12px;
   border-bottom: 1px solid #decabd;
   background: #f2edea;
