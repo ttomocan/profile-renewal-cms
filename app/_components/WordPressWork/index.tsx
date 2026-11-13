@@ -5,7 +5,7 @@ export default function WordPressWork() {
   return (
     <section id="wordpress-blog" className={`inner ${styles.section}`} aria-labelledby="wordpress-blog-heading">
       <div className={styles.card}>
-        <div className={styles.screens}>
+        <div className={`${styles.screens} fadeUpTrigger`}>
           <figure className={styles.screen}>
             <figcaption className={styles.browserBar}>newagevoice.com</figcaption>
             <div className={styles.viewport}>
@@ -19,7 +19,7 @@ export default function WordPressWork() {
             </div>
           </figure>
         </div>
-        <div className={styles.body}>
+        <div className={`${styles.body} fadeUpTrigger`}>
           <p className={styles.eyebrow}>WordPress / 自主運営</p>
           <h2 id="wordpress-blog-heading">自主運営のWordPress実績</h2>
           <p>「ともきゃんのボイトレ生活」「ブログデザインマニア」の2つのブログを企画・制作・運営しています。</p>

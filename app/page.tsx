@@ -84,7 +84,7 @@ export default async function Home() {
               <dd>1級ウェブデザイン技能士</dd>
             </div>
           </dl>
-          <p className="p-top-facts__note">参画件数は新規サイト・LP、副業を含み、改修を除きます。</p>
+          <p className="p-top-facts__note fadeUpTrigger">参画件数は新規サイト・LP、副業を含み、改修を除きます。</p>
         </section>
 
         <section className="p-top-results inner">
