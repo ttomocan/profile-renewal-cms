@@ -192,7 +192,7 @@
     }
 
     &:focus {
-      text-decoration-thickness: 2px;
+      text-decoration-thickness: 1px;
     }
   }
 }
@@ -914,6 +914,7 @@
     font-weight: 700;
     margin-top: 14px;
     text-decoration-line: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
 }
