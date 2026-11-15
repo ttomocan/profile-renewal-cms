@@ -385,6 +385,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     font-weight: 700;
     margin-top: 14px;
     text-decoration-line: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
 
@@ -802,6 +803,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   a {
     color: $primary-color;
     text-decoration-line: underline;
+    text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
 }
