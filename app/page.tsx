@@ -7,6 +7,7 @@ import { getBlogList, getResults } from '@/app/_libs/microcms';
 import { TOP_DIARY_LIMIT } from '@/app/_constants';
 import ResultsSlider from '@/app/_components/ResultsSlider';
 import WordPressWork from '@/app/_components/WordPressWork';
+import HandwrittenName from '@/app/_components/HandwrittenName';
 import { caveatBrush } from '@/app/fonts';
 import { selectFeaturedResults } from '@/lib/resultPresentation';
 
@@ -40,7 +41,7 @@ export default async function Home() {
                 <div className="p-top-hero__icon">
                   <Image src="/img/pages/top/img_tomocan.jpg" alt="ともきゃんの似顔絵" width={80} height={80} sizes="(max-width: 767px) 56px, 80px" loading="eager" />
                 </div>
-                <p className="p-top-hero__name">TOMOCAN</p>
+                <p className="p-top-hero__name"><HandwrittenName /></p>
               </div>
 
               <h1 className="p-top-hero__title">設計・実装・改善まで担うWebエンジニア</h1>

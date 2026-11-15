@@ -103,7 +103,7 @@
   }
 
   &__name {
-    @include font-properties(var(--font-caveat-brush), 400, 24px);
+    @include font-properties(var(--font-caveat-brush), 400, 36px);
     letter-spacing: 0.08em;
     line-height: 1.2;
     margin: 0;
@@ -892,4 +892,29 @@
     text-decoration-line: underline;
     text-underline-offset: 3px;
   }
+}
+
+// 元の背景・見出し・本文は動かさず、名前だけを描画する。
+.handwritten-name {
+  display: inline-block;
+  width: 4.1em;
+  height: .8em;
+  vertical-align: middle;
+  svg { display: block; width: 100%; height: 100%; overflow: visible; }
+  &:not([data-handwriting]) svg > g > path { mask: none; }
+  &[data-handwriting='pending'] .handwritten-name__pen {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    animation: name-pen-fallback 0s 5s forwards;
+  }
+  &[data-handwriting='drawing'] .handwritten-name__pen {
+    stroke-dasharray: 1;
+    animation: name-pen-draw .32s linear var(--pen-delay) both;
+  }
+}
+@keyframes name-pen-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes name-pen-fallback { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .handwritten-name svg > g > path { mask: none !important; }
+  .handwritten-name .handwritten-name__pen { animation: none !important; stroke-dashoffset: 0 !important; }
 }
