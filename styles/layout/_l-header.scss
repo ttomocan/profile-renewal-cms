@@ -527,6 +527,6 @@ main#main {
 
   // ロゴを明るく表示
   .l-header__logo img {
-    filter: brightness(1.2) contrast(1.1);
+    filter: brightness(0) invert(1);
   }
 }

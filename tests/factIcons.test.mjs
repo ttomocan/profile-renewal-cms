@@ -1,0 +1,11 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import * as sass from 'sass';
+import postcss from 'postcss';
+const css=postcss.parse(sass.compile('styles/pages/top.scss',{silenceDeprecations:['legacy-js-api','mixed-decls']}).css);
+const props=selector=>{const r={};css.walkRules(rule=>{if(rule.selector===selector)rule.walkDecls(d=>r[d.prop]=d.value)});return r};
+test('three decorative assets match the card types',()=>{for(const [i,n] of ['experience','projects','qualification'].entries()){assert.match(props(`.p-top-facts__item:nth-child(${i+1})::before`)['background-image'],new RegExp(`icon-fact-${n}.svg`));const s=readFileSync(`public/img/pages/top/icon-fact-${n}.svg`,'utf8');assert.match(s,/viewBox="0 0 120 120"/);assert.doesNotMatch(s,/<script|https?:\/\/(?!www.w3.org)|onload/);}});
+test('decorations do not consume layout or input',()=>{const p=props('.p-top-facts__item::before');assert.equal(p.position,'absolute');assert.equal(p['pointer-events'],'none');assert.equal(p.opacity,'0.09');assert.equal(p.content,'""');});
+test('white logo is restricted to unscrolled top header',()=>{const tree=postcss.parse(sass.compile('styles/layout/_l-header.scss').css);const filters=[];tree.walkRules(r=>r.walkDecls('filter',d=>{if(r.selector.includes('__logo'))filters.push([r.selector,d.value]);}));assert.deepEqual(filters,[['.l-header.--top:not(.scroll) .l-header__logo img','brightness(0) invert(1)']]);});
+test('large orange figures retain white background',()=>assert.equal(props('.p-top-facts__item strong')['background-color'],'#ffffff'));
