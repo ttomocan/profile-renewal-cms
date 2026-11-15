@@ -328,8 +328,9 @@
     box-sizing: border-box;
 
     &:focus {
-      outline: 3px solid #69300b;
-      outline-offset: 3px;
+      border-color: #b54708;
+      outline: 3px solid #b54708;
+      outline-offset: 0;
     }
   }
 
