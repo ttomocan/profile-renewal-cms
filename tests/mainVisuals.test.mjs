@@ -60,9 +60,9 @@ async function loadHome() {
       const empty = async () => ({ contents: [], totalCount: 0, offset: 0, limit: 6 });
       return { getBlogList: empty, getResults: empty };
     }
-    if (id === '@/lib/resultPresentation' || id === '@/lib/contentOrder') {
+    if (id === '@/lib/resultPresentation' || id === '@/lib/contentOrder' || id === '@/lib/handwrittenName' || id === '@/lib/handwritingScript' || id === '@/app/_components/HandwrittenName') {
       const utility = { exports: {} };
-      const output = ts.transpileModule(readSource(id.slice(2) + '.ts'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+      const output = ts.transpileModule(readSource(id.slice(2) + (id.endsWith('/HandwrittenName') ? '.tsx' : '.ts')), { compilerOptions: { module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.ReactJSX } }).outputText;
       runInNewContext(output, { module: utility, exports: utility.exports, require: localRequire });
       return utility.exports;
     }
