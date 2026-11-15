@@ -225,6 +225,28 @@
     min-width: 0;
     padding: 20px 10px;
     text-align: center;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+
+    // 情報を増やさず、背景の線画で各実績の種類を補足する。
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 92px;
+      height: 92px;
+      background: center / contain no-repeat;
+      opacity: .09;
+      pointer-events: none;
+    }
+
+    &:nth-child(1)::before { background-image: url('/img/pages/top/icon-fact-experience.svg'); }
+    &:nth-child(2)::before { background-image: url('/img/pages/top/icon-fact-projects.svg'); }
+    &:nth-child(3)::before { background-image: url('/img/pages/top/icon-fact-qualification.svg'); }
 
     dt {
       color: #666666;
@@ -241,6 +263,8 @@
     }
 
     strong {
+      // 数字の背後は白を保ち、装飾によるコントラスト低下を防ぐ。
+      background-color: #ffffff;
       color: $mainC;
       font-family: var(--font-roboto), sans-serif;
       font-size: clamp(32px, 4vw, 44px);
