@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 const css=readFileSync(new URL('../styles/object/project/_form.scss',import.meta.url),'utf8');
 test('text inputs have a flush focus ring matching the primary button',()=>{
- assert.match(css,/border-color: #b54708;\s*outline: 3px solid #b54708;\s*outline-offset: 0;/);
+ assert.match(css,/border-color: #b54708;\s*outline: 2px solid #b54708;\s*outline-offset: 0;/);
  const button=readFileSync(new URL('../styles/object/component/_button.scss',import.meta.url),'utf8');
  assert.match(button,/@include btn\(#b54708,/);
 });

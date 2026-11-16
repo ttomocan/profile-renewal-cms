@@ -57,6 +57,8 @@ export default function PageTop() {
     const reduced = window.matchMedia(
       '(prefers-reduced-motion: reduce)',
     ).matches;
+    // Move focus away from the button before it becomes hidden at the top.
+    document.getElementById('main')?.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' });
   };
 

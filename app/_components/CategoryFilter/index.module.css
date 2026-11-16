@@ -19,7 +19,7 @@
 .select {
   padding: 10px 16px;
   padding-right: 2.5rem;
-  border: 1px solid #e9ecef;
+  border: 1px solid #767676;
   border-radius: var(--radius-standard);
   background-color: #fff;
   font-size: 1rem;
@@ -40,13 +40,13 @@
 }
 
 .select:focus {
-  border-color: #f36b0a;
+  border-color: #b54708;
   box-shadow: 0 4px 12px rgba(243, 107, 10, 0.15);
 }
 
 .select:focus-visible {
-  outline: 3px solid #f36b0a;
-  outline-offset: 3px;
+  outline: 2px solid #b54708;
+  outline-offset: 0;
 }
 
 .selectIcon {

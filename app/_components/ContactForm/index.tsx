@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useEffect, useRef } from 'react';
+import { useActionState, useEffect, useRef, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 import { createContactData, type ContactFormState } from '@/app/_actions/contact';
 import { sendGAEvent } from '@next/third-parties/google';
@@ -29,6 +29,13 @@ function SubmitButton({ errorId }: { errorId?: string }) {
 
 export default function ContactForm() {
   const [state, formAction] = useActionState(createContactData, initialState);
+  // React form actions reset uncontrolled fields even when validation returns an error.
+  const [values, setValues] = useState({ namae: '', furigana: '', email: '', item: '', message: '' });
+  const selectedItemRef = useRef('');
+  const updateValue = (field: keyof typeof values, value: string) => {
+    if (field === 'item') selectedItemRef.current = value;
+    setValues(previous => ({ ...previous, [field]: value }));
+  };
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLParagraphElement>(null);
 
@@ -38,6 +45,12 @@ export default function ContactForm() {
       return;
     }
     if (state.status !== 'error') return;
+
+    // Native radio reset can run after React commits an action result. Restore the
+    // checked property as well as keeping its controlled value for the next edit.
+    formRef.current?.querySelectorAll<HTMLInputElement>('input[name="item"]').forEach(input => {
+      input.checked = input.value === selectedItemRef.current;
+    });
 
     if (state.field) {
       formRef.current?.querySelector<HTMLElement>(`[name="${state.field}"]`)?.focus();
@@ -71,6 +84,7 @@ export default function ContactForm() {
       className="p-form"
       action={formAction}
       onSubmit={handleSubmit}
+      onReset={event => event.preventDefault()}
       noValidate
     >
       <div className="p-form__item">
@@ -83,7 +97,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="namae" id="namae" className="textfield" autoComplete="name" required aria-required="true" aria-invalid={hasFieldError('namae')} aria-describedby={hasFieldError('namae') ? 'contact-error' : undefined} maxLength={100} />
+          <input type="text" name="namae" id="namae" value={values.namae} onChange={event => updateValue('namae', event.target.value)} className="textfield" autoComplete="name" required aria-required="true" aria-invalid={hasFieldError('namae')} aria-describedby={hasFieldError('namae') ? 'contact-error' : undefined} maxLength={100} />
         </div>
       </div>
 
@@ -97,7 +111,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="text" name="furigana" id="furigana" className="textfield" autoComplete="off" required aria-required="true" aria-invalid={hasFieldError('furigana')} aria-describedby={hasFieldError('furigana') ? 'contact-error' : undefined} maxLength={100} />
+          <input type="text" name="furigana" id="furigana" value={values.furigana} onChange={event => updateValue('furigana', event.target.value)} className="textfield" autoComplete="off" required aria-required="true" aria-invalid={hasFieldError('furigana')} aria-describedby={hasFieldError('furigana') ? 'contact-error' : undefined} maxLength={100} />
         </div>
       </div>
 
@@ -111,7 +125,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <input type="email" name="email" id="email" className="textfield" autoComplete="email" inputMode="email" required aria-required="true" aria-invalid={hasFieldError('email')} aria-describedby={hasFieldError('email') ? 'contact-error' : undefined} maxLength={254} />
+          <input type="email" name="email" id="email" value={values.email} onChange={event => updateValue('email', event.target.value)} className="textfield" autoComplete="email" inputMode="email" required aria-required="true" aria-invalid={hasFieldError('email')} aria-describedby={hasFieldError('email') ? 'contact-error' : undefined} maxLength={254} />
         </div>
       </div>
 
@@ -125,7 +139,7 @@ export default function ContactForm() {
         <div className="p-form__input">
           {contactTypes.map((type) => (
             <label className="checkbox" key={type}>
-              <input type="radio" name="item" value={type} required aria-describedby={hasFieldError('item') ? 'contact-error' : undefined} />
+              <input type="radio" name="item" value={type} checked={values.item === type} onChange={event => updateValue('item', event.target.value)} required aria-describedby={hasFieldError('item') ? 'contact-error' : undefined} />
               <span className="checkbox-text">{type}</span>
             </label>
           ))}
@@ -142,7 +156,7 @@ export default function ContactForm() {
           </span>
         </div>
         <div className="p-form__input">
-          <textarea className="textarea" id="message" name="message" required aria-required="true" aria-invalid={hasFieldError('message')} aria-describedby={hasFieldError('message') ? 'contact-error' : undefined} maxLength={5000} />
+          <textarea className="textarea" id="message" name="message" value={values.message} onChange={event => updateValue('message', event.target.value)} required aria-required="true" aria-invalid={hasFieldError('message')} aria-describedby={hasFieldError('message') ? 'contact-error' : undefined} maxLength={5000} />
         </div>
       </div>
 

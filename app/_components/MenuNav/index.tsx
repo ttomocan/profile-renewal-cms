@@ -41,32 +41,32 @@ export default function MenuNav({ onLinkClick }: MenuNavProps) {
       <nav className="l-header__navigation" role="navigation" aria-label="グローバルナビゲーション">
         <ul className="l-navigation">
           <li className="l-navigation__item">
-            <MenuNavLink href="/" className={`c-navigation-link${isCurrent('/') ? ' current' : ''}`} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/" aria-current={isCurrent('/') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Top
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/about/" className={`c-navigation-link${isCurrent('/about') ? ' current' : ''}`} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/about/" aria-current={isCurrent('/about') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/about') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               About
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/skill/" className={`c-navigation-link${isCurrent('/skill') ? ' current' : ''}`} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/skill/" aria-current={isCurrent('/skill') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/skill') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Skill
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/result/" className={`c-navigation-link${isCurrent('/result') ? ' current' : ''}`} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/result/" aria-current={isCurrent('/result') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/result') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Result
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/diary/" className={`c-navigation-link${isCurrent('/diary') ? ' current' : ''}`} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/diary/" aria-current={isCurrent('/diary') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/diary') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Diary
             </MenuNavLink>
           </li>
           <li className="l-navigation__item">
-            <MenuNavLink href="/contact/" className={`c-navigation-link${isCurrent('/contact') ? ' current' : ''}`} onLinkClick={onLinkClick}>
+            <MenuNavLink href="/contact/" aria-current={isCurrent('/contact') ? 'page' : undefined} className={`c-navigation-link${isCurrent('/contact') ? ' current' : ''}`} onLinkClick={onLinkClick}>
               Contact
             </MenuNavLink>
           </li>

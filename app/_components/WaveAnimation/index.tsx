@@ -43,6 +43,9 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     isRunning: false,
   });
   const resizeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+  // Decorative movement ends within five seconds, including resize/re-render.
+  const animationDeadlineRef = useRef(0);
+  const animationFinishedRef = useRef(false);
 
   // Wave layers configuration - memoized for performance
   const waveLayers = useMemo<WaveLayer[]>(
@@ -177,7 +180,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
   const startAnimation = useCallback(() => {
     const state = animationStateRef.current;
 
-    if (state.isRunning) return;
+    if (state.isRunning || animationFinishedRef.current) return;
 
     state.isRunning = true;
     animate();
@@ -219,10 +222,14 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
         animationStateRef.current.seconds = 0;
         animationStateRef.current.t = 0;
 
-        startAnimation();
+        if (animationFinishedRef.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          draw();
+        } else {
+          startAnimation();
+        }
       }
     }, CONSTANTS.DEBOUNCE_MS);
-  }, [setupCanvas, startAnimation, stopAnimation]);
+  }, [setupCanvas, startAnimation, stopAnimation, draw]);
 
   /**
    * Initialize and cleanup
@@ -235,11 +242,26 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     const context = setupCanvas(canvas);
     if (!context) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (!animationDeadlineRef.current) animationDeadlineRef.current = Date.now() + 4500;
+    const remainingTime = Math.max(0, animationDeadlineRef.current - Date.now());
+    if (remainingTime === 0) animationFinishedRef.current = true;
+    const finishTimer = setTimeout(() => {
+      animationFinishedRef.current = true;
+      stopAnimation();
       draw();
-    } else {
-      startAnimation();
-    }
+    }, remainingTime);
+
+    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handleMotionChange = () => {
+      if (motionQuery.matches || animationFinishedRef.current) {
+        stopAnimation();
+        draw();
+      } else {
+        startAnimation();
+      }
+    };
+    handleMotionChange();
+    motionQuery.addEventListener('change', handleMotionChange);
 
     // Setup resize observer
     let resizeObserver: ResizeObserver | undefined;
@@ -254,6 +276,8 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     // Cleanup function
     return () => {
       stopAnimation();
+      clearTimeout(finishTimer);
+      motionQuery.removeEventListener('change', handleMotionChange);
 
       if (resizeTimeoutRef.current) {
         clearTimeout(resizeTimeoutRef.current);
