@@ -20,7 +20,7 @@ export default function Footer() {
   return (
     <>
       <div className="c-wave">
-        <WaveAnimation height={100} colors={footerWaveColors} />
+        <WaveAnimation key={pathname} height={100} colors={footerWaveColors} />
       </div>
       <footer className="l-footer">
         <div className="l-footer__navigation" role="navigation" aria-label="グローバルナビゲーション">

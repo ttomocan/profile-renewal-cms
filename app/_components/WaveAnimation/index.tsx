@@ -32,6 +32,8 @@ const CONSTANTS = {
     EXTRA_WIDTH: 10,
   },
   DEBOUNCE_MS: 16, // ~60fps
+  MOTION_BUDGET_MS: 4500,
+  MIN_VISIBLE_RATIO: 0.01,
 } as const;
 
 export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a'], speed = CONSTANTS.WAVE.SPEED, height = CONSTANTS.WAVE.HEIGHT, className = '' }: WaveAnimationProps) {
@@ -42,10 +44,9 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     t: 0,
     isRunning: false,
   });
-  const resizeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
-  // Decorative movement ends within five seconds, including resize/re-render.
-  const animationDeadlineRef = useRef(0);
-  const animationFinishedRef = useRef(false);
+  const resizeTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  // Decorative movement is capped across pauses, resize and re-render.
+  const remainingMotionRef = useRef<number>(CONSTANTS.MOTION_BUDGET_MS);
 
   // Wave layers configuration - memoized for performance
   const waveLayers = useMemo<WaveLayer[]>(
@@ -76,10 +77,6 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
       // Set actual size in memory (scaled for DPI)
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
-
-      // Set display size (CSS pixels)
-      canvas.style.width = `${rect.width}px`;
-      canvas.style.height = `${rect.height}px`;
 
       // Scale the context to ensure correct drawing operations
       context.scale(dpr, dpr);
@@ -145,7 +142,6 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
 
     if (!canvas || !context) return;
 
-    const rect = canvas.getBoundingClientRect();
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     const currentT = animationStateRef.current.t;
@@ -180,7 +176,7 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
   const startAnimation = useCallback(() => {
     const state = animationStateRef.current;
 
-    if (state.isRunning || animationFinishedRef.current) return;
+    if (state.isRunning) return;
 
     state.isRunning = true;
     animate();
@@ -213,23 +209,10 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
       const canvas = canvasRef.current;
       if (!canvas) return;
 
-      stopAnimation();
-
-      // Reset canvas and context
-      const newContext = setupCanvas(canvas);
-      if (newContext) {
-        // Reset animation state
-        animationStateRef.current.seconds = 0;
-        animationStateRef.current.t = 0;
-
-        if (animationFinishedRef.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          draw();
-        } else {
-          startAnimation();
-        }
-      }
+      // Preserve both the drawn phase and the remaining animation budget.
+      if (setupCanvas(canvas)) draw();
     }, CONSTANTS.DEBOUNCE_MS);
-  }, [setupCanvas, startAnimation, stopAnimation, draw]);
+  }, [setupCanvas, draw]);
 
   /**
    * Initialize and cleanup
@@ -242,26 +225,65 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
     const context = setupCanvas(canvas);
     if (!context) return;
 
-    if (!animationDeadlineRef.current) animationDeadlineRef.current = Date.now() + 4500;
-    const remainingTime = Math.max(0, animationDeadlineRef.current - Date.now());
-    if (remainingTime === 0) animationFinishedRef.current = true;
-    const finishTimer = setTimeout(() => {
-      animationFinishedRef.current = true;
-      stopAnimation();
-      draw();
-    }, remainingTime);
-
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleMotionChange = () => {
-      if (motionQuery.matches || animationFinishedRef.current) {
-        stopAnimation();
-        draw();
-      } else {
-        startAnimation();
+    let isInView = false;
+    let startedAt: number | undefined;
+    let finishTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const pause = () => {
+      if (startedAt !== undefined) {
+        remainingMotionRef.current = Math.max(0, remainingMotionRef.current - (performance.now() - startedAt));
+        startedAt = undefined;
       }
+      if (finishTimer !== undefined) {
+        clearTimeout(finishTimer);
+        finishTimer = undefined;
+      }
+      stopAnimation();
     };
-    handleMotionChange();
-    motionQuery.addEventListener('change', handleMotionChange);
+
+    const syncMotion = () => {
+      if (!isInView || document.visibilityState !== 'visible' || motionQuery.matches || remainingMotionRef.current <= 0) {
+        pause();
+        return;
+      }
+      if (startedAt !== undefined) return;
+
+      startedAt = performance.now();
+      startAnimation();
+      finishTimer = setTimeout(() => {
+        pause();
+        remainingMotionRef.current = 0;
+        draw();
+      }, remainingMotionRef.current);
+    };
+
+    // Keep a static wave visible before scrolling in, after the cap, and in reduced motion.
+    draw();
+    motionQuery.addEventListener('change', syncMotion);
+    document.addEventListener('visibilitychange', syncMotion);
+
+    const checkViewport = () => {
+      const rect = canvas.getBoundingClientRect();
+      isInView = rect.width > 0 && rect.height > 0 &&
+        rect.top < window.innerHeight && rect.bottom > 0 &&
+        rect.left < window.innerWidth && rect.right > 0;
+      syncMotion();
+    };
+    let intersectionObserver: IntersectionObserver | undefined;
+    if (typeof IntersectionObserver !== 'undefined') {
+      intersectionObserver = new IntersectionObserver(entries => {
+        const entry = entries.find(item => item.target === canvas);
+        if (!entry) return;
+        isInView = entry.isIntersecting && entry.intersectionRatio >= CONSTANTS.MIN_VISIBLE_RATIO;
+        syncMotion();
+      }, { threshold: CONSTANTS.MIN_VISIBLE_RATIO });
+      intersectionObserver.observe(canvas);
+    } else {
+      window.addEventListener('scroll', checkViewport, { passive: true });
+      window.addEventListener('resize', checkViewport);
+      checkViewport();
+    }
 
     // Setup resize observer
     let resizeObserver: ResizeObserver | undefined;
@@ -275,9 +297,15 @@ export default function WaveAnimation({ colors = ['#f36b0a', '#f36b0a', '#f36b0a
 
     // Cleanup function
     return () => {
-      stopAnimation();
-      clearTimeout(finishTimer);
-      motionQuery.removeEventListener('change', handleMotionChange);
+      pause();
+      motionQuery.removeEventListener('change', syncMotion);
+      document.removeEventListener('visibilitychange', syncMotion);
+      if (intersectionObserver) {
+        intersectionObserver.disconnect();
+      } else {
+        window.removeEventListener('scroll', checkViewport);
+        window.removeEventListener('resize', checkViewport);
+      }
 
       if (resizeTimeoutRef.current) {
         clearTimeout(resizeTimeoutRef.current);
