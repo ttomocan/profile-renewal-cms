@@ -175,6 +175,14 @@
       grid-template-columns: 1fr;
     }
 
+    .programming__heading--split {
+      font-size: clamp(15px, calc(10vw - 17px), 22px);
+
+      > span {
+        white-space: nowrap;
+      }
+    }
+
     .programming__image {
       img,
       svg,

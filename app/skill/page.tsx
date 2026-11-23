@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 type SkillCardProps = {
-  title: string;
+  title: string | [string, string];
   image?: string;
   imageAlt?: string;
   icon?: ReactNode;
@@ -17,12 +17,15 @@ type SkillCardProps = {
 };
 
 function SkillCard({ title, image, icon, summary, points, link }: SkillCardProps) {
+  const splitTitle = typeof title !== 'string';
   return (
     <article className="programming__item fadeUpTrigger">
       <div className="programming__image" aria-hidden={image ? undefined : true}>
-        {image ? <Image src={image} alt="" width={100} height={100} /> : icon ?? <span className="programming__text-icon">{title.slice(0, 2)}</span>}
+        {image ? <Image src={image} alt="" width={100} height={100} /> : icon ?? <span className="programming__text-icon">{(splitTitle ? title[0] : title).slice(0, 2)}</span>}
       </div>
-      <h3 className="programming__heading">{title}</h3>
+      <h3 className={splitTitle ? 'programming__heading programming__heading--split' : 'programming__heading'}>
+        {splitTitle ? <><span>{title[0]}</span><wbr /><span>{title[1]}</span></> : title}
+      </h3>
       <div className="programming__detail">
         <p className="programming__description">{summary}</p>
         {points.length > 0 && (
@@ -65,9 +68,9 @@ export default function Page() {
           <SkillCard title="JavaScript" image="/img/pages/skill/img_javascript.svg" imageAlt="JavaScript" summary="UIの操作やアニメーションを、既存処理への影響を確認しながら実装します。" points={['メニュー、モーダル、スライダーなどのUI実装', 'フォームや表示切り替えの制御', 'ブラウザ間の表示・操作確認']} />
           <SkillCard title="PHP" image="/img/pages/skill/img_php.svg" imageAlt="PHP" summary="PHPを用いたお問い合わせフォームやログイン機能の実装に対応しています。WordPressのカスタマイズにも活用しています。" points={['テンプレート内の表示処理の実装', '既存コードの改修・保守']} />
           <SkillCard title="CMS" image="/img/pages/skill/wordpress-official.svg" imageAlt="WordPress" summary="WordPressを中心にCMSを使用し、サイトの構築・カスタマイズ・運用保守を担当してきました。Movable TypeとRCMSにも触れた経験があります。" points={['WordPressのオリジナルテーマ開発・既存テーマの改修', '投稿機能、カスタムブロック、カスタムフィールドを使った更新機能の実装', 'お問い合わせフォームの実装、運用時の改修']} />
-          <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、Git Flowに沿って開発・リリース・緊急修正のブランチを使い分けます。" points={['feature：機能の開発・改修', 'release：リリース前の確認・調整', 'hotfix：本番の緊急修正', 'GitHubでの差分確認とレビューを意識したコミット']} />
+          <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、Git Flowに沿って開発・リリース・緊急修正のブランチを使い分けます。" points={['ブランチを使った機能開発・修正', '差分確認とレビューを前提にしたコミット', 'GitHubを使ったコード管理']} />
           <SkillCard
-            title="Webディレクション・進行管理"
+            title={['Webディレクション・', '進行管理']}
             icon={
               <svg viewBox="0 0 64 64" width={80} height={80} fill="#f36b0a" aria-hidden="true" focusable="false">
                 <rect x={3} y={6} width={38} height={14} rx={2} />

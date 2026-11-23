@@ -6,7 +6,7 @@ async function renderCards() {
   const harness = createDiaryHarness({});
   const html = await harness.render(harness.load('app/skill/page.tsx').default());
   return [...html.matchAll(/<article class="programming__item fadeUpTrigger">([\s\S]*?)<\/article>/g)].map(([, markup]) => ({
-    title: markup.match(/<h3 class="programming__heading">(.*?)<\/h3>/)?.[1],
+    title: markup.match(/<h3 class="programming__heading(?: programming__heading--split)?">(.*?)<\/h3>/)?.[1].replace(/<[^>]+>/g, ''),
     markup,
   }));
 }
@@ -32,8 +32,17 @@ test('CMSはWordPress中心の既存経験と他CMSの使用経験、microCMSの
   assert.match(cards.find(card => card.title === 'microCMS').markup, /個人サイトで記事や制作実績を管理/);
 });
 
-test('Git FlowとAIツールの役割、自分で行う最終確認を伝える', async () => {
+test('Git Flowの概要と指定されたGitの3項目、AIツールの役割を伝える', async () => {
   const cards = await renderCards();
-  assert.match(cards.find(card => card.title === 'Git').markup, /Git Flow[\s\S]*feature[\s\S]*release[\s\S]*hotfix/);
+  const git = cards.find(card => card.title === 'Git').markup;
+  assert.match(git, /Git Flowに沿って開発・リリース・緊急修正のブランチを使い分けます/);
+  assert.deepEqual([...git.matchAll(/<li>(.*?)<\/li>/g)].map(([, value]) => value), ['ブランチを使った機能開発・修正', '差分確認とレビューを前提にしたコミット', 'GitHubを使ったコード管理']);
   assert.match(cards.find(card => card.title === 'AIを使った開発補助').markup, /ChatGPTで要件と仕様を整理[\s\S]*Cursorで初回実装[\s\S]*Codexで変更差分をレビュー[\s\S]*既存機能への影響は最後に自分で確認/);
+});
+
+test('Webディレクションの見出しは中点の直後でのみ折り返せる', async () => {
+  const cards = await renderCards();
+  const direction = cards.find(card => card.title === 'Webディレクション・進行管理').markup;
+  assert.match(direction, /<h3 class="programming__heading programming__heading--split"><span>Webディレクション・<\/span><wbr\s*\/?><span>進行管理<\/span><\/h3>/);
+  assert.equal(cards.filter(card => /<wbr/.test(card.markup)).length, 1);
 });
