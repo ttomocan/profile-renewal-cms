@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
-import BreadcrumbListJsonLd from '@/app/_components/BreadcrumbListJsonLd';
 
 type SkillCardProps = {
   title: string | [string, string];
@@ -46,11 +45,6 @@ function SkillCard({ title, image, icon, summary, points, link }: SkillCardProps
 }
 
 export default function Page() {
-  const breadcrumbItems = [
-    { label: 'トップ', href: '/' },
-    { label: '対応スキル・技術', active: true },
-  ];
-
   return (
     <>
       <section className="first inner">
@@ -154,8 +148,6 @@ export default function Page() {
           </Link>
         </div>
       </section>
-
-      <BreadcrumbListJsonLd items={breadcrumbItems} />
     </>
   );
 }
