@@ -25,11 +25,13 @@ function SkillCard({ title, image, icon, summary, points, link }: SkillCardProps
       <h3 className="programming__heading">{title}</h3>
       <div className="programming__detail">
         <p className="programming__description">{summary}</p>
-        <ul className="programming__points c-list">
-          {points.map((point) => (
-            <li key={point}>{point}</li>
-          ))}
-        </ul>
+        {points.length > 0 && (
+          <ul className="programming__points c-list">
+            {points.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+        )}
         {link && (
           <Link href={link.href} className="programming__related-link">
             {link.label}
@@ -62,8 +64,8 @@ export default function Page() {
           <SkillCard title="HTML / CSS / SCSS" image="/img/pages/skill/img_html5.svg" imageAlt="HTML" summary="文書構造と更新後の保守性を考えてマークアップ・スタイリングします。" points={['セマンティックHTMLと見出し設計', 'BEM・FLOCSSを用いたCSS設計', '各画面幅に合わせたレスポンシブ実装']} />
           <SkillCard title="JavaScript" image="/img/pages/skill/img_javascript.svg" imageAlt="JavaScript" summary="UIの操作やアニメーションを、既存処理への影響を確認しながら実装します。" points={['メニュー、モーダル、スライダーなどのUI実装', 'フォームや表示切り替えの制御', 'ブラウザ間の表示・操作確認']} />
           <SkillCard title="PHP" image="/img/pages/skill/img_php.svg" imageAlt="PHP" summary="PHPを用いたお問い合わせフォームやログイン機能の実装に対応しています。WordPressのカスタマイズにも活用しています。" points={['テンプレート内の表示処理の実装', '既存コードの改修・保守']} />
-          <SkillCard title="CMS" image="/img/pages/skill/wordpress-official.svg" imageAlt="WordPress" summary="WordPressを中心にCMSを使用しています。Movable Type・RCMSの使用経験があり、microCMSは個人開発で使用しています。" points={['WordPressのオリジナルテーマ開発・既存テーマの改修', '投稿タイプ・投稿機能、カスタムブロック、カスタムフィールドの設計', 'お問い合わせフォーム、表示速度、運用時の改修']} />
-          <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、チームで確認しやすい単位を意識してバージョン管理します。" points={['ブランチを使った機能開発・修正', '差分確認とレビューを前提にしたコミット', 'GitHubを使ったコード管理']} />
+          <SkillCard title="CMS" image="/img/pages/skill/wordpress-official.svg" imageAlt="WordPress" summary="WordPressを中心にCMSを使用し、サイトの構築・カスタマイズ・運用保守を担当してきました。Movable TypeとRCMSにも触れた経験があります。" points={['WordPressのオリジナルテーマ開発・既存テーマの改修', '投稿機能、カスタムブロック、カスタムフィールドを使った更新機能の実装', 'お問い合わせフォームの実装、運用時の改修']} />
+          <SkillCard title="Git" image="/img/pages/skill/img_git.svg" imageAlt="Git" summary="変更履歴を残し、Git Flowに沿って開発・リリース・緊急修正のブランチを使い分けます。" points={['feature：機能の開発・改修', 'release：リリース前の確認・調整', 'hotfix：本番の緊急修正', 'GitHubでの差分確認とレビューを意識したコミット']} />
           <SkillCard
             title="Webディレクション・進行管理"
             icon={
@@ -84,22 +86,21 @@ export default function Page() {
           <span className="c-heading-lv2-en">Personal Development</span>
           <span className="c-heading-lv2-ja">個人開発で使用</span>
         </h2>
-        <p className="programming__note fadeUpTrigger">個人開発やこのポートフォリオの改善を通じて使用しています。本業の商用案件での経験とは分けて紹介します。</p>
+        <p className="programming__note fadeUpTrigger">個人開発の「いろポン！」や、このポートフォリオの制作・改修で使っている技術です。</p>
         <div className="skill-cards">
-          <SkillCard title="Next.js / React" image="/img/pages/skill/react-official.svg" summary="コンポーネント単位でUIを組み立て、App Routerを使ったWebサイト・アプリ開発に取り組んでいます。" points={['Server Componentsを含む画面構成', '状態や責務を分けたコンポーネント設計', 'メタデータ、画像、表示速度の最適化']} />
+          <SkillCard title="Next.js / React" image="/img/pages/skill/react-official.svg" summary="コンポーネント単位でUIを組み立て、App Routerを使ったWebサイト・アプリ開発に取り組んでいます。" points={['記事・制作実績の一覧と詳細ページの実装', 'クイズの出題・回答・結果画面の実装', 'いろポン！の画面スタイルにTailwind CSSを使用']} />
           <SkillCard title="TypeScript" image="/img/pages/skill/img_typescript.svg" imageAlt="TypeScript" summary="PropsやCMSデータに型を定義し、変更時の見落としを減らすために使用しています。" points={['コンポーネントのProps定義', 'API・CMSレスポンスの型定義', '型チェックによる実装ミスの早期発見']} />
-          <SkillCard title="microCMS" image="/img/pages/skill/img_microcms.svg" imageAlt="microCMS" summary="個人サイトで記事や制作実績を管理するヘッドレスCMSとして使用しています。" points={['一覧・詳細データの取得', '下書き表示とキャッシュ設計', 'CMSデータを使ったメタ情報生成']} />
+          <SkillCard title="microCMS" image="/img/pages/skill/img_microcms.svg" imageAlt="microCMS" summary="個人サイトで記事や制作実績を管理するヘッドレスCMSとして使用しています。" points={['一覧・詳細データの取得', '公開データの取得間隔の設定', 'CMSデータを使ったメタ情報生成']} />
         </div>
       </section>
 
       <section className="ai-tool inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
           <span className="c-heading-lv2-en">Learning &amp; Support</span>
-          <span className="c-heading-lv2-ja">学習中の技術・AI活用</span>
+          <span className="c-heading-lv2-ja">基本的な使用経験・AI活用</span>
         </h2>
         <div className="skill-cards">
-          <SkillCard title="Tailwind CSS" image="/img/pages/skill/img_css3.svg" imageAlt="CSS" summary="ユーティリティクラスによるスタイリングを学習し、基本的なレイアウトやレスポンシブ指定を試しています。" points={['個人学習で使用', '基本的なレイアウト・余白指定', '既存案件での実務経験とは区別']} />
-          <SkillCard title="ChatGPT / Claude / Gemini / Codex / gemini Notebook" image="/img/pages/skill/img_chatgpt.svg" imageAlt="AIツール" summary="要件整理、コードレビュー、テスト観点の洗い出しなど、開発の補助に活用しています。Gemini・gemini Notebookでは、仕様や資料の作成・整理も行っています。" points={['生成コードをそのまま採用せず差分と影響を確認', 'アクセシビリティとレスポンシブ表示を確認', 'ブラウザ間の差異と既存処理への影響を確認']} />
+          <SkillCard title="AIを使った開発補助" image="/img/pages/skill/img_chatgpt.svg" summary="仕様整理から実装、差分レビューまで、工程に応じてAIツールを使い分けています。" points={['ChatGPTで要件と仕様を整理', 'Cursorで初回実装', 'Codexで変更差分をレビュー', '仕様との一致、表示・動作、既存機能への影響は最後に自分で確認']} />
 
         </div>
       </section>
@@ -109,7 +110,7 @@ export default function Page() {
         <p className="programming__note fadeUpTrigger">使用技術とは分けて、デザイン確認・画像編集・コード編集のツールを紹介します。</p>
         <div className="skill-cards">
           <SkillCard title="Figma / Adobe" image="/img/pages/skill/img_figma.svg" imageAlt="Figma" summary="デザインの意図やコンポーネント構造を読み取り、実装へ落とし込みます。" points={['Figmaのデザインデータ確認・制作', 'Adobe XD・Illustrator・Photoshopのデザインデータにも対応可能', 'Photoshopでの画像編集・書き出し', 'Illustratorでの素材調整']} />
-          <SkillCard title="その他の補助ツール" image="/img/pages/skill/img_cursor.svg" imageAlt="開発ツール" summary="Cursor、Visual Studio Code、gemini Notebook、Canva、Adobe Express、Fireflyを目的に応じて使い分けています。" points={['コード編集・調査の補助', '資料整理とドキュメント作成', 'ブログ用画像や素材の作成']} />
+          <SkillCard title="その他の補助ツール" image="/img/pages/skill/img_cursor.svg" imageAlt="開発ツール" summary="コードの編集、資料整理、ブログ用の素材作成に使うツールです。" points={['コード編集・調査の補助', '資料整理とドキュメント作成', 'ブログ用画像や素材の作成']} />
         </div>
       </section>
 

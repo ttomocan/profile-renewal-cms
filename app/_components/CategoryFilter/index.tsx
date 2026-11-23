@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Suspense } from 'react';
 import type { FormEvent } from 'react';
 import { Category } from '@/app/_libs/microcms';
-import styles from './index.module.css';
+import styles from '../DiaryFilterControls.module.css';
 
 type CategoryFilterProps = {
   categories: Category[];
@@ -20,24 +20,26 @@ function CategoryFilterComponent({ categories, selectedCategoryId }: CategoryFil
   };
 
   return (
-    <form className={styles.categoryFilter} action="/diary/" method="get" onSubmit={handleSubmit}>
+    <form className={styles.form} action="/diary/" method="get" onSubmit={handleSubmit}>
       <label className={styles.label} htmlFor="diary-category">
-        カテゴリー:
+        カテゴリー
       </label>
-      <div className={styles.selectWrapper}>
-        <select id="diary-category" name="category" defaultValue={selectedCategoryId || ''} className={styles.select}>
-          <option value="">すべて</option>
-          {categories.map((category) => (
-            <option key={category.id} value={category.id}>
-              {category.name}
-            </option>
-          ))}
-        </select>
-        <svg className={styles.selectIcon} width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+      <div className={styles.controls}>
+        <div className={styles.selectWrapper}>
+          <select id="diary-category" name="category" defaultValue={selectedCategoryId || ''} className={`${styles.field} ${styles.select}`}>
+            <option value="">すべて</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+          <svg className={styles.selectIcon} width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </div>
+        <button type="submit" className={styles.submitButton}>表示する</button>
       </div>
-      <button type="submit" className={styles.submitButton}>表示する</button>
     </form>
   );
 }

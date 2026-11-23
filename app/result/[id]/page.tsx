@@ -105,7 +105,6 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
     .sort((a, b) => compareContentNewest(a.item, b.item))
     .slice(0, 3)
     .map(({ item }) => item);
-  const contactTopics = [...rolesArray, ...techStackArray].slice(0, 4).join('、');
 
   const breadcrumbItems = [
     { label: 'トップ', href: '/' },
@@ -289,7 +288,7 @@ export default async function ResultDetailPage({ params }: ResultDetailPageProps
                 採用・協業について相談する
               </h2>
               <div className="result-detail__section-content result-detail__section-content--summary">
-                <p>{contactTopics ? `${contactTopics}に関する` : 'Web制作に関する'}採用・業務委託・協業のご相談を受け付けています。この制作実績について確認したい点がある場合も、内容を添えてご連絡ください。</p>
+                <p>Web制作に関する採用・業務委託・協業のご相談を受け付けています。この実績についてのご質問も、内容を添えてご連絡ください。</p>
                 <p className="result-contact__button">
                   <Link href="/contact/" className="c-button__link">
                     採用・協業について問い合わせる

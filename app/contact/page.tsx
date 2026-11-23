@@ -9,7 +9,7 @@ export default function Page() {
 
   return (
     <>
-      <section className="inner inner-s">
+      <section className="inner">
         <p className="fadeUpTrigger">採用、業務委託・協業、制作実績、ブログ・メディア運営に関するお問い合わせを受け付けています。</p>
         <ul className="u-mt20 c-list fadeUpTrigger">
           <li>採用に関するご連絡</li>

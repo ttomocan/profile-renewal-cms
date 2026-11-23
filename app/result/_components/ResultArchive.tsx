@@ -35,7 +35,7 @@ export default function ResultArchive({ currentPage, resultsData, personalResult
               {pageLabel}の一覧
             </h2>
             <p>
-              本業・副業の区分、サイトの種類、本人の担当領域を一覧で紹介します。案件固有の実装内容や、案件全体の制作期間・規模は各詳細ページで確認できます。
+              本業・副業で携わった制作実績を紹介します。各詳細ページに、案件の概要、本人の担当範囲、使用技術、具体的な実装内容を掲載しています。
               {currentPage > 1 && ` 現在は${currentPage}ページ目です。`}
             </p>
           </section>

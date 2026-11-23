@@ -46,8 +46,7 @@ export default async function Home() {
 
               <h1 className="p-top-hero__title">設計・実装・改善まで担うWebエンジニア</h1>
               <p className="p-top-hero__about-text">
-                Web制作会社で<strong>10年以上</strong>の経験があり、Web制作<strong className="p-top-hero__count">250件<sup>※</sup></strong>に参画してきました。
-                <span className="p-top-hero__count-note">※新規サイト・LP、副業を含む。改修を除く。</span>
+                <strong>2016年から</strong>、累計<strong className="p-top-hero__count">250件以上</strong>のWeb制作に携わってきました。
               </p>
               <p className="p-top-hero__expertise">WordPress構築 / フロントエンド実装 / UI改善 / SEO対策</p>
               <p className="p-top-hero__about-text">更新する人と制作チームを考えた、CMSの実装・改修・運用に取り組んできました。</p>
@@ -71,13 +70,13 @@ export default async function Home() {
             <div className="p-top-facts__item fadeUpTrigger">
               <dt>Web制作経験</dt>
               <dd>
-                <strong>10</strong>年以上
+                <strong>2016</strong>年から
               </dd>
             </div>
             <div className="p-top-facts__item fadeUpTrigger">
               <dt>Web制作への参画</dt>
               <dd>
-                <strong>250</strong>件
+                <strong>250</strong>件以上
               </dd>
             </div>
             <div className="p-top-facts__item fadeUpTrigger">
@@ -85,7 +84,7 @@ export default async function Home() {
               <dd>1級ウェブデザイン技能士</dd>
             </div>
           </dl>
-          <p className="p-top-facts__note fadeUpTrigger">参画件数は新規サイト・LP、副業を含み、改修を除きます。</p>
+          <p className="p-top-facts__note fadeUpTrigger">コーポレートサイトや採用サイトなどの制作に携わってきました。</p>
         </section>
 
         <section className="p-top-results inner">
@@ -120,8 +119,8 @@ export default async function Home() {
               <Image src="/img/pages/top/img_programming.jpg" alt="コードを実装している画面" width={300} height={200} />
               <h3 className="p-top-skill__item-heading c-heading-lv3">実装・CMS構築</h3>
               <ul className="c-list">
-                <li>HTML、CSS、JavaScript、PHPによるフロントエンド実装</li>
-                <li>WordPressのテーマ開発、投稿機能、カスタムフィールド設計</li>
+                <li>HTML、CSS、JavaScriptによるフロントエンド実装</li>
+                <li>PHPを使ったWordPressのテーマ開発・カスタマイズ</li>
                 <li>更新性と運用方法を考慮したCMS構築</li>
               </ul>
             </article>
@@ -131,7 +130,7 @@ export default async function Home() {
               <ul className="c-list">
                 <li>デザイン意図を読み取り、レスポンシブ表示まで実装</li>
                 <li>Figma、Photoshop、Illustratorを使った制作</li>
-                <li>SEO、アクセシビリティ、表示速度を考慮した改善</li>
+                <li>見出し構造やメタ情報、画面の操作性を確認</li>
               </ul>
             </article>
             <article className="p-top-skill__item col fadeUpTrigger">
@@ -139,8 +138,8 @@ export default async function Home() {
               <h3 className="p-top-skill__item-heading c-heading-lv3">個人開発・AI活用</h3>
               <ul className="c-list">
                 <li>Next.js、React、TypeScript、microCMSによる個人開発</li>
-                <li>要件整理、コードレビュー、テスト観点の洗い出しにAIを活用</li>
-                <li>生成結果を検証し、既存処理への影響まで確認</li>
+                <li>仕様整理、コード案の作成、エラー調査にAIを活用</li>
+                <li>仕様との一致、コードの差分、動作は自分で確認</li>
               </ul>
             </article>
           </div>

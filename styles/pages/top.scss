@@ -762,27 +762,17 @@
       pointer-events: none;
     }
 
-    &__badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      z-index: 2;
-    }
-
     &__work-type {
-      color: #ffffff;
-      background: $mainC;
+      color: $brandStrong;
+      background: #fff3e8;
       display: inline-flex;
       align-items: center;
-      padding: 3px 12px;
+      padding: 2px 10px;
       border-radius: $radiusSmall;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: 0.001em;
-      -webkit-backdrop-filter: blur(16px);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgb(255, 255, 255);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(243, 107, 10, 0.15);
       text-transform: uppercase;
     }
 
@@ -800,13 +790,18 @@
     &__meta {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: 8px;
       margin-bottom: 12px;
       font-size: 12px;
       color: #78716c;
     }
 
     &__category {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
       border: 1px solid rgba(243, 107, 10, 0.15);
       border-radius: $radiusSmall;
       padding: 2px 10px;
@@ -814,6 +809,12 @@
       color: $brandStrong;
       text-transform: uppercase;
       letter-spacing: 0.05em;
+    }
+
+    &__category-icon {
+      flex: 0 0 16px;
+      width: 16px;
+      height: 16px;
     }
 
     &__period {
@@ -867,11 +868,6 @@
       &__summary {
         font-size: 13px;
         -webkit-line-clamp: 2;
-      }
-
-      &__badge {
-        top: 8px;
-        left: 8px;
       }
 
       &__action-icon {

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import ResultCategoryIcon from './ResultCategoryIcon';
 import Link from 'next/link';
 import { parseRoles, safeGetProjectType, safeGetCover, safeGetWorkType } from '@/lib/parse';
 import { groupProjectTechnologies } from '@/lib/resultPresentation';
@@ -16,7 +17,7 @@ export default function ResultCard({ result, disableLink = false, showTechnologi
   const { id, title, summary } = result;
 
   const workType = safeGetWorkType(result);
-  const projectType = safeGetProjectType(result);
+  const projectTypes = safeGetProjectType(result).split(' / ').map(type => type.trim()).filter((type, index, types) => type && types.indexOf(type) === index);
   const cover = safeGetCover(result, true); // 一覧ページではOGP画像を使用
   const roles = parseRoles(result);
   const technologies = groupProjectTechnologies(result.techStack).technologies;
@@ -27,9 +28,6 @@ export default function ResultCard({ result, disableLink = false, showTechnologi
       <div className="result-card__image">
         <Image src={cover.url} alt="" fill sizes="(max-width: 767px) calc(100vw - 40px), (max-width: 1200px) 50vw, 33vw" className="result-card__image-img" loading={eagerImage ? 'eager' : 'lazy'} />
         <div className="result-card__overlay"></div>
-        <div className="result-card__badge">
-          <span className={`result-card__work-type work-type-${workType}`}>{workType}</span>
-        </div>
         {!disableLink && (
           <div className="result-card__action-icon" aria-hidden="true">
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,7 +38,13 @@ export default function ResultCard({ result, disableLink = false, showTechnologi
       </div>
       <div className="result-card__content">
         <div className="result-card__meta">
-          <span className="result-card__category">{projectType}</span>
+          <span className={`result-card__work-type work-type-${workType}`}>{workType}</span>
+          {projectTypes.map(projectType => (
+            <span className="result-card__category" key={projectType}>
+              <ResultCategoryIcon category={projectType} />
+              {projectType}
+            </span>
+          ))}
         </div>
         <h3 className="result-card__title">{title}</h3>
         {roles.length > 0 && <p className="result-card__responsibility">担当：{roles.join(' / ')}</p>}

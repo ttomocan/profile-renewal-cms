@@ -5,13 +5,14 @@ import Date from '../Date';
 import Category from '../Category';
 import styles from './index.module.css';
 import { addHeadingIds } from '@/lib/tableOfContents';
+import { getArticleContent } from '@/lib/articleContent';
 
 type Props = {
   data: Blog;
 };
 
 export default function Article({ data }: Props) {
-  const article = addHeadingIds(data.content);
+  const article = addHeadingIds(getArticleContent(data));
   const showTableOfContents = article.items.length >= 2;
 
   return (

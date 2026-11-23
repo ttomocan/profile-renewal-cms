@@ -1,0 +1,18 @@
+.form { flex: 1 1 320px; min-width: 0; width: 100%; font-family: inherit; }
+.label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; line-height: 1.5; }
+.controls { display: grid; grid-template-columns: minmax(0, 1fr) 108px; align-items: stretch; gap: 12px; }
+.inputWrapper, .selectWrapper { position: relative; min-width: 0; }
+.inputWrapper img { position: absolute; top: 50%; left: 16px; transform: translateY(-50%); pointer-events: none; }
+.field, .submitButton { box-sizing: border-box; width: 100%; min-height: 48px; border: 1px solid #767676; border-radius: 8px; font-family: inherit; font-size: 16px; line-height: 1.5; transition: background-color 0.2s ease, border-color 0.2s ease; }
+.field { display: block; min-width: 0; background: #fff; color: #292929; padding: 11px 16px; appearance: none; }
+.searchInput { padding-left: 44px; }
+.searchInput::placeholder { color: #767676; }
+.select { padding-right: 40px; cursor: pointer; }
+.selectIcon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #666; }
+.field:hover { border-color: #b54708; }
+.field:focus-visible { outline: 2px solid #b54708; outline-offset: 0; }
+.submitButton { border-color: #b54708; background: #b54708; color: #fff; padding: 11px 16px; font-weight: 700; text-align: center; white-space: nowrap; cursor: pointer; }
+.submitButton:hover { background: #8f3500; border-color: #8f3500; }
+.submitButton:focus-visible { outline: 3px solid #69300b; outline-offset: 3px; }
+@media (max-width: 768px) { .form { flex-basis: auto; } .controls { grid-template-columns: minmax(0, 1fr) 100px; gap: 8px; } }
+@media (prefers-reduced-motion: reduce) { .field, .submitButton { transition: none; } }

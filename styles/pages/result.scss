@@ -199,33 +199,24 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     transition: opacity 0.4s ease;
   }
 
-  &__badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
-  }
-
   &__work-type {
-    color: $white;
-    background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
+    color: $brandStrong;
+    background: #fff3e8;
     display: inline-flex;
     align-items: center;
-    padding: 3px 12px;
+    padding: 2px 10px;
     border-radius: $radius-pill;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 0.001em;
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 1);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border: 1px solid $primary-muted;
     text-transform: uppercase;
 
     // 案件区分別カラースキーム（メインカラーベース）
     &.work-type-work-type-main,
     &.work-type-main {
-      background: linear-gradient(135deg, $primary-color 0%, color.adjust($primary-color, $lightness: -10%) 100%);
-      color: $white;
+      background: #fff3e8;
+      color: $brandStrong;
     }
 
     &.work-type-work-type-side,
@@ -293,6 +284,7 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &__category {
+    gap: 5px;
     display: inline-flex;
     align-items: center;
     padding: 2px 10px;
@@ -303,6 +295,12 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: $radius-pill;
     border: 1px solid $primary-muted;
     letter-spacing: 0.001em;
+  }
+
+  &__category-icon {
+    flex: 0 0 16px;
+    width: 16px;
+    height: 16px;
   }
 
   &__period {

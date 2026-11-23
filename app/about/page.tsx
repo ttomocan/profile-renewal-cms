@@ -41,7 +41,7 @@ export default function Page() {
         <dl className="about-facts fadeUpTrigger">
           <div className="about-facts__item">
             <dt>Webエンジニア経験</dt>
-            <dd>10年以上</dd>
+            <dd>2016年から</dd>
           </div>
           <div className="about-facts__item">
             <dt>Web制作会社</dt>
@@ -49,10 +49,9 @@ export default function Page() {
           </div>
           <div className="about-facts__item">
             <dt>Web制作への参画</dt>
-            <dd>250件</dd>
+            <dd>250件以上</dd>
           </div>
         </dl>
-        <p className="about-count-note">参画件数は新規サイト・LP、副業を含み、改修を除きます。</p>
         <p className="about-section-copy fadeUpTrigger">コーポレートサイト、ブランドサイト、オウンドメディアなどの制作に携わり、実装からCMS構築、レスポンシブ調整、SEO、運用・保守まで担当してきました。</p>
         <div className="about-career fadeUpTrigger" aria-labelledby="career-heading">
           <h3 id="career-heading">学歴・職歴</h3>
@@ -95,7 +94,7 @@ export default function Page() {
           </li>
           <li>
             <strong>フロントエンド実装</strong>
-            <span>HTML、CSS、JavaScript、PHPを使い、各画面幅と運用後の変更を考慮して実装します。</span>
+            <span>HTML、CSS、JavaScriptを使い、各画面幅と運用後の変更を考慮して実装します。</span>
           </li>
           <li>
             <strong>UI改善・品質確認</strong>
@@ -159,7 +158,7 @@ export default function Page() {
               </tr>
               <tr>
                 <th scope="row">家族</th>
-                <td>妻と幼い息子の3人家族</td>
+                <td>妻と息子の3人家族</td>
               </tr>
               <tr>
                 <th scope="row">趣味</th>
@@ -170,8 +169,8 @@ export default function Page() {
                 <td>遊ぶように生きる（人生というゲームを、ワクワクしながらプレイすること）</td>
               </tr>
               <tr>
-                <th scope="row">人生のバイブル</th>
-                <td>NARUTO</td>
+                <th scope="row">好きな漫画</th>
+                <td>NARUTO（特に波の国編）</td>
               </tr>
             </tbody>
           </table>

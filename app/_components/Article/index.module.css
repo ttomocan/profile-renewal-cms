@@ -2,7 +2,6 @@
 
 .article {
   margin-inline: auto;
-  max-width: 720px;
 }
 
 .tableOfContents {
@@ -259,12 +258,25 @@
 
 .content > blockquote {
   margin: 40px 0;
-  padding: 24px 32px;
+  padding: 24px;
   background: #fffaf5;
   border-radius: 8px;
-  border-left: 4px solid #f36b0a;
+  border: 1px solid #eed8c5;
+  border-left: 4px solid #b54708;
+  font-style: normal;
+  overflow-wrap: anywhere;
   font-size: 1.05rem;
   line-height: 1.9;
+}
+
+.content > blockquote::before {
+  content: '';
+  display: block;
+  position: static;
+  width: 24px;
+  height: 24px;
+  margin-bottom: 12px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23b54708'%3E%3Cpath d='M10 5H4v8h4c0 3-2 4-4 4v2c4 0 6-3 6-7V5zm10 0h-6v8h4c0 3-2 4-4 4v2c4 0 6-3 6-7V5z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 .content > blockquote > p {
@@ -368,7 +380,7 @@
   }
 
   .content > blockquote {
-    padding: 20px 24px;
+    padding: 20px;
     margin: 32px 0;
   }
 }

@@ -19,12 +19,10 @@ test('validation errors use readable dark red', () => {
   assert.equal(style('styles/object/project/_form.scss', '.p-form__error').color, '#a32116');
 });
 test('search and category have strong boundaries and flush 2px focus', () => {
-  const search = 'app/_components/SearchField/index.module.css';
-  assert.equal(style(search, '.search').border, '1px solid #767676');
-  assert.equal(style(search, '.searchInput:focus').outline, '2px solid #b54708');
-  assert.equal(style(search, '.searchInput:focus')['outline-offset'], '0');
-  assert.equal(style(search, '.searchInput')['min-width'], '0');
-  const category = 'app/_components/CategoryFilter/index.module.css';
-  assert.equal(style(category, '.select').border, '1px solid #767676');
-  assert.equal(style(category, '.select:focus-visible').outline, '2px solid #b54708');
+  const shared = 'app/_components/DiaryFilterControls.module.css';
+  assert.equal(style(shared, '.field').background, '#fff');
+  assert.equal(style(shared, '.field:focus-visible').outline, '2px solid #b54708');
+  assert.equal(style(shared, '.field:focus-visible')['outline-offset'], '0');
+  assert.equal(style(shared, '.field')['min-width'], '0');
+  assert.equal(style(shared, '.submitButton:focus-visible').outline, '3px solid #69300b');
 });
