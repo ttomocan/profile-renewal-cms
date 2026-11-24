@@ -11,6 +11,12 @@
   max-width: 720px;
 }
 
+@media (min-width: 1041px) {
+  .related {
+    max-width: none;
+  }
+}
+
 .related h2 {
   border-left: 4px solid #f36b0a;
   font-size: 1.35rem;

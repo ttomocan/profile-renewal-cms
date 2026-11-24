@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
 import test from 'node:test';
+import postcss from 'postcss';
 import { createDiaryHarness } from './helpers/diaryPageHarness.mjs';
 
 const category = { id: 'activity', name: '活動記録' };
@@ -115,4 +117,23 @@ test('関連記事が1件だけなら本文・カテゴリ条件と通常カー�
   assert.doesNotMatch(html, /splide__arrows|splide__track/);
   assert.ok(hrefs(html).includes('/diary/only-related'));
   assert.match(html, /CMSの本文/);
+});
+
+test('日記詳細の関連記事だけPC幅で記事の内幅まで広げ、従来の余白を保つ', async () => {
+  const current = article('current', '現在の記事');
+  const h = createDiaryHarness({ getBlogDetail: async () => current, getBlogList: async () => ({ contents: [current, ...relatedArticles] }) });
+  const html = await h.render(await h.load('app/diary/[slug]/page.tsx').default({ params: Promise.resolve({ slug: current.id }), searchParams: Promise.resolve({}) }));
+  assert.match(html, /<article class="inner">[\s\S]*?CMSの本文[\s\S]*?<section class="[^"]+-related" aria-labelledby="related-articles-heading">/);
+
+  const css = postcss.parse(readFileSync('app/diary/[slug]/page.module.css', 'utf8'));
+  const declarations = [];
+  css.walkRules('.related', rule => {
+    const media = rule.parent.type === 'atrule' ? rule.parent.params : null;
+    rule.walkDecls(decl => declarations.push([media, decl.prop, decl.value]));
+  });
+  assert.deepEqual(declarations, [
+    [null, 'margin', '64px auto 0'],
+    [null, 'max-width', '720px'],
+    ['(min-width: 1041px)', 'max-width', 'none'],
+  ]);
 });
