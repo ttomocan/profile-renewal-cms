@@ -93,12 +93,31 @@ export default function Page() {
 
       <section className="ai-tool inner">
         <h2 className="c-heading-lv2 fadeUpTrigger">
-          <span className="c-heading-lv2-en">Learning &amp; Support</span>
-          <span className="c-heading-lv2-ja">基本的な使用経験・AI活用</span>
+          <span className="c-heading-lv2-en">AI-Assisted Development</span>
+          <span className="c-heading-lv2-ja">AIを活用した開発フロー</span>
         </h2>
         <div className="skill-cards">
-          <SkillCard title="AIを使った開発補助" image="/img/pages/skill/img_chatgpt.svg" summary="仕様整理から実装、差分レビューまで、工程に応じてAIツールを使い分けています。" points={['ChatGPTで要件と仕様を整理', 'Cursorで初回実装', 'Codexで変更差分をレビュー', '仕様との一致、表示・動作、既存機能への影響は最後に自分で確認']} />
-
+          <SkillCard
+            title="AIを使った開発補助"
+            image="/img/pages/skill/img_chatgpt.svg"
+            summary="仕様整理から実装、差分レビューまで、工程に応じてAIツールを使い分けています。"
+            points={[
+              'ChatGPTで要件と仕様を整理',
+              'Cursorで初回実装',
+              'Codexで変更差分をレビュー',
+              '仕様との一致、表示・動作、既存機能への影響は最後に自分で確認',
+            ]}
+          />
+          <SkillCard
+            title="仕様・資料の作成と整理"
+            icon={
+              <svg viewBox="0 0 64 64" width={80} height={80} fill="none" stroke="#f36b0a" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                <path d="M16 8h21l11 11v37H16zM37 8v11h11M24 31h16M24 40h16M24 48h10" />
+              </svg>
+            }
+            summary="業務ではGemini Notebook（旧NotebookLM）を使い、仕様や資料の作成・整理を行っています。"
+            points={[]}
+          />
         </div>
       </section>
 
