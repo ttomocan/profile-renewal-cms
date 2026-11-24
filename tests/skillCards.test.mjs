@@ -62,6 +62,13 @@ test('AIの開発フローに既存カードとGemini Notebookの独立したカ
   assert.match(notebook, /<h3 class="programming__heading">仕様・資料の作成と整理<\/h3>/);
   assert.match(notebook, /業務ではGemini Notebook（旧NotebookLM）を使い、仕様や資料の作成・整理を行っています。/);
   assert.match(notebook, /<div class="programming__image" aria-hidden="true"><svg\b/);
+  assert.match(notebook, /<rect x="16" y="9" width="34" height="46" rx="4"/);
+  assert.doesNotMatch(notebook, /M16 8h21l11 11/);
+  assert.deepEqual([...notebook.matchAll(/<li>(.*?)<\/li>/g)].map(([, value]) => value), [
+    '要件や仕様に関する情報を整理',
+    '業務資料の構成を整理',
+    '関連資料から要点を整理',
+  ]);
 });
 
 test('Webディレクションの見出しは中点の直後でのみ折り返せる', async () => {

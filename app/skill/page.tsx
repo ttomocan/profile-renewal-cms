@@ -112,11 +112,12 @@ export default function Page() {
             title="仕様・資料の作成と整理"
             icon={
               <svg viewBox="0 0 64 64" width={80} height={80} fill="none" stroke="#f36b0a" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
-                <path d="M16 8h21l11 11v37H16zM37 8v11h11M24 31h16M24 40h16M24 48h10" />
+                <rect x={16} y={9} width={34} height={46} rx={4} />
+                <path d="M24 9v46M12 18h8M12 27h8M12 36h8M12 45h8M31 24h12M31 32h12M31 40h8" />
               </svg>
             }
             summary="業務ではGemini Notebook（旧NotebookLM）を使い、仕様や資料の作成・整理を行っています。"
-            points={[]}
+            points={['要件や仕様に関する情報を整理', '業務資料の構成を整理', '関連資料から要点を整理']}
           />
         </div>
       </section>
