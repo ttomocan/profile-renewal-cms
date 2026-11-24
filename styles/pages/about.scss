@@ -175,6 +175,25 @@
     margin-top: 24px;
   }
 
+  @include mq(pc) {
+    main > section.inner.inner-s {
+      max-width: calc(#{$inner} + 40px);
+    }
+
+    .greeting__detail,
+    .about-section--compact > .about-section-copy,
+    .work-style[aria-labelledby=about-contact-heading] > .about-section-copy {
+      // Left-align editorial copy with its compact heading without lengthening its lines.
+      max-width: $innerSmall;
+      width: 100%;
+    }
+
+    .greeting__detail,
+    .work-style[aria-labelledby=about-contact-heading] > .about-section-copy {
+      margin-inline: auto;
+    }
+  }
+
   @include mq(sp) {
     .about-career__list > div,
     .about-qualifications ul,
