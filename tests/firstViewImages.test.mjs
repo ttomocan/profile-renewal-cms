@@ -3,6 +3,7 @@ import test from 'node:test';
 import { createElement } from 'react';
 import { readFileSync } from 'node:fs';
 import { runInNewContext } from 'node:vm';
+import { gzipSync } from 'node:zlib';
 import ts from 'typescript';
 import { createDiaryHarness } from './helpers/diaryPageHarness.mjs';
 
@@ -23,9 +24,16 @@ async function render(file, props = {}, source = cms) {
   return h.render(createElement(Component, props));
 }
 
-test('常時表示するロゴは即時取得し、SNSはPCだけ先行取得する', async () => {
+test('ロゴは初期HTMLで描画し、SNSはPCだけ先行取得する', async () => {
   const html = await render('app/_components/Header/index.tsx');
-  assert.equal(loading(images(html).find(img => img.includes('/img/common/h_logo.png'))), 'eager');
+  const logo = html.match(/<div class="l-header__logo"[^>]*>([\s\S]*?)<\/div>/)?.[1];
+  assert.ok(logo);
+  assert.match(logo, /<a\b[^>]*aria-label="TOMOCAN LIFESTYLE（ホームへ）"[^>]*>/);
+  assert.match(logo, /<svg\b[^>]*width="400"[^>]*height="33"[^>]*viewBox="0 0 513 42"/);
+  assert.match(logo, /<path\b/);
+  assert.match(logo, /<linearGradient\b/);
+  assert.doesNotMatch(html, /h_logo(?:\.png|\.svg)/);
+  assert.ok(gzipSync(logo).length < 9_000, 'keep the inline markup below 9 KB gzipped');
   const preloads = [...html.matchAll(/<link\b[^>]*rel="preload"[^>]*>/g)].map(m => m[0]).filter(tag => tag.includes('/img/common/icon_'));
   assert.equal(preloads.length, 3);
   for (const tag of preloads) assert.match(tag, /media="\(min-width: 1041px\)"/);
