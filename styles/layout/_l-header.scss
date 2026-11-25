@@ -61,6 +61,12 @@ main#main {
   height: 100px;
 }
 
+.l-header__logo svg {
+  max-width: 100%;
+  height: auto;
+  vertical-align: bottom;
+}
+
 /* ======================================= */
 /* 　PC
 /* ======================================= */
@@ -526,7 +532,7 @@ main#main {
   }
 
   // ロゴを明るく表示
-  .l-header__logo img {
+  .l-header__logo svg {
     filter: brightness(0) invert(1);
   }
 }
