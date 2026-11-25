@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { usePathname } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import MenuNav from '../MenuNav';
+import HeaderLogo from './HeaderLogo';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -135,8 +135,8 @@ export default function Header() {
       </a>
       <header ref={headerRef} className={`l-header ${pageClass} ${isScrolled ? 'scroll' : ''}`}>
         <div className="l-header__logo" inert={isMenuOpen}>
-          <Link href="/">
-            <Image src="/img/common/h_logo.png" alt="TOMOCAN LIFESTYLE（ホームへ）" width={400} height={33} sizes="(max-width: 428px) 70vw, (max-width: 1040px) 300px, (max-width: 1333px) 30vw, 400px" loading="eager" />
+          <Link href="/" aria-label="TOMOCAN LIFESTYLE（ホームへ）">
+            <HeaderLogo />
           </Link>
         </div>
         <div className={`l-header__menuBtn ${isMenuOpen ? 'is-open' : 'is-close'}`}>
