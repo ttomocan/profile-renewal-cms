@@ -29,7 +29,7 @@ export default function BlogList({ blog, eagerFirstImage = false }: Props) {
       {blog.map((article, index) => (
         <article key={article.id} className={styles.list}>
           <Link href={`/diary/${article.id}/`} className={styles.link} aria-label={`記事「${article.title}」を読む`}>
-            <div className={styles.imageWrapper}>{article.thumbnail ? <Image src={article.thumbnail.url} alt="" className={styles.image} width={article.thumbnail.width} height={article.thumbnail.height} loading={eagerFirstImage && index === 0 ? 'eager' : 'lazy'} sizes="(max-width: 480px) calc(100vw - 74px), (max-width: 767px) 120px, 200px" /> : <Image className={styles.image} src="/img/common/ogp.png" alt="" width={200} height={105} loading={eagerFirstImage && index === 0 ? 'eager' : 'lazy'} sizes="(max-width: 480px) calc(100vw - 74px), (max-width: 767px) 120px, 200px" />}</div>
+            <div className={styles.imageWrapper}>{article.thumbnail ? <Image src={article.thumbnail.url} alt="" className={styles.image} width={article.thumbnail.width} height={article.thumbnail.height} loading={eagerFirstImage && index === 0 ? 'eager' : 'lazy'} fetchPriority={eagerFirstImage && index === 0 ? 'low' : undefined} sizes="(max-width: 480px) calc(100vw - 74px), (max-width: 767px) 120px, 200px" /> : <Image className={styles.image} src="/img/common/ogp.png" alt="" width={200} height={105} loading={eagerFirstImage && index === 0 ? 'eager' : 'lazy'} fetchPriority={eagerFirstImage && index === 0 ? 'low' : undefined} sizes="(max-width: 480px) calc(100vw - 74px), (max-width: 767px) 120px, 200px" />}</div>
             <div className={styles.content}>
               <header>
                 <h3 className={styles.title}>{article.title}</h3>

@@ -36,7 +36,12 @@
     inset: 0;
     position: absolute;
 
-    > img {
+    > picture {
+      display: contents;
+    }
+
+    > img,
+    > picture > img {
       height: 100%;
       object-fit: cover;
       object-position: center;
@@ -192,11 +197,11 @@
     }
   }
 
-  &--skill .pagetitle__visual > img {
+  &--skill .pagetitle__visual > picture > img {
     object-position: center 54%;
   }
 
-  &--diary .pagetitle__visual > img {
+  &--diary .pagetitle__visual > picture > img {
     object-position: center 58%;
   }
 }
@@ -262,11 +267,11 @@
       width: 174px;
     }
 
-    &--skill .pagetitle__visual > img {
+    &--skill .pagetitle__visual > picture > img {
       object-position: 43% center;
     }
 
-    &--diary .pagetitle__visual > img {
+    &--diary .pagetitle__visual > picture > img {
       object-position: 48% center;
     }
   }

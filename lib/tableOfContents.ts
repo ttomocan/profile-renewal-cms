@@ -31,13 +31,19 @@ function getExistingId(attributes: string) {
 
 export function addHeadingIds(content: string): { content: string; items: TableOfContentsItem[] } {
   const items: TableOfContentsItem[] = [];
-  const normalizedImages = content.replace(/<img\b([^>]*)>/gi, (tag, attributes: string) => {
-    const altMatch = attributes.match(/\salt=(['"])(.*?)\1/i);
-    if (!altMatch) return `<img${attributes} alt="">`;
-
-    const alt = altMatch[2].trim();
-    const isUnhelpful = /^(image|画像|img[_-]?\d*|[^/\\]+\.(?:jpe?g|png|webp|gif|svg))$/i.test(alt);
-    return isUnhelpful ? tag.replace(altMatch[0], ' alt=""') : tag;
+  // Keep quoted attributes intact (e.g. alt text containing a > character).
+  const normalizedImages = content.replace(/<!--[\s\S]*?-->|(<img)(?=[\s/>])((?:"[^"]*"|'[^']*'|[^'">])*)>/gi, (tag, open: string | undefined, attributes: string | undefined) => {
+    if (!open || attributes === undefined) return tag;
+    const imageAttributes = [...attributes.matchAll(/\s+([^\s=/"'<>]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'=<>]+)))?/g)];
+    const alt = imageAttributes.find(match => match[1].toLowerCase() === 'alt');
+    const hasLoading = imageAttributes.some(match => match[1].toLowerCase() === 'loading');
+    let normalized = attributes;
+    if (!alt) {
+      normalized = normalized.replace(/(\s*\/)?$/, ' alt=""$1');
+    } else if (/^(image|画像|img[_-]?\d*|[^/\\]+\.(?:jpe?g|png|webp|gif|svg))$/i.test((alt[2] ?? alt[3] ?? alt[4] ?? '').trim())) {
+      normalized = normalized.slice(0, alt.index) + ' alt=""' + normalized.slice(alt.index + alt[0].length);
+    }
+    return `${open}${hasLoading ? '' : ' loading="lazy"'}${normalized}>`;
   });
   const normalizedHeadings = normalizedImages.replace(/<h1\b([^>]*)>/gi, '<h2$1>').replace(/<\/h1>/gi, '</h2>');
   // 後方の見出しや本文要素のIDも予約し、既存のアンカーを生成IDで奪わない。

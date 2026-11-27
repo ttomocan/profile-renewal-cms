@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, { getImageProps } from 'next/image';
 import type { ReactNode } from 'react';
 
 type Props = {
@@ -55,6 +55,31 @@ function PageGraphic({ page }: { page: GraphicPage }) {
   );
 }
 
+const mobileHeroMedia = '(max-width: 767px)';
+
+function PageHero({ page }: { page: 'skill' | 'diary' }) {
+  const base = `/img/pages/${page}/img_hero`;
+  const sizes = '100vw';
+  const mobileSrcSet = `${base}-640.avif 640w, ${base}-1200.avif 1200w`;
+  const { props: desktopImage } = getImageProps({
+    src: `${base}.webp`, alt: '', width: 1366, height: 400, sizes, loading: 'eager', fetchPriority: 'high',
+  });
+
+  return (
+    <>
+      <link rel="preload" as="image" type="image/avif" media={mobileHeroMedia}
+        imageSrcSet={mobileSrcSet} imageSizes={sizes} fetchPriority="high" />
+      <link rel="preload" as="image" media="(width > 767px)"
+        imageSrcSet={desktopImage.srcSet} imageSizes={sizes} fetchPriority="high" />
+      <picture>
+        <source type="image/avif" media={mobileHeroMedia} srcSet={mobileSrcSet} sizes={sizes} />
+        {/* The picture needs a single WebP fallback shared with the desktop preload. */}
+        <img {...desktopImage} alt="" />
+      </picture>
+    </>
+  );
+}
+
 export default function PageTitle({ title, sub, isHeading = true }: Props) {
   // titleをサニタイズして安全なファイルパスに変換
   const sanitizeTitle = (title: string) => {
@@ -68,6 +93,8 @@ export default function PageTitle({ title, sub, isHeading = true }: Props) {
       <div className="pagetitle__visual">
         {graphicPage ? (
           <PageGraphic page={graphicPage} />
+        ) : lowerCaseTitle === 'skill' || lowerCaseTitle === 'diary' ? (
+          <PageHero page={lowerCaseTitle} />
         ) : (
           <Image src={`/img/pages/${lowerCaseTitle}/img_hero.webp`} alt="" width={1366} height={400} sizes="100vw" priority />
         )}

@@ -401,15 +401,32 @@ $transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 // ===============================================
 // 実績グリッド
 // ===============================================
+$result-grid-min-track: 250px;
+$result-grid-min-gap: 20px;
+
 .results-grid {
   display: grid;
   margin-bottom: 50px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: clamp(20px, 2vw, 30px);
+  grid-template-columns: repeat(auto-fit, minmax($result-grid-min-track, 1fr));
+  gap: clamp($result-grid-min-gap, 2vw, 30px);
+
+  &--archive {
+    container-type: inline-size;
+  }
 
   @include mq('pcTab') {
     &--personal {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+}
+
+// At each column threshold the gap is still at its 20px minimum.
+@for $columns from 2 through 3 {
+  @container (min-width: #{$columns * $result-grid-min-track + ($columns - 1) * $result-grid-min-gap}) {
+    .results-grid--archive > .result-card.fadeUpTrigger:nth-child(#{$columns}) {
+      animation: none;
+      opacity: 1;
     }
   }
 }

@@ -52,17 +52,57 @@ test('トップはKVと似顔絵を即時取得し、下層セクション画像
   assert.equal(loading(tags.find(img => img.includes('img_programming.jpg'))), 'lazy');
 });
 
+test('トップはスマホでのみ軽量AVIFを使い、既存のWebP候補を残す', async () => {
+  const html = await render('app/page.tsx', {}, { ...cms, getBlogList: async () => ({ contents: [] }) });
+  const picture = html.match(/<picture>([\s\S]*?)<\/picture>/)?.[1];
+  assert.match(picture, /<source[^>]*type="image\/avif"[^>]*media="\(max-width: 767px\)"[^>]*img_hero_sp-640.avif/);
+  assert.match(picture, /<source[^>]*img_hero_sp.webp/);
+  assert.match(picture, /<source[^>]*img_hero.webp/);
+});
+
+for (const title of ['Skill', 'Diary']) {
+  test(`${title}のバナーはスマホだけAVIFを選び、AVIFとWebPの先読みを重複させない`, async () => {
+    const html = await render('app/_components/PageTitle/index.tsx', { title, sub: '見出し' });
+    assert.match(html, /<source[^>]*type="image\/avif"[^>]*media="\(max-width: 767px\)"/);
+    const preloads = html.match(/<link[^>]+as="image"[^>]*>/g) ?? [];
+    assert.equal(preloads.length, 2);
+    assert.ok(preloads.some(link => link.includes('type="image/avif"') && link.includes('media="(max-width: 767px)"')));
+    assert.ok(preloads.some(link => link.includes('media="(width &gt; 767px)"') && link.includes('img_hero.webp')));
+    assert.match(html, /<img[^>]*img_hero.webp/);
+  });
+}
+
 test('Aboutの最初の写真は遅延取得や透明な登場待ちをしない', async () => {
   const html = await render('app/about/page.tsx');
-  assert.equal(loading(images(html).find(img => img.includes('/img/pages/about/img_tomocan.jpg'))), 'eager');
+  const photo = images(html).find(img => img.includes('/img/pages/about/img_tomocan.jpg'));
+  assert.equal(loading(photo), 'eager');
+  assert.match(photo, /fetchPriority="low"/);
+  assert.doesNotMatch(html, /<link[^>]+as="image"[^>]*img_tomocan/);
   assert.match(html, /class="greeting__image"/);
 });
 
-test('記事詳細のアイキャッチは即時取得し、本文幅に合う候補サイズを通知する', async () => {
-  const html = await render('app/_components/Article/index.tsx', { data: blogs[0] });
-  const img = images(html)[0];
-  assert.equal(loading(img), 'eager');
-  assert.match(img, /sizes="\(max-width: 767px\) calc\(100vw - 40px\), 720px"/);
+test('記事詳細は共通バナーを先読みし、アイキャッチを低優先度、本文画像を遅延取得にする', async () => {
+  const data = {
+    ...blogs[0],
+    content: '<p><img src="/img/inline.jpg" width="840" height="472" alt="図"></p>'
+      + '<p><img src="/img/inline-authored.jpg" alt="図" loading="eager"></p>'
+      + '<p><img src="/img/inline-metadata.jpg" data-loading="other" alt="画像 > test"/></p>',
+  };
+  const html = await render('app/diary/layout.tsx', { children: createElement(createDiaryHarness(cms).load('app/_components/Article/index.tsx').default, { data }) });
+  const tags = images(html);
+  const banner = tags.find(img => img.includes('/img/pages/diary/img_hero.webp'));
+  const thumbnail = tags.find(img => img.includes('/img/article-1.jpg'));
+  const inline = tags.find(img => img.includes('/img/inline.jpg'));
+  assert.notEqual(loading(banner), 'lazy');
+  assert.match(html, /<link[^>]+as="image"[^>]+img_hero/);
+  assert.doesNotMatch(html, /<link[^>]+as="image"[^>]+article-1/);
+  assert.equal(loading(thumbnail), 'eager');
+  assert.match(thumbnail, /fetchPriority="low"/);
+  assert.match(thumbnail, /sizes="\(max-width: 880px\) calc\(100vw - 40px\), 840px"/);
+  assert.equal(loading(inline), 'lazy');
+  assert.match(inline, /width="840" height="472" alt="図"/);
+  assert.equal(loading(tags.find(img => img.includes('inline-authored.jpg'))), 'eager');
+  assert.match(html, /<img loading="lazy" src="\/img\/inline-metadata.jpg" data-loading="other" alt="画像 > test"\/>/);
 });
 
 test('通常・関連記事の一覧画像はlazyのまま、FV対象の一覧だけ先頭を即時取得する', async () => {
@@ -70,6 +110,7 @@ test('通常・関連記事の一覧画像はlazyのまま、FV対象の一覧�
   assert.deepEqual(lazy.map(loading), ['lazy', 'lazy', 'lazy']);
   const eager = images(await render('app/_components/DiaryList/index.tsx', { blog: blogs, eagerFirstImage: true }));
   assert.deepEqual(eager.map(loading), ['eager', 'lazy', 'lazy']);
+  assert.match(eager[0], /fetchPriority="low"/);
   assert.match(eager[0], /sizes="\(max-width: 480px\) calc\(100vw - 74px\), \(max-width: 767px\) 120px, 200px"/);
   const fallback = images(await render('app/_components/DiaryList/index.tsx', { blog: [{ ...blogs[0], thumbnail: undefined }], eagerFirstImage: true }));
   assert.equal(loading(fallback[0]), 'eager');
@@ -88,11 +129,13 @@ for (const [file, props] of [
   });
 }
 
-test('実績一覧の先頭だけ即時表示し、後続カードとスライダー用既定値はlazyを保つ', async () => {
+test('実績一覧だけ初期行の表示制御を有効にし、先頭以外の画像はlazyを保つ', async () => {
   const contents = [1, 2, 3].map(n => ({ id: `project-${n}`, title: `実績${n}`, summary: '概要', publishedAt: date, updatedAt: date, cover: { url: `/img/project-${n}.jpg`, width: 800, height: 450 } }));
   const html = await render('app/result/_components/ResultArchive.tsx', { currentPage: 2, resultsData: { contents, totalCount: 24, offset: 12, limit: 12 } });
   assert.deepEqual(images(html).filter(img => img.includes('/img/project-')).map(loading), ['eager', 'lazy', 'lazy']);
+  assert.match(html, /class="results-grid results-grid--archive"/);
   assert.match(html, /<article class="result-card">/);
+  assert.match(html, /<article class="result-card fadeUpTrigger">/);
   const card = await render('components/ResultCard.tsx', { result: contents[0] });
   assert.equal(loading(images(card)[0]), 'lazy');
 });
