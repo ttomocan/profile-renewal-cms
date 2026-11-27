@@ -29,6 +29,7 @@ export default async function Home() {
         <div className={`p-top-hero ${caveatBrush.variable}`}>
           <div className="p-top-hero__image">
             <picture>
+              <source type="image/avif" media="(max-width: 767px)" sizes="100vw" srcSet="/img/pages/top/img_hero_sp-640.avif 640w, /img/pages/top/img_hero_sp-750.avif 750w" />
               <source srcSet={mobileHeroSrcSet} media="(max-width: 767px)" />
               <source srcSet={desktopHeroSrcSet} media="(min-width: 768px)" />
               <img {...desktopHeroProps} alt="" />
