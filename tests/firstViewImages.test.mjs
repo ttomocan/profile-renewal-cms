@@ -58,11 +58,28 @@ test('Aboutの最初の写真は遅延取得や透明な登場待ちをしない
   assert.match(html, /class="greeting__image"/);
 });
 
-test('記事詳細のアイキャッチは即時取得し、本文幅に合う候補サイズを通知する', async () => {
-  const html = await render('app/_components/Article/index.tsx', { data: blogs[0] });
-  const img = images(html)[0];
-  assert.equal(loading(img), 'eager');
-  assert.match(img, /sizes="\(max-width: 767px\) calc\(100vw - 40px\), 720px"/);
+test('記事詳細は共通バナーを先読みし、アイキャッチを低優先度、本文画像を遅延取得にする', async () => {
+  const data = {
+    ...blogs[0],
+    content: '<p><img src="/img/inline.jpg" width="840" height="472" alt="図"></p>'
+      + '<p><img src="/img/inline-authored.jpg" alt="図" loading="eager"></p>'
+      + '<p><img src="/img/inline-metadata.jpg" data-loading="other" alt="画像 > test"/></p>',
+  };
+  const html = await render('app/diary/layout.tsx', { children: createElement(createDiaryHarness(cms).load('app/_components/Article/index.tsx').default, { data }) });
+  const tags = images(html);
+  const banner = tags.find(img => img.includes('/img/pages/diary/img_hero.webp'));
+  const thumbnail = tags.find(img => img.includes('/img/article-1.jpg'));
+  const inline = tags.find(img => img.includes('/img/inline.jpg'));
+  assert.notEqual(loading(banner), 'lazy');
+  assert.match(html, /<link[^>]+as="image"[^>]+img_hero/);
+  assert.doesNotMatch(html, /<link[^>]+as="image"[^>]+article-1/);
+  assert.equal(loading(thumbnail), 'eager');
+  assert.match(thumbnail, /fetchPriority="low"/);
+  assert.match(thumbnail, /sizes="\(max-width: 880px\) calc\(100vw - 40px\), 840px"/);
+  assert.equal(loading(inline), 'lazy');
+  assert.match(inline, /width="840" height="472" alt="図"/);
+  assert.equal(loading(tags.find(img => img.includes('inline-authored.jpg'))), 'eager');
+  assert.match(html, /<img loading="lazy" src="\/img\/inline-metadata.jpg" data-loading="other" alt="画像 > test"\/>/);
 });
 
 test('通常・関連記事の一覧画像はlazyのまま、FV対象の一覧だけ先頭を即時取得する', async () => {
@@ -88,11 +105,13 @@ for (const [file, props] of [
   });
 }
 
-test('実績一覧の先頭だけ即時表示し、後続カードとスライダー用既定値はlazyを保つ', async () => {
+test('実績一覧だけ初期行の表示制御を有効にし、先頭以外の画像はlazyを保つ', async () => {
   const contents = [1, 2, 3].map(n => ({ id: `project-${n}`, title: `実績${n}`, summary: '概要', publishedAt: date, updatedAt: date, cover: { url: `/img/project-${n}.jpg`, width: 800, height: 450 } }));
   const html = await render('app/result/_components/ResultArchive.tsx', { currentPage: 2, resultsData: { contents, totalCount: 24, offset: 12, limit: 12 } });
   assert.deepEqual(images(html).filter(img => img.includes('/img/project-')).map(loading), ['eager', 'lazy', 'lazy']);
+  assert.match(html, /class="results-grid results-grid--archive"/);
   assert.match(html, /<article class="result-card">/);
+  assert.match(html, /<article class="result-card fadeUpTrigger">/);
   const card = await render('components/ResultCard.tsx', { result: contents[0] });
   assert.equal(loading(images(card)[0]), 'lazy');
 });

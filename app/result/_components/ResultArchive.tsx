@@ -42,7 +42,7 @@ export default function ResultArchive({ currentPage, resultsData, personalResult
 
           {results.length > 0 ? (
             <>
-              {listedResults.length > 0 && <div className="results-grid">
+              {listedResults.length > 0 && <div className="results-grid results-grid--archive">
                 {listedResults.map((result, index) => (
                   <ResultCard key={result.id} result={result} showTechnologies={false} eagerImage={index === 0} />
                 ))}
